@@ -1,1 +1,388 @@
-/* styles here */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v5.0.2 | 20191019
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+  display: block;
+}
+
+/* HTML5 hidden-attribute fix for newer browsers */
+*[hidden] {
+  display: none;
+}
+
+body {
+  line-height: 1;
+}
+
+menu, ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.bg-red {
+  background-color: #EF4839;
+}
+
+.text-red {
+  color: #EF4839;
+}
+
+.bg-beige {
+  background-color: #FFFEFA;
+}
+
+.text-beige {
+  color: #FFFEFA;
+}
+
+.bg-brown {
+  background-color: #7E5539;
+}
+
+.text-brown {
+  color: #7E5539;
+}
+
+.bg-yellow-0 {
+  background-color: #FDFAF0;
+}
+
+.text-yellow-0 {
+  color: #FDFAF0;
+}
+
+.bg-yellow-1 {
+  background-color: #FBEED1;
+}
+
+.text-yellow-1 {
+  color: #FBEED1;
+}
+
+.bg-yellow-2 {
+  background-color: #F5D690;
+}
+
+.text-yellow-2 {
+  color: #F5D690;
+}
+
+.bg-pink-0 {
+  background-color: #FCF2F4;
+}
+
+.text-pink-0 {
+  color: #FCF2F4;
+}
+
+.bg-pink-1 {
+  background-color: #F8DEE2;
+}
+
+.text-pink-1 {
+  color: #F8DEE2;
+}
+
+.bg-pink-2 {
+  background-color: #F2C3CB;
+}
+
+.text-pink-2 {
+  color: #F2C3CB;
+}
+
+.bg-purple-0 {
+  background-color: #F4EFFB;
+}
+
+.text-purple-0 {
+  color: #F4EFFB;
+}
+
+.bg-purple-1 {
+  background-color: #ECE3F7;
+}
+
+.text-purple-1 {
+  color: #ECE3F7;
+}
+
+.bg-purple-2 {
+  background-color: #DDCFF2;
+}
+
+.text-purple-2 {
+  color: #DDCFF2;
+}
+
+.bg-blueberry-0 {
+  background-color: #EDF1FF;
+}
+
+.text-blueberry-0 {
+  color: #EDF1FF;
+}
+
+.bg-blueberry-1 {
+  background-color: #E6EBFF;
+}
+
+.text-blueberry-1 {
+  color: #E6EBFF;
+}
+
+.bg-blueberry-2 {
+  background-color: #D4DDFF;
+}
+
+.text-blueberry-2 {
+  color: #D4DDFF;
+}
+
+.bg-blue-0 {
+  background-color: #F0F6FC;
+}
+
+.text-blue-0 {
+  color: #F0F6FC;
+}
+
+.bg-blue-1 {
+  background-color: #D1E8FD;
+}
+
+.text-blue-1 {
+  color: #D1E8FD;
+}
+
+.bg-blue-2 {
+  background-color: #AFD8FB;
+}
+
+.text-blue-2 {
+  color: #AFD8FB;
+}
+
+.bg-natural-0 {
+  background-color: #FFFFFF;
+}
+
+.text-natural-0 {
+  color: #FFFFFF;
+}
+
+.bg-natural-1 {
+  background-color: #F2EEEB;
+}
+
+.text-natural-1 {
+  color: #F2EEEB;
+}
+
+.bg-natural-2 {
+  background-color: #CAB9AE;
+}
+
+.text-natural-2 {
+  color: #CAB9AE;
+}
+
+.bg-natural-3 {
+  background-color: #94725B;
+}
+
+.text-natural-3 {
+  color: #94725B;
+}
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bayon {
+  font-family: "Bayon", serif;
+}
+
+.notoSansTC {
+  font-family: "Noto Sans TC", serif;
+}
+
+.bigText {
+  font-family: "Bayon", serif;
+  font-size: 19rem;
+}
+
+h1, h2, h3, h4, h5, h6, p, .smallText {
+  font-family: "Noto Sans TC", serif;
+  color: #7E5539;
+  font-weight: 300;
+}
+h1.textBold, h2.textBold, h3.textBold, h4.textBold, h5.textBold, h6.textBold, p.textBold, .smallText.textBold {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 6.1rem;
+  line-height: 8rem;
+}
+
+h2 {
+  font-size: 4.9rem;
+  line-height: 6.4rem;
+}
+
+h3 {
+  font-size: 3.9rem;
+  line-height: 5.6rem;
+}
+
+h4 {
+  font-size: 3.1rem;
+  line-height: 4.8rem;
+}
+
+h5 {
+  font-size: 2.5rem;
+  line-height: 3.6rem;
+}
+
+h6 {
+  font-size: 2rem;
+  line-height: 3.2rem;
+}
+
+p {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}
+
+.smallText {
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+}
+
+.xsText {
+  font-size: 1rem;
+  line-height: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  border-radius: 6px;
+  background-color: #2D3648;
+  font-family: "Noto Sans TC", serif;
+  font-size: 18px;
+  color: #FFF;
+}
+.btn.btn-large {
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 24px 16px;
+  border-radius: 6px;
+  background-color: #2D3648;
+  font-family: "Noto Sans TC", serif;
+  font-size: 18px;
+  color: #FFF;
+}
+.btn.btn-medium {
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 20px 12px;
+  border-radius: 6px;
+  background-color: #2D3648;
+  font-family: "Noto Sans TC", serif;
+  font-size: 16px;
+  color: #FFF;
+}
+.btn.btn-small {
+  display: inline-block;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 12px 8px;
+  border-radius: 6px;
+  background-color: #2D3648;
+  font-family: "Noto Sans TC", serif;
+  font-size: 14px;
+  color: #FFF;
+}
+
+html {
+  font-size: 10px;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrapper {
+  width: 1216px;
+}
+@media (max-width: 1248px) {
+  .wrapper {
+    width: 992px;
+  }
+}
+@media (max-width: 1024px) {
+  .wrapper {
+    width: 768px;
+  }
+}
+@media (max-width: 800px) {
+  .wrapper {
+    width: 576px;
+  }
+}
+@media (max-width: 608px) {
+  .wrapper {
+    width: 390px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

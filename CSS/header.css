@@ -1,0 +1,138 @@
+header{
+    z-index: 1000;
+
+    width: 100%;
+    max-width: 1512px;
+    height: 80px;
+    padding: 16px 48px;
+    box-sizing: border-box;
+    background-color: #F2C3CB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    transition: all .5s;
+}
+
+header.scroll{
+    transition: all .5s;
+    transform: translateY(-100%);
+}
+
+.headerList{
+    display: flex;
+}
+
+.headerItem{
+    margin-right: clamp(12px, 2vw, 24px);
+    /* font-size: clamp(0.8rem, 1rem, 16px); */
+
+}
+
+.headerItem:last-child{
+    margin: 0;
+}
+
+.headerItem a{
+    text-decoration: none;
+    color: #D14535;
+    font-family: "Noto Sans TC";
+    font-weight: 600;
+    position: relative;
+    font-size: 16px;
+    padding: 10px;
+    letter-spacing: -.02rem;
+    
+    /* background: linear-gradient(to right, #EF4839, #FFAA54); */
+    /* background-clip: text; */
+    /* color: transparent; */
+}
+
+.headerItem a::after{
+    content: "";
+    display: block;
+    width: 0;
+    border: 1px solid #D14535;
+    
+    position: absolute;
+    top: calc(1rem + 16px);
+    left: 0;
+
+    opacity: 0; 
+    visibility: hidden;
+
+
+    transition: all .5S;
+}
+
+.headerItem a:hover::after{
+    opacity: 1;
+    width: 100%;
+    visibility: visible; /*顯示*/
+
+   transform: translate(0);
+    
+}
+
+
+
+
+/* ------------------登入按鈕--------------- */
+
+.login{
+    all: unset;   /*移除預設*/
+    cursor: pointer;
+
+    padding: 14px 16px;
+    background-color: #D14535;
+    border-radius: 100px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-family: "Noto Sans TC";
+    font-size: clamp(0.8rem, 1rem, 16px);
+    font-weight: 500;
+    color: #FFFEFA;
+}
+
+
+/* RWD預設 */
+.navHamburger{
+    display: none;
+}
+
+/* ----------------RWD 768px---------------- */
+@media (width<=768px){
+header{
+    padding: 14px 12px;
+}
+
+
+nav{
+    display: none;
+}
+
+.navHamburger{
+    display: block;
+    padding: 16px 8px;
+    box-sizing: border-box;
+}
+
+.line{
+    width: 48px;
+    border: 1.5px solid #D14535;
+    margin-bottom: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+}
