@@ -1,0 +1,21 @@
+// Define a spacing scale
+$spacing-scale: (4, 8, 16, 24, 32);
+
+@each $space in $spacing-scale {
+  .px-#{$space} {
+    padding-left: #{$space}px;
+    padding-right: #{$space}px;
+  }
+  .py-#{$space} {
+    padding-top: #{$space}px;
+    padding-bottom: #{$space}px;
+  }
+  .mx-#{$space} {
+    margin-left: #{$space}px;
+    margin-right: #{$space}px;
+  }
+  .my-#{$space} {
+    margin-top: #{$space}px;
+    margin-bottom: #{$space}px;
+  }
+}

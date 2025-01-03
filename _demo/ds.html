@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設計庫</title>
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1 class="black">Color</h1>
+    <section class="colors">
+        <h2>Primary</h2>
+        <div>
+            <div class="bg-red">
+                <p class="text-natural-0">bg-red<br>text-red</p>
+            </div>
+            <div class="bg-beige">
+                <p>bg-beige<br>text-beige</p>
+            </div>
+            <div class="bg-brown">
+                <p class="text-natural-0">bg-brown<br>text-brown</p>
+            </div>
+        </div>
+        <h2>Secondary</h2>
+        <div>
+            <div class="bg-yellow-0">
+                <p>bg-yellow-0<br>text-yellow-0</p>
+            </div>
+            <div class="bg-yellow-1">
+                <p>bg-yellow-1<br>text-yellow-1</p>
+            </div>
+            <div class="bg-yellow-2">
+                <p>bg-yellow-2<br>text-yellow-2</p>
+            </div>
+        </div>
+        <div>
+            <div class="bg-pink-0">
+                <p>bg-pink-0<br>text-pink-0</p>
+            </div>
+            <div class="bg-pink-1">
+                <p>bg-pink-1<br>text-pink-1</p>
+            </div>
+            <div class="bg-pink-2">
+                <p>bg-pink-2<br>text-pink-2</p>
+            </div>
+        </div>
+        <div>
+            <div class="bg-purple-0">
+                <p>bg-purple-0<br>text-purple-0</p>
+            </div>
+            <div class="bg-purple-1">
+                <p>bg-purple-1<br>text-purple-1</p>
+            </div>
+            <div class="bg-purple-2">
+                <p>bg-purple-2<br>text-purple-2</p>
+            </div>
+        </div>
+        <div>
+            <div class="bg-blueberry-0">
+                <p>bg-blueberry-0<br>text-blueberry-0</p>
+            </div>
+            <div class="bg-blueberry-1">
+                <p>bg-blueberry-1<br>text-blueberry-1</p>
+            </div>
+            <div class="bg-blueberry-2">
+                <p>bg-blueberry-2<br>text-blueberry-2</p>
+            </div>
+        </div>
+        <div>
+            <div class="bg-blue-0">
+                <p>bg-blue-0<br>text-blue-0</p>
+            </div>
+            <div class="bg-blue-1">
+                <p>bg-blue-1<br>text-blue-1</p>
+            </div>
+            <div class="bg-blue-2">
+                <p>bg-blue-2<br>text-blue-2</p>
+            </div>
+        </div>
+        <h2>Natural</h2>
+        <div>
+            <div class="bg-natural-0">
+                <p>bg-natural-0<br>text-natural-0</p>
+            </div>
+            <div class="bg-natural-1">
+                <p>bg-natural-1<br>text-natural-1</p>
+            </div>
+            <div class="bg-natural-2">
+                <p>bg-natural-2<br>text-natural-2</p>
+            </div>
+        </div>
+        <div>
+            <div class="bg-natural-3">
+                <p class="text-natural-0">bg-natural-3<br>text-natural-3</p>
+            </div>
+        </div>
+    </section>
+
+    <h1>Typography</h1>
+    <section class="typography">
+        <div>
+            <h3>字體</h3>
+            <h3 class="bayon">bayon</h3>
+            <h3 class="notoSansTC">notoSansTC</h3>
+        </div>
+        <div>
+            <h3 class="textBlack">粗體 textBlack</h3>
+        </div>
+    </section>
+
+
+    <h1>Buttons</h1>
+    <section class="buttons">
+        <div style="flex-direction: column; gap: 20px;">
+            <div class="btn primary large">btn primary large</div>
+            <div class="btn primary default">btn primary default</div>
+            <div class="btn primary small">btn primary small</div>
+            <div class="btn outline large">btn outline large</div>
+            <div class="btn outline default">btn outline default</div>
+            <div class="btn outline small">btn outline small</div>
+            <div class="btn text large">btn text large</div>
+            <div class="btn text default">btn text default</div>
+            <div class="btn text small">btn text small</div>
+            <div class="btn white large">btn white large</div>
+            <div class="btn white default">btn white default</div>
+            <div class="btn white small">btn white small</div>
+        </div>
+    </section>
+
+
+    <style>
+        body { padding: 20px; background-color: #EEE;}
+        body > h1{ margin-top: 80px }
+        section{ margin-bottom: 80px}
+        section > div{
+            display: flex;
+            gap: 20px;
+        }
+        p {margin: 5px;}
+        .colors > div > div{
+            display: flex; align-items:center;justify-content: center;
+            min-width: 200px; min-height: 200px; border: 1px solid rgba(0, 0, 0, 0.1);border-radius:12px;margin:5px; 
+            text-align: center; 
+        }
+    </style>
+    
+</body>
+
+</html>

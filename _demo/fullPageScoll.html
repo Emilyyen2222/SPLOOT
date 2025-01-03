@@ -1,0 +1,70 @@
+<!-- 網頁滑動的時候會滑一整個區塊 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滑動區塊</title>
+
+</head>
+<body>
+    <!-- 這邊只是範例，讓每個 section 是佔滿整個螢幕
+    實際寬度依照切版自己調整
+    vw: 螢幕寬度 -> 100% 螢幕寬度
+    vh: 螢幕高度 -> 100% 螢幕高度-->
+    <style>
+        section{
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <!-- 套的方式就是在每個區塊加 class: scrollSection
+    html 標籤不一定要是 section，都可以
+    但建議都是section，方面閱讀-->
+    <section class="scrollSection" style="background-color:lightblue;"></section>
+    <section class="scrollSection" style="background-color:lightcoral"></section>
+    <!-- 黃色這塊沒有家class 會直接被跳過
+    所以要套的話，所有區塊都要加 -->
+    <section class style="background-color:lightgoldenrodyellow"></section>
+    <section class="scrollSection" style="background-color:lightgreen"></section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.scrollSection'); // querySelect 去找每一個會滑動的 section
+            let currentSectionIndex = 0; // 追蹤目前在第幾個區塊
+            let isScrolling = false; // 偵測目前是否在滑動，預防滑動的時候觸發太多次
+    
+            const scrollToSection = (index) => {
+                sections[index].scrollIntoView({ behavior: 'smooth' });
+            }; // function 滑動到 第[index]個 section 
+            // behavior smooth 是讓他可以滑順的滑倒下一個section 拿掉的話會變成用跳的到下一個區塊
+    
+            const handleScroll = (e) => {
+                if (isScrolling) return; // 如果正在滑動就返回，預防觸發太多次
+    
+                isScrolling = true; // 表示正在滑動
+                if (e.deltaY > 0 && currentSectionIndex < sections.length - 1) { // e.deltaY > 0 代表在往下滑
+                    currentSectionIndex++; // 如果正在往下滑 且 目前不在最後一個section -> 滑到下一個
+                } else if (e.deltaY < 0 && currentSectionIndex > 0) { // e.deltaY < 0 代表在往上滑
+                    currentSectionIndex--; // 如果正在往上滑 且 目前不在第一個section -> 滑到上一個
+                }
+    
+                scrollToSection(currentSectionIndex); // function 滑到下一個區塊
+    
+                // 加一個 delay 預防觸發太多次滑動
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 1000);
+            };
+    
+            document.addEventListener('wheel', handleScroll);
+            // wheel 跟 scroll 不一樣
+            // wheel 是只要嘗試滑動或有滑動的動作就會觸發
+            // scroll 是實際上頁面有滑動的時候才會觸發
+        });
+    </script>
+    
+    
+</body>
+</html>

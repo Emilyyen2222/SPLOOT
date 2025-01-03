@@ -1,0 +1,40 @@
+$colors: (
+  red: #D14535,
+  beige: #FFFEFA,
+  brown: #7E5539,
+  yellow-0: #FDFAF0,
+  yellow-1: #FBEED1,
+  yellow-2: #F5D690,
+  pink-0: #FCF2F4,
+  pink-1: #F8DEE2,
+  pink-2: #F2C3CB,
+  purple-0: #F4EFFB,
+  purple-1: #ECE3F7,
+  purple-2: #DDCFF2,
+  blueberry-0: #EDF1FF,
+  blueberry-1: #E6EBFF,
+  blueberry-2: #D4DDFF,
+  blue-0: #F0F6FC,
+  blue-1: #D1E8FD,
+  blue-2: #AFD8FB,
+  natural-0: #FFFFFF,
+  natural-1: #F2EEEB,
+  natural-2: #CAB9AE,
+  natural-3: #94725B,
+);
+
+@each $color, $value in $colors {
+    // Background color
+    .bg-#{$color} {
+        background-color: #{$value};
+    }
+    
+    // Text color
+    .text-#{$color} {
+        color: #{$value};
+    }
+}
+
+.bg-transparent{
+    background-color: transparent;
+}
