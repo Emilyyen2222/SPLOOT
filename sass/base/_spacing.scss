@@ -3,19 +3,23 @@ $spacing-scale: (4, 8, 16, 24, 32);
 
 @each $space in $spacing-scale {
   .px-#{$space} {
-    padding-left: #{$space}px;
-    padding-right: #{$space}px;
+    padding-left: #{$space / 10}rem;
+    padding-right: #{$space / 10}rem;
   }
   .py-#{$space} {
-    padding-top: #{$space}px;
-    padding-bottom: #{$space}px;
+    padding-top: #{$space / 10}rem;
+    padding-bottom: #{$space / 10}rem;
   }
+  .pd-#{$space} {
+    padding: #{$space / 10}rem;
+  }
+  
   .mx-#{$space} {
-    margin-left: #{$space}px;
-    margin-right: #{$space}px;
+    margin-left: #{$space / 10}rem;
+    margin-right: #{$space / 10}rem;
   }
   .my-#{$space} {
-    margin-top: #{$space}px;
-    margin-bottom: #{$space}px;
+    margin-top: #{$space / 10}rem;
+    margin-bottom: #{$space / 10}rem;
   }
 }

@@ -1,26 +1,49 @@
+$red: #D14535;
+$beige: #FFFEFA;
+$brown: #7E5539;
+$yellow-0: #FDFAF0;
+$yellow-1: #FBEED1;
+$yellow-2: #F5D690;
+$pink-0: #FCF2F4;
+$pink-1: #F8DEE2;
+$pink-2: #F2C3CB;
+$purple-0: #F4EFFB;
+$purple-1: #ECE3F7;
+$purple-2: #DDCFF2;
+$blueberry-0: #EDF1FF;
+$blueberry-1: #E6EBFF;
+$blueberry-2: #D4DDFF;
+$blue-0: #F0F6FC;
+$blue-1: #D4E7F7;
+$blue-2: #A5CCED;
+$natural-0: #FFFFFF;
+$natural-1: #F2EEEB;
+$natural-2: #CAB9AE;
+$natural-3: #94725B;
+
 $colors: (
-  red: #D14535,
-  beige: #FFFEFA,
-  brown: #7E5539,
-  yellow-0: #FDFAF0,
-  yellow-1: #FBEED1,
-  yellow-2: #F5D690,
-  pink-0: #FCF2F4,
-  pink-1: #F8DEE2,
-  pink-2: #F2C3CB,
-  purple-0: #F4EFFB,
-  purple-1: #ECE3F7,
-  purple-2: #DDCFF2,
-  blueberry-0: #EDF1FF,
-  blueberry-1: #E6EBFF,
-  blueberry-2: #D4DDFF,
-  blue-0: #F0F6FC,
-  blue-1: #D1E8FD,
-  blue-2: #AFD8FB,
-  natural-0: #FFFFFF,
-  natural-1: #F2EEEB,
-  natural-2: #CAB9AE,
-  natural-3: #94725B,
+    red: $red,
+    beige: $beige,
+    brown: $brown,
+    yellow-0: $yellow-0,
+    yellow-1: $yellow-1,
+    yellow-2: $yellow-2,
+    pink-0: $pink-0,
+    pink-1: $pink-1,
+    pink-2: $pink-2,
+    purple-0: $purple-0,
+    purple-1: $purple-1,
+    purple-2: $purple-2,
+    blueberry-0: $blueberry-0,
+    blueberry-1: $blueberry-1,
+    blueberry-2: $blueberry-2,
+    blue-0: $blue-0,
+    blue-1: $blue-1,
+    blue-2: $blue-2,
+    natural-0: $natural-0,
+    natural-1: $natural-1,
+    natural-2: $natural-2,
+    natural-3: $natural-3
 );
 
 @each $color, $value in $colors {
