@@ -1,0 +1,87 @@
+.dropdown-qa{
+    @include dropdownBasic(qa);
+    @include p();
+
+
+    overflow: hidden;
+    height: 6.4rem;
+    transition: height .5s ease;
+
+    .question-block{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .question{
+            display: flex;
+            gap: 2rem;
+
+            span{
+                font-family: $bayon;
+                font-size: 3.2rem;
+            }
+        }
+        .expandBtn{ width: 2.4rem;
+        transition: transform .5s ease; }
+    }
+
+    .answer{
+        display: flex;
+        gap: 2rem;
+
+        span{
+            font-family: $bayon;
+            font-size: 3.2rem;
+        }
+    }
+
+    hr { 
+        opacity: 0;
+        transition: opacity .5s ease; 
+    }
+    .answer{ 
+        opacity: 0;
+        transition: opacity .5s ease;
+    }
+
+    // 點擊展開後
+    &.-expand{
+        height: auto;
+        
+        .expandBtn{ transform: rotate(180deg) }
+        hr{ opacity: 1 }
+        .answer{ opacity: 1; }
+    }
+}
+.dropdown-menu{
+    @include dropdownBasic(menu);
+    @include smallText();
+
+    .dropdownBtn{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .expandBtn{ width: 2.4rem }
+    }
+
+    .dropdownList{
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+    }
+
+    hr{ display: none }
+    .dropdownList{ display: none }
+
+    // 點擊展開後
+    &.-expand{
+        .expandBtn{ transform: rotate(180deg) }
+        hr{ display: block }
+        .dropdownList{ display: flex }
+    }
+
+}
+
+
+

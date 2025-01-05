@@ -1,47 +1,45 @@
 .btn{
-    width: 100%;
     cursor: pointer;
+    width: 100%;
+    border-radius: 100px;
+
     font-family: $notoSansTC;
+    font-weight: $fontWeight-black;
     text-align: center;
 
+    // Style
     &.primary{
-        border-radius: 100px;
-        background-color: map-get($colors, red);
-        color: map-get($colors, beige);
+        background-color: $red;
+        color: $beige;
     }
     &.outline{
-        border-radius: 100px;
-        border: 1px solid map-get($colors, red);
-        color: map-get($colors, red);
+        border: 1px solid $red;
+        color: $red;
     }
     &.text{
-        color: map-get($colors, red);
-        border-bottom: 1px solid map-get($colors, red);
+        border-radius: 0;
+        color: $red;
+        border-bottom: 1px solid $red;
     }
     &.white{
-        border-radius: 100px;
-        background-color: map-get($colors, natural-0);
-        color: map-get($colors, red);
+        background-color: $natural-0;
+        color: $red;
     }
+
+    // Size
     &.large{
+        @include h6();
         height: 4.8rem;
         padding: .8rem 1.6rem;
-        font-size: map-get($fontSize, h6);
-        line-height: map-get($lineHeight, h6);
-        font-weight: $fontWeight-black;
     }
     &.default{
-        height: 4rem;
+        @include p();
+        height: 4.8rem;
         padding: .8rem 1.6rem;
-        font-size: map-get($fontSize, p);
-        line-height: 4rem;
-        font-weight: $fontWeight-black;
     }
     &.small{
+        @include smallText();
         height: 3rem;
         padding: .4rem 1.6rem;
-        font-size: map-get($fontSize, smallText);
-        line-height: 3rem;
-        font-weight: $fontWeight-black;
     }
 }

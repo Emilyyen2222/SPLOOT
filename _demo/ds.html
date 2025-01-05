@@ -14,111 +14,106 @@
 </head>
 
 <body>
-    <h1 class="black">Color</h1>
     <section class="colors">
+        <h1 class="black">Color</h1>
         <h2>Primary</h2>
         <div>
             <div class="bg-red">
-                <p class="text-natural-0">bg-red<br>text-red</p>
+                <p class="text-natural-0">red</p>
             </div>
             <div class="bg-beige">
-                <p>bg-beige<br>text-beige</p>
+                <p>beige</p>
             </div>
             <div class="bg-brown">
-                <p class="text-natural-0">bg-brown<br>text-brown</p>
+                <p class="text-natural-0">brown</p>
             </div>
         </div>
         <h2>Secondary</h2>
         <div>
             <div class="bg-yellow-0">
-                <p>bg-yellow-0<br>text-yellow-0</p>
+                <p>yellow-0</p>
             </div>
             <div class="bg-yellow-1">
-                <p>bg-yellow-1<br>text-yellow-1</p>
+                <p>yellow-1</p>
             </div>
             <div class="bg-yellow-2">
-                <p>bg-yellow-2<br>text-yellow-2</p>
+                <p>yellow-2</p>
             </div>
         </div>
         <div>
             <div class="bg-pink-0">
-                <p>bg-pink-0<br>text-pink-0</p>
+                <p>pink-0</p>
             </div>
             <div class="bg-pink-1">
-                <p>bg-pink-1<br>text-pink-1</p>
+                <p>pink-1</p>
             </div>
             <div class="bg-pink-2">
-                <p>bg-pink-2<br>text-pink-2</p>
+                <p>pink-2</p>
             </div>
         </div>
         <div>
             <div class="bg-purple-0">
-                <p>bg-purple-0<br>text-purple-0</p>
+                <p>purple-0</p>
             </div>
             <div class="bg-purple-1">
-                <p>bg-purple-1<br>text-purple-1</p>
+                <p>purple-1</p>
             </div>
             <div class="bg-purple-2">
-                <p>bg-purple-2<br>text-purple-2</p>
+                <p>purple-2</p>
             </div>
         </div>
         <div>
             <div class="bg-blueberry-0">
-                <p>bg-blueberry-0<br>text-blueberry-0</p>
+                <p>blueberry-0</p>
             </div>
             <div class="bg-blueberry-1">
-                <p>bg-blueberry-1<br>text-blueberry-1</p>
+                <p>blueberry-1</p>
             </div>
             <div class="bg-blueberry-2">
-                <p>bg-blueberry-2<br>text-blueberry-2</p>
+                <p>blueberry-2</p>
             </div>
         </div>
         <div>
             <div class="bg-blue-0">
-                <p>bg-blue-0<br>text-blue-0</p>
+                <p>blue-0</p>
             </div>
             <div class="bg-blue-1">
-                <p>bg-blue-1<br>text-blue-1</p>
+                <p>blue-1</p>
             </div>
             <div class="bg-blue-2">
-                <p>bg-blue-2<br>text-blue-2</p>
+                <p>blue-2</p>
             </div>
         </div>
         <h2>Natural</h2>
         <div>
             <div class="bg-natural-0">
-                <p>bg-natural-0<br>text-natural-0</p>
+                <p>natural-0</p>
             </div>
             <div class="bg-natural-1">
-                <p>bg-natural-1<br>text-natural-1</p>
+                <p>natural-1</p>
             </div>
             <div class="bg-natural-2">
-                <p>bg-natural-2<br>text-natural-2</p>
+                <p>natural-2</p>
             </div>
         </div>
         <div>
             <div class="bg-natural-3">
-                <p class="text-natural-0">bg-natural-3<br>text-natural-3</p>
+                <p class="text-natural-0">natural-3</p>
             </div>
         </div>
     </section>
 
-    <h1>Typography</h1>
     <section class="typography">
-        <div>
-            <h3>字體</h3>
-            <h3 class="bayon">bayon</h3>
-            <h3 class="notoSansTC">notoSansTC</h3>
-        </div>
+        <h1>Typography</h1>
         <div>
             <h3 class="textBlack">粗體 textBlack</h3>
         </div>
     </section>
 
 
-    <h1>Buttons</h1>
     <section class="buttons">
-        <div style="flex-direction: column; gap: 20px;">
+        <h1>Buttons (還沒做 hover)</h1>
+        <div style="flex-direction: column">
             <div class="btn primary large">btn primary large</div>
             <div class="btn primary default">btn primary default</div>
             <div class="btn primary small">btn primary small</div>
@@ -134,16 +129,105 @@
         </div>
     </section>
 
+    <section class="dropdowns">
+        <h1>Dropdown (還沒做下拉效果)</h1>
+        <div style="flex-direction: column">
+            <!-- QA 下拉選單：關閉 -->
+            <div class="dropdown-qa">
+                <div class="question-block">
+                    <div class="question">
+                        <span>Q</span>
+                        <p>可以隨時更改方案嗎</p>
+                    </div>
+                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
+
+                </div>
+                <hr>
+                <div class="answer">
+                    <span>A</span>
+                    <p>是的，您可以隨時更改您的方案！<br>只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！</p>
+                </div>
+            </div>
+
+            <!-- QA 下拉選單：展開 -->
+            <div class="dropdown-qa -expand">
+                <div class="question-block">
+                    <div class="question">
+                        <span>Q</span>
+                        <p>可以隨時更改方案嗎</p>
+                    </div>
+                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
+                </div>
+                <hr>
+                <div class="answer">
+                    <span>A</span>
+                    <p>是的，您可以隨時更改您的方案！<br>只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！</p>
+                </div>
+            </div>
+
+            <!-- 一般下拉選單：關閉 -->
+            <div class="dropdown-menu">
+
+                <div class="dropdownBtn">
+                    <span>選擇選項</span>
+                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
+                </div>
+                <hr>
+                <ul class="dropdownList">
+                    <li>選項1</li>
+                    <li>選項2</li>
+                    <li>選項3</li>
+                    <li>選項4</li>
+                </ul>
+            </div>
+
+            <!-- 一般下拉選單：展開 -->
+            <div class="dropdown-menu -expand">
+                <div class="dropdownBtn">
+                    <span>選擇選項</span>
+                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
+                </div>
+                <hr>
+                <ul class="dropdownList">
+                    <li>選項1</li>
+                    <li>選項2</li>
+                    <li>選項3</li>
+                    <li>選項4</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+        <!-- 下拉選單簡易 js -->
+    <script>
+        const dropdown_qas = document.querySelectorAll('.dropdown-qa');
+        const dropdown_menus = document.querySelectorAll('.dropdown-menu');
+
+        dropdown_qas.forEach(dropdown => {
+            dropdown.addEventListener('click', () => {
+                dropdown.classList.toggle('-expand');
+            });
+        });
+        dropdown_menus.forEach(dropdown => {
+            dropdown.addEventListener('click', () => {
+                dropdown.classList.toggle('-expand');
+
+                const items = dropdown.querySelectorAll('li');
+                items.forEach(item => {
+                    item.addEventListenr
+                });
+            });
+        });
+    </script>
+
 
     <style>
         body { padding: 20px; background-color: #EEE;}
-        body > h1{ margin-top: 80px }
-        section{ margin-bottom: 80px}
+        section{ margin: 80px 0}
         section > div{
             display: flex;
             gap: 20px;
         }
-        p {margin: 5px;}
         .colors > div > div{
             display: flex; align-items:center;justify-content: center;
             min-width: 200px; min-height: 200px; border: 1px solid rgba(0, 0, 0, 0.1);border-radius:12px;margin:5px; 
