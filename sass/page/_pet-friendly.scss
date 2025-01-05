@@ -30,7 +30,7 @@ body{
         height: 3.6rem;
         border-radius: 100px;
 
-        margin-bottom: 4rem;
+        margin-bottom: 2.4rem;
 
         // 隱藏單選按鈕
             .switch-input{
@@ -86,7 +86,9 @@ body{
             justify-content: flex-start;
             gap: 32px;
 
-            padding-top: 16px;
+            border-bottom: 1px solid map-get($colors ,yellow-1 );
+
+            padding: 1.6rem 0;
 
             img{
                 width: 100%;
