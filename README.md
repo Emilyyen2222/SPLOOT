@@ -1,134 +1,204 @@
-哪裡看不懂或寫不夠清楚再跟我說～
+## 指令
 
+## Sass 監控
+```bash
+sass ./src/assets/sass/style.scss ./src/assets/css/style.css -w
+```
 
-sass 監控
-    sass ./src/assets/sass/style.scss ./src/assets/css/style.css -w
+## Vite 開發
+```bash
+npm vite dev
+```
 
-vite 開發
-    npm vite dev
+## Vite 打包建立
+```bash
+npm vite build
+```
 
-vite 打包建立
-    npm vite build
+---
 
+## 開發指南
 
+### 已經在 `style.scss`裡預設好了
+1rem = 10px
+```scss
+html{ font-size: 10px; }
+```
 
-開發
-    rwd切版：五個斷點 xs, sm, md, lg, xl
-        @include xs(){
-            內容
-        }
-        @include sm(){
-            內容
-        }
+所有元素、偽元素都加上 box-sizing: border-box
+```scss
+*,
+*::after,
+*::before{
+    box-sizing: border-box;
+}
+```
 
-    每頁背景顏色:
-        <body class="bg-pink-2"> //放在最上面
-    顏色:
-        color: map-get($colors, pink-2);
-        background-color: map-get($colors, blue-2);
+a連結都先把底限拿掉
+```scss
+a{ text-decoration: none; }
+```
 
-    設計庫字體：
-        bigText, h1, h2, h3, h4, h5, h6, p, smallText, xsText //大小、行高、間距都設好了
+預設字體顏色是咖啡色
+```scss
+body{ color: map-get($colors, brown); }
+```
+除非有特別需求，不應該在`scss`裡看到`box-sizing`
 
-        @include textStyle(bigText);
-        @include textStyle(h1);
-        @include textStyle(h1, bold); //粗體
+### RWD 切版
+使用五個斷點：`xs`, `sm`, `md`, `lg`, `xl`
+```scss
+@include xs() {
+    //內容-這段記得刪掉
+};
+@include sm() {
+    //內容-這段記得刪掉
+};
+```
 
-        如果 html 裡 <h1> <h2> 等等標籤需要粗體，在class加 bold
-        <h1 class="bold">Title</h1>  
+### 每頁背景顏色
+將 `body` class 設定在最上層：
+```html
+<body class="bg-pink-2">
+```
 
-    bayon字體：
-        @include bayon(20);//bayon 2rem (20px);
+#### 顏色設定
+```scss
+color: map-get($colors, pink-2);
+background-color: map-get($colors, blue-2);
+```
 
-    背景圓圈：
-        @include circle($bgc);
+### 設計庫字體
+支援以下樣式：`bigText`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `smallText`, `xsText`  
+字體大小、行高、間距均已設置。
 
+```scss
+@include textStyle(bigText);
+@include textStyle(h1);
+@include textStyle(h1, bold); // 粗體
+```
+所以，除非是有特別設定，不應該在你的 scss 裡面看到 `font-family`,`font-size`,`font-weight`,`line-height`,`letter-spacing`!!!
 
+HTML 標籤範例：
+```html
+<h1>Title</h1> <!-- 一般 -->
+<h1 class="bold">Title</h1> <!-- 粗體 -->
+```
 
-Vue 元件: 下面的會被做成 vue 元件，但如果有需要先用的，可以去 ds.html 看怎麼用
+### Bayon 字體
+```scss
+@include bayon(20); // bayon 2rem (20px)
+```
 
-    按紐: 看 figma 按紐元件風格 (之後會做成 vue 元件)
-        Style: primary, outline, text, white
-        Size: large, default, small
-        都調整好顏色大小字型間距了
+### 背景圓圈
+```scss
+@include circle($bgc);
+```
 
-        class="btn primary large"
-        class="btn outline default"
+---
 
-    下拉選單: (之後會做成 vue 元件)
-        dropdown-qa 用在 Q&A 的下拉式選單
-        dropdown-menu 一般下拉式選單 
+## Vue 元件 (開發中，但如果有需要先用可以參考 ds.html)
 
-        一樣都調整好顏色大小字型間距了
+### 按鈕
+根據 Figma 按鈕元件風格，支援以下樣式：
+- **Style**: `primary`, `outline`, `text`, `white`
+- **Size**: `large`, `default`, `small`
 
+已調整好顏色、大小、字型、間距：
+```html
+<div class="btn primary large">Button</div>
+<div class="btn outline default">Button</div>
+```
 
-開發
-    sass 
-        進亮不要動到除了 page 以外的東西
-        如果有需要做 mixin 的，先做在自己 page 的上面
-        等大家上傳完之後，再統一整合，不然很容易有衝突
-        記得在檔名前面加底線，然後import 進自己的 style.scss
+### 下拉選單
+- `dropdown-qa`: 用於 Q&A 下拉選單
+- `dropdown-menu`: 一般下拉選單
 
-    class
-        如果有需要變化的東西，例如下拉選單有預設的閉合和點擊後的展開，
-        在 className 前面加一個減號，來去做變化
-        例如 ->
-            class="dropdown-menu" 這個是預設閉合的狀態
-            class="dropdown-menu -expand" 這個是點擊展開的狀態
-            -expand 前面有加減號
-        可以去參考 ds.html 下拉選單的寫法
+---
 
-    css 
-        如果有要 @include 的話，先寫在最上面
-        
-    css 編譯順序
-        如果可以的話再遵守就好，只是比較方便閱讀跟改動
+## 開發須知
 
-        cursor: pointer
-        // 位置
-        position
-        top: 0
-        left: 0
+### Sass
+1. 請勿更動除了 `page` 以外的檔案。
+2. 需要製作 `mixin` 的，先放置在自己的 `page` 頁面上方，待整合時統一整理。
+3. 檔名前請加底線，並 `import` 到自己的 `style.scss`。
 
-        // 樣式
-        display: flex;
-        justify-content
-        align-items
+### Class 命名規則
+若需狀態變化，例如下拉選單的閉合與展開：
 
-        // 外觀 （由內到外）
-        width
-        max-width
-        height
-        box-sizing
-        padding
-        border
-        margin
-        border-radius
-        background-color
+```html
+<!-- 預設閉合狀態 -->
+<div class="dropdown-menu">
 
-        // 內文
-        fontfamily
-        fontsize
-        fontweight
-        text-align
-        text-decoration
-        line-height
-        color
+<!-- 點擊展開狀態 -->
+<div class="dropdown-menu -expand">
+```
+`-expand` 前置加 `-` 號表示狀態。
 
------------------------------------------------------
-src
-    assets //放前端會用到的東西，包含 css img js sass 
-    component //放 Vue component
-    vendors //第三方套件，例如jquery
+### CSS 編寫順序
+如果可以，請盡量遵循以下順序，方便閱讀與修改：
+```css
+// 滑鼠指標設定
+cursor: pointer;
 
-.gitignore
-    讓 git 忽略掉下面的開發，就不會上傳
-    -> 每個人的各自開發的頁面 css (sass/page 裡面的 scss)內容一定不一樣，css檔案上傳的話一定會有衝突，所以要忽略掉，自己的css應該都要是等別人上傳並拉下來之後，透過監控自己的 style.scss 去產出自己的 style.css 檔
-    目前有下面這些 (換到 vite 開發的時候可能會有變動)
+// 位置
+position;
+top;
+left;
 
-    CSS
-    css
-    .vscode
+// 樣式
+display: flex;
+justify-content;
+align-items;
+overflow;
 
-default.html
-    Html 初始模板，開發網頁前從這個複製
+// 外觀（由內到外）
+width;
+max-width;
+height;
+box-sizing;
+padding;
+border;
+margin;
+border-radius;
+background-color;
+
+// 內文
+font-family;
+font-size;
+font-weight;
+text-align;
+text-decoration;
+line-height;
+color;
+
+// 效果
+transform;
+transition;
+```
+
+---
+
+## 檔案結構
+
+### `default.html`
+開發初始模板，請複製此檔案進行網頁開發。
+
+### `src`
+- **`assets`**: 放置前端所需資源（CSS、Img、JS、Sass）。
+- **`component`**: 放置 Vue 元件。
+- **`vendors`**: 放置第三方套件（例如 jQuery）。
+
+---
+
+### `.gitignore`
+將以下內容忽略，避免上傳：
+1. 監控產出的 `.css` 檔案。
+
+目前需忽略：
+```
+*.css
+*.css.map
+```
+
+---
