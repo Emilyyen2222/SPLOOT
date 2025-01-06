@@ -1,21 +1,25 @@
-.title{
-    margin-bottom: 3.6rem;
-    text-align: center;
-}
 
 // 主功能容器
 .petFriendBox{
     display: flex;
     justify-content: center;
-    gap: 40px;
-
+    gap: 4rem;
+    
     // 左 地點卡片
     .leftMain{
-        max-width: 752px;
+        width: 55.5%;
+        max-width: 800px;
         padding: 2.4rem;
-        border-radius: 16px;
+        border-radius: 20px;
         background-color: map-get($colors, beige);
+        
+        .title{
+            text-align: center;
 
+            p{
+                @include textStyle(xsText);
+            }
+        }
         // switch樣式
         .switch{
             position: relative;
@@ -25,7 +29,7 @@
 
             width: 30rem;
             height: 3.6rem;
-            margin-bottom: 2.4rem;
+            margin: 4rem auto;
             border-radius: 100px;
             background-color: map-get($colors, natural-1);
 
@@ -84,10 +88,15 @@
         .facilityCards{
             display: flex;
             justify-content: flex-start;
-            gap: 32px;
+            gap: 3.2rem;
 
             padding: 1.6rem 0;
             border-bottom: 1px solid map-get($colors ,yellow-1);
+
+            &:last-child{
+                padding-bottom: 0;
+                border-bottom:none
+            }
 
             img{
                 width: 100%;
@@ -109,12 +118,20 @@
                 align-items: flex-end;
                 margin-left: auto;
             }
-
-
-
-            
-
         }
+    }
+    .rightMain{
+      width: 25%;
+    //   border-radius: 20px;
 
+      #map{
+        position: sticky;
+        top: 8rem;
+
+        width: 100%;
+        height: 80vh;
+        border-radius: 20px;
+
+      }
     }
 }
