@@ -1,31 +1,22 @@
-## 指令
+# Sass / Scss
 
 ## Sass 監控
 ```bash
 sass ./src/assets/sass/style.scss ./src/assets/css/style.css -w
 ```
 
-## Vite 開發
-```bash
-npm vite dev
-```
+## Scss 開發
+1. 不要更動除了 `page` 以外的檔案。
+2. 需要製作 `mixin` 模組的話，先放置在自己的 `page` 頁面上方，整合時統一整理。
+3. 檔名前請加底線，並 `import` 到自己的 `style.scss`。
 
-## Vite 打包建立
-```bash
-npm vite build
-```
+## `style.scss` 預設
 
----
-
-## 開發指南
-
-### 已經在 `style.scss`裡預設好了
-1rem = 10px
 ```scss
-html{ font-size: 10px; }
+html{ font-size: 10px; } // 1rem = 10px;
 ```
 
-所有元素、偽元素都加上 box-sizing: border-box
+所有元素、偽元素都加上 `box-sizing: border-box`
 ```scss
 *,
 *::after,
@@ -34,38 +25,35 @@ html{ font-size: 10px; }
 }
 ```
 
-a連結都先把底限拿掉
+`a`連結都先把底線拿掉
 ```scss
 a{ text-decoration: none; }
 ```
 
-預設字體顏色是咖啡色
+預設字體顏色：咖啡色
 ```scss
 body{ color: map-get($colors, brown); }
 ```
-除非有特別需求，不應該在`scss`裡看到`box-sizing`
-
-### RWD 切版
-使用五個斷點：`xs`, `sm`, `md`, `lg`, `xl`
-```scss
-@include xs() {
-    //內容-這段記得刪掉
-};
-@include sm() {
-    //內容-這段記得刪掉
-};
-```
 
 ### 每頁背景顏色、預設字體顏色
-將 `body` class 設定在最上層：
+在 `body` 設定背景顏色，預設字體顏色，如果沒預設就是上方預設的咖啡色
 ```html
 <body class="bg-blue-0 text-blue-2">
 ```
 
-#### 顏色設定
+### RWD 切版
+使用五個斷點：`xs: 390px`, `sm: 576px`, `md: 768px`, `lg: 992px`, `xl: 1216px`
+```scss
+@include xs() {
+    //內容-這段記得刪掉
+};
+```
+
+#### 顏色使用
 ```scss
 color: map-get($colors, pink-2);
 background-color: map-get($colors, blue-2);
+border: 1px solid map-get($colors, red);
 ```
 
 ### 設計庫字體
@@ -77,9 +65,13 @@ background-color: map-get($colors, blue-2);
 @include textStyle(h1);
 @include textStyle(h1, bold); // 粗體
 ```
-所以，除非是有特別設定，不應該在你的 scss 裡面看到 `font-family`,`font-size`,`font-weight`,`line-height`,`letter-spacing`!!!
 
-HTML 標籤範例：
+### Bayon 字體
+```scss
+@include bayon(20); // bayon 2rem (20px)
+```
+
+`<h1>` `<h2>` ... `<span>`標籤
 ```html
 <h1>Title</h1> <!-- 一般 -->
 <h1 class="bold">Title</h1> <!-- 粗體 -->
@@ -87,58 +79,16 @@ HTML 標籤範例：
 <span class="smallText bold">Small Bold Text</span>
 ```
 
-### Bayon 字體
-```scss
-@include bayon(20); // bayon 2rem (20px)
-```
+除非是有特別設定，不應該在你的 scss 裡面看到 `font-family`,`font-size`,`font-weight`,`line-height`,`letter-spacing`!!!
 
 ### 背景圓圈
+固定寬高，只需要填顏色，預設 `z-index: -5`
 ```scss
-@include circle($bgc);
+@include circle(map-get($colors, pink-1));
 ```
-
----
-
-## Vue 元件 (開發中，但如果有需要先用可以參考 ds.html)
-
-### 按鈕
-根據 Figma 按鈕元件風格，支援以下樣式：
-- **Style**: `primary`, `outline`, `text`, `white`
-- **Size**: `large`, `default`, `small`
-
-已調整好顏色、大小、字型、間距：
-```html
-<div class="btn primary large">Button</div>
-<div class="btn outline default">Button</div>
-```
-
-### 下拉選單
-- `dropdown-qa`: 用於 Q&A 下拉選單
-- `dropdown-menu`: 一般下拉選單
-
----
-
-## 開發須知
-
-### Sass
-1. 請勿更動除了 `page` 以外的檔案。
-2. 需要製作 `mixin` 的，先放置在自己的 `page` 頁面上方，待整合時統一整理。
-3. 檔名前請加底線，並 `import` 到自己的 `style.scss`。
-
-### Class 命名規則
-若需狀態變化，例如下拉選單的閉合與展開：
-
-```html
-<!-- 預設閉合狀態 -->
-<div class="dropdown-menu">
-
-<!-- 點擊展開狀態 -->
-<div class="dropdown-menu -expand">
-```
-`-expand` 前置加 `-` 號表示狀態。
 
 ### CSS 編寫順序
-如果可以，請盡量遵循以下順序，方便閱讀與修改：
+請盡量遵循以下順序，方便尋找與修改：
 ```css
 // 滑鼠指標設定
 cursor: pointer;
@@ -181,6 +131,55 @@ transition;
 
 ---
 
+# Vite / Vue 開發
+
+### Vite 開發模式
+```bash
+npm vite dev
+```
+
+### Vite 打包建立
+```bash
+npm vite build
+```
+
+## Vue 元件開發
+### 都使用 Composition API
+
+---
+
+# 元件
+
+### 按鈕
+根據 Figma 按鈕元件風格，支援以下樣式：
+- **Style**: `primary`,`blue`, `outline`, `text`, `white`
+- **Size**: `large`, `default`, `small`
+
+已調整好顏色、大小、字型、間距
+```html
+<div class="btn primary large">Button</div>
+<div class="btn blue default">Button</div>
+```
+
+### 下拉選單 (開發中)
+---
+
+## 其他開發須知
+
+### Class 命名規則
+若需狀態變化，例如下拉選單的閉合與展開：
+
+```html
+<!-- 預設閉合狀態 -->
+<div class="dropdown-menu">
+
+<!-- 點擊展開狀態 -->
+<div class="dropdown-menu -expand">
+```
+`-expand` 前置加 `-` 號表示狀態。
+
+---
+
 ## 檔案結構
 
 ### `default.html`
@@ -197,7 +196,6 @@ transition;
 將以下內容忽略，避免上傳：
 1. 監控產出的 `.css` 檔案。
 
-目前需忽略：
 ```
 *.css
 *.css.map
