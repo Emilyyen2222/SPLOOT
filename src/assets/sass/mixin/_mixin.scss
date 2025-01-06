@@ -33,14 +33,16 @@
     }@else{
         font-family: $notoSansTC;
     }
-    font-size: map-get($fontSize, $f);
-    line-height: map-get($lineHeight, $f);
+    font-size: map-get($fontSize, $f)/10 + rem ;
+    line-height: map-get($lineHeight, $f)/10 + rem;
 
     @if($fw == default){
         font-weight: $fontWeight-default;
     }@else if($fw == bold){
         font-weight: $fontWeight-bold;
     }
+
+    letter-spacing: map-get($fontSize, $f) * map-get($letterSpacing, $f) / 10 + rem
 }
 // Bayon字體
 @mixin bayon($fz){
@@ -48,6 +50,7 @@
     font-size: ($fz / 10)+ rem;
     line-height: normal;
 }
+.bigText{ @include textStyle(bigText); }
 h1{ @include textStyle(h1); }
 h2{ @include textStyle(h2); }
 h3{ @include textStyle(h3); }
@@ -55,7 +58,8 @@ h4{ @include textStyle(h4); }
 h5{ @include textStyle(h5); }
 h6{ @include textStyle(h6); }
 p{ @include textStyle(p); }
-
+.smallText{ @include textStyle(smallText); }
+.xsText{ @include textStyle(xsText); }
 .bold{ font-weight: $fontWeight-bold; }
 
 // -------- Buttons / Dropdowns --------
@@ -99,3 +103,5 @@ p{ @include textStyle(p); }
 
     transform: translate(-50%, -50%); 
 }
+
+// -------- Background Image --------

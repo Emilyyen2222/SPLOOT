@@ -1,7 +1,11 @@
 $colors: (
+    // Primary
     red: #D14535,
     beige: #FFFEFA,
-    brown: #7E5539,
+    brown: #693413,
+    blue: #3B6683,
+
+    // Secondary
     yellow-0: #FDFAF0,
     yellow-1: #FBEED1,
     yellow-2: #F5D690,
@@ -17,6 +21,8 @@ $colors: (
     blue-0: #F0F6FC,
     blue-1: #D4E7F7,
     blue-2: #A5CCED,
+
+    // Natural
     natural-0: #FFFFFF,
     natural-1: #F2EEEB,
     natural-2: #CAB9AE,
@@ -27,5 +33,8 @@ $colors: (
     // Background color
     .bg-#{$color} {
         background-color: #{$value};
+    }
+    .text-#{$color} {
+        color: #{$value};
     }
 }

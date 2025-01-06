@@ -56,10 +56,10 @@ body{ color: map-get($colors, brown); }
 };
 ```
 
-### 每頁背景顏色
+### 每頁背景顏色、預設字體顏色
 將 `body` class 設定在最上層：
 ```html
-<body class="bg-pink-2">
+<body class="bg-blue-0 text-blue-2">
 ```
 
 #### 顏色設定
@@ -83,6 +83,8 @@ HTML 標籤範例：
 ```html
 <h1>Title</h1> <!-- 一般 -->
 <h1 class="bold">Title</h1> <!-- 粗體 -->
+<span class="smallText">Small Text</span>
+<span class="smallText bold">Small Bold Text</span>
 ```
 
 ### Bayon 字體

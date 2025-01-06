@@ -3,32 +3,42 @@ $bayon: "Bayon", serif;
 $notoSansTC: "Noto Sans TC", serif;
 
 // -------- Headings -------- 
+// 寫 px，後面 mixin 會換成 rem
 $fontSize: (
-    bigText: 19rem,
-    h1: 6.1rem,
-    h2: 4.9rem,
-    h3: 3.9rem,
-    h4: 3.1rem,
-    h5: 2.5rem,
-    h6: 2rem,
-    p: 1.6rem,
-    smallText: 1.3rem,
-    xsText: 1rem
-);  
+    bigText: 190,
+    h1: 61,
+    h2: 49,
+    h3: 39,
+    h4: 31,
+    h5: 25,
+    h6: 20,
+    p: 16,
+    smallText: 13,
+    xsText: 10,
+);   
 $lineHeight: (
-    bigText: normal,
-    h1: 8rem,
-    h2: 6.4rem,
-    h3: 5.6rem,
-    h4: 4.8rem,
-    h5: 3.6rem,
-    h6: 3.2rem,
-    p: 3.2rem,
-    smallText: 2.2rem,
-    xsText: 2rem
+    bigText: map-get($fontSize, bigText) * 0.9,
+    h1: 80,
+    h2: 64,
+    h3: 56,
+    h4: 48,
+    h5: 36,
+    h6: 32,
+    p: 32,
+    smallText: 22,
+    xsText: 20,
 );
 $letterSpacing: (
-
+    bigText: 0,
+    h1: 0,
+    h2: 0,
+    h3: .02,
+    h4: .04,
+    h5: .04,
+    h6: .04,
+    p: .04,
+    smallText: .06,
+    xsText: .08,
 );
-$fontWeight-default: 300;
-$fontWeight-bold: 500;
+$fontWeight-default: 400;
+$fontWeight-bold: 700;
