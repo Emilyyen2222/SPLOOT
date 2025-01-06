@@ -9,6 +9,10 @@
         background-color: map-get($colors, red);
         color: map-get($colors, beige);
     }
+    &.blue{
+        background-color: map-get($colors, blue);
+        color: map-get($colors, beige);
+    }
     &.outline{
         border: 1px solid map-get($colors, red);
         color: map-get($colors, red);
