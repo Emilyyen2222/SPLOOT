@@ -1,0 +1,42 @@
+.btn{
+    cursor: pointer;
+    width: 100%;
+    border-radius: 100px;
+    text-align: center;
+
+    // Style
+    &.primary{
+        background-color: map-get($colors, red);
+        color: map-get($colors, beige);
+    }
+    &.outline{
+        border: 1px solid map-get($colors, red);
+        color: map-get($colors, red);
+    }
+    &.text{
+        border-bottom: 1px solid map-get($colors, red);
+        border-radius: 0;
+        color: map-get($colors, red);
+    }
+    &.white{
+        background-color: map-get($colors, natural-0);
+        color: map-get($colors, red);
+    }
+
+    // Size
+    &.large{
+        @include textStyle(h6, bold);
+        height: 4.8rem;
+        padding: .8rem 1.6rem;
+    }
+    &.default{
+        @include textStyle(p, bold);
+        height: 4.8rem;
+        padding: .8rem 1.6rem;
+    }
+    &.small{
+        @include textStyle(smallText, bold);
+        height: 3rem;
+        padding: .4rem 1.6rem;
+    }
+}

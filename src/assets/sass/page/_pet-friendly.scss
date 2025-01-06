@@ -1,0 +1,124 @@
+.title{
+    margin-bottom: 3.6rem;
+    text-align: center;
+}
+
+// 主功能容器
+.petFriendBox{
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+
+    // 左 地點卡片
+    .leftMain{
+        max-width: 752px;
+        padding: 2.4rem;
+        border-radius: 16px;
+        background-color: map-get($colors, beige);
+
+        // switch樣式
+        .switch{
+            position: relative;
+
+            display: flex;
+            align-items: center;
+
+            width: 30rem;
+            height: 3.6rem;
+            margin-bottom: 2.4rem;
+            border-radius: 100px;
+            background-color: map-get($colors, natural-1);
+
+
+        // 隱藏單選按鈕
+            .switch-input{
+                display: none;
+            }
+
+        //位置條
+            .slider{
+                position: absolute;
+
+                width: 25%;
+                height: 3.6rem;
+                border: 1px solid map-get($colors, natural-2);
+                border-radius: 40px;
+                background-color: map-get($colors , beige);
+
+                transition: transform .3s ease;
+            }
+
+            .labels{
+                display: flex;
+                justify-content: space-between;
+
+                width: 100%;
+                margin: 0.8rem 1.6rem;
+
+                label{
+                    cursor: pointer;
+                    z-index: 10;
+                }
+            }
+
+
+            /* 當某一選項被選中時，滑塊移動到相對應位置 */
+            #hospital:checked ~ .slider {
+                transform: translateX(0);
+            }
+            
+            #restaurant:checked ~ .slider {
+                transform: translateX(100%);
+            }
+            
+            #park:checked ~ .slider {
+                transform: translateX(200%);
+            }
+            
+            #hotel:checked ~ .slider {
+                transform: translateX(300%);
+            }
+
+        }
+
+        .facilityCards{
+            display: flex;
+            justify-content: flex-start;
+            gap: 32px;
+
+            padding: 1.6rem 0;
+            border-bottom: 1px solid map-get($colors ,yellow-1);
+
+            img{
+                width: 100%;
+                width: 18rem;
+                height: 12rem;
+            }
+
+            .cardsBox{
+                flex-wrap: 1;
+
+                .cardsTypeIcon{
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            .cardsBtnBox{
+                display: flex;
+                align-items: flex-end;
+                margin-left: auto;
+
+                .cardsBtn{
+
+                }
+            }
+
+
+
+            
+
+        }
+
+    }
+}

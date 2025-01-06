@@ -1,0 +1,101 @@
+// -------- Screen Size --------
+@mixin xs(){
+    @media screen and (max-width: $media_xs){
+        @content;
+    }
+}
+@mixin sm(){
+    @media screen and (max-width: $media_sm){
+        @content;
+    }
+}
+@mixin md(){
+    @media screen and (max-width: $media_md){
+        @content;
+    }
+}
+@mixin lg(){
+    @media screen and (max-width: $media_lg){
+        @content;
+    }
+}
+@mixin xl(){
+    @media screen and (max-width: $media_xl){
+        @content;
+    }
+}
+
+// -------- Typography (Font) --------
+// bigText, h1, h2, h3, h4, h5, h6, p, smallText, xsText
+@mixin textStyle($f, $fw: default){
+    @if($f == bigText){
+        font-family: $bayon;
+    }@else{
+        font-family: $notoSansTC;
+    }
+    font-size: map-get($fontSize, $f);
+    line-height: map-get($lineHeight, $f);
+
+    @if($fw == default){
+        font-weight: $fontWeight-default;
+    }@else if($fw == bold){
+        font-weight: $fontWeight-bold;
+    }
+}
+// Bayon字體
+@mixin bayon($fz){
+    font-family: $bayon;
+    font-size: ($fz / 10)+ rem;
+    line-height: normal;
+}
+h1{ @include textStyle(h1); }
+h2{ @include textStyle(h2); }
+h3{ @include textStyle(h3); }
+h4{ @include textStyle(h4); }
+h5{ @include textStyle(h5); }
+h6{ @include textStyle(h6); }
+p{ @include textStyle(p); }
+
+.bold{ font-weight: $fontWeight-bold; }
+
+// -------- Buttons / Dropdowns --------
+@mixin dropdownBasic($type){
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    border: 1px solid map-get($colors, red);
+    background-color: map-get($colors, natural-0);
+    border-radius: 20px;
+
+    @if ($type == qa){
+        gap: 1.6rem;
+        padding: 1.6rem 1.6rem;
+    }@else if ($type == menu){
+        gap: .4rem;
+        padding: .4rem 1.6rem; 
+    }
+
+    hr{
+        width: 100%;
+        border: 1px solid map-get($colors, natural-1);
+    }
+
+}
+
+// -------- Background Circle --------
+@mixin circle($bgc) {
+    position: fixed;
+    top: 50%; 
+    left: 50%; 
+    z-index: -5;
+
+    width: 1240px;
+    height: 1240px;
+    border-radius: 50%;
+    background-color: $bgc;
+
+    transform: translate(-50%, -50%); 
+}

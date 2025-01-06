@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>member center</title>
+    <link rel="stylesheet" href="./css/nav.css">
+</head>
+<body>
+    <main class="wrapper">
+        <!-- nav -->
+        <section class="nav">
+            <div>
+                <h2>嗨! <span>username</span> 歡迎回來</h2>
+            </div>
+            <nav>
+                
+            </nav>
+        </section>
+
+        <!-- main content -->
+        <section class="personalInfo">
+            <button class="backPage"></button>
+            <div class="personalInfo_container">
+                <h2>個人資料</h2>
+                <div class="cards_container">
+
+                    <div class="card" id="">
+                        <div class="card_title">
+                            <h3>基本資料</h3>
+                            <button id="personalInfo-edit"></button>
+                        </div>
+                        <div class="card-content">
+                            <table class="" id="">
+                                <tr>
+                                    <td>姓名</td>
+                                    <td>派大星</td>
+                                </tr>
+                                <tr>
+                                    <td>暱稱暱稱</td>
+                                    <td>斯普拉特</td>
+                                </tr>
+                                <tr>
+                                    <td>性別</td>
+                                    <td>女</td>
+                                </tr>
+                                <tr>
+                                    <td>生日</td>
+                                    <td>2019.12.12</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>                    
+                    <!--  -->
+                    <div class="card" id="">
+                        <div class="card_title">
+                            <h3>帳戶</h3>
+                            <button id="personalInfo-edit"></button>
+                        </div>
+                        <div class="card-content">
+                            <table class="" id="">
+                                <tr>
+                                    <td>信箱</td>
+                                    <td>abc123@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <td>密碼</td>
+                                    <td>******</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="card" id="">
+                        <div class="card_title">
+                            <h3>聯絡資訊</h3>
+                            <button id="personalInfo-edit"></button>
+                        </div>
+                        <div class="card-content">
+                            <table class="" id="">
+                                <tr>
+                                    <td>手機</td>
+                                    <td>0800092000</td>
+                                </tr>
+                                <tr>
+                                    <td>聯絡地址</td>
+                                    <td>台北市中山區...</td>
+                                </tr>
+                                <tr>
+                                    <td>LineID</td>
+                                    <td>dlaw12</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    
+        <!-- 更新個人基本資料 -->
+         <div class="personalInfo-basic">
+            <h3>更新個人基本資料</h3>
+            <p>請勿公開個人詳細資訊。所有可檢視你個人檔案的使用者都能看到這裡新增的資訊。</p>
+            <form action="">
+                <input type="text" placeholder="" id="fullName">
+                <label for="fullName">姓名</label>
+                <input type="text" placeholder="" id="nickname">
+                <label for="fullName">暱稱</label>
+                <input type="text" placeholder="" id="gender">
+                <label for="fullName">性別</label>
+                <input type="date" placeholder="" id="birthday">
+                <label for="fullName">生日</label>
+                <input type="text" placeholder="" id="region">
+                <label for="fullName">地區</label>
+                <div class="personalInfo-basic-Btn">
+                    <button class="cancel">取消</button>
+                    <button class="save">儲存</button>
+                </div>
+                
+            </form>
+         </div>
+
+        <!-- 更新聯絡資料 -->
+        <div class="personalInfo-contact">
+            <h3>更新個人聯絡資料</h3>
+            <form action="">
+                <input type="number" placeholder="" id="cellphone">
+                <label for="cellphone">手機(選填)</label>
+                <input type="text" placeholder="" id="address">
+                <label for="address">聯絡地址(選填)</label>
+                <input type="text" placeholder="" id="lineID">
+                <label for="lineID">LineID <span>(配對系統和小幫手所需)</span> </label>
+                <div class="personalInfo-basic-Btn">
+                    <button class="cancel">取消</button>
+                    <button class="save">儲存</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 更新帳戶 -->
+        <div class="personalInfo-account">
+            <h3>帳戶</h3>
+            <form action="">
+                <input type="number" placeholder="" id="accountEmail">
+                <label for="accountEmail">帳戶</label>
+                <input type="text" placeholder="" id="accountPassword">
+                <label for="address">密碼</label>
+                <input type="text" placeholder="" id="lineID">
+                <label for="lineID">帳號狀態</label>
+                <div class="personalInfo-basic-Btn">
+                    <button class="cancel">變更信箱</button>
+                    <button class="save">變更密碼(需驗證)</button>
+                </div>
+            </form>
+        </div>
+
+
+    </main>
+
+
+</body>
+</html>
