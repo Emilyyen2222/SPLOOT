@@ -1,19 +1,18 @@
-下面所有東西換到 vite 開發的時候，應該有很多東西都會有變
 哪裡看不懂或寫不夠清楚再跟我說～
 
-指令
-    sass 監控 (換到 vite 開發的時候可能會有變動)
-        sass 監控的檔案位置 監控輸出的檔案位置
-        sass sass/style.scss css/style.css
 
-    vite 開發
-        npm vite dev
+sass 監控
+    sass ./src/assets/sass/style.scss ./src/assets/css/style.css -w
 
-    vite 打包建立
-        npm vite build
+vite 開發
+    npm vite dev
+
+vite 打包建立
+    npm vite build
 
 
-mixin 使用:
+
+開發
     rwd切版：五個斷點 xs, sm, md, lg, xl
         @include xs(){
             內容
@@ -22,24 +21,31 @@ mixin 使用:
             內容
         }
 
-    bayon 字體：
-        @include bayon(字體大小); (已經調好行高等等的，只需要填大小就好)
-        bayon 20px -> @include bayon(20);
+    每頁背景顏色:
+        <body class="bg-pink-2"> //放在最上面
+    顏色:
+        color: map-get($colors, pink-2);
+        background-color: map-get($colors, blue-2);
 
-    引入 h1 300 字體：
-        @include h1(); (已經調好大小、粗細、行高)
-        h1 500 粗字體：
-        @include h1(bold);
+    設計庫字體：
+        bigText, h1, h2, h3, h4, h5, h6, p, smallText, xsText //大小、行高、間距都設好了
+
+        @include textStyle(bigText);
+        @include textStyle(h1);
+        @include textStyle(h1, bold); //粗體
+
+        如果 html 裡 <h1> <h2> 等等標籤需要粗體，在class加 bold
+        <h1 class="bold">Title</h1>  
+
+    bayon字體：
+        @include bayon(20);//bayon 2rem (20px);
+
+    背景圓圈：
+        @include circle($bgc);
 
 
 
-
-    
-
-
-
-
-    下面的會被做成 vue 元件，但如果有需要先用的，可以去 ds.html 看怎麼用
+Vue 元件: 下面的會被做成 vue 元件，但如果有需要先用的，可以去 ds.html 看怎麼用
 
     按紐: 看 figma 按紐元件風格 (之後會做成 vue 元件)
         Style: primary, outline, text, white
@@ -54,9 +60,6 @@ mixin 使用:
         dropdown-menu 一般下拉式選單 
 
         一樣都調整好顏色大小字型間距了
-
-
-
 
 
 開發
@@ -112,53 +115,11 @@ mixin 使用:
         line-height
         color
 
-
-
-
-
-_demo
-    放一些套件的地方
-
-    ds.html 放做好的元件庫
-    fullPageScroll.html 頁面區塊滑動的效果
-css
-    經過 sass 監控完的 css 檔
-    裡面應該只會有兩個檔案 style.css 和 style.css.map
-    有多的說明你監控的方式錯了
-img 
-    放圖片的地方
-
-js
-    換到 vite 開發的時候可能會有變動
-
-sass
-    base: 基本元素
-        color: 顏色
-            使用->  color: map-get($colors, $pink-0);
-        reset: reset.css
-        spacing: padding, margin (可能會刪掉)
-        typography: 字體字型
-        var: 存放其他變數
-
-    component: 元件
-        btn: 按紐元件
-        dropdown: 下拉選單
-
-    layout: 每一頁都會有的元素
-        footer
-        header
-    
-    mixin: 
-        mixin 是一種用來重複使用樣式的工具。它讓你可以定義一段可重用的 CSS 邏輯，然後在需要的地方呼叫(@include)這段邏輯，而不用每次都重新寫相同的程式碼。
-
-        使用->
-
-    page:
-        每一頁專用的 css
-
-    style.scss:
-        把以上所有元素都匯入(@import)進 style.scss
-
+-----------------------------------------------------
+src
+    assets //放前端會用到的東西，包含 css img js sass 
+    component //放 Vue component
+    vendors //第三方套件，例如jquery
 
 .gitignore
     讓 git 忽略掉下面的開發，就不會上傳
@@ -169,5 +130,5 @@ sass
     css
     .vscode
 
-head.html
+default.html
     Html 初始模板，開發網頁前從這個複製
