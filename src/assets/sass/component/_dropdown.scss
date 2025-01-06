@@ -1,7 +1,6 @@
 .dropdown-qa{
     @include dropdownBasic(qa);
-    @include p();
-
+    @include textStyle(p);
 
     overflow: hidden;
     height: 6.4rem;
@@ -55,7 +54,7 @@
 }
 .dropdown-menu{
     @include dropdownBasic(menu);
-    @include smallText();
+    @include textStyle(smallText);
 
     .dropdownBtn{
         display: flex;

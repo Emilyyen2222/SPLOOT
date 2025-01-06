@@ -1,14 +1,3 @@
-@mixin md{
-    @media screen and (max-width: 768px){
-        @content;
-    }
-}
-//暫用
-
-html{
-    font-size: 10px;
-}
-
 header{
     z-index: 500;
     margin: 0 auto;
@@ -28,7 +17,7 @@ header{
     align-items: center;
     justify-content: space-between;
 
-    background-color: rgb(255, 255, 255, 0);
+    background-color: transparent;
 
     position: sticky;
     top: 0;
@@ -54,8 +43,7 @@ header{
 
 
         a{
-        text-decoration: none;
-        color: #EF4839;
+        color: map-get($colors, red);
         font-family: "Noto Sans TC";
         font-weight: 500;
     
@@ -65,7 +53,7 @@ header{
             content: "";
             display: block;
             width: 0;
-            border: 1px solid #EF4839;
+            border: 1px solid  map-get($colors, red);
 
             position: absolute;
             top: calc(1.4rem + 16px);
@@ -102,7 +90,7 @@ header{
             cursor: pointer;
 
             padding: 0.8rem 1.6rem;
-            background-color: #EF4839;
+            background-color:  map-get($colors, red);
             border-radius: 100px;
 
             display: flex;
@@ -110,7 +98,7 @@ header{
             font-family: "Noto Sans TC, serif";
             font-size: 1.4rem;
             font-weight: 500;
-            color: #FFFEFA;
+            color: map-get($colors, beige);
         }
     }
 
@@ -128,7 +116,7 @@ header{
     .line{
         @include md(){
             width: 48px;
-            border: 1.5px solid #EF4839;
+            border: 1.5px solid  map-get($colors, red);
             margin-bottom: 1.2rem;
         }
     }

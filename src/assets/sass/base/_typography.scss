@@ -14,10 +14,9 @@ $fontSize: (
     p: 1.6rem,
     smallText: 1.3rem,
     xsText: 1rem
-);
-    
+);  
 $lineHeight: (
-    bigText: auto,
+    bigText: normal,
     h1: 8rem,
     h2: 6.4rem,
     h3: 5.6rem,
@@ -28,5 +27,8 @@ $lineHeight: (
     smallText: 2.2rem,
     xsText: 2rem
 );
+$letterSpacing: (
+
+);
 $fontWeight-default: 300;
-$fontWeight-black: 500;
+$fontWeight-bold: 500;
