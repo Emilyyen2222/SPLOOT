@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>毛孩日曆</title>
 
- <!-- 把這段複製進去 -->
- <link rel="preconnect" href="https://fonts.googleapis.com">
- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
- <!-- 把這段複製進去 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
 
- <link rel="stylesheet" href="../src/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../src/assets/css/style.css">
         
 </head>
-<body class="bg-yellow-0">
+<body class="bg-yellow-1">
     <header>
         <div class="navHamburger">
             <div class="line"></div>
@@ -43,15 +42,109 @@
     </header>
 <!-- 主內容 -->
     <div class="wrapper">
-<!-- 標題 -->
-        <div class="title">
-            <h3 class="textBlack">打造你的專屬毛孩日曆</h3>
-            <p class="xsText">掌握官方活動資訊與家長分享毛孩的精彩時刻。</p>
-        </div>
 <!-- 主要功能 -->
-        <div class="petCalenderBox">
-            <div class="leftMain"></div>
-        </div>
+        <div class="petCalendarBox">
+            <!-- 左 寵物日曆 -->
+            <div class="leftMain">
+                <div class="calendar">
+                    俺是日曆
+                </div>
+            </div>
+            <!-- 右 日曆活動內容 -->
+            <div class="rightMain">
+                <!-- 標題 -->
+                <div class="title">
+                    <h3 class="bold">打造你的專屬毛孩日曆</h3>
+                    <p class="smallText">掌握官方活動資訊與家長分享毛孩的精彩時刻。</p>
+                </div>
+                <div class="midBox">
+                    <!-- 滑動switch -->
+                    <div class="switch" id="switch">
+                        <input type="radio" id="officialEvent" name="option" class="switch-input">
+                        <input type="radio" id="splooter" name="option" class="switch-input">
+                        <div class="slider"></div>
+                        <div class="labels xsText">
+                        <label for="officialEvent">官方活動</label>
+                        <label for="splooter">Splooter</label>
+                        </div>
+                    </div>
+                    <div class="scheduleBtn">
+                        <img src="../src/assets/img/pet-calendar/add-schedule.svg" alt="" class="scheduleIcon">
+                        <p>新增行程</p>
+                    </div>
+                </div>
+                <!-- 活動卡片 -->
+                <ul class="scheduleCards">
+                    <li class="scheduleCard">
+                        <div class="cardText">
+                            <div class="cardTop">
+                                <h6 class="scheduleName bold">聖誕節Splooter聚餐</h6>
+                                <div class="scheduleType">已額滿</div>
+                            </div>
+                            <p class="summary">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
+                            <div class="info">
+                                <p class="noOfpeople">人數限制：45人</p>
+                                <p class="time">活動時間：2024年 12月 25日 18:30-21:30</p>
+                                <p class="place">活動地點：台北市信義區信義路五段7號86樓 (饗 A Joy）</p>
+                            </div>
+                        </div>
+                        <div class="cardsBtnBox">
+                            <div class="btn primary small blue">參加</div>
+                        </div>
+                    </li>
+                    <li class="scheduleCard">
+                        <div class="cardText">
+                            <div class="cardTop">
+                                <h6 class="scheduleName bold">聖誕節Splooter聚餐</h6>
+                                <div class="scheduleType">已額滿</div>
+                            </div>
+                            <p class="summary">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
+                            <div class="info">
+                                <p class="noOfpeople">人數限制：45人</p>
+                                <p class="time">活動時間：2024年 12月 25日 18:30-21:30</p>
+                                <p class="place">活動地點：台北市信義區信義路五段7號86樓 (饗 A Joy）</p>
+                            </div>
+                        </div>
+                        <div class="cardsBtnBox">
+                            <div class="btn primary small blue">參加</div>
+                        </div>
+                    </li>
+                    <li class="scheduleCard">
+                        <div class="cardText">
+                            <div class="cardTop">
+                                <h6 class="scheduleName bold">聖誕節Splooter聚餐</h6>
+                                <div class="scheduleType">已額滿</div>
+                            </div>
+                            <p class="summary">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
+                            <div class="info">
+                                <p class="noOfpeople">人數限制：45人</p>
+                                <p class="time">活動時間：2024年 12月 25日 18:30-21:30</p>
+                                <p class="place">活動地點：台北市信義區信義路五段7號86樓 (饗 A Joy）</p>
+                            </div>
+                        </div>
+                        <div class="cardsBtnBox">
+                            <div class="btn primary small blue">參加</div>
+                        </div>
+                    </li>
+                    <li class="scheduleCard">
+                        <div class="cardText">
+                            <div class="cardTop">
+                                <h6 class="scheduleName bold">聖誕節Splooter聚餐</h6>
+                                <div class="scheduleType">已額滿</div>
+                            </div>
+                            <p class="summary">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
+                            <div class="info">
+                                <p class="noOfpeople">人數限制：45人</p>
+                                <p class="time">活動時間：2024年 12月 25日 18:30-21:30</p>
+                                <p class="place">活動地點：台北市信義區信義路五段7號86樓 (饗 A Joy）</p>
+                            </div>
+                        </div>
+                        <div class="cardsBtnBox">
+                            <div class="btn primary small blue">參加</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
     </div>
 

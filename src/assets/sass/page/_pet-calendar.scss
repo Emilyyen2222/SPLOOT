@@ -1,0 +1,173 @@
+//主功能容器
+.petCalendarBox{
+    display: flex;
+    justify-content: center;
+    gap: 3.2rem;
+
+    .leftMain{
+        .calendar{
+            width: 376px;
+            height: 396px;
+            border: 1px solid black;
+        }
+    }
+
+    .rightMain{
+            width: 55.5%;
+            max-width: 800px;
+            padding: 2.4rem;
+            border-radius: 20px;
+            background-color: map-get($colors, yellow-0);
+
+            .title{
+                text-align: center;
+            }
+
+            .midBox{
+                display: flex;
+                align-items: center;
+
+                // switch樣式
+                .switch {
+                    position: relative;
+
+                    display: flex;
+                    align-items: center;
+
+                    width: 15rem;
+                    height: 3.6rem;
+                    margin: 4rem auto 4rem 0;
+                    border-radius: 100px;
+                    background-color: map-get($colors, natural-1);
+
+
+                    // 隱藏單選按鈕
+                    .switch-input {
+                        display: none;
+                    }
+
+                    //位置條
+                    .slider {
+                        position: absolute;
+
+                        width: 50%;
+                        height: 3.6rem;
+                        border: 1px solid map-get($colors, natural-2);
+                        border-radius: 40px;
+                        background-color: map-get($colors , beige);
+
+                        transition: transform .3s ease;
+                    }
+
+                    .labels {
+                        display: flex;
+                        justify-content: space-between;
+
+                        width: 100%;
+                        margin: 0.8rem 1.6rem;
+
+                        color: map-get($colors, brown);
+
+                        label {
+                            cursor: pointer;
+                            z-index: 10;
+                        }
+                    }
+
+
+                    /* 當某一選項被選中時，滑塊移動到相對應位置 */
+                    #officialEvent:checked~.slider {
+                        transform: translateX(0);
+                    }
+
+                    #splooter:checked~.slider {
+                        transform: translateX(100%);
+                    }
+                }
+
+                .scheduleBtn{
+                    cursor: pointer;
+
+                    display: flex;
+                    align-items: center;
+
+                    .scheduleIcon{
+                        width: 24px;
+                        height: 24px;
+                        margin-left: 4px;
+                    }
+
+                    p{
+                        @include textStyle(xsText)
+                    }
+                }
+
+
+
+            }
+
+            .scheduleCard{
+                display: flex;
+                justify-content: flex-start;
+                gap: 3.2rem;
+
+                padding: 1.6rem 0;
+                border-bottom: 1px solid map-get($colors , natural-1);
+
+
+                &:first-child{
+                    padding-top: 0;
+                }
+    
+                &:last-child {
+                    padding-bottom: 0;
+                    border-bottom: none
+                }
+
+                .cardText{
+                    .cardTop{
+                        display: flex;
+                        gap: 16px;
+
+                        .scheduleType{
+                            @include textStyle(xsText);
+
+                            height: 20px;
+                            padding: 0 8px;
+                            border-radius: 100px;
+                            background-color: map-get($colors, natural-1);
+                        }
+                    }
+
+                    .summary{
+                        @include textStyle(smallText, bold);
+
+                        margin: 8px 0;
+                    }
+
+                    .info p{
+                        @include textStyle(smallText);
+                    }
+
+
+                }
+
+                .cardsBtnBox {
+                    display: flex;
+                    align-items: flex-end;
+                    margin-left: auto;
+    
+    
+                }
+            }
+
+
+
+
+
+
+
+
+
+    }
+}
