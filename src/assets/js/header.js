@@ -1,19 +1,15 @@
 const header = document.querySelector('header');
-let lastScrollTop = 0;
+const body = document.querySelector('body');
+const headerLinks = document.querySelectorAll('.headerItem a')
 
-window.addEventListener('scroll',()=>{
-    const scrollY = window.scrollY;
+//body class放到header上
 
-    if(scrollY > lastScrollTop){
-        header.classList.add("scroll");
-    }else{
-        header.classList.remove("scroll");
+header.className = body.className;
 
-    };
+//body class放到每個選單的<a>上
 
-    if (scrollY <= 0) {
-        lastScrollTop = 0;  // 如果 scrollY 小於或等於 0，設置 lastScrollTop 為 0
-    } else {
-        lastScrollTop = scrollY;  // 否則，將 lastScrollTop 設為當前的 scrollY
-    }
+headerLinks.forEach(link=>{
+    link.className = body.className;
 });
+
+
