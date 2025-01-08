@@ -1,53 +1,54 @@
-.heroSection {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15vh;
-    
-    &::before {
-        content: "CONNECT THROUGH SPLOOT.";
-        display: block;
-        position: absolute;
-        top: -1rem;
-        left: 3rem;
-        width: 3rem;
-        color: #F8DEE2;
-        font-size: 6rem;
-        font-weight: 900;
-        z-index: -5;
-        letter-spacing: -.2rem;
-    }
+// 變數管理
+$main-color: #F8DEE2;
+$highlight-color: #D14535;
+$font-size-large: 6rem;
+$font-weight-bold: 900;
+$letter-spacing-tight: -0.2rem;
 
-    &::after {
-        content: "SHARE & WAG MORE.";
-        display: block;
-        position: absolute;
-        bottom: -5rem;
-        right: -0.3rem;
-        width: 560px;
-        color: #F8DEE2;
-        font-size: 6rem;
-        font-weight: 900;
-        z-index: -5;
-        line-height: 1;
-        letter-spacing: -.2rem;
-    }
+.heroSection {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15vh;
+
+  &::before,
+  &::after {
+    display: block;
+    position: absolute;
+    color: $main-color;
+    font-size: $font-size-large;
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-tight;
+    z-index: -5;
+  }
+
+  &::before {
+    content: "CONNECT THROUGH SPLOOT.";
+    top: -1rem;
+    left: 3rem;
+  }
+
+  &::after {
+    content: "SHARE & WAG MORE.";
+    bottom: -5rem;
+    right: -0.3rem;
+  }
 }
 
 .seasonalSlogan {
-    &::before {
-        content: "聖誕禮盒來囉！";
-        display: block;
-        position: absolute;
-        top: 7rem;
-        left: 10rem;
-        width: 14rem;
-        color: #D14535;
-        font-size: 2rem;
-        font-weight: 900;
-        z-index: -1;
-    }
+  &::before {
+    content: "聖誕禮盒來囉！";
+    display: block;
+    position: absolute;
+    top: 7rem;
+    left: 10rem;
+    width: 14rem;
+    color: $highlight-color;
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+    z-index: -1;
+  }
 }
 
 :root {
