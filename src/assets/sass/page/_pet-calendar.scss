@@ -1,3 +1,4 @@
+#petCalendar{
 //主功能容器
 .petCalendarBox{
     display: flex;
@@ -170,4 +171,21 @@
 
 
     }
+}
+
+.circle{
+    @include circle(#F9E7C0);
+
+    position: fixed;
+    left: 50%;
+}
+
+.circle1{
+    top: -200px;
+}
+
+.circle2{
+    top: 1040px;
+}
+
 }
