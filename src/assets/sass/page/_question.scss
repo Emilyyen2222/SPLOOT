@@ -34,7 +34,7 @@
         color: map-get($colors, red);
     }
 }
-
+#splootBoxQuestion{
 // Components
 .circle {
     @include circle(map-get($colors, pink-0));
@@ -147,4 +147,5 @@
             }
         }
     }
+}
 }
