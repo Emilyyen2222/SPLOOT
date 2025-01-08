@@ -1,0 +1,150 @@
+
+// mixins
+@mixin question-container() {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+
+    transform: translate(-50%, -50%);
+}
+
+@mixin prev-navigation() {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    height: 30px;
+
+    .prev-line {
+        width: 50px;
+        border-bottom: 1px solid map-get($colors, red);
+    }
+
+    .prev-text {
+        cursor: pointer;
+
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0.64px;
+        text-align: center;
+        color: map-get($colors, red);
+    }
+}
+
+// Components
+.circle {
+    @include circle(map-get($colors, pink-0));
+}
+
+.question_container {
+    @include question-container();
+
+    .title {
+        align-self: stretch;
+
+        font-size: 31px;
+        font-weight: 900;
+        text-align: center;
+        line-height: 48px;
+        color: map-get($colors, brown);
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        gap: 8px;
+
+        height: 136px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+
+        .option {
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-self: stretch;
+
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: white;
+
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            letter-spacing: 0.64px;
+            color: map-get($colors, brown);
+        }
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        gap: 8px;
+
+        height: 78px;
+
+        .next-button {
+            cursor: pointer;
+            align-self: stretch;
+
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: map-get($colors, red);
+
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            color: map-get($colors, beige);
+        }
+
+        .prev {
+            @include prev-navigation();
+        }
+    }
+}
+
+.progress-bar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 100%;
+    padding: 16px 24px;
+
+    .progress-bar {
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        align-self: stretch;
+        gap: 8px;
+
+        .progress-segment {
+            position: relative;
+
+            width: 142.22px;
+            height: 4px;
+            border-radius: 100px;
+            background: map-get($colors, beige);
+
+            &.filled {
+                background: map-get($colors, red);
+            }
+        }
+    }
+}
