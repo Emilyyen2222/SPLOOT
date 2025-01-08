@@ -1,17 +1,17 @@
 header{
     z-index: 500;
-    margin: 0 auto 56px;
-
     width: 100%;
     max-width: 1512px;
     height: 8rem;
     padding: 1.6rem 4.8rem;
+    margin: 0 auto;
 
     // RWD
     @include md(){
         padding: 1.4rem 1.2rem;
     }
-    box-sizing: border-box;
+    position: sticky;
+    top: 0;
 
     display: flex;
     align-items: center;
@@ -19,8 +19,6 @@ header{
 
     background-color: transparent;
 
-    position: sticky;
-    top: 0;
     transition: all .5s;
 
     .logo{
@@ -45,37 +43,35 @@ header{
 
     .headerItem{
         margin-right: 2.4rem;
+        
         font-size: clamp(1rem,1.4vw,1.4rem);
-
 
         a{
         // color: map-get($colors, red);
-        font-family: "Noto Sans TC";
-        font-weight: 500;
+        font-family: $notoSansTC;
+        font-weight: $fontWeight-bold;
     
         position: relative;
 
         &::after{
             content: "";
-            display: block;
-            width: 0;
-            border: 1px solid  map-get($colors, red);
-
             position: absolute;
             top: calc(1.4rem + 16px);
             left: 0;
 
+            display: block;
+            width: 0;
+            
+            border: 1px solid  map-get($colors, red);
             opacity: 0; 
             visibility: hidden;
 
-
-            transition: all .5S;
-
-            
+            transition: all .5s;  
         }
         &:hover::after{
-            opacity: 1;
             width: 100%;
+
+            opacity: 1;
             visibility: visible; /*顯示*/
         
             transform: translate(0);
@@ -95,15 +91,16 @@ header{
             all: unset;   /*移除預設*/
             cursor: pointer;
 
-            padding: 0.8rem 1.6rem;
-            background-color:  map-get($colors, red);
-            border-radius: 100px;
-
             display: flex;
             align-items: center;
-            font-family: "Noto Sans TC, serif";
+
+            padding: 0.8rem 1.6rem;
+            border-radius: 100px;
+            background-color:  map-get($colors, red);
+
+            font-family: $notoSansTC;
+            font-weight: $fontWeight-bold;
             font-size: 1.4rem;
-            font-weight: 500;
             color: map-get($colors, beige);
         }
     }
@@ -114,8 +111,8 @@ header{
 
         @include md(){
             display: block;
+
              padding: 1.6px 0.8px;
-             box-sizing: border-box;
         }
     }
 

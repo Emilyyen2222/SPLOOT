@@ -97,6 +97,7 @@ cursor: pointer;
 position;
 top;
 left;
+z-index;
 
 // 樣式
 display: flex;
@@ -111,6 +112,7 @@ height;
 box-sizing;
 padding;
 border;
+opacity;
 margin;
 border-radius;
 background-color;
