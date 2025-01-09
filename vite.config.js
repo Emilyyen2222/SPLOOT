@@ -12,13 +12,5 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src") // @ 符號：直接指向到 src 資料夾
     }
-  },
-  build: {
-    rollupOptions: {
-      input: {
-        index: path.resolve(__dirname, 'index.html'),
-        ds: path.resolve(__dirname, "_demo/ds.html")
-      }
-    }
   }
 })
