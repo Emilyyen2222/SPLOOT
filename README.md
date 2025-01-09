@@ -36,9 +36,19 @@ body{ color: map-get($colors, brown); }
 ```
 
 ### 每頁背景顏色、預設字體顏色
-在 `body` 設定背景顏色，預設字體顏色，如果沒預設就是上方預設的咖啡色
+在 `body` 加上 id，名稱是自己的頁面
 ```html
-<body class="bg-blue-0 text-blue-2">
+<body id="pageName">
+```
+
+在頁面的 scss 中設定背景顏色和預設字體顏色，如果沒有設定就是上方的咖啡色
+```scss
+#pageName{
+body{
+    background-color: map-get($colors, pink-0);
+    color: map-get($colors, blue-2);
+}
+}
 ```
 
 ### RWD 切版
@@ -105,14 +115,13 @@ justify-content;
 align-items;
 overflow;
 
-// 外觀（由內到外）
+// 外觀框架（由內到外）
 width;
 max-width;
 height;
 box-sizing;
 padding;
 border;
-opacity;
 margin;
 border-radius;
 background-color;
@@ -126,7 +135,8 @@ text-decoration;
 line-height;
 color;
 
-// 效果
+// 其他效果變化
+opacity;
 transform;
 transition;
 ```
@@ -148,16 +158,17 @@ npm create vite@latest
 ```
 
 ### 下載安裝套件
+已經包含 Vue-router 和 Pinia 了，可以去`package.json`檢查，沒有到話再下載
 ```bash
 npm install
 ```
 
-### 下載 Vue-router
+### 下載 Vue-router (已經包含在 package 裡了)
 ```bash
 npm install vue-router@4
 ```
 
-### 下載 Pinia
+### 下載 Pinia (已經包含在 package 裡了)
 ```bash
 npm install pinia
 ```
@@ -174,14 +185,17 @@ npm vite dev
 npm vite build
 ```
 
-## Vue 元件開發
-### 都使用 Composition API
+### Vite 打包檢視
+```bash
+npm vite preview
+```
 
+## Vue 元件開發 (都使用 Composition API)
 ---
 
 # 元件
 
-### 按鈕
+## 按鈕
 根據 Figma 按鈕元件風格，支援以下樣式：
 - **Style**: `primary`,`blue`, `outline`, `text`, `white`
 - **Size**: `large`, `default`, `small`
@@ -192,20 +206,28 @@ npm vite build
 <div class="btn blue default"><span>Button</span></div>
 ```
 
-### 下拉選單
-Q&A 下拉選單
+## 下拉選單
+### Q&A 下拉選單
+`question`的地方填問題，`answer`的地方填答案
 ```vue
 <DropdownQa 
     question="QQQQQ"
     answer="AAAAA"></DropdownQa>
 ```
+
+### 選項下拉選單
+`placeHolder`的地方填欄位預設文字，`options`的地方放選項陣列
+
+- **建議**：`placeHolder` `options` 用物件的方式，以防一頁有多個選單，方便管理
+```vue
 <DropdownMenu
-    :placeHolder="menu1.placeHolder"
+    :placeHolder="menu1.placeHolder" 
     :options="menu1.options"></DropdownMenu>
 ```
 ---
 
 ## 其他開發須知
+### 請 修改/完成 一小部分，一個段落，或一個元件時就先 commit，否則一次要上傳很多個檔案，很容易有衝突。
 
 ### Class 命名規則
 若需狀態變化，例如下拉選單的閉合與展開：
@@ -228,7 +250,10 @@ Q&A 下拉選單
 
 ### `src`
 - **`assets`**: 前端所需資源（CSS、Img、JS、Sass）。
-- **`component`**: Vue 元件。(ItemContainer.vue)
+- **`component`**: Vue 元件。(ItemContainer.vue)。
+    - **`Banner`**: 上方 header。
+    - **`DropdownMenu`**: 下拉選單。
+    - **`DropdownQa`**: Q&A 下拉選單。
 - **`pages`**: 頁面 View。(HomeView.vue)
 - **`router`**: Vue-router。
 - **`vendors`**: 第三方套件（例如 jQuery）。
