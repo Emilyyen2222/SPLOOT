@@ -7,7 +7,7 @@
 
         <div class="logo">
             <a href="./">
-                <img src="@/assets/img/logo.svg" alt="Logo">
+                <img src="@/assets/img/header-red.svg" alt="Logo">
             </a>
         </div>
         <nav>
