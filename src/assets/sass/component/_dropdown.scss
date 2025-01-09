@@ -1,10 +1,33 @@
+@mixin dropdownBasic($type){
+    cursor: pointer;
+    
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    border: 1px solid map-get($colors, red);
+    background-color: map-get($colors, natural-0);
+    border-radius: 20px;
+    
+    @if ($type == qa){
+        gap: 1.6rem;
+        padding: 1.6rem 1.6rem;
+    }@else if ($type == menu){
+        gap: .4rem;
+        padding: .4rem 1.6rem; 
+    }
+    
+    hr{
+        width: 100%;
+        border: 1px solid map-get($colors, natural-1);
+    }
+    
+}
+
+// -------- Dropdowns --------
 .dropdown-qa{
     @include dropdownBasic(qa);
     @include textStyle(p);
-
-    overflow: hidden;
-    height: 6.4rem;
-    transition: height .5s ease;
 
     .question-block{
         display: flex;
@@ -20,8 +43,10 @@
                 font-size: 3.2rem;
             }
         }
-        .expandBtn{ width: 2.4rem;
-        transition: transform .5s ease; }
+        .expandBtn{ 
+            width: 2.4rem;
+            transition: transform .5s ease;
+        }
     }
 
     .answer{
@@ -34,22 +59,10 @@
         }
     }
 
-    hr { 
-        opacity: 0;
-        transition: opacity .5s ease; 
-    }
-    .answer{ 
-        opacity: 0;
-        transition: opacity .5s ease;
-    }
 
     // 點擊展開後
     &.-expand{
-        height: auto;
-        
         .expandBtn{ transform: rotate(180deg) }
-        hr{ opacity: 1 }
-        .answer{ opacity: 1; }
     }
 }
 .dropdown-menu{
@@ -61,7 +74,10 @@
         justify-content: space-between;
         align-items: center;
         
-        .expandBtn{ width: 2.4rem }
+        .expandBtn{ 
+            width: 2.4rem;
+            transition: transform .5s ease;
+        }
     }
 
     .dropdownList{
@@ -69,9 +85,6 @@
         flex-direction: column;
         gap: .8rem;
     }
-
-    hr{ display: none }
-    .dropdownList{ display: none }
 
     // 點擊展開後
     &.-expand{
