@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="loginBox">
-            <button class="login">登入</button>
+            <div class="btn primary small red">登入</div>
         </div>
     </header>
 </template>
