@@ -1,30 +1,97 @@
+$btnPrimary: (
+    bgc: red,
+    color: beige
+);
+$btnBlue: (
+    bgc: blue,
+    color: beige
+);
+$btnOutline: (
+    bgc: red,
+    color: red
+);
+$btnText: (
+    bgc: red,
+    color: red
+);
+$btnWhite: (
+    bgc: natural-0,
+    color: red
+);
+
 .btn{
     cursor: pointer;
     width: 100%;
     border-radius: 100px;
     text-align: center;
 
+    span {
+        display: inline-block;
+        position: relative;
+        transition: all .3s ease;
+    
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          border-radius: 50%;
+          
+          opacity: 0;
+          transform: translateY(-50%);
+          transition: all .3s ease;
+        
+        }
+    }
+    
+    &:hover {
+        span {
+            transform: translateX(-30px);
+            &::after { opacity: 1; }
+        }
+    }
+
+
     // Style
     &.primary{
         background-color: map-get($colors, red);
         color: map-get($colors, beige);
+
+        span::after{
+            background-color: map-get($colors, beige);
+        }
     }
     &.blue{
         background-color: map-get($colors, blue);
         color: map-get($colors, beige);
+
+        span::after{
+            background-color: map-get($colors, beige);
+        }
     }
     &.outline{
         border: 1px solid map-get($colors, red);
         color: map-get($colors, red);
+
+        span::after{
+            background-color: map-get($colors, red);
+        }
     }
     &.text{
         border-bottom: 1px solid map-get($colors, red);
         border-radius: 0;
         color: map-get($colors, red);
+
+        span::after{
+            background-color: map-get($colors, red);
+        }
     }
     &.white{
         background-color: map-get($colors, natural-0);
         color: map-get($colors, red);
+
+        span::after{
+            background-color: map-get($colors, red);
+        }
     }
 
     // Size
@@ -32,15 +99,43 @@
         @include textStyle(h6, bold);
         height: 4.8rem;
         padding: .8rem 1.6rem;
+
+        span::after{
+            right: -3.2rem;
+            width: 8px;
+            height: 8px;
+        }
+        &:hover span{
+            transform: translateX(-2.4rem);
+        }
     }
     &.default{
         @include textStyle(p, bold);
         height: 4.8rem;
         padding: .8rem 1.6rem;
+
+        span::after{
+            right: -2.4rem;
+            width: 4px;
+            height: 4px;
+        }
+        &:hover span{
+            transform: translateX(-2rem);
+        }
     }
     &.small{
         @include textStyle(smallText, bold);
         height: 3rem;
         padding: .4rem 1.6rem;
+
+        span::after{
+            right: -1.6rem;
+            width: 3px;
+            height: 3px;
+        }
+        &:hover span{
+            transform: translateX(-1.3rem);
+        }
     }
+
 }
