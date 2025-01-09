@@ -87,22 +87,6 @@ header{
             width: auto;
         }
 
-        .login{
-            all: unset;   /*移除預設*/
-            cursor: pointer;
-
-            display: flex;
-            align-items: center;
-
-            padding: 0.8rem 1.6rem;
-            border-radius: 100px;
-            background-color:  map-get($colors, red);
-
-            font-family: $notoSansTC;
-            font-weight: $fontWeight-bold;
-            font-size: 1.4rem;
-            color: map-get($colors, beige);
-        }
     }
 
     // RWD預設
