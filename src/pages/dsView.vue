@@ -1,8 +1,9 @@
+<!-- Sam -->
 <template>
-    <banner></banner>
+    <Banner></Banner>
 
     <section class="buttons">
-        <h4>Buttons</h4>
+        <h4>Buttons (完成)</h4>
         <div style="flex-direction: column">
             <div class="btn primary large"><span>btn primary large</span></div>
             <div class="btn primary default"><span>btn primary default</span></div>
