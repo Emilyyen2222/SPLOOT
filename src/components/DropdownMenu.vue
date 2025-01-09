@@ -10,8 +10,8 @@
       <hr>
       <ul class="dropdownList">
           <li 
-            v-for="(item, index) in menuItems" :key="item"
-            @click="selectItem(item)">{{ item.name }}</li>
+            v-for="(option, index) in options" :key="option"
+            @click="selectItem(option)">{{ option.name }}</li>
       </ul>
     </template>
   </div>
@@ -25,7 +25,7 @@
           type: String,
           required: true,
       },
-      menuItems: {
+      options: {
           type: Array,
           required: true,
       }
@@ -38,7 +38,7 @@
   function toggleDropdown(){
     isExpand.value = !isExpand.value;
   }
-  function selectItem(item){
-    placeHolder.value = item.name;
+  function selectItem(o){
+    placeHolder.value = o.name;
   }
 </script>
