@@ -15,7 +15,7 @@ $fontSize: (
     p: 16,
     smallText: 13,
     xsText: 10,
-);   
+);
 $lineHeight: (
     bigText: map-get($fontSize, bigText) * 0.9,
     h1: 80,

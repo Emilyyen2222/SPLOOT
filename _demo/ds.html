@@ -13,135 +13,19 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="stylesheet" href="../src/assets/css/style.css">
+    <link rel="stylesheet" href="../src/assets/sass/style.scss">
 
 </head>
 
 <body>
-    <div class="xsText">AAAAA</div>
-    
-    <section class="buttons">
-        <h1>Buttons (還沒做 hover)</h1>
-        <div style="flex-direction: column">
-            <div class="btn primary large">btn primary large</div>
-            <div class="btn primary default">btn primary default</div>
-            <div class="btn primary small">btn primary small</div>
-            <div class="btn blue large">btn blue large</div>
-            <div class="btn blue default">btn blue default</div>
-            <div class="btn blue small">btn blue small</div>
-            <div class="btn outline large">btn outline large</div>
-            <div class="btn outline default">btn outline default</div>
-            <div class="btn outline small">btn outline small</div>
-            <div class="btn text large">btn text large</div>
-            <div class="btn text default">btn text default</div>
-            <div class="btn text small">btn text small</div>
-            <div class="btn white large">btn white large</div>
-            <div class="btn white default">btn white default</div>
-            <div class="btn white small">btn white small</div>
-        </div>
-    </section>
+    <div id="app"></div>
 
-    <section class="dropdowns">
-        <h1>Dropdown (還沒做下拉效果)</h1>
-        <div style="flex-direction: column">
-            <!-- QA 下拉選單：關閉 -->
-            <div class="dropdown-qa">
-                <div class="question-block">
-                    <div class="question">
-                        <span>Q</span>
-                        <p>可以隨時更改方案嗎</p>
-                    </div>
-                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
+    <script type="module">
+        import { createApp } from "vue";
+        import dsView from "../src/views/dsView.vue";
 
-                </div>
-                <hr>
-                <div class="answer">
-                    <span>A</span>
-                    <p>是的，您可以隨時更改您的方案！<br>只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！</p>
-                </div>
-            </div>
-
-            <!-- QA 下拉選單：展開 -->
-            <div class="dropdown-qa -expand">
-                <div class="question-block">
-                    <div class="question">
-                        <span>Q</span>
-                        <p>可以隨時更改方案嗎</p>
-                    </div>
-                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
-                </div>
-                <hr>
-                <div class="answer">
-                    <span>A</span>
-                    <p>是的，您可以隨時更改您的方案！<br>只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！</p>
-                </div>
-            </div>
-
-            <!-- 一般下拉選單：關閉 -->
-            <div class="dropdown-menu">
-
-                <div class="dropdownBtn">
-                    <span>選擇選項</span>
-                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
-                </div>
-                <hr>
-                <ul class="dropdownList">
-                    <li>選項1</li>
-                    <li>選項2</li>
-                    <li>選項3</li>
-                    <li>選項4</li>
-                </ul>
-            </div>
-
-            <!-- 一般下拉選單：展開 -->
-            <div class="dropdown-menu -expand">
-                <div class="dropdownBtn">
-                    <span>選擇選項</span>
-                    <img class="expandBtn" src="../IMG/icon/chev-red.svg" alt="chev-red">
-                </div>
-                <hr>
-                <ul class="dropdownList">
-                    <li>選項1</li>
-                    <li>選項2</li>
-                    <li>選項3</li>
-                    <li>選項4</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-        <!-- 下拉選單簡易 js -->
-    <script>
-        const dropdown_qas = document.querySelectorAll('.dropdown-qa');
-        const dropdown_menus = document.querySelectorAll('.dropdown-menu');
-
-        dropdown_qas.forEach(dropdown => {
-            dropdown.addEventListener('click', () => {
-                dropdown.classList.toggle('-expand');
-            });
-        });
-        dropdown_menus.forEach(dropdown => {
-            dropdown.addEventListener('click', () => {
-                dropdown.classList.toggle('-expand');
-
-                const items = dropdown.querySelectorAll('li');
-                items.forEach(item => {
-                    
-                });
-            });
-        });
+        createApp(dsView).mount("#app");
     </script>
-
-
-    <style>
-        body { padding: 20px; background-color: #EEE;}
-        section{ margin: 80px 0}
-        section > div{
-            display: flex;
-            gap: 20px;
-        }
-    </style>
-    
 </body>
 
 </html>

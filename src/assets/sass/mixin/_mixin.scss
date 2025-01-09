@@ -50,6 +50,7 @@
     font-size: ($fz / 10)+ rem;
     line-height: normal;
 }
+
 .bigText{ @include textStyle(bigText); }
 h1{ @include textStyle(h1); }
 h2{ @include textStyle(h2); }
@@ -62,38 +63,8 @@ p{ @include textStyle(p); }
 .xsText{ @include textStyle(xsText); }
 .bold{ font-weight: $fontWeight-bold; }
 
-// -------- Buttons / Dropdowns --------
-@mixin dropdownBasic($type){
-    cursor: pointer;
-
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-    border: 1px solid map-get($colors, red);
-    background-color: map-get($colors, natural-0);
-    border-radius: 20px;
-
-    @if ($type == qa){
-        gap: 1.6rem;
-        padding: 1.6rem 1.6rem;
-    }@else if ($type == menu){
-        gap: .4rem;
-        padding: .4rem 1.6rem; 
-    }
-
-    hr{
-        width: 100%;
-        border: 1px solid map-get($colors, natural-1);
-    }
-
-}
-
 // -------- Background Circle --------
-@mixin circle($bgc) {
-    // position: fixed;
-    // top: 50%; 
-    // left: 50%; 
+@mixin circle($bgc) { 
     z-index: -5;
 
     width: 1240px;
@@ -103,5 +74,3 @@ p{ @include textStyle(p); }
 
     transform: translate(-50%, -50%); 
 }
-
-// -------- Background Image --------
