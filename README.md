@@ -135,6 +135,35 @@ transition;
 
 # Vite / Vue 開發
 
+## 前置事項
+可以用`node -v`來看電腦目前使用的版本
+
+### 安裝 Node.js
+安裝網址：https://nodejs.org/en
+
+### 安裝 Vite
+製作 Vite 專案
+```bash
+npm create vite@latest
+```
+
+### 下載安裝套件
+```bash
+npm install
+```
+
+### 下載 Vue-router
+```bash
+npm install vue-router@4
+```
+
+### 下載 Pinia
+```bash
+npm install pinia
+```
+
+## Vite Vue 開發
+
 ### Vite 開發模式
 ```bash
 npm vite dev
@@ -159,11 +188,21 @@ npm vite build
 
 已調整好顏色、大小、字型、間距
 ```html
-<div class="btn primary large">Button</div>
-<div class="btn blue default">Button</div>
+<div class="btn primary large"><span>Button</span></div>
+<div class="btn blue default"><span>Button</span></div>
 ```
 
-### 下拉選單 (開發中)
+### 下拉選單
+Q&A 下拉選單
+```vue
+<DropdownQa 
+    question="QQQQQ"
+    answer="AAAAA"></DropdownQa>
+```
+<DropdownMenu
+    :placeHolder="menu1.placeHolder"
+    :options="menu1.options"></DropdownMenu>
+```
 ---
 
 ## 其他開發須知
@@ -188,9 +227,11 @@ npm vite build
 開發初始模板，請複製此檔案進行網頁開發。
 
 ### `src`
-- **`assets`**: 放置前端所需資源（CSS、Img、JS、Sass）。
-- **`component`**: 放置 Vue 元件。
-- **`vendors`**: 放置第三方套件（例如 jQuery）。
+- **`assets`**: 前端所需資源（CSS、Img、JS、Sass）。
+- **`component`**: Vue 元件。(ItemContainer.vue)
+- **`pages`**: 頁面 View。(HomeView.vue)
+- **`router`**: Vue-router。
+- **`vendors`**: 第三方套件（例如 jQuery）。
 
 ---
 
