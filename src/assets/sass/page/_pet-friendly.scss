@@ -1,209 +1,206 @@
+#petFriendly{
+
 // 主功能容器
 
 
-.petFriendBox {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
+    .petFriendBox {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
 
-    // 左 地點卡片
-    .leftMain {
-        width: 55.5%;
-        max-width: 800px;
-        padding: 2.4rem;
-        border-radius: 20px;
-        background-color: map-get($colors, blue-0);
-
-        @include md() {
-            width: 100%;
-            border-radius: 0;
-        }
-
-        .title {
-            text-align: center;
-        }
-
-        // switch樣式
-        .switch {
-            position: relative;
-
-            display: flex;
-            align-items: center;
-
-            width: 30rem;
-            height: 3.6rem;
-            margin: 4rem auto;
-            border-radius: 100px;
-            background-color: map-get($colors, natural-1);
-
-
-            // 隱藏單選按鈕
-            .switch-input {
-                display: none;
-            }
-
-            //位置條
-            .slider {
-                position: absolute;
-
-                width: 25%;
-                height: 3.6rem;
-                border: 1px solid map-get($colors, natural-2);
-                border-radius: 40px;
-                background-color: map-get($colors , beige);
-
-                transition: transform .3s ease;
-            }
-
-            .labels {
-                display: flex;
-                justify-content: space-between;
-
-                width: 100%;
-                margin: 0.8rem 1.6rem;
-
-                color: map-get($colors, brown);
-
-                label {
-                    cursor: pointer;
-                    z-index: 10;
-                }
-            }
-
-
-            /* 當某一選項被選中時，滑塊移動到相對應位置 */
-            #hospital:checked~.slider {
-                transform: translateX(0);
-            }
-
-            #restaurant:checked~.slider {
-                transform: translateX(100%);
-            }
-
-            #park:checked~.slider {
-                transform: translateX(200%);
-            }
-
-            #hotel:checked~.slider {
-                transform: translateX(300%);
-            }
-
-        }
-
-        .facilityCards {
-            display: flex;
-            justify-content: flex-start;
-            gap: 3.2rem;
-
-            padding: 1.6rem 0;
-            border-bottom: 1px solid map-get($colors , yellow-1);
-
-            &:first-child{
-                padding-top: 0;
-            }
-
-            &:last-child {
-                padding-bottom: 0;
-                border-bottom: none
-            }
-
-            img {
-                width: 18rem;
-                height: 12rem;
-                border-radius: 4px;
-            }
-
-            .cardsBox {
-
-                .cardsTypeIcon {
-                    display: flex;
-                    align-items: center;
-
-                    i,
-                    p {
-                        color: map-get($colors, brown);
-                    }
-                }
-            }
-
-            .cardsBtnBox {
-                display: flex;
-                align-items: flex-end;
-                margin-left: auto;
-
-
-            }
-        }
-    }
-
-    .rightMain {
-        width: 376px;
-
-        @include md() {
-            position: fixed;
-            top: 0;
-            left: 100%;
-
-            width: 100vw;
-            height: 100vh;
-
-            transition: left 1s;
-
-            z-index: 600;  //超過header
-
-            &.clicked {
-                left: 0;
-            }
-        }
-
-
-        .mapBack{
-            position: absolute;
-            top: 10px;
-            right: 10px;
-
-            display: none; //RWD => display:flex
-            justify-content: center;
-            align-items: center;
-            
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #fff;
-            box-shadow: 0 0 4px rgb(114, 114, 114);
-
-            z-index: 700;
-
-            @include md{
-                display: flex;
-            }
-
-            img{
-                width: 20px;
-                height: 20px;
-            }
-
-        }
-
-        #map {
-            position: sticky;
-            top: 8rem;
-
-            width: 100%;
-            height: 80vh;
+        // 左 地點卡片
+        .leftMain {
+            width: 55.5%;
+            max-width: 800px;
+            padding: 2.4rem;
             border-radius: 20px;
+            background-color: map-get($colors, blue-0);
 
-            @include md(){
-                height: 100%;
+            @include md() {
+                width: 100%;
                 border-radius: 0;
             }
 
+            .title {
+                text-align: center;
+            }
+
+            // switch樣式
+            .switch {
+                position: relative;
+
+                display: flex;
+                align-items: center;
+
+                width: 30rem;
+                height: 3.6rem;
+                margin: 4rem auto;
+                border-radius: 100px;
+                background-color: map-get($colors, natural-1);
+
+
+                // 隱藏單選按鈕
+                .switch-input {
+                    display: none;
+                }
+
+                //位置條
+                .slider {
+                    position: absolute;
+
+                    width: 25%;
+                    height: 3.6rem;
+                    border: 1px solid map-get($colors, natural-2);
+                    border-radius: 40px;
+                    background-color: map-get($colors , beige);
+
+                    transition: transform .3s ease;
+                }
+
+                .labels {
+                    display: flex;
+                    justify-content: space-between;
+
+                    width: 100%;
+                    margin: 0.8rem 1.6rem;
+
+                    color: map-get($colors, brown);
+
+                    label {
+                        cursor: pointer;
+                        z-index: 10;
+                    }
+                }
+
+
+                /* 當某一選項被選中時，滑塊移動到相對應位置 */
+                #hospital:checked~.slider {
+                    transform: translateX(0);
+                }
+
+                #restaurant:checked~.slider {
+                    transform: translateX(100%);
+                }
+
+                #park:checked~.slider {
+                    transform: translateX(200%);
+                }
+
+                #hotel:checked~.slider {
+                    transform: translateX(300%);
+                }
+            }
+
+            .facilityCards {
+                display: flex;
+                justify-content: flex-start;
+                gap: 3.2rem;
+
+                padding: 1.6rem 0;
+                border-bottom: 1px solid map-get($colors , yellow-1);
+
+                &:first-child{
+                    padding-top: 0;
+                }
+
+                &:last-child {
+                    padding-bottom: 0;
+                    border-bottom: none
+                }
+
+                img {
+                    width: 18rem;
+                    height: 12rem;
+                    border-radius: 4px;
+                }
+
+                .cardsBox {
+
+                    .cardsTypeIcon {
+                        display: flex;
+                        align-items: center;
+
+                        img{
+                            width: 16px;
+                            height: 16px;
+                            margin-right: 4px;
+                        }
+
+                        p {
+                            color: map-get($colors, brown);
+                        }
+                    }
+                }
+
+                .cardsBtnBox {
+                    display: flex;
+                    align-items: flex-end;
+                    margin-left: auto;
+                }
+            }
         }
 
+        .rightMain {
+            width: 376px;
+
+            @include md() {
+                position: fixed;
+                top: 0;
+                left: 100%;
+
+                width: 100vw;
+                height: 100vh;
+
+                transition: left 1s;
+
+                z-index: 600;  //超過header
+
+                &.clicked {
+                    left: 0;
+                }
+            }
 
 
+            .mapBack{
+                position: absolute;
+                top: 10px;
+                right: 10px;
 
+                display: none; //RWD => display:flex
+                justify-content: center;
+                align-items: center;
+                
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #fff;
+                box-shadow: 0 0 4px rgb(114, 114, 114);
 
+                z-index: 700;
 
+                @include md{
+                    display: flex;
+                }
+
+                img{
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            #map {
+                position: sticky;
+                top: 8rem;
+
+                width: 100%;
+                height: 80vh;
+                border-radius: 20px;
+
+                @include md(){
+                    height: 100%;
+                    border-radius: 0;
+                }
+            }
+        }
     }
 }
