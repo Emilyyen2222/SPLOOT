@@ -1,14 +1,15 @@
+<!-- Sam -->
 <template>
-    <header :class="[themes[props.theme].theme, `bg-${props.bgc}`]">
+    <header :class="[header, `bg-${bgc}`]">
         <nav>
             <div class="navHamburger">
-                <div class="line bg-red"></div>
-                <div class="line bg-red"></div>
+                <div class="line"></div>
+                <div class="line"></div>
             </div>
             <div class="logo">
                 <RouterLink to="/">
-                    <img v-if="props.theme == 'red'" src="@/assets/img/header-red.svg" alt="Logo">
-                    <img v-if="props.theme == 'blue'" src="@/assets/img/header-blue.svg" alt="Logo">
+                    <img v-if="theme == 'red'" src="@/assets/img/header-red.svg" alt="Logo">
+                    <img v-if="theme == 'blue'" src="@/assets/img/header-blue.svg" alt="Logo">
                 </RouterLink>
             </div>
             <ul class="headerList">
@@ -19,14 +20,14 @@
                 <li class="headerItem"><RouterLink to="/sploot-friendly">友善設施</RouterLink></li>
             </ul>
             <div class="loginBox">
-                <div :class="themes[props.theme].btn"><span>登入</span></div>
+                <div :class="btn"><span>登入</span></div>
             </div>
         </nav>
     </header>
 </template>
   
 <script setup>
-    import { ref } from 'vue';
+    import { ref, defineProps } from 'vue';
 
     const props = defineProps({
         theme: {
@@ -39,14 +40,16 @@
         }
     });
 
-    const themes = {
-        red:{
-            theme: 'redTheme',
-            btn: 'btn primary small',
-        },
-        blue:{
-            theme: 'blueTheme',
-            btn: 'btn blue small',
-        }
+    const header = ref('');
+    const btn = ref('');
+
+    if(props.theme == 'red'){
+        header.value = 'redTheme';
+        btn.value = 'btn primary small';
+    }else if(props.theme == 'blue'){
+        header.value = 'blueTheme';
+        btn.value = 'btn blue small';
     }
+
+
 </script>
