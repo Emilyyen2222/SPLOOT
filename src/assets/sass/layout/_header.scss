@@ -36,26 +36,23 @@ $headerThemes: (
                     align-items: center;
                     gap: .8rem;
         
-                    width: 6.4rem;
+                    width: 8rem;
                     .line{
                         width: 2.4rem;
                         height: 3px;
                         background-color: map-get($colors, $value);
-                    }
-                    
+                    }       
                 }
             }
         
             .logo{
-                width: 6.4rem;
-                height: 4.8rem;
+                width: 8rem;
+                img{ width: 6.4rem; }
         
                 @include md(){
                     width: 5.4rem;
-                    height: 4rem;
+                    img{ width: 100%; }
                 }
-        
-                img{ width: 100%; }
             }
         
             .headerList{
@@ -63,10 +60,7 @@ $headerThemes: (
                 display: flex;
                 gap: 2.4rem;
         
-        
-                @include md(){
-                    display: none;
-                }
+                @include md(){ display: none; }
         
                 a{
                     display: block;
@@ -92,7 +86,7 @@ $headerThemes: (
                     }
                     &:hover::after{
                         width: 100%;
-        
+
                         opacity: 1;
                         visibility: visible;
                     }
@@ -101,24 +95,31 @@ $headerThemes: (
             }
         
             .loginBox{
-                width: 6.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                width: 8rem;
+
+                .btn{
+                    width: 6.4rem;
+                    transition: all .3s ease;
+
+                    &:hover{ width: 100%; }
+                }
 
                 @include md(){
                     .btn.blue.small{
                         background-color: transparent;
                         color: map-get($colors, blue);
 
-                        span::after{
-                            background-color: map-get($colors, blue);
-                        }
+                        span::after{ background-color: map-get($colors, blue); }
                     }
                     .btn.primary.small{
                         background-color: transparent;
                         color: map-get($colors, red);
 
-                        span::after{
-                            background-color: map-get($colors, red);
-                        }
+                        span::after{ background-color: map-get($colors, red); }
                     }
 
                 }
