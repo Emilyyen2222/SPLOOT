@@ -1,7 +1,8 @@
 <!-- Sam -->
 <template>
-    <Banner></Banner>
+    <Banner theme="red" bgc="purple-1"></Banner>
 
+    <h4 style="margin: 20px 0">首頁還沒切元件庫先當首頁</h4>
     <section class="buttons">
         <h4>Buttons (完成)</h4>
         <div style="flex-direction: column">
@@ -11,15 +12,21 @@
             <div class="btn blue large"><span>btn blue large</span></div>
             <div class="btn blue default"><span>btn blue default</span></div>
             <div class="btn blue small"><span>btn blue small</span></div>
+            <div class="btn white large"><span>btn white large</span></div>
+            <div class="btn white default"><span>btn white default</span></div>
+            <div class="btn white small"><span>btn white small</span></div>
             <div class="btn outline large"><span>btn outline large</span></div>
             <div class="btn outline default"><span>btn outline default</span></div>
             <div class="btn outline small"><span>btn outline small</span></div>
             <div class="btn text large"><span>btn text large</span></div>
             <div class="btn text default"><span>btn text default</span></div>
             <div class="btn text small"><span>btn text small</span></div>
-            <div class="btn white large"><span>btn white large</span></div>
-            <div class="btn white default"><span>btn white default</span></div>
-            <div class="btn white small"><span>btn white small</span></div>
+            <div class="btn textBlue large"><span>btn textBlue large</span></div>
+            <div class="btn textBlue default"><span>btn textBlue default</span></div>
+            <div class="btn textBlue small"><span>btn textBlue small</span></div>
+            <div class="btn textRed large"><span>btn textRed large</span></div>
+            <div class="btn textRed default"><span>btn textRed default</span></div>
+            <div class="btn textRed small"><span>btn textRed small</span></div>
         </div>
     </section>
 
@@ -67,7 +74,6 @@
 </script>
 
 <style>
-    body { padding: 20px; background-color: #EEE;}
-    section{ margin: 80px 0}
+    section{ margin-bottom: 20px}
     section > div{ display: flex; gap: 20px; }
 </style>

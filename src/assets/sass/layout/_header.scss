@@ -1,111 +1,128 @@
-header{
-    z-index: 500;
-    width: 100%;
-    max-width: 1512px;
-    height: 8rem;
-    padding: 1.6rem 4.8rem;
-    margin: 0 auto;
-
-    // RWD
-    @include md(){
-        padding: 1.4rem 1.2rem;
-    }
-    position: sticky;
-    top: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: transparent;
-
-    transition: all .5s;
-
-    .logo{
-        width: 6.4rem;
-        height: 4.8rem;
-
-        img{
-            width: 6.4rem;
-            height: 4.8rem;
-        }
-    }
-   
-    nav{
-        @include md(){
-            display: none;
-        }
-    }
-
-    .headerList{
-        display: flex;
-    }
-
-    .headerItem{
-        margin-right: 2.4rem;
+$headerThemes: (
+    red: red,
+    blue: blue,
+);
+@each $theme, $value in $headerThemes {
+    header.#{$theme}Theme{
+        position: sticky;
+        top: 0;
+        z-index: 1000;
         
-        font-size: clamp(1rem,1.4vw,1.4rem);
-
-        a{
-        // color: map-get($colors, red);
-        font-family: $notoSansTC;
-        font-weight: $fontWeight-bold;
-    
-        position: relative;
-
-        &::after{
-            content: "";
-            position: absolute;
-            top: calc(1.4rem + 16px);
-            left: 0;
-
-            display: block;
-            width: 0;
-            
-            border: 1px solid  map-get($colors, red);
-            opacity: 0; 
-            visibility: hidden;
-
-            transition: all .5s;  
-        }
-        &:hover::after{
+        width: 100%;
+        
+        nav{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        
             width: 100%;
-
-            opacity: 1;
-            visibility: visible; /*顯示*/
+            max-width: 1512px;
+            height: 6.4rem;
+            padding: 1.6rem 4.8rem;
+            margin: 0 auto;
         
-            transform: translate(0);
+            @include md(){
+                padding: 1.2rem 1.6rem;
+            }
+        
+            .navHamburger{
+                display: none;
+        
+                @include md(){
+                    cursor: pointer;
+                    
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: .8rem;
+        
+                    width: 6.4rem;
+                    .line{
+                        width: 2.4rem;
+                        height: 3px;
+                        background-color: map-get($colors, $value);
+                    }
+                    
+                }
+            }
+        
+            .logo{
+                width: 6.4rem;
+                height: 4.8rem;
+        
+                @include md(){
+                    width: 5.4rem;
+                    height: 4rem;
+                }
+        
+                img{ width: 100%; }
+            }
+        
+            .headerList{
+                @include textStyle(smallText);
+                display: flex;
+                gap: 2.4rem;
+        
+        
+                @include md(){
+                    display: none;
+                }
+        
+                a{
+                    display: block;
+                    height: 4.8rem;
+                    font-weight: 400;
+        
+                    color: map-get($colors, $value);
+                    line-height: 4.8rem;  
+                    
+                    &::after{
+                        content: "";
+                        bottom: 0;
+                        left: 0;
+                        
+                        display: block;
+                        width: 0;
+                        border: 1px solid map-get($colors, $value);
+        
+                        opacity: 0;
+                        visibility: hidden;
+        
+                        transition: all .5s;
+                    }
+                    &:hover::after{
+                        width: 100%;
+        
+                        opacity: 1;
+                        visibility: visible;
+                    }
+                }
+                
+            }
+        
+            .loginBox{
+                width: 6.4rem;
+
+                @include md(){
+                    .btn.blue.small{
+                        background-color: transparent;
+                        color: map-get($colors, blue);
+
+                        span::after{
+                            background-color: map-get($colors, blue);
+                        }
+                    }
+                    .btn.primary.small{
+                        background-color: transparent;
+                        color: map-get($colors, red);
+
+                        span::after{
+                            background-color: map-get($colors, red);
+                        }
+                    }
+
+                }
+            }
         }
-
-        }
-    }
-
-    .loginBox{
-        display: flex;
-        justify-content: flex-end;
-        @include md(){
-            width: auto;
-        }
-
-    }
-
-    // RWD預設
-    .navHamburger{
-        display: none;
-
-        @include md(){
-            display: block;
-
-             padding: 1.6px 0.8px;
-        }
-    }
-
-    .line{
-        @include md(){
-            width: 48px;
-            border: 1.5px solid  map-get($colors, red);
-            margin-bottom: 1.2rem;
-        }
-    }
-
+    }   
 }
