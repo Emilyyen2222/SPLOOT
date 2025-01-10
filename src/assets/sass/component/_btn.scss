@@ -1,141 +1,146 @@
-$btnPrimary: (
-    bgc: red,
-    color: beige
+$btnStyles: (
+    primary: (
+        bgc: map-get($colors, red),
+        color: map-get($colors, beige),
+    ),
+    blue: (
+        bgc: map-get($colors, blue),
+        color: map-get($colors, beige),
+    ),
+    white: (
+        bgc: map-get($colors, natural-0),
+        color: map-get($colors, red),
+    ),
+    outline: (
+        bgc: transparent,
+        color: map-get($colors, red),
+    ),
+    text: (
+        borderRadius: 0,
+        bgc: transparent,
+        color: map-get($colors, red),
+    ),
+    textBlue: (
+        borderRadius: 0,
+        bgc: transparent,
+        color: map-get($colors, blue),
+    ),
+    textRed: (
+        borderRadius: 0,
+        bgc: transparent,
+        color: map-get($colors, red),
+    )
+
 );
-$btnBlue: (
-    bgc: blue,
-    color: beige
+$btnSizes: (
+    large: (
+        textStyle: h6,
+        height: 4.8rem,
+        padding: .8rem 1.6rem,
+        circleSize: 8px,
+        translate: -2.4rem,
+    ),
+    default: (
+        textStyle: p,
+        height: 4.8rem,
+        padding: .8rem 1.6rem,
+        circleSize: 4px,
+        translate: -2rem,
+    ),
+    small: (
+        textStyle: smallText,
+        height: 3rem,
+        padding: .4rem 1.6rem,
+        circleSize: 3px,
+        translate: -1.3rem,
+    ),
 );
-$btnOutline: (
-    bgc: red,
-    color: red
-);
-$btnText: (
-    bgc: red,
-    color: red
-);
-$btnWhite: (
-    bgc: natural-0,
-    color: red
-);
+@mixin buttonStyle($bgc, $color, $border: null, $borderBottom: null, $borderRadius: 100px){
+    background-color: $bgc;
+    color: $color;
+    border: $border;
+    border-bottom: $borderBottom;
+    border-radius: $borderRadius; 
 
-.btn{
-    cursor: pointer;
-    width: 100%;
-    border-radius: 100px;
-    text-align: center;
+    span::after{
+        background-color: $color;
+    }
+}
+@mixin buttonSize($textStyle, $height, $padding, $circleSize, $translate){
+    @include textStyle($textStyle);
+    height: $height;
+    padding: $padding;
 
-    span {
-        display: inline-block;
-        position: relative;
-        transition: all .3s ease;
-    
-        &::after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          border-radius: 50%;
-          
-          opacity: 0;
-          transform: translateY(-50%);
-          transition: all .3s ease;
-        
+    span::after{
+        width: $circleSize;
+        height: $circleSize;
+        right: $translate;
+    }
+    &:hover span{
+        transform: translateX($translate);
+    }
+}
+
+@each $style, $styleProps in $btnStyles {
+    @each $size, $sizeProps in $btnSizes {
+        $bgc: map-get($styleProps, bgc);
+        $color: map-get($styleProps, color);
+        $text: map-get($sizeProps, textStyle);
+        $h: map-get($sizeProps, height);
+        $pd: map-get($sizeProps, padding);
+        $circleSize: map-get($sizeProps, circleSize);
+        $translate: map-get($sizeProps, translate);
+        $br: map-get($styleProps, borderRadius);
+
+        .btn.#{$style}.#{$size}{
+            @include textStyle($text);
+            cursor: pointer;
+
+            width: 100%;
+            height: $h;
+            padding: $pd;
+            background-color: $bgc;
+            
+            color: $color;
+            text-align: center;
+            
+            @if($br != 0){
+                border-radius: 100px;
+            }@else{
+                border-radius: 0;
+            }
+            @if($style == 'outline'){
+                border: 1px solid $color;
+            }@else if($style == 'text'){
+                border-bottom: 1px solid $color;
+            }
+
+            span {
+                display: inline-block;
+                position: relative;
+                transition: all .3s ease;
+            
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: calc(50% - $circleSize/2);
+                    right: $translate;
+
+                    width: $circleSize;
+                    height: $circleSize;
+                    border-radius: 50%;
+                    background-color: $color;
+                    
+                    opacity: 0;
+                    transition: all .3s ease;   
+                }
+            }
+            
+            &:hover span{
+                transform: translateX($translate);
+
+                &::after { opacity: 1; }
+            }
         }
     }
-    
-    &:hover {
-        span {
-            transform: translateX(-30px);
-            &::after { opacity: 1; }
-        }
-    }
-
-
-    // Style
-    &.primary{
-        background-color: map-get($colors, red);
-        color: map-get($colors, beige);
-
-        span::after{
-            background-color: map-get($colors, beige);
-        }
-    }
-    &.blue{
-        background-color: map-get($colors, blue);
-        color: map-get($colors, beige);
-
-        span::after{
-            background-color: map-get($colors, beige);
-        }
-    }
-    &.outline{
-        border: 1px solid map-get($colors, red);
-        color: map-get($colors, red);
-
-        span::after{
-            background-color: map-get($colors, red);
-        }
-    }
-    &.text{
-        border-bottom: 1px solid map-get($colors, red);
-        border-radius: 0;
-        color: map-get($colors, red);
-
-        span::after{
-            background-color: map-get($colors, red);
-        }
-    }
-    &.white{
-        background-color: map-get($colors, natural-0);
-        color: map-get($colors, red);
-
-        span::after{
-            background-color: map-get($colors, red);
-        }
-    }
-
-    // Size
-    &.large{
-        @include textStyle(h6, bold);
-        height: 4.8rem;
-        padding: .8rem 1.6rem;
-
-        span::after{
-            right: -3.2rem;
-            width: 8px;
-            height: 8px;
-        }
-        &:hover span{
-            transform: translateX(-2.4rem);
-        }
-    }
-    &.default{
-        @include textStyle(p, bold);
-        height: 4.8rem;
-        padding: .8rem 1.6rem;
-
-        span::after{
-            right: -2.4rem;
-            width: 4px;
-            height: 4px;
-        }
-        &:hover span{
-            transform: translateX(-2rem);
-        }
-    }
-    &.small{
-        @include textStyle(smallText, bold);
-        height: 3rem;
-        padding: .4rem 1.6rem;
-
-        span::after{
-            right: -1.6rem;
-            width: 3px;
-            height: 3px;
-        }
-        &:hover span{
-            transform: translateX(-1.3rem);
-        }
-    }
-
 }

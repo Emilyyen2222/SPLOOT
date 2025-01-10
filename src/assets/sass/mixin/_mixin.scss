@@ -48,7 +48,7 @@
 @mixin bayon($fz){
     font-family: $bayon;
     font-size: ($fz / 10)+ rem;
-    line-height: normal;
+    line-height: ($fz / 9)+ rem;
 }
 
 .bigText{ @include textStyle(bigText); }
