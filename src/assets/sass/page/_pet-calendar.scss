@@ -6,92 +6,121 @@
 
         .topMain{
             display: flex;
-            justify-content:center;
-            gap: 13.4rem;
+            gap: 10%;
+        
+            .topLeft{
+               display: flex;
+               align-items: center;
 
-            .title{
-                text-align: center;
+               .topLeftBox{
+                    height: 50%;                 
+
+                   .switch {
+                       position: relative;
+    
+                       display: flex;
+                       align-items: center;
+    
+                       width: 15rem;
+                       height: 3.6rem;
+                       margin: 4rem auto 21.5rem 0;
+                       border-radius: 100px;
+                       background-color: map-get($colors, natural-1);
+    
+    
+                       // 隱藏單選按鈕
+                       .switch-input {
+                           display: none;
+                       }
+    
+                       //位置條
+                       .slider {
+                           position: absolute;
+    
+                           width: 50%;
+                           height: 3.6rem;
+                           border: 1px solid map-get($colors, natural-2);
+                           border-radius: 40px;
+                           background-color: map-get($colors , beige);
+    
+                           transition: transform .3s ease;
+                       }
+    
+                       .labels {
+                           display: flex;
+                           justify-content: space-between;
+    
+                           width: 100%;
+                           margin: 0.8rem 1.6rem;
+    
+                           color: map-get($colors, brown);
+    
+                           label {
+                               cursor: pointer;
+                               z-index: 10;
+                           }
+                       }
+    
+    
+                       /* 當某一選項被選中時，滑塊移動到相對應位置 */
+                       #officialEvent:checked~.slider {
+                           transform: translateX(0);
+                       }
+    
+                       #splooter:checked~.slider {
+                           transform: translateX(100%);
+                       }
+                   }
+
+               }
+
+            }   
+
+            .topRight{
+
+                .calendar{
+                    width: 384px;
+                    height: 355px;
+                    // border: 1px solid black;
+                }
             }
-
-            .switch {
-                position: relative;
-
-                display: flex;
-                align-items: center;
-
-                width: 15rem;
-                height: 3.6rem;
-                margin: 4rem auto 21.5rem 0;
-                border-radius: 100px;
-                background-color: map-get($colors, natural-1);
-
-
-                // 隱藏單選按鈕
-                .switch-input {
-                    display: none;
-                }
-
-                //位置條
-                .slider {
-                    position: absolute;
-
-                    width: 50%;
-                    height: 3.6rem;
-                    border: 1px solid map-get($colors, natural-2);
-                    border-radius: 40px;
-                    background-color: map-get($colors , beige);
-
-                    transition: transform .3s ease;
-                }
-
-                .labels {
-                    display: flex;
-                    justify-content: space-between;
-
-                    width: 100%;
-                    margin: 0.8rem 1.6rem;
-
-                    color: map-get($colors, brown);
-
-                    label {
-                        cursor: pointer;
-                        z-index: 10;
-                    }
-                }
-
-
-                /* 當某一選項被選中時，滑塊移動到相對應位置 */
-                #officialEvent:checked~.slider {
-                    transform: translateX(0);
-                }
-
-                #splooter:checked~.slider {
-                    transform: translateX(100%);
-                }
-            }
+        }
+        
+        .scheduleBtnBox{
+            border-bottom: 1px solid map-get($colors ,natural-2 );
 
             .scheduleBtn{
                 display: flex;
                 align-items: center;
 
-                img{
-                    width: 24px;
-                    height: 24px;
-                }
+                width: 72px;
+                height: 32px;
+                margin-bottom: 18px;
             }
-
-            .calendar{
-                width: 384px;
-                height: 355px;
-                border: 1px solid black;
+            
+            img{
+                width: 24px;
+                height: 24px;
             }
-
         }
-
 
     }
 
-
+    
+    .circle{
+        @include circle(#F9E7C0);
+    
+        position: fixed;
+        left: 50%;
+    }
+    
+    .circle1{
+        top: -200px;
+    }
+    
+    .circle2{
+        top: 1040px;
+    }
 
 
 

@@ -1,5 +1,5 @@
 <template>
-<Banner></Banner>
+<Banner theme="blue" bgc="yellow-1"></Banner>
 <!-- 主內容 -->
 <div class="wrapper">
 <!-- 主要功能 -->
@@ -8,34 +8,38 @@
             <div class="topMain">
                 <!-- 上左 -->
                 <div class="topLeft">
-                    <!-- 標題 -->
-                    <div class="title">
-                        <h2 class="bold">打造你的專屬毛孩日曆</h2>
-                        <p>掌握官方活動資訊與家長分享毛孩的精彩時刻。</p>
-                    </div>
-                    <!-- 滑動switch -->
-                    <div class="switch" id="switch">
-                        <input type="radio" id="officialEvent" name="option" class="switch-input">
-                        <input type="radio" id="splooter" name="option" class="switch-input">
-                        <div class="slider"></div>
-                        <div class="labels xsText">
-                        <label for="officialEvent">官方活動</label>
-                        <label for="splooter">Splooter</label>
+                    <div class="topLeftBox">
+                        <!-- 標題 -->
+                        <div class="title">
+                            <h3 class="bold">打造你的專屬毛孩日曆</h3>
+                            <p>掌握官方活動資訊與家長分享毛孩的精彩時刻。</p>
                         </div>
-                    </div>
-                    <!-- 行程按鈕 -->
-                    <div class="scheduleBtn">
-                        <img src="@/assets/img/pet-calendar/add-schedule.svg" alt="" class="scheduleIcon">
-                        <p class="xsText">新增行程</p>
+                        <!-- 滑動switch -->
+                        <div class="switch" id="switch">
+                            <input type="radio" id="officialEvent" name="option" class="switch-input">
+                            <input type="radio" id="splooter" name="option" class="switch-input">
+                            <div class="slider"></div>
+                            <div class="labels xsText">
+                            <label for="officialEvent">官方活動</label>
+                            <label for="splooter">Splooter</label>
+                            </div>
+                        </div>
                     </div>
                 </div>  
                 <!-- 上右 行程日曆 -->
                 <div class="topRight">
                     <div class="calendar">
-                        俺是日曆
+                        <img src="../assets/img/pet-calendar/ca.png" alt="">
                     </div>
                 </div>
             </div>
+                <!-- 行程按鈕 -->
+                <div class="scheduleBtnBox">
+                    <div class="scheduleBtn">
+                        <img src="@/assets/img/pet-calendar/add-schedule.svg" alt="" class="scheduleIcon">
+                        <p class="xsText">新增行程</p>
+                    </div>
+                </div>
             <!-- 下 日曆活動內容 -->
             <div class="bottomMain">
                 <!-- 活動卡片 -->

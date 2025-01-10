@@ -1,5 +1,5 @@
 <template>
-<Banner></Banner>
+<Banner theme="blue" bgc="blue-1"></Banner>
 <!-- 主內容 -->
 <div class="wrapper">
     
