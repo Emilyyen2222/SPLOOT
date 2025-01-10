@@ -1,3 +1,4 @@
+// Sam
 import { createRouter, createWebHistory } from "vue-router";
 
 // path → component
@@ -7,9 +8,8 @@ const routes = [
     component: () => import('@/pages/dsView.vue'),
     meta: {
       title: 'Sploot',
-      theme: 'blue',
-      bodyId: '',
-      bodyBg: 'pink-1',
+      theme: 'red',
+      bodyBg: 'yellow-1',
     }
   },
   {
@@ -18,8 +18,7 @@ const routes = [
     meta: {
       title: '訂閱寵物盒 | Sploot',
       theme: 'red',
-      bodyId: '',
-      bodyBg: 'purple-1',
+      bodyBg: 'pink-2',
     }
   },
   {
@@ -27,9 +26,8 @@ const routes = [
     component: () => import('@/pages/dsView.vue'),
     meta: {
       title: '尋找小幫手 | Sploot',
-      theme: 'red',
-      bodyId: '',
-      bodyBg: 'purple-1',
+      theme: 'blue',
+      bodyBg: 'blueberry-0',
     }
   },
   {
@@ -37,9 +35,8 @@ const routes = [
     component: () => import('@/pages/dsView.vue'),
     meta: {
       title: '毛孩日曆 | Sploot',
-      theme: 'red',
-      bodyId: '',
-      bodyBg: 'purple-1',
+      theme: 'blue',
+      bodyBg: 'yellow-1',
     }
   },
   {
@@ -47,9 +44,8 @@ const routes = [
     component: () => import('@/pages/dsView.vue'),
     meta: {
       title: '友善設施 | Sploot',
-      theme: 'red',
-      bodyId: '',
-      bodyBg: 'purple-1',
+      theme: 'blue',
+      bodyBg: 'blue-1',
     }
   },
   
