@@ -27,6 +27,9 @@ $colors: (
     natural-1: #F2EEEB,
     natural-2: #CAB9AE,
     natural-3: #94725B,
+
+    // transparent
+    transparent: transparent,
 );
 
 @each $color, $value in $colors {
