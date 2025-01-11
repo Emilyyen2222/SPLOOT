@@ -26,3 +26,6 @@ dist-ssr
 #這自己家的
 *.css
 *.css.map
+
+
+note.md
