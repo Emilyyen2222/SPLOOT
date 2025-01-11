@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    justify-content: center; 
+    padding: 0 20px;
+    width: 100%;
+
+    .splootBuddy{
+        width: 100%;
+
+        color: map-get($colors, blue);
+
+        .heroTitle{
+            display: flex;
+            justify-content: center;
+            align-content: flex-start;
+            gap: 16px;
+
+            .enTitle{
+                @include bayon(49);
+                line-height: 6.6rem;
+            }
+        }
+        .bottomTitle{
+            text-align: center;
+        }
+    }
+}

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>毛孩友善設施</title>
+    <title>設計庫</title>
+    <link rel="stylesheet" href="../css/style.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,16 +14,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
     <link rel="stylesheet" href="../src/assets/sass/style.scss">
-        
+
 </head>
+
 <body>
+    <div id="app"></div>
 
-<div id="app"></div>
+    <script type="module">
+        import { createApp } from "vue";
+        import dsView from "../src/pages/dsView.vue";
 
-<script type="module">
-    import { createApp } from "vue";
-    import dsView from "../src/pages/petFriendlyView.vue";
-
-    createApp(dsView).mount("#app");
-</script>
+        createApp(dsView).mount("#app");
+    </script>
 </body>
+
+</html>

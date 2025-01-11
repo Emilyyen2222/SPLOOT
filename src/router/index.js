@@ -23,7 +23,7 @@ const routes = [
   },
   {
     path: '/sploot-buddy',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/pages/splootBuddy.vue'),
     meta: {
       title: '尋找小幫手 | Sploot',
       theme: 'blue',
