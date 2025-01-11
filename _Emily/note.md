@@ -13,3 +13,20 @@ style.scss裡面import新開發的.scss
 mixin先寫在自己的scss裡面
 
 background-color: map-get($colors, 顏色);
+
+
+寫在questionView.vue
+questionView for  頁面
+vbase tab
+
+questionView.vue加上
+<template>
+    <banner></banner>
+</template>
+-----------------------------
+<script setup>
+    import Banner from "../components/Banner.vue";
+</script>
+
+
+http://localhost:5173/_Emily/vue-question.html
