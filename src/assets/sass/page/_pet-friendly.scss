@@ -1,5 +1,3 @@
-#petFriendly{
-
 // 主功能容器
 
 
@@ -115,6 +113,7 @@
                 }
 
                 .cardsBox {
+                    max-width: 172px;
 
                     .cardsTypeIcon {
                         display: flex;
@@ -153,7 +152,7 @@
 
                 transition: left 1s;
 
-                z-index: 600;  //超過header
+                z-index: 1500;  //超過header
 
                 &.clicked {
                     left: 0;
@@ -162,6 +161,8 @@
 
 
             .mapBack{
+                cursor: pointer;
+                
                 position: absolute;
                 top: 10px;
                 right: 10px;
@@ -176,7 +177,7 @@
                 background-color: #fff;
                 box-shadow: 0 0 4px rgb(114, 114, 114);
 
-                z-index: 700;
+                z-index: 1600;
 
                 @include md{
                     display: flex;
@@ -203,4 +204,3 @@
             }
         }
     }
-}

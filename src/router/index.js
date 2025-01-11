@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/sploot-calendar',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/pages/petCalendarView.vue'),
     meta: {
       title: '毛孩日曆 | Sploot',
       theme: 'blue',
@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: '/sploot-friendly',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/pages/petFriendlyView.vue'),
     meta: {
       title: '友善設施 | Sploot',
       theme: 'blue',

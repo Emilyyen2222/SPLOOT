@@ -1,11 +1,19 @@
-#petCalendar{
+.wrapper{
+    display: flex;
+    justify-content: center; /* 讓內容置中 */
+    padding: 0 20px; /* 設定兩邊的間距 */
+    width: 100%;
+   
+    // border: 1px solid blue;
 
     .petCalendarBox{
-        margin: 0 auto;
-        width: 70%;
+        width: 100%;
+        max-width: 1008px;
+        // border: 1px solid black;
 
         .topMain{
             display: flex;
+            justify-content: space-between;
             gap: 10%;
         
             .topLeft{
@@ -71,9 +79,7 @@
                            transform: translateX(100%);
                        }
                    }
-
                }
-
             }   
 
             .topRight{
@@ -87,6 +93,8 @@
         }
         
         .scheduleBtnBox{
+            padding-bottom: 1.8rem;
+            margin-bottom: 2.8rem;
             border-bottom: 1px solid map-get($colors ,natural-2 );
 
             .scheduleBtn{
@@ -95,7 +103,6 @@
 
                 width: 72px;
                 height: 32px;
-                margin-bottom: 18px;
             }
             
             img{
@@ -104,8 +111,67 @@
             }
         }
 
-    }
+        .scheduleCard{
 
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3欄，欄位寬度相等 */
+            gap: 3.6rem;
+
+            .scheduleCards{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                width: 100%;
+                min-width:27rem;
+                height: 352px;
+
+                padding: 2.4rem;
+                border-radius: 0.8rem;
+                background-color: map-get($colors, yellow-0);
+
+                .cardText{
+                    padding-bottom: 1.6rem;
+                    
+                    .cardTitle{
+                        margin-bottom: 0.8rem;
+                    }
+
+                    .cardcontent{
+                        margin-bottom: 0.8rem;
+                    }
+
+                    .info{
+                        display: flex;
+
+                        .leftItem{                
+                            white-space: nowrap;
+
+                            .cardIcon{
+                                width: 22px;
+                                height: 22px;
+                                margin-right: 8px;
+                            }
+
+                            .timeLabelBox{
+                                height: 4.4rem;                                
+                            }
+
+                            .placeLabelBox{
+                                height: 4.4rem;
+                            }
+                        }                       
+                    }
+                }
+
+                .cardsBtnBox{
+                    padding: 0.8rem 0 0 75%;
+                    border-top: 1px solid map-get($colors,natural-1);
+                }
+            }
+       }
+    }
+}
     
     .circle{
         @include circle(#F9E7C0);
@@ -154,4 +220,3 @@
 
 
 
-}
