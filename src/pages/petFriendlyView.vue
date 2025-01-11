@@ -42,7 +42,7 @@
                         <p class="smallText">{{ card.content }}</p>
                     </div>
                     <div class="cardsBtnBox">
-                        <div class="btn primary small blue" @click="isMobileMapMove">查看</div>
+                        <div class="btn primary small blue" @click="isMobileMapMove(card.name)"><span>查看</span></div>
                     </div>
                 </li>
    
@@ -50,10 +50,10 @@
         </div>
         <!--右 動態地圖-->
         <div class="rightMain" ref="map" :class="{'clicked':mapMove}">
-            <div class="mapBack" @click="mapRturn">
-                <img src="/src/assets/img/pet-friendly/return.svg" alt="返回">
+            <div class="mapBack" @click="mapReturn">
+                <img src="@/assets/img/icon/return.svg" alt="返回">
             </div>
-            <iframe id="map" src="https://maps.google.com/maps?q=沐 • Moon Street Cafe&z=15&output=embed"frameborder="0"></iframe>
+            <iframe id="map" :src="iframeSrc"></iframe>
         </div>
     </div>        
 </div> 
@@ -80,27 +80,41 @@
             iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
             iconAlt: "",
             type: "友善餐廳",
-            name: "沐 • Moon Street Cafe",
+            name: "中正紀念堂",
             content: "待填寫",
-        }
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
+            imgAlt: "",
+            iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
+            iconAlt: "",
+            type: "友善餐廳",
+            name: "緯育TibaMe附設台北職訓中心",
+            content: "待填寫",
+        },
     ])
 
     const map = ref(null);
+     // iframe切換
+    const iframeSrc = ref('https://maps.google.com/maps?q=沐 • Moon Street Cafe&z=15&output=embed');
 
     let mapMove = ref(false);
-    // const iframeSrc = "https://maps.google.com/maps?q=沐 • Moon Street Cafe&z=15&output=embed"frameborder="0"
 
     // 移動地圖的處理函式
-    function isMobileMapMove(){
+    function isMobileMapMove(placeName){
         // console.log(map.value);
         if(window.innerWidth < 768){
         mapMove.value = !mapMove.value;
         document.body.style.overflow = 'hidden'; // 禁止滾動
-        }
+        }      
+    // 更新地圖 src
+        const currentSRC = iframeSrc.value;
+        iframeSrc.value = currentSRC.replace(/q=([^&]*)/, `q=${encodeURIComponent(placeName)}`);
     };
     //地圖退回按鈕
-    function mapRturn(){
+    function mapReturn(){
         // console.log(map.value);
+
         mapMove.value = !mapMove.value;
 
         document.body.style.overflow = "auto"; //恢復滾動
@@ -116,8 +130,12 @@
     }
     window.addEventListener('resize', mapMoveEvent)
 
-    // iframe切換
-    
+
+
+    // function X(e){
+    //     isMobileMapMove();
+    //     updateMapSrc(e);
+    // }
 
 </script>
 
