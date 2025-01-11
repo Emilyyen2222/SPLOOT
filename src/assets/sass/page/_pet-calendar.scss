@@ -137,7 +137,7 @@
                         margin-bottom: 0.8rem;
                     }
 
-                    .cardcontent{
+                    .cardContent{
                         margin-bottom: 0.8rem;
                     }
 
@@ -165,6 +165,7 @@
                 }
 
                 .cardsBtnBox{
+                    height: 32px;
                     padding: 0.8rem 0 0 75%;
                     border-top: 1px solid map-get($colors,natural-1);
                 }

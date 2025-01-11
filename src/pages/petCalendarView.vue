@@ -45,18 +45,20 @@
                 <!-- 活動卡片 -->
                 <ul class="scheduleCard">
                     <!-- 活動卡片們 -->
-                    <li class="scheduleCards">
+                    <li class="scheduleCards" v-for="(card,index) in cardsData" :key="index">
+                        <!-- 卡片標題 -->
                         <div class="cardText">
                             <div class="cardTitle">
-                                <h6 class="scheduleName bold">00000000000000000我們的暗號是爆炸頭軍曹</h6>
-                            </div>
-                            <div class="cardcontent">
-                                <p class="summary smallText">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
+                                <h6 class="scheduleName bold">{{card.title}}</h6>
                             </div>
                             <!-- 卡片內容 -->
+                            <div class="cardContent">
+                                <p class="cardContentText smallText">{{card.content}}</p>
+                            </div>
+                            <!-- 人數，時間，地點 -->
                             <div class="info">
                                 <div class="leftItem">
-                                    <img class="peopleCount cardIcon" src="@/assets/img/icon/peopleCount.svg" alt="">
+                                    <img class="peopleCountLabel cardIcon" src="@/assets/img/icon/peopleCount.svg" alt="">
                                     <div class="timeLabelBox">
                                         <img class="time cardIcon" src="@/assets/img/icon/time.svg" alt="">
                                     </div>
@@ -65,13 +67,13 @@
                                     </div>
                                 </div>
                                 <div class="rightItem">
-                                    <p class="noOfpeople smallText">45人</p>
+                                    <p class="peopleCount smallText">{{card.peopleCount}}人</p>
                                     <div class="ymd">
-                                        <p class="ymdStart smallText">2024年 12月 25日 18:30</p>
-                                        <p class="ymdEnd smallText">2024年 12月 25日 21:30</p>
+                                        <p class="ymdStart smallText">{{ getTimeObject(card.startTime) }}</p>
+                                        <p class="ymdEnd smallText">{{ getTimeObject(card.endTime) }}</p>
                                     </div>
-                                    <div class="adress">
-                                        <div class="placeText smallText">台北市信義區信義路五段7號86樓 (饗 A Joy)</div>
+                                    <div class="place">
+                                        <div class="placeText smallText">{{ card.place }}</div>
                                     </div>
                             </div>
                             </div>
@@ -79,112 +81,7 @@
                         <div class="cardsBtnBox">
                             <div class="btn small blue"><span>參加</span></div>
                         </div>
-                    </li> 
-                    <li class="scheduleCards">
-                        <div class="cardText">
-                            <div class="cardTitle">
-                                <h6 class="scheduleName bold">00000000000000000我們的暗號是爆炸頭軍曹</h6>
-                            </div>
-                            <div class="cardcontent">
-                                <p class="summary smallText">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
-                            </div>
-                            <!-- 卡片內容 -->
-                            <div class="info">
-                                <div class="leftItem">
-                                    <img class="peopleCount cardIcon" src="@/assets/img/icon/peopleCount.svg" alt="">
-                                    <div class="timeLabelBox">
-                                        <img class="time cardIcon" src="@/assets/img/icon/time.svg" alt="">
-                                    </div>
-                                    <div class="placeLabelBox cardIcon">
-                                        <img class="location" src="@/assets/img/icon/location.svg" alt="">
-                                    </div>
-                                </div>
-                                <div class="rightItem">
-                                    <p class="noOfpeople smallText">45人</p>
-                                    <div class="ymd">
-                                        <p class="ymdStart smallText">2024年 12月 25日 18:30</p>
-                                        <p class="ymdEnd smallText">2024年 12月 25日 21:30</p>
-                                    </div>
-                                    <div class="adress">
-                                        <div class="placeText smallText">台北市信義區信義路五段7號86樓 (饗 A Joy)</div>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="cardsBtnBox">
-                            <div class="btn small blue"><span>參加</span></div>
-                        </div>
-                    </li> 
-                    <li class="scheduleCards">
-                        <div class="cardText">
-                            <div class="cardTitle">
-                                <h6 class="scheduleName bold">00000000000000000我們的暗號是爆炸頭軍曹</h6>
-                            </div>
-                            <div class="cardcontent">
-                                <p class="summary smallText">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
-                            </div>
-                            <!-- 卡片內容 -->
-                            <div class="info">
-                                <div class="leftItem">
-                                    <img class="peopleCount cardIcon" src="@/assets/img/icon/peopleCount.svg" alt="">
-                                    <div class="timeLabelBox">
-                                        <img class="time cardIcon" src="@/assets/img/icon/time.svg" alt="">
-                                    </div>
-                                    <div class="placeLabelBox cardIcon">
-                                        <img class="location" src="@/assets/img/icon/location.svg" alt="">
-                                    </div>
-                                </div>
-                                <div class="rightItem">
-                                    <p class="noOfpeople smallText">45人</p>
-                                    <div class="ymd">
-                                        <p class="ymdStart smallText">2024年 12月 25日 18:30</p>
-                                        <p class="ymdEnd smallText">2024年 12月 25日 21:30</p>
-                                    </div>
-                                    <div class="adress">
-                                        <div class="placeText smallText">台北市信義區信義路五段7號86樓 (饗 A Joy)</div>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="cardsBtnBox">
-                            <div class="btn small blue"><span>參加</span></div>
-                        </div>
-                    </li> 
-                    <li class="scheduleCards">
-                        <div class="cardText">
-                            <div class="cardTitle">
-                                <h6 class="scheduleName bold">00000000000000000我們的暗號是爆炸頭軍曹</h6>
-                            </div>
-                            <div class="cardcontent">
-                                <p class="summary smallText">帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!</p>
-                            </div>
-                            <!-- 卡片內容 -->
-                            <div class="info">
-                                <div class="leftItem">
-                                    <img class="peopleCount cardIcon" src="@/assets/img/icon/peopleCount.svg" alt="">
-                                    <div class="timeLabelBox">
-                                        <img class="time cardIcon" src="@/assets/img/icon/time.svg" alt="">
-                                    </div>
-                                    <div class="placeLabelBox cardIcon">
-                                        <img class="location" src="@/assets/img/icon/location.svg" alt="">
-                                    </div>
-                                </div>
-                                <div class="rightItem">
-                                    <p class="noOfpeople smallText">45人</p>
-                                    <div class="ymd">
-                                        <p class="ymdStart smallText">2024年 12月 25日 18:30</p>
-                                        <p class="ymdEnd smallText">2024年 12月 25日 21:30</p>
-                                    </div>
-                                    <div class="adress">
-                                        <div class="placeText smallText">台北市信義區信義路五段7號86樓 (饗 A Joy)</div>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="cardsBtnBox">
-                            <div class="btn small blue"><span>參加</span></div>
-                        </div>
-                    </li>                
+                    </li>              
                 </ul>
             </div>
     </div>
@@ -194,9 +91,88 @@
 </template>
 
 <script setup>
- import Banner from "../components/Banner.vue";
- import {ref} from "vue";
+    import Banner from "../components/Banner.vue";
+    import {ref} from "vue";
 
- //data
+    //data
+    const cardsData = ref([
+        {
+            title: "聖誕節Splooter聚餐聖誕節Splooter聚餐",
+            content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!",
+            peopleCount: "45",
+            startTime:{
+                year: "2024",
+                month: "12",
+                day: "25",
+                time: '18:30'
+            },
+            endTime:{
+                year: "2024",
+                month: "12",
+                day: "25",
+                time: '21:30'
+            },
+            place:"台北市信義區信義路五段7號86樓 (饗 A Joy)"
+        },
+        {
+            title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
+            content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
+            peopleCount: "不限",
+            startTime:{
+                year: "2024",
+                month: "12",
+                day: "31",
+                time: '07:00'
+            },
+            endTime:{
+                year: "2024",
+                month: "12",
+                day: "31",
+                time: '11:30'
+            },
+            place:"二二八公園集合"
+        },
+        {
+            title: "三天兩夜豪華郵輪寵物派對",
+            content: "目標石垣島，帶著毛孩們一起出國吧",
+            peopleCount: "80",
+            startTime:{
+                year: "2025",
+                month: "01",
+                day: "23",
+                time: '08:30'
+            },
+            endTime:{
+                year: "2025",
+                month: "01",
+                day: "26",
+                time: '22:00'
+            },
+            place:"基隆港"
+        },
+        {
+            title: "英雄毛孩Cosplay比賽",
+            content: "Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！",
+            peopleCount: "60",
+            startTime:{
+                year: "2025",
+                month: "02",
+                day: "01",
+                time: '09:30'
+            },
+            endTime:{
+                year: "2025",
+                month: "02",
+                day: "01",
+                time: '15:50'
+            },
+            place:"緯育Tibame台北職訓中心"
+        }
+    ]);
+
+    //開始時間～結束時間 物件
+    function getTimeObject(theTime){
+        return `${theTime.year}年 ${theTime.month}月 ${theTime.day}日 ${theTime.time}`;
+    }
   
 </script>

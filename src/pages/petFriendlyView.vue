@@ -128,14 +128,5 @@
         document.body.style.overflow = "auto"; //恢復滾動
         }
     }
-    window.addEventListener('resize', mapMoveEvent)
-
-
-
-    // function X(e){
-    //     isMobileMapMove();
-    //     updateMapSrc(e);
-    // }
-
+    window.addEventListener('resize', mapMoveEvent);
 </script>
-
