@@ -1,7 +1,8 @@
-#splootBox{
+ body{
     background-color: map-get($colors, pink-0);
     position: relative;
-    
+}    
+  
 .heroSection {
     position: relative;
     display: flex;
@@ -84,7 +85,6 @@
             p.default {
                 margin: 0;
             }
-            
         }
     }
     .boxDivider {
@@ -114,7 +114,7 @@
 .circle {
     @include circle(map-get($colors, pink-1));
     z-index: -20;
-    position:absolute;
+    position: absolute;
     top: 67%; 
     left: 50%;
 }
@@ -285,4 +285,3 @@
 }
 /* RWD */
 
-}

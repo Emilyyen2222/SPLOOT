@@ -1,46 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sploot box</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-    <link rel="stylesheet" href="../src/assets/sass/style.scss">
-</head>
-<body>
-    <header>
-        <div class="navHamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
-
-        <div class="logo">
-            <a href="./index.html">
-                <img src="../src/assets/img/header-red.svg" alt="Logo">
-            </a>
-        </div>
-        <nav>
-            <ul class="headerList">
-                <li class="headerItem"><a href="#">認識新毛友</a></li>
-                <li class="headerItem"><a href="#">訂閱寵物盒</a></li>
-                <li class="headerItem"><a href="#">尋找小幫手</a></li>
-                <li class="headerItem"><a href="#">毛孩日曆</a></li>
-                <li class="headerItem"><a href="#">友善設施</a></li>
-            </ul>
-        </nav>
-        <button class="login">LogIn</button>
-    </header>
-    
-    <!------------------------- hero section -------------------------------->
-
-    <div class="heroSection">
-        <img class="img" src="../src/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
+<template>
+    <Banner theme="red" bgc="pink-0"></Banner>
+ <div class="heroSection">
+        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
         <div class="herobtn">
             <div class="btn primary large">
                 <p>訂閱SPLOOT BOX</p>
@@ -58,7 +19,7 @@
 <div class="boxContainer">
     <div class="boxSection">
         <div class="boxImage">
-            <img src="../src/assets/img/splootbox/splootbox1.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
         </div>
         <div class="boxText">
             <h4 class="bold">必備日用品</h4>
@@ -72,13 +33,13 @@
             <p class="default">100%純肉製作，無人工添加，營養滿分，美味安心</p>
         </div>
         <div class="boxImage">
-            <img src="../src/assets/img/splootbox/splootbbox2.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbbox2.avif" alt="">
         </div>
     </div>
     <div class="boxDivider"></div>
     <div class="boxSection">
         <div class="boxImage">
-            <img src="../src/assets/img/splootbox/splootbox1.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
         </div>
         <div class="boxText">
             <h4 class="bold">功能玩具</h4>
@@ -98,25 +59,25 @@
                 <li class="title">01
                     <p class="bold">幫您的毛孩填寫客製化問卷</p>
                     <div class="howImg">
-                        <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                        <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                         </div>
                     </li>
                     <li class="title">02
                         <p class="bold">選擇方案(銀卡，金卡，白金卡)</p>
                         <div class="howImg">
-                            <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                            <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                         </div>
                     </li>
                     <li class="title">03
                         <p class="bold">SPLOOT BOX 將於每月 5 號統一寄出</p>
                         <div class="howImg">
-                            <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                            <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                         </div>
                     </li>
                     <li class="title">04
                         <p class="bold">SPLOOT BOX讓毛孩每月充滿期待！</p>
                         <div class="howImg">
-                            <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                            <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                         </div>
                     </li>
                 </ul>
@@ -139,7 +100,7 @@
             <div class="reviews-container">
                 <div class="review-card">
                     <div class="review-image">
-                        <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                        <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                     </div>
                     <div class="review-content">
                         <h6 class="review-title">CCC:</h6>
@@ -150,7 +111,7 @@
                 </div>
                 <div class="review-card">
                     <div class="review-image">
-                        <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                        <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                     </div>
                     <div class="review-content">
                         <h6 class="review-title">CCC:</h6>
@@ -161,7 +122,7 @@
                 </div>
                 <div class="review-card">
                     <div class="review-image">
-                        <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                        <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                     </div>
                     <div class="review-content">
                         <h6 class="review-title">CCC:</h6>
@@ -172,7 +133,7 @@
                 </div>
                 <div class="review-card">
                     <div class="review-image">
-                        <img src="../src/assets/img/splootbox/questionaire.jpeg"  alt="">
+                        <img src="@/assets/img/splootbox/questionaire.jpeg"  alt="">
                     </div>
                     <div class="review-content">
                         <h6 class="review-title">CCC:</h6>
@@ -260,13 +221,11 @@
 
     <!-- circle bg -->
     <div class="circle"></div>
-        
-        <!-- footer -->
-        
-        
-        
-    <!--------------------------- js -------------------------------------->
-    <script src="./js/header.js"></script>
+         
+</template>
 
-</body>
-</html>
+<script setup>
+import Banner from "../components/Banner.vue";
+
+
+</script>

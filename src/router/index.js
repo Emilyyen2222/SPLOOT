@@ -14,11 +14,11 @@ const routes = [
   },
   {
     path: '/sploot-box',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/pages/splootboxView.vue'),
     meta: {
       title: '訂閱寵物盒 | Sploot',
       theme: 'red',
-      bodyBg: 'pink-2',
+      bodyBg: 'pink-0',
     }
   },
   {
