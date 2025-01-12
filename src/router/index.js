@@ -24,6 +24,15 @@ const routes = [
     }
   },
   {
+    path: '/question',
+    component: () => import('@/pages/questionView.vue'),
+    meta: {
+      title: '訂閱寵物盒 | Sploot',
+      theme: 'red',
+      bodyBg: 'pink-2',
+    }
+  },
+  {
     path: '/sploot-buddy',
     component: () => import('@/pages/splootBuddy.vue'),
     meta: {

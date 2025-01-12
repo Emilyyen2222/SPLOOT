@@ -1,16 +1,19 @@
 <template>
-    <Banner theme="red" bgc="pink-0"></Banner>
- <div class="heroSection">
-        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
+<Banner theme="red" bgc="pink-0"></Banner>
+ 
+<!---------------------------- heroSection ------------------->
+<div class="heroSection">
         <div class="herobtn">
-            <div class="btn primary large">
-                <p>訂閱SPLOOT BOX</p>
-            </div>
+            <h4 class="bold">聖誕禮盒來囉！</h4>
+            <!-- <a href="@/pages/questionView.vue" class="btn primary default"> -->
+                <RouterLink to="/question" class="btn primary default">
+                    <span>訂閱SPLOOT BOX</span>
+                </RouterLink>
+                
         </div>
-        <h4 class="bold">聖誕禮盒來囉！</h4>
+        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
     </div>
-
-<!--  -->
+    <!------------------- SPLOOT BOX裡面有什麼 ------------------------->
 <div class="boxTitle1"> 
     <h4 class="bold">SPLOOT BOX裡面有什麼?</h4>
     <p class="bigText">What's in the box</p>
@@ -220,7 +223,7 @@
             
 
     <!-- circle bg -->
-    <div class="circle"></div>
+    <div class="circleSplootBox"></div>
          
 </template>
 

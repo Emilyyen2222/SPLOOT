@@ -2,37 +2,44 @@
     background-color: map-get($colors, pink-0);
     position: relative;
 }    
-  
 .heroSection {
-    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    gap: 20px;
     height: 56rem;
     background-color: map-get($colors, pink-2);
-        
+    .img {
+        max-width: 100%;
+        height: auto;
+
+        @include md(){
+            display: none;
+        }
+    }
     .herobtn {
-        width: 17.4rem;
-        position: absolute;
-        left: 29.2rem;
-        bottom: 19.9rem;
-    }
-    h4 {
-        position: absolute;
         display: flex;
-        left: 28.8rem;
-        color: map-get($colors, red);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-left: 28.8rem;
+        gap: 3.1rem;
+
+        @include md(){
+            margin: 0 auto;
+        }
+        .bold{
+        color: map-get($colors, red); 
+        }
     }
-  }
+}
   .boxTitle1 {
-    z-index: 10;
+    // z-index: 10;
     display: flex;
     position: relative;
     justify-content: center;
     color: map-get($colors, red);
     margin-bottom: 3rem;
     margin-top: 30rem;
-
     .bigText {
         z-index: -5;
         position: absolute;
@@ -44,31 +51,25 @@
 }
 .boxContainer {
     display: flexbox;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 3.2rem;
     max-width: 121.6rem;
     width: 100%;
     padding: 4rem;
     margin: 0 auto;
     background-color: map-get($colors, beige);
     border-radius: 2rem;
-
     .boxSection {
         z-index: 10;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
-
         @include md(){
             display: grid;
         }
         .boxImage {
             img {
                 width: 55.2rem;
-                height: 34.4rem;
+                height: auto;
                 background-color: map-get($colors, beige);
                 border-radius: 0.8rem;
             }
@@ -95,7 +96,6 @@
     }
 }
 .boxTitle2 {
-    z-index: 10;
     display: flex;
     position: relative;
     justify-content: center;
@@ -111,7 +111,7 @@
     }
 }
 // Component
-.circle {
+.circleSplootBox {
     @include circle(map-get($colors, pink-1));
     z-index: -20;
     position: absolute;
@@ -283,5 +283,4 @@
         }
     }
 }
-/* RWD */
 
