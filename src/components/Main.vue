@@ -1,23 +1,16 @@
 <!-- Sam -->
 <template>
-  <!-- <Banner :theme="route.meta.theme" :bgc="route.meta.bgc"></Banner> -->
+  <!-- <MainHeader :theme="route.meta.theme" :bgc="route.meta.bgc"></MainHeader> -->
   <RouterView></RouterView>
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
-  import { useRoute } from 'vue-router';
+import { ref, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
-  import Banner from './Banner.vue';
+import MainHeader from './MainHeader.vue';
 
-  const route = useRoute();
+const route = useRoute();
+</script>
 
-  // const meta = computed(() => route.meta);
-
-  // console.log(route.meta.theme);
-  // console.log(route.meta.bgc);
-</script>    
-  
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
