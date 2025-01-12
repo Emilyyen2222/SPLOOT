@@ -8,7 +8,7 @@ sass ./src/assets/sass/style.scss ./src/assets/css/style.css -w
 ## Scss 開發
 1. 不要更動除了 `page` 以外的檔案。
 2. 需要製作 `mixin` 模組的話，先放置在自己的 `page` 頁面上方，整合時統一整理。
-3. 檔名前請加底線，並 `import` 到自己的 `style.scss`。
+3. 檔名前請加底線，並 `import` 到自己的 `style.scss`，按照字母排列順序(VsCode 左側檔案管理的順序)，
 
 ## `style.scss` 預設
 
@@ -28,27 +28,6 @@ html{ font-size: 10px; } // 1rem = 10px;
 `a`連結都先把底線拿掉
 ```scss
 a{ text-decoration: none; }
-```
-
-預設字體顏色：咖啡色
-```scss
-body{ color: map-get($colors, brown); }
-```
-
-### 每頁背景顏色、預設字體顏色
-在 `body` 加上 id，名稱是自己的頁面
-```html
-<body id="pageName">
-```
-
-在頁面的 scss 中設定背景顏色和預設字體顏色，如果沒有設定就是上方的咖啡色
-```scss
-#pageName{
-body{
-    background-color: map-get($colors, pink-0);
-    color: map-get($colors, blue-2);
-}
-}
 ```
 
 ### RWD 切版
@@ -76,9 +55,15 @@ border: 1px solid map-get($colors, red);
 @include textStyle(h1, bold); // 粗體
 ```
 
-### Bayon 字體
+### Bayon 字體 (用在某些數字和英文)
 ```scss
 @include bayon(20); // bayon 2rem (20px)
+```
+如果有需要可以自己做成 class 
+```scss
+.bayon-20{
+    @include bayon(20);
+}
 ```
 
 `<h1>` `<h2>` ... `<span>`標籤
@@ -111,8 +96,10 @@ z-index;
 
 // 樣式
 display: flex;
+flex-wrap;
 justify-content;
 align-items;
+gap;
 overflow;
 
 // 外觀框架（由內到外）
@@ -145,70 +132,97 @@ transition;
 
 # Vite / Vue 開發
 
-## 前置事項
-可以用`node -v`來看電腦目前使用的版本
-
-### 安裝 Node.js
-安裝網址：https://nodejs.org/en
-
-### 安裝 Vite
-製作 Vite 專案
-```bash
-npm create vite@latest
-```
-
 ### 下載安裝套件
 已經包含 Vue-router 和 Pinia 了，可以去`package.json`檢查，沒有到話再下載
 ```bash
 npm install
 ```
 
-### 下載 Vue-router (已經包含在 package 裡了)
+### 下載 Vue-router, Pinia (已經包含在 package 裡了)
 ```bash
 npm install vue-router@4
-```
-
-### 下載 Pinia (已經包含在 package 裡了)
-```bash
 npm install pinia
 ```
 
-## Vite Vue 開發
-
-### Vite 開發模式
-```bash
-npm vite dev
+## Vue 開發 (都使用 Composition API)
+### Vue-router
+- **path**: 網址
+- **component**: 這個網址要顯示的畫面 (`xxxView.vue`)
+- **meta**: 這個網址要帶入的參數
+    - **title**: 網頁上方的網頁名稱
+    - **theme**: 上面 header 的主色調 (紅色`red`, 藍色`blue`)
+    - **bodyId**: 如果有需要的話才加，body 的 id 名稱
+    - **bodyBg**: 網頁的背景顏色
+    - **textColor**: 如果有需要的話才加，網頁的預設文字顏色，如果沒有填寫就是咖啡色
+  
+```vue
+{
+    path: '/sploot-box',
+    component: () => import('@/pages/splootboxView.vue'),
+    meta: {
+      title: '訂閱寵物盒 | Sploot',
+      theme: 'red',
+      bodyBg: 'pink-0',
+}
+},
+{
+    path: '/sploot-buddy',
+    component: () => import('@/pages/splootBuddy.vue'),
+    meta: {
+      title: '尋找小幫手 | Sploot',
+      theme: 'blue',
+      bodyBg: 'blueberry-0',
+    }
+},
 ```
 
-### Vite 打包建立
-```bash
-npm vite build
+如果有需要用到點擊連結到其他網頁，原本是用`<a>`標籤
+```vue
+<a href="./sploot.html"><span>首頁</span></a>
+```
+開發的時候可以用 Vue-router 網頁就不會重整重新載入，會順順的換到下一頁，把`<a>`換成`<RouterLink>`，裡面的 `/sploot`就是上面的 `path`
+```vue
+<RouterLink to="/sploot"><span>首頁</span></RouterLink>
+```
+### 使用元件
+在使用元件之前，都要在下方的`<script setup>`裡面先把元件`import`進來
+```vue
+<script setup>
+    import { ref } from "vue";
+
+    import SimpleCounter from "../components/SimpleCounter.vue";
+</script>
+```
+```vue
+<template>
+    <SimpleCounter></SimpleCounter>
+</template>
 ```
 
-### Vite 打包檢視
-```bash
-npm vite preview
-```
-
-## Vue 元件開發 (都使用 Composition API)
 ---
 
-# 元件
+# 已完成元件
+## Vue 元件
+元件都已經挑整好顏色、大小、字型、風格等等的，只需要選擇風格和調整裡面的文字就好了
 
-## 按鈕
-根據 Figma 按鈕元件風格，支援以下樣式：
-- **Style**: `primary`,`blue`, `outline`, `text`, `white`
-- **Size**: `large`, `default`, `small`
-
-已調整好顏色、大小、字型、間距
-```html
-<div class="btn primary large"><span>Button</span></div>
-<div class="btn blue default"><span>Button</span></div>
+## Header
+- **theme**：header 的主色 (紅色`red`, 藍色`blue`)
+- **bgc**: header 的背景色（跟網頁的背景色一樣）
+```vue
+import MainHeader from '../components/MainHeader.vue';
 ```
+```vue
+<MainHeader theme="red" bgc="purple-1"></MainHeader>
+```
+## Footer (開發中)
 
 ## 下拉選單
 ### Q&A 下拉選單
-`question`的地方填問題，`answer`的地方填答案
+- **question**：問題
+- **answer**：回答
+```vue
+import DropdownQa from "../components/DropdownQa.vue";
+```
 ```vue
 <DropdownQa 
     question="QQQQQ"
@@ -216,15 +230,80 @@ npm vite preview
 ```
 
 ### 選項下拉選單
-`placeHolder`的地方填欄位預設文字，`options`的地方放選項陣列
-
-- **建議**：`placeHolder` `options` 用物件的方式，以防一頁有多個選單，方便管理
+- **placeHolder**：選單預設文字
+- **options**：選項
+    - **建議**：`placeHolder` `options` 用物件的方式，以防一頁有多個選單，方便管理
+```vue
+import DropdownMenu from "../components/DropdownMenu.vue";
+```
 ```vue
 <DropdownMenu
     :placeHolder="menu1.placeHolder" 
     :options="menu1.options"></DropdownMenu>
 ```
+```js
+const menu1 = {
+    placeHolder: '請選擇一個選項',
+    options: [
+        {
+            id: 0,
+            name: '選項1'
+        },
+        {
+            id: 1,
+            name: '選項2'
+        },
+        {
+            id: 2,
+            name: '選項3'
+        },
+        {
+            id: 3,
+            name: '選項4'
+        },
+    ]
+};
+```
+## 其他非 Vue 元件
 ---
+## 按鈕
+根據 Figma 按鈕元件風格，支援以下樣式：
+- **Style**: `primary`,`blue`, `outline`, `text`, `white`
+- **Size**: `large`, `default`, `small`
+
+總共兩層`div`，外面的`div`可以加其他東西但一定要加`btnBox`，裡面的`<div>`選樣式（記得裡面需要`<span>`標籤）
+```html
+<div class="btnBox">
+    <div class="btn primary large"><span>查看</span></div>
+</div>
+<div class="btnBox">
+    <div class="btn blue small"><span>查看</span></div>
+</div>
+```
+## 問卷按紐
+同上外面的div加`questionBox`，裡面的`<div>`選擇是選項、下一題、上一題
+- **Style**: `option`,`nextQ`, `lastQ`
+### 選項按鈕
+
+```html
+<div class="questionBox">
+    <div class="btn option"><span>選項1</span></div>
+</div>
+```
+
+下一題
+```html
+<div class="questionBox">
+    <div class="btn nextQ"><span>下一題</span></div>
+</div>
+```
+
+上一題
+```html
+<div class="questionBox">
+    <div class="btn lastQ"><span>上一題</span></div>
+</div>
+```
 
 ## 其他開發須知
 ### 請 修改/完成 一小部分，一個段落，或一個元件時就先 commit，否則一次要上傳很多個檔案，很容易有衝突。
@@ -251,22 +330,6 @@ npm vite preview
 ### `src`
 - **`assets`**: 前端所需資源（CSS、Img、JS、Sass）。
 - **`component`**: Vue 元件。(ItemContainer.vue)。
-    - **`Banner`**: 上方 header。
-    - **`DropdownMenu`**: 下拉選單。
-    - **`DropdownQa`**: Q&A 下拉選單。
 - **`pages`**: 頁面 View。(HomeView.vue)
 - **`router`**: Vue-router。
 - **`vendors`**: 第三方套件（例如 jQuery）。
-
----
-
-### `.gitignore`
-將以下內容忽略，避免上傳：
-1. 監控產出的 `.css` 檔案。
-
-```
-*.css
-*.css.map
-```
-
----
