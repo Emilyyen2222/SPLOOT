@@ -163,26 +163,17 @@ npm install pinia
       title: '訂閱寵物盒 | Sploot',
       theme: 'red',
       bodyBg: 'pink-0',
-}
-},
-{
-    path: '/sploot-buddy',
-    component: () => import('@/pages/splootBuddy.vue'),
-    meta: {
-      title: '尋找小幫手 | Sploot',
-      theme: 'blue',
-      bodyBg: 'blueberry-0',
     }
 },
 ```
 
 如果有需要用到點擊連結到其他網頁，原本是用`<a>`標籤
 ```vue
-<a href="./sploot.html"><span>首頁</span></a>
+<a href="./sploot-box.html"><span>首頁</span></a>
 ```
 開發的時候可以用 Vue-router 網頁就不會重整重新載入，會順順的換到下一頁，把`<a>`換成`<RouterLink>`，裡面的 `/sploot`就是上面的 `path`
 ```vue
-<RouterLink to="/sploot"><span>首頁</span></RouterLink>
+<RouterLink to="/sploot-box"><span>首頁</span></RouterLink>
 ```
 ### 使用元件
 在使用元件之前，都要在下方的`<script setup>`裡面先把元件`import`進來
