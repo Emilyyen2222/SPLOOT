@@ -4,23 +4,22 @@ html{ font-size: 10px; }
 *, *::after, *::before{ box-sizing: border-box; }
 a{ text-decoration: none; }
 
-//引用變數
+// 引用變數
 @import 'base/var';
 @import 'base/color';
 @import 'base/typography';
-body{ color: map-get($colors, brown); }
 
 @import 'mixin/mixin';
 
-//組件
+// 組件
 @import 'component/btn';
 @import 'component/dropdown';
 
-//layout
+// layout
 @import 'layout/footer';
 @import 'layout/header';
 
-//page
+// page
 @import 'page/index';
 @import 'page/pet-friendly';
 @import 'page/question';

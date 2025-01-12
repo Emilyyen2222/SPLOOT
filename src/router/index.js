@@ -10,6 +10,8 @@ const routes = [
       title: 'Sploot',
       theme: 'red',
       bodyBg: 'yellow-1',
+      bodyId: 'ds', // 有需要才加
+      textColor: 'brown' //有需要才加
     }
   },
   {
@@ -64,22 +66,21 @@ router.beforeEach((to, from, next) => {
   if(to.meta.bodyId){ document.body.id = to.meta.bodyId; }
 
   let iconLink = document.querySelector("link[rel~='icon']");
+  let bodyClass = '';
+
+  if(to.meta.bodyBg){ bodyClass = ` bg-${to.meta.bodyBg}`; }
 
   if(to.meta.theme == 'red'){
-    iconLink.href = 'src/assets/img/header-red.svg';
+    iconLink.href = new URL('@/assets/img/header-red.svg', import.meta.url).href;
+    bodyClass += ` text-brown`;
   }else if(to.meta.theme == 'blue'){
-    iconLink.href = 'src/assets/img/header-blue.svg';
+    iconLink.href = new URL('@/assets/img/header-blue.svg', import.meta.url).href;
+    bodyClass += ` text-blue`;
   }
 
-  if(to.meta.bodyBg){ document.body.classList = `bg-${to.meta.bodyBg}`; }
-
-  
-
+  document.body.classList = bodyClass
 
   next();
-
-
-
 });
 
 export default router;
