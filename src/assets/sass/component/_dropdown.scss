@@ -7,14 +7,14 @@
     width: 100%;
     border: 1px solid map-get($colors, red);
     background-color: map-get($colors, natural-0);
-    border-radius: 20px;
+    border-radius: 16px;
     
     @if ($type == qa){
         gap: 1.6rem;
         padding: 1.6rem 1.6rem;
     }@else if ($type == menu){
         gap: .4rem;
-        padding: .4rem 1.6rem; 
+        padding: .8rem 1.6rem; 
     }
     
     hr{
@@ -24,10 +24,14 @@
     
 }
 
-// -------- Dropdowns --------
+// -------- Dropdown Q&A --------
 .dropdown-qa{
     @include dropdownBasic(qa);
     @include textStyle(p);
+
+    max-height: 6.4rem;
+    transition: all .3s ease;
+    transition-delay: 1s;
 
     .question-block{
         display: flex;
@@ -59,15 +63,18 @@
         }
     }
 
-
     // 點擊展開後
     &.-expand{
+        max-height:fit-content;
+
         .expandBtn{ transform: rotate(180deg) }
     }
 }
+
+// -------- Dropdown Menu --------
 .dropdown-menu{
     @include dropdownBasic(menu);
-    @include textStyle(smallText);
+    @include textStyle(p);
 
     .dropdownBtn{
         display: flex;
@@ -84,13 +91,39 @@
         display: flex;
         flex-direction: column;
         gap: .8rem;
+
+        li{
+            span{
+                display: inline-block;
+                position: relative;
+                transition: all .3s ease;
+
+                &::after{
+                    content: '';
+                    position: absolute;
+                    top: calc(50% - 2px);
+                    right: -.8rem;
+
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: map-get($colors, brown);
+
+                    opacity: 0;
+                    transition: all .3s ease;
+                }
+            }
+            &:hover{
+                span{
+                    transform: translateX(.8rem);
+                    &::after{ opacity: 1; }
+                }
+            }
+        }
     }
 
-    // 點擊展開後
     &.-expand{
         .expandBtn{ transform: rotate(180deg) }
-        hr{ display: block }
-        .dropdownList{ display: flex }
     }
 
 }

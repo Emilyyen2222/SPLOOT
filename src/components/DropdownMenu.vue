@@ -12,7 +12,9 @@
       <ul class="dropdownList">
           <li 
             v-for="(option, index) in options" :key="option"
-            @click="selectItem(option)">{{ option.name }}</li>
+            @click="selectItem(option)">
+            <span>{{ option.name }}</span>
+          </li>
       </ul>
     </template>
   </div>
