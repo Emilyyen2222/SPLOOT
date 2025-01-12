@@ -23,5 +23,20 @@
         .bottomTitle{
             text-align: center;
         }
+        
+        .circle{
+            @include circle(#E6EBFF);
+            
+            position: fixed;
+            left: 50%;
+        }
+        
+        .circle1{
+            top: 228px;
+        }
+        
+        .circle2{
+            top: 1252px;
+        }
     }
 }

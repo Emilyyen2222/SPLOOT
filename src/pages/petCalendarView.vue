@@ -84,10 +84,10 @@
                     </li>              
                 </ul>
             </div>
-    </div>
+            <div class="circle1 circle"></div>
+            <div class="circle2 circle"></div>
+        </div>
 </div>
-    <div class="circle1 circle"></div>
-    <div class="circle2 circle"></div>
 </template>
 
 <script setup>
@@ -133,8 +133,8 @@
             place:"二二八公園集合"
         },
         {
-            title: "三天兩夜豪華郵輪寵物派對",
-            content: "目標石垣島，帶著毛孩們一起出國吧",
+            title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
+            content: "目標石垣島，帶著毛孩們一起出國吧！",
             peopleCount: "80",
             startTime:{
                 year: "2025",

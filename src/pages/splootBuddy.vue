@@ -1,5 +1,5 @@
 <template>
- <Banner theme="blue" bgc="blue-1"></Banner>
+ <Banner theme="blue" bgc="Blueberry-0"></Banner>
 <!-- 主內容 -->
 <div class="wrapper">
 <!-- 主要功能 -->
@@ -14,7 +14,9 @@
 
 
 
- </div>
+    <div class="circle1 circle"></div>
+    <div class="circle2 circle"></div>
+</div>
 
 </div>
 
