@@ -1,5 +1,5 @@
 <template>
-<Banner theme="blue" bgc="yellow-1"></Banner>
+<MainHeader theme="blue" bgc="yellow-1"></MainHeader>
 <!-- 主內容 -->
 <div class="wrapper">
 <!-- 主要功能 -->
@@ -78,7 +78,7 @@
                             </div>
                             </div>
                         </div>
-                        <div class="cardsBtnBox">
+                        <div class="btnBox">
                             <div class="btn small blue"><span>參加</span></div>
                         </div>
                     </li>              
@@ -91,7 +91,7 @@
 </template>
 
 <script setup>
-    import Banner from "../components/Banner.vue";
+    import MainHeader from "../components/MainHeader.vue";
     import {ref} from "vue";
 
     //data

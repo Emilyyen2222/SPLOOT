@@ -1,5 +1,5 @@
 <template>
-<Banner theme="blue" bgc="blue-1"></Banner>
+<MainHeader theme="blue" bgc="blue-1"></MainHeader>
 <!-- 主內容 -->
 <div class="wrapper">
     
@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-    import Banner from "../components/Banner.vue";
+    import MainHeader from "../components/MainHeader.vue";
     import {ref} from "vue";
 
     //data

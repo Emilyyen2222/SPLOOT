@@ -1,0 +1,190 @@
+.wrapper{
+    display: flex;
+    justify-content: center; 
+
+    padding: 0 20px;
+
+    .splootBuddy{
+        max-width: 1008px;
+        width: 100%;
+
+        color: map-get($colors, blue);
+
+        .heroTitle{
+            display: flex;
+            justify-content: center;
+            align-content: flex-start;
+            gap: 1.6rem;
+
+            .enTitle{
+                @include bayon(49);
+                line-height: 6.6rem;
+            }
+        }
+        .secondTitle{
+            margin-bottom: 5.6rem;
+
+            text-align: center;
+        }
+
+        .firstTimeUse{
+            cursor: pointer;
+
+            display: flex;
+            justify-content: flex-end;
+
+            margin: 0 1.6rem 8px 0;
+
+            p{
+                border-bottom: 1px solid map-get($colors, blue);
+            }
+        }
+
+        .selectTypeSection{
+            padding: 1.6rem;
+            border-radius: 16px;
+            margin-bottom: 8px;
+
+            width: 100%;
+            background-color: map-get($colors, beige);
+
+            .buddyType{
+                display: flex;
+                justify-content: center;
+                gap: 0.8rem;
+
+                margin-bottom: 8px;
+
+                .buddyTypes{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 100%;
+                    max-width: 238rem;
+                    height: 6rem;
+                    padding: 1.6rem 3.2rem;
+                    border: 1px solid map-get($colors, natural-1);
+                    border-radius: 8px;
+
+                    .typeIcon{
+                        width: 28px;
+                        height: 28px;
+
+                        margin-right: 8px;
+                    }
+                }
+            }
+            .selcetPlaceAndPetType{
+                display: flex;
+                gap: 32px;
+    
+                .leftSection{
+                    width: 50%;
+    
+                    .leftLabel{
+                        margin-bottom: 4px;
+                    }
+    
+                    .dropDown{
+                        height: 4.8rem;
+                        margin-bottom: 8px;
+                        border-color: map-get($colors, natural-1);
+    
+                        &:last-child{
+                            margin: 0;
+                        }
+                    }
+                }
+                
+                .rightSection{
+                    width: 50%;
+                    
+                    .rightLabel{
+                        margin-bottom: 4px;
+                    }
+    
+                    .petType{
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.8rem;
+    
+                        .petTypes{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;;
+    
+                            height: 4rem;
+                            padding: 0 2.4rem;
+                            border: 1px solid map-get($colors, natural-1);
+                            border-radius: 100px
+    
+                        }
+                        .petTypes.clicked{
+                            background-color: map-get($colors, natural-1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .buddytSearch{
+            width: 50%;
+            max-width: 48.8rem;
+
+            margin: 0 auto;
+        }
+
+        .middleSection{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding-bottom: 1.6rem;
+            border-bottom: 1px solid map-get($colors, blueberry-2);
+            margin: 10.4rem 0 4.8rem;
+
+            .toBeBuddy{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+               .howToBe{
+                width: 100%;
+                border-color: map-get($colors, blue);
+               }
+            }
+
+            .scheduleBtn{
+                cursor: pointer;
+
+                display: flex;
+                align-items: center;
+            }
+        }
+
+
+
+
+
+
+
+        
+
+        // 背景圓形＊2
+        .circle{
+            @include circle(#E6EBFF);
+            
+            position: fixed;
+            left: 50%;
+        }
+        
+        .circle1{
+            top: 228px;
+        }
+        
+        .circle2{
+            top: 1252px;
+        }
+    }
+}
