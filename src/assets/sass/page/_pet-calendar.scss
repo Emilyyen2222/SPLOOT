@@ -97,6 +97,8 @@
             border-bottom: 1px solid map-get($colors ,natural-2 );
 
             .scheduleBtn{
+                cursor: pointer;
+
                 display: flex;
                 align-items: center;
 
@@ -170,23 +172,23 @@
                 }
             }
        }
+       
+       .circle{
+           @include circle(#F9E7C0);
+           
+           position: fixed;
+           left: 50%;
+        }
+        
+        .circle1{
+            top: -200px;
+        }
+        
+        .circle2{
+            top: 1040px;
+        }
     }
 }
-    
-    .circle{
-        @include circle(#F9E7C0);
-    
-        position: fixed;
-        left: 50%;
-    }
-    
-    .circle1{
-        top: -200px;
-    }
-    
-    .circle2{
-        top: 1040px;
-    }
 
 
 
