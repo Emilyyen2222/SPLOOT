@@ -1,79 +1,115 @@
 <!-- Sam -->
 <template>
-    <Banner theme="red" bgc="purple-1"></Banner>
-
+    <MainHeader theme="red" bgc="purple-1"></MainHeader>
     <h4 style="margin: 20px 0">首頁還沒切元件庫先當首頁</h4>
     <section class="buttons">
+
         <h4>Buttons (完成)</h4>
         <div style="flex-direction: column">
-            <div class="btn primary large"><span>btn primary large</span></div>
-            <div class="btn primary default"><span>btn primary default</span></div>
-            <div class="btn primary small"><span>btn primary small</span></div>
-            <div class="btn blue large"><span>btn blue large</span></div>
-            <div class="btn blue default"><span>btn blue default</span></div>
-            <div class="btn blue small"><span>btn blue small</span></div>
-            <div class="btn white large"><span>btn white large</span></div>
-            <div class="btn white default"><span>btn white default</span></div>
-            <div class="btn white small"><span>btn white small</span></div>
-            <div class="btn outline large"><span>btn outline large</span></div>
-            <div class="btn outline default"><span>btn outline default</span></div>
-            <div class="btn outline small"><span>btn outline small</span></div>
-            <div class="btn text large"><span>btn text large</span></div>
-            <div class="btn text default"><span>btn text default</span></div>
-            <div class="btn text small"><span>btn text small</span></div>
-            <div class="btn textBlue large"><span>btn textBlue large</span></div>
-            <div class="btn textBlue default"><span>btn textBlue default</span></div>
-            <div class="btn textBlue small"><span>btn textBlue small</span></div>
-            <div class="btn textRed large"><span>btn textRed large</span></div>
-            <div class="btn textRed default"><span>btn textRed default</span></div>
-            <div class="btn textRed small"><span>btn textRed small</span></div>
+            <template v-for="style in btnStyles">
+                <template v-for="size in btnSizes">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <h6>btn {{ style }} {{ size }}</h6>
+                        <div class="btnBox" :class="`${size}Box`">
+                            <div :class="['btn', style, size]"><span>查看</span></div>
+                        </div>
+                    </div>
+                </template>
+            </template>
         </div>
     </section>
-
+    <section>
+        <h4>問卷問題</h4>
+        <div style="flex-direction: column; gap: 8px; padding: 10px; margin: 0 auto">
+            <h6>btn option</h6>
+            <div class="questionBox">
+                <div class="btn option"><span>選項1</span></div>
+            </div>
+            <div class="questionBox">
+                <div class="btn option"><span>選項2</span></div>
+            </div>
+            <div class="questionBox">
+                <div class="btn option"><span>選項3</span></div>
+            </div>
+            <h6>btn nextQ</h6>
+            <div class="questionBox">
+                <div class="btn nextQ"><span>下一題</span></div>
+            </div>
+            <h6>btn lastQ</h6>
+            <div class="questionBox">
+                <div class="btn lastQ"><span>上一題</span></div>
+            </div>
+        </div>
+    </section>
     <section class="dropdowns">
         <h4>Dropdowns (還沒加動畫)</h4>
         <div style="flex-direction:column">
-            <DropdownQa 
-                question="QQQQQ"
-                answer="AAAAA"></DropdownQa>
-            <DropdownMenu
-                :placeHolder="menu1.placeHolder"
-                :options="menu1.options"></DropdownMenu>
+            <h6>DropdownQa</h6>
+            <DropdownQa question="QQQQQ" answer="AAAAA"></DropdownQa>
+            <h6>DropdownMenu</h6>
+            <DropdownMenu :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
         </div>
     </section>
 </template>
 
 <script setup>
-    import { ref } from "vue";
+import { ref } from "vue";
 
-    import Banner from "../components/Banner.vue";
-    import DropdownQa from "../components/DropdownQa.vue";
-    import DropdownMenu from "../components/DropdownMenu.vue";
+import MainHeader from '../components/MainHeader.vue';
+import DropdownQa from "../components/DropdownQa.vue";
+import DropdownMenu from "../components/DropdownMenu.vue";
 
-    const menu1 = {
-        placeHolder: '請選擇一個選項',
-        options: [
-            {
-                id: 0,
-                name: '選項1'
-            },
-            {
-                id: 1,
-                name: '選項2'
-            },
-            {
-                id: 2,
-                name: '選項3'
-            },
-            {
-                id: 3,
-                name: '選項4'
-            },
-        ]
-    };
+const btnStyles = ['primary', 'blue', 'white', 'outline', 'text', 'textBlue', 'textRed'];
+const btnSizes = ['large', 'default', 'small'];
+const menu1 = {
+    placeHolder: '請選擇一個選項',
+    options: [
+        {
+            id: 0,
+            name: '選項1'
+        },
+        {
+            id: 1,
+            name: '選項2'
+        },
+        {
+            id: 2,
+            name: '選項3'
+        },
+        {
+            id: 3,
+            name: '選項4'
+        },
+    ]
+};
 </script>
 
 <style>
-    section{ margin-bottom: 20px}
-    section > div{ display: flex; gap: 20px; }
+section {
+    width: 100%;
+    padding: 0 10px;
+    margin: 40px 0
+}
+
+section>div {
+    display: flex;
+    gap: 20px;
+}
+
+section>hr {
+    border: 1px solid #693413;
+    margin: 20px auto
+}
+
+.largeBox {
+    width: 134px;
+}
+
+.defaultBox {
+    width: 98px;
+}
+
+.smallBox {
+    width: 68px;
+}
 </style>

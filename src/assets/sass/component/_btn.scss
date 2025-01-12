@@ -1,32 +1,35 @@
 $btnStyles: (
     primary: (
+        borderRadius: 100px,
         bgc: map-get($colors, red),
         color: map-get($colors, beige),
     ),
     blue: (
+        borderRadius: 100px,
         bgc: map-get($colors, blue),
         color: map-get($colors, beige),
     ),
     white: (
+        borderRadius: 100px,
         bgc: map-get($colors, natural-0),
         color: map-get($colors, red),
     ),
     outline: (
+        borderRadius: 100px,
+        border: 1px solid map-get($colors, red),
         bgc: transparent,
         color: map-get($colors, red),
     ),
     text: (
-        borderRadius: 0,
+        borderBottom: 1px solid map-get($colors, red),
         bgc: transparent,
         color: map-get($colors, red),
     ),
     textBlue: (
-        borderRadius: 0,
         bgc: transparent,
         color: map-get($colors, blue),
     ),
     textRed: (
-        borderRadius: 0,
         bgc: transparent,
         color: map-get($colors, red),
     )
@@ -38,29 +41,57 @@ $btnSizes: (
         height: 4.8rem,
         padding: .8rem 1.6rem,
         circleSize: 8px,
-        translate: -2.4rem,
+        translate: 1.6rem,
     ),
     default: (
         textStyle: p,
-        height: 4.8rem,
+        height: 4rem,
         padding: .8rem 1.6rem,
         circleSize: 4px,
-        translate: -2rem,
+        translate: .8rem,
     ),
     small: (
         textStyle: smallText,
         height: 3rem,
         padding: .4rem 1.6rem,
         circleSize: 3px,
-        translate: -1.3rem,
+        translate: .6rem,
     ),
 );
-@mixin buttonStyle($bgc, $color, $border: null, $borderBottom: null, $borderRadius: 100px){
+@mixin btnBasic(){
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    
+    transition: width .3s ease;
+
+    &:hover{ width: 100%; }
+
+    span {
+        display: inline-block;
+        position: relative;
+        transition: all .3s ease;
+    
+        &::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            
+            opacity: 0;
+            transition: all .3s ease;   
+        }
+    }
+    &:hover span::after{ opacity: 1; }
+}
+@mixin buttonStyle($bgc, $color, $border: null, $borderBottom: null, $borderRadius: null){
+    border-bottom: $borderBottom;
+    border: $border;
+    border-radius: $borderRadius;
     background-color: $bgc;
     color: $color;
-    border: $border;
-    border-bottom: $borderBottom;
-    border-radius: $borderRadius; 
 
     span::after{
         background-color: $color;
@@ -68,79 +99,90 @@ $btnSizes: (
 }
 @mixin buttonSize($textStyle, $height, $padding, $circleSize, $translate){
     @include textStyle($textStyle);
+    width: calc(100% - $translate);
     height: $height;
     padding: $padding;
 
     span::after{
+        top: calc(50% - $circleSize / 2);
+        right: -$translate;
+
         width: $circleSize;
         height: $circleSize;
-        right: $translate;
     }
     &:hover span{
-        transform: translateX($translate);
+        transform: translateX(-$translate / 2 );
     }
 }
 
-@each $style, $styleProps in $btnStyles {
-    @each $size, $sizeProps in $btnSizes {
-        $bgc: map-get($styleProps, bgc);
-        $color: map-get($styleProps, color);
-        $text: map-get($sizeProps, textStyle);
-        $h: map-get($sizeProps, height);
-        $pd: map-get($sizeProps, padding);
-        $circleSize: map-get($sizeProps, circleSize);
-        $translate: map-get($sizeProps, translate);
-        $br: map-get($styleProps, borderRadius);
 
-        .btn.#{$style}.#{$size}{
-            @include textStyle($text);
-            cursor: pointer;
+.btnBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            width: 100%;
-            height: $h;
-            padding: $pd;
-            background-color: $bgc;
-            
-            color: $color;
-            text-align: center;
-            
-            @if($br != 0){
-                border-radius: 100px;
-            }@else{
-                border-radius: 0;
+    @each $style, $styleProps in $btnStyles {
+        @each $size, $sizeProps in $btnSizes {
+            .btn.#{$style}.#{$size}{
+                @include btnBasic();
+                @include buttonStyle(
+                    map-get($styleProps, bgc),
+                    map-get($styleProps, color),
+                    map-get($styleProps, border),
+                    map-get($styleProps, borderBottom),
+                    map-get($styleProps, borderRadius),
+                );
+                @include buttonSize(
+                    map-get($sizeProps, textStyle),
+                    map-get($sizeProps, height),
+                    map-get($sizeProps, padding),
+                    map-get($sizeProps, circleSize),
+                    map-get($sizeProps, translate),
+                );
             }
-            @if($style == 'outline'){
-                border: 1px solid $color;
-            }@else if($style == 'text'){
-                border-bottom: 1px solid $color;
-            }
+        }
+    }
+}
+.questionBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            span {
-                display: inline-block;
-                position: relative;
-                transition: all .3s ease;
-            
-                &::after {
-                    content: "";
-                    position: absolute;
-                    top: calc(50% - $circleSize/2);
-                    right: $translate;
-
-                    width: $circleSize;
-                    height: $circleSize;
-                    border-radius: 50%;
-                    background-color: $color;
-                    
-                    opacity: 0;
-                    transition: all .3s ease;   
-                }
-            }
-            
-            &:hover span{
-                transform: translateX($translate);
-
-                &::after { opacity: 1; }
-            }
+    .btn{
+        @include btnBasic();
+        @include buttonSize(
+            map-get(map-get($btnSizes, default), textStyle),
+            map-get(map-get($btnSizes, default), height),
+            map-get(map-get($btnSizes, default), padding),
+            map-get(map-get($btnSizes, default), circleSize),
+            map-get(map-get($btnSizes, default), translate),
+        );
+        &.option{
+            @include buttonStyle(
+                map-get($colors, beige),
+                map-get($colors, brown),
+                null,
+                null,
+                100px,
+            );
+        }
+        &.nextQ{
+            @include buttonStyle(
+                map-get($colors, red),
+                map-get($colors, beige),
+                null,
+                null,
+                100px,
+            );
+        }
+        &.lastQ{
+            @include buttonStyle(
+                transparent,
+                map-get($colors, red),
+                null,
+                1px solid map-get($colors, red),
+                0,
+            );
         }
     }
 }
