@@ -1,15 +1,16 @@
 <template>
-<Banner theme="red" bgc="pink-0"></Banner>
+<MainHeader theme="red" bgc="pink-0"></MainHeader>
  
 <!---------------------------- heroSection ------------------->
 <div class="heroSection">
         <div class="herobtn">
             <h4 class="bold">聖誕禮盒來囉！</h4>
             <!-- <a href="@/pages/questionView.vue" class="btn primary default"> -->
+            <div class="btnBox">
                 <RouterLink to="/question" class="btn primary default">
                     <span>訂閱SPLOOT BOX</span>
                 </RouterLink>
-                
+            </div>
         </div>
         <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
     </div>
@@ -172,52 +173,11 @@
             <!--FAQ  -->
             <div class="faqWrapper">
                 <div class="faqTitle">FAQ</div>
-                
                 <div class="faqContainer">
-                    <div class="faqItem">
-                        <div class="faqQuestion">
-                            <div class="faqIconTextGroup">
-                                <h4 class="faqIcon">Q</h4>
-                                <p class="faqText">可以隨時更改方案嗎？</p>
-                            </div>
-                            <div class="arrowIcon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                        </div>
-                        
-                        <div class="divider"></div>
-                        <div class="faqAnswer">
-                            <h4 class="faqIcon">A</h4>
-                            <p class="faqText">
-                                是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
-                                如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="faqItem">
-                        <div class="faqQuestion">
-                            <div class="faqIconTextGroup">
-                                <h4 class="faqIcon">Q</h4>
-                                <p class="faqText">可以隨時更改方案嗎？</p>
-                            </div>
-                            <div class="arrowIcon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="faqItem">
-                        <div class="faqQuestion">
-                            <div class="faqIconTextGroup">
-                                <h4 class="faqIcon">Q</h4>
-                                <p class="faqText">可以隨時更改方案嗎？</p>
-                            </div>
-                            <div class="arrowIcon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <DropdownQa  question="可以隨時更改方案嗎？" answer="是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
+                                如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！"></DropdownQa>
+                    <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
+                    <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
                 </div>
             </div>
             
@@ -228,7 +188,8 @@
 </template>
 
 <script setup>
-import Banner from "../components/Banner.vue";
+import MainHeader from "../components/MainHeader.vue";
+import DropdownQa from "../components/DropdownQa.vue";
 
 
 </script>

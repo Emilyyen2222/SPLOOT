@@ -33,6 +33,15 @@ const routes = [
     }
   },
   {
+    path: '/match',
+    component: () => import('@/pages/matchView.vue'),
+    meta: {
+      title: '認識毛毛友 | Match',
+      theme: 'purple',
+      bodyBg: 'purple-1',
+    }
+  },
+  {
     path: '/sploot-buddy',
     component: () => import('@/pages/splootBuddy.vue'),
     meta: {
