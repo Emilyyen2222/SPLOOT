@@ -1,5 +1,5 @@
 <template>
-<MainHeader theme="red" bgc=""></MainHeader>
+<MainHeader theme="red" bgc="purple-1"></MainHeader>
 
 <!------------------------ question 1---------------------->
 <div class="box">
@@ -124,7 +124,7 @@
     </div>
     
     <!-- circle bg -->
-    <div class="circleQuestion"></div>
+    <div class="circleMatch"></div>
 </template>
 
 <script setup>

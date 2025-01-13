@@ -24,11 +24,13 @@
         margin-left: 28.8rem;
         gap: 3.1rem;
 
+        color: map-get($colors, red);  
+
         @include md(){
             margin: 0 auto;
         }
-        .bold{
-        color: map-get($colors, red); 
+        .btnBox{
+            width: 100%;
         }
     }
 }
@@ -243,44 +245,6 @@
         margin: 0 auto;
         padding: 0 1.6rem;
         margin-bottom: 16rem;
-        .faqItem {
-            padding: 1.6rem;
-            background-color: map-get($colors, beige);
-            border: 1px solid #D14535;
-            border-radius: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.6rem;
-            .faqQuestion {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 1.9rem;
-                .faqIconTextGroup {
-                    @include bayon(32);
-                    display: flex;
-                    align-items: center;
-                    gap: .8rem;
-                    .faqIcon {
-                        @include bayon(32);
-                    }
-                }
-                .arrowIcon {
-                    font-size: 1.8rem;
-                    cursor: pointer;
-                    color: map-get($colors, red);
-                }
-            }
-            .divider {
-                width: 100%;
-                height: .1rem;
-                background-color: map-get($colors, natural-1);
-            }
-            .faqAnswer {
-                display: flex;
-                gap: 1.9rem;
-            }
-        }
     }
 }
 
