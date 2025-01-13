@@ -207,6 +207,71 @@ import MainHeader from '../components/MainHeader.vue';
 ```
 ## Footer (開發中)
 
+## 一般按鈕
+根據 Figma 按鈕元件風格，支援以下樣式：
+- **Style**: `primary`,`blue`, `outline`, `text`, `white`
+- **Size**: `large`, `default`, `small`
+
+```vue
+import Btn from '../components/Btn.vue';
+```
+```vue
+<Btn btnStyle="primary large">查看</Btn>
+<Btn btnStyle="blue small">查看</Btn>
+```
+
+## 問卷填寫
+- **placeHolder**: 放預設文字
+- **errorMsg**: 錯誤時顯示的訊息
+- **v-model**: 裡面輸入的值(監聽)
+- **hasError**: 是否顯示錯誤
+
+```vue
+import InputText from '../components/InputText.vue';
+```
+下面那段不用複製進去，只是展示用 `v-model` 監聽裡面輸入的值 `inputValue`，最後放進下面的`<p>`標籤
+```vue
+<InputText
+    placeHolder="這裡填預設文字"
+    errorMsg="Invalid Input"
+    v-model="inputValue"
+    :hasError="inputError">
+</InputText>
+<p>用 v-model 監聽: {{ inputValue }}</p>
+```
+用 `watch` 功能隨時監看 `inputValue`的值，下方展示是用如果輸入的值包含`123`這個字串，就會顯示錯誤
+```js
+let inputValue = ref('');
+let inputError = ref(false);
+
+watch(inputValue, (newValue, oldValue) => {
+    if(inputValue.value.includes('123')){
+        inputError.value = true;
+    }else{
+        inputError.value = false;
+    }
+})
+```
+
+## 問卷選擇
+- **btnType**:`form`
+- **Style**: 選項`option`,下一題`nextQ`,上一題 `lastQ`
+
+問卷選項
+```vue
+<Btn btnType="form" btnStyle="option">選擇1</Btn>
+```
+
+下一題
+```vue
+<Btn btnType="form" btnStyle="nextQ">下一題</Btn>
+```
+
+上一題
+```vue
+<Btn btnType="form" btnStyle="nextQ">上一題</Btn>
+```
+
 ## 下拉選單
 ### Q&A 下拉選單
 - **question**：問題
@@ -254,46 +319,6 @@ const menu1 = {
         },
     ]
 };
-```
-## 其他非 Vue 元件
----
-## 按鈕
-根據 Figma 按鈕元件風格，支援以下樣式：
-- **Style**: `primary`,`blue`, `outline`, `text`, `white`
-- **Size**: `large`, `default`, `small`
-
-總共兩層`div`，外面的`div`可以加其他東西但一定要加`btnBox`，裡面的`<div>`選樣式（記得裡面需要`<span>`標籤）
-```html
-<div class="btnBox">
-    <div class="btn primary large"><span>查看</span></div>
-</div>
-<div class="btnBox">
-    <div class="btn blue small"><span>查看</span></div>
-</div>
-```
-## 問卷按紐
-同上外面的div加`questionBox`，裡面的`<div>`選擇是選項、下一題、上一題
-- **Style**: `option`,`nextQ`, `lastQ`
-### 選項按鈕
-
-```html
-<div class="questionBox">
-    <div class="btn option"><span>選項1</span></div>
-</div>
-```
-
-下一題
-```html
-<div class="questionBox">
-    <div class="btn nextQ"><span>下一題</span></div>
-</div>
-```
-
-上一題
-```html
-<div class="questionBox">
-    <div class="btn lastQ"><span>上一題</span></div>
-</div>
 ```
 
 ## 其他開發須知
