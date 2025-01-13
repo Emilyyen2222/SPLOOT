@@ -1,0 +1,33 @@
+.inputBox{
+  width: 100%;
+
+  text-align: center;
+  input{
+    @include textStyle(p);
+    width: 100%;
+    height: 4.8rem;
+    padding: .8rem .8rem;
+    border: 1px solid map-get($colors, natural-1);
+    border-radius: 16px;
+  
+    color: map-get($colors, brown);
+    text-align: center;
+  
+    &:focus{
+      outline: none;
+      border: 1px solid map-get($colors, natural-2);
+    }
+  }
+  .errorMsg{
+    @include textStyle(xsText);
+    margin-top: .8rem;
+    color: map-get($colors, red);
+  }
+  &.-error{
+    input{
+      border: 1px solid map-get($colors, red);
+      color: map-get($colors, red);
+    }
+  }
+  
+}
