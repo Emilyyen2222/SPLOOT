@@ -87,7 +87,6 @@
                     }
     
                     .dropDown{
-                        height: 4.8rem;
                         margin-bottom: 8px;
                         border-color: map-get($colors, natural-1);
     
@@ -160,6 +159,62 @@
 
                 display: flex;
                 align-items: center;
+            }
+        }
+
+        .bottomSection{
+            .buddyCard{
+
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3欄，欄位寬度相等 */
+                gap: 4.8rem;
+
+                .buddyCards{
+                   width: 100%;
+                    min-width:27rem;
+
+                    border-radius: 8px;
+                    background-color: map-get($colors, beige);
+                    .cardsImg{
+                        height: 17.2rem;
+                        border-radius: 8px 8px 0 0;
+                    }
+
+                    .cardText{
+                        width: 100%;
+                        padding: 16px;
+
+                        .reviews{
+                            display: flex;
+                            align-items: center;
+
+                            margin: 4px 0;
+
+                            .stars{
+                                display: flex;
+
+                                .star{
+                                    width: 16px;
+                                    height: 16px;  
+                                    margin-right: 4px;                                      
+                                    }
+                                
+                            }
+
+                            .avgGrade{
+                                margin-right: 4px;
+                            }
+                        }
+
+                        .btnBox{
+                            margin: 16px 0 0;
+                        }
+                    }
+                }
+            }
+
+            .seeMoreBtnBox{
+                margin: 120px 0 184px;
             }
         }
 

@@ -90,29 +90,29 @@
     <div class="bottomSection">
     <ul class="buddyCard">
         <li class="buddyCards">
-            <img src="" alt="" class="cardsImg">
+            <img src="@/assets/img/pet-friendly/cards7.png" alt="" class="cardsImg">
             <div class="cardText">
                 <h6 class="cardsTitle bold">快速散步去</h6>
                 <div class="reviews">
                     <ul class="stars">
-                        <li><img src="" alt="star" class="star star1"></li>
-                        <li><img src="" alt="star" class="star star2"></li>
-                        <li><img src="" alt="star" class="star star3"></li>
-                        <li><img src="" alt="star" class="star star4"></li>
-                        <li><img src="" alt="star" class="star star5"></li>
+                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                        <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
                     </ul>
                     <div class="avgGrade smallText">4.5</div>
                     <div class="commentCount smallText">(3)</div>
                 </div>
                 <div class="serviceTime">服務時段：週一至週五 09:00-18:00</div>
-            </div>
-            <div class="btnBox ">
-                <div class="cardsBtn btn small blue"><span>查看</span></div>
+                <div class="btnBox ">
+                    <Btn btnStyle="blue small">查看</Btn>
+                </div>
             </div>
         </li>
     </ul>
 
-    <div class="seeMore"><p class="bold">查看更多</p></div>
+    <div class="seeMoreBtnBox"><p class="seeMore bold">查看更多</p></div>
     </div>
 
 
@@ -131,6 +131,7 @@
 
     import MainHeader from "../components/MainHeader.vue";
     import DropdownMenu from "../components/DropdownMenu.vue";
+    import Btn from '../components/Btn.vue';
 
     const city = {
     placeHolder: '請選擇城市',
