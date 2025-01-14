@@ -32,11 +32,11 @@
     </div>
     <div class="boxDivider"></div>
     <div class="boxSection">
-        <div class="boxText">
+        <div class="text boxText">
             <h4 class="bold">原肉鮮零食</h4>
             <p class="default">100%純肉製作，無人工添加，營養滿分，美味安心</p>
         </div>
-        <div class="boxImage">
+        <div class="img boxImage">
             <img src="@/assets/img/splootbox/splootbbox2.avif" alt="">
         </div>
     </div>
@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="boxTitle4">
-                <p class="bigText">Testmonial</p>
+                <!-- <p class="bigText">Testmonial</p> -->
             </div>
         </div>
 
@@ -183,7 +183,7 @@
             
 
     <!-- circle bg -->
-    <div class="circleSplootBox"></div>
+    <!-- <div class="circleSplootBox"></div> -->
          
 </template>
 

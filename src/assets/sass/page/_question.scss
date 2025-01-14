@@ -1,23 +1,27 @@
 @mixin box(){
-    height: 100%;
-    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    // max-width: 384px;
+    height: calc(100vh - 10.4rem);
+    margin: 0 auto;
+
 }
 @mixin question-container() {
     display: flex;
     flex-direction: column;
     margin-top: 2%;
-    width: 26%;
+    width: 100%;
     z-index: 10;
     text-align: center;
-    @include xl(){
-        width: 50%;
-    }
-    @include lg(){
-        width: 50%;
-    }
+    max-width: 384px;
+
+    // @include xl(){
+    //     width: 50%;
+    // }
+    // @include lg(){
+    //     width: 50%;
+    // }
 }
 @mixin prev-navigation() {
     display: flex;
@@ -73,8 +77,7 @@ body{
 }
 .circleQuestion {
     @include circle(map-get($colors, pink-1));
-    z-index: -20;
-    position: absolute;
+    position: fixed;
     top:5%; 
     left: 50%;
 }
@@ -89,22 +92,23 @@ body{
             gap: 8px;
             margin-top: 4rem;
             margin-bottom: 4rem;
+
             .smallText{
                 margin-bottom: 4rem;
             }
-            .options.birthday{
+            .birthday{
                 display: flex;
                 flex-direction: row;
             }
             
-            .option.first{
+            .first{
                 margin-bottom: 4rem;
-                border-radius: 1.6rem;
+                border-radius: 16px;
             }
             .option {
-                padding: .8rem 1.6rem;
+                // padding: .8rem 1.6rem;
                 border-radius: 10rem;
-                background-color: map-get($colors, natural-0);
+                // background-color: map-get($colors, natural-0);
                 color: map-get($colors, brown);
                 cursor: pointer;
             }
@@ -137,3 +141,11 @@ body{
     @include progressBar();
 }
 
+// .test{
+    //div  裡面
+    // text-align: center;
+    //  div本體（需要有寬度）
+//     margin: 0 auto;
+
+//     border: 1px solid;
+// }
