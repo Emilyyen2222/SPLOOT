@@ -11,7 +11,7 @@
     .img {
         max-width: 100%;
         height: auto;
-
+        
         @include md(){
             display: none;
         }
@@ -35,7 +35,6 @@
     }
 }
   .boxTitle1 {
-    // z-index: 10;
     display: flex;
     position: relative;
     justify-content: center;
@@ -52,9 +51,10 @@
     }
 }
 .boxContainer {
-    display: flexbox;
+    display: flex;
+    flex-direction: column;
     max-width: 121.6rem;
-    width: 100%;
+    width: 85%;
     padding: 4rem;
     margin: 0 auto;
     background-color: map-get($colors, beige);
@@ -64,9 +64,22 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 100%;
+        // width: 100%;
+        @include lg(){
+            display: flex;
+            flex-direction: column;
+        }
         @include md(){
-            display: grid;
+            // display: grid;
+        }
+        @include sm(){
+
+        }
+        .text.boxText{
+            order: 0;
+            @include lg(){
+                order: 1;
+            }
         }
         .boxImage {
             img {
@@ -74,6 +87,9 @@
                 height: auto;
                 background-color: map-get($colors, beige);
                 border-radius: 0.8rem;
+                @include lg(){
+                    width: 100%;
+                }
             }
         }
         .boxText {
@@ -95,6 +111,7 @@
         height: 0.1rem;
         background-color: map-get($colors, pink-1);
         border: none;
+        margin: 3.2rem 0;
     }
 }
 .boxTitle2 {

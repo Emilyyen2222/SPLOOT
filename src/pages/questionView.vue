@@ -6,22 +6,32 @@
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩叫什麼名字？</h4>
         <div class="options">
-            <p class="option first">毛孩姓名</p>
-            <div class="questionBox"><div class="btn option"><span>女生 狗狗</span></div></div>
-            <div class="questionBox"><div class="btn option"><span>男生 狗狗</span></div></div>
-            <div class="questionBox"><div class="btn option"><span>女生 貓貓</span></div></div>
-            <div class="questionBox"><div class="btn option"><span>男生 貓貓</span></div></div>
-        </div>
-            <div class="questionBox"><div class="btn nextQ"><span>下一題</span></div></div>
-            <div class="questionBox"><div class="btn lastQ"><span>上一題</span></div></div>
-
-        <!-- <div class="navigation">
-            <p class="nextButton">下一題</p>
-            <div class="prev">
-                <p class="prevText">上一題</p>
-                <div class="prevLine"></div>
+            <!-- <p class="option first">毛孩姓名</p> -->
+            <div class="first">
+            <InputText placeHolder="毛孩姓名" errorMsg="Invalid Input" v-model="inputValue" :hasError="inputError">
+            </InputText>
             </div>
-        </div> -->
+            <Btn btnStyle="white default">女生 狗狗</Btn>
+            <Btn btnStyle="white default">男生 狗狗</Btn>
+            <Btn btnStyle="white default">女生 貓貓</Btn>
+            <Btn btnStyle="white default">男生 貓貓</Btn>
+        </div>
+        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>    
+    </div>
+
+     <!-- progress bar -->
+     <div class="progressBarContainer">
+        <div class="progressBar">
+            <div class="progressSegment filled"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+            <div class="progressSegment"></div>
+        </div>
     </div>
 </div>
 <!------------------------ question 2貓---------------------->
@@ -108,20 +118,7 @@
         </div>
     </div>
 </div>
-    <!-- progress bar -->
-    <div class="progressBarContainer">
-        <div class="progressBar">
-            <div class="progressSegment filled"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-        </div>
-    </div>
+   
     
     <!-- circle bg -->
     <div class="circleQuestion"></div>
@@ -130,6 +127,8 @@
 <script setup>
     import MainHeader from "../components/MainHeader.vue";
     import DropdownMenu from "../components/DropdownMenu.vue";
+    import Btn from '../components/Btn.vue';
+    import InputText from '../components/InputText.vue';
 
     const menu1 = {
     placeHolder: '我的毛孩品種是',
@@ -154,6 +153,3 @@
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>

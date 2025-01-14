@@ -3,7 +3,7 @@
 .circleMatch {
     @include circle(map-get($colors, purple-2));
     z-index: -20;
-    position: absolute;
-    top:40%; 
+    position: fixed;
+    bottom: 0;
     left: 50%;
 }
