@@ -89,52 +89,49 @@
                 }
             }
 
-            .facilityCards {
-                display: flex;
-                justify-content: flex-start;
-                gap: 3.2rem;
-
+            .facilityCards{
                 padding: 1.6rem 0;
-                border-bottom: 1px solid map-get($colors , yellow-1);
 
-                &:first-child{
-                    padding-top: 0;
-                }
+                .cardsContent {
+                    display: flex;
+                    justify-content: flex-start;
+                    gap: 3.2rem;
 
-                &:last-child {
-                    padding-bottom: 0;
-                    border-bottom: none
-                }
+                    margin-bottom: 1.6rem;
 
-                img {
-                    width: 18rem;
-                    height: 12rem;
-                    border-radius: 4px;
-                }
+                    &:first-child{
+                        padding-top: 0;
+                    }
 
-                .cardsBox {
-                    max-width: 172px;
+                    &:last-child {
+                        padding-bottom: 0;
+                        border-bottom: none
+                    }
 
-                    .cardsTypeIcon {
-                        display: flex;
-                        align-items: center;
+                    img {
+                        width: 18rem;
+                        height: 12rem;
+                        border-radius: 4px;
+                    }
 
-                        img{
-                            width: 16px;
-                            height: 16px;
-                            margin-right: 4px;
-                        }
+                    .cardsBox {
+                        max-width: 172px;
 
-                        p {
-                            color: map-get($colors, brown);
+                        .cardsTypeIcon {
+                            display: flex;
+                            align-items: center;
+
+                            img{
+                                width: 16px;
+                                height: 16px;
+                                margin-right: 4px;
+                            }
+
+                            p {
+                                color: map-get($colors, brown);
+                            }
                         }
                     }
-                }
-
-                .cardsBtnBox {
-                    display: flex;
-                    align-items: flex-end;
-                    margin-left: auto;
                 }
             }
         }

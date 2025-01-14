@@ -56,6 +56,8 @@
                 margin-bottom: 8px;
 
                 .buddyTypes{
+                    cursor: pointer;
+
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -109,6 +111,8 @@
                         gap: 0.8rem;
     
                         .petTypes{
+                            cursor: pointer;
+
                             display: flex;
                             justify-content: center;
                             align-items: center;;
@@ -148,9 +152,11 @@
                 align-items: center;
                 gap: 8px;
 
-               .howToBe{
+               .howToBe{    //元件調整
                 width: 100%;
                 border-color: map-get($colors, blue);
+
+                @include textStyle(xsText, bold); 
                }
             }
 
@@ -213,18 +219,18 @@
                 }
             }
 
-            .seeMoreBtnBox{
-                margin: 120px 0 184px;
+            .seeMoreBtn{
+                max-width: 16rem;
+                margin: 12rem auto 18.4rem;
+
+                .seeMore{ //組件調整
+                    border-color: map-get($colors, blue);
+
+                    @include textStyle(p, bold);
+                }
             }
         }
-
-
-
-
-
-
-
-        
+        //以上為主頁內容
 
         // 背景圓形＊2
         .circle{
@@ -235,11 +241,106 @@
         }
         
         .circle1{
-            top: 228px;
+            top: 848px;
         }
         
         .circle2{
-            top: 1252px;
+            top: 2088px;
         }
+    }
+}
+
+//小幫手燈箱    
+.buddyLightBox{
+    display: none;
+
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    translate: -50%;
+
+    width: 80rem;
+
+    z-index: 1010;
+
+    &.clicked{   //點選後顯現
+        display: block;
+    }
+
+    .colseBtn{
+        cursor: pointer;
+
+        width: 4.8rem;
+        height: 4.8rem;
+        margin: 0 0 1.6rem auto;
+        border-radius: 100px;
+        background-color: map-get($colors, beige);
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .buddyIntroduction{
+        margin-bottom: 1.6rem;
+        padding: 2.4rem;
+        background-color: map-get($colors, beige);
+        border-radius: 16px;
+
+        .introTitle{
+            padding-bottom: 2.4rem;
+            border-bottom: 1px solid map-get($colors,natural-1);
+
+            text-align: center;
+        }
+        .introSectionBox{
+            display: flex;
+            flex-direction: column;
+            gap: 3.2rem;
+
+            margin-top: 2.4rem;
+
+            .introSection{
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                .introImg{
+                    width: 264px;
+                    height: 160px;
+
+                    border-radius: 8px;
+                }
+
+            }
+        }
+
+        .middleText{
+            margin-top: 4rem;
+        }
+
+    }
+    .introBtn{
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+//遮罩
+.blackCover{
+    display: none;
+
+    position: fixed;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+
+    z-index: 1005;
+    
+    &.clicked{
+    display: block;
     }
 }

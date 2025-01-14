@@ -30,20 +30,20 @@
             <ul class="facilityCard">
 
                 <li class="facilityCards" v-for="(card, index) in cardsData" :key="index">
-                    <div class="cardsImg">
-                        <img :src="card.imgSrc" :alt="card.imgAlt">
-                    </div>
-                    <div class="cardsBox">
-                        <div class="cardsTypeIcon">
-                            <img :src="card.iconSrc" :alt="card.iconAlt">
-                            <p class="xsText">{{ card.type }}</p>
+                    <div class="cardsContent">
+                        <div class="cardsImg">
+                            <img :src="card.imgSrc" :alt="card.imgAlt">
                         </div>
-                        <h6 class="cardsTitle">{{ card.name }}</h6>
-                        <p class="smallText">{{ card.content }}</p>
+                        <div class="cardsBox">
+                            <div class="cardsTypeIcon">
+                                <img :src="card.iconSrc" :alt="card.iconAlt">
+                                <p class="xsText">{{ card.type }}</p>
+                            </div>
+                            <h6 class="cardsTitle">{{ card.name }}</h6>
+                            <p class="smallText">{{ card.content }}</p>
+                        </div>
                     </div>
-                    <div class="cardsBtnBox">
-                        <div class="btn primary small blue" @click="isMobileMapMove(card.name)"><span>查看</span></div>
-                    </div>
+                    <Btn btnStyle="blue small" @click="isMobileMapMove(card.name)">查看</Btn>
                 </li>
    
             </ul>                                                
@@ -60,8 +60,10 @@
 </template>
 
 <script setup>
-    import MainHeader from "../components/MainHeader.vue";
     import {ref} from "vue";
+
+    import MainHeader from "../components/MainHeader.vue";
+    import Btn from '../components/Btn.vue';
 
     //data
     const cardsData = ref([

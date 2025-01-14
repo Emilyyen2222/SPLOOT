@@ -78,9 +78,7 @@
                             </div>
                             </div>
                         </div>
-                        <div class="btnBox">
-                            <div class="btn small blue"><span>參加</span></div>
-                        </div>
+                        <Btn btnStyle="blue small">查看</Btn>
                     </li>              
                 </ul>
             </div>
@@ -92,7 +90,9 @@
 
 <script setup>
     import { ref } from 'vue';
+    
     import MainHeader from "../components/MainHeader.vue";
+    import Btn from '../components/Btn.vue';
 
 //data
 const cardsData = ref([
