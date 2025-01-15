@@ -12,7 +12,7 @@
     <div class="secondTitle">
         <p>提供毛小孩們最棒且最有愛的服務</p>
     </div>
-    <div class="firstTimeUse" @click="showLightBox">
+    <div class="firstTimeUse" @click="toggleLightBox">
         <p class="xsText">第一次使用小幫手？</p>
     </div>
     <!-- 過濾篩選選單部分 -->
@@ -117,10 +117,11 @@
  </div>
 </div>
 
-<!-- 小幫手介紹燈箱 -->
-
-<div class="buddyLightBox" :class="{clicked:isLightBox}">
-    <div class="closeBtn" @click="showLightBox"><img src="@/assets/img/icon/close.svg" alt="closeIcon"></div>
+<LightBox 
+    :is-light-box="isLightBox" 
+    @toggle="toggleLightBox" 
+    bgc="transparent" 
+    pY="0" pX="0">
     <div class="buddyIntroduction introTop">
         <div class="introTitle">
             <h4 class="bold">值得信任的毛孩小幫手</h4>
@@ -186,15 +187,13 @@
                 </div>
             </div>
         </div>
+        <div class="introBtn">
+            <Btn btnStyle="blue default">成為小幫手</Btn>
+        </div>
     </div>
+</LightBox>
 
-    <div class="introBtn">
-        <Btn btnStyle="blue default">成為小幫手</Btn>
-    </div>
-</div>
 
-<!-- 遮罩 -->
-<div class="blackCover" :class="{clicked:isLightBox}"></div>
 
 
 </template>
@@ -202,9 +201,10 @@
 <script setup>
     import {ref} from "vue";
 
-    import MainHeader from "../components/MainHeader.vue";
-    import DropdownMenu from "../components/DropdownMenu.vue";
-    import Btn from '../components/Btn.vue';
+    import MainHeader from "@/components/MainHeader.vue";
+    import DropdownMenu from "@/components/DropdownMenu.vue";
+    import Btn from '@/components/Btn.vue';
+    import LightBox from "../components/LightBox.vue";
 
     const city = {
     placeHolder: '請選擇城市',
@@ -254,25 +254,11 @@
         ]
     };
 
-    //燈箱顯示與否
-    let isLightBox = ref(false);
+ //燈箱狀態
+let isLightBox = ref(false);
 
-    function showLightBox(){
-        isLightBox.value = !isLightBox.value;
-
-    }
-
-
-
-
+// 控制燈箱的顯示與隱藏
+function toggleLightBox() {
+  isLightBox.value = !isLightBox.value;
+}
 </script>
-<!-- const firstTimeUse = document.querySelector(".firstTimeUse");
-const lightBox = document.querySelector(".buddyLightBox");
-const blackCover = document.querySelector(".blackCover");
-
-firstTimeUse.addEventListener("click",function(){
-
-    alert("aaa");
-    // lightBox.classList.add("clicked");
-    // blackCover.classList.add("clicked");
-}); -->
