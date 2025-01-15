@@ -37,5 +37,12 @@ http://localhost:5173/_Emily/vue-question.html
 @ = 從這個路徑開始../src
 
 
+// .test{
+    //div  裡面
+    // text-align: center;
+    //  div本體（需要有寬度）
+//     margin: 0 auto;
 
+//     border: 1px solid;
+// }
 
