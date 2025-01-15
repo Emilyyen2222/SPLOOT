@@ -120,7 +120,7 @@
 <!-- 小幫手介紹燈箱 -->
 
 <div class="buddyLightBox" :class="{clicked:isLightBox}">
-    <div class="colseBtn" @click="showLightBox"><img src="@/assets/img/icon/close.svg" alt="colseIcon"></div>
+    <div class="closeBtn" @click="showLightBox"><img src="@/assets/img/icon/close.svg" alt="closeIcon"></div>
     <div class="buddyIntroduction introTop">
         <div class="introTitle">
             <h4 class="bold">值得信任的毛孩小幫手</h4>
@@ -200,7 +200,7 @@
 </template>
 
 <script setup>
-    import {onMounted, ref} from "vue";
+    import {ref} from "vue";
 
     import MainHeader from "../components/MainHeader.vue";
     import DropdownMenu from "../components/DropdownMenu.vue";
@@ -231,7 +231,7 @@
         { id: 350, name: '苗栗縣' },
         { id: 630, name: '雲林縣' }
     ]
-};
+    };
     const district = {
         placeHolder: '請選擇行政區',
         options: [
