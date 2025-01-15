@@ -1,17 +1,19 @@
  body{
     background-color: map-get($colors, pink-0);
     position: relative;
-}    
+} 
+.herobox{
+    background-color: map-get($colors, pink-2);
+}   
 .heroSection {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    margin: 0 auto;
     height: 56rem;
+    max-width: 68.3rem;
     background-color: map-get($colors, pink-2);
     .img {
-        max-width: 100%;
-        height: auto;
-        
         @include md(){
             display: none;
         }
@@ -19,35 +21,51 @@
     .herobtn {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
-        margin-left: 28.8rem;
         gap: 3.1rem;
-
         color: map-get($colors, red);  
-
-        @include md(){
-            margin: 0 auto;
-        }
         .btnBox{
-            width: 100%;
+            width: 22.4rem;
+            margin: 0 auto;
         }
     }
 }
-  .boxTitle1 {
+.bigTitle{
     display: flex;
-    position: relative;
     justify-content: center;
-    color: map-get($colors, red);
-    margin-bottom: 3rem;
-    margin-top: 30rem;
-    .bigText {
-        z-index: -5;
-        position: absolute;
-        left: 9.1rem;
-        top: 0.1rem;
-        transform: translate(20px, -120px);
-        color: map-get($colors, pink-1);
+    align-items: center;
+    text-align: center;
+    max-width: 1300px;
+    margin: 0 auto;
+     margin-top: 30rem;
+     margin-bottom: 3rem;
+    .boxTitle {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        color: map-get($colors, red);
+       
+        width: 100%;
+        @include md(){
+            font-size: 2rem;
+        }
+        h4{
+            z-index: 10;
+        }
+        p {
+            z-index: -5;
+            position: absolute;
+            top: 0.1rem;
+            transform: translate(20px, -120px);
+            color: map-get($colors, pink-1);
+            @include bayon(190);
+            font-weight: 400;
+            line-height: 171px;
+            @include md(){
+                @include bayon(80);
+            }
+        }
     }
 }
 .boxContainer {
@@ -64,16 +82,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // width: 100%;
         @include lg(){
             display: flex;
             flex-direction: column;
-        }
-        @include md(){
-            // display: grid;
-        }
-        @include sm(){
-
         }
         .text.boxText{
             order: 0;
@@ -114,22 +125,7 @@
         margin: 3.2rem 0;
     }
 }
-.boxTitle2 {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    color: map-get($colors, red);
-    margin-top: 19.2rem;
-    .bigText {
-        z-index: -5;
-        position: absolute;
-        top: 0.1rem;
-        transform: translate(20px, -120px);
-        text-align: center;
-        color: map-get($colors, pink-1);
-    }
-}
-// Component
+// 背景圓圈
 .circleSplootBox {
     @include circle(map-get($colors, pink-1));
     z-index: -20;
@@ -137,21 +133,21 @@
     top: 67%; 
     left: 50%;
 }
+
+// 如何訂閱區塊
 .howitworks {
     display: flex;
     flex-direction: column;
     position: relative;
     max-width: 132.8rem;
     margin: 0 auto; 
+    text-align: center;
     width: 100%;
-    
     .howitworks_section {
         display: flex;
       .title {
-            text-align: center;
             color: map-get($colors, brown);
             @include bayon(56);
-            margin: 1rem 1rem;
             padding: 0.8rem;
             background-color: map-get($colors, beige);
             border-radius: 0.8rem;
@@ -164,93 +160,130 @@
     }
 }
 .howitworksbtn {
+    position: relative;
     display: flex; 
     justify-content: center; 
-    width: 17.6rem; 
-    margin: 0 auto; 
+    top: 8rem;
+    .btnBox{
+        width: 18rem;
+    }
 }
 // 評語區塊
-.testmonialWrapper {
+.reviewTitle {
+    display: block;
+    position: relative;
+    max-width: 590px;
+    text-align: center;
+    margin: 20rem auto;
+    color: map-get($colors, red);
+    @include sm(){
+        max-width: 342px;
+    }
     .boxTitle3 {
-        position: relative;
         text-align: center;
-        top: 32rem;
-        .feedback-title {
-            color: map-get($colors, red);
-        }
         .feedback-content {
             margin: 2.4rem auto;
             max-width: 600px;
-            color: map-get($colors, red);
-        }
-    }
-    .boxTitle4 {
-        z-index: -10;
-        position: relative;
-        text-align: center;
-        top: 44rem;
-        color: map-get($colors, red);
-    }
-    .reviews-container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        gap: 1rem;
-        top: 47rem;
-        .review-card {
-            display: inline-flex;
-            flex-direction: column;
-            width: 28rem;
-            padding: 0.8rem;
-            background-color: map-get($colors, beige);
-            border-radius: 0.8rem;
-            gap: 2.4rem;
-            padding-bottom: 2.4rem;
-            .review-image {
-                width: 100%; 
-                height: 70%; 
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                overflow: hidden;
-                img {
-                    width: 100%; 
-                    height: 100%; 
-                    object-fit: cover; 
-                }
-            }
-            .review-content {
-                display: flex;
-                flex-direction: column;
-                height: 13.6rem;
-                gap: 1.6rem;
-            }
         }
     }
 }
-.newsSection {
-    position: relative;
-    display: inline-flex;
-    top: 58rem;
-    flex-direction: column;
-    width: 100%;
+.reviews-container {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.8rem;
+    margin: 0 auto;
+    gap: 5rem;
+    .review-card {
+        display: inline-flex;
+        flex-direction: column;
+        max-width: 280px;
+        padding: 0.8rem;
+        background-color: map-get($colors, beige);
+        border-radius: 0.8rem;
+        gap: 0.8rem;
+        padding: 0.8rem;
+        height: 36.8rem;
+        .review-image {
+            max-width: 26.4rem; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 0.8rem;
+            img {
+                width: 100%; 
+                height: 20.8rem;
+                object-fit: cover; 
+            }
+        }
+        .review-content {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
-// faq區塊
+// testmonial大字
+.box4 {
+    z-index: -10;
+    position: relative;
+    text-align: center;
+    top: -3rem;
+    color: map-get($colors, red);
+    p{
+        @include lg(){
+            @include bayon(120);
+        }
+        @include md(){
+            @include bayon(80);
+        }
+        @include sm(){
+            @include bayon(64);
+        }
+    }
+    
+}
+
+// 訂閱電子報
+.news {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center; 
+    max-width: 38.6rem;
+    top: 16rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    .newsSection {
+        flex-direction: column;
+        display: inline-flex;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+}
+
+
+
+// FAQ區塊
 .faqWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: map-get($colors, pink-1);
+    
     @include bayon(100);
-    max-height: 66rem;
     width: 100%;
-    margin-top: 66rem;
+    margin: 0 auto;
+    margin-top: 14rem;
     .faqTitle {
         display: flex;
         justify-content: center;
         margin-top: 6rem;
         color: map-get($colors, red);
+        // margin-bottom: 14rem;
     }
     .faqContainer {
         width: 100%;
