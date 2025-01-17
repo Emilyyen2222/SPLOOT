@@ -47,6 +47,8 @@
                         :placeHolder="city.placeHolder"
                         :options="city.options">
                     </DropdownMenu>
+                </div>
+                <div class="dropdownMenu">
                     <DropdownMenu class="dropDown district"
                         :placeHolder="district.placeHolder"
                         :options="district.options">
@@ -68,13 +70,15 @@
             </div>
         </div>
     </div>
-    <Btn btnStyle="blue default buddytSearch">搜尋</Btn>
+    <Btn btnStyle="primary default buddytSearch">搜尋</Btn>
 
     <!-- 成為小幫手＋新增貼文 -->
     <div class="middleSection">
         <div class="toBeBuddy">
             <p class="smallText">你是喜愛動物又擁有照顧經驗的人嗎?</p>
-            <Btn btnStyle="outline small textBlue howToBe">成為小幫手</Btn>
+            <div class="btnBox">
+                <Btn btnStyle="outline small">成為小幫手</Btn>
+            </div>
         </div>        
         <!-- 行程按鈕 -->       
         <div class="scheduleBtn">
@@ -87,26 +91,27 @@
     <div class="bottomSection">
         <ul class="buddyCard">
             <li class="buddyCards" v-for="(card,index) in cardsData" :key="index">
-                <img :src="card.imgSrc" alt="" class="cardsImg">
-                <div class="cardText">
-                    <h6 class="cardsTitle bold">{{ card.title }}</h6>
-                    <div class="reviews">
-                        <ul class="stars">
-                            <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                            <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                            <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                            <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                            <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
-                        </ul>
-                        <div class="avgGrade smallText">4.5</div>
-                        <div class="commentCount smallText">(3)</div>
+                <div class="cardBox">
+                    <img :src="card.imgSrc" alt="" class="cardsImg">
+                    <div class="cardText">
+                        <h6 class="cardsTitle bold">{{ card.title }}</h6>
+                        <div class="reviews">
+                            <ul class="stars">
+                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                            </ul>
+                            <div class="avgGrade smallText">4.5</div>
+                            <div class="commentCount smallText">(3)</div>
+                        </div>
+                        <div class="serviceTime smallText">服務時段：{{ card.serviceDaysStart }}至{{ card.serviceDaysEnd }} {{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div>                
                     </div>
-                    <div class="serviceTime smallText">服務時段：{{ card.serviceDaysStart }}至{{ card.serviceDaysEnd }} {{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div>                
-                    <Router-link  to="/sploot-buddy/buddy-post">
-                        <Btn btnStyle="blue small">查看</Btn>  
-                    </Router-link>
-
                 </div>
+                <Router-link  to="/sploot-buddy/buddy-post">
+                    <Btn btnStyle="primary small">查看</Btn>  
+                </Router-link>
             </li>
         </ul>
 

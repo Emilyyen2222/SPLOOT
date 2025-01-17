@@ -78,7 +78,7 @@
                             </div>
                             </div>
                         </div>
-                        <Btn btnStyle="blue small">查看</Btn>
+                        <Btn btnType="event" :btnStyle="card.btnStyle">{{ btnText[card.btnStyle] }}</Btn>
                     </li>              
                 </ul>
             </div>
@@ -112,7 +112,9 @@ const cardsData = ref([
             day: "25",
             time: '21:30'
         },
-        place:"台北市信義區信義路五段7號86樓 (饗 A Joy)"
+        place:"台北市信義區信義路五段7號86樓 (饗 A Joy)",
+        btnStyle:"edit",
+        
     }, 
     {
         title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
@@ -130,7 +132,8 @@ const cardsData = ref([
             day: "31",
             time: '11:30'
         },
-        place:"二二八公園集合"
+        place:"二二八公園集合",
+        btnStyle:"attend",
     },
     {
         title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
@@ -148,7 +151,8 @@ const cardsData = ref([
             day: "26",
             time: '22:00'
         },
-        place:"基隆港"
+        place:"基隆港",
+        btnStyle:"registered",
     },
     {
         title: "英雄毛孩Cosplay比賽",
@@ -166,9 +170,18 @@ const cardsData = ref([
             day: "01",
             time: '15:50'
         },
-        place:"緯育Tibame台北職訓中心"
+        place:"緯育Tibame台北職訓中心",
+        btnStyle:"disable",        
     }
 ]);
+
+const btnText = ref({
+    attend : "參加",
+    edit : "編輯",
+    registered : "已參加",
+    disable : "已額滿",
+})
+
 
 //開始時間～結束時間 物件
 function getTimeObject(theTime){

@@ -43,7 +43,7 @@
                             <p class="smallText">{{ card.content }}</p>
                         </div>
                     </div>
-                    <Btn btnStyle="blue small" @click="isMobileMapMove(card.name)">查看</Btn>
+                    <Btn btnStyle="primary small" @click="isMobileMapMove(card.name)">查看</Btn>
                 </li>
    
             </ul>                                                
