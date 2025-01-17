@@ -5,7 +5,7 @@
     flex-direction: column;
     
     width: 100%;
-    border: 1px solid map-get($colors, red);
+    // border: 1px solid map-get($colors, red);
     background-color: map-get($colors, natural-0);
     border-radius: 16px;
     
@@ -30,8 +30,13 @@
     @include textStyle(p);
 
     max-height: 6.4rem;
+    border: 1px solid map-get($colors, red);
+
+    color: map-get($colors, brown);
+
     transition: all .3s ease;
     transition-delay: 1s;
+
 
     .question-block{
         display: flex;
@@ -65,67 +70,76 @@
 
     // 點擊展開後
     &.-expand{
-        max-height:fit-content;
+        max-height: fit-content;
 
         .expandBtn{ transform: rotate(180deg) }
     }
 }
 
 // -------- Dropdown Menu --------
-.dropdown-menu{
-    @include dropdownBasic(menu);
-    @include textStyle(p);
-
-    .dropdownBtn{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+@each $theme in $themes{
+    body.#{$theme}Theme{
+        .dropdown-menu{
+            @include dropdownBasic(menu);
+            @include textStyle(p);
+            border: 1px solid map-get($colors, natural-1);
         
-        .expandBtn{ 
-            width: 2.4rem;
-            transition: transform .5s ease;
-        }
-    }
-
-    .dropdownList{
-        display: flex;
-        flex-direction: column;
-        gap: .8rem;
-
-        li{
-            span{
-                display: inline-block;
-                position: relative;
-                transition: all .3s ease;
-
-                &::after{
-                    content: '';
-                    position: absolute;
-                    top: calc(50% - 2px);
-                    right: -.8rem;
-
-                    width: 4px;
-                    height: 4px;
-                    border-radius: 50%;
-                    background-color: map-get($colors, brown);
-
-                    opacity: 0;
-                    transition: all .3s ease;
+            .dropdownBtn{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                .expandBtn{ 
+                    width: 2.4rem;
+                    transition: transform .5s ease;
                 }
             }
-            &:hover{
-                span{
-                    transform: translateX(.8rem);
-                    &::after{ opacity: 1; }
+        
+            .dropdownList{
+                display: flex;
+                flex-direction: column;
+                gap: .8rem;
+
+                li{
+                    span{
+                        display: inline-block;
+                        position: relative;
+                        transition: all .3s ease;
+        
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            top: calc(50% - 2px);
+                            right: -.8rem;
+        
+                            width: 4px;
+                            height: 4px;
+                            border-radius: 50%;
+                            background-color: map-get($themeColors, $theme);
+        
+                            opacity: 0;
+                            transition: all .3s ease;
+                        }
+                    }
+                    &:hover{
+                        span{
+                            transform: translateX(.8rem);
+                            &::after{ opacity: 1; }
+                        }
+                    }
                 }
             }
+        
+            &.-expand{
+                .expandBtn{ transform: rotate(180deg) }
+            }
+        
+            &.-active{
+                border: 1px solid map-get($colors, $theme);
+            }
+        
         }
     }
-
-    &.-expand{
-        .expandBtn{ transform: rotate(180deg) }
-    }
-
 }
 
 

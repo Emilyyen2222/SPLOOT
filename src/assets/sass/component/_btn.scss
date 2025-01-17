@@ -1,192 +1,108 @@
-$btnStyles: (
-    primary: (
-        borderRadius: 100px,
-        bgc: map-get($colors, red),
-        color: map-get($colors, beige),
-    ),
-    blue: (
-        borderRadius: 100px,
-        bgc: map-get($colors, blue),
-        color: map-get($colors, beige),
-    ),
-    white: (
-        borderRadius: 100px,
-        bgc: map-get($colors, natural-0),
-        color: map-get($colors, red),
-    ),
-    outline: (
-        borderRadius: 100px,
-        border: 1px solid map-get($colors, red),
-        bgc: transparent,
-        color: map-get($colors, red),
-    ),
-    text: (
-        borderBottom: 1px solid map-get($colors, red),
-        bgc: transparent,
-        color: map-get($colors, red),
-    ),
-    textBlue: (
-        bgc: transparent,
-        color: map-get($colors, blue),
-    ),
-    textRed: (
-        bgc: transparent,
-        color: map-get($colors, red),
-    )
+$btnStyles: (primary, white, outline, baseline, text);
+$btnSizes: (large, default, small);
 
-);
-$btnSizes: (
-    large: (
-        textStyle: h6,
-        height: 4.8rem,
-        padding: .8rem 1.6rem,
-        circleSize: 8px,
-        translate: 1.6rem,
-    ),
-    default: (
-        textStyle: p,
-        height: 4rem,
-        padding: .8rem 1.6rem,
-        circleSize: 4px,
-        translate: .8rem,
-    ),
-    small: (
-        textStyle: smallText,
-        height: 3rem,
-        padding: .4rem 1.6rem,
-        circleSize: 3px,
-        translate: .6rem,
-    ),
-);
-@mixin btnBasic(){
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
+@each $theme in $themes {
+    body.#{$theme}Theme{
+        .btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+            @each $style in $btnStyles {
+                @each $size, $sizeProps in $btnSizes {
+                    .btn.#{$style}.#{$size}{
+                        @include btnBasic($size);
     
-    transition: width .3s ease;
-
-    &:hover{ width: 100%; }
-
-    span {
-        display: inline-block;
-        position: relative;
-        transition: all .3s ease;
+                        @if($style == primary){
+                            @include btnHover($size, beige);
+                            background-color: map-get($colors, $theme);
     
-        &::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            
-            opacity: 0;
-            transition: all .3s ease;   
-        }
-    }
-    &:hover span::after{ opacity: 1; }
-}
-@mixin buttonStyle($bgc, $color, $border: null, $borderBottom: null, $borderRadius: null){
-    border-bottom: $borderBottom;
-    border: $border;
-    border-radius: $borderRadius;
-    background-color: $bgc;
-    color: $color;
-
-    span::after{
-        background-color: $color;
-    }
-}
-@mixin buttonSize($textStyle, $height, $padding, $circleSize, $translate){
-    @include textStyle($textStyle);
-    width: calc(100% - $translate);
-    height: $height;
-    padding: $padding;
-
-    span::after{
-        top: calc(50% - $circleSize / 2);
-        right: -$translate;
-
-        width: $circleSize;
-        height: $circleSize;
-    }
-    &:hover span{
-        transform: translateX(-$translate / 2 );
-    }
-}
-
-
-.btnBox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @each $style, $styleProps in $btnStyles {
-        @each $size, $sizeProps in $btnSizes {
-            .btn.#{$style}.#{$size}{
-                @include btnBasic();
-                @include buttonStyle(
-                    map-get($styleProps, bgc),
-                    map-get($styleProps, color),
-                    map-get($styleProps, border),
-                    map-get($styleProps, borderBottom),
-                    map-get($styleProps, borderRadius),
-                );
-                @include buttonSize(
-                    map-get($sizeProps, textStyle),
-                    map-get($sizeProps, height),
-                    map-get($sizeProps, padding),
-                    map-get($sizeProps, circleSize),
-                    map-get($sizeProps, translate),
-                );
+                        }@else if($style == white){
+                            @include btnHover($size, $theme);
+                            background-color: map-get($colors, beige);
+    
+                        }@else if($style == outline){
+                            @include btnHover($size, $theme);
+                            border: 1px solid map-get($colors, $theme);
+                            background-color: transparent;
+    
+                        }@else if($style == baseline){
+                            @include btnHover($size, $theme);
+                            border-radius: 0;
+                            background-color: transparent;
+    
+                            span{ border-bottom: 1px solid map-get($colors, $theme); }
+    
+                        }@else if($style == text){
+                            @include btnHover($size, $theme);
+                            border-radius: 0;
+                            background-color: transparent;
+                        }
+                    }
+                }
             }
         }
     }
 }
-.formBox{
+.formBtn{
     display: flex;
     align-items: center;
     justify-content: center;
 
+    $size: default;
     .btn{
-        @include btnBasic();
-        @include buttonSize(
-            map-get(map-get($btnSizes, default), textStyle),
-            map-get(map-get($btnSizes, default), height),
-            map-get(map-get($btnSizes, default), padding),
-            map-get(map-get($btnSizes, default), circleSize),
-            map-get(map-get($btnSizes, default), translate),
-        );
+        @include btnBasic($size);
+
         &.option{
-            @include buttonStyle(
-                map-get($colors, beige),
-                map-get($colors, brown),
-                null,
-                null,
-                100px,
-            );
+            @include btnHover($size, brown);
+            background-color: map-get($colors, beige);
         }
         &.nextQ{
-            @include buttonStyle(
-                map-get($colors, red),
-                map-get($colors, beige),
-                null,
-                null,
-                100px,
-            );
+            @include btnHover($size, beige);
+            background-color: map-get($colors, red);
         }
         &.lastQ{
-            @include buttonStyle(
-                transparent,
-                map-get($colors, red),
-                null,
-                1px solid map-get($colors, red),
-                0,
-            );
-        }
+            @include btnHover($size, red);
+            border-radius: 0;
+            background-color: transparent;
 
+            span{ border-bottom: 1px solid map-get($colors, red); }
+        }
     }
     &.-active .option{
         border: 1px solid map-get($colors, red);
+    }
+}
+.eventBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    $size: small;
+    .btn{
+        @include btnBasic($size);
+
+        &.attend{
+            @include btnHover($size, beige);
+            background-color: map-get($colors, blue);
+        }
+        &.edit{
+            @include btnHover($size, brown);
+            background-color: map-get($colors, yellow-2);
+        }
+        &.registered{
+            @include btnHover($size, blue);
+            border: 1px solid map-get($colors, blue);
+            background-color: transparent;
+        }
+        &.disable{
+            color: map-get($colors, natural-2);
+            border: 1px solid map-get($colors, natural-2);
+            background-color: transparent;
+
+            &:hover{
+                cursor: not-allowed;
+            }
+        }
     }
 }

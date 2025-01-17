@@ -41,3 +41,13 @@ $colors: (
         color: #{$value};
     }
 }
+
+$themeColors: (
+    red: map-get($colors, brown),
+    blue: map-get($colors, blue),
+);
+@each $theme in $themes{
+    body.#{$theme}Theme{
+        color: map-get($themeColors, $theme);
+    }
+}
