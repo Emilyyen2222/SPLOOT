@@ -1,0 +1,110 @@
+.memberCenter {
+    max-width: 70vw;
+    margin: 0 auto;
+    .backPage {
+      display: none;
+    }
+  
+    .topNav{
+      width: 100%;
+      margin-bottom: 6.4rem;
+      .msg-n-avatar {
+        width: 100%;
+        display: flex;
+        // justify-content: start;
+        gap: 2rem;
+        margin-bottom: .8rem;
+      }
+  
+      nav{
+        width: 100%;
+      }
+    }    
+  }
+  
+  //頭像 和 歡迎詞
+  .msg-n-avatar{
+    width: 100%;
+    .avatar{
+      cursor: pointer;
+      width: 4.8rem;
+      height: 4.8rem;
+      border:2px solid #FFF;
+      // border:2px solid map-get($colors, natural-0);
+      border-radius: 50%;
+    
+      background-color: #693413;
+    }
+    
+    .msg-welcome{
+      width: calc(100% - 4.8rem);
+      text-align-last: left;
+      font-size: 2.5rem;
+      // @include textStyle(h5);
+      h2{}
+  
+      span{}
+    }
+  } 
+  
+  //topNav nav: 會員中心的navigaiton
+  .topNav nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.2rem;
+    li {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      height: 4rem;
+      padding: .4rem  1.2rem;
+      border-radius: 10rem;
+      background-color: #FFF;
+      //background-color: map-get($colors, natural-0);
+      color: #D14535;
+    //   color: map-get($colors , red );
+      font-size: 1.3rem;
+      // @include textStyle(smallText);
+
+      //===============
+    &:li:active{  //加進去的class
+        background-color: #D14535;
+        // background-color: map-get($colors, red);
+        color: #FFFEFA;
+        // color: map-get($colors , beige );
+    }
+      i {
+        display: block;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 50%;
+  
+        background-color: #ccc;
+      }
+      //===============
+      &:li:active i{  //加進去的class
+        background-color: #FFFEFA;
+        // background-color: map-get($colors , beige );
+      }
+  
+      p {
+        font-size: 1.3rem;   //之後套用sass
+      }
+    }
+  
+    ol {
+      display: none;
+    }
+  
+    .on {
+      display: flex; //之後用JS給class
+    }
+  }
+  
+  ol {
+    li {}
+  }
+  

@@ -1,0 +1,129 @@
+
+//===========================
+//layout
+.login-signup {
+    width: 496px;
+    // height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    button{
+        width: 100%;
+    }
+}
+
+.lsBox {
+    width: 100%;
+    padding: 56px 72px;
+
+    border: 2px solid red;
+}
+
+//差異化
+//login-start
+.login-start {
+    .link-fastSignUp {
+        width: 100%;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        margin: 0;
+        margin-bottom: 120px;
+
+        p {}
+
+        a {}
+    }
+
+    .login-box {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+
+        h2 {}
+
+        form {}
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        // $divider: width= calc(100%-46px)/2;
+        .divider {
+            width: 100%;
+            height: 22px;
+            border: 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-group-thirdL {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+    }
+}
+
+.login-box .robot {
+    background-color: #ccc;
+    width: 100%;
+    height: 56px; //引入API
+}
+
+.divider {
+    p {}
+
+    .left,
+    .right {
+        height: 0;
+        width: 100%;
+        border: .5px solid #ccc;
+    }
+
+    // .right{
+    //     height: 0;
+    //     width: 100%;
+    //     border:.5px solid #ccc;
+    // }
+    // &.divider::before{
+    //     width: auto;
+    //     border: 1px solid #ccc;
+    //     position: absolute;
+
+    // }
+    // &.divider::after{}
+}
+
+.btn-group-thirdL{
+    button{}
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    input {
+        width: 100%;
+    }
+
+    a {
+        display: block;
+        text-align: right;
+        padding-right: 16px;
+    }
+}
+
+// sign up SOP
+
+// login SOP
+
+// forget pwd SOP

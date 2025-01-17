@@ -23,6 +23,9 @@ a{ text-decoration: none; }
 
 // page
 @import 'page/index';
+@import 'page/_login-signup';
+@import 'page/_mcnav';
+@import 'page/_member-center';
 @import 'page/pet-friendly';
 @import 'page/question';
 @import 'page/splootbox';
