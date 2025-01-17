@@ -125,15 +125,13 @@
  </div>
 </div>
 
+<!-- bgc="transparent" -->
 <LightBox 
+    :title="lightTitle.title"
     :is-light-box="isLightBox" 
     @toggle="toggleLightBox" 
-    bgc="transparent" 
     pY="0" pX="0">
     <div class="buddyIntroduction introTop">
-        <div class="introTitle">
-            <h4 class="bold">值得信任的毛孩小幫手</h4>
-        </div>
 
         <div class="introSectionBox">
             <div class="introSection">
@@ -196,7 +194,7 @@
             </div>
         </div>
         <div class="introBtn">
-            <Btn btnStyle="blue default">成為小幫手</Btn>
+            <Btn btnStyle="primary default">成為小幫手</Btn>
         </div>
     </div>
 </LightBox>
@@ -213,6 +211,9 @@
     import DropdownMenu from "@/components/DropdownMenu.vue";
     import Btn from '@/components/Btn.vue';
     import LightBox from "../components/LightBox.vue";
+
+    // 燈箱標題請輸入
+    const lightTitle = {title: "值得信任的毛孩小幫手"}
 
     const city = {
     placeHolder: '請選擇城市',
@@ -298,10 +299,11 @@
     ])
 
  //燈箱狀態
-let isLightBox = ref(false);
+let isLightBox = ref(true);
 
 // 控制燈箱的顯示與隱藏
 function toggleLightBox() {
   isLightBox.value = !isLightBox.value;
 }
+
 </script>

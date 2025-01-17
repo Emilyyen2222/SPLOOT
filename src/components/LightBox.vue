@@ -1,10 +1,20 @@
+<!-- Ian -->
 <template>
 
     <div v-if="isLightBox" class="lightBox" :class="{clicked:isLightBox}">
-        <div class="closeBtn" :class="closeBtn" @click="toggleLightBox">
-            <img src="@/assets/img/icon/close.svg" alt="closeIcon">
+        <div class="lightBoxContent" :class="bgc" :style="{padding:`${pY}rem ${pX}rem`}">
+            <div class="closeBtnBox">
+                <div class="closeBtn" @click="toggleLightBox">
+                    <img src="@/assets/img/icon/close.svg" alt="closeIcon">
+                </div>
+            </div>
+            <div class="introTitle">
+                <h4 class="bold">{{ title }}</h4>
+            </div>
+            <div class="overflow">
+                <slot></slot>
+            </div>        
         </div>
-        <div class="lightBoxContent" :class="bgc" :style="{padding:`${pY}rem ${pX}rem`}"><slot></slot></div>
     </div>
     
     <div class="blackCover" :class="{clicked:isLightBox}"></div>
@@ -15,10 +25,6 @@
    import { defineProps, defineEmits } from 'vue';
     
     const props = defineProps({
-        closeBtn:{
-            type:String,
-            default:'',
-        },
         bgc:{
             type:String,
             default:'#FFFEFA',
@@ -35,8 +41,13 @@
             type: Boolean,
             required: true,
         },
+        title:{
+            type: String,
+            required: true,
+        },
         
     })
+  
 
     const emit = defineEmits(['toggle']);
 
