@@ -8,7 +8,6 @@
      display: none;
 
      width: 80rem;
-    //  overflow-y: auto;
 
 
     &.clicked{
@@ -21,13 +20,15 @@
         border-radius: 16px;
         background-color: map-get($colors, beige);
 
+      
+
         &.transparent{
             background-color: transparent;
         }
 
         .closeBtnBox{
 
-            padding: 2.4rem 2.4rem 1.6rem calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
+            padding: 2.4rem 2.4rem 0.4rem calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
 
             .closeBtn{
                 cursor: pointer;
@@ -51,10 +52,15 @@
             text-align: center;
         }
 
-        .overflow{
-            height: 800px;
+        .overflowBox{
+            padding: 8px;
+            border-radius: 16px;
             
-            overflow-y: auto;
+            .overflow{
+                height: 655.34px; //上層標題加上p & m 若移動需重新計算
+                overflow-y: auto;
+            }
+            
         }
 
     }

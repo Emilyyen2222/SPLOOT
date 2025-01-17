@@ -11,9 +11,11 @@
             <div class="introTitle">
                 <h4 class="bold">{{ title }}</h4>
             </div>
-            <div class="overflow">
-                <slot></slot>
-            </div>        
+            <div class="overflowBox">
+                <div class="overflow">
+                    <slot></slot>
+                </div>        
+            </div>
         </div>
     </div>
     
