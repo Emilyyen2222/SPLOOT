@@ -37,7 +37,7 @@ const routes = [
     component: () => import('@/pages/matchView.vue'),
     meta: {
       title: '認識毛毛友 | Match',
-      theme: 'purple',
+      theme: 'red',
       bodyBg: 'purple-1',
     }
   },

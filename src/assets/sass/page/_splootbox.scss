@@ -1,6 +1,7 @@
  body{
     background-color: map-get($colors, pink-0);
     position: relative;
+    overflow-x: hidden;
 } 
 .herobox{
     background-color: map-get($colors, pink-2);
@@ -14,6 +15,7 @@
     max-width: 68.3rem;
     background-color: map-get($colors, pink-2);
     .img {
+        width: 400px;
         @include md(){
             display: none;
         }
@@ -29,6 +31,7 @@
             width: 22.4rem;
             margin: 0 auto;
         }
+        
     }
 }
 .bigTitle{
