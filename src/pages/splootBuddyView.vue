@@ -86,10 +86,10 @@
     <!-- 任務牆 -->
     <div class="bottomSection">
         <ul class="buddyCard">
-            <li class="buddyCards">
-                <img src="@/assets/img/pet-friendly/cards7.png" alt="" class="cardsImg">
+            <li class="buddyCards" v-for="(card,index) in cardsData" :key="index">
+                <img :src="card.imgSrc" alt="" class="cardsImg">
                 <div class="cardText">
-                    <h6 class="cardsTitle bold">快速散步去</h6>
+                    <h6 class="cardsTitle bold">{{ card.title }}</h6>
                     <div class="reviews">
                         <ul class="stars">
                             <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
@@ -101,8 +101,11 @@
                         <div class="avgGrade smallText">4.5</div>
                         <div class="commentCount smallText">(3)</div>
                     </div>
-                    <div class="serviceTime smallText">服務時段：週一至週五 09:00-18:00</div>                
-                    <Btn btnStyle="blue small">查看</Btn>                
+                    <div class="serviceTime smallText">服務時段：{{ card.serviceDaysStart }}至{{ card.serviceDaysEnd }} {{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div>                
+                    <Router-link  to="/sploot-buddy/buddy-post">
+                        <Btn btnStyle="blue small">查看</Btn>  
+                    </Router-link>
+
                 </div>
             </li>
         </ul>
@@ -253,6 +256,41 @@
             },
         ]
     };
+
+    const cardsData = ref([
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        }, 
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+    ])
 
  //燈箱狀態
 let isLightBox = ref(false);

@@ -24,7 +24,7 @@ const routes = [
     }
   },
   {
-    path: '/question',
+    path: '/sploot-box/question',
     component: () => import('@/pages/questionView.vue'),
     meta: {
       title: '訂閱寵物盒 | Sploot',
@@ -51,8 +51,8 @@ const routes = [
     }
   },
   {
-    path: '/sploot-calendar',
-    component: () => import('@/pages/petCalendarView.vue'),
+    path: '/sploot-event',
+    component: () => import('@/pages/eventView.vue'),
     meta: {
       title: '毛孩日曆 | Sploot',
       theme: 'blue',
@@ -60,12 +60,21 @@ const routes = [
     }
   },
   {
-    path: '/sploot-friendly',
+    path: '/sploot-pet-friendly',
     component: () => import('@/pages/petFriendlyView.vue'),
     meta: {
       title: '友善設施 | Sploot',
       theme: 'blue',
       bodyBg: 'blue-1',
+    }
+  },
+  {
+    path: '/sploot-buddy/buddy-post',
+    component: () => import('@/pages/buddyPostView.vue'),
+    meta: {
+      title: '尋找小幫手 | Sploot',
+      theme: 'blue',
+      bodyBg: 'blueberry-0',
     }
   },
   

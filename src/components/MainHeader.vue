@@ -19,8 +19,8 @@
                     { name: '認識新毛友', link: '/match'},
                     { name: '訂閱寵物盒', link: '/sploot-box'},
                     { name: '尋找小幫手', link: '/sploot-buddy'},
-                    { name: '毛孩日曆', link: '/sploot-calendar'},
-                    { name: '友善設施', link: '/sploot-friendly'},
+                    { name: '毛孩日曆', link: '/sploot-event'},
+                    { name: '友善設施', link: '/sploot-pet-friendly'},
                 ]" :key="index">
 
                     <RouterLink :to="item.link" 
