@@ -1,12 +1,12 @@
 <!-- Sam -->
 <template>
-    <header :class="[themes[props.theme].header,`bg-${props.bgc}`]">
+    <header :class="[`bg-${props.bgc}`]">
         <nav>
             <div class="navHamburger"
                 :class="{'-navFocus': isNavFocus}"
                 @click="toggleNav">
-                <div class="line" :class="themes[props.theme].bg"></div>
-                <div class="line" :class="themes[props.theme].bg"></div>
+                <div class="line"></div>
+                <div class="line"></div>
             </div>
             <div class="logo">
                 <RouterLink to="/">
@@ -23,24 +23,25 @@
                     { name: '友善設施', link: '/sploot-pet-friendly'},
                 ]" :key="index">
 
-                    <RouterLink :to="item.link" 
-                    :class="themes[props.theme].color">{{ item.name }}</RouterLink>
+                    <RouterLink :to="item.link">{{ item.name }}</RouterLink>
                 </li>
             </ul>
-            <div class="btnBox loginBox">
-                <div :class="themes[props.theme].loginBtn"><span>登入</span></div>
-            </div>
+            <Btn class="loginBox" btnStyle="primary small">登入</Btn>
         </nav>
     </header>
 </template>
   
 <script setup>
     import { ref, defineProps, reactive } from 'vue';
+    import { useRoute } from 'vue-router';
+    
+    import Btn from './Btn.vue';
 
+    const route = useRoute();
     const props = defineProps({
         theme: {
             type: String,
-            required: true,
+            default: '',
         },
         bgc: {
             type: String,
@@ -50,17 +51,9 @@
 
     const themes = {
         red: {
-            header: 'redTheme',
-            bg: 'bg-red',
-            color: 'text-red',
-            loginBtn: 'btn primary small',
             logoUrl: new URL('@/assets/img/header-red.svg', import.meta.url).href,
         },
         blue: {
-            header: 'blueTheme',
-            bg: 'bg-blue',
-            color: 'text-blue',
-            loginBtn: 'btn blue small',
             logoUrl: new URL('@/assets/img/header-blue.svg', import.meta.url).href,
         },
     }

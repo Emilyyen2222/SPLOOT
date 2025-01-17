@@ -1,125 +1,122 @@
-$headerThemes: (
-    red: red,
-    blue: blue,
-);
-@each $theme, $value in $headerThemes {
-    header.#{$theme}Theme{
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        
-        width: 100%;
-        margin-bottom: 24px;
-        
-        nav{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        
+// $headerThemes: (red ,blue);
+@each $theme in $themes {
+    body.#{$theme}Theme{
+        header{
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            
             width: 100%;
-            max-width: 1512px;
-            height: 6.4rem;
-            padding: 1.6rem 4.8rem;
-            margin: 0 auto;
-        
-            @include md(){
-                padding: 1.2rem 1.6rem;
-            }
-        
-            .navHamburger{
-                display: none;
-        
-                @include md(){
-                    cursor: pointer;
-                    
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: .8rem;
-        
-                    width: 8rem;
-                    .line{
-                        width: 2.4rem;
-                        height: 3px;
-                        transition: all .3s ease;
-                    }  
-                    
-                    &.-navFocus{
-                        .line:first-child{
-                            transform: translateY(.55rem) rotate(45deg);
-                            transition: transform .3s ease;
-                        }
-                        .line:last-child{
-                            transform: translateY(-.55rem) rotate(-45deg);
-                            transition: transform .3s ease;
-                        }
-                    }
-                }
-            }
-        
-            .logo{
-                width: 8rem;
-                img{ width: 6.4rem; }
-        
-                @include md(){
-                    width: 5.4rem;
-                    img{ width: 100%; }
-                }
-            }
-        
-            .headerList{
-                @include textStyle(smallText);
+            margin-bottom: 24px;
+            
+            nav{
                 display: flex;
-                gap: 2.4rem;
-        
-                @include md(){ display: none; }
-        
-                a{
-                    display: block;
-                    height: 4.8rem;
-                    line-height: 4.8rem;  
-                    
-                    &::after{
-                        content: "";
-                        bottom: 0;
-                        left: 0;
-                        
-                        display: block;
-                        width: 0;
-                        border: 1px solid map-get($colors, $value);
-        
-                        opacity: 0;
-                        visibility: hidden;
-                        transition: all .5s;
-                    }
-                    &:hover::after{
-                        width: 100%;
-                        opacity: 1;
-                        visibility: visible;
-                    }
-                }
-                
-            }
-        
-            .loginBox{
-                width: 8rem;
-
+                align-items: center;
+                justify-content: space-between;
+            
+                width: 100%;
+                max-width: 1512px;
+                height: 6.4rem;
+                padding: 1.6rem 4.8rem;
+                margin: 0 auto;
+            
                 @include md(){
-                    .btn.blue.small{
-                        background-color: transparent;
-                        color: map-get($colors, blue);
+                    padding: 1.2rem 1.6rem;
+                }
+            
+                .navHamburger{
+                    display: none;
+            
+                    @include md(){
+                        cursor: pointer;
+                        
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: .8rem;
+            
+                        width: 8rem;
+                        .line{
+                            width: 2.4rem;
+                            height: 3px;
 
-                        span::after{ background-color: map-get($colors, blue); }
+                            background-color: map-get($colors, $theme);
+                            transition: all .3s ease;
+                        }  
+                        
+                        &.-navFocus{
+                            .line:first-child{
+                                transform: translateY(.55rem) rotate(45deg);
+                                transition: transform .3s ease;
+                            }
+                            .line:last-child{
+                                transform: translateY(-.55rem) rotate(-45deg);
+                                transition: transform .3s ease;
+                            }
+                        }
                     }
-                    .btn.primary.small{
-                        background-color: transparent;
-                        color: map-get($colors, red);
-
-                        span::after{ background-color: map-get($colors, red); }
+                }
+            
+                .logo{
+                    width: 8rem;
+                    img{ width: 6.4rem; }
+            
+                    @include md(){
+                        width: 5.4rem;
+                        img{ width: 100%; }
                     }
+                }
+            
+                .headerList{
+                    @include textStyle(smallText);
+                    display: flex;
+                    gap: 2.4rem;
+            
+                    @include md(){ display: none; }
+            
+                    a{
+                        display: block;
+                        height: 4.8rem;
 
+                        color: map-get($colors, $theme);
+                        line-height: 4.8rem;  
+                        
+                        &::after{
+                            content: "";
+                            bottom: 0;
+                            left: 0;
+                            
+                            display: block;
+                            width: 0;
+                            border: 1px solid map-get($colors, $theme);
+            
+                            opacity: 0;
+                            visibility: hidden;
+                            transition: all .5s;
+                        }
+                        &:hover::after{
+                            width: 100%;
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+                    
+                }
+            
+                .loginBox{
+                    width: 8rem;
+    
+                    @include md(){
+                        .btn.primary.small{
+                            background-color: transparent;
+                            color: map-get($colors, $theme);
+    
+                            span::after{ background-color: map-get($colors, $theme); }
+                        }
+    
+                    }
                 }
             }
-        }
-    }   
+        }   
+    }
 }
