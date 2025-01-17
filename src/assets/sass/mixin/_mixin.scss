@@ -47,8 +47,8 @@
 // Bayon字體
 @mixin bayon($fz){
     font-family: $bayon;
-    font-size: ($fz / 10)+ rem;
-    line-height: ($fz / 9)+ rem;
+    font-size: calc($fz / 10)+ rem;
+    line-height: calc($fz * 0.9 / 10)+ rem;
 }
 
 .bigText{ @include textStyle(bigText); }
@@ -62,6 +62,80 @@ p{ @include textStyle(p); }
 .smallText{ @include textStyle(smallText); }
 .xsText{ @include textStyle(xsText); }
 .bold{ font-weight: $fontWeight-bold; }
+
+
+// -------- btnSettings --------
+@mixin btnBasic($size){
+    @if($size == large){
+        @include textStyle(h6);
+        height: 4.8rem;
+        padding: .8rem 1.6rem;
+    }@else if($size == default){
+        @include textStyle(p);
+        height: 4rem;
+        padding: .8rem 1.6rem;
+    }@else if($size == small){
+        @include textStyle(smallText);
+        height: 3rem;
+        padding: .4rem 1.6rem;
+    }
+
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    border-radius: 100px;
+    text-align: center;
+    transition: width .3s ease;
+
+    span { display: inline-block; }
+}
+@mixin btnHover($size, $c){
+    $t: 0;
+    $circle: 0;
+    @if($size == large){
+        $circle: 8px;
+        $t: 1.6rem;
+    }@else if($size == default){
+        $circle: 4px;
+        $t: .8rem;
+    }@else if($size == small){
+        $circle: 3px;
+        $t: .6rem;
+    }
+
+    width: calc(100% - $t);
+    color: map-get($colors, $c);
+
+    span{ 
+        position: relative;
+        transition: all .3s ease;
+        &::after{ 
+            content: "";
+            position: absolute;
+            top: calc(50% - $circle /2);
+            right: -$t;
+            
+            width: $circle;
+            height: $circle;
+            border-radius: 50%;
+            background-color: map-get($colors, $c); 
+
+            opacity: 0;
+            transition: all .3s ease; 
+        }
+    }
+
+    &:hover{
+        width: 100%;
+        span{
+            transform: translateX(-$t / 2);
+            &::after{ opacity: 1; }
+        }
+    }
+}
 
 // -------- Background Circle --------
 @mixin circle($bgc) { 
