@@ -1,7 +1,7 @@
 <!-- Sam -->
 <template>
   <div class="dropdownBox">
-    <div class="dropdown-menu" ref="dropdownMenu"
+    <div class="dropdown-menu" :class="props.size" ref="dropdownMenu"
       @click="toggleDropdown">
       <div class="dropdownBtn">
           <span>{{ placeHolder }}</span>
@@ -28,6 +28,10 @@
   const route = useRoute();
 
   const props = defineProps({
+      size: {
+        type: String,
+        default: 'default',
+      },
       placeHolder: {
           type: String,
           required: true,
