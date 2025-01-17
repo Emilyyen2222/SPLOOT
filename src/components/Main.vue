@@ -12,5 +12,3 @@ import MainHeader from './MainHeader.vue';
 
 const route = useRoute();
 </script>
-
-<style lang="scss" scoped></style>
