@@ -7,8 +7,7 @@
         <div class="herobtn">
             <h4 class="bold">聖誕禮盒來囉!</h4>
             <div class="btnBox">
-                <RouterLink to="/question">
-                    <!-- <span>訂閱SPLOOT BOX</span> -->
+                <RouterLink to="/sploot-box/question">
                     <Btn btnStyle="primary large">訂閱SPLOOT BOX</Btn>
                 </RouterLink>
             </div>
