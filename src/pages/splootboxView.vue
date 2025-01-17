@@ -7,12 +7,13 @@
         <div class="herobtn">
             <h4 class="bold">聖誕禮盒來囉!</h4>
             <div class="btnBox">
-                <RouterLink to="/question" class="btn primary large">
-                    <span>訂閱SPLOOT BOX</span>
+                <RouterLink to="/question">
+                    <!-- <span>訂閱SPLOOT BOX</span> -->
+                    <Btn btnStyle="primary large">訂閱SPLOOT BOX</Btn>
                 </RouterLink>
             </div>
         </div>
-        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="" style="width: 400px">
+        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="">
     </div>
 </div>
 <!-- SPLOOT BOX大字區塊 -->
@@ -109,8 +110,8 @@
         <!-- 立即訂閱按鈕 -->
         <div class="howitworksbtn">
             <div class="btnBox">
-                <RouterLink to="/question" class="btn primary large">
-                    <span>立即訂閱</span>
+                <RouterLink to="/question">
+                    <Btn btnStyle="primary large">立即訂閱</Btn>
                 </RouterLink>
             </div>
         </div>
