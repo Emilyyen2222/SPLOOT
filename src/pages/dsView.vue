@@ -59,6 +59,8 @@
             <DropdownQa question="這裡是問題" answer="這裡是回答"></DropdownQa>
             <h6>DropdownMenu</h6>
             <DropdownMenu :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
+            <h6>DropdownMenu (size="large")</h6>
+            <DropdownMenu size="large" :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
         </div>
     </section>
 

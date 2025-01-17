@@ -83,6 +83,13 @@
             @include dropdownBasic(menu);
             @include textStyle(p);
             border: 1px solid map-get($colors, natural-1);
+
+            &.large{
+                @include textStyle(p);
+            }
+            &.default{
+                @include textStyle(smallText);
+            }
         
             .dropdownBtn{
                 display: flex;
