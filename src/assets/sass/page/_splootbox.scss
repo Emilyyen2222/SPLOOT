@@ -3,37 +3,48 @@
     position: relative;
     overflow-x: hidden;
 } 
-.herobox{
-    background-color: map-get($colors, pink-2);
-}   
-.heroSection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    height: 56rem;
-    max-width: 68.3rem;
-    background-color: map-get($colors, pink-2);
+.herobox {
+    position: relative;
+    width: 100%; 
+    height: 56rem; 
+    // background-color: transparent;
+    @include md(){
+        // background-color: map-get($colors, pink-2);
+    }
+    // overflow: hidden;
     .img {
-        width: 400px;
-        @include md(){
-            display: none;
-        }
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      position: absolute;
+      z-index: -5;
+      @include md(){
+        // display: none;
+      }
     }
     .herobtn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 3.1rem;
-        color: map-get($colors, red);  
-        .btnBox{
-            width: 22.4rem;
-            margin: 0 auto;
+      position: absolute;
+      top: 50%; 
+      left: 30%; 
+      transform: translate(-50%, -50%); 
+      z-index: 5; 
+      text-align: center;
+      @include lg(){
+        left: 50%;
+      }
+      h4.bold {
+        color: map-get($colors, beige);
+        @include md(){
+            // color: map-get($colors, red);  
         }
-        
+      }
+      .btnBox {
+        margin-top: 10px;
+        width: 22rem;
+      }
     }
-}
+  }
+//   SPLOOT BOX大字區塊
 .bigTitle{
     display: flex;
     justify-content: center;
@@ -136,7 +147,6 @@
     top: 67%; 
     left: 50%;
 }
-
 // 如何訂閱區塊
 .howitworks {
     display: flex;
@@ -244,9 +254,7 @@
             @include bayon(64);
         }
     }
-    
 }
-
 // 訂閱電子報
 .news {
     display: flex;
@@ -264,11 +272,7 @@
         align-items: stretch;
         gap: 1rem;
     }
-
 }
-
-
-
 // FAQ區塊
 .faqWrapper {
     display: flex;
@@ -276,7 +280,6 @@
     justify-content: center;
     align-items: center;
     background-color: map-get($colors, pink-1);
-    
     @include bayon(100);
     width: 100%;
     margin: 0 auto;

@@ -1,20 +1,19 @@
 <template>
-<MainHeader theme="red" bgc="pink-0"></MainHeader>
+<MainHeader theme="red" bgc="pink-0" style="margin-bottom: 0;"></MainHeader>
  
 <!--- heroSection -->
 <div class="herobox">
-    <div class="heroSection">
-        <div class="herobtn">
-            <h4 class="bold">聖誕禮盒來囉!</h4>
-            <div class="btnBox">
-                <RouterLink to="/sploot-box/question">
-                    <Btn btnStyle="primary large">訂閱SPLOOT BOX</Btn>
-                </RouterLink>
-            </div>
+    <img class="img" src="@/assets/img/splootbox/splootboxmain.jpg" alt="">
+    <div class="herobtn">
+        <h4 class="bold">聖誕禮盒來囉!</h4>
+        <div class="btnBox">
+            <RouterLink to="/sploot-box/question">
+                <Btn btnStyle="white large">訂閱SPLOOT BOX</Btn>
+            </RouterLink>
         </div>
-        <img class="img" src="@/assets/img/splootbox/IMG_7913.png" alt="">
     </div>
 </div>
+
 <!-- SPLOOT BOX大字區塊 -->
 <div class="bigTitle">
     <div class="boxTitle"> 
@@ -40,7 +39,7 @@
             <p class="default">100%純肉製作，無人工添加，營養滿分，美味安心</p>
         </div>
         <div class="img boxImage">
-            <img src="@/assets/img/splootbox/splootbbox2.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
         </div>
     </div>
     <div class="boxDivider"></div>
