@@ -5,10 +5,20 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: '/',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/pages/homeView.vue'),
     meta: {
       title: 'Sploot',
       theme: 'red',
+      bodyBg: 'yellow-1',
+      bodyId: 'home',
+    }
+  },
+  {
+    path: '/ds',
+    component: () => import('@/pages/dsView.vue'),
+    meta: {
+      title: '元件庫 | Sploot',
+      theme: 'blue',
       bodyBg: 'yellow-1',
       bodyId: 'ds', // 有需要才加
       textColor: 'brown' //有需要才加
@@ -90,10 +100,10 @@ router.beforeEach((to, from, next) => {
 
   if(to.meta.theme == 'red'){
     iconLink.href = new URL('@/assets/img/header-red.svg', import.meta.url).href;
-    bodyClass += ` text-brown`;
+    bodyClass += ` redTheme`;
   }else if(to.meta.theme == 'blue'){
     iconLink.href = new URL('@/assets/img/header-blue.svg', import.meta.url).href;
-    bodyClass += ` text-blue`;
+    bodyClass += ` blueTheme`;
   }
 
   document.body.classList = bodyClass
