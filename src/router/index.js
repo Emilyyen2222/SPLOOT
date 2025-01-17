@@ -87,6 +87,15 @@ const routes = [
       bodyBg: 'blueberry-0',
     }
   },
+  {
+    path: '/member-center',
+    component: () => import('@/pages/memberCenter.vue'),
+    meta: {
+      title: '尋找小幫手 | Sploot',
+      theme: 'blue',
+      bodyBg: 'blueberry-0',
+    }
+  },
   
 ];
 

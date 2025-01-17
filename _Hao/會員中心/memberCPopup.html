@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../../haostyle/haocss/_memberCenter.css">
+
+</head>
+
+<body class="bg-">
+    <!-- header -->
+    <header>
+        <div class="navHamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+
+        <div class="logo">
+            <a href="./index.html">
+                <img src="../src/assets/img/header-red.svg" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul class="headerList">
+                <li class="headerItem"><a href="#">認識新毛友</a></li>
+                <li class="headerItem"><a href="#">訂閱寵物盒</a></li>
+                <li class="headerItem"><a href="#">尋找小幫手</a></li>
+                <li class="headerItem"><a href="#">毛孩日曆</a></li>
+                <li class="headerItem"><a href="#">友善設施</a></li>
+            </ul>
+        </nav>
+        <div class="loginBox">
+            <div class="btn primary small red">登入</div>
+        </div>
+    </header>
+    <!-- 主內容從下方開始 -->
+
+    <main class="memberCenter">
+
+        <!-- top nav -->
+        <div class="topNav">
+            <!-- msg & avatar -->
+            <div class="msg-n-avatar">
+                <!-- avatar -->
+                <div class="avatar"></div>
+                <!-- msg -->
+                <div class="msg-welcome">
+                    <h2>嗨! <span id="msgUsername">username</span> 歡迎回來</h2>
+                </div>
+            </div>
+            <!-- mc nav -->
+            <nav>
+                <ul>
+                    <li>
+                        <i></i>
+                        <p>會員資料</p>
+                    </li>
+                    <li>
+                        <i></i>
+                        <p>寵物盒訂閱紀錄</p>
+                    </li>
+                    <li>
+                        <i></i>
+                        <p>配對喜好設定</p>
+                    </li>
+                    <li>
+                        <i></i>
+                        <p>寵物資訊卡</p>
+                        <ol class="none">
+                            <li>
+                                <i></i>
+                                <p>建立寵物資訊卡</p>
+                            </li>
+                            <li>
+                                <i></i>
+                                <p>寵物資訊卡一覽</p>
+                            </li>
+                        </ol>
+                    </li>
+                    <li>
+                        <i></i>
+                        <p>小幫手中心</p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- main content -->
+        <section class="memberInfo"> <!-- 區塊更新 -->
+
+            <!-- memberInfo update, popup 第一區塊的彈窗-->
+            <section class="memberInfo-update">
+                <!-- 用 Routerlink -->
+
+                <!-- close元件 -->
+                <button class="close"></button>
+
+                <div class="popup-basicInfo">
+                    <h2 class="popup-title">會員資料</h2>
+                    <!-- 頭像 -->
+                    <div class="avatars">
+                        <ul>
+                            <li>
+                                <div class="avatar"> <!-- 頭相框 -->
+                                    <img src="" alt="avatar"> <!-- 放頭像用 -->
+                                </div>
+                                <p>小白</p>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <img src="" alt="avatar">
+                                </div>
+                                <p>小白</p>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <img src="" alt="avatar">
+                                </div>
+                                <p>小白</p>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <img src="" alt="avatar">
+                                </div>
+                                <p>小白</p>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <img src="" alt="avatar">
+                                </div>
+                                <p>小白</p>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <img src="" alt="avatar">
+                                </div>
+                                <p>小白</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 基本資料 -->
+                    <div class="card basicInfo">
+                        <div class="card-title">
+                            <h2>基本資料</h2>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="card-content">
+                            <div class="input-group">
+                                <label for="name">姓名</label>
+                                <input type="text" class="" name="name" id="name">
+                            </div>
+                            <div class="input-group">
+                                <label for="nickname">暱稱</label>
+                                <input type="text" class="" name="nickname" id="nickname">
+                            </div>
+                            <div class="input-group">
+                                <label for="sex">性別</label>
+                                <div class="sex" id="sex">
+                                    <label for="male">
+                                        <input type="radio" class="" name="sex" value="男" id="male">男
+                                    </label>
+                                    <label for="female">
+                                        <input type="radio" class="" name="sex" value="女" id="female">女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="birthday">生日</label>
+                                <div class="select-group">
+                                    <select name="birthday-m" id=""></select>
+                                    <select name="birthday-d" id=""></select>
+                                </div>
+                                <!-- 自訂下拉 -->
+                                <!-- <div class="drop-down" >     
+                                        <div class="birthday-m"></div>
+                                        <div class="birthday-d"></div>
+                                    </div> -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 帳戶 ，改成card布局 -->
+                    <div class="card accountInfo">
+                        <div class="card-title">
+                            <h2>帳戶</h2>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="card-content">
+                            <div class="input-group">
+                                <div class="mc-pu-account">
+                                    <p>帳戶</p>
+                                    <input type="email" name="email" id="">
+                                </div>
+                                <a href="">變更信箱</a>
+                            </div>
+                            <div class="input-group">
+                                <div class="mc-pu-password">
+                                    <p>密碼</p>
+                                    <div id="inputWrapper" class="input-wrapper">
+                                        <input type="password" name="pwd" id="">
+                                        <!-- eye button -->
+                                        <button id="mcEye">E</button>
+                                    </div>
+                                </div>
+                                <a href="">變更密碼</a>
+                            </div>
+                            <div class="input-group account-state">
+                                <p>帳號狀態</p>
+                                <input type="text" placeholder="正常">
+                            </div>
+                            <div class="btn-group">
+                                <button><i></i>Google</button>
+                                <a href="#">解除綁訂</a>
+                            </div>
+                            <div class="btn-group">
+                                <button><i></i>Line</button>
+                                <a href="#">綁訂</a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- 聯絡資料 -->
+                    <div class="card contactInfo">
+                        <div class="card-title">
+                            <h2>聯絡資料</h2>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="card-content">
+                            <div class="input-group">
+                                <p>手機</p>
+                                <input type="text" name="phone">
+                            </div>
+                            <div class="input-group">
+                                <p>聯絡地址</p>
+                                <input type="text" name="address">
+                            </div>
+                            <div class="input-group">
+                                <p>LineID</p>
+                                <div class="lineid-wrapper">
+                                    <input type="text" name="lineId" id="mcPuLineid">
+                                    <p id="lineidnotice">*未提供Line ID 將無法使用 認識新毛友 和 尋找小幫手</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pu-btn-group">
+                        <div>
+                            <button name="save" value="儲存">儲存</button>
+                        </div>
+                        <div>
+                            <button name="cancel" value="取消">取消修改</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+    </main>
+
+
+    <!-- header文字和背景色 -->
+    <script src="../src/assets/js/header.js"></script>
+</body>
+
+</html>

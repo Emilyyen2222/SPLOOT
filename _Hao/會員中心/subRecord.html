@@ -3,81 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscription Record</title>
+    <title>Document</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bayon&family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="../src/assets/css/style.css">
+
 </head>
-<body>
-    
-    <main class="wrapper">
-        <!-- nav -->
-        <section class="nav">
-            <div>
-                <h2>嗨! <span>username</span> 歡迎回來</h2>
-            </div>
-            <nav>
-                
-            </nav>
-        </section>
+<body class="bg-">
+    <!-- header -->
+    <header>
+        <div class="navHamburger">
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
 
-        <!-- main content -->
-        <section class="subRecord">
-            <div class="subRecord-wrapper">
-                <h2>訂閱</h2>
-                <!-- sub present -->
-                <div class="sub-recently">
-                    <h3>當前訂閱</h3>
-                    <div class="slider">
-                        <div class="cards-container">
-                            <div class="card">
-                                <div class="card_title">
-                                    <h3>小白</h3> <!-- 寵物名 -->
+        <div class="logo">
+            <a href="./index.html">
+                <img src="../src/assets/img/logo.svg" alt="Logo">
+            </a>
+        </div>
+        <nav>
+            <ul class="headerList">
+                <li class="headerItem"><a href="#">認識新毛友</a></li>
+                <li class="headerItem"><a href="#">訂閱寵物盒</a></li>
+                <li class="headerItem"><a href="#">尋找小幫手</a></li>
+                <li class="headerItem"><a href="#">毛孩日曆</a></li>
+                <li class="headerItem"><a href="#">友善設施</a></li>
+            </ul>
+        </nav>
+        <div class="loginBox">
+            <button class="login">登入</button>
+        </div>
+    </header>
+<!-- 主內容從下方開始 -->
+  <!-- main content -->
+    <section class="subRecord">
+        <div class="subRecord-wrapper">
+            <h2>訂閱</h2>
+            <!-- sub present -->
+            <div class="sub-recently">
+                <h3>當前訂閱</h3>
+                <div class="slider">
+                    <div class="cards-container">
+                        <div class="card">
+                            <div class="card_title">
+                                <h3>小白</h3> <!-- 寵物名 -->
+                            </div>
+                            <div class="card-content">
+                                <h4>銀卡(三個月)</h4>
+                                <p>結束訂閱日期 : 2025/05/15</p>
+                                <p>地址 : 104台北市中山區南京東路三段219號4F</p>
+                                <div class="cardBtn">
+                                    <button>續約</button>
+                                    <button>更改方案</button>
                                 </div>
-                                <div class="card-content">
-                                    <h4>銀卡(三個月)</h4>
-                                    <p>結束訂閱日期 : 2025/05/15</p>
-                                    <p>地址 : 104台北市中山區南京東路三段219號4F</p>
-                                    <div class="cardBtn">
-                                        <button>續約</button>
-                                        <button>更改方案</button>
-                                    </div>
-                                </div>
-                            </div> <!-- * n -->
-                        </div>
-                    </div>
-                    <div class="total">
-                        <p>訂閱數量 <span>4</span> 個</p>
+                            </div>
+                        </div> <!-- * n -->
                     </div>
                 </div>
-                <!-- 氣質線 -->
-                <div class="line"></div>
-                <!-- history -->
-                <div class="sub-history">
-                    <h3>歷史紀錄</h3>
-                    <div class="table-container">
-                        <table>
-                            <th>
-                                <td>索引</td>
-                                <td>寵物名</td>
-                                <td>體型</td>
-                                <td>方案</td>
-                                <td>時間區間</td>
-                                <td>金額</td>
-                            </th>
-                            <tr>
-                                <td>1</td>
-                                <td>小白</td>
-                                <td>中型犬</td>
-                                <td>銀卡(三個月)</td>
-                                <td>2024/10/15~2024/01/15</td>
-                                <td>$300</td>
-                            </tr> <!-- * n  -->
-                        </table>
-                        
-                    </div>
+                <div class="total">
+                    <p>訂閱數量 <span>4</span> 個</p>
                 </div>
             </div>
-            
-        </section>
-    </main>
-
+            <!-- 氣質線 -->
+            <div class="line"></div>
+            <!-- history -->
+            <div class="sub-history">
+                <h3>歷史紀錄</h3>
+                <div class="table-container">
+                    <table>
+                        <th>
+                            <td>索引</td>
+                            <td>寵物名</td>
+                            <td>體型</td>
+                            <td>方案</td>
+                            <td>時間區間</td>
+                            <td>金額</td>
+                        </th>
+                        <tr>
+                            <td>1</td>
+                            <td>小白</td>
+                            <td>中型犬</td>
+                            <td>銀卡(三個月)</td>
+                            <td>2024/10/15~2024/01/15</td>
+                            <td>$300</td>
+                        </tr> <!-- * n  -->
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </section>
 </body>
 </html>
+
