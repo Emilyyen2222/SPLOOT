@@ -2,12 +2,14 @@
   <div class="inputBox" :class="{'-error': hasError}">
 
     <input 
-    :type="inputType"
+    type="text"
+    :class="textAlign"
     :placeholder="placeHolder"
     :value="modelValue"
     @input="updateValue">
   
-    <p v-if="hasError" class="errorMsg">{{ errorMsg }}</p>
+    <p v-if="hasError" class="errorMsg"
+      :class="textAlign">{{ errorMsg }}</p>
   </div>
 </template>
 
@@ -15,13 +17,9 @@
   import { ref, defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
-    inputType: {
+    textAlign: {
       type: String,
-      default: 'text'
-    },
-    modelValue: {
-      type: String,
-      default: ''
+      default: 'textCenter'
     },
     placeHolder: {
       type: String,
@@ -34,7 +32,11 @@
     hasError: {
       type: Boolean,
       default: false
-    }
+    },
+    modelValue: {
+      type: String,
+      default: ''
+    },
   });
 
   const emit = defineEmits(['update:modelValue']);
