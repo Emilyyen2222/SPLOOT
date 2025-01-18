@@ -2,7 +2,7 @@
 <template>
 
     <div v-if="isLightBox" class="lightBox" :class="{clicked:isLightBox}">
-        <div class="lightBoxContent" :class="bgc" :style="{padding:`${pY}rem ${pX}rem`}">
+        <div class="lightBoxContent" :class="bgc">
             <div class="closeBtnBox">
                 <div class="closeBtn" @click="toggleLightBox">
                     <img src="@/assets/img/icon/close.svg" alt="closeIcon">
@@ -50,15 +50,11 @@
         
     })
   
-
     const emit = defineEmits(['toggle']);
 
     function toggleLightBox() {
     emit('toggle');
     }
- 
-    
-    
  
  </script>
  

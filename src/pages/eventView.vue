@@ -29,7 +29,8 @@
                 <!-- 上右 行程日曆 -->
                 <div class="topRight">
                     <div class="calendar">
-                        <img src="@/assets/img/pet-calendar/ca.png" alt="">
+                        <!-- <img src="@/assets/img/pet-calendar/ca.png" alt=""> -->
+                         <Calendar></Calendar>
                     </div>
                 </div>
         </div>
@@ -93,6 +94,7 @@
     
     import MainHeader from "../components/MainHeader.vue";
     import Btn from '../components/Btn.vue';
+    import Calendar from '../components/calendar.vue';
 
 //data
 const cardsData = ref([

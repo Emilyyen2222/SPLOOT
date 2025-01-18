@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 .wrapper{
     display: flex;
     justify-content: center; 
@@ -250,31 +254,34 @@
         .circle{
             @include circle(#E6EBFF);
             
-            position: fixed;
+            position: absolute;
             left: 50%;
         }
         
         .circle1{
-            top: 848px;
+            top: 929px;
         }
         
         .circle2{
-            top: 2088px;
+            top: 2169px;
         }
     }
 }
 
 //燈箱內容
     .buddyIntroduction{
-        padding: 0 4.8rem 4.8rem;
         background-color: map-get($colors, beige);
         border-radius: 16px;
+
+        .littleTitle{
+            margin: 2.4rem 0;
+
+            text-align: center;
+        }
 
         .introSectionBox{
             display: flex;
             gap: 2.4rem;
-
-            margin-top: 2.4rem;
 
             .introSection{
                 display: flex;
@@ -292,15 +299,8 @@
                 }
             }
         }
-
-        .middleText{
-            text-align: center;
-
-            margin-top: 4rem;
-        }
-
     }
     .introBtn{
-        width: 90%;
+        width: 100%;
         margin: 24px auto 0;
     }
