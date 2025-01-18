@@ -1,5 +1,5 @@
 <template>
-<MainHeader theme="red" bgc="pink-0" style="margin-bottom: 0;"></MainHeader>
+<MainHeader theme="red" bgc="pink-0"></MainHeader>
  
 <!--- heroSection -->
 <div class="herobox">
@@ -32,7 +32,6 @@
             <p class="default">簡單實用，清潔護理一步到位，呵護毛孩健康</p>
         </div>
     </div>
-    <div class="boxDivider"></div>
     <div class="boxSection">
         <div class="text boxText">
             <h4 class="bold">原肉鮮零食</h4>
@@ -192,8 +191,8 @@
                 </div>
                 <div class="newsButton">
                     <div class="btnBox">
-                        <RouterLink to="/question" class="btn primary large">
-                            <span>訂閱電子報</span>
+                        <RouterLink to="/question">
+                            <Btn btnStyle="primary large">訂閱電子報</Btn>
                         </RouterLink>
                     </div>
                 </div>
