@@ -4,6 +4,6 @@
     @include circle(map-get($colors, purple-2));
     z-index: -20;
     position: fixed;
-    bottom: 0;
+    top:96%; 
     left: 50%;
 }

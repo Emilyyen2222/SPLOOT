@@ -2,7 +2,7 @@
 <MainHeader theme="red" bgc=""></MainHeader>
 
 <!------------------------ question 1---------------------->
-<div class="box">
+<div class="box firstBox">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩叫什麼名字？</h4>
         <div v-show="true" class="options">
@@ -64,7 +64,7 @@
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是什麼品種？</h4>
         <div class="options">
-            <DropdownMenu
+            <DropdownMenu size="large"
                 :placeHolder="menus.menu1.placeHolder" 
                 :options="menus.menu1.options">
             </DropdownMenu>
@@ -81,19 +81,19 @@
             <div class="smallText">領養的日期也可以喔！<br> 我們希望可以幫您的毛孩一起慶祝這特別的日子！</div>
                 <div class="birthday">
                     <div class="year">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.year.placeHolder"
                         :options="menus.year.options">
                         </DropdownMenu>
                     </div>
                     <div class="month">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.month.placeHolder"
                         :options="menus.month.options">
                         </DropdownMenu>
                     </div>
                     <div class="date">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.day.placeHolder"
                         :options="menus.day.options">
                         </DropdownMenu> 
@@ -104,7 +104,7 @@
         <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
     </div>
 </div>
-   <!-- Question 5 -->
+<!-- Question 5 -->
 <div class="box">
     <div class="questionContainer">
         <h4 class="title bold">請輸入您的Email</h4>
@@ -116,7 +116,7 @@
             </div>
             <div class="quickLogin">
                 <div class="">已經有帳號？</div>
-                <Btn class="check" btnStyle="btn text small">查看</Btn>
+                <Btn class="check" btnStyle="baseline small">查看</Btn>
             </div>
         </div>
         <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
@@ -127,7 +127,6 @@
 <div class="boxSub">
     <div class="questionContainer">
         <h4 class="title bold">為您的毛孩選擇一個方案等級</h4>
-        <!-- <div class="options"></div> -->
         <div class="container">
                 <div class="card">
                     <div class="content">
@@ -193,7 +192,76 @@
         </div> 
     </div>
 </div>
-<!---question 7---->
+<!-- Question7 -->
+<div class="boxSub">
+    <div class="questionContainer">
+        <h4 class="title bold">為您的毛孩選擇一個方案等級</h4>
+        <div class="container">
+                <div class="card">
+                    <div class="content">
+                        <h6 class="title">銀卡</h6>
+                        <div class="boxDivider"></div>
+                        <ul class="planItems">
+                            <li class="smallText">精選功能玩具 x1</li>
+                            <li class="smallText">天然原肉零食 x1</li>
+                            <li class="smallText">必備日用品<span class="xsText">（如便攜式飲水器或小型毛巾）</span></li>
+                        </ul>
+                        <ul class="planText">
+                            <li class="smallText">適合對象：</li>
+                            <li class="smallText">初次體驗者，讓毛孩嘗試 Sploot Box 的基本樂趣！</li>
+                        </ul>
+                    </div>
+                    <div class="image">
+                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="content">
+                        <h6 class="title">金卡</h6>
+                        <div class="boxDivider"></div>
+                        <ul class="planItems">
+                            <li class="smallText">高互動功能玩具 x2</li>
+                            <li class="smallText">原肉健康零食 x2</li>
+                            <li class="smallText">必備日用品<span class="xsText">（如寵物洗毛精、耳朵清潔用品）</span></li>
+                            <li class="smallText">免費加入會員獨享活動資格</li>
+                        </ul>
+                        <ul class="planText">
+                            <li class="smallText">適合對象：</li>
+                            <li class="smallText">需要更多寵物用品、愛好玩具的活潑毛孩！</li>
+                        </ul>
+                    </div>
+                    <div class="image">
+                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                    </div>
+                </div>
+                <div class="card popular">
+                    <div class="content">
+                        <h6 class="title">白金卡</h6>
+                        <div class="boxDivider"></div>
+                        <ul class="planItems">
+                            <li class="smallText">全套高互動玩具 x3</li>
+                            <li class="smallText">豪華版原肉零食組 x3</li>
+                            <li class="smallText">高級寵物日用品<span class="xsText">如牙膏牙刷組、耳護清潔液）</span></li>
+                            <li class="smallText">獨家驚喜禮物 x1</li>
+                            <li class="smallText red">專屬服務：免費諮詢小幫手專區</li>
+                        </ul>
+                        <ul class="planText">
+                            <li class="smallText">適合對象：</li>
+                            <li class="smallText">追求全方位照護及豐富體驗的毛孩與飼主！</li>
+                        </ul>
+                    </div>
+                    <div class="image">
+                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                    </div>
+                </div>
+            </div>
+        <div class="subBtn">
+            <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
+            <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        </div> 
+    </div>
+</div>
+<!---question 8---->
 <div class="box">
     <div class="questionContainer">
         <h4 class="title bold">選擇付款與運送方式</h4>
@@ -201,21 +269,21 @@
                 <div class="ship">
                     <div class="xsText left">收貨地點</div>
                     <div class="year">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.country.placeHolder"
                         :options="menus.country.options">
                         </DropdownMenu>
                     </div>
                     <div class="xsText left">取貨方式</div>
                     <div class="month">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.shipPlace.placeHolder"
                         :options="menus.shipPlace.options">
                         </DropdownMenu>
                     </div>
                     <div class="xsText left">付款方式</div>
                     <div class="date">
-                        <DropdownMenu
+                        <DropdownMenu size="large"
                         :placeHolder="menus.payment.placeHolder"
                         :options="menus.payment.options">
                         </DropdownMenu> 
@@ -226,6 +294,100 @@
         <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
         <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
     </div>
+</div>
+<!-- Question 9 -->
+<div class="boxPayment">
+    <div class="questionContainer">
+        <h4 class="title bold">完成購買程序</h4>
+        <div class="options">
+            <div class="paymentBox">
+                <div class="textBox">
+                    <p>SPLOOT BOX 三個月方案 - 白金卡(Platinum)</p> 
+                    <p>$3,597</p> 
+                </div>
+                <div class="boxDivider"></div>
+                <div class="textBox">
+                    <p>月費</p> 
+                    <p>$3,597</p> 
+                </div>
+                <div class="boxDivider"></div>
+                <div class="textBox">
+                    <p>今日應付金額</p> 
+                    <p>$3,597</p> 
+                </div>
+            </div>
+            <div class="infoBox">
+                <div class="xsText left">信用卡付款</div>
+                <InputText textAlign = "textLeft" placeHolder="卡號" errorMsg="Invalid Input" 
+                v-model="inputValue" :hasError="inputError">
+                </InputText>
+                <InputText textAlign = "textLeft" placeHolder="持卡人姓名" errorMsg="Invalid Input" 
+                v-model="inputValue" :hasError="inputError">
+                </InputText>
+                <div class="cardInfo">
+                    <div class="info">
+                        <DropdownMenu size=""
+                        :placeHolder="menus.visaYear.placeHolder"
+                        :options="menus.visaYear.options">
+                        </DropdownMenu>
+                    </div>
+                    <div class="info">
+                        <DropdownMenu size=""
+                        :placeHolder="menus.visaMonth.placeHolder"
+                        :options="menus.visaMonth.options">
+                        </DropdownMenu>
+                    </div>
+                    <div class="info">
+                    <InputText textAlign = "textLeft" placeHolder="安全碼" errorMsg="Invalid Input" 
+                    v-model="inputValue" :hasError="inputError">
+                    </InputText>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <ul class="planItems">
+                <li class="xsText">SHOPLINE將會使用本次交易資訊作為後續定期扣款，點擊提交即同意 《SHOPLINE Payments 支付服務條款》及《SHOPLINE Payments 隱私權政策》。</li>
+                <li class="xsText">本金流服務由 SHOPLINE Payments 提供，通過 PCI-DSS 國際信用卡組織最高等級認證，提供安全的交易服務，支援國內外信用卡刷卡。</li>
+            </ul>
+
+            <li class="checkBox">
+                <div class="boxAlign">
+                    <input type="checkbox">
+                    <p class="xsText">
+                        我同意 
+                        <a href="" class="link">網站服務條款</a> 及 
+                        <a href="" class="link">隱私權政策</a>
+                    </p>
+                </div>
+                <div class="boxAlign">
+                    <input type="checkbox">
+                    <p class="xsText">我同意成為 SPLOOT 的會員</p>
+                </div>
+                <div class="boxAlign">
+                    <input type="checkbox">
+                    <p class="xsText">我願意接收 SPLOOT 的最新消息、優惠及服務推廣相關資訊</p>
+                </div>
+            </li>
+        <Btn btnType="form" btnStyle="nextQ">開始訂閱SPLOOT BOX</Btn>   
+    </div>
+</div>
+<!-- Question 10 -->
+<div class="boxFinish">
+        <div class="finishBox">
+            <h4 class="title bold">感謝您的訂閱</h4>
+            <div class="">
+                <p>您已成功訂閱SPLOOT BOX 白金卡(Platinum)三個月方案 </p>
+                <Btn class="padding" btnType="form" btnStyle="nextQ">回到首頁</Btn>  
+            </div>
+        </div>
+</div>
+<div class="boxFinish">
+        <div class="finishBox">
+            <h4 class="title bold">感謝您的訂閱</h4>
+            <p>您已成功訂閱SPLOOT BOX 白金卡(Platinum)三個月方案</p>
+            <p>請至信箱查閱訂單詳情</p>
+            <Btn class="padding top" btnType="form" btnStyle="nextQ">回到首頁</Btn>
+        </div>
 </div>
 
 <!-- circle bg -->
@@ -320,6 +482,20 @@ payment: {
     { id: 2, name: '澳門' },
   ],
 },
+visaYear: {
+    placeHolder: '年份',
+    options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+      id: i,
+      name: `${2025 - i} 年`,
+    })),
+  },
+visaMonth: {
+    placeHolder: '月份',
+    options: Array.from({ length: 12 }, (_, i) => ({
+      id: i + 1,
+      name: `${i + 1} 月`,
+    })),
+  },
 };
 
 
