@@ -32,12 +32,12 @@
             default:'#FFFEFA',
         },
         pX: {
-        type: [Number, String],
-        required: true
-          },
+            type: [Number, String],
+            required: true
+        },
         pY: {
-        type: [Number, String],
-        required: true
+            type: [Number, String],
+            required: true
         },
         isLightBox: {
             type: Boolean,

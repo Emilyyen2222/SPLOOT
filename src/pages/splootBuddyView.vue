@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <Btn btnStyle="primary default buddytSearch">搜尋</Btn>
+    <Btn btnStyle="primary default buddytSearch" @click="togglePopUp">搜尋</Btn>
 
     <!-- 成為小幫手＋新增貼文 -->
     <div class="middleSection">
@@ -129,8 +129,7 @@
 <LightBox 
     :title="lightTitle.title"
     :is-light-box="isLightBox" 
-    @toggle="toggleLightBox" 
-    pY="0" pX="0">
+    @toggle="toggleLightBox">
     <div class="buddyIntroduction introTop">
         <div class="topText littleTitle">
             <h6 class="bold">SPLOOT承諾</h6>
@@ -201,6 +200,13 @@
     </div>
 </LightBox>
 
+<!-- <PopUp
+:is-pop-up="isPopUp"
+@toggle="togglePopUp"
+>
+<div class="close" @click="togglePopUp">按我</div>
+</PopUp> -->
+
 
 
 
@@ -213,6 +219,7 @@
     import DropdownMenu from "@/components/DropdownMenu.vue";
     import Btn from '@/components/Btn.vue';
     import LightBox from "../components/LightBox.vue";
+    // import PopUp from "../components/popUp.vue"
 
     // 燈箱標題請輸入
     const lightTitle = {title: "值得信任的毛孩小幫手"}
@@ -306,6 +313,26 @@ let isLightBox = ref(false);
 // 控制燈箱的顯示與隱藏
 function toggleLightBox() {
   isLightBox.value = !isLightBox.value;
+  // 停止捲軸
+  if (isLightBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
 }
+
+// //popup狀態
+// let isPopUp =ref(false);
+
+// // 控制燈箱的顯示與隱藏
+// function togglePopUp() {
+//   isPopUp.value = !isPopUp.value;
+//   // // 停止捲軸
+//   if (isPopUp.value) {
+//     document.body.classList.add('clicked');
+//   } else {
+//     document.body.classList.remove('clicked');
+//   }
+// }
 
 </script>
