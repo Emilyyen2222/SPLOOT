@@ -22,10 +22,24 @@
     <section>
         <h4>問卷問題</h4>
         <div style="flex-direction: column; gap: 8px; padding: 10px; margin: 0 auto">
-            <h6>Input</h6>
-            <InputText placeHolder="這裡填預設文字" errorMsg="Invalid Input" v-model="inputValue" :hasError="inputError">
+            <h6>Input (預設字置中)</h6>
+            <InputText
+                :placeHolder="input1.placeHolder"
+                :errorMsg="input1.errorMsg"
+                :hasError="input1.inputError.value"
+                v-model="input1.inputValue.value">
             </InputText>
-            <p>用 v-model 監聽: {{ inputValue }}</p>
+            <p>用 v-model 監聽: {{ input1.inputValue }}</p>
+
+            <h6>Input (字靠左): textAlign = "textLeft"</h6>
+            <InputText
+                :textAlign="input2.textAlign"
+                :placeHolder="input2.placeHolder"
+                :errorMsg="input2.errorMsg"
+                :hasError="input2.inputError.value"
+                v-model="input2.inputValue.value">
+            </InputText>
+            <p>用 v-model 監聽: {{ input2.inputValue }}</p>
 
             <h6>Option</h6>
             <Btn btnType="form" btnStyle="option" v-model="selectedOptions">選項1</Btn>
@@ -63,6 +77,15 @@
             <DropdownMenu size="large" :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
         </div>
     </section>
+    <section>
+        <h4>燈箱</h4>
+        <LightBox 
+            :is-light-box="false" 
+            @toggle="toggleLightBox"
+            pY="0" 
+            pX="0">
+        </LightBox>
+    </section>
 
 </template>
 
@@ -74,22 +97,40 @@ import Btn from '../components/Btn.vue';
 import InputText from '../components/InputText.vue';
 import DropdownQa from "../components/DropdownQa.vue";
 import DropdownMenu from "../components/DropdownMenu.vue";
+import LightBox from "../components/LightBox.vue";
 
 const btnStyles = ['primary', 'white', 'outline', 'baseline', 'text'];
 const btnSizes = ['large', 'default', 'small'];
 
 // 問卷問題的 Input Value 監聽
-let inputValue = ref('');
-let inputError = ref(false);
+const input1 = {
+    placeHolder: '這裡填預設文字',
+    errorMsg: 'Invalid Input',
+    inputValue: ref(''),
+    inputError: ref(false),
+}
+const input2 = {
+    textAlign: 'textLeft',
+    placeHolder: '這裡填預設文字',
+    errorMsg: 'Invalid Input',
+    inputValue: ref(''),
+    inputError: ref(false),
+}
 
-watch(inputValue, (newValue, oldValue) => {
-    if (inputValue.value.includes('123')) {
-        inputError.value = true;
+watch(input1.inputValue, (newValue, oldValue) => {
+    if (input1.inputValue.value.includes('123')) {
+        input1.inputError.value = true;
     } else {
-        inputError.value = false;
+        input1.inputError.value = false;
     }
 })
-
+watch(input2.inputValue, (newValue, oldValue) => {
+    if (input2.inputValue.value.includes('123')) {
+        input2.inputError.value = true;
+    } else {
+        input2.inputError.value = false;
+    }
+})
 // 問卷問題的選項
 const selectedOptions = ref([]);
 
