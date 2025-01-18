@@ -20,10 +20,10 @@
                     <input type="radio" id="hotel" name="option" class="switch-input">
                     <div class="slider"></div>
                     <div class="labels xsText">
-                    <label for="hospital">動物醫院</label>
-                    <label for="restaurant">友善餐廳</label>
-                    <label for="park">寵物公園</label>
-                    <label for="hotel">友善旅館</label>
+                    <label for="hospital"><img src="../assets/img/icon/hospital.svg" alt="hospital">動物醫院</label>
+                    <label for="restaurant"><img src="../assets/img/icon/restaurant.svg" alt="restaurant">友善餐廳</label>
+                    <label for="park"><img src="../assets/img/icon/park.svg" alt="park">寵物公園</label>
+                    <label for="hotel"><img src="../assets/img/icon/hotel.svg" alt=" hotel">友善旅館</label>
                 </div>
             </div>
             <!-- 地點卡-->
@@ -37,9 +37,8 @@
                         <div class="cardsBox">
                             <div class="cardsTypeIcon">
                                 <img :src="card.iconSrc" :alt="card.iconAlt">
-                                <p class="xsText">{{ card.type }}</p>
+                                <p class="bold">{{ card.name }}</p>
                             </div>
-                            <h6 class="cardsTitle">{{ card.name }}</h6>
                             <p class="smallText">{{ card.content }}</p>
                         </div>
                     </div>
@@ -57,13 +56,15 @@
         </div>
     </div>        
 </div> 
+<MainFooter></MainFooter>
 </template>
 
 <script setup>
     import {ref} from "vue";
 
-    import MainHeader from "../components/MainHeader.vue";
-    import Btn from '../components/Btn.vue';
+    import MainHeader from "@/components/MainHeader.vue";
+    import Btn from '@/components/Btn.vue';
+    import MainFooter from '@/components/MainFooter.vue'
 
     //data
     const cardsData = ref([
@@ -91,7 +92,7 @@
             iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
             iconAlt: "",
             type: "友善餐廳",
-            name: "緯育TibaMe附設台北職訓中心",
+            name: "緯育TibaMe台北職訓中心",
             content: "待填寫",
         },
     ])

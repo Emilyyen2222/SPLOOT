@@ -83,6 +83,8 @@
                     </li>              
                 </ul>
             </div>
+
+<MainFooter></MainFooter>
             <div class="circle1 circle"></div>
             <div class="circle2 circle"></div>
         </div>
@@ -95,12 +97,14 @@
     import MainHeader from "../components/MainHeader.vue";
     import Btn from '../components/Btn.vue';
     import Calendar from '../components/calendar.vue';
+    import MainFooter from "@/components/MainFooter.vue"
+
 
 //data
 const cardsData = ref([
     {
         title: "聖誕節Splooter聚餐聖誕節Splooter聚餐",
-        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂~~現場有精美聖誕禮物喔!!",
+        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂現場有精美聖誕禮物喔!!",
         peopleCount: "45",
         startTime:{
             year: "2024",
