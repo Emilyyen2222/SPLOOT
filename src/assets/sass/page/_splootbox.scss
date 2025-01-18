@@ -11,14 +11,14 @@
     @include md(){
         // background-color: map-get($colors, pink-2);
     }
-    // overflow: hidden;
     .img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; 
-      position: absolute;
-      z-index: -5;
-      @include md(){
+        position: absolute;
+        z-index: -5;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        object-position: 50% 100%; 
+        @include md(){
         // display: none;
       }
     }
@@ -29,9 +29,7 @@
       transform: translate(-50%, -50%); 
       z-index: 5; 
       text-align: center;
-      @include lg(){
-        left: 50%;
-      }
+      @include lg(){left: 50%;}
       h4.bold {
         color: map-get($colors, beige);
         @include md(){
