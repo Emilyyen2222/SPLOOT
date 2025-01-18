@@ -84,11 +84,11 @@
                 </ul>
             </div>
 
-<MainFooter></MainFooter>
             <div class="circle1 circle"></div>
             <div class="circle2 circle"></div>
         </div>
-</div>
+    </div>
+    <MainFooter></MainFooter>
 </template>
 
 <script setup>
