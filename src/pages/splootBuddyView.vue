@@ -132,7 +132,9 @@
     @toggle="toggleLightBox" 
     pY="0" pX="0">
     <div class="buddyIntroduction introTop">
-
+        <div class="topText littleTitle">
+            <h6 class="bold">SPLOOT承諾</h6>
+        </div>
         <div class="introSectionBox">
             <div class="introSection">
                 <img src="" alt="" class="introImg">
@@ -150,8 +152,8 @@
             </div>
         </div>
 
-        <div class="middleText">
-            <p class="bold">什麼樣的毛孩適合寵物小幫手?</p>
+        <div class="middleText littleTitle">
+            <h6 class="bold">什麼樣的毛孩適合寵物小幫手?</h6>
         </div>
 
         <div class="introSectionBox">
@@ -173,8 +175,8 @@
     </div>
 
     <div class="buddyIntroduction introBottom">
-        <div class="introTitle">
-            <h4 class="bold">什麼人適合成為小幫手</h4>
+        <div class="littleTitle">
+            <h6 class="bold">什麼人適合成為小幫手</h6>
         </div>
 
         <div class="introSectionBox">
@@ -299,7 +301,7 @@
     ])
 
  //燈箱狀態
-let isLightBox = ref(true);
+let isLightBox = ref(false);
 
 // 控制燈箱的顯示與隱藏
 function toggleLightBox() {
