@@ -33,7 +33,7 @@
   const box = ref('');
   
   if(props.btnType == 'default'){
-    box.value = `btn`
+    box.value = `defaultBtn`
   }else if(props.btnType == 'form'){
     box.value = 'formBtn'
   }else if(props.btnType == 'event'){
