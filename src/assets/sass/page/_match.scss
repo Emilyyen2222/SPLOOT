@@ -1,9 +1,19 @@
-
-
 .circleMatch {
     @include circle(map-get($colors, purple-2));
     z-index: -20;
     position: fixed;
     top:96%; 
     left: 50%;
+}
+
+.matchWrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 384px;
+    height: 100vh;
+    margin: 0 auto;
+    img{
+        width: 592px;
+    }
 }

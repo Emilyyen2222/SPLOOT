@@ -208,6 +208,9 @@
                     <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
                 </div>
             </div>
+            
+<MainFooter></MainFooter>         
+
 <!-- circle bg -->
     <div class="circleSplootBox"></div>
          
@@ -218,6 +221,7 @@ import MainHeader from "../components/MainHeader.vue";
 import DropdownQa from "../components/DropdownQa.vue";
 import Btn from '../components/Btn.vue';
 import InputText from '../components/InputText.vue';
+import MainFooter from "../components/MainFooter.vue";
 
 
 </script>
