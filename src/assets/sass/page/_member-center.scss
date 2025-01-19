@@ -1,29 +1,30 @@
 
-@use 'mcnav';
-//==============以下暫放=================================
-body {
-  background-color: #F2EEEB;
-  // background-color: map-get($colors, natural-1);
-  // color: map-get($colors, primary-Brown);
-  color: #693413;
-}
+// @use 'member-nav';  //不能，因為沒法取用base裡面的變數
+//===============================================
 
 //sturcture
 .memberCenter {
   max-width: 70vw;
   margin: 0 auto;
-
   .topNav {
-    .msg-n-avatar {}
-
-    nav {}
+    width: 100%;
+    margin-bottom: 6.4rem;
+    .msg-n-avatar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: .8rem;
+    }
+    .mcNav {
+      width: 100%;
+    }
   }
 
-  .memberInfo {
-    //會更新的區塊
+  .memberInfo {  //會更新的區塊
     width: 100%;
-    padding: 2.4rem; //之後改成rem
-
+    padding: 2.4rem;
+    // 標題 會員資料  
     .title2 {
       width: 100%;
       display: flex;
@@ -31,103 +32,145 @@ body {
       align-items: center;
       margin-bottom: 1.6rem;
     }
-
+    // 氣直線
     .divider {
       width: 100%;
       height: 1px;
       background-color: #ccc;
-      margin-bottom: 2.4rem;
+      margin-bottom: .8rem;
+    }
+    // 三張卡片的外層
+    .cards-container {}
+  }
+}
+
+// 頂部區塊(不會更新) : topNav
+ //頭像 和 歡迎詞
+.msg-n-avatar{
+  width: 100%;
+  .avatar{
+    cursor: pointer;
+    width: 4.8rem;
+    height: 4.8rem;
+    border:2px solid map-get($colors, natural-0);
+    border-radius: 50%;
+  
+    background-color: #693413;
+  }
+  
+  .msg-welcome{
+    width: calc(100% - 4.8rem);
+    text-align-last: left;
+    h5{}
+
+    span{}
+  }
+} 
+
+ //mcNav: 會員中心的navigaiton
+.mcNav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.2rem;
+  .btn-wrapper{
+    @include textStyle(smallText);
+  }
+    i {
+      display: block;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;  
+      background-color: map-get($colors, red );
     }
 
-    .cards-container {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 1.6rem;
-    }
-
-  }
-}
-
-//頭像 和 歡迎詞
-.msg-n-avatar {
-  .avatar {}
-
-  .msg-welcome {
-    h2 {}
-
-    span {}
-  }
-}
-
-//topNav nav: 會員中心的navigaiton
-.topNav nav ul {
-  li {
-    i {}
-
-    p {}
   }
 
-  ol {}
+  ol {
+    display: none;
+  }
 
-  .on {}
-}
+  .on {
+    display: flex; //之後用JS給class
+  }
+
 
 ol {
   li {}
 }
 
 
-// =============
-// memberInfo
-
+// =============================
+// 下面主要區塊，memberInfo
+ //標題 : 會員資料
 .title2 {
-  h2 {
-    font-size: 2rem;
-    // @include textStyle(h6);
-  }
+  display: flex;
+  justify-content: space-between;
+  h6 {}
 
-  a {
-    font-size: 1rem;
-    // @include textStyle(xsText);
-    color: #D14535;
-    // color: map-get($colors , red );
-    border-bottom: 1px solid #D14535;
-  }
+  .btn-wr {}
 }
 
 // .divider{}
 
-//card
-.cards-container {
-  .top2-cards {
+//三張卡片的共用屬性 : .card
+.memberInfo .cards-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  .card{
     width: 100%;
-    display: flex;
-    gap: 1.6rem;
-
-    .card-basicInfo {
-      border-radius: .8rem;
-    }
-
-    .card-account {
-      border-radius: .8rem;
-    }
-  }
-
-  .card-contact {
     border-radius: .8rem;
+    background-color: map-get($colors, natural-0 );
+    padding: 1.6rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    .card-title{}
 
-    .card-content {
+    .divider{}
+
+    .card-content{
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+    }
+
+    .bi-inbox{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
       gap: 5.6rem;
+      @include textStyle(smallText);
+    }
+
+    .bi-inbox:first-child{
+      width : calc(min-width + 5.6rem);
     }
   }
+}
+ // 上面兩張卡的布局
+.top2-cards {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.6rem;
+  .card-basicInfo {}
 
-  .privacy {
-    li {}
+  .card-account {}
+}
+ //第三張卡
+.card-contact {
+  .card-content {
+    .setWid{
+      width: 5.6rem;
+    }
   }
 }
 
-//上兩張卡
+ //上兩張卡 : 基本資料&帳戶
 .top2-cards {
   flex-grow: 1;
 
@@ -137,8 +180,7 @@ ol {
 
   .card_title {
     h3 {
-      font-size: 1.6rem;
-      // @include textStyle(p);
+      @include textStyle(p);
     }
   }
 
@@ -149,69 +191,59 @@ ol {
     ul {}
   }
 }
-
+ //第三張卡 : 聯絡資料
 .card-contact {
   padding: 1.6rem 2.4rem;
 }
-
+ // 隱私權
 .privacy {
   display: flex;
   justify-content: flex-end;
   gap: .8rem;
 
-  li {
-    a {}
-  }
+.btn{
+  width: calc(min-width + 1rem);
+}
 }
 
-.card-content ul {
-  .items {}
-
-  .values {}
-
-}
 
 // ===============================================
 //memberInfo update, pop up，彈窗
 
 .memberInfo-update {
-  position: relative;
   width: 55vw;
   max-width: 99vw;
   margin: 3.9rem auto 0 auto;
   padding-top: 4.4rem;
 
-  .close {
-    //右上角的X按鈕   //用component?
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 3.6rem;
-    height: 3.6rem;
-    border-radius: 50%;
-
-    background-color: #ccc;
-  }
 
   .popup-basicInfo {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
     padding: 5.6rem;
     border-radius: 1.6rem;
-    background-color: #FFFEFA;
+    background-color: map-get($colors, beige);
 
-    // background-color: map-get($colors, beige);
-    .popup-title {
-      text-align: center;
-      font-size: 3.1rem;
-      // @include textStyle(h4);
+    .closeBtn-group{
+      display: flex;
+      justify-content: flex-end;
     }
 
-    .avatars {
-      width: 100%;
+    .close {
+      //右上角的X按鈕   
+      cursor: pointer;
+
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 50%;
+  
+      background-color: #ccc;
     }
+ 
+
+    .avatars {}
 
     .basicInfo {
       padding: 1.6rem 0;
@@ -232,27 +264,23 @@ ol {
 }
 
 //avatar
-.avatars ul {
+.avatars .card-content{
+  width: 100%;
   display: flex;
   justify-content: center;
   gap: 1.6rem;
   padding: 2.4rem 0;
-
-  li {
+  .av-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .8rem;
     .avatar {
-      //頭相框，可以在選擇(focus?)的時候，出現外框(outline)
+      //頭相框，可以在選擇(focus?)的時候，出現外框(outline)，並且名字變成粗體
       width: 6.4rem;
       height: 6.4rem;
       border-radius: 50%;
-      background-color: #CAB9AE;
-      // background-color: map-get($colors, natural-2 );
-    }
-
-    p {
-      text-align: center;
-      font-size: 1.3rem;
-      font-weight: 400;
-      // @include textStyle(smallText, bold);
+      background-color: map-get($colors, natural-2 );
     }
 
     & img {}
@@ -276,22 +304,33 @@ ol {
 
     .input-group {
       display: flex;
-      gap: 5.6rem;
+      justify-content: space-between;
       align-items: center;
     }
+
+    label{
+      width: 6.4rem;
+    }
+
   }
 
   .input-group {
     label {
       display: flex;
       width: 6.4rem;
-      font-size: 1.3rem;
-      // @include textStyle(smallText);
+      @include textStyle(smallText);
     }
 
-    input {
+    &:nth-child(2) {
       width: 100%;
-      align-items: center;
+    }
+
+    .inp-name{
+      display: flex;
+      justify-content: flex-start;
+      align-items: start;
+      gap: .8rem;
+      height: 4rem;
     }
 
     .sex {
@@ -303,6 +342,7 @@ ol {
   }
 
   .select-group {
+    width: 100%;
     display: flex;
     gap: 1.2rem;
 
@@ -331,8 +371,7 @@ ol {
 
     .input-group p {
       width: 6.4rem;
-      font-size: 1.3rem;
-      // @include textStyle(smallText);
+      @include textStyle(smallText);
     }
 
     input {
@@ -382,6 +421,7 @@ ol {
     }
 
     button {
+      height: 100%;
       position: absolute;
       top: 0;
       right: 0;
@@ -396,6 +436,7 @@ ol {
 .accountInfo .btn-group {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding-left: 12rem;
 
   button {}
@@ -426,8 +467,7 @@ ol {
     p {
       display: block;
       width: 6.4rem;
-      font-size: 1.3rem;
-      // @include textStyle(smallText);
+      @include textStyle(smallText);
     }
 
     .lineid-wrapper {
@@ -441,8 +481,7 @@ ol {
       position: absolute;
       bottom: -1.4rem;
       left: 0;
-      font-size: 1rem;
-      // @include textStyle(xsText);
+      @include textStyle(xsText);
     }
 
     input {
@@ -459,44 +498,264 @@ ol {
 }
 
 //=========================================================
-//mc card
+// petcard view
 
-.memberInfo .card {
+.petcardView {  //會更新的區塊
   width: 100%;
-  background-color: #FFF;
-  // background-color: map-get($colors, natural-1)
-  .card-title {
-      text-align: left;
-      h3 {}
+  padding: 2.4rem;
+  // 標題 寵物資訊卡  
+  .petcard-title {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.6rem;
   }
-
+  // 氣直線
   .divider {
-      margin: .8rem 0;
-      width: 100%;
-      height: .1rem;
-      background-color: #F2EEEB;
-      // background-color: map-get($colors, natural-1 );
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: 2.4rem;
   }
+  // 卡片的外層
+  .petcard-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  .card-content {
-      display: flex;
-      ul {
-          display: flex;
-          flex-direction: column;
-          gap: .4rem;
-          align-items: center;
-          font-size: 1.3rem;
-          // @include textStyle(smallText);
-      }
+    .petcard{
+      width: 48%;
+      height: 48.8rem;
+    }
 
-      .items, .value{
-          display: flex;
-          flex-direction: column;
-      }
-      
-      input{
-          width: 100%;
-      }
+    #addPetCard{
+      width: 48%;
+      height: 22rem;
+      border: 1px dashed map-get($colors, natural-2 ) ;
+      border-radius: 1.6rem;
+    }
+
+    #addPetCardBtn{
+      margin: 0 auto;
+        width: 16.8rem;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.6rem;
+    }
+
+    .ptc-top{
+      width: 100%;
+      height: 22rem;
+      background-color: map-get($colors, natural-0);
+    }
+
+    .btn-group{
+      @include textStyle(xsText);
+    }
   }
 
 }
+
+//=======================
+//訂閱紀錄
+.subRecord{
+//當前方案
+  .sub-recently{
+    width: 100%;
+    margin-bottom: 4rem;
+    .sr-title{
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      margin-bottom: 1.6rem;
+    }
+
+    .divider{
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      margin-bottom: 2.4rem;
+    }
+
+    .sr-slider{
+      display: flex;
+      width: 100%;   
+    }
+  }
+ //歷史紀錄
+  .sub-history{
+    .sh-title{
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      margin-bottom: 1.6rem;
+    }
+
+    .divider{
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      margin-bottom: 2.4rem;
+    }
+
+    .sh-h{
+      width: 100%;
+      padding: 1.6rem 0;
+      background-color: map-get($colors, natural-0 );
+      border-radius: 1.6rem;
+    }
+  }
+
+}
+ //slider
+.sr-slider .cards-container{
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  gap: 2.4rem;
+
+  overflow-x: scroll;          /* 啟用水平滑動 */
+  scroll-behavior: smooth;     /* 平滑滑動效果（可選） */ 
+  .card{
+    flex: 0 0 auto;  //不允許伸縮
+    width: 31.2rem;
+    height: 100%;
+    padding: 0;
+    background-color: map-get($colors, natural-0 );
+    border-radius: 1.6rem;
+    .card-title{
+      display: flex;
+      justify-content: start;
+      width: 100%;
+      padding: 0.8rem 2.4rem;
+      border-bottom: 1px solid map-get($colors, natural-1 );
+    }
+
+    .card-content{
+      width: 100%;
+      height: 100%;
+      padding: 2rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 2.4rem;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;               /* Safari 和 Chrome */
+  }
+}
+
+.sr-slider .card-content{
+  .sr-items-group{
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    .srItems{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+ //歷史紀錄的表格
+.sh-h{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 1.6rem 0;
+  gap: .8rem;
+  .sh-h-title{
+    width: 100%;
+    padding: .8rem 2.4rem;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    border-bottom: 1px solid map-get($colors, natural-2);
+    &:not(:nth-child(20)){
+      flex:1 0 0;
+    }
+  }
+
+  .sh-h-content{
+    width: 100%;
+    display: flex;
+    padding: 0 2.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    gap: .8rem;
+    .sh-h-items{
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+    }
+
+    .sh-h-items:not(:nth-child(20)){
+      flex:1 0 0;
+    }
+  }
+}
+
+//========================================
+// 小幫手中心
+.helperCenter{
+  .hc-not-passed{}
+  .hc-passed{}
+}
+
+ // 無身分
+.hc-not-passed{
+  .hc-title{
+    text-align: left;
+  }
+
+  .hc-nav{
+    display: flex;
+    justify-content: space-between;
+    gap: 2.4rem;
+    .hc-steps{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.6rem 3.2rem;
+      border-radius: .8rem;
+      border: .1rem solid map-get($colors, natural-2 );
+    }
+  }
+
+  .hc-post-manage{
+    width: 100%;
+    height: 22rem;
+    .divider{
+      width: 100%;
+      height: 1px;
+      background-color: #ccc;
+      margin-bottom: .8rem;      
+    }
+
+    .hc-msg{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+
+ }
+
+ // 有身分
+.hc-passed{}
