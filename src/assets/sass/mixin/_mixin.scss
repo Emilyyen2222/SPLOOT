@@ -106,7 +106,7 @@ p{ @include textStyle(p); }
         $t: .6rem;
     }
 
-    width: calc(100% - $t);
+    width: calc(100% + $t);
     color: map-get($colors, $c);
 
     span{ 
