@@ -91,9 +91,9 @@ const routes = [
     path: '/member-center',
     component: () => import('@/pages/memberCenter.vue'),
     meta: {
-      title: '尋找小幫手 | Sploot',
-      theme: 'blue',
-      bodyBg: 'blueberry-0',
+      title: '會員中心 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
     }
   },
   
