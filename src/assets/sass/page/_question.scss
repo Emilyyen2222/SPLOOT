@@ -14,52 +14,9 @@
         text-align: left; 
         margin-left: 1rem;
     }
-}
-@mixin question-container() {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: 100%;
-    z-index: 10;
-}
-@mixin progressBar() {
-    z-index: 100;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    padding: 1.6rem 2.4rem;
-    .progressBar {
-        display: inline-flex;
-        gap: .8rem;
-        .progressSegment {
-            width: 14.3rem;
-            height: .4rem;
-            border-radius: 10rem;
-            background: map-get($colors, beige);
-            &.filled {
-                background: map-get($colors, red);
-            }
-        }
-    }
-}
-//內文
-body{
-    position: relative;
-}
-.circleQuestion {
-    @include circle(map-get($colors, pink-1));
-    position: fixed;
-    top:12%; 
-    left: 50%;
-}
-.box{
-    @include box();
     .firstBox{
-    height: calc(100vh - 12.6rem);
-    }
+        height: calc(100vh - 12.6rem);
+        }
     .questionContainer {
         @include question-container();
         .quickLogin{
@@ -91,6 +48,51 @@ body{
             
         }
     }
+}
+@mixin question-container() {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+}
+@mixin progressBar() {
+    z-index: 100;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 1.6rem 2.4rem;
+    .progressBar {
+        display: flex;
+        gap: .8rem;
+        .progressSegment {
+            flex: 1;
+            width: 14.3rem;
+            height: .4rem;
+            border-radius: 10rem;
+            background: map-get($colors, beige);
+            &.filled {
+                background: map-get($colors, red);
+            }
+        }
+    }
+}
+//內文
+body{
+    position: relative;
+}
+.circleQuestion {
+    @include circle(map-get($colors, pink-1));
+    position: fixed;
+    top:12%; 
+    left: 50%;
+}
+.box{
+    @include box();
+   
 }
 
 .progressBarContainer {

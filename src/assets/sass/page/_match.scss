@@ -2,18 +2,93 @@
     @include circle(map-get($colors, purple-2));
     z-index: -20;
     position: fixed;
-    top:96%; 
+    top:105%; 
     left: 50%;
 }
-
-.matchWrap{
+@mixin matchWrap(){
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 384px;
+    width: auto;
     height: 100vh;
     margin: 0 auto;
-    img{
-        width: 592px;
+    // border: 1px solid;
+    .borderBottom{
+        width: 10rem;
+        margin: 0 auto;
     }
+    .left{
+        text-align: left; 
+        margin-left: 1rem;
+    }
+    .questionContainer {
+        margin-top: 3.6rem;
+        text-align: center;
+        // border: 1px solid;
+        h4{
+            margin-bottom: 3.6rem;
+        }
+    }
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 4rem;
+        // margin-bottom: 4rem;
+        width: 384px;
+        // border: 1px solid;
+        .smallText{margin-bottom: 4rem;}
+        .birthday{
+            display: flex;
+            .year{width: 14.4rem;}
+            .month{width: 11.2rem;}
+            .date{width: 11.2rem;}
+        }
+        .first{
+            margin-bottom: 4rem;
+            border-radius: 16px;
+        }
+    }
+}
+
+// 內文
+.matchWrap{
+    @include matchWrap();
+    .image{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+        width: 100vw;
+        gap: 1rem;
+        // border: 1px solid;
+        .imgFlex{
+            display: flex;
+            img{
+                border-radius: 1.6rem;
+                // width: 100%;
+                height: 200px;
+            }
+            &.img1 {
+                width: 350px; 
+              }
+            &.img2 {
+            width: 450px; 
+            }
+            &.img3 {
+            width: 400px; 
+            }
+        }
+    }
+}
+.firstBox{
+    height: calc(100vh - 12.6rem);
+    }
+.btnContainer{
+    display: flex; 
+    justify-content: flex-end;
+    margin-bottom: 2.4rem;
 }
