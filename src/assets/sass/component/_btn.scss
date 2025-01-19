@@ -3,7 +3,7 @@ $btnSizes: (large, default, small);
 
 @each $theme in $themes {
     body.#{$theme}Theme{
-        .btn{
+        .defaultBtn{
             display: flex;
             align-items: center;
             justify-content: center;
@@ -28,6 +28,7 @@ $btnSizes: (large, default, small);
     
                         }@else if($style == baseline){
                             @include btnHover($size, $theme);
+                            padding: 0;
                             border-radius: 0;
                             background-color: transparent;
     
@@ -35,6 +36,7 @@ $btnSizes: (large, default, small);
     
                         }@else if($style == text){
                             @include btnHover($size, $theme);
+                            padding: 0;
                             border-radius: 0;
                             background-color: transparent;
                         }
