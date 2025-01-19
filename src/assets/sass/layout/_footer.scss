@@ -6,13 +6,30 @@
         
         border-bottom: 1px solid map-get($colors, $theme);
 
+        @include md(){
+            padding: 80px auto 48px;;
+        }
+
+        @include sm(){
+            padding: 80px 2.4rem 48px;;
+        }
+
         .footerBox{
             display: flex;
             justify-content: space-between;
 
+            @include md(){
+                display: block;
+            }
+
             .footerList{
                 display: flex;
                 gap: 16.4rem;
+
+                @include md(){
+                    margin-top: 40px;
+                    gap: 11.2rem;
+                }
 
                 .leftItem{
                     width: 12rem;
@@ -29,8 +46,13 @@
     .footerBottom{
         margin: 24px 0 56px 11.2rem;
 
+        @include md(){             
+            width: 80%;
+            margin: 24px auto 56px;
+        }
+
         .tibame{
-            color: map-get($colors, $theme);;
+            color: map-get($colors, $theme);
         }
     }
 

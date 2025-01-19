@@ -1,9 +1,5 @@
 .wrapper{
-    display: flex;
-    justify-content: center;
-
-    padding: 0 20px;
-
+    
     .petCalendarBox{
         max-width: 1008px;
         
@@ -13,13 +9,33 @@
             display: flex;
             justify-content: space-between;
             gap: 10%;
+
+            @include md(){
+                flex-direction: column;
+            }
         
             .topLeft{
                display: flex;
                align-items: center;
+               justify-content: center;
+
 
                .topLeftBox{
-                    height: 50%;                 
+                    height: 50%;  
+                    @include md(){
+                        margin-top: 2.4rem;
+
+                        .title {
+                            text-align: center;
+                            h3{
+                                @include textStyle(h5, bold);
+                            }
+
+                            p{
+                                @include textStyle(smallText);
+                            }
+                        }
+                    }               
 
                    .switch {
                        position: relative;
@@ -32,7 +48,10 @@
                        margin: 4rem auto 21.5rem 0;
                        border-radius: 100px;
                        background-color: map-get($colors, natural-1);
-    
+
+                       @include md(){
+                         margin: 2.4rem auto 2.4rem;
+                        }  
     
                        // 隱藏單選按鈕
                        .switch-input {
@@ -82,11 +101,13 @@
 
             .topRight{
                 margin-top: 40px;
+                @include md(){
+                    margin-top: 0;
+                }  
 
                 .calendar{
-                    width: 384px;
-                    height: 355px;
-                    // border: 1px solid black;
+                    width: 335px;
+                    height: 307px;
                 }
             }
         }
@@ -113,15 +134,26 @@
         }
 
         .scheduleCard{
-
             display: grid;
             grid-template-columns: repeat(3, 1fr); /* 3欄，欄位寬度相等 */
             gap: 3.6rem;
+            place-items: center;
+
+            @include lg(){
+                grid-template-columns: repeat(2, 1fr); /* 2欄，欄位寬度相等 */
+            }
+
+            @include md(){
+                grid-template-columns: repeat(1, 1fr); /* 1欄，欄位寬度相等 */
+
+            }
 
             .scheduleCards{
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+
+                max-width: 31.2rem;
 
                 .cardText{
                     height: 282px;

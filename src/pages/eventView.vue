@@ -104,7 +104,7 @@
 const cardsData = ref([
     {
         title: "聖誕節Splooter聚餐聖誕節Splooter聚餐",
-        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~聖誕快樂現場有精美聖誕禮物喔!!",
+        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
         peopleCount: "45",
         startTime:{
             year: "2024",
