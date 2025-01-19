@@ -186,10 +186,20 @@ body{
                 display: grid;
                 grid-template-columns: repeat(3, 1fr); /* 3欄，欄位寬度相等 */
                 gap: 4.8rem;
+                place-items: center;
+
+                @include lg(){
+                    grid-template-columns: repeat(2, 1fr); /* 2欄，欄位寬度相等 */
+                }
+    
+                @include md(){
+                    grid-template-columns: repeat(1, 1fr); /* 1欄，欄位寬度相等 */
+    
+                }
 
                 .buddyCards{
                    width: 100%;
-                    min-width:27rem;
+                    max-width:31.2rem;
                     .cardBox{
                         background-color: map-get($colors, beige);
                         border-radius: 16px;
