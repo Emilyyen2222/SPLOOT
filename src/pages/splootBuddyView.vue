@@ -12,8 +12,8 @@
     <div class="secondTitle">
         <p>提供毛小孩們最棒且最有愛的服務</p>
     </div>
-    <div class="firstTimeUse" @click="toggleLightBox">
-        <p class="xsText">第一次使用小幫手？</p>
+    <div class="firstTimeUse" >
+        <Btn btnStyle="baseline small" @click="toggleLightBox">第一次使用小幫手？</Btn>
     </div>
     <!-- 過濾篩選選單部分 -->
     <div class="selectTypeSection">

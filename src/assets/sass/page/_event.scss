@@ -22,19 +22,24 @@
 
                .topLeftBox{
                     height: 50%;  
+
                     @include md(){
                         margin-top: 2.4rem;
+                    }
 
-                        .title {
-                            text-align: center;
-                            h3{
-                                @include textStyle(h5, bold);
-                            }
-
-                            p{
-                                @include textStyle(smallText);
-                            }
+                    .title {
+                        text-align: center;
+                        
+                        @include md(){
+                        h3{
+                            @include textStyle(h5, bold);
                         }
+
+                        p{
+                            @include textStyle(smallText);
+                        }
+                    }
+                    
                     }               
 
                    .switch {

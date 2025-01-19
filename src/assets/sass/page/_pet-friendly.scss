@@ -6,12 +6,22 @@
 
         // 左 地點卡片
         .leftMain {
-            width: 60%;
             max-width: 800px;
 
             .title {
                 text-align: center;
+                
+                @include md(){
+                h3{
+                    @include textStyle(h5, bold);
+                }
+
+                p{
+                    @include textStyle(smallText);
+                }
             }
+            
+            }  
 
             // switch樣式
             .switch {
@@ -25,6 +35,10 @@
                 margin: 4rem auto;
                 border-radius: 100px;
                 background-color: map-get($colors, blue-0);
+
+                @include md(){
+                    margin: 2.4rem auto 2.4rem;
+                }  
 
 
                 // 隱藏單選按鈕

@@ -32,16 +32,14 @@ body{
         }
 
         .firstTimeUse{
-            cursor: pointer;
-
             display: flex;
             justify-content: flex-end;
 
-            margin: 0 1.6rem 8px 0;
-
-            p{
-                border-bottom: 1px solid map-get($colors, blue);
+            .btn.baseline.small{
+                @include textStyle(xsText);
             }
+
+            margin: 0 1.6rem 8px 0;
         }
 
         .selectTypeSection{
