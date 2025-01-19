@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="footerBottom">
-            <p class="xsText">本網站為緯育TibaMe [第94期]前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
+            <p class="xsText tibame">本網站為緯育TibaMe [第94期]前端工程師專業技術養成班學員作品，僅供學習、展示之用途。</p>
         </div>
     </footer>
 

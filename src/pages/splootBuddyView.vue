@@ -119,11 +119,11 @@
             <Btn btnStyle="outline default textBlue seeMore">查看更多</Btn> 
         </div>
     </div>
-    <!-- 圓形 * 2 -->
-    <div class="circle1 circle"></div>
-    <div class="circle2 circle"></div>
- </div>
 </div>
+</div>
+<!-- 圓形 * 2 -->
+<div class="circle1 circle"></div>
+<div class="circle2 circle"></div>
 
 <!-- bgc="transparent" -->
 <LightBox 

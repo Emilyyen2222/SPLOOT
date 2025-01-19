@@ -27,7 +27,11 @@
         }
     }
     .footerBottom{
-        margin: 24px 0 56px 11.2rem ;
+        margin: 24px 0 56px 11.2rem;
+
+        .tibame{
+            color: map-get($colors, $theme);;
+        }
     }
 
 }

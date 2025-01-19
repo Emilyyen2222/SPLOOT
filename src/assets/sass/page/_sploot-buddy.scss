@@ -239,7 +239,7 @@ body{
 
             .seeMoreBtn{
                 max-width: 16rem;
-                margin: 12rem auto 18.4rem;
+                margin: 12rem auto 0;
 
                 .seeMore{ //組件調整
                     border-color: map-get($colors, blue);
@@ -249,7 +249,9 @@ body{
             }
         }
         //以上為主頁內容
+    }
 
+}
         // 背景圓形＊2
         .circle{
             @include circle(#E6EBFF);
@@ -265,8 +267,6 @@ body{
         .circle2{
             top: 1000px;
         }
-    }
-}
 
 //燈箱內容
     .buddyIntroduction{
