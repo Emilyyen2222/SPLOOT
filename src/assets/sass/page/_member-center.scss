@@ -1,6 +1,15 @@
 
 // @use 'member-nav';  //不能，因為沒法取用base裡面的變數
 //===============================================
+ //background circle
+ .whole-bg{}
+
+.member-circle{
+  @include circle(map-get($colors, natural-2));
+  position: fixed;
+  top:143%; 
+  left: 50%;
+}
 
 //sturcture
 .memberCenter {
@@ -459,14 +468,15 @@ ol {
 
     .input-group {
       display: flex;
+      justify-content: space-between;
       gap: 5.6rem;
       align-items: center;
-      height: 4rem;
+      height: 4.8rem;
     }
 
     p {
       display: block;
-      width: 6.4rem;
+      width: 7.4rem;
       @include textStyle(smallText);
     }
 
@@ -718,13 +728,16 @@ ol {
 .hc-not-passed{
   .hc-title{
     text-align: left;
+    margin-bottom: 2.4rem;
   }
 
   .hc-nav{
     display: flex;
     justify-content: space-between;
     gap: 2.4rem;
+    margin-bottom: 2.4rem;
     .hc-steps{
+      cursor: pointer;
       width: 100%;
       display: flex;
       justify-content: center;
@@ -758,4 +771,83 @@ ol {
  }
 
  // 有身分
-.hc-passed{}
+.hc-passed .hc-post-manage{
+  width: 100%;
+  //h6
+
+  .divider{
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    margin-bottom: .8rem; 
+  }
+
+  .hc-grid-container{
+    width: 100%;
+    margin-top: 4rem;
+
+    display: grid;
+    grid-template-columns: 1fr; // 初始為單列 
+    grid-gap: 3.2rem;              // 行列間距 
+    max-width: 100%;            // 最大寬度限制 
+    margin: 0 auto;              // 水平置中    
+    .hc-postCard{}
+
+    .postCard{
+      width: 100%;
+      height: 22rem;
+      background-color: map-get($colors, natural-0 );
+    }
+  }
+
+  /* 螢幕寬度 768px 及以上，改為 2列 */
+  @media (min-width: 768px) {
+    .hc-grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 2列 */
+    }
+  }
+  
+  /* 螢幕寬度 1024px 及以上，保持 2列 */
+  @media (min-width: 1024px) {
+    .hc-grid-container {
+      grid-template-columns: repeat(2, 1fr); /* 仍為 2列 */
+    }
+  }
+
+  .empty{
+    width: 100%;
+    height: 22rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px dashed map-get($colors, natural-2);
+    border-radius: 1.6rem;
+    .btn-group{
+      height: 100%;
+      width: 16.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.hc-passed .hc-postCard{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: .8rem ;
+  .postCard{}  //元件
+
+  .hc-btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    text-align: center;
+    .btn-group{
+      display: flex;
+      justify-content: center;
+      gap: 4rem ;
+    }
+  }
+}
