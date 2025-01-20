@@ -221,7 +221,6 @@
     import Btn from '@/components/Btn.vue';
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
-    // import PopUp from "@/components/popUp.vue"
 
     // 燈箱標題請輸入
     const lightTitle = {title: "值得信任的毛孩小幫手"}

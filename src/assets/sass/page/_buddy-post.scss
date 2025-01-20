@@ -6,5 +6,210 @@
     .buddyPost{
         max-width: 1008px;
         width: 100%;
+        
+        .nav{
+            display: flex;
+            justify-content: space-between;
+
+            margin: 48px 0 16px;
+
+            .navTag{
+                display: flex;
+                gap: 8px;
+            }
+        }
+
+        .heroContent{
+            margin-bottom: 9.6rem;
+            .postTop{
+                background-color: map-get($colors, Beige);
+                border-radius: 16px;
+
+                .postMain{
+                    padding: 4rem;
+                    margin-bottom: 1.6rem;
+                    
+                    .postTitle{
+                        .reviews{
+                            display: flex;
+                            
+                            padding-bottom: 1.6rem;
+                            margin-top: 0.8rem;
+                            border-bottom: 1px solid map-get($colors, natural-1);
+                            
+                        //stars統一移置下方
+                        }
+                    }
+                    .postText{
+                        padding: 1.6rem 0;
+                    }
+                    .editBtn{
+                        padding-right: calc(100% - 4.8rem);
+
+                        .baseline.small{
+                            @include textStyle(xsText);
+                        }
+                    }
+                }
+            }
+            .poster{
+                display: flex;
+                gap: 3.2rem;
+
+                background-color: map-get($colors, Beige);
+                padding: 4rem;
+                border-radius: 16px;
+
+                .information{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    .topContent{
+
+                        .location{
+                            display: flex;
+                        }
+                    }
+                    .middleContent{
+
+                        .tagBox{
+                            display: flex;
+
+                            .tagUl{
+                                display: flex;
+                                align-items: center;
+                                gap: 0.4rem;
+                                flex-wrap: wrap;
+                                
+                                margin-left: 1.6rem;
+
+                                .tagLi{
+                                    padding: 0.4rem 0.8rem;
+                                    border: 1px solid map-get($colors, natural-1);
+                                    border-radius: 100px;
+                                }
+                            }
+                            .time{
+                                margin-left: 1.6rem;
+                            }
+                        }
+                    }
+                }
+                .connect{
+                    flex-shrink: 0;
+                    .lineQRCode{
+                        width: 9.6rem;
+                        height: 9.6rem;
+                        border: 1px solid;
+
+                        .QRcode{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .commentContent{
+            .newComment{
+                display: flex;
+                justify-content: space-between;
+
+                padding-bottom: 1.6rem;
+                border-bottom: 1px solid map-get($colors, blueberry-2);
+
+                .baseline.small{
+                    @include textStyle(xsText);
+                }
+            }
+            .commentCards{
+                display: flex;
+                justify-content: space-between;
+                padding: 2.4rem 0 5.2rem;
+                
+                .commenmtCard{
+                    max-width: 31.2rem;
+                    height: 20,8rem;
+                    padding: 1.6rem;
+                    background-color: map-get($colors, Beige);
+                    border-radius: 12px;
+                    
+                    .commenter{
+                        display: flex;
+                        gap: 1.6rem;
+                        margin-bottom: 0.8rem;
+                    }
+                }
+            }      
+        } 
+        .postComment{
+            .postTitle{
+                display: flex;
+                align-items: center;
+                gap: 2.4rem;
+
+                padding-bottom: 1.6rem;
+                border-bottom: 1px solid map-get($colors, blueberry-2);
+
+            }
+            .inputComment{
+                display: flex;
+                align-items: center;
+                margin: 24px 0 13.6rem;
+                
+                .content{
+                    flex-grow: 1;
+                    margin-left: 2.4rem;
+                    .input{
+                        display: flex;
+                        gap: 1.6rem;
+                        margin-top: 1.6rem;
+                        
+                        .primary.default{
+                            width: 15.2rem; 
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+    // 大頭貼設定  
+    .avatar{
+        flex-shrink: 0;
+
+        width: 8rem;
+        height: 8rem;
+        border-radius: 50%;
+        border: 1px solid map-get($colors, blueberry-2);
+
+
+        .avatarImg{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    //星星評價
+    .stars{
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-right: 0.8rem;
+    }
+
+
+
+
+
+
+
+
+
+
     }
 }
