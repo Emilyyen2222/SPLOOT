@@ -3,7 +3,6 @@
     <MainHeader theme="red" bgc="purple-1"></MainHeader>
     <h4 style="margin: 20px 0">首頁還沒切元件庫先當首頁</h4>
     <section class="buttons">
-
         <h4>Buttons (完成)</h4>
         <div style="flex-direction: column">
             <template v-for="style in btnStyles">
@@ -19,6 +18,7 @@
             </template>
         </div>
     </section>
+    <Btn btnStyle="text large">Test</Btn>
     <section>
         <h4>問卷問題</h4>
         <div style="flex-direction: column; gap: 8px; padding: 10px; margin: 0 auto">
@@ -40,6 +40,16 @@
                 v-model="input2.inputValue.value">
             </InputText>
             <p>用 v-model 監聽: {{ input2.inputValue }}</p>
+
+            <h6>Input (小) size = "small"</h6>
+            <InputText
+                size = "small"
+                :placeHolder="input3.placeHolder"
+                :errorMsg="input3.errorMsg"
+                :hasError="input3.inputError.value"
+                v-model="input3.inputValue.value">
+            </InputText>
+            <p>用 v-model 監聽: {{ input3.inputValue }}</p>
 
             <h6>Option</h6>
             <Btn btnType="form" btnStyle="option" v-model="selectedOptions">選項1</Btn>
@@ -86,13 +96,14 @@
             pX="0">
         </LightBox>
     </section>
-
+    <MainFooter class="bg-yellow-2"></MainFooter>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
 
 import MainHeader from '../components/MainHeader.vue';
+import MainFooter from '../components/MainFooter.vue';
 import Btn from '../components/Btn.vue';
 import InputText from '../components/InputText.vue';
 import DropdownQa from "../components/DropdownQa.vue";
@@ -116,6 +127,13 @@ const input2 = {
     inputValue: ref(''),
     inputError: ref(false),
 }
+const input3 = {
+    textAlign: 'textLeft',
+    placeHolder: '這裡填預設文字',
+    errorMsg: 'Invalid Input',
+    inputValue: ref(''),
+    inputError: ref(false),
+}
 
 watch(input1.inputValue, (newValue, oldValue) => {
     if (input1.inputValue.value.includes('123')) {
@@ -129,6 +147,13 @@ watch(input2.inputValue, (newValue, oldValue) => {
         input2.inputError.value = true;
     } else {
         input2.inputError.value = false;
+    }
+})
+watch(input3.inputValue, (newValue, oldValue) => {
+    if (input3.inputValue.value.includes('123')) {
+        input3.inputError.value = true;
+    } else {
+        input3.inputError.value = false;
     }
 })
 // 問卷問題的選項

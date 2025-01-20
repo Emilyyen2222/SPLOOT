@@ -3,7 +3,7 @@
 
     <input 
     type="text"
-    :class="textAlign"
+    :class="[textAlign, size]"
     :placeholder="placeHolder"
     :value="modelValue"
     @input="updateValue">
@@ -17,6 +17,10 @@
   import { ref, defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
+    size: {
+      type: String,
+      default: '',
+    },
     textAlign: {
       type: String,
       default: 'textCenter'
@@ -27,7 +31,7 @@
     },
     errorMsg: {
       type: String,
-      required: true,
+      default: 'Invalid Input'
     },
     hasError: {
       type: Boolean,
