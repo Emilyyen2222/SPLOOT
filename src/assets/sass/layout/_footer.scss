@@ -57,12 +57,12 @@
         }
     }
     .footerBottom{
-        // height: 42rem;
         padding: 24px 0 56px 11.2rem;
-
+        
         @include md(){             
-            width: 80%;
-            margin: 24px auto 56px;
+            padding: 24px 2.4rem 56px;
+
+            text-align: center;
         }
 
         .tibame{
