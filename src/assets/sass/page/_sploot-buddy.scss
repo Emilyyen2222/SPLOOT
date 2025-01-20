@@ -12,8 +12,6 @@ body{
         max-width: 1008px;
         width: 100%;
 
-        color: map-get($colors, blue);
-
         .heroTitle{
             display: flex;
             justify-content: center;
@@ -110,7 +108,7 @@ body{
                         }
 
                         .city{           
-                            z-index: 1000; //上層需要壓過下層選單
+                            z-index: 950; //上層需要壓過下層選單
                         }
                     }
                 }
