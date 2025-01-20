@@ -33,12 +33,13 @@
                         display: flex;
                         flex-direction: column;
                         align-items: center;
-                        gap: .8rem;
+                        justify-content: space-between;
             
                         width: 8rem;
+                        height: 1.2rem;
                         .line{
                             width: 2.4rem;
-                            height: 3px;
+                            height: 2px;
 
                             background-color: map-get($colors, $theme);
                             transition: all .3s ease;
@@ -46,11 +47,11 @@
                         
                         &.-navFocus{
                             .line:first-child{
-                                transform: translateY(.55rem) rotate(45deg);
+                                transform: translateY(.5rem) rotate(45deg);
                                 transition: transform .3s ease;
                             }
                             .line:last-child{
-                                transform: translateY(-.55rem) rotate(-45deg);
+                                transform: translateY(-.5rem) rotate(-45deg);
                                 transition: transform .3s ease;
                             }
                         }
