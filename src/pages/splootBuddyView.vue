@@ -1,6 +1,5 @@
 <template>
  <MainHeader theme="blue" bgc="blueberry-0"></MainHeader>
- <!-- <main class="bg-blueberry-0"> -->
 <!-- 主內容 -->
 <div class="wrapper">
 
@@ -200,7 +199,7 @@
         </div>
     </div>
 </LightBox>
-<!-- </main> -->
+
 <MainFooter></MainFooter>
 <!-- <PopUp
 :is-pop-up="isPopUp"
