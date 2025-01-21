@@ -21,9 +21,9 @@
             <!-- 貼文內容介紹 -->
             <div class="postContent">
                 <div class="postTop">
-                <div class="postImg">
-                    <img src="../assets/img/buddy-post/demo.png" alt="">
-                </div>
+                    <div class="postImg">
+                        <img src="../assets/img/buddy-post/demo.png" alt="">
+                    </div>
                 <div class="postMain">                
                         <div class="postTitle">
                             <h5 class="bold">高速散步</h5>
@@ -50,10 +50,10 @@
             </div>
             <!-- 貼文者資訊 -->
             <div class="poster">
-                <div class="avatar">
-                    <img class="avatarImg" src="../assets/img/buddy-post/avatarImg.svg" alt="avatar">
-                </div>
-                <div class="information">
+                <div class="userBox">
+                    <div class="avatar">
+                        <img class="avatarImg" src="../assets/img/buddy-post/avatarImg.svg" alt="avatar">
+                    </div>
                     <div class="topContent">
                         <h5 class="bold name">高倉健</h5>
                         <div class="location">
@@ -61,6 +61,8 @@
                             <p class="smallText">文山區, 臺北</p>
                         </div>
                     </div>
+                </div>
+                <div class="information">
                     <div class="middleContent">
                         <div class="petType tagBox">
                             <p class=" smallText">寵物類型</p>
@@ -107,7 +109,7 @@
         <div class="commentContent">
             <div class="newComment">
                 <h6 class="bold">最新評論</h6>
-                <Btn btnStyle="baseline small">所有評論</Btn>  <!-- 要改成xs字型 -->
+                <Btn btnStyle="baseline small" @click="toggleLightBox">所有評論</Btn>  <!-- 要改成xs字型 -->
             </div>
             <!-- 評論卡片 -->
             <ul class="commentCards">
@@ -208,9 +210,82 @@
                 </div>
             </div>
         </div>
+        <!-- 所有評論 -->
+        <LightBox 
+            :title="lightTitle.title"
+            :is-light-box="isLightBox" 
+            @toggle="toggleLightBox">
+           <ul class="commentCards inLightBox">
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/demologo.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">Emily</h6>
+                               <p class="xsText">2024/12/25</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。</p>
+                       </div>
+                   </li>
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/L.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">Lupe Chen</h6>
+                               <p class="xsText">2025/1/2</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">服務不錯，但總覺得他有點心不在焉。</p>
+                       </div>
+                   </li>
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/S.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">鄒宗翰</h6>
+                               <p class="xsText">2025/1/11</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">散步路線很特別，還有經過詛咒隧道，挺有趣的。</p>
+                       </div>
+                   </li>
+           </ul>     
+        </LightBox>
     </div>
  </div>
 <MainFooter></MainFooter>
+
+
 </template>
 
 <script setup>
@@ -220,6 +295,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import Btn from '@/components/Btn.vue';
 import MainFooter from "@/components/MainFooter.vue"
 import InputText from '../components/InputText.vue';
+import LightBox from '../components/LightBox.vue';
 
 
 const input = {
@@ -230,4 +306,20 @@ const input = {
     inputError: ref(false),
 }
 
+// 燈箱標題請輸入
+const lightTitle = {title: "所有評論"}
+
+//燈箱狀態
+let isLightBox = ref(false);
+
+// 控制燈箱的顯示與隱藏
+function toggleLightBox() {
+  isLightBox.value = !isLightBox.value;
+  // 停止捲軸
+  if (isLightBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
 </script>

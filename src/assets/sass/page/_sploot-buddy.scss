@@ -18,6 +18,11 @@ body{
             align-content: flex-start;
             gap: 1.6rem;
 
+            @include sm(){
+                flex-direction: column;
+                text-align: center
+            }
+
             .enTitle{
                 @include bayon(49);
                 line-height: 6.6rem;
@@ -65,15 +70,34 @@ body{
                     width: 100%;
                     max-width: 238rem;
                     height: 6rem;
-                    padding: 1.6rem 3.2rem;
+                    padding: 1.6rem 2.8rem;
                     border: 1px solid map-get($colors, natural-1);
                     border-radius: 8px;
+
+                    @include md{
+                        padding: 1.6rem 0.4rem;
+                    }
+
+                    @include sm{
+                        flex-direction: column;
+                        align-items: center;
+                    }
 
                     .typeIcon{
                         width: 28px;
                         height: 28px;
 
                         margin-right: 8px;
+
+                        @include sm{
+                            margin-right: 0;
+                        }
+                    }
+
+                    .smallText{
+                        @include sm{
+                            @include textStyle(xsText);
+                        }
                     }
                 }
             }
@@ -135,7 +159,12 @@ body{
                             height: 4rem;
                             padding: 0 2.4rem;
                             border: 1px solid map-get($colors, natural-1);
-                            border-radius: 100px
+                            border-radius: 100px;
+
+                            @include md(){
+                                padding: 0 1.2rem;
+                                @include textStyle(xsText);
+                            }
     
                         }
                         .petTypes.clicked{

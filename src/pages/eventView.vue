@@ -29,7 +29,6 @@
                 <!-- 上右 行程日曆 -->
                 <div class="topRight">
                     <div class="calendar">
-                        <!-- <img src="@/assets/img/pet-calendar/ca.png" alt=""> -->
                          <Calendar></Calendar>
                     </div>
                 </div>
@@ -94,9 +93,9 @@
 <script setup>
     import { ref } from 'vue';
     
-    import MainHeader from "../components/MainHeader.vue";
-    import Btn from '../components/Btn.vue';
-    import Calendar from '../components/calendar.vue';
+    import MainHeader from "@/components/MainHeader.vue";
+    import Btn from '@/components/Btn.vue';
+    import Calendar from '@/components/Calendar.vue'
     import MainFooter from "@/components/MainFooter.vue"
 
 

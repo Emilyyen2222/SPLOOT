@@ -222,9 +222,6 @@
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
 
-    // 燈箱標題請輸入
-    const lightTitle = {title: "值得信任的毛孩小幫手"}
-
     const city = {
     placeHolder: '請選擇城市',
     options: [
@@ -307,6 +304,9 @@
             serviceTimeEnd: "18:00",
         },
     ])
+
+// 燈箱標題請輸入
+const lightTitle = {title: "值得信任的毛孩小幫手"}
 
  //燈箱狀態
 let isLightBox = ref(false);

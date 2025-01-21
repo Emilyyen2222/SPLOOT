@@ -13,7 +13,3 @@ import {ref} from 'vue'
 const selectedColor = ref('yellow');
 
 </script>
-
-<style lang="scss" scoped>
-
-</style>
