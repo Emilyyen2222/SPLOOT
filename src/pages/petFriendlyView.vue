@@ -14,10 +14,10 @@
             </div>
             <!-- 滑動switch -->
             <div class="switch" id="switch">
-                    <input type="radio" id="hospital" name="option" class="switch-input">
-                    <input type="radio" id="restaurant" name="option" class="switch-input">
-                    <input type="radio" id="park" name="option" class="switch-input">
-                    <input type="radio" id="hotel" name="option" class="switch-input">
+                    <input type="radio" id="hospital" name="option" class="switch-input" @change="setActive('hospital')">
+                    <input type="radio" id="restaurant" name="option" class="switch-input" @change="setActive('restaurant')">
+                    <input type="radio" id="park" name="option" class="switch-input" @change="setActive('park')">
+                    <input type="radio" id="hotel" name="option" class="switch-input" @change="setActive('hotel')">
                     <div class="slider"></div>
                     <div class="labels xsText">
                     <label for="hospital"><img src="../assets/img/icon/hospital.svg" alt="hospital">動物醫院</label>
@@ -29,7 +29,7 @@
             <!-- 地點卡-->
             <ul class="facilityCard">
 
-                <li class="facilityCards" v-for="(card, index) in cardsData" :key="index">
+                <li class="facilityCards" v-for="(card, index) in filterData" :key="index">
                     <div class="cardsContent">
                         <div class="cardsImg">
                             <img :src="card.imgSrc" :alt="card.imgAlt">
@@ -60,46 +60,170 @@
 </template>
 
 <script setup>
-    import {ref} from "vue";
+    import {ref, computed} from "vue";
 
     import MainHeader from "@/components/MainHeader.vue";
     import Btn from '@/components/Btn.vue';
     import MainFooter from '@/components/MainFooter.vue'
 
     //data
-    const cardsData = ref([
+    const type = ref(
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            imgAlt: "",
-            iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            iconAlt: "",
-            type: "友善餐廳",
+        hospital: {
+            icon: new URL("@/assets/img/icon/hospital.svg", import.meta.url).href
+        },
+        restaurant: {
+            icon: new URL("@/assets/img/icon/restaurant.svg", import.meta.url).href
+        },
+        park: {
+            icon: new URL("@/assets/img/icon/park.svg", import.meta.url).href
+        },
+        hotel: {
+            icon: new URL("@/assets/img/icon/hotel.svg", import.meta.url).href
+        },
+    }
+    )
+
+    const rawCardsData = ref([
+
+        //醫院
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-1.jpg", import.meta.url).href,
+            type: "hospital",  //和type產生關聯
+            name: "愛達司動物醫院",
+            content: "新店的動物醫療服務，關心每隻毛孩的健康，讓愛犬愛貓安心療養。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-2.jpg", import.meta.url).href,
+            type: "hospital",
+            name: "人人愛動物醫院",
+            content: "致力於提供高品質的動物醫療照護，專業診療，讓寵物重獲健康快樂。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-3.jpg", import.meta.url).href,
+            type: "hospital",
+            name: "王樣動物醫院",
+            content: "永康街上的動物醫院，醫療品質好，專精於小動物及癱瘓治療。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-4.jpg", import.meta.url).href,
+            type: "hospital",
+            name: "梅西動物醫療中心",
+            content: "位於高雄的綜合性動物醫療服務，設備齊全，關愛每個毛孩的健康需求。",
+        },
+
+        //餐廳
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-1.jpg", import.meta.url).href,
+            type: "restaurant",  //和type產生關聯
+            name: "象園咖啡內湖店",
+            content: "附設露台和遊樂場的休閒親子餐廳，供應異國佳餚。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-2.jpg", import.meta.url).href,
+            type: "restaurant",
+            name: `大稻埕貴賓 寵物友善餐廳`,
+            content: "建築古色古香，還有店狗與顧客互動，料理評價也高。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-3.jpg", import.meta.url).href,
+            type: "restaurant",
+            name: "哈time貓咪咖啡",
+            content: "寵物友善咖啡廳，本店全採預約制，近菜寮捷運站2號出口。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-4.jpg", import.meta.url).href,
+            type: "restaurant",
             name: "沐 • Moon Street Cafe",
-            content: "待填寫",
+            content: "寵物可落地可上椅，有提供寵物餐點，環境舒服，是假日放鬆好去處。",
+        },
+
+        //公園
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/park-1.jpg", import.meta.url).href,
+            type: "park",  //和type產生關聯
+            name: "迎風狗運動公園",
+            content: "設有安全圍籬的草地，遊客可欣賞市區摩天大樓景色，讓狗狗自由活動。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            imgAlt: "",
-            iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            iconAlt: "",
-            type: "友善餐廳",
-            name: "中正紀念堂",
-            content: "待填寫",
+            imgSrc: new URL("@/assets/img/pet-friendly/park-2.jpg", import.meta.url).href,
+            type: "park",
+            name: "大佳河濱公園",
+            content: "面積廣大的公園，附設河畔自行車道與運動場，是從事活動的熱門去處。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            imgAlt: "",
-            iconSrc: new URL("@/assets/img/pet-friendly/cards1.png", import.meta.url).href,
-            iconAlt: "",
-            type: "友善餐廳",
-            name: "緯育TibaMe台北職訓中心",
-            content: "待填寫",
+            imgSrc: new URL("@/assets/img/pet-friendly/park-3.jpg", import.meta.url).href,
+            type: "park",
+            name: "竹東狗狗公園",
+            content: "環境地點佳，停車方便，夜幕來臨時公園裡的燈光優美，適合親子共遊。",
         },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/park-4.jpg", import.meta.url).href,
+            type: "park",
+            name: "高屏溪河濱寵物公園",
+            content: "設備完善，場地空曠好停車，十分適合家庭帶毛小孩來玩耍的好地方",
+        },
+
+        //旅館
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-1.jpg", import.meta.url).href,
+            type: "hotel",  //和type產生關聯
+            name: "里萊行旅",
+            content: "可與毛孩一同入住，距離桃園夜市3公里，距離景福寺和桃園火車站4公里。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-2.jpg", import.meta.url).href,
+            type: "hotel",
+            name: "太陽慢慢走",
+            content: "公寓住宅區，距離台南火車站2公里，以及有一群店狗守護著貴賓們。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-3.jpg", import.meta.url).href,
+            type: "hotel",
+            name: "月亮慢慢走",
+            content: "自助式check in，旅館內會有店貓不時出來巡邏與陪玩陪睡。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-4.jpg", import.meta.url).href,
+            type: "hotel",
+            name: "牠的足跡寵物友善民宿",
+            content: "環境溫馨，傢俱與佈置對寵物相當友善，旁邊有大公園讓毛孩散步。",
+        },
+        
     ])
 
+    //用type匯入對應icon
+    const cardsData = computed(() =>
+    rawCardsData.value.map((card) => ({
+    ...card,
+    iconSrc: type.value[card.type]?.icon || "", // 根據 type 動態取出 icon
+  }))
+);
+
+//-----------------------------過濾器---------------------------------------
+
+const activeCard = ref();
+
+//change事件 
+function setActive(cardtType){
+    activeCard.value = cardtType;
+} 
+
+const filterData = computed(()=>{
+
+    //如果都不選 顯示醫院
+    if(!activeCard.value){
+        return cardsData.value.filter((card) => card.type === 'hospital');
+    }
+    //回傳過濾點選後的值
+    return cardsData.value.filter((card) => card.type === activeCard.value);
+})
+
+
+//------------------------------------地圖部分----------------------------------
     const map = ref(null);
      // iframe切換
-    const iframeSrc = ref('https://maps.google.com/maps?q=沐 • Moon Street Cafe&z=15&output=embed');
+    const iframeSrc = ref('https://maps.google.com/maps?q=愛達司動物醫院&z=15&output=embed');
 
     let mapMove = ref(false);
 

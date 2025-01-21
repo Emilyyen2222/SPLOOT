@@ -19,22 +19,22 @@
     <div class="selectTypeSection">
         <ul class="buddyType">
             <li class="buddyTypes walkies">
-                <img src="@/assets/img/footer-blue.svg" alt="walkies" class="typeIcon">
+                <img src="@/assets/img/icon/walkies.svg" alt="walkies" class="typeIcon">
                     <p class="smallText">散步陪伴</p>
                 </img>
             </li>
             <li class="buddyTypes homeCare">
-                <img src="@/assets/img/footer-blue.svg" alt="homecare" class="typeIcon">
+                <img src="@/assets/img/icon/homeCare.svg" alt="homecare" class="typeIcon">
                     <p class="smallText">到府照顧</p>
                 </img>
             </li>
             <li class="buddyTypes fostering">
-                <img src="@/assets/img/footer-blue.svg" alt="fostering" class="typeIcon">
+                <img src="@/assets/img/icon/fostering.svg" alt="fostering" class="typeIcon">
                     <p class="smallText">友善寄宿</p>
                 </img>
             </li>
             <li class="buddyTypes petDrop">
-                <img src="@/assets/img/footer-blue.svg" alt="petdrop" class="typeIcon">
+                <img src="@/assets/img/icon/petDrop.svg" alt="petdrop" class="typeIcon">
                     <p class="smallText">毛孩計程車</p>
                 </img>
             </li>
