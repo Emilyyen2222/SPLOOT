@@ -1,0 +1,400 @@
+@mixin homeCircle($bgc, $pos){
+  position: absolute;
+  @if($pos == bottom){
+    bottom: min(-868px, -70vw);
+  }@else if($pos == top){
+    top: 0;
+  }@else if($pos == center){
+    top: 50%;
+  }
+  left: 50%;
+  z-index: -5;
+
+  width: max(868px, 70vw);
+  height: max(868px, 70vw);
+  border-radius: 50%;
+  background-color: map-get($colors, $bgc);
+
+  transform: translate(-50%, -50%); 
+}
+@mixin homeScreen(){
+  @media screen and ((max-width:1440px) and (min-width: 992px)){
+      @content;
+  }
+}
+#home{
+  overflow-x: hidden;
+
+  section{
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
+
+    display: grid;
+    place-items: center;
+
+    width: 100vw;
+    height: 100vh;
+    padding-top: 6.4rem;
+
+    
+    .mainBox{
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 6.4rem);
+      @include lg(){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: end;
+
+        max-height: calc(100vh - 6.4rem);
+      }
+      
+      .bigText{
+        @include bayon(168);
+        text-align: center;
+
+        @include homeScreen(){
+          font-size: calc(168 / 1440 * 100) + vw;
+          line-height: calc(168 / 1440 * 90) + vw;
+        }
+        @include lg(){
+          @include bayon(168);
+          padding: 0 2.4rem;
+        }
+        @include sm(){
+          @include bayon(88);
+        }
+  
+      }
+
+      img{
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        @include lg(){
+          position: static;
+          width: auto;
+          height: 44vh;
+        }
+      }
+
+      .mainText{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4.8rem;
+
+        width: 50rem;
+        text-align: center;
+
+        @include homeScreen(){
+          gap: calc(48 / 1440 * 100) + vw;
+          width: calc(500 / 1440 * 100) + vw;
+        }
+        @include lg(){
+          position: static;
+
+          width: 100vw;
+          padding: 0 2.4rem;
+          margin-bottom: 7.2rem;
+        }
+
+        .content{
+          @include homeScreen(){
+            h2{
+              font-size: calc(49 / 1440 * 100) + vw;
+              line-height: calc(64 / 1440 * 100) + vw;
+            }
+            h6{
+              font-size: calc(20 / 1440 * 100) + vw;
+              line-height: calc(32 / 1440 * 100) + vw;
+              letter-spacing: calc(20 * .04 / 1440 * 100) + vw;
+            }
+          }
+          @include lg(){
+            h2{ @include textStyle(h3, bold)}
+          }
+        }
+
+        .defaultBtn{ 
+          width: 24rem; 
+          @include homeScreen(){
+            width: calc(240 / 1440 * 100) + vw;
+            .btn.primary.large{
+              font-size: calc(20 / 1440 * 100) + vw;
+              line-height: calc(32 / 1440 * 100) + vw;
+              letter-spacing: calc(20 * .04 / 1440 * 100) + vw;
+              height: calc(40 / 1440 * 100) + vw;
+              padding: calc(8 / 1440 * 100) + vw calc(16 / 1440 * 100) + vw;
+  
+              span{
+                &::after{
+                  top: calc(50% - 0.277vw);
+                  width: calc(8 / 1440 * 100) + vw;
+                  height: calc(8 / 1440 * 100) + vw;
+                }
+              }
+
+              &:hover{
+                span{ transform: translateX(calc(-8 / 1440 * 100) + vw)}
+              }
+            }
+          }
+        
+        }
+      }
+    }
+  }
+
+.landing{
+  .mainBox{
+    position: relative;
+    max-width: 1101px;
+    max-height: 714px;
+    @include homeScreen(){
+      max-width: calc(1101 / 1440 * 100) + vw;
+      max-height: calc(714 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 2rem;
+      z-index: -1;
+      @include homeScreen(){
+        top: calc(20 / 1440 * 100) + vw;
+      }
+    }
+
+    img{
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      @include lg(){
+        transform: none;
+      }
+    }
+  }
+  .landingCircle{
+    position: absolute;
+    top: 58rem;
+    left: 50%;
+    z-index: -5;
+    transform: translate(-50%, -50%); 
+  }
+  
+}
+
+.match{
+  .mainBox{
+    position: relative;
+    max-width: 1142px;
+    max-height: 680px;
+    @include homeScreen(){
+      max-width: calc(1142 / 1440 * 100) + vw;
+      max-height: calc(680 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 2rem;
+      z-index: -1;
+      @include homeScreen(){
+        top: calc(20 / 1440 * 100) + vw;
+      }
+    }
+    .mainText{
+      position: absolute;
+      z-index: 1;
+      top: 85px;
+      left: 85px;
+      @include homeScreen(){
+        top: calc(85 / 1440 * 100) + vw;
+        left: calc(85 / 1440 * 100) + vw;
+      }
+      @include lg(){
+        position: static;
+      }
+    }
+  }
+  .homeCircle{
+    @include homeCircle(purple-1, bottom );
+  }
+  
+}
+
+.splootBox{
+  .mainBox{
+    position: relative;
+    max-width: 1040px;
+    max-height: 680px;
+    @include homeScreen(){
+      max-width: calc(1040 / 1440 * 100) + vw;
+      max-height: calc(680 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 12.4rem;
+      z-index: -1;
+      @include homeScreen(){
+        top: calc(124 / 1440 * 100) + vw;
+      }
+      
+    }
+    .mainText{
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 27rem;
+      @include homeScreen(){
+        top: calc(0 / 1440 * 100) + vw;
+        left: calc(270 / 1440 * 100) + vw;
+      }
+      @include lg(){
+        position: static;
+      }
+    }
+  }
+  .homeCircle{
+    @include homeCircle(pink-1, top);
+  }
+}
+
+.splootBuddy{
+  .mainBox{
+    position: relative;
+    max-width: 1172px;
+    max-height: 680px;
+    @include homeScreen(){
+      max-width: calc(1172 / 1440 * 100) + vw;
+      max-height: calc(680 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 2rem;
+      z-index: -1;
+      @include homeScreen(){
+        top: calc(20 / 1440 * 100) + vw;
+      }
+      
+    }
+    .mainText{
+      position: absolute;
+      z-index: 1;
+      top: 4rem;
+      right: 5.2rem;
+      @include homeScreen(){
+        top: calc(40 / 1440 * 100) + vw;
+        right: calc(52 / 1440 * 100) + vw;
+      }
+      @include lg(){
+        position: static;
+      }
+    }
+  }
+  .homeCircle{
+    @include homeCircle(blueberry-1, bottom);
+  }
+}
+
+.event{
+  .mainBox{
+    position: relative;
+    max-width: 1086px;
+    max-height: 680px;
+    @include homeScreen(){
+      max-width: calc(1086 / 1440 * 100) + vw;
+      max-height: calc(680 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 2rem;
+      z-index: -1;
+      @include homeScreen(){
+        top: calc(20 / 1440 * 100) + vw;
+      }
+      
+    }
+    .mainText{
+      position: absolute;
+      z-index: 1;
+      top: 4.8rem;
+      left: 3.2rem;
+      @include homeScreen(){
+        top: calc(48 / 1440 * 100) + vw;
+        left: calc(32 / 1440 * 100) + vw;
+      }
+      @include lg(){
+        position: static;
+      }
+    }
+  }
+  .homeCircle{
+    @include homeCircle(yellow-1, top);
+  }
+}
+
+.splootFriendly{
+  .mainBox{
+    position: relative;
+    max-width: 1036px;
+    max-height: 680px;
+    @include homeScreen(){
+      max-width: calc(1036 / 1440 * 100) + vw;
+      max-height: calc(680 / 1440 * 100) + vw;
+    }
+    @include lg(){
+      max-height: calc(100vh - 6.4rem);
+    }
+
+    .bigText{
+      position: absolute;
+      top: 2rem;
+      z-index: -1;
+
+      @include homeScreen(){
+        top: calc(20 / 1440 * 100) + vw;
+      }
+      
+    }
+    .mainText{
+      position: absolute;
+      z-index: 1;
+      top: 4.2rem;
+      left: 28rem;
+      @include homeScreen(){
+        top: calc(42 / 1440 * 100) + vw;
+        left: calc(280 / 1440 * 100) + vw;
+      }
+      @include lg(){
+        position: static;
+      }
+    }
+  }
+  .homeCircle{
+    @include homeCircle(blue-2, bottom);
+  }
+}
+
+
+}
