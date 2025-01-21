@@ -43,7 +43,8 @@
 
             <h6>Input (小) size = "small"</h6>
             <InputText
-                size = "small"
+                :size = "input3.size"
+                :textAlign = "input3.textAlign"
                 :placeHolder="input3.placeHolder"
                 :errorMsg="input3.errorMsg"
                 :hasError="input3.inputError.value"
@@ -128,6 +129,7 @@ const input2 = {
     inputError: ref(false),
 }
 const input3 = {
+    size: 'small',
     textAlign: 'textLeft',
     placeHolder: '這裡填預設文字',
     errorMsg: 'Invalid Input',
