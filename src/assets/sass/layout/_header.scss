@@ -72,8 +72,29 @@
                     @include textStyle(smallText);
                     display: flex;
                     gap: 2.4rem;
-            
-                    @include md(){ display: none; }
+
+                    @include md(){ 
+
+                        @include textStyle(h5, bold);
+                        position: absolute;
+                        top: -100vh;
+                        left: 0;
+                        z-index: -1;
+    
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        width: 100vw;
+                        height: 100vh;
+
+                        text-align: center;
+                        transition: all .6s ease;
+                        &.-navFocus{
+                            top: 0;
+                            
+                        }
+                    }
             
                     a{
                         display: block;
@@ -81,6 +102,10 @@
 
                         color: map-get($colors, $theme);
                         line-height: 4.8rem;  
+
+                        @include md(){
+                            color: map-get($themeColors, $theme);
+                        }
                         
                         &::after{
                             content: "";
@@ -99,6 +124,10 @@
                             width: 100%;
                             opacity: 1;
                             visibility: visible;
+
+                            @include md(){
+                                opacity: 0;
+                            }
                         }
                     }
                     

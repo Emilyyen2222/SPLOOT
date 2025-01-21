@@ -13,7 +13,7 @@
                     <img :src="themes[props.theme].logoUrl" alt="Logo">
                 </RouterLink>
             </div>
-            <ul class="headerList" :class="{'-navFocus': isNavFocus}">
+            <ul class="headerList" :class="[{ '-navFocus': isNavFocus }, { ['bg-' + props.bgc]: isMD }]">
                 <li class="headerItem" 
                 v-for="(item, index) in [
                     { name: '認識新毛友', link: '/match'},
@@ -32,7 +32,7 @@
 </template>
   
 <script setup>
-    import { ref, defineProps, reactive } from 'vue';
+    import { ref, defineProps, onMounted} from 'vue';
     import { useRoute } from 'vue-router';
     
     import Btn from './Btn.vue';
@@ -59,10 +59,24 @@
     }
 
     const isNavFocus = ref(false);
+    const isMD = ref(false);
+    if(window.innerWidth <= 768){
+        isMD.value = true;
+    }
 
     function toggleNav(){
         isNavFocus.value = !isNavFocus.value
     }
+    
+    onMounted(() => {
+        window.addEventListener('resize', () => {
+            if(window.innerWidth > 768){
+                isMD.value = false;
+            }else{
+                isMD.value = true;
+            }
+        })
+    });
 
 
 </script>

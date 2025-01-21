@@ -26,9 +26,9 @@ main {
 @import 'layout/header';
 
 // page
-@import 'page/index';
-@import 'page/_login-signup';
-@import 'page/_member-center';
+@import 'page/home';
+@import 'page/login-signup';
+@import 'page/member-center';
 @import 'page/pet-friendly';
 @import 'page/question';
 @import 'page/splootbox';

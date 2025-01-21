@@ -1,5 +1,5 @@
 <template>
-    <MainHeader theme="red" bgc=""></MainHeader>
+    <MainHeader theme="red" bgc="purple-1"></MainHeader>
     <!-- <main class="bg-purple-1" style="z-index: -10;"> -->
     <!------------------------match question 1---------------------->
 <div class="matchWrap firstBox">
@@ -132,4 +132,11 @@
     }, 3000); 
     </script>
     
-    
+<style lang="scss" scoped>
+    header{
+        &.bg-purple-1{
+            background-color: transparent;
+        }
+    }
+
+</style>
