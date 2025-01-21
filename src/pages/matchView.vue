@@ -6,21 +6,22 @@
     <div class="questionContainer">
         <h4 class="title bold">我想認識的毛孩朋友是</h4>
         <div class="image">
-            <div class="imgFlex">
-            <img class="img2" src="@/assets/img/splootbox/dogbox.avif" alt="">
-            </div>
+            <RouterLink to="/match/matchCard" style="cursor: pointer;">
+                <div class="imgFlex">
+                <img class="img2" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                </div>
+            </RouterLink>    
         </div>
     </div>
-    <div v-show="true" class="options">
-        <Btn btnType="form" btnStyle="option">貓貓</Btn>
+    <div class="options">
+        <RouterLink to="/match/petInfoCard" style="cursor: pointer;">
+            <Btn btnType="form" btnStyle="option">貓貓</Btn>
+        </RouterLink>
         <Btn btnType="form" btnStyle="option">狗狗</Btn>
         <Btn btnType="form" btnStyle="option">不限</Btn>
     </div>
     <!-- progress bar -->
     <div class="progressBarContainer">
-        <div class="btnContainer">
-            <Btn class="" btnStyle="baseline default">直接配對</Btn>
-        </div>
         <div class="progressBar">
             <div class="progressSegment filled"></div>
             <div class="progressSegment"></div>
@@ -28,7 +29,11 @@
             <div class="progressSegment"></div>
         </div>
     </div>
+    <div class="btnContainer">
+        <Btn class="" btnStyle="baseline default">直接配對</Btn>
+    </div>
 </div>
+
    <!------------------------match question2貓---------------------->
 <div class="matchWrap">
     <div class="questionContainer">
@@ -111,25 +116,19 @@
     <!-- circle bg -->
         <div class="circleMatch"></div>
     <!-- </main> -->
-    </template>
+    
+</template>
     
     <script setup>
+        import {ref} from "vue";
         import MainHeader from "../components/MainHeader.vue";
         import DropdownMenu from "../components/DropdownMenu.vue";
         import Btn from '../components/Btn.vue';
         import InputText from '../components/InputText.vue';
-        import { ref } from 'vue';
 
 
+        
 
-    // v-if="currentQuestion === 1"
-    // v-if="currentQuestion !== 4"
-    // 追蹤當前問題
-    const currentQuestion = ref(1);
-    // 跳轉到下題
-    setTimeout(() => {
-        currentQuestion.value = 5;
-    }, 3000); 
     </script>
     
 <style lang="scss" scoped>

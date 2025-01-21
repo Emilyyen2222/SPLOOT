@@ -52,6 +52,24 @@ const routes = [
     }
   },
   {
+    path: '/match/matchCard',
+    component: () => import('@/pages/matchCardView.vue'),
+    meta: {
+      title: '認識毛毛友 | MatchCard',
+      theme: 'red',
+      bodyBg: 'purple-1',
+    }
+  },
+  {
+    path: '/match/petInfoCard',
+    component: () => import('@/pages/petInfoCardView.vue'),
+    meta: {
+      title: '認識毛毛友 | petInfoCard',
+      theme: 'red',
+      bodyBg: 'purple-1',
+    }
+  },
+  {
     path: '/sploot-buddy',
     component: () => import('@/pages/splootBuddyView.vue'),
     meta: {

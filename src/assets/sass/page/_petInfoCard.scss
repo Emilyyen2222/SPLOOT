@@ -1,0 +1,144 @@
+.infoContainer {
+    position: relative;
+    background: map-get($colors, beige);
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4rem;
+    .field{
+        display: flex;
+        align-items: center;
+        gap: 5.6rem;
+        @include md(){
+            flex-direction: column;
+            gap: 1.2rem;
+            align-items: start;
+        }
+        label{
+            width: 6.4rem;
+        }
+    }
+    .tags{
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-start;
+        gap: .8rem;
+        .tag{
+            padding: 0.8rem 1.6rem;
+            border: 1px solid map-get($colors, natural-1);
+            border-radius: 50px;
+            min-width: 7.5rem;
+            height: 4rem;
+            text-align: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    }
+    .infoTop{
+        padding: 2.4rem;
+        border-bottom: 1px solid map-get($colors, natural-1); 
+        .closeBtn{
+            display: flex;
+            justify-content: flex-end;
+        }
+        h4{
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .infoWrap{
+        display: flex;
+        flex-direction: column;
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+        gap: 1.2rem;
+        .wPhotoSec{
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 5.6rem;
+
+            width: 100%;
+            @include md(){
+                gap: .2rem;
+            }
+            .photo{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                img{
+                    align-self: flex-start;
+                    width: 100%;
+                    border-radius: 8px;
+                    @include sm(){
+                        display: none;
+                    }
+                }  
+            }
+            .infoSection{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between ;
+                gap: 1.2rem;
+
+                // max-width: 35rem;
+                .fieldWrapper{
+                    .petName{
+                        min-width: 30rem;
+                        width: 75%;
+                        max-width: 35rem;
+                        // width: 100%;
+                    }
+            }
+        }
+    }
+        .birthdaySection{
+            .birthFieldWrapper{
+                .birthBox{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1.2rem;
+                }
+                .year{
+                    width: 12rem;
+                }
+                .month{
+                    width: 12rem;
+                }
+                .date{
+                    width: 12rem;
+                }
+            }
+        }
+        .infoInput{
+            max-width: 56rem;
+        }
+        .breedOpt{
+                max-width: 35rem;
+                width: 75%;
+                min-width: 33rem;
+        }
+        .breedOptions{
+            display: flex;
+            align-items: center;
+            text-align: center;
+            gap: 1.2rem;
+        }
+        
+    }
+    .saveBtnBox{
+        position: absolute;
+        max-width: 65.6rem;
+        width: 100%;
+        padding: 0 1.2rem;
+        display: flex;
+        flex-direction: column;
+        left: 50%;
+        bottom: -10%;
+        transform: translateX(-50%);
+
+    }
+  }
+  

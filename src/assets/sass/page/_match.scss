@@ -50,6 +50,7 @@
             border-radius: 16px;
         }
     }
+    
 }
 
 // 內文
@@ -85,10 +86,11 @@
     }
 }
 .firstBox{
-    height: calc(100vh - 12.6rem);
+    height: calc(100vh - 13.6rem);
     }
 .btnContainer{
-    display: flex; 
-    justify-content: flex-end;
-    margin-bottom: 2.4rem;
+    position: fixed;
+    bottom: 36px;
+    right: 30px;
 }
+
