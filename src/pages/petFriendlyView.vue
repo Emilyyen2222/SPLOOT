@@ -111,6 +111,18 @@
             name: "梅西動物醫療中心",
             content: "位於高雄的綜合性動物醫療服務，設備齊全，關愛每個毛孩的健康需求。",
         },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-3.jpg", import.meta.url).href,
+            type: "hospital",
+            name: "王樣動物醫院",
+            content: "永康街上的動物醫院，醫療品質好，專精於小動物及癱瘓治療。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-4.jpg", import.meta.url).href,
+            type: "hospital",
+            name: "梅西動物醫療中心",
+            content: "位於高雄的綜合性動物醫療服務，設備齊全，關愛每個毛孩的健康需求。",
+        },
 
         //餐廳
         {
@@ -124,6 +136,18 @@
             type: "restaurant",
             name: `大稻埕貴賓 寵物友善餐廳`,
             content: "建築古色古香，還有店狗與顧客互動，料理評價也高。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-3.jpg", import.meta.url).href,
+            type: "restaurant",
+            name: "哈time貓咪咖啡",
+            content: "寵物友善咖啡廳，本店全採預約制，近菜寮捷運站2號出口。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-4.jpg", import.meta.url).href,
+            type: "restaurant",
+            name: "沐 • Moon Street Cafe",
+            content: "寵物可落地可上椅，有提供寵物餐點，環境舒服，是假日放鬆好去處。",
         },
         {
             imgSrc: new URL("@/assets/img/pet-friendly/restaurant-3.jpg", import.meta.url).href,
@@ -163,6 +187,18 @@
             name: "高屏溪河濱寵物公園",
             content: "設備完善，場地空曠好停車，十分適合家庭帶毛小孩來玩耍的好地方",
         },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/park-3.jpg", import.meta.url).href,
+            type: "park",
+            name: "竹東狗狗公園",
+            content: "環境地點佳，停車方便，夜幕來臨時公園裡的燈光優美，適合親子共遊。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/park-4.jpg", import.meta.url).href,
+            type: "park",
+            name: "高屏溪河濱寵物公園",
+            content: "設備完善，場地空曠好停車，十分適合家庭帶毛小孩來玩耍的好地方",
+        },
 
         //旅館
         {
@@ -176,6 +212,18 @@
             type: "hotel",
             name: "太陽慢慢走",
             content: "公寓住宅區，距離台南火車站2公里，以及有一群店狗守護著貴賓們。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-3.jpg", import.meta.url).href,
+            type: "hotel",
+            name: "月亮慢慢走",
+            content: "自助式check in，旅館內會有店貓不時出來巡邏與陪玩陪睡。",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-4.jpg", import.meta.url).href,
+            type: "hotel",
+            name: "牠的足跡寵物友善民宿",
+            content: "環境溫馨，傢俱與佈置對寵物相當友善，旁邊有大公園讓毛孩散步。",
         },
         {
             imgSrc: new URL("@/assets/img/pet-friendly/hotel-3.jpg", import.meta.url).href,
