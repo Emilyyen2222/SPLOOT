@@ -258,6 +258,8 @@ body{
             gap: .8rem;
         }
         .link{
+            cursor: pointer;
+
             color: map-get($colors, red);
             text-decoration: underline;
         }
@@ -286,5 +288,12 @@ body{
         h4{padding-bottom: 1.6rem;}
         .padding{padding-top: 4rem;}
     }
-    
+}
+.policy{
+    overflow-y: auto;
+    height: 60rem;
+    h6{
+    text-align: center;
+    margin:2.4rem 0;
+    }
 }

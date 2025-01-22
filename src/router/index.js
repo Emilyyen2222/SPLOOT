@@ -61,7 +61,7 @@ const routes = [
     }
   },
   {
-    path: '/match/petInfoCard',
+    path: '/petInfoCard',
     component: () => import('@/pages/petInfoCardView.vue'),
     meta: {
       title: '認識毛毛友 | petInfoCard',

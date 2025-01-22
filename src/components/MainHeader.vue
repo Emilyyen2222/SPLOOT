@@ -16,7 +16,7 @@
             <ul class="headerList" :class="[{ '-navFocus': isNavFocus }, { ['bg-' + props.bgc]: isMD }]">
                 <li class="headerItem" 
                 v-for="(item, index) in [
-                    { name: '認識新毛友', link: '/match'},
+                    { name: '認識新毛友', link: '/petInfoCard'},
                     { name: '訂閱寵物盒', link: '/sploot-box'},
                     { name: '尋找小幫手', link: '/sploot-buddy'},
                     { name: '毛孩日曆', link: '/sploot-event'},
