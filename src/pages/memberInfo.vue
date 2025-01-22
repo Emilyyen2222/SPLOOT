@@ -113,6 +113,7 @@
             bgc="transparent:50%"
             id="memberInfoPop" 
             class="memberInfo-update">
+            
             <div class="pb-container">
   
               <h6 class="bold">會員資料</h6>
@@ -128,37 +129,37 @@
                   <div class="card-content">   <!-- 之後用v-for，產6個 -->            
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait1.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait2.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait3.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait4.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait5.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
                     <div class="av-group">
                         <div class="avatar">           <!-- 頭相框 -->
-                        <img src="" alt="avatar">      <!-- 放頭像用 -->
+                          <img src="../assets/img/member-center/portrait6.svg" alt="avatar">      <!-- 放頭像用 -->
                         </div>
                         <smallText>小白</smallText>
                     </div>
