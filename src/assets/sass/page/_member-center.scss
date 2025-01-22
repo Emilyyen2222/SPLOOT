@@ -1,83 +1,59 @@
 
 // @use 'member-nav';  //不能，因為沒法取用base裡面的變數
 //===============================================
+
+.divider{
+  width: 100%;
+  height: 1px;
+  background-color: map-get($colors, natural-2 );
+}
+
+.lightBox{
+  position: fixed;
+}
+
+.blackCover{
+  right: 0;
+}
+// =========================================
  //background circle
- .whole-bg{}
+
 
 .member-circle{
   @include circle(map-get($colors, natural-2));
   position: fixed;
   top:143%; 
   left: 50%;
+  opacity: 0.2;
 }
 
 //sturcture
-.memberCenter {
-  max-width: 70vw;
-  margin: 0 auto;
-  .topNav {
-    width: 100%;
-    margin-bottom: 6.4rem;
-    .msg-n-avatar {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-bottom: .8rem;
-    }
-    .mcNav {
-      width: 100%;
-    }
-  }
 
-  .memberInfo {  //會更新的區塊
-    width: 100%;
-    padding: 2.4rem;
-    // 標題 會員資料  
-    .title2 {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.6rem;
-    }
-    // 氣直線
-    .divider {
-      width: 100%;
-      height: 1px;
-      background-color: #ccc;
-      margin-bottom: .8rem;
-    }
-    // 三張卡片的外層
-    .cards-container {}
-  }
+.whole-bg{
+  max-width: 80vw;
+  margin: 0 auto;
+  padding-top: 2.4rem;
 }
 
-// 頂部區塊(不會更新) : topNav
- //頭像 和 歡迎詞
-.msg-n-avatar{
+ //topNav: 會員中心的navigaiton
+ .topNav {
   width: 100%;
-  .avatar{
-    cursor: pointer;
-    width: 4.8rem;
-    height: 4.8rem;
-    border:2px solid map-get($colors, natural-0);
-    border-radius: 50%;
-  
-    background-color: #693413;
+  margin-bottom: 6.4rem;
+  .msg-n-avatar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: .8rem;
   }
-  
-  .msg-welcome{
-    width: calc(100% - 4.8rem);
-    text-align-last: left;
-    h5{}
-
-    span{}
+  .mcNav {
+    width: 100%;
   }
-} 
 
- //mcNav: 會員中心的navigaiton
-.mcNav{
+
+}
+
+ .mcNav{
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -108,6 +84,55 @@
 ol {
   li {}
 }
+
+
+.memberCenter {
+  width: 100%;
+}
+
+.memberInfo {  //會更新的區塊
+  width: 100%;
+  padding-bottom: 6rem;
+  .title2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.6rem;
+  }
+  // 氣直線
+  .divider {
+    margin-top: 1.6rem;
+    margin-bottom:2.4rem;
+  }
+  // 三張卡片的外層
+  .cards-container {}
+}
+
+// 頂部區塊(不會更新) : topNav
+ //頭像 和 歡迎詞
+.msg-n-avatar{
+  width: 100%;
+  .avatar{
+    cursor: pointer;
+    width: 4.8rem;
+    height: 4.8rem;
+    border:2px solid map-get($colors, natural-0);
+    border-radius: 50%;
+  
+    background-color: #693413;
+  }
+  
+  .msg-welcome{
+    width: calc(100% - 4.8rem);
+    text-align-last: left;
+    h5{}
+
+    span{}
+  }
+} 
+
+
 
 
 // =============================
@@ -144,7 +169,12 @@ ol {
     .card-content{
       display: flex;
       flex-direction: column;
-      gap: .4rem;
+      gap: 1.6rem;
+    }
+
+    .input-group{
+      width: 100%;
+      display: flex;
     }
 
     .bi-inbox{
@@ -219,38 +249,14 @@ ol {
 // ===============================================
 //memberInfo update, pop up，彈窗
 
-.memberInfo-update {
-  width: 55vw;
-  max-width: 99vw;
-  margin: 3.9rem auto 0 auto;
-  padding-top: 4.4rem;
+.memberInfo-update { // LightBox的外層
+  // width: 55vw;
+  // max-width: 99vw;
+  // margin: 3.9rem auto 0 auto;
 
-
-  .popup-basicInfo {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.6rem;
-    padding: 5.6rem;
-    border-radius: 1.6rem;
-    background-color: map-get($colors, beige);
-
-    .closeBtn-group{
-      display: flex;
-      justify-content: flex-end;
+    .blackCover{
+      right: 0;
     }
-
-    .close {
-      //右上角的X按鈕   
-      cursor: pointer;
-
-      width: 3.6rem;
-      height: 3.6rem;
-      border-radius: 50%;
-  
-      background-color: #ccc;
-    }
- 
 
     .avatars {}
 
@@ -264,13 +270,13 @@ ol {
 
     .contactInfo {
       padding: 1.6rem 0;
+      margin-bottom: 2.4rem;
     }
   }
 
   .input-group {
     height: 4rem;
   }
-}
 
 //avatar
 .avatars .card-content{
@@ -292,7 +298,10 @@ ol {
       background-color: map-get($colors, natural-2 );
     }
 
-    & img {}
+    & img {
+      width: 100%;
+      border-radius: 50%;
+    }
   }
 
   &:first-child p {
@@ -307,13 +316,14 @@ ol {
   .divider {}
 
   .card-content {
+    display: flex;
     flex-direction: column;
     gap: 1.6rem;
     padding: 1.6rem 0;
 
     .input-group {
       display: flex;
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: center;
     }
 
@@ -342,20 +352,29 @@ ol {
       height: 4rem;
     }
 
+
+
     .sex {
       display: flex;
+      justify-content: start;
       align-items: center;
       gap: 2.4rem;
     }
 
+
+  }
+
+  #sexGroup{
+    display: flex;
+    justify-content: start;
   }
 
   .select-group {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     gap: 1.2rem;
-
-    select {
+   .dropBirthday{
       width: 100%;
     }
   }
@@ -363,6 +382,9 @@ ol {
 
 //account info.
 .accountInfo {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
   .card-title {
     h2 {}
   }
@@ -372,15 +394,12 @@ ol {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-
     .input-group {
+      width: 100%;
       display: flex;
+      justify-content: start;      
       align-items: center;
-    }
-
-    .input-group p {
-      width: 6.4rem;
-      @include textStyle(smallText);
+      gap: 5.6rem;
     }
 
     input {
@@ -394,52 +413,29 @@ ol {
 }
 
 .accountInfo .input-group {
-  width: 100%;
+  label{
+    width: 6.5rem;
+    @include textStyle(smallText);
+  }
 
-  .mc-pu-account {
-    width: 80%;
+  .group-email, .group-pwd{
+    width: 100%;
     display: flex;
-    gap: 5.6rem;
+    justify-content: space-between;
 
-    p {
-      width: 6.4rem;
-    }
-
-    input {
-      width: 100%;
+    .defaultBtn{
+      width: 8rem;
+      // display: inline-block;
     }
   }
 
-  .mc-pu-password {
-    width: 80%;
-    display: flex;
-    gap: 5.6rem;
-
-    p {
-      width: 6.4rem;
-    }
-
-    .input-wrapper {
-      width: 100%;
-      position: relative;
-    }
-
-    input {
-      //mc-pu-pwd裡面
-      width: 100%;
-    }
-
-    button {
-      height: 100%;
-      position: absolute;
-      top: 0;
-      right: 0;
-    }
+  #mcEye {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
-  a {
-    margin-left: auto;
-  }
 }
 
 .accountInfo .btn-group {
@@ -448,21 +444,26 @@ ol {
   align-items: center;
   padding-left: 12rem;
 
-  button {}
+  .defaultBtn{
+    width: 8rem;
+    // display: inline-block;
+  }
 
   a {}
 }
 
 //contact info.
 .contactInfo {
-  .card-title {
-    ul {}
-  }
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  .card-title {}
 
   .divider {}
 
   .card-content {
     width: 100%;
+    display: flex;
     flex-direction: column;
     gap: 1.6rem;
 
@@ -489,7 +490,7 @@ ol {
       display: block;
       width: 100%;
       position: absolute;
-      bottom: -1.4rem;
+      bottom: -2.4rem;
       left: 0;
       @include textStyle(xsText);
     }
@@ -499,20 +500,54 @@ ol {
     }
   }
 }
-
+// 儲存修改紐
 .pu-btn-group {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: .8rem;
   text-align: center;
 }
 
+ // 設定新信箱
+.mc-update-verify{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 8rem 7.1rem;
+  max-width: 50rem;
+  height: 42rem;
+  text-align: center;
+  h5{}
+
+  p{}
+
+  label{
+    width: 100%;
+  }
+  // 打勾icon
+  .tick{
+    width: 12rem;
+    height: 12rem;
+    margin: 0 auto;
+    background-color: #0D99FF;  //暫時
+    border-radius: 50%;
+  }
+
+}
+
+#resetPwdAgree{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
 //=========================================================
 // petcard view
 
 .petcardView {  //會更新的區塊
   width: 100%;
-  padding: 2.4rem;
+  padding-bottom: 6rem;
   // 標題 寵物資訊卡  
   .petcard-title {
     width: 100%;
@@ -523,12 +558,9 @@ ol {
   }
   // 氣直線
   .divider {
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
     margin-bottom: 2.4rem;
   }
-  // 卡片的外層
+  // 寵物卡片的外層，改用grid?
   .petcard-container {
     display: flex;
     flex-wrap: wrap;
@@ -536,7 +568,12 @@ ol {
 
     .petcard{
       width: 48%;
-      height: 48.8rem;
+      height: 30.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      gap: .8rem;
+      margin-bottom: 3.2rem;
     }
 
     #addPetCard{
@@ -563,30 +600,95 @@ ol {
     }
 
     .btn-group{
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
       @include textStyle(xsText);
     }
   }
+}
+// 喜好設定彈窗
+ .matchAdjust{
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 2.4rem;
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+ }
 
+.matchAdjust .tag-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem ;
+  .tag-container{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5.6rem;
+    p{
+      width: 7.8rem;
+    }
+    .tag-group{
+      display: flex;
+      justify-content: start;
+      gap: .8rem;
+    }
+
+    .tag{}
+  }
+}
+
+.matchAdjust .btn-group{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.delete-petcard{
+  width: 42.5rem;
+  height: 17.6rem;
+  margin: 0 auto;
+  padding: 5.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  .title{
+    width: 100%;
+    text-align: center;
+    p{}
+  }
+
+  .btn-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem ;
+  }
 }
 
 //=======================
 //訂閱紀錄
 .subRecord{
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 4rem;
 //當前方案
   .sub-recently{
     width: 100%;
-    margin-bottom: 4rem;
     .sr-title{
       display: flex;
       justify-content:space-between;
       align-items: center;
-      margin-bottom: 1.6rem;
     }
 
     .divider{
-      width: 100%;
-      height: 1px;
-      background-color: #ccc;
+      margin-top: 1.6rem;
       margin-bottom: 2.4rem;
     }
 
@@ -605,9 +707,6 @@ ol {
     }
 
     .divider{
-      width: 100%;
-      height: 1px;
-      background-color: #ccc;
       margin-bottom: 2.4rem;
     }
 
@@ -666,7 +765,7 @@ ol {
   .sr-items-group{
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: .4rem;
     .srItems{
       display: flex;
       justify-content: space-between;
@@ -720,6 +819,7 @@ ol {
 //========================================
 // 小幫手中心
 .helperCenter{
+  padding-bottom: 6rem;
   .hc-not-passed{}
   .hc-passed{}
 }
@@ -752,10 +852,8 @@ ol {
     width: 100%;
     height: 22rem;
     .divider{
-      width: 100%;
-      height: 1px;
-      background-color: #ccc;
-      margin-bottom: .8rem;      
+      margin-top: 1.6rem;
+      margin-bottom: 2.4rem;      
     }
 
     .hc-msg{
@@ -776,9 +874,6 @@ ol {
   //h6
 
   .divider{
-    width: 100%;
-    height: 1px;
-    background-color: #ccc;
     margin-bottom: .8rem; 
   }
 
@@ -797,6 +892,10 @@ ol {
       width: 100%;
       height: 22rem;
       background-color: map-get($colors, natural-0 );
+    }
+
+    .postCard img{
+      width: 100%;
     }
   }
 

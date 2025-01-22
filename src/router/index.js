@@ -105,11 +105,20 @@ const routes = [
       bodyBg: 'blueberry-0',
     }
   },
+  // {
+  //   path: '/member-center',
+  //   component: () => import('@/pages/memberCenter.vue'),
+  //   meta: {
+  //     title: '會員中心 | Sploot',
+  //     theme: 'red',
+  //     bodyBg: 'natural-1',
+  //   }
+  // },
   {
-    path: '/member-center',
-    component: () => import('@/pages/memberCenter.vue'),
+    path: '/member-center/member-info',
+    component: () => import('@/pages/memberInfo.vue'),
     meta: {
-      title: '會員中心 | Sploot',
+      title: '會員資料 | Sploot',
       theme: 'red',
       bodyBg: 'natural-1',
     }
@@ -123,6 +132,34 @@ const routes = [
       bodyBg: 'yellow-1',
     }
   },
+  {
+    path: '/member-center/petcard',
+    component: () => import('@/pages/memberPetcard.vue'),
+    meta: {
+      title: '寵物資訊卡 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  {
+    path: '/member-center/sub-record',
+    component: () => import('@/pages/memberSubRecord.vue'),
+    meta: {
+      title: '訂閱紀錄 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  {
+    path: '/member-center/helper',
+    component: () => import('@/pages/memberHelper.vue'),
+    meta: {
+      title: '會員資料 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  
   
 ];
 

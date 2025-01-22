@@ -165,21 +165,22 @@
     <!-- forget pwd SOP -->
     <div class="f-pwd-start lsBox">
       <!-- forget pwd : varify email -->
-      <h2>驗證信箱</h2>
+      <div class="title">
+        <h2>驗證信箱</h2>
+  
+        <p>請輸入註冊實的信箱，我們會寄給一封信到您的信箱</p>
+      
+      </div>
 
-      <p>請輸入註冊實的信箱，我們會寄給一封信到您的信箱</p>
+      <label for="">
+        <input type="email" name="email" id="fgPwdVE" placeholder="輸入信箱">
+      </label>
 
-      <form method="post" action="">
-        <label for="">
-          <input type="email" name="email" id="fgPwdVE" placeholder="輸入信箱">
-        </label>
+      <div class="btn-group">
+        <button type="submit" name="sendVCode">寄送驗證碼</button>
+        <button class="cancel">取消</button>
+      </div>
 
-        <div class="btn-group">
-          <button type="submit" name="sendVCode">寄送驗證碼</button>
-          <button class="cancel">取消</button>
-        </div>
-
-      </form>
     </div>
 
     <div class="s-pwd-start">
@@ -192,6 +193,7 @@
         </label>
 
         <div class="btn-group">
+          <!-- setInnterval -->
           <button type="submit" name="sendVCode" class="">重新寄送驗證碼</button>
           <button class="cancel">送出</button>
         </div>
