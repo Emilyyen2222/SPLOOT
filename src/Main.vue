@@ -8,7 +8,7 @@
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
-import MainHeader from './MainHeader.vue';
+// import MainHeader from './MainHeader.vue';
 
 const route = useRoute();
 </script>

@@ -1,7 +1,7 @@
  body{
     background-color: map-get($colors, pink-0);
     position: relative;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 } 
 .herobox {
     position: relative;

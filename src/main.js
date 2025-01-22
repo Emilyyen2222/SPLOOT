@@ -2,7 +2,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import router from "@/router/index.js";
-import Main from "@/components/Main.vue";
+import Main from "@/Main.vue";
 import VCalendar from "v-calendar"; //Ian
 import 'v-calendar/style.css'; //Ian
 

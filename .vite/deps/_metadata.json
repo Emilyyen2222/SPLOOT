@@ -1,0 +1,31 @@
+{
+  "hash": "6c69421e",
+  "configHash": "4028a8c9",
+  "lockfileHash": "99397637",
+  "browserHash": "76a2e77c",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "f6edab4b",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "e225f9c1",
+      "needsInterop": false
+    },
+    "v-calendar": {
+      "src": "../../node_modules/v-calendar/dist/es/index.js",
+      "file": "v-calendar.js",
+      "fileHash": "cef32c94",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-IJV5NOMV": {
+      "file": "chunk-IJV5NOMV.js"
+    }
+  }
+}

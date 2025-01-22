@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-  import { ref, defineProps, defineEmits } from 'vue';
+  import { ref, defineEmits } from 'vue';
   import { useRoute } from 'vue-router';
 
   const route = useRoute();

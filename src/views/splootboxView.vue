@@ -209,10 +209,10 @@
                 </div>
             </div>
             
+            <!-- circle bg -->
+                <div class="circleSplootBox"></div>
 <MainFooter></MainFooter>         
 
-<!-- circle bg -->
-    <div class="circleSplootBox"></div>
          
 </template>
 

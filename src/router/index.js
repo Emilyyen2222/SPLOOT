@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: '/',
-    component: () => import('@/pages/homeView.vue'),
+    component: () => import('@/views/homeView.vue'),
     meta: {
       title: 'Sploot',
       theme: 'red',
@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/ds',
-    component: () => import('@/pages/dsView.vue'),
+    component: () => import('@/views/dsView.vue'),
     meta: {
       title: '元件庫 | Sploot',
       theme: 'red',
@@ -26,7 +26,7 @@ const routes = [
   },
   {
     path: '/sploot-box',
-    component: () => import('@/pages/splootboxView.vue'),
+    component: () => import('@/views/splootboxView.vue'),
     meta: {
       title: '訂閱寵物盒 | Sploot',
       theme: 'red',
@@ -35,7 +35,7 @@ const routes = [
   },
   {
     path: '/sploot-box/question',
-    component: () => import('@/pages/questionView.vue'),
+    component: () => import('@/views/questionView.vue'),
     meta: {
       title: '訂閱寵物盒 | Sploot',
       theme: 'red',
@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: '/match',
-    component: () => import('@/pages/matchView.vue'),
+    component: () => import('@/views/matchView.vue'),
     meta: {
       title: '認識毛毛友 | Match',
       theme: 'red',
@@ -53,7 +53,7 @@ const routes = [
   },
   {
     path: '/match/matchCard',
-    component: () => import('@/pages/matchCardView.vue'),
+    component: () => import('@/views/matchCardView.vue'),
     meta: {
       title: '認識毛毛友 | MatchCard',
       theme: 'red',
@@ -62,7 +62,7 @@ const routes = [
   },
   {
     path: '/petInfoCard',
-    component: () => import('@/pages/petInfoCardView.vue'),
+    component: () => import('@/views/petInfoCardView.vue'),
     meta: {
       title: '認識毛毛友 | petInfoCard',
       theme: 'red',
@@ -71,7 +71,7 @@ const routes = [
   },
   {
     path: '/sploot-buddy',
-    component: () => import('@/pages/splootBuddyView.vue'),
+    component: () => import('@/views/splootBuddyView.vue'),
     meta: {
       title: '尋找小幫手 | Sploot',
       theme: 'blue',
@@ -80,7 +80,7 @@ const routes = [
   },
   {
     path: '/sploot-event',
-    component: () => import('@/pages/eventView.vue'),
+    component: () => import('@/views/eventView.vue'),
     meta: {
       title: '毛孩日曆 | Sploot',
       theme: 'blue',
@@ -89,7 +89,7 @@ const routes = [
   },
   {
     path: '/sploot-pet-friendly',
-    component: () => import('@/pages/petFriendlyView.vue'),
+    component: () => import('@/views/petFriendlyView.vue'),
     meta: {
       title: '友善設施 | Sploot',
       theme: 'blue',
@@ -98,7 +98,7 @@ const routes = [
   },
   {
     path: '/sploot-buddy/buddy-post',
-    component: () => import('@/pages/buddyPostView.vue'),
+    component: () => import('@/views/buddyPostView.vue'),
     meta: {
       title: '尋找小幫手 | Sploot',
       theme: 'blue',
@@ -107,7 +107,7 @@ const routes = [
   },
   // {
   //   path: '/member-center',
-  //   component: () => import('@/pages/memberCenter.vue'),
+  //   component: () => import('@/views/memberCenter.vue'),
   //   meta: {
   //     title: '會員中心 | Sploot',
   //     theme: 'red',
@@ -116,7 +116,7 @@ const routes = [
   // },
   {
     path: '/member-center/member-info',
-    component: () => import('@/pages/memberInfo.vue'),
+    component: () => import('@/views/memberInfo.vue'),
     meta: {
       title: '會員資料 | Sploot',
       theme: 'red',
@@ -125,7 +125,7 @@ const routes = [
   },
   {
     path: '/backend/member',
-    component: () => import('@/pages/backend/memberManage.vue'),
+    component: () => import('@/views/backend/memberManage.vue'),
     meta: {
       title: '會員管理 | Sploot',
       theme: 'red',
@@ -134,7 +134,7 @@ const routes = [
   },
   {
     path: '/member-center/petcard',
-    component: () => import('@/pages/memberPetcard.vue'),
+    component: () => import('@/views/memberPetcard.vue'),
     meta: {
       title: '寵物資訊卡 | Sploot',
       theme: 'red',
@@ -143,7 +143,7 @@ const routes = [
   },
   {
     path: '/member-center/sub-record',
-    component: () => import('@/pages/memberSubRecord.vue'),
+    component: () => import('@/views/memberSubRecord.vue'),
     meta: {
       title: '訂閱紀錄 | Sploot',
       theme: 'red',
@@ -152,7 +152,7 @@ const routes = [
   },
   {
     path: '/member-center/helper',
-    component: () => import('@/pages/memberHelper.vue'),
+    component: () => import('@/views/memberHelper.vue'),
     meta: {
       title: '會員資料 | Sploot',
       theme: 'red',
