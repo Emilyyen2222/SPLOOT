@@ -1,8 +1,7 @@
 <template>
     <MainHeader theme="red" bgc=""></MainHeader>
     <!-- <main class="bg-purple-1" style="z-index: -10;"> -->
-
-<Btn btnStyle="primary large" @click="toggleLightBox">TEST</Btn>
+<!-- <Btn btnStyle="primary large" @click="toggleLightBox">TEST</Btn> -->
 
 <LightBox 
     :title="lightTitle.title"
@@ -163,11 +162,13 @@
             </div>
         </div>
     </div>
-</div>
-<div class="saveBtnBox">
-    <Btn btnType="form" btnStyle="nextQ">儲存</Btn> 
-    <Btn class="borderBottom" btnType="form" btnStyle="lastQ">取消編輯</Btn>
-</div> 
+    </div>
+    <div class="saveBtnBox">
+        <RouterLink to="/match" style="cursor: pointer;">
+            <Btn btnType="form" btnStyle="nextQ">儲存</Btn> 
+        </RouterLink>
+        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">取消編輯</Btn>
+    </div> 
 
 </LightBox>
     <!-- </main> -->

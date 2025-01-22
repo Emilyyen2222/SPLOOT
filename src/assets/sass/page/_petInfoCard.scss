@@ -15,9 +15,7 @@
             gap: 1.2rem;
             align-items: start;
         }
-        label{
-            width: 6.4rem;
-        }
+        label{width: 6.4rem;}
     }
     .tags{
         display: flex;
@@ -60,9 +58,7 @@
             gap: 5.6rem;
 
             width: 100%;
-            @include md(){
-                gap: .2rem;
-            }
+            @include md(){gap: .2rem;}
             .photo{
                 display: flex;
                 align-items: center;
@@ -82,14 +78,11 @@
                 flex-direction: column;
                 justify-content: space-between ;
                 gap: 1.2rem;
-
-                // max-width: 35rem;
                 .fieldWrapper{
                     .petName{
                         min-width: 30rem;
                         width: 75%;
                         max-width: 35rem;
-                        // width: 100%;
                     }
             }
         }
@@ -101,24 +94,14 @@
                     flex-wrap: wrap;
                     gap: 1.2rem;
                 }
-                .year{
-                    width: 12rem;
-                }
-                .month{
-                    width: 12rem;
-                }
-                .date{
-                    width: 12rem;
-                }
+                .year,.month,.date {width: 12rem;}
             }
         }
-        .infoInput{
-            max-width: 56rem;
-        }
+        .infoInput{max-width: 56rem;}
         .breedOpt{
-                max-width: 35rem;
-                width: 75%;
-                min-width: 33rem;
+            max-width: 35rem;
+            width: 75%;
+            min-width: 33rem;
         }
         .breedOptions{
             display: flex;
@@ -138,7 +121,6 @@
         left: 50%;
         bottom: -10%;
         transform: translateX(-50%);
-
     }
   }
   

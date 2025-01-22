@@ -14,9 +14,9 @@
         </div>
     </div>
     <div class="options">
-        <RouterLink to="/match/petInfoCard" style="cursor: pointer;">
+        <!-- <RouterLink to="/match/petInfoCard" style="cursor: pointer;"> -->
             <Btn btnType="form" btnStyle="option">貓貓</Btn>
-        </RouterLink>
+        <!-- </RouterLink> -->
         <Btn btnType="form" btnStyle="option">狗狗</Btn>
         <Btn btnType="form" btnStyle="option">不限</Btn>
     </div>
@@ -40,13 +40,13 @@
         <h4 class="title bold">我想認識的貓咪朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img1" src="@/assets/img/splootbox/cat1.jpg" alt="">
             </div>
             <div class="imgFlex">
-                <img class="img2" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img2" src="@/assets/img/splootbox/cat2.jpg" alt="">
             </div> 
             <div class="imgFlex">
-                <img class="img3" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img3" src="@/assets/img/splootbox/cat3.jpg" alt="">
             </div> 
         </div>
     </div>
@@ -63,13 +63,13 @@
         <h4 class="title bold">我想認識的狗狗朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img1" src="@/assets/img/splootbox/dog1.jpg" alt="">
             </div>
             <div class="imgFlex">
-                <img class="img2" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img2" src="@/assets/img/splootbox/dog2.jpg" alt="">
             </div> 
             <div class="imgFlex">
-                <img class="img3" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img3" src="@/assets/img/splootbox/dog3.jpg" alt="">
             </div> 
         </div>
     </div>
@@ -86,7 +86,7 @@
         <h4 class="title bold">我喜歡哪一種社交性</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img1" src="@/assets/img/splootbox/dog2.jpg" alt="">
             </div>
         </div>
     </div>
@@ -103,7 +103,7 @@
         <h4 class="title bold">我希望的毛孩朋友結紮狀態</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img1" src="@/assets/img/splootbox/doghospital.avif" alt="">
             </div>
         </div>
     </div>
