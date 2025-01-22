@@ -98,7 +98,7 @@
                 </div>
                 <div class="connect">
                     <div class="lineQRCode">
-                        <img src="../assets/img/header-red.svg" alt="account" class="QRcode">
+                        <img src="../assets/img/buddy-post/demoQR.png" alt="account" class="QRcode">
                     </div>
                     <p class="smallText">聯繫小幫手</p>
                 </div>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="commentInfo">
                             <h6 class="bold">Emily</h6>
-                            <p class="xsText">2024/12/25</p>
+                            <p class="xsText">2025/1/22</p>
                             <ul class="stars">
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                     <div class="comment">
-                        <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。</p>
+                        <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。</p>
                     </div>
                 </li>
                 <li class="commenmtCard">
@@ -140,8 +140,8 @@
                             <img class="avatarImg" src="../assets/img/buddy-post/L.svg" alt="avatar">
                         </div>
                         <div class="commentInfo">
-                            <h6 class="bold">Lupe Chen</h6>
-                            <p class="xsText">2025/1/2</p>
+                            <h6 class="bold">Lupe</h6>
+                            <p class="xsText">2025/1/19</p>
                             <ul class="stars">
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -152,17 +152,17 @@
                         </div>
                     </div>
                     <div class="comment">
-                        <p class="smallText">服務不錯，但總覺得他有點心不在焉。</p>
+                        <p class="smallText">C'est dommage! 雖然服務不錯，我的愛犬也看起來很開心，但他似乎有點心不在焉，少了些專注感。</p>
                     </div>
                 </li>
                 <li class="commenmtCard">
                     <div class="commenter">
                         <div class="avatar">
-                            <img class="avatarImg" src="../assets/img/buddy-post/S.svg" alt="avatar">
+                            <img class="avatarImg" src="../assets/img/buddy-post/e.svg" alt="avatar">
                         </div>
                         <div class="commentInfo">
-                            <h6 class="bold">鄒宗翰</h6>
-                            <p class="xsText">2025/1/11</p>
+                            <h6 class="bold">艾倫．葉卡</h6>
+                            <p class="xsText">2025/1/15</p>
                             <ul class="stars">
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                 <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                     <div class="comment">
-                        <p class="smallText">散步路線很特別，還有經過詛咒隧道，挺有趣的。</p>
+                        <p class="smallText">散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把霍普交給他時，內心有些猶豫，但看到霍普回來時興奮又快樂，那種擔憂全都消散了。</p>
                     </div>
                 </li>
             </ul>
@@ -186,7 +186,7 @@
             </div>
             <div class="inputComment">
                 <div class="avatar">
-                    <img class="avatarImg" src="../assets/img/buddy-post/gosuubaba.svg" alt="avatar">
+                    <img class="avatarImg" src="../assets/img/buddy-post/Kosoku-baba.svg" alt="avatar">
                 </div>
                 <div class="content">
                     <ul class="stars">
@@ -210,6 +210,11 @@
                 </div>
             </div>
         </div>
+
+        <!-- 圓形 * 2 -->
+    <div class="circle1 circle"></div>
+    <div class="circle2 circle"></div>
+
         <!-- 所有評論 -->
         <LightBox 
             :title="lightTitle.title"
@@ -223,7 +228,7 @@
                            </div>
                            <div class="commentInfo">
                                <h6 class="bold">Emily</h6>
-                               <p class="xsText">2024/12/25</p>
+                               <p class="xsText">2025/1/22</p>
                                <ul class="stars">
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -234,7 +239,7 @@
                            </div>
                        </div>
                        <div class="comment">
-                           <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。雖然他說很累，但還是完成了任務，感覺不錯。</p>
+                           <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。</p>
                        </div>
                    </li>
                    <li class="commenmtCard">
@@ -243,8 +248,8 @@
                                <img class="avatarImg" src="../assets/img/buddy-post/L.svg" alt="avatar">
                            </div>
                            <div class="commentInfo">
-                               <h6 class="bold">Lupe Chen</h6>
-                               <p class="xsText">2025/1/2</p>
+                               <h6 class="bold">Lupe</h6>
+                               <p class="xsText">2025/1/19</p>
                                <ul class="stars">
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -255,17 +260,38 @@
                            </div>
                        </div>
                        <div class="comment">
-                           <p class="smallText">服務不錯，但總覺得他有點心不在焉。</p>
+                           <p class="smallText">C'est dommage! 雖然服務不錯，我的愛犬也看起來很開心，但他似乎有點心不在焉，少了些專注感。</p>
                        </div>
                    </li>
                    <li class="commenmtCard">
+                        <div class="commenter">
+                            <div class="avatar">
+                                <img class="avatarImg" src="../assets/img/buddy-post/e.svg" alt="avatar">
+                            </div>
+                            <div class="commentInfo">
+                                <h6 class="bold">艾倫．葉卡</h6>
+                                <p class="xsText">2025/1/15</p>
+                                <ul class="stars">
+                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <p class="smallText">散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把霍普交給他時，內心有些猶豫，但看到霍普回來時興奮又快樂，那種擔憂全都消散了。</p>
+                        </div>
+                    </li>
+                     <li class="commenmtCard">
                        <div class="commenter">
                            <div class="avatar">
                                <img class="avatarImg" src="../assets/img/buddy-post/S.svg" alt="avatar">
                            </div>
                            <div class="commentInfo">
                                <h6 class="bold">鄒宗翰</h6>
-                               <p class="xsText">2025/1/11</p>
+                               <p class="xsText">2025/1/14</p>
                                <ul class="stars">
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
@@ -277,6 +303,69 @@
                        </div>
                        <div class="comment">
                            <p class="smallText">散步路線很特別，還有經過詛咒隧道，挺有趣的。</p>
+                       </div>
+                   </li>
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/H.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">Hoaaaaa</h6>
+                               <p class="xsText">2025/1/1</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">The service was good, but he seemed a bit distracted and somewhat unfocused.!!</p>
+                       </div>
+                   </li>
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/M.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">Mysterio</h6>
+                               <p class="xsText">2024/12/25</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">雪拉輕踏風中行，步伐輕快心自清，隨風自在醉我流。</p>
+                       </div>
+                   </li>
+                   <li class="commenmtCard">
+                       <div class="commenter">
+                           <div class="avatar">
+                               <img class="avatarImg" src="../assets/img/buddy-post/Kosoku-baba.svg" alt="avatar">
+                           </div>
+                           <div class="commentInfo">
+                               <h6 class="bold">Kosoku baba</h6>
+                               <p class="xsText">2024/12/12</p>
+                               <ul class="stars">
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
+                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
+                               </ul>
+                           </div>
+                       </div>
+                       <div class="comment">
+                           <p class="smallText">這小子速度快得讓我都差點跟不上。不過，看他那副萎掉的樣子，竟然還能堅持，倒是讓我有點佩服</p>
                        </div>
                    </li>
            </ul>     

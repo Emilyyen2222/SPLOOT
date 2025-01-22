@@ -101,83 +101,86 @@
 
 //data
 const cardsData = ref([
-    {
-        title: "聖誕節Splooter聚餐聖誕節Splooter聚餐",
-        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
-        peopleCount: "45",
-        startTime:{
-            year: "2024",
-            month: "12",
-            day: "25",
-            time: '18:30'
-        },
-        endTime:{
-            year: "2024",
-            month: "12",
-            day: "25",
-            time: '21:30'
-        },
-        place:"台北市信義區信義路五段7號86樓 (饗 A Joy)",
-        btnStyle:"edit",
-        
-    }, 
-    {
-        title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
-        content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
-        peopleCount: "不限",
-        startTime:{
-            year: "2024",
-            month: "12",
-            day: "31",
-            time: '07:00'
-        },
-        endTime:{
-            year: "2024",
-            month: "12",
-            day: "31",
-            time: '11:30'
-        },
-        place:"二二八公園集合",
-        btnStyle:"attend",
+{
+    title: "聖誕節Splooter聚餐",
+    content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
+    peopleCount: "45",
+    startTime: {
+        year: "2024",
+        month: "12",
+        day: "25",
+        time: '18:30'
     },
-    {
-        title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
-        content: "目標石垣島，帶著毛孩們一起出國吧！",
-        peopleCount: "80",
-        startTime:{
-            year: "2025",
-            month: "01",
-            day: "23",
-            time: '08:30'
-        },
-        endTime:{
-            year: "2025",
-            month: "01",
-            day: "26",
-            time: '22:00'
-        },
-        place:"基隆港",
-        btnStyle:"registered",
+    endTime: {
+        year: "2024",
+        month: "12",
+        day: "25",
+        time: '21:30'
     },
-    {
-        title: "英雄毛孩Cosplay比賽",
-        content: "Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！",
-        peopleCount: "60",
-        startTime:{
-            year: "2025",
-            month: "02",
-            day: "01",
-            time: '09:30'
-        },
-        endTime:{
-            year: "2025",
-            month: "02",
-            day: "01",
-            time: '15:50'
-        },
-        place:"緯育Tibame台北職訓中心",
-        btnStyle:"disable",        
-    }
+    place: "台北市信義區信義路五段7號86樓 (饗 A Joy)",
+    type: "official",
+    btnStyle: "edit",
+}, 
+{
+    title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
+    content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
+    peopleCount: "不限",
+    startTime: {
+        year: "2024",
+        month: "12",
+        day: "31",
+        time: '07:00'
+    },
+    endTime: {
+        year: "2024",
+        month: "12",
+        day: "31",
+        time: '11:30'
+    },
+    place: "二二八公園集合",
+    type: "official",
+    btnStyle: "attend",
+},
+{
+    title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
+    content: "目標石垣島，帶著毛孩們一起出國吧！",
+    peopleCount: "80",
+    startTime: {
+        year: "2025",
+        month: "01",
+        day: "23",
+        time: '08:30'
+    },
+    endTime: {
+        year: "2025",
+        month: "01",
+        day: "26",
+        time: '22:00'
+    },
+    place: "基隆港",
+    type: "official",
+    btnStyle: "registered",
+},
+{
+    title: "英雄毛孩Cosplay比賽",
+    content: "Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！",
+    peopleCount: "60",
+    startTime: {
+        year: "2025",
+        month: "02",
+        day: "01",
+        time: '09:30'
+    },
+    endTime: {
+        year: "2025",
+        month: "02",
+        day: "01",
+        time: '15:50'
+    },
+    place: "緯育Tibame台北職訓中心",
+    type: "official",
+    btnStyle: "disable",        
+}
 ]);
 
 const btnText = ref({

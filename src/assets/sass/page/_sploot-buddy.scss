@@ -287,21 +287,21 @@ body{
     }
 
 }
-        // 背景圓形＊2
-        .circle{
-            @include circle(#E6EBFF);
-            
-            position: fixed;
-            left: 50%;
-        }
-        
-        .circle1{
-            top: -240px;
-        }
-        
-        .circle2{
-            top: 1000px;
-        }
+// 背景圓形＊2
+.circle{
+    @include circle(#E6EBFF);
+    
+    position: fixed;
+    left: 50%;
+}
+
+.circle1{
+    top: -240px;
+}
+
+.circle2{
+    top: 1000px;
+}
 
 //燈箱內容
     .buddyIntroduction{

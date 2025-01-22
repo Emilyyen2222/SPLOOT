@@ -303,6 +303,22 @@
             serviceTimeStart: "09:00",
             serviceTimeEnd: "18:00",
         },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
     ])
 
 // 燈箱標題請輸入
