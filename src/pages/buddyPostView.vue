@@ -311,7 +311,7 @@
                                <img class="avatarImg" src="../assets/img/buddy-post/H.svg" alt="avatar">
                            </div>
                            <div class="commentInfo">
-                               <h6 class="bold">Hoaaaaa</h6>
+                               <h6 class="bold">Haooooo</h6>
                                <p class="xsText">2025/1/1</p>
                                <ul class="stars">
                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>

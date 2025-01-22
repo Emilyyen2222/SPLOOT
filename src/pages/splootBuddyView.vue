@@ -272,7 +272,7 @@
 
     const cardsData = ref([
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
@@ -280,7 +280,7 @@
             serviceTimeEnd: "18:00",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
@@ -288,7 +288,7 @@
             serviceTimeEnd: "18:00",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
@@ -296,7 +296,7 @@
             serviceTimeEnd: "18:00",
         }, 
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
@@ -304,7 +304,7 @@
             serviceTimeEnd: "18:00",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
@@ -312,7 +312,7 @@
             serviceTimeEnd: "18:00",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/cards7.png",  import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
             serviceDaysStart:"週一",
             serviceDaysEnd:"週五",
