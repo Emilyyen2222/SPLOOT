@@ -114,51 +114,51 @@ const routes = [
   //     bodyBg: 'natural-1',
   //   }
   // },
-  // {
-  //   path: '/member-center/member-info',
-  //   component: () => import('@/views/memberInfo.vue'),
-  //   meta: {
-  //     title: '會員資料 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'natural-1',
-  //   }
-  // },
-  // {
-  //   path: '/backend/member',
-  //   component: () => import('@/views/backend/memberManage.vue'),
-  //   meta: {
-  //     title: '會員管理 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'yellow-1',
-  //   }
-  // },
-  // {
-  //   path: '/member-center/petcard',
-  //   component: () => import('@/views/memberPetcard.vue'),
-  //   meta: {
-  //     title: '寵物資訊卡 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'natural-1',
-  //   }
-  // },
-  // {
-  //   path: '/member-center/sub-record',
-  //   component: () => import('@/views/memberSubRecord.vue'),
-  //   meta: {
-  //     title: '訂閱紀錄 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'natural-1',
-  //   }
-  // },
-  // {
-  //   path: '/member-center/helper',
-  //   component: () => import('@/views/memberHelper.vue'),
-  //   meta: {
-  //     title: '會員資料 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'natural-1',
-  //   }
-  // },
+  /*{
+    path: '/member-center/member-info',
+    component: () => import('@/views/memberInfo.vue'),
+    meta: {
+      title: '會員資料 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  {
+    path: '/backend/member',
+    component: () => import('@/views/backend/memberManage.vue'),
+    meta: {
+      title: '會員管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/member-center/petcard',
+    component: () => import('@/views/memberPetcard.vue'),
+    meta: {
+      title: '寵物資訊卡 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  {
+    path: '/member-center/sub-record',
+    component: () => import('@/views/memberSubRecord.vue'),
+    meta: {
+      title: '訂閱紀錄 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
+  {
+    path: '/member-center/helper',
+    component: () => import('@/views/memberHelper.vue'),
+    meta: {
+      title: '會員資料 | Sploot',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },*/
   
   
 ];

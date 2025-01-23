@@ -108,9 +108,6 @@
             :title="lightTitle1.title"
             :is-light-box="lightTitle1.isLightBox.value" 
             @toggle="toggleLightBox_memberInfo"
-            pY="5.6rem" 
-            pX="5.6rem"
-            bgc="transparent:50%"
             id="memberInfoPop" 
             class="memberInfo-update">
             
@@ -351,10 +348,10 @@
             <!-- 儲存修改紐 -->
             <div class="pu-btn-group">
                 <div>
-                  <Btn btnStyle="primary default">儲存</Btn>
+                  <Btn btnStyle="primary default" @click="toggleLightBox_memberInfo">儲存</Btn>
                 </div>
                 <div>
-                  <Btn btnStyle="baseline default">取消修改</Btn>
+                  <Btn btnStyle="baseline default" @click="toggleLightBox_memberInfo">取消修改</Btn>
                 </div>
             </div>
             <!-- 驗證程序 : pop up  -->
@@ -373,9 +370,6 @@
               :title="lightTitle2.title"
               :is-light-box="lightTitle2.isLightBox.value" 
               @toggle="toggleLightBox_email"
-              pY="5.6rem" 
-              pX="5.6rem"
-              bgc="transparent:50%" 
               id="resetEmailPop">
             <div>
     
@@ -440,12 +434,9 @@
 
           <!-- 變更密碼 -->
           <LightBox 
-            :title="lightTitle3.title"
             :is-light-box="lightTitle3.isLightBox.value" 
+            :title="lightTitle3.title"
             @toggle="toggleLightBox_pwd"
-            pY="5.6rem" 
-            pX="5.6rem"
-            bgc="transparent:50%"
             id="resetPwdPop" >
               <div>
                     
@@ -561,18 +552,72 @@
 
 import { ref } from 'vue';
 // components
-import MainHeader from '../components/MainHeader.vue';
-import Btn from '../components/Btn.vue';
+import MainHeader from '@/components/MainHeader.vue';
+import Btn from '@/components/Btn.vue';
 import DropdownMenu from '../components/DropdownMenu.vue';
 import InputText from '../components/InputText.vue';
 import LightBox from '../components/LightBox.vue';
 // pages
-import memberNav from '../pages/memberNav.vue' ;
+import memberNav from '../views/memberNav.vue' ;
 
 
 // dropDown
 const menu1 = {
     placeHolder: '請選擇月份',
+    options: [
+        {
+            id: 0,
+            name: '1月'
+        },
+        {
+            id: 1,
+            name: '2月'
+        },
+        {
+            id: 2,
+            name: '3月'
+        },
+        {
+            id: 3,
+            name: '4月'
+        },
+        {
+            id: 4,
+            name: '5月'
+        },
+        {
+            id: 5,
+            name: '6月'
+        },
+        {
+            id: 6,
+            name: '7月'
+        },
+        {
+            id: 7,
+            name: '8月'
+        },
+        {
+            id: 8,
+            name: '9月'
+        },
+        {
+            id: 9,
+            name: '10月'
+        },
+        {
+            id: 10,
+            name: '11月'
+        },
+        {
+            id: 11,
+            name: '12月'
+        },
+    ]
+};
+
+const menu2 = {
+    placeHolder: '請選擇日期',
     options: [
         {
             id: 0,
@@ -589,60 +634,6 @@ const menu1 = {
         {
             id: 3,
             name: '4'
-        },
-        {
-            id: 4,
-            name: '5'
-        },
-        {
-            id: 5,
-            name: '6'
-        },
-        {
-            id: 6,
-            name: '7'
-        },
-        {
-            id: 7,
-            name: '8'
-        },
-        {
-            id: 8,
-            name: '9'
-        },
-        {
-            id: 9,
-            name: '10'
-        },
-        {
-            id: 10,
-            name: '11'
-        },
-        {
-            id: 11,
-            name: '12'
-        },
-    ]
-};
-
-const menu2 = {
-    placeHolder: '請選擇日期',
-    options: [
-        {
-            id: 0,
-            name: '選項1'
-        },
-        {
-            id: 1,
-            name: '選項2'
-        },
-        {
-            id: 2,
-            name: '選項3'
-        },
-        {
-            id: 3,
-            name: '選項4'
         },
     ]
 };
@@ -694,8 +685,6 @@ const input6 = {
 const lightTitle1 = {title: "會員資料", isLightBox: ref(false)};
 const lightTitle2 = {title: "變更信箱", isLightBox: ref(false)};
 const lightTitle3 = {title: "變更密碼", isLightBox: ref(false)};
-//  // lightBox 狀態
-// let isLightBox = ref(false);
 
 // // 控制燈箱的顯示與隱藏
 function toggleLightBox_memberInfo() {
@@ -709,7 +698,6 @@ function toggleLightBox_memberInfo() {
 };
 function toggleLightBox_email() {
   lightTitle2.isLightBox.value = !lightTitle2.isLightBox.value;
-  // 根據狀態新增或移除 clicked 類別
   if (lightTitle2.isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
@@ -718,11 +706,11 @@ function toggleLightBox_email() {
 };
 function toggleLightBox_pwd() {
   lightTitle3.isLightBox.value = !lightTitle3.isLightBox.value;
-  // 根據狀態新增或移除 clicked 類別
   if (lightTitle2.isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
   }
 };
+
 </script>
