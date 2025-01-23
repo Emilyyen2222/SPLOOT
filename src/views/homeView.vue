@@ -148,7 +148,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/sass/style.scss";
+  // @import "../assets/sass/style.scss";
   #home{
     header{
       position: fixed;

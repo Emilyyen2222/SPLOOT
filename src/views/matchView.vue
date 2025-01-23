@@ -122,15 +122,15 @@
     <script setup>
         import {ref} from "vue";
         import MainHeader from "../components/MainHeader.vue";
-        import DropdownMenu from "../components/DropdownMenu.vue";
         import Btn from '../components/Btn.vue';
+        import DropdownMenu from "../components/DropdownMenu.vue";
         import InputText from '../components/InputText.vue';
 
 
         
 
     </script>
-    
+<!--     
 <style lang="scss" scoped>
     header{
         &.bg-purple-1{
@@ -138,4 +138,4 @@
         }
     }
 
-</style>
+</style> -->

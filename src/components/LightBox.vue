@@ -2,7 +2,7 @@
 <template>
 
     <div v-if="isLightBox" class="lightBox" :class="{clicked:isLightBox}">
-        <div class="lightBoxContent" :class="bgc">
+        <div class="lightBoxContent">
             <div class="closeBtnBox">
                 <div class="closeBtn" @click="toggleLightBox">
                     <img src="@/assets/img/icon/close.svg" alt="closeIcon">
@@ -27,10 +27,6 @@
    import { defineProps, defineEmits } from 'vue';
     
     const props = defineProps({
-        bgc:{
-            type:String,
-            default:'#FFFEFA',
-        },
         isLightBox: {
             type: Boolean,
             required: true,

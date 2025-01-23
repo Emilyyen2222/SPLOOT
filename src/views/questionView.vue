@@ -397,10 +397,7 @@
 
 <PopUp
 :is-pop-up="isPopUp"
-@toggle="togglePopUp"
 >
-<div class="close" @click="togglePopUp"></div>
-
 <div class="policy">
 <h6>隱私權政策</h6>
 <p>在您開始使用 SPLOOT布魯家 所經營之網站之前，請詳細閱讀以下所有服務條款：
