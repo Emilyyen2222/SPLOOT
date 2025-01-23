@@ -6,7 +6,10 @@
     <!-- msg & avatar -->
     <div class="msg-n-avatar">
         <!-- avatar -->
-        <div class="avatar"></div>
+        <div class="avatar">
+          <!-- 改ref -->
+          <img src="../assets/img/member-center/portrait1.svg" alt="">
+        </div>
         <!-- msg -->
         <div class="msg-welcome">
         <h5 class="bold">嗨! <span id="msgUsername">username</span> 歡迎回來</h5>
@@ -21,17 +24,17 @@
       </div>      
       <div class="btn-wrapper">
         <RouterLink to="/member-center/petcard">
-          <Btn btnStyle="white default" @click="mc_changeColor">寵物資訊卡</Btn>
+          <Btn btnStyle="white default">寵物資訊卡</Btn>
         </RouterLink>
       </div>      
       <div class="btn-wrapper">
         <RouterLink to="/member-center/sub-record">
-          <Btn btnStyle="white default" @click="mc_changeColor">寵物盒訂閱紀錄</Btn>
+          <Btn btnStyle="white default">寵物盒訂閱紀錄</Btn>
         </RouterLink>        
       </div>      
       <div class="btn-wrapper">
         <RouterLink to="/member-center/helper">
-          <Btn btnStyle="white default" @click="mc_changeColor">小幫手中心</Btn>
+          <Btn btnStyle="white default">小幫手中心</Btn>
         </RouterLink>          
       </div>      
         
@@ -54,11 +57,11 @@ import LightBox from '../components/LightBox.vue';
 
 //const
 // mcNav 按鈕狀態
-const isActive = ref( false );
+// const isActive = ref( false );
 
-const mc_changeColor = () => {
-  isActive.value = !isActive.value;
-};
+// const mc_changeColor = () => {
+//   isActive.value = !isActive.value;
+// };
 //
 // function mc_changeColor(){
 //   if(){

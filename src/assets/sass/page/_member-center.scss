@@ -114,13 +114,15 @@ ol {
 .msg-n-avatar{
   width: 100%;
   .avatar{
-    cursor: pointer;
     width: 4.8rem;
     height: 4.8rem;
     border:2px solid map-get($colors, natural-0);
     border-radius: 50%;
   
-    background-color: #693413;
+    img{
+      width: 100%;
+      border-radius: 50%;
+    }
   }
   
   .msg-welcome{
@@ -291,6 +293,7 @@ ol {
     align-items: center;
     gap: .8rem;
     .avatar {
+      cursor: pointer;
       //頭相框，可以在選擇(focus?)的時候，出現外框(outline)，並且名字變成粗體
       width: 6.4rem;
       height: 6.4rem;
@@ -598,6 +601,7 @@ ol {
       height: 22rem;
       background-color: map-get($colors, natural-0);
     }
+    
 
     .btn-group{
       display: flex;
@@ -647,6 +651,12 @@ ol {
   gap: .8rem;
 }
 
+#deletePetcardPop{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .delete-petcard{
   width: 42.5rem;
   height: 17.6rem;
@@ -654,7 +664,7 @@ ol {
   padding: 5.6rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.2rem;
   .title{
     width: 100%;

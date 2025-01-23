@@ -65,13 +65,11 @@
           <div class="hc-postCard" id="hcPostBuddy">
   
             <div class="postCard">
-                <img src="" alt="寵物資訊卡" id="petCard">
             </div>
             <div class="hc-btn-group">
               <Btn btnStyle="primary default" id="editPostCard">編輯</Btn>
               <div class="btn-group">
-                <Btn btnStyle="baseline small" id="deletePostCard">刪除卡片</Btn>
-                <Btn btnStyle="baseline small" id="matchAdjustment">配對喜好設定</Btn>
+                <Btn btnStyle="baseline small" id="deletePostCard">刪除貼文</Btn>
               </div>
             </div>                
             
