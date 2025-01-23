@@ -21,9 +21,9 @@
             <div class="ptc-top">
             </div>
             <div class="ptc-btn-group">
-              <Btn btnStyle="primary default" @click="toggleLightBox_editCard">編輯</Btn>
+              <Btn btnStyle="primary default" @click="toggleLightBox_editDog">編輯</Btn>
               <div class="btn-group">
-                <Btn btnStyle="baseline small" @click="toggleLightBox_deleteCard">刪除卡片</Btn>
+                <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">刪除卡片</Btn>
                 <Btn btnStyle="baseline small" @click="toggleLightBox_match">配對喜好設定</Btn>
               </div>
             </div>
@@ -33,9 +33,9 @@
             <div class="ptc-top">
             </div>
             <div class="ptc-btn-group">
-              <Btn btnStyle="primary default" @click="toggleLightBox_editCard">編輯</Btn>
+              <Btn btnStyle="primary default" @click="toggleLightBox_editCat">編輯</Btn>
               <div class="btn-group">
-                <Btn btnStyle="baseline small" @click="toggleLightBox_deleteCard">刪除卡片</Btn>
+                <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">刪除卡片</Btn>
                 <Btn btnStyle="baseline small"  @click="toggleLightBox_match">配對喜好設定</Btn>
               </div>
             </div>
@@ -43,8 +43,8 @@
             <!-- card3 -->
           <div class="petcard" id="addPetCard">
             <div class="" id="addPetCardBtn">
-              <Btn btnStyle="baseline small" @click="toggleLightBox_editCard">+ 狗狗資訊卡</Btn>
-              <Btn btnStyle="baseline small" @click="toggleLightBox_editCard">+ 貓貓資訊卡</Btn>
+              <Btn btnStyle="baseline small" @click="toggleLightBox_editDog">+ 狗狗資訊卡</Btn>
+              <Btn btnStyle="baseline small" @click="toggleLightBox_editCat">+ 貓貓資訊卡</Btn>
             </div>
           </div>           
       </div>
@@ -52,23 +52,24 @@
 </div>
 
     <!-- LightBox，編輯卡片 : 兩: 貓&狗-->
+     <!-- 狗 -->
     <LightBox 
-    :title="lightTitle4.title"
-    :is-light-box="lightTitle4.isLightBox.value" 
-    @toggle="toggleLightBox_editCard"
-    pY="5.6rem" 
-    pX="5.6rem"
-    bgc="transparent:50%"
-    id="editPetcardPop"></LightBox>
+    :title="lightTitle_editDog.title"
+    :is-light-box="lightTitle_editDog.isLightBox.value" 
+    @toggle="toggleLightBox_editDog"
+    id="editPetcardPop_dog"></LightBox>
+     <!-- 貓 -->
+    <LightBox 
+    :title="lightTitle_editCat.title"
+    :is-light-box="lightTitle_editCat.isLightBox.value" 
+    @toggle="toggleLightBox_editCat"
+    id="editPetcardPop_cat"></LightBox>
 
     <!-- LightBox，配對喜好調整 -->
     <LightBox 
-      :title="lightTitle6.title"
-      :is-light-box="lightTitle6.isLightBox.value" 
+      :title="lightTitle_matchReset.title"
+      :is-light-box="lightTitle_matchReset.isLightBox.value" 
       @toggle="toggleLightBox_match"
-      pY="5.6rem" 
-      pX="5.6rem"
-      bgc="transparent:50%"
       id="matchAdjustPop" 
       class="matchAdjust-wrapper">
 
@@ -106,31 +107,27 @@
 
         </div>          
         <div class="btn-group">
-          <Btn btnStyle="primary small">儲存</Btn>
+          <Btn btnStyle="primary small" @click="toggleLightBox_match">儲存</Btn>
           <Btn btnStyle="baseline small" @click="toggleLightBox_match">取消修改</Btn>
         </div>
       </div>
     </LightBox>
 
-    <!-- LightBox，刪除卡片 -->
-    <LightBox 
-    :title="lightTitle5.title"
-    :is-light-box="lightTitle5.isLightBox.value" 
-    @toggle="toggleLightBox_deleteCard"
-    pY="5.6rem" 
-    pX="5.6rem"
-    bgc="transparent:50%"
+    <!-- PopUp，刪除卡片 -->
+    <PopUp
+    :is-pop-up="deleteCard.isPopUp.value"
+    @toggle="togglePopUp_deleteCard"
     id="deletePetcardPop">
     <div class="delete-petcard">
       <div class="title">
         <p class="bold">確定刪除資訊卡?</p>
       </div>
       <div class="btn-group">
-        <Btn btnStyle="primary small">確定</Btn>
-        <Btn btnStyle="baseline small">取消</Btn>
+        <Btn btnStyle="primary small" @click="togglePopUp_deleteCard">確定</Btn>
+        <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">取消</Btn>
       </div>
     </div>
-    </LightBox>
+    </PopUp>
 
 
 
@@ -145,13 +142,14 @@
 
 import { ref } from 'vue';
 // components
-import MainHeader from '../components/MainHeader.vue';
-import Btn from '../components/Btn.vue';
-import DropdownMenu from '../components/DropdownMenu.vue';
-import InputText from '../components/InputText.vue';
+import MainHeader from '@/components/MainHeader.vue';
+import Btn from '@/components/Btn.vue';
+// import DropdownMenu from '../components/DropdownMenu.vue';
+// import InputText from '../components/InputText.vue';
 import LightBox from '../components/LightBox.vue';
+import PopUp from "../components/popUp.vue";
 // pages
-import memberNav from '../pages/memberNav.vue' ;
+import memberNav from '../views/memberNav.vue' ;
 
 // dropDown
 const menu1 = {
@@ -274,37 +272,26 @@ const input6 = {
 
 
 // // lightBox title
-const lightTitle4 = {title: "狗狗資訊卡", isLightBox: ref(false)};
-// const lightTitle4cat = {title: "貓貓資訊卡", isLightBox: ref(false)};
-const lightTitle5 = {title: "刪除確認", isLightBox: ref(false)};
-const lightTitle6 = {title: "配對喜好設定", isLightBox: ref(false)};
-//  // lightBox 狀態
-// let isLightBox = ref(false);
+const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
+const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
+const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};
 
 // 控制燈箱的顯示與隱藏
  // 編輯卡片
-function toggleLightBox_editCard() {   // 狗
-  lightTitle4.isLightBox.value = !lightTitle4.isLightBox.value;
+   // 狗
+function toggleLightBox_editDog() {  
+  lightTitle_editDog.isLightBox.value = !lightTitle_editDog.isLightBox.value;
   // 根據狀態新增或移除 clicked 類別
-  if (lightTitle4.isLightBox.value) {
+  if (lightTitle_editDog.isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
   }
 };
-// function toggleLightBox_editCard() {   // 貓
-//   lightTitle4cat.isLightBox.value = !lightTitle4cat.isLightBox.value;
-//   // 根據狀態新增或移除 clicked 類別
-//   if (lightTitle4cat.isLightBox.value) {
-//     document.body.classList.add('clicked');
-//   } else {
-//     document.body.classList.remove('clicked');
-//   }
-// };
- // 刪除資訊卡
-function toggleLightBox_deleteCard() {
-  lightTitle5.isLightBox.value = !lightTitle5.isLightBox.value;
-  if (lightTitle5.isLightBox.value) {
+   // 貓
+function toggleLightBox_editCat() {  
+  lightTitle_editCat.isLightBox.value = !lightTitle_editCat.isLightBox.value;
+  if (lightTitle_editCat.isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
@@ -312,11 +299,27 @@ function toggleLightBox_deleteCard() {
 };
  // 配對喜好設定 
 function toggleLightBox_match() {
-  lightTitle6.isLightBox.value = !lightTitle6.isLightBox.value;
-  if (lightTitle6.isLightBox.value) {
+  lightTitle_matchReset.isLightBox.value = !lightTitle_matchReset.isLightBox.value;
+  if (lightTitle_matchReset.isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
   }
 };
+
+//popup狀態
+const deleteCard = { isPopUp : ref (false )  };
+
+// 刪除資訊卡
+// 控制燈箱的顯示與隱藏
+function togglePopUp_deleteCard() {
+  deleteCard.isPopUp.value = !deleteCard.isPopUp.value;
+  // // 停止捲軸
+  if (deleteCard.isPopUp.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+};
+
 </script>

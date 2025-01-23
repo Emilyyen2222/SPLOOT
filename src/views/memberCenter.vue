@@ -46,8 +46,8 @@
   import { ref } from 'vue';
 
   // components
-  import MainHeader from '../components/MainHeader.vue';
-  import Btn from '../components/Btn.vue';
+  import MainHeader from '@/components/MainHeader.vue';
+  import Btn from '@/components/Btn.vue';
   import DropdownMenu from '../components/DropdownMenu.vue';
   import InputText from '../components/InputText.vue';
   import LightBox from '../components/LightBox.vue';
@@ -56,7 +56,7 @@
   import memberPetcard from './memberPetcard.vue' ;
   import memberSubRecord from '../pages/memberSubRecord.vue' ;
   import memberHelper from '../pages/memberHelper.vue' ;
-  import memberNav from '../pages/memberNav.vue' ;
+  import memberNav from '../views/memberNav.vue' ;
 
 //data
 // const 
