@@ -350,52 +350,63 @@ const menu1 = {
 - **`router`**: Vue-router。
 - **`vendors`**: 第三方套件（例如 jQuery）。
 
-## 彈出式視窗
-同一個頁面有出現兩個以上的彈出式視窗"全部"都要修改變數及函式，並要再複製一份新的函數：
+# 彈出式視窗
 
-範例:
-toggleLightBox -> toggleLightBox2
-lightTitle -> lightTitle2
-isLightBox -> isLightBox2
+## 多重彈出式視窗說明
+當同一頁面有兩個以上的彈出式視窗時，所有變數與函式都需要修改名稱並複製新的函式，例如：
 
-function toggleLightBox2(){...}
+- `toggleLightBox` -> `toggleLightBox2`
+- `lightTitle` -> `lightTitle2`
+- `isLightBox` -> `isLightBox2`
 
-### 燈箱
-內建關閉燈箱的開關 內容超過長度會自動生成捲軸 已設定padding,遮罩,定位 僅把內容放入即可 
+範例函式：
 
-## html
+```javascript
+function toggleLightBox2() {
+  // 新的燈箱控制邏輯
+}
+```
 
+## 燈箱
+內建功能：
+1. 自動關閉燈箱的按鈕。
+2. 內容超出長度時自動生成捲軸。
+3. 預設設定了 `padding`、遮罩及定位。
+
+只需將內容填入即可使用。
+
+### HTML
+```html
 <LightBox 
     :title="lightTitle.title"
     :is-light-box="isLightBox" 
     @toggle="toggleLightBox">
 
-    //輸入燈箱內容
+    <!-- 輸入燈箱內容 -->
 
 </LightBox>
 
-控制燈箱的按鈕請加上:
+<!-- 控制燈箱的按鈕 -->
+<button @click="toggleLightBox">開啟燈箱</button>
+```
 
-@click="toggleLightBox"
-
-## script
-
+### Script
+```javascript
 <script setup>
 import LightBox from "@/components/LightBox.vue";
+import { ref } from 'vue';
 
-//1. 主標題請輸入在這裡 
-const lightTitle = {title: "我是預設標題，請多指教}
+// 1. 主標題請輸入在這裡 
+const lightTitle = { title: "我是預設標題，請多指教" };
 
-//2. 燈箱開關，請直接複製貼上
-import LightBox from "../components/LightBox.vue";
-
- //燈箱狀態
+// 2. 燈箱開關
+// 燈箱狀態
 let isLightBox = ref(false);
 
 // 控制燈箱的顯示與隱藏
 function toggleLightBox() {
   isLightBox.value = !isLightBox.value;
-  // 根據狀態新增或移除 clicked 類別
+  // 根據狀態新增或移除 `clicked` 類別
   if (isLightBox.value) {
     document.body.classList.add('clicked');
   } else {
@@ -403,35 +414,38 @@ function toggleLightBox() {
   }
 }
 </script>
+```
 
-### pop up
-已設定padding,遮罩,定位 僅把內容放入即可 內部無任何架構
+## 彈出視窗 (Pop-Up)
+內建功能：
+1. 預設 `padding`、遮罩及定位。
+2. 不含任何內部架構。
 
-## html
+只需將內容填入即可使用。
 
-<PopUp
-	:is-pop-up="isPopUp">
-
-	”輸入燈箱內容“
-
+### HTML
+```html
+<PopUp :is-pop-up="isPopUp">
+    <!-- 輸入燈箱內容 -->
 </PopUp>
 
-控制燈箱的按鈕請加上:
+<!-- 控制彈出視窗的按鈕 -->
+<button @click="togglePopUp">開啟彈出視窗</button>
+```
 
-@click="togglePopUp"
-
-## script
-
+### Script
+```javascript
 <script setup>
-import PopUp from "../components/popUp.vue"
+import PopUp from "../components/PopUp.vue";
+import { ref } from 'vue';
 
-//popup狀態
-let isPopUp =ref(false);
+// popup 狀態
+let isPopUp = ref(false);
 
-// 控制燈箱的顯示與隱藏
+// 控制彈出視窗的顯示與隱藏
 function togglePopUp() {
   isPopUp.value = !isPopUp.value;
-  // // 停止捲軸
+  // 停止捲軸
   if (isPopUp.value) {
     document.body.classList.add('clicked');
   } else {
