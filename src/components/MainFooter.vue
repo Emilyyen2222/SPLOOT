@@ -7,13 +7,26 @@
                     <img :src="currentSrc" alt="Logo-footer">
                 </div>
                 <div class="footerList">
-                    <div class="leftList">
+                    <!-- <div class="leftList">
                         <Btn btnStyle="text small" class="leftItem">關於我們</Btn>
                         <Btn btnStyle="text small" class="leftItem">認識新毛友</Btn>
                         <Btn btnStyle="text small" class="leftItem">訂閱寵物盒</Btn>
                         <Btn btnStyle="text small" class="leftItem">尋找小幫手</Btn>
                         <Btn btnStyle="text small" class="leftItem">毛孩日曆</Btn>
                         <Btn btnStyle="text small" class="leftItem">友善設施</Btn>
+                    </div> -->
+                    <div class="leftList">
+                        <Btn btnStyle="text small" class="leftItem" 
+                        v-for="(item,index) in footerItem"
+                        :key="index">
+                            <RouterLink :to="item.link">{{ item.name }}</RouterLink>
+                        </Btn>
+                        <!-- <Btn btnStyle="text small" class="leftItem">關於我們</Btn>
+                        <Btn btnStyle="text small" class="leftItem">認識新毛友</Btn>
+                        <Btn btnStyle="text small" class="leftItem">訂閱寵物盒</Btn>
+                        <Btn btnStyle="text small" class="leftItem">尋找小幫手</Btn>
+                        <Btn btnStyle="text small" class="leftItem">毛孩日曆</Btn>
+                        <Btn btnStyle="text small" class="leftItem">友善設施</Btn> -->
                     </div>
                     <div class="rightList">
                         <Btn btnStyle="text small" class="rightItem">INSTAGRAM</Btn>
@@ -38,6 +51,17 @@
 import {ref} from 'vue';
 
 import Btn from '@/components/Btn.vue'
+import { RouterLink } from 'vue-router';
+
+const footerItem = ref([
+    { name: '關於我們', link: '' },
+    { name: '認識新毛友', link: '/petInfoCard'},
+    { name: '訂閱寵物盒', link: '/sploot-box'},
+    { name: '尋找小幫手', link: '/sploot-buddy'},
+    { name: '毛孩日曆', link: '/sploot-event'},
+    { name: '友善設施', link: '/sploot-pet-friendly'},
+
+])
 
 const logoSrc = {
     red: new URL('../assets/img/footer-red.svg', import.meta.url).href,

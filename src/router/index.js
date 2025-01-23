@@ -166,7 +166,14 @@ const routes = [
 // 建立 router
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: routes
+  routes: routes,
+  scrollBehavior(to, from, savedPosition) { //Ian
+    if (savedPosition) {
+      return savedPosition; // 如果有保存的位置，返回該位置
+    } else {
+      return { top: 0 };  // 否則滾動到頂部
+    }
+  }
 });
 
 router.beforeEach((to, from, next) => {
