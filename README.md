@@ -349,3 +349,93 @@ const menu1 = {
 - **`pages`**: 頁面 View。(HomeView.vue)
 - **`router`**: Vue-router。
 - **`vendors`**: 第三方套件（例如 jQuery）。
+
+## 彈出式視窗
+同一個頁面有出現兩個以上的彈出式視窗"全部"都要修改變數及函式，並要再複製一份新的函數：
+
+範例:
+toggleLightBox -> toggleLightBox2
+lightTitle -> lightTitle2
+isLightBox -> isLightBox2
+
+function toggleLightBox2(){...}
+
+### 燈箱
+內建關閉燈箱的開關 內容超過長度會自動生成捲軸 已設定padding,遮罩,定位 僅把內容放入即可 
+
+## html
+
+<LightBox 
+    :title="lightTitle.title"
+    :is-light-box="isLightBox" 
+    @toggle="toggleLightBox">
+
+    //輸入燈箱內容
+
+</LightBox>
+
+控制燈箱的按鈕請加上:
+
+@click="toggleLightBox"
+
+## script
+
+<script setup>
+import LightBox from "@/components/LightBox.vue";
+
+//1. 主標題請輸入在這裡 
+const lightTitle = {title: "我是預設標題，請多指教}
+
+//2. 燈箱開關，請直接複製貼上
+import LightBox from "../components/LightBox.vue";
+
+ //燈箱狀態
+let isLightBox = ref(false);
+
+// 控制燈箱的顯示與隱藏
+function toggleLightBox() {
+  isLightBox.value = !isLightBox.value;
+  // 根據狀態新增或移除 clicked 類別
+  if (isLightBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
+</script>
+
+### pop up
+已設定padding,遮罩,定位 僅把內容放入即可 內部無任何架構
+
+## html
+
+<PopUp
+	:is-pop-up="isPopUp">
+
+	”輸入燈箱內容“
+
+</PopUp>
+
+控制燈箱的按鈕請加上:
+
+@click="togglePopUp"
+
+## script
+
+<script setup>
+import PopUp from "../components/popUp.vue"
+
+//popup狀態
+let isPopUp =ref(false);
+
+// 控制燈箱的顯示與隱藏
+function togglePopUp() {
+  isPopUp.value = !isPopUp.value;
+  // // 停止捲軸
+  if (isPopUp.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
+</script>

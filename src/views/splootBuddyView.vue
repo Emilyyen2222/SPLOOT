@@ -70,7 +70,7 @@
             </div>
         </div>
     </div>
-    <Btn btnStyle="primary default buddytSearch" @click="togglePopUp">搜尋</Btn>
+    <Btn btnStyle="primary default buddytSearch">搜尋</Btn>
 
     <!-- 成為小幫手＋新增貼文 -->
     <div class="middleSection">
@@ -116,7 +116,7 @@
         </ul>
 
         <div class="seeMoreBtn">
-            <Btn btnStyle="outline default textBlue seeMore">查看更多</Btn> 
+            <Btn btnStyle="outline default textBlue seeMore" @click="toggleLightBox2">查看更多</Btn> 
         </div>
     </div>
 </div>
@@ -200,13 +200,14 @@
     </div>
 </LightBox>
 
+<LightBox
+    :title="lightTitle2.title"
+    :is-light-box="isLightBox2" 
+    @toggle="toggleLightBox2">
+aaaaa
+</LightBox>
+
 <MainFooter></MainFooter>
-<!-- <PopUp
-:is-pop-up="isPopUp"
-@toggle="togglePopUp"
->
-<div class="close" @click="togglePopUp">按我</div>
-</PopUp> -->
 
 
 
@@ -338,18 +339,23 @@ function toggleLightBox() {
   }
 }
 
-// //popup狀態
-// let isPopUp =ref(false);
+// 燈箱標題請輸入“發佈”)
+const lightTitle2 = {title: "發佈貼文"}
 
-// // 控制燈箱的顯示與隱藏
-// function togglePopUp() {
-//   isPopUp.value = !isPopUp.value;
-//   // // 停止捲軸
-//   if (isPopUp.value) {
-//     document.body.classList.add('clicked');
-//   } else {
-//     document.body.classList.remove('clicked');
-//   }
-// }
+ //燈箱狀態
+let isLightBox2 = ref(false);
+
+// 控制燈箱的顯示與隱藏
+function toggleLightBox2() {
+  isLightBox2.value = !isLightBox2.value;
+  // 停止捲軸
+  if (isLightBox2.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
+
+
 
 </script>
