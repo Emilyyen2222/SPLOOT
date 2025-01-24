@@ -63,14 +63,10 @@
           <div class="hc-grid-container">
             <!-- 1 -->
             <div class="hc-postCard" id="hcPostBuddy">
-    
-              <div class="postCard">
-              </div>
+              <helperPostCard class="helperPostCard"/>
               <div class="hc-btn-group">
-                <Btn btnStyle="primary default" id="editPostCard">編輯</Btn>
-                <div class="btn-group">
-                  <Btn btnStyle="baseline small" id="deletePostCard" @click="togglePopUp_deleteCard">刪除貼文</Btn>
-                </div>
+                <Btn btnStyle="primary default" id="editPostCard">編輯</Btn>                
+                <Btn btnStyle="baseline small" id="deletePostCard" @click="togglePopUp_deleteCard">刪除貼文</Btn>            
               </div>                
               
             </div>
@@ -130,11 +126,14 @@ import { ref } from 'vue';
 // components
 import MainHeader from '@/components/MainHeader.vue';
 import Btn from '@/components/Btn.vue';
-import DropdownMenu from '../components/DropdownMenu.vue';
-import InputText from '../components/InputText.vue';
-import LightBox from '../components/LightBox.vue';
+// import DropdownMenu from '../components/DropdownMenu.vue';
+// import InputText from '../components/InputText.vue';
+// import LightBox from '../components/LightBox.vue';
+import PopUp from '../components/PopUp.vue';
+
 // pages
 import memberNav from '../views/memberNav.vue' ;
+import helperPostCard from '../views/helperPostCard.vue';
 
 //popup狀態
 const deleteCard = { isPopUp : ref (false )  };
