@@ -104,25 +104,17 @@ const routes = [
       theme: 'blue',
       bodyBg: 'blueberry-0',
     }
-  },
-  // {
-  //   path: '/member-center',
-  //   component: () => import('@/views/memberCenter.vue'),
-  //   meta: {
-  //     title: '會員中心 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'natural-1',
-  //   }
-  // },
-  /*{
-    path: '/member-center/member-info',
-    component: () => import('@/views/memberInfo.vue'),
+  }, /*
+  {
+    path: '/member-center',
+    component: () => import('@/views/memberCenter.vue'),
     meta: {
-      title: '會員資料 | Sploot',
+      title: '會員中心 | Sploot',
       theme: 'red',
       bodyBg: 'natural-1',
     }
   },
+ 
   {
     path: '/backend/member',
     component: () => import('@/views/backend/memberManage.vue'),
@@ -142,8 +134,8 @@ const routes = [
     }
   },
   {
-    path: '/member-center/sub-record',
-    component: () => import('@/views/memberSubRecord.vue'),
+    path: '/member-center/subscription',
+    component: () => import('@/views/memberSubscription.vue'),
     meta: {
       title: '訂閱紀錄 | Sploot',
       theme: 'red',

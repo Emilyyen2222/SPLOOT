@@ -288,27 +288,27 @@
     
       <div class="sh-title">
         <h6 class="bold">歷史紀錄</h6>
-        <smallText></smallText>
       </div>
     
       <div class="divider"></div>
     
       <div class="sh-h">
         <div class="sh-h-title">
-          <p class="bold">索引</p>
-          <p class="bold">寵物名稱</p>
-          <p class="bold">定月方案</p>
-          <p class="bold">訂閱日期</p>
-          <p class="bold">金額</p>
+          <p class="bold th_index">索引</p>
+          <p class="bold th_petName">寵物名稱</p>
+          <p class="bold th_plan">定月方案</p>
+          <p class="bold th_date">訂閱日期</p>
+          <p class="bold th_total">金額</p>
         </div>
         <div class="sh-h-content">
           <!-- v-for -->
+          <!-- <div class="sh-h-items" v-for{ subHistory through in items } :key="id"> -->
           <div class="sh-h-items">
-            <p>01</p>
-            <p>小白</p>
-            <p>銀卡(三個月)</p>
-            <p>2024/01/15</p>
-            <p>$300</p>
+            <p class="tb_index">01</p>
+            <p class="tb_petName">小白</p>
+            <p class="tb_plan">銀卡(三個月)</p>
+            <p class="tb_date">2024/01/15</p>
+            <p class="tb_total">$300</p>
           </div>
           <div class="sh-h-items">
             <p>02</p>
@@ -352,6 +352,12 @@ import InputText from '../components/InputText.vue';
 import LightBox from '../components/LightBox.vue';
 // pages
 import memberNav from '../views/memberNav.vue' ;
+
+// const subHistory ={
+//   [
+//     { id:0, ind: 1, petName: '小白', plan: '銀卡(三個月)', date: '2024/01/15' , total: '$'+1299 },
+//   ],
+// };
 
 // lightbox
 const lightTitle_resub = { title: "續約" , isLightBox : ref(false) };

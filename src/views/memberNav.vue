@@ -18,8 +18,8 @@
     <!-- mc nav -->
     <div class="mcNav">
       <div class="btn-wrapper">
-        <RouterLink to='/member-center/member-info'>
-          <Btn btnStyle="white default" class="mcNav-btn" :class="{ active: isActive }" @click="mc_changeColor">會員資料</Btn>
+        <RouterLink to='/member-center'>
+          <Btn btnStyle="white default" class="mcNav-btn">會員資料</Btn>
         </RouterLink>        
       </div>      
       <div class="btn-wrapper">
@@ -28,7 +28,7 @@
         </RouterLink>
       </div>      
       <div class="btn-wrapper">
-        <RouterLink to="/member-center/sub-record">
+        <RouterLink to="/member-center/subscription">
           <Btn btnStyle="white default">寵物盒訂閱紀錄</Btn>
         </RouterLink>        
       </div>      
@@ -49,9 +49,9 @@ import { ref } from 'vue';
 
 // components
 import Btn from '../components/Btn.vue';
-import DropdownMenu from '../components/DropdownMenu.vue';
-import InputText from '../components/InputText.vue';
-import LightBox from '../components/LightBox.vue';
+// import DropdownMenu from '../components/DropdownMenu.vue';
+// import InputText from '../components/InputText.vue';
+// import LightBox from '../components/LightBox.vue';
 
 // data
 
