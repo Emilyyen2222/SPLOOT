@@ -214,7 +214,70 @@
         .circle2{
             top: 1040px;
         }
-    }
+   
+    .vc-container{
+        width: 100%;
+        height: 100%;
+        background-color: map-get($colors, transparent);
+        border: none;
+        
+        .vc-header{
+            padding: 0;
+            margin-bottom: 1.2rem;
+            
+            .vc-title, .vc-arrow{
+                @include bayon(24);
+                color: map-get($colors, blue);
+                font-weight: 400;
+            }
+
+            .vc-base-icon{
+                stroke-width:1 ;
+            }
+
+            button{
+                background-color: transparent;
+            }
+        }
+                    
+            .vc-weeks{
+                padding: 0;            
+                border-radius: 16px;
+                background-color: map-get($colors, beige);
+
+                .vc-week{
+                    margin: 8px;
+                }
+
+                .vc-weekdays{
+                    align-items: center;
+
+                    height: 4.4rem;
+                    border-radius: 16px 16px 0 0;
+                    background-color: map-get($colors, yellow-2);
+
+                }
+            }
+        } 
+
+        .vc-weekday{
+            @include bayon(13);
+            font-weight: 400;
+        }
+        
+        .brownDate, .vc-weekday{
+            color: map-get($colors, brown);
+        }
+
+        .blueDate, .vc-weekday-1, .vc-weekday-7{
+            color: map-get($colors, blue);
+        }
+
+        .brownDate, .blueDate{
+            @include bayon(20);
+        }
+
+    }    
 }
 
 
