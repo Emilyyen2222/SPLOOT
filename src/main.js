@@ -8,6 +8,4 @@ import 'v-calendar/style.css'; //Ian
 
 const pinia = createPinia();
 
-createApp(Main).use(router).use(pinia).use(VCalendar, {
-    componentPrefix: 'vc',  // 元件名稱的前綴（例如 vc-calendar）
-}).mount('#app');
+createApp(Main).use(router).use(pinia).use(VCalendar, {}).mount('#app');
