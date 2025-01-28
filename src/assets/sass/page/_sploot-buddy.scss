@@ -196,6 +196,18 @@ body{
 
                 .btnBox{
                     width: 12rem;
+
+                    .outline.small{
+                        @include sm(){
+
+                            margin-right: 1rem;
+
+                            @include textStyle(xsText);
+                        }
+
+
+                    }
+
                 }
             }
 

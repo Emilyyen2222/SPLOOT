@@ -1,0 +1,151 @@
+.authWrapper{
+    display: flex;
+    justify-content: space-between;
+
+    width: 80rem;
+
+    .underline{
+        cursor: pointer;
+        border-bottom: 1px solid;
+    }
+
+
+    .mainLeft{
+        width: 50%;
+        max-width: 40rem;
+
+
+        padding: 5.6rem;
+
+        .topText{
+            display: flex;
+            justify-content: flex-end;
+            gap: 1.6rem;
+
+            margin-bottom: 2.4rem;
+        }
+        
+        .theView{
+            margin-bottom: 2rem;
+            
+            h4{
+                margin-bottom: 2rem;
+
+                text-align: center;
+            }
+
+            input{
+                margin-bottom: 0.8rem;
+            }
+
+            &.singUp{
+                display: block;
+            }
+
+            &.login{
+                display: block;
+            }
+
+
+
+            .passwordBox{
+                position: relative;
+
+                display: flex;
+
+                .theEye{
+                    cursor: pointer;
+
+                    position: absolute;
+                    top: calc(50% - 10px);
+                    right: 16px;
+
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .forgotPassword{
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .buttomBtn{
+            .captchaCheck{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                padding: 1.2rem 1.6rem;
+                margin-bottom: 0.8rem;
+                border: 1px solid map-get($colors, natural-1);
+                border-radius: 20px;
+
+                .robotCheckBox{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.8rem;
+                }
+            }
+
+            .dividerBox{
+                display: flex;
+                align-items: center;
+
+                margin: 2rem 0;
+
+                .divider{
+                    border: 0.5px solid map-get($colors, natural-1);
+                }
+
+                p{
+                    margin: 0 1.6rem;
+
+                    color: map-get($colors, natural-2);
+                }
+            }
+
+            .quickWay{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                padding: 0.4rem 1.6rem;
+                border: 1px solid map-get($colors, natural-1);
+                border-radius: 20px;
+
+                .authIcon{
+                    flex-grow: 0;
+
+                    width: 24px;
+                    height: 24px;
+                }
+
+                .quickBox{
+                    flex-grow: 1;
+                    
+                    text-align: center;
+                }
+
+                &.gmail{
+                    margin-bottom: 0.8rem;
+                }
+            }
+        }        
+    }
+
+
+
+    .mainRight{
+        width: 50%;
+        max-width: 40rem;
+
+        .authMainImg{
+            width: 100%;
+            height: 100%;
+            border-radius: 0 16px 16px 0
+        }
+    }
+
+
+}

@@ -207,6 +207,10 @@
 aaaaa
 </LightBox>
 
+<authBox
+authType="login"
+></authBox>
+
 <MainFooter></MainFooter>
 
 
@@ -222,6 +226,8 @@ aaaaa
     import Btn from '@/components/Btn.vue';
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
+
+    import authBox from '../components/authBox.vue'
 
     const city = {
     placeHolder: '請選擇城市',

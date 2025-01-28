@@ -1,7 +1,7 @@
 <!-- Ian -->
 <template>
    
-   <div v-if="isPopUp" class="popUp" :class="{clicked:isPopUp}">
+   <div v-if="isPopUp" class="popUp" :class="[{clicked:isPopUp}, popProps.isAuth]">
     <slot></slot>
     
    </div>
@@ -18,6 +18,10 @@ const popProps = defineProps({
     isPopUp:{
         type: Boolean,
         required: true,        
+    },
+    isAuth:{
+        type: String,
+        required: false,        
     }
 })
 
