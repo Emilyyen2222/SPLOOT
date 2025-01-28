@@ -458,9 +458,7 @@ function togglePopUp() {
 ```
 
 
-# 登入註冊使用說明
-
-## authBox
+# authBox登入註冊使用說明
 
 ### HTML
 ```vue
