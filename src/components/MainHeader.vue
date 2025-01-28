@@ -36,6 +36,7 @@
     import { useRoute } from 'vue-router';
     
     import Btn from './Btn.vue';
+    import authBox from './authBox.vue'
 
     const route = useRoute();
     const props = defineProps({
@@ -77,6 +78,9 @@
             }
         })
     });
+
+
+    
 
 
 </script>

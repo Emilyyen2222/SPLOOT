@@ -453,3 +453,64 @@ function togglePopUp() {
   }
 }
 </script>
+
+# authBox 使用說明
+
+## 父元件範例
+
+```vue
+<authBox
+  authType=""
+  :is-auth-box="isAuthBox"
+  @toggle="toggleAuthBox"
+></authBox>
+```
+
+### `authType` 說明
+- **註冊**：`authType="signUp"`
+- **登入**：`authType="login"`
+
+### 顯示 `authBox` 的按鈕設置
+
+在需要觸發顯示 `authBox` 的按鈕標籤上添加：
+
+```vue
+@click="toggleAuthBox"
+```
+
+## 父元件 Script
+
+```javascript
+<script setup>
+import { ref } from 'vue';
+
+// 登入或註冊框狀態
+let isAuthBox = ref(false);
+
+// 控制登入或註冊框的顯示與隱藏
+function toggleAuthBox() {
+  isAuthBox.value = !isAuthBox.value;
+
+  // 停止捲軸
+  if (isAuthBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
+</script>
+```
+
+---
+
+## 功能說明
+
+1. **`isAuthBox` 狀態控制**：
+   - `true`：顯示 `authBox`。
+   - `false`：隱藏 `authBox`。
+
+2. **停止捲軸功能**：
+   - 當 `authBox` 顯示時，自動為 `<body>` 添加 `clicked` class，避免頁面背景滾動。
+   - 當 `authBox` 隱藏時，自動移除 `clicked` class。
+
+

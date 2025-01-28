@@ -19,11 +19,6 @@ body.clicked{
     &.clicked{
         display: block;
     }
-
-    //  為了登入特別設置
-    &.auth{
-        padding: 0;
-    }
 }
 
 //遮罩

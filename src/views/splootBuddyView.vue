@@ -116,7 +116,7 @@
         </ul>
 
         <div class="seeMoreBtn">
-            <Btn btnStyle="outline default textBlue seeMore" @click="toggleLightBox2">查看更多</Btn> 
+            <Btn btnStyle="outline default textBlue seeMore" @click="toggleAuthBox">查看更多</Btn> 
         </div>
     </div>
 </div>
@@ -200,15 +200,10 @@
     </div>
 </LightBox>
 
-<LightBox
-    :title="lightTitle2.title"
-    :is-light-box="isLightBox2" 
-    @toggle="toggleLightBox2">
-aaaaa
-</LightBox>
-
 <authBox
 authType="login"
+:is-auth-box="isAuthBox"
+@toggle="toggleAuthBox"
 ></authBox>
 
 <MainFooter></MainFooter>
@@ -345,23 +340,18 @@ function toggleLightBox() {
   }
 }
 
-// 燈箱標題請輸入“發佈”)
-const lightTitle2 = {title: "發佈貼文"}
+// 登入or註冊箱狀態
+let isAuthBox =ref(false);
 
- //燈箱狀態
-let isLightBox2 = ref(false);
-
-// 控制燈箱的顯示與隱藏
-function toggleLightBox2() {
-  isLightBox2.value = !isLightBox2.value;
+// 控制登入or註冊箱的顯示與隱藏
+function toggleAuthBox() {
+    isAuthBox.value = !isAuthBox.value;
   // 停止捲軸
-  if (isLightBox2.value) {
+  if (isAuthBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
   }
 }
-
-
 
 </script>

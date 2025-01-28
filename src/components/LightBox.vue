@@ -40,7 +40,7 @@
   
     const emit = defineEmits(['toggle']);
 
-    function toggleLightBox() {
+    function toggleLightBox(){
     emit('toggle');
     }
  
