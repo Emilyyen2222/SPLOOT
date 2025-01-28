@@ -463,10 +463,10 @@ function togglePopUp() {
 ### HTML
 ```vue
 <authBox
-  authType=""
-  :is-auth-box="isAuthBox"
-  @toggle="toggleAuthBox"
-></authBox>
+    v-model:authType="authType" 
+    :isAuthBox="isAuthBox" 
+    @toggle="toggleAuthBox"
+  ></authBox>
 
 <!-- 在需要觸發顯示authBox的按鈕標籤上添加： -->
 <Btn @click="toggleAuthBox"></Btn>
@@ -480,6 +480,8 @@ function togglePopUp() {
 ```vue
 <script setup>
 
+//設定初始模式（登入or註冊） login：登入  signUp：註冊
+const authType = ref('login');
 // 登入或註冊框狀態
 let isAuthBox = ref(false);
 

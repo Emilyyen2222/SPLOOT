@@ -8,11 +8,11 @@
             <div class="topSection">
                 <div class="topText" v-show="props.authType === 'signUp'">
                     <p class="smallText">已有帳號？</p>
-                    <p class="smallText underline">登入</p>
+                    <p class="smallText underline" @click="toggleAuthType">登入</p>
                 </div>
                 <div class="topText" v-show="props.authType === 'login'">
                     <p class="smallText">還沒有帳號？</p>
-                    <p class="smallText underline">快速註冊</p>
+                    <p class="smallText underline" @click="toggleAuthType">快速註冊</p>
                 </div>
             </div>
             
@@ -195,13 +195,20 @@ const props = defineProps({
         type: Boolean,
         required: true,
     },
-})
+});
 
-const emit = defineEmits(['toggle']);
+const emit = defineEmits(['update:authType', 'toggle']);
 
 function toggleAuthBox(){
     emit('toggle');
 }
+
+//註冊登入切換
+function toggleAuthType() {
+    const newAuthType = props.authType === 'login' ? 'signUp' : 'login';
+    emit('update:authType', newAuthType); // 通知父層更新 authType
+}
+
 
 //密碼顯示
 

@@ -30,8 +30,8 @@
         </nav>
     </header>
     <authBox
-    authType="signUp"
-    :is-auth-box="isAuthBox"
+    v-model:authType="authType" 
+    :isAuthBox="isAuthBox" 
     @toggle="toggleAuthBox"
     ></authBox>
 </template>
@@ -84,6 +84,8 @@
         })
     });
 
+    // 初始為登入模式
+    const authType = ref('login'); 
     let isAuthBox = ref(false);
 
     // 控制登入或註冊框的顯示與隱藏
