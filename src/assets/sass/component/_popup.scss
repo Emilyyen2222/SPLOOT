@@ -4,7 +4,7 @@ body.clicked{
 
 .popUp{
     position: fixed;
-    z-index: 1010;
+    z-index: 1015;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -33,7 +33,7 @@ body.clicked{
     height: 100%;
     background-color: rgb(0, 0, 0, 0.8);
 
-    z-index: 1005;
+    z-index: 1010;
     
     &.clicked{
     display: block;

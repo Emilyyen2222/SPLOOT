@@ -116,7 +116,7 @@
         </ul>
 
         <div class="seeMoreBtn">
-            <Btn btnStyle="outline default textBlue seeMore" @click="toggleAuthBox">查看更多</Btn> 
+            <Btn btnStyle="outline default textBlue seeMore">查看更多</Btn> 
         </div>
     </div>
 </div>
@@ -200,12 +200,6 @@
     </div>
 </LightBox>
 
-<authBox
-authType="login"
-:is-auth-box="isAuthBox"
-@toggle="toggleAuthBox"
-></authBox>
-
 <MainFooter></MainFooter>
 
 
@@ -221,8 +215,6 @@ authType="login"
     import Btn from '@/components/Btn.vue';
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
-
-    import authBox from '../components/authBox.vue'
 
     const city = {
     placeHolder: '請選擇城市',
@@ -340,18 +332,5 @@ function toggleLightBox() {
   }
 }
 
-// 登入or註冊箱狀態
-let isAuthBox =ref(false);
-
-// 控制登入or註冊箱的顯示與隱藏
-function toggleAuthBox() {
-    isAuthBox.value = !isAuthBox.value;
-  // 停止捲軸
-  if (isAuthBox.value) {
-    document.body.classList.add('clicked');
-  } else {
-    document.body.classList.remove('clicked');
-  }
-}
 
 </script>

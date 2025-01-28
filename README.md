@@ -489,9 +489,9 @@ function toggleAuthBox() {
 
   // 停止捲軸
   if (isAuthBox.value) {
-    document.body.classList.add('clicked');
+    document.body.classList.add('authClicked');
   } else {
-    document.body.classList.remove('clicked');
+    document.body.classList.remove('authClicked');
   }
 }
 </script>

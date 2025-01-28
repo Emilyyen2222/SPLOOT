@@ -26,9 +26,14 @@
                     <RouterLink :to="item.link">{{ item.name }}</RouterLink>
                 </li>
             </ul>
-            <Btn class="loginBox" btnStyle="primary small">登入</Btn>
+            <Btn class="loginBox" btnStyle="primary small" @click="toggleAuthBox">登入</Btn>
         </nav>
     </header>
+    <authBox
+    authType="signUp"
+    :is-auth-box="isAuthBox"
+    @toggle="toggleAuthBox"
+    ></authBox>
 </template>
   
 <script setup>
@@ -36,7 +41,7 @@
     import { useRoute } from 'vue-router';
     
     import Btn from './Btn.vue';
-    import authBox from './authBox.vue'
+    import authBox from './AuthBox.vue'
 
     const route = useRoute();
     const props = defineProps({
@@ -78,6 +83,20 @@
             }
         })
     });
+
+    let isAuthBox = ref(false);
+
+    // 控制登入或註冊框的顯示與隱藏
+    function toggleAuthBox() {
+    isAuthBox.value = !isAuthBox.value;
+
+    // 停止捲軸
+    if (isAuthBox.value) {
+        document.body.classList.add('authClicked');
+    } else {
+        document.body.classList.remove('authClicked');
+    }
+    }
 
 
     
