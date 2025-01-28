@@ -350,6 +350,8 @@ const menu1 = {
 - **`router`**: Vue-router。
 - **`vendors`**: 第三方套件（例如 jQuery）。
 
+---
+
 # 彈出式視窗
 
 ## 多重彈出式視窗說明
@@ -361,7 +363,7 @@ const menu1 = {
 
 範例函式：
 
-```javascript
+```script
 function toggleLightBox2() {
   // 新的燈箱控制邏輯
 }
@@ -375,8 +377,8 @@ function toggleLightBox2() {
 
 只需將內容填入即可使用。
 
-### HTML
-```html
+### template
+```vue
 <LightBox 
     :title="lightTitle.title"
     :is-light-box="isLightBox" 
@@ -391,7 +393,7 @@ function toggleLightBox2() {
 ```
 
 ### Script
-```javascript
+```vue
 <script setup>
 import LightBox from "@/components/LightBox.vue";
 import { ref } from 'vue';
@@ -424,7 +426,7 @@ function toggleLightBox() {
 只需將內容填入即可使用。
 
 ### HTML
-```html
+```vue
 <PopUp :is-pop-up="isPopUp">
     <!-- 輸入燈箱內容 -->
 </PopUp>
@@ -434,7 +436,7 @@ function toggleLightBox() {
 ```
 
 ### Script
-```javascript
+```vue
 <script setup>
 import PopUp from "../components/PopUp.vue";
 import { ref } from 'vue';
@@ -453,36 +455,32 @@ function togglePopUp() {
   }
 }
 </script>
+```
 
-# authBox 使用說明
 
-## 父元件範例
+# 登入註冊使用說明
 
+## authBox
+
+### HTML
 ```vue
 <authBox
   authType=""
   :is-auth-box="isAuthBox"
   @toggle="toggleAuthBox"
 ></authBox>
-```
 
+<!-- 在需要觸發顯示authBox的按鈕標籤上添加： -->
+<Btn @click="toggleAuthBox"></Btn>
+
+```
 ### `authType` 說明
 - **註冊**：`authType="signUp"`
 - **登入**：`authType="login"`
 
-### 顯示 `authBox` 的按鈕設置
-
-在需要觸發顯示 `authBox` 的按鈕標籤上添加：
-
+## Script
 ```vue
-@click="toggleAuthBox"
-```
-
-## 父元件 Script
-
-```javascript
 <script setup>
-import { ref } from 'vue';
 
 // 登入或註冊框狀態
 let isAuthBox = ref(false);
@@ -500,17 +498,5 @@ function toggleAuthBox() {
 }
 </script>
 ```
-
----
-
-## 功能說明
-
-1. **`isAuthBox` 狀態控制**：
-   - `true`：顯示 `authBox`。
-   - `false`：隱藏 `authBox`。
-
-2. **停止捲軸功能**：
-   - 當 `authBox` 顯示時，自動為 `<body>` 添加 `clicked` class，避免頁面背景滾動。
-   - 當 `authBox` 隱藏時，自動移除 `clicked` class。
 
 
