@@ -32,34 +32,34 @@
                             size="small">
                         </InputText>
                         <!-- <p>用 v-model 監聽: {{ inputValueMail }}</p> -->
-                            <div class="passwordBox">
-                                <InputText
-                                    ref="password1"
-                                    class="password1"
-                                    placeHolder="密碼"
-                                    errorMsg="Invalid Input"
-                                    v-model="inputValuePassword"
-                                    :hasError="inputErrorPassword"
-                                    textAlign = "textLeft"
-                                    size="small">
-                                </InputText>
-                                <img class="theEye" :src="eyeState1" alt="" @click="eyeStateToggle1">
-                                <!-- <p>用 v-model 監聽: {{ inputValuePassword }}</p> -->
-                            </div>
-                            <div class="passwordBox">
-                                <InputText
-                                    ref="password2"
-                                    class="password2"
-                                    placeHolder="再次輸入密碼"
-                                    errorMsg="Invalid Input"
-                                    v-model="inputValuePassword2"
-                                    :hasError="inputErrorPassword2"
-                                    textAlign = "textLeft"
-                                    size="small">
-                                </InputText>
-                                <img class="theEye" :src="eyeState2" alt="" @click="eyeStateToggle2">
-                                <!-- <p>用 v-model 監聽: {{ inputValuePassword2 }}</p> -->
-                            </div>
+                        <div class="passwordBox">
+                            <InputText
+                                ref="password1"
+                                class="password1"
+                                placeHolder="密碼"
+                                errorMsg="Invalid Input"
+                                v-model="inputValuePassword"
+                                :hasError="inputErrorPassword"
+                                textAlign = "textLeft"
+                                size="small">
+                            </InputText>
+                            <img class="theEye" :src="eyeState1" alt="" @click="eyeStateToggle1">
+                            <!-- <p>用 v-model 監聽: {{ inputValuePassword }}</p> -->
+                        </div>
+                        <div class="passwordBox">
+                            <InputText
+                                ref="password2"
+                                class="password2"
+                                placeHolder="再次輸入密碼"
+                                errorMsg="Invalid Input"
+                                v-model="inputValuePassword2"
+                                :hasError="inputErrorPassword2"
+                                textAlign = "textLeft"
+                                size="small">
+                            </InputText>
+                            <img class="theEye" :src="eyeState2" alt="" @click="eyeStateToggle2">
+                            <!-- <p>用 v-model 監聽: {{ inputValuePassword2 }}</p> -->
+                        </div>
                         <div class="checkBox">
                             <input type="checkbox" id="agree">
                             <label class="xsText" for="agree">我已閱讀並同意 <span class="termsAgreement underline" @click="togglePopUp">網站服務條款</span> 及 <span class="agreementSection underline" @click="togglePopUp">隱私權政策</span></label>

@@ -64,7 +64,7 @@
             border-radius: 16px;
             
             .overflow{
-                height: 70vh; //上層標題加上p & m 若移動需重新計算
+                height:80vh; //上層標題加上p & m 若移動需重新計算
                 padding: 0 5.6rem 5.6rem 0;
                 overflow-y: auto;
             }
@@ -73,6 +73,9 @@
 
     }
 
+    &.pb-0 .overflowBox .overflow{
+            padding-bottom: 0;
+        }    //加上pb-0使下面的padding消失
  }
     //遮罩
     .blackCover{

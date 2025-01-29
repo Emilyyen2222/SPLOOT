@@ -1,7 +1,7 @@
 <!-- Ian -->
 <template>
 
-    <div v-if="isLightBox" class="lightBox" :class="{clicked:isLightBox}">
+    <div v-if="isLightBox" class="lightBox" :class="[{clicked:isLightBox},padding]">
         <div class="lightBoxContent">
             <div class="closeBtnBox">
                 <div class="closeBtn" @click="toggleLightBox">
@@ -34,6 +34,10 @@
         title:{
             type: String,
             required: true,
+        },
+        padding:{
+            type: String,
+            required: false,
         },
         
     })

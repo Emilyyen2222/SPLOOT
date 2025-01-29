@@ -45,9 +45,11 @@
                 <div class="dropdownMenu">
                     <DropdownMenu class="dropDown city"
                         :placeHolder="city.placeHolder"
-                        :options="city.options">
+                        :options="city.options"
+                        v-model="selectedCity">
                     </DropdownMenu>
                 </div>
+                <p>目前選擇的城市：{{ selectedCity ? selectedCity.name : "未選擇" }}</p>
                 <div class="dropdownMenu">
                     <DropdownMenu class="dropDown district"
                         :placeHolder="district.placeHolder"
@@ -83,7 +85,7 @@
         <!-- 行程按鈕 -->       
         <div class="scheduleBtn">
             <img src="@/assets/img/icon/add-schedule.svg" alt="" class="scheduleIcon">
-            <p class="xsText">新增行程</p>
+            <p class="xsText" @click="toggleLightBox2">新增貼文</p>
         </div>        
     </div>
 
@@ -120,12 +122,15 @@
         </div>
     </div>
 </div>
+
 </div>
 <!-- 圓形 * 2 -->
 <div class="circle1 circle"></div>
 <div class="circle2 circle"></div>
 
-<!-- bgc="transparent" -->
+
+<!-- "第一次使用小幫手"燈箱 -->
+
 <LightBox 
     :title="lightTitle.title"
     :is-light-box="isLightBox" 
@@ -200,6 +205,63 @@
     </div>
 </LightBox>
 
+<!-- "新增貼文"燈箱 -->
+<LightBox 
+    padding="pb-0"
+    :title="lightTitle2.title"
+    :is-light-box="isLightBox2" 
+    @toggle="toggleLightBox2">
+
+<div class="newPost">
+    <div class="imgUpload">
+        <div class="imgUploadSection">
+            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+            <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                <img :src="hasUploadImg" alt="uploadImg">
+            </div>
+        </div>
+        <div class="imgUploadBtn">
+            <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
+            <Btn btnStyle="primary small" @click="callFileInput">上傳圖檔</Btn>
+        </div>
+    </div>
+    <div class="newPostInput">
+        <div class="postTitle">
+            <p class="smallText inputLabel">發佈主題*</p>
+            <InputText
+                textAlign = "textLeft"
+                size = "small"
+                placeHolder="這裡輸入發佈主題"
+                errorMsg="Invalid Input"
+                v-model="inputValue"
+                :hasError="inputError">
+            </InputText>
+        </div>
+        <div class="postContent">
+            <p class="smallText inputLabel">發佈內容*</p>
+            <!-- <InputText
+                textAlign = "textLeft"
+                size = "small"
+                placeHolder="請於200字內"
+                errorMsg="Invalid Input"
+                v-model="inputValue"
+                :hasError="inputError">
+            </InputText> -->
+            <textarea name="" id="" placeHolder="請於200字內"></textarea>
+        </div>
+    </div>
+    <div class="newPostBtn">
+        <Btn btnStyle="primary small">提交</Btn>
+        <div class="cancelBtn">
+            <Btn btnStyle="baseline small">取消</Btn>
+        </div>
+    </div>
+</div>
+
+
+
+</LightBox>
+
 <MainFooter></MainFooter>
 
 
@@ -208,62 +270,86 @@
 </template>
 
 <script setup>
-    import {ref} from "vue";
+    import {onMounted, ref, watch} from "vue";
 
     import MainHeader from "@/components/MainHeader.vue";
     import DropdownMenu from "@/components/DropdownMenu.vue";
     import Btn from '@/components/Btn.vue';
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
+    import InputText from '@/components/InputText.vue';
 
+//城市選單
     const city = {
-    placeHolder: '請選擇城市',
+    placeHolder: "請選擇城市",
     options: [
-        { id: 100, name: '台北市' },
-        { id: 200, name: '基隆市' },
-        { id: 220, name: '新北市' },
-        { id: 300, name: '新竹市' },
-        { id: 302, name: '新竹縣' },
-        { id: 400, name: '台中市' },
-        { id: 500, name: '彰化縣' },
-        { id: 540, name: '南投縣' },
-        { id: 600, name: '嘉義市' },
-        { id: 602, name: '嘉義縣' },
-        { id: 700, name: '台南市' },
-        { id: 800, name: '高雄市' },
-        { id: 880, name: '澎湖縣' },
-        { id: 900, name: '屏東縣' },
-        { id: 950, name: '台東縣' },
-        { id: 970, name: '花蓮縣' },
-        { id: 209, name: '連江縣' },
-        { id: 210, name: '金門縣' },
-        { id: 290, name: '宜蘭縣' },
-        { id: 350, name: '苗栗縣' },
-        { id: 630, name: '雲林縣' }
+        { id: 100, name: "台北市" },
+        { id: 200, name: "基隆市" },
+        { id: 220, name: "新北市" },
+        { id: 300, name: "新竹市" },
+        { id: 302, name: "新竹縣" },
+        { id: 400, name: "台中市" },
+        { id: 500, name: "彰化縣" },
+        { id: 540, name: "南投縣" },
+        { id: 600, name: "嘉義市" },
+        { id: 602, name: "嘉義縣" },
+        { id: 700, name: "台南市" },
+        { id: 800, name: "高雄市" },
+        { id: 880, name: "澎湖縣" },
+        { id: 900, name: "屏東縣" },
+        { id: 950, name: "台東縣" },
+        { id: 970, name: "花蓮縣" },
+        { id: 209, name: "連江縣" },
+        { id: 210, name: "金門縣" },
+        { id: 290, name: "宜蘭縣" },
+        { id: 350, name: "苗栗縣" },
+        { id: 630, name: "雲林縣" }
     ]
-    };
-    const district = {
-        placeHolder: '請選擇行政區',
-        options: [
-            {
-                id: 0,
-                name: '選項1'
-            },
-            {
-                id: 1,
-                name: '選項2'
-            },
-            {
-                id: 2,
-                name: '選項3'
-            },
-            {
-                id: 3,
-                name: '選項4'
-            },
-        ]
-    };
+};
 
+const district = {
+  placeHolder: "請選擇行政區",
+  options: []};
+
+const districtData = {
+    100: ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
+    200: ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
+    220: ["板橋區", "三重區", "中和區", "永和區", "新莊區", "新店區", "樹林區", "鶯歌區", "三峽區", "淡水區", "汐止區", "瑞芳區", "土城區", "蘆洲區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區"],
+    300: ["東區", "北區", "香山區"],
+    302: ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
+    400: ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
+    500: ["彰化市", "芬園鄉", "花壇鄉", "秀水鄉", "鹿港鎮", "福興鄉", "線西鄉", "和美鎮", "伸港鄉", "員林市", "社頭鄉", "永靖鄉", "埔心鄉", "溪湖鎮", "大村鄉", "埔鹽鄉", "田中鎮", "北斗鎮", "田尾鄉", "埤頭鄉", "溪州鄉", "竹塘鄉", "二林鎮", "大城鄉", "芳苑鄉", "二水鄉"],
+    540: ["南投市", "中寮鄉", "草屯鎮", "國姓鄉", "埔里鎮", "仁愛鄉", "名間鄉", "集集鎮", "水里鄉", "魚池鄉", "信義鄉", "竹山鎮", "鹿谷鄉"],
+    600: ["東區", "西區"],
+    602: ["番路鄉", "梅山鄉", "竹崎鄉", "阿里山鄉", "中埔鄉", "大埔鄉", "水上鄉", "鹿草鄉", "太保市", "朴子市", "東石鄉", "六腳鄉", "新港鄉", "民雄鄉", "大林鎮", "溪口鄉", "義竹鄉", "布袋鎮"],
+    700: ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
+    800: ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區", "茄萣區"],
+    880: ["馬公市", "西嶼鄉", "望安鄉", "七美鄉", "白沙鄉", "湖西鄉"],
+    900: ["屏東市", "三地門鄉", "霧台鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"]
+};
+
+//城市選單監聽
+
+// let selectedCity = ref(null); //v-model綁定
+
+// watch(selectedCity, (newValue) => {
+//     console.log("選擇的城市變更為:", newValue);
+// });
+
+// // 監聽 `selectedCity`，動態更新 `district.options`
+// watch(selectedCity, (newCity) => {
+//   if (newCity) {
+//     // 確保 newCity 是數字
+//     const cityId = Number(newCity);
+//     district.value.options = districtData[cityId] || [];
+//   } else {
+//     district.value.options = [];
+//   }
+// });
+
+
+
+//小幫手卡片
     const cardsData = ref([
         {
             imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
@@ -315,6 +401,7 @@
         },
     ])
 
+// "第一次使用小幫手"燈箱
 // 燈箱標題請輸入
 const lightTitle = {title: "值得信任的毛孩小幫手"}
 
@@ -331,6 +418,57 @@ function toggleLightBox() {
     document.body.classList.remove('clicked');
   }
 }
+
+// "新增貼文"燈箱
+// 燈箱標題請輸入
+const lightTitle2 = {title: "發佈 散步陪伴 貼文"}
+
+ //燈箱狀態
+let isLightBox2 = ref(false);
+
+// 控制燈箱的顯示與隱藏
+function toggleLightBox2() {
+  isLightBox2.value = !isLightBox2.value;
+  // 停止捲軸
+  if (isLightBox2.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
+
+// "新增貼文"燈箱裡的input
+let inputValue = ref('');
+let inputError = ref(false);
+
+watch(inputValue, (newValue, oldValue) => {
+    if(inputValue.value.includes('123')){
+        inputError.value = true;
+    }else{
+        inputError.value = false;
+    }
+})
+
+
+const fileInput = ref(null);
+const hasUploadImg = ref(null);
+
+// 按下按鈕呼叫"選擇檔案"
+const callFileInput = () => {
+    fileInput.value.click();
+}
+
+// 上傳圖片
+const uploadFileImage = () => {
+    const file = event.target.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        hasUploadImg.value = e.target.result; // 設定預覽圖片的 base64 URL
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
 
 </script>

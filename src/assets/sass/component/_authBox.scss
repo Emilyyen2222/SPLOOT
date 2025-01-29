@@ -90,6 +90,15 @@ body.authClicked{
                     }
                 }
 
+                .checkBox{
+                    display: flex;
+                    align-items: center;
+
+                    #agree{
+                        margin: 0.3rem;
+                    }
+                }
+
                 .forgotPassword{
                     display: flex;
                     justify-content: flex-end;

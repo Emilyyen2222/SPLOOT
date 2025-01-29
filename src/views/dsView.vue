@@ -89,14 +89,43 @@
         </div>
     </section>
     <section>
-        <h4>燈箱</h4>
+        <h4>LightBox燈箱</h4>
+        <p @click="toggleLightBox"
+        style="
+        cursor: pointer;
+        text-decoration: underline;
+        ">按下去</p>
         <LightBox 
-            :is-light-box="false" 
-            @toggle="toggleLightBox"
-            pY="0" 
-            pX="0">
+        :title="lightTitle.title"
+        :is-light-box="isLightBox" 
+        @toggle="toggleLightBox">
+        
+        <div 
+        style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        ">
+        <h2 class="bold" style="text-align: center;">請輸入內容<br>往下滑動</h2>
+    
+        </div>
+        <div 
+        style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        ">
+        <h2 class="bold">請輸入內容</h2>
+    
+        </div>
+            
         </LightBox>
     </section>
+
+
+
     <MainFooter class="bg-yellow-2"></MainFooter>
 </template>
 
@@ -171,6 +200,24 @@ const menu1 = {
         { id: 3, name: '選項4' },
     ]
 };
+
+// LightBox燈箱
+// 燈箱標題請輸入
+const lightTitle = {title: "請輸入標題"}
+
+ //燈箱狀態
+let isLightBox = ref(false);
+
+// 控制燈箱的顯示與隱藏
+function toggleLightBox() {
+  isLightBox.value = !isLightBox.value;
+  // 停止捲軸
+  if (isLightBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+}
 </script>
 
 <style>

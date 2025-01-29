@@ -315,7 +315,7 @@ body{
     top: 1000px;
 }
 
-//燈箱內容
+// "第一次使用小幫手"燈箱
     .buddyIntroduction{
         background-color: map-get($colors, beige);
         border-radius: 16px;
@@ -351,3 +351,92 @@ body{
         width: 100%;
         margin: 24px auto 0;
     }
+
+// "新增貼文"燈箱
+.newPost{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    // padding-top: 5.6rem;
+
+    .imgUpload{
+        .imgUploadSection{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+    
+            height: 24rem;
+            margin-bottom: 0.8rem;
+            border: 1px dashed map-get($colors, natural-1);
+            border-radius: 8px;
+    
+            .imgUploadText{
+                text-align: center;
+                color: map-get($colors, natural-2);
+            }
+            .uploadImgBox{
+                max-width: 100%;
+                height: auto;
+                border-radius: 8px;
+
+                img{
+                    max-width: 100%;
+                    max-height: 24rem;
+                }
+            }
+        } 
+        .imgUploadBtn{
+            width: 8.8rem;
+            margin-left: calc(100% - 8.8rem);
+        }
+    }
+    .newPostInput{
+        .postTitle{
+            display: flex;
+            align-items: center;
+            gap: 5.6rem;
+    
+            margin-bottom: 1.6rem;
+    
+        }
+    
+        .postContent{
+            display: flex;
+            align-items: center;
+            gap: 5.6rem;
+
+            textarea{
+                resize: none; /* 禁止使用者調整大小 */
+                
+                @include textStyle(smallText);
+
+                width: 100%;
+                height: 8.8rem;
+                padding: .8rem .8rem;
+                border: 1px solid map-get($colors, natural-1);
+                border-radius: 16px;
+                
+                color: map-get($colors, brown);
+
+                &::placeholder{
+                    color: map-get($colors, natural-2);
+                    opacity: 1;
+                }
+
+                &:focus{
+                    outline: none;
+                    border: 1px solid map-get($colors, natural-2);
+
+                    &::placeholder{
+                        opacity: 0;
+                      }
+                }
+            }
+        }
+    }
+    .inputLabel{
+        flex-shrink: 0;
+    }
+}
+
