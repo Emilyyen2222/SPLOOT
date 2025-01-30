@@ -18,25 +18,12 @@
     <!-- 過濾篩選選單部分 -->
     <div class="selectTypeSection">
         <ul class="buddyType">
-            <li class="buddyTypes walkies">
-                <img src="@/assets/img/icon/walkies.svg" alt="walkies" class="typeIcon">
-                    <p class="smallText">散步陪伴</p>
-                </img>
-            </li>
-            <li class="buddyTypes homeCare">
-                <img src="@/assets/img/icon/homeCare.svg" alt="homecare" class="typeIcon">
-                    <p class="smallText">到府照顧</p>
-                </img>
-            </li>
-            <li class="buddyTypes fostering">
-                <img src="@/assets/img/icon/fostering.svg" alt="fostering" class="typeIcon">
-                    <p class="smallText">友善寄宿</p>
-                </img>
-            </li>
-            <li class="buddyTypes petDrop">
-                <img src="@/assets/img/icon/petDrop.svg" alt="petdrop" class="typeIcon">
-                    <p class="smallText">毛孩計程車</p>
-                </img>
+            <li 
+            v-for="(type, index) in buddyTypes" :key="index"
+            :class="['buddyTypes', type.class, {checked: selcetedBuddyType === type.class}]"
+            @click="toggleBuddyType(type.class)">
+                <img :src="type.icon" alt="type.class" class="typeIcon">
+                <p class="smallText">{{ type.label }}</p>
             </li>
         </ul>
         <div class="selcetPlaceAndPetType">
@@ -49,7 +36,6 @@
                         v-model="selectedCity">
                     </DropdownMenu>
                 </div>
-                <p>目前選擇的城市：{{ selectedCity ? selectedCity.name : "未選擇" }}</p>
                 <div class="dropdownMenu">
                     <DropdownMenu class="dropDown district"
                         :placeHolder="district.placeHolder"
@@ -58,16 +44,21 @@
                 </div>
             </div>
             <div class="rightSection">
-                <div class="rightLabel xsText">毛小孩類型</div>
+                <div class="rightLabel">
+                    <p class="xsText">毛小孩類型</p>
+                    <div class="checkAll">
+                        <input type="checkbox" id="checkBox" v-model="isAllchecked" @change="toggleAll">
+                        <label for="checkBox">全部</label>
+                    </div>
+                </div>
                 <ul class="petType smallText">
-                    <li class="petTypes all clicked">全部</li>
-                    <li class="petTypes puppy">幼犬</li>
-                    <li class="petTypes small">小型犬</li>
-                    <li class="petTypes middle">中型犬</li>
-                    <li class="petTypes large">大型犬</li>
-                    <li class="petTypes elder">老年犬</li>
-                    <li class="petTypes kitten">幼貓</li>
-                    <li class="petTypes cat">成貓</li>
+                    <li
+                    v-for="(type, index) in petTypes"
+                    :key="index"
+                    :class="['petTypes', type.class, {checked: selectedPetTypes.includes(type.class)}]"
+                    @click="togglePetType(type.class)">
+                    {{ type.label }}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -83,18 +74,20 @@
             </div>
         </div>        
         <!-- 行程按鈕 -->       
-        <div class="scheduleBtn">
+        <div class="scheduleBtn" @click="toggleLightBox2">
             <img src="@/assets/img/icon/add-schedule.svg" alt="" class="scheduleIcon">
-            <p class="xsText" @click="toggleLightBox2">新增貼文</p>
+            <p class="xsText">新增貼文</p>
         </div>        
     </div>
 
     <!-- 任務牆 -->
     <div class="bottomSection">
         <ul class="buddyCard">
-            <li class="buddyCards" v-for="(card,index) in cardsData" :key="index">
+            <li class="buddyCards" v-for="(card,index) in visibleCards" :key="index">
                 <div class="cardBox">
-                    <img :src="card.imgSrc" alt="" class="cardsImg">
+                    <div class="cardsImgBox">
+                        <img :src="card.imgSrc" alt="" class="cardsImg">
+                    </div>
                     <div class="cardText">
                         <h6 class="cardsTitle bold">{{ card.title }}</h6>
                         <div class="reviews">
@@ -118,7 +111,9 @@
         </ul>
 
         <div class="seeMoreBtn">
-            <Btn btnStyle="outline default textBlue seeMore">查看更多</Btn> 
+            <Btn btnStyle="outline default textBlue seeMore" 
+            @click="loadMore"
+            v-if="visibleCards.length < cardsData.length">查看更多</Btn> 
         </div>
     </div>
 </div>
@@ -264,13 +259,10 @@
 
 <MainFooter></MainFooter>
 
-
-
-
 </template>
 
 <script setup>
-    import {onMounted, ref, watch} from "vue";
+    import {computed, onMounted, ref, watch} from "vue";
 
     import MainHeader from "@/components/MainHeader.vue";
     import DropdownMenu from "@/components/DropdownMenu.vue";
@@ -278,6 +270,121 @@
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
     import InputText from '@/components/InputText.vue';
+
+// 服務選單
+const buddyTypes =ref([
+    {
+        label: "散步陪伴",
+        class: "walkies",
+        icon: new URL("@/assets/img/icon/walkies.svg", import.meta.url).href
+    },
+    {
+        label: "到府照顧",
+        class: "homeCare",
+        icon: new URL("@/assets/img/icon/homeCare.svg", import.meta.url).href
+    },
+    {
+        label: "友善寄宿",
+        class: "fostering",
+        icon: new URL("@/assets/img/icon/fostering.svg", import.meta.url).href
+    },
+    {
+        label: "毛孩計程車",
+        class: "petDrop",
+        icon: new URL("@/assets/img/icon/petDrop.svg", import.meta.url).href
+    },
+])
+
+const selcetedBuddyType = ref("walkies"); //預設點選
+
+//點選樣式(單選)
+
+const toggleBuddyType = (typeClass) => {
+    selcetedBuddyType.value = typeClass
+};
+
+// 寵物分類標籤
+const petTypes = ref([
+    {
+        label: "幼犬",
+        class: "puppy",
+    },
+    {
+        label: "小型犬",
+        class: "small",
+    },
+    {
+        label: "中型犬",
+        class: "middle",
+    },
+    {
+        label: "大型犬",
+        class: "large",
+    },
+    {
+        label: "老年犬",
+        class: "elder",
+    },
+    {
+        label: "幼貓",
+        class: "kitten",
+    },
+    {
+        label: "成貓",
+        class: "cat",
+    },
+])
+
+const selectedPetTypes = ref([]); //預設點選(多選)
+
+const isAllchecked = computed(() => {
+    return selectedPetTypes.value.length === petTypes.value.length;
+});
+
+const toggleAll = () => {
+    if(isAllchecked.value){
+        selectedPetTypes.value = []; //清空所有選項
+    }else{
+        selectedPetTypes.value = petTypes.value.map(type => type.class); //選擇所有類型
+    }
+};
+
+const togglePetType = (typeClass) => {
+    if(selectedPetTypes.value.includes(typeClass)){
+        selectedPetTypes.value = selectedPetTypes.value.filter(t => t!==typeClass);
+    }else{
+        selectedPetTypes.value.push(typeClass);
+    };
+}
+// const selectedPetTypes = ref([""]); //預設點選(多選)
+
+// const togglePetType = (typeClass) => {
+//         const allTypes = ["all", "puppy", "small", "middle", "large", "elder", "kitten", "cat"];
+//         const withoutAll = allTypes.filter(t => t !== "all")
+
+//     if(typeClass === "all"){  //點選的如果是all 
+//         if(selectedPetTypes.value.includes("all")){
+//             selectedPetTypes.value = []; //清空所有選項
+//         }else{
+//             selectedPetTypes.value = [...allTypes]; //選擇所有類型
+//         }
+//         return; //直接返回不再往下
+//     }else{
+//         selectedPetTypes.value = selectedPetTypes.value.filter(t => t!=="all");
+//     };
+
+//     if(selectedPetTypes.value.includes(typeClass)){
+//         selectedPetTypes.value = selectedPetTypes.value.filter(t => t!==typeClass);
+//     }else{
+//         selectedPetTypes.value.push(typeClass);
+//     };
+
+//     // **當所有類別都選擇時，自動勾選 "all"
+//     if (selectedPetTypes.value.length === withoutAll.length) {
+//         selectedPetTypes.value = [...allTypes];
+//     };
+    
+// };
 
 //城市選單
     const city = {
@@ -311,24 +418,25 @@ const district = {
   placeHolder: "請選擇行政區",
   options: []};
 
-const districtData = {
-    100: ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
-    200: ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
-    220: ["板橋區", "三重區", "中和區", "永和區", "新莊區", "新店區", "樹林區", "鶯歌區", "三峽區", "淡水區", "汐止區", "瑞芳區", "土城區", "蘆洲區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區"],
-    300: ["東區", "北區", "香山區"],
-    302: ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
-    400: ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
-    500: ["彰化市", "芬園鄉", "花壇鄉", "秀水鄉", "鹿港鎮", "福興鄉", "線西鄉", "和美鎮", "伸港鄉", "員林市", "社頭鄉", "永靖鄉", "埔心鄉", "溪湖鎮", "大村鄉", "埔鹽鄉", "田中鎮", "北斗鎮", "田尾鄉", "埤頭鄉", "溪州鄉", "竹塘鄉", "二林鎮", "大城鄉", "芳苑鄉", "二水鄉"],
-    540: ["南投市", "中寮鄉", "草屯鎮", "國姓鄉", "埔里鎮", "仁愛鄉", "名間鄉", "集集鎮", "水里鄉", "魚池鄉", "信義鄉", "竹山鎮", "鹿谷鄉"],
-    600: ["東區", "西區"],
-    602: ["番路鄉", "梅山鄉", "竹崎鄉", "阿里山鄉", "中埔鄉", "大埔鄉", "水上鄉", "鹿草鄉", "太保市", "朴子市", "東石鄉", "六腳鄉", "新港鄉", "民雄鄉", "大林鎮", "溪口鄉", "義竹鄉", "布袋鎮"],
-    700: ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
-    800: ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區", "茄萣區"],
-    880: ["馬公市", "西嶼鄉", "望安鄉", "七美鄉", "白沙鄉", "湖西鄉"],
-    900: ["屏東市", "三地門鄉", "霧台鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"]
-};
+// const districtData = {
+//     100: ["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
+//     200: ["仁愛區", "信義區", "中正區", "中山區", "安樂區", "暖暖區", "七堵區"],
+//     220: ["板橋區", "三重區", "中和區", "永和區", "新莊區", "新店區", "樹林區", "鶯歌區", "三峽區", "淡水區", "汐止區", "瑞芳區", "土城區", "蘆洲區", "五股區", "泰山區", "林口區", "深坑區", "石碇區", "坪林區", "三芝區", "石門區", "八里區", "平溪區", "雙溪區", "貢寮區", "金山區", "萬里區", "烏來區"],
+//     300: ["東區", "北區", "香山區"],
+//     302: ["竹北市", "湖口鄉", "新豐鄉", "新埔鎮", "關西鎮", "芎林鄉", "寶山鄉", "竹東鎮", "五峰鄉", "橫山鄉", "尖石鄉", "北埔鄉", "峨眉鄉"],
+//     400: ["中區", "東區", "南區", "西區", "北區", "北屯區", "西屯區", "南屯區", "太平區", "大里區", "霧峰區", "烏日區", "豐原區", "后里區", "石岡區", "東勢區", "和平區", "新社區", "潭子區", "大雅區", "神岡區", "大肚區", "沙鹿區", "龍井區", "梧棲區", "清水區", "大甲區", "外埔區", "大安區"],
+//     500: ["彰化市", "芬園鄉", "花壇鄉", "秀水鄉", "鹿港鎮", "福興鄉", "線西鄉", "和美鎮", "伸港鄉", "員林市", "社頭鄉", "永靖鄉", "埔心鄉", "溪湖鎮", "大村鄉", "埔鹽鄉", "田中鎮", "北斗鎮", "田尾鄉", "埤頭鄉", "溪州鄉", "竹塘鄉", "二林鎮", "大城鄉", "芳苑鄉", "二水鄉"],
+//     540: ["南投市", "中寮鄉", "草屯鎮", "國姓鄉", "埔里鎮", "仁愛鄉", "名間鄉", "集集鎮", "水里鄉", "魚池鄉", "信義鄉", "竹山鎮", "鹿谷鄉"],
+//     600: ["東區", "西區"],
+//     602: ["番路鄉", "梅山鄉", "竹崎鄉", "阿里山鄉", "中埔鄉", "大埔鄉", "水上鄉", "鹿草鄉", "太保市", "朴子市", "東石鄉", "六腳鄉", "新港鄉", "民雄鄉", "大林鎮", "溪口鄉", "義竹鄉", "布袋鎮"],
+//     700: ["中西區", "東區", "南區", "北區", "安平區", "安南區", "永康區", "歸仁區", "新化區", "左鎮區", "玉井區", "楠西區", "南化區", "仁德區", "關廟區", "龍崎區", "官田區", "麻豆區", "佳里區", "西港區", "七股區", "將軍區", "學甲區", "北門區", "新營區", "後壁區", "白河區", "東山區", "六甲區", "下營區", "柳營區", "鹽水區", "善化區", "大內區", "山上區", "新市區", "安定區"],
+//     800: ["新興區", "前金區", "苓雅區", "鹽埕區", "鼓山區", "旗津區", "前鎮區", "三民區", "楠梓區", "小港區", "左營區", "仁武區", "大社區", "岡山區", "路竹區", "阿蓮區", "田寮區", "燕巢區", "橋頭區", "梓官區", "彌陀區", "永安區", "湖內區", "鳳山區", "大寮區", "林園區", "鳥松區", "大樹區", "旗山區", "美濃區", "六龜區", "內門區", "杉林區", "甲仙區", "桃源區", "那瑪夏區", "茂林區", "茄萣區"],
+//     880: ["馬公市", "西嶼鄉", "望安鄉", "七美鄉", "白沙鄉", "湖西鄉"],
+//     900: ["屏東市", "三地門鄉", "霧台鄉", "瑪家鄉", "九如鄉", "里港鄉", "高樹鄉", "鹽埔鄉", "長治鄉", "麟洛鄉", "竹田鄉", "內埔鄉", "萬丹鄉", "潮州鎮", "泰武鄉", "來義鄉", "萬巒鄉", "崁頂鄉", "新埤鄉", "南州鄉", "林邊鄉", "東港鎮", "琉球鄉", "佳冬鄉", "新園鄉", "枋寮鄉", "枋山鄉", "春日鄉", "獅子鄉", "車城鄉", "牡丹鄉", "恆春鎮", "滿州鄉"]
+// };
 
 //城市選單監聽
+
 
 // let selectedCity = ref(null); //v-model綁定
 
@@ -351,22 +459,6 @@ const districtData = {
 
 //小幫手卡片
     const cardsData = ref([
-        {
-            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
-            title: "快速散步去",
-            serviceDaysStart:"週一",
-            serviceDaysEnd:"週五",
-            serviceTimeStart: "09:00",
-            serviceTimeEnd: "18:00",
-        },
-        {
-            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
-            title: "快速散步去",
-            serviceDaysStart:"週一",
-            serviceDaysEnd:"週五",
-            serviceTimeStart: "09:00",
-            serviceTimeEnd: "18:00",
-        },
         {
             imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
             title: "快速散步去",
@@ -399,7 +491,113 @@ const districtData = {
             serviceTimeStart: "09:00",
             serviceTimeEnd: "18:00",
         },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
+        {
+            imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg",  import.meta.url).href,
+            title: "快速散步去",
+            serviceDaysStart:"週一",
+            serviceDaysEnd:"週五",
+            serviceTimeStart: "09:00",
+            serviceTimeEnd: "18:00",
+        },
     ])
+
+    const visbleCount = ref(6); //預設顯示6個
+
+    const visibleCards = computed(() => {
+        return cardsData.value.slice(0, visbleCount.value);
+  });
+
+  const loadMore = () => {
+    visbleCount.value += 6;
+  }
 
 // "第一次使用小幫手"燈箱
 // 燈箱標題請輸入
@@ -449,7 +647,6 @@ watch(inputValue, (newValue, oldValue) => {
     }
 })
 
-
 const fileInput = ref(null);
 const hasUploadImg = ref(null);
 
@@ -469,6 +666,5 @@ const uploadFileImage = () => {
     reader.readAsDataURL(file);
   }
 };
-
 
 </script>
