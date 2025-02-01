@@ -268,16 +268,22 @@ ol {
     .avatars {}
 
     .basicInfo {
-      padding: 1.6rem 0;
+      margin: 1.6rem 0;
     }
 
     .accountInfo {
-      padding: 1.6rem 0;
+      margin: 1.6rem 0;
     }
 
     .contactInfo {
-      padding: 1.6rem 0;
-      margin-bottom: 2.4rem;
+      margin: 1.6rem 0;
+      margin-bottom: 4rem;
+    }
+
+    label{
+      height: 4rem;
+      display: flex;
+      align-items: center;
     }
   }
 
@@ -327,22 +333,27 @@ ol {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    padding: 1.6rem 0;
+    margin: 1.6rem 0;
 
     .input-group {
       display: flex;
       // justify-content: space-between;
-      align-items: center;
+      align-items: start;
     }
 
-    label{
+    label{  //外層
       width: 6.4rem;
+      align-self: flex-start;
+    }
+
+    .birthday{
+      height: auto;
     }
 
   }
 
   .input-group {
-    label {
+    label { // radio內層
       display: flex;
       width: 6.4rem;
       @include textStyle(smallText);
@@ -381,9 +392,11 @@ ol {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: start;
     gap: 1.2rem;
    .dropBirthday{
-      width: 100%;
+      // width: 100%;
+      flex-grow: 1;
     }
   }
 }
@@ -406,7 +419,7 @@ ol {
       width: 100%;
       display: flex;
       justify-content: start;      
-      align-items: center;
+      align-items: start;
       gap: 5.6rem;
     }
 
@@ -422,6 +435,7 @@ ol {
 
 .accountInfo .input-group {
   label{
+    align-self: center;
     width: 6.5rem;
     @include textStyle(smallText);
   }
@@ -479,12 +493,13 @@ ol {
       display: flex;
       justify-content: space-between;
       gap: 5.6rem;
-      align-items: center;
+      align-items: start;
       height: 4.8rem;
     }
 
-    p {
-      display: block;
+    label {
+      display: flex;
+      align-items: center;
       width: 7.4rem;
       @include textStyle(smallText);
     }
@@ -681,7 +696,7 @@ ol {
   flex-direction: column;
   justify-content: center;
 }
-
+//  PopUp，刪除卡片 
 .delete-petcard{
   width: 42.5rem;
   height: 17.6rem;
@@ -702,6 +717,74 @@ ol {
     display: flex;
     flex-direction: column;
     gap: .8rem ;
+  }
+}
+
+// lightbox，適性測驗
+.hcTest{
+  display: flex;
+  flex-direction: column;
+  .questions{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1.6rem;
+    padding: 4.4rem 0;
+    @include textStyle(p);
+    .hcTest-q{}
+  }
+  .btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    justify-content: flex-start;
+    gap: 2.4rem;
+  }
+}
+// lightbox，資料審核
+// lightbox，合約簽署
+.hcSign-wrapper{
+  margin-top: 4.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  .hc-terms{
+    width: 100%;
+    .content{
+      width: 100%;
+      @include textStyle(smallText);
+      white-space:pre-wrap;
+    }
+  }
+
+  .hcSigh-check{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    .check-content{
+      @include textStyle(smallText);
+    }
+  }
+
+  .btn-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+}
+// lightbox，小幫手管理
+.hcManage-wrapper{
+  margin-top: 4.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+  .input-wrapper{}
+
+  .btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
   }
 }
 
@@ -729,7 +812,15 @@ ol {
 
     .sr-slider{
       display: flex;
-      width: 100%;   
+      width: 100%;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+
+      -ms-overflow-style: none;  /* IE 和 Edge */
+      scrollbar-width: none;     /* Firefox */         
+    }
+    .sr-slider::-webkit-scrollbar {
+      display: none;  /* 隱藏 Chrome, Safari 和 Opera 的滾動條 */
     }
   }
  //歷史紀錄
@@ -767,7 +858,7 @@ ol {
   scroll-behavior: smooth;     /* 平滑滑動效果（可選） */ 
   .card{
     flex: 0 0 auto;  //不允許伸縮
-    width: 31.2rem;
+    min-width: 31.2rem;
     height: 100%;
     padding: 0;
     background-color: map-get($colors, natural-0 );
@@ -856,31 +947,119 @@ ol {
   .hc-passed{}
 }
 
+// 四個過審步驟
+.hc-nav{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2.4rem;
+  margin-bottom: 2.4rem;
+  .hc-steps{
+    cursor: pointer;
+    flex-basis: 19.5rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.6rem 3.2rem;
+    border-radius: 8px;
+    border: 1px solid map-get($colors, natural-2 );
+  }
+  .hc-steps:hover{
+    background-color: map-get($colors, natural-0 );
+    transition:.3s;
+  }
+}
+
+ //
+.hcVarify-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap:3.2rem;
+  label{
+    @include textStyle(smallText);
+    white-space: nowrap;
+    min-width: 7rem;
+  }
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap:1.6rem;
+    .input-group{
+      display: flex;
+      justify-content: start;
+      gap:1.6rem;    
+    }
+    .birthday{
+      height: auto;
+      align-items: start;
+    }
+    .select-group{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+    .dropBirthday{
+      flex-grow: 1;
+    }
+  }
+  .upload-file-wrapper{
+    display: flex;
+    justify-content: space-between;
+    gap: 4.4rem;
+    .selfy{
+      flex-grow: 1;
+    }
+    .idCard{
+      flex-grow: 1;
+    }
+  }
+  .btn-group{}
+}
+.hcVarify-wrapper {
+  .selfy,.idCard{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    white-space: wrap;
+    p{}
+    .upload-area{
+      width: auto ;
+      height: 20rem;
+      border-radius: 8px;
+      border: 1px dashed map-get($colors, natural-2 );
+
+      position: relative;
+    }
+    .selfy .upload-area::before{
+      content: "上傳個人自拍照";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    .idCard .upload-area::before{
+      content: "上傳身分證正面";
+      position: absolute;
+      top: 50%;
+      left: 50%;      
+    }
+
+  }
+}
+
+
  // 無身分
 .hc-not-passed{
   .hc-title{
     text-align: left;
     margin-bottom: 2.4rem;
+    display: flex;
+    justify-content: space-between;
   }
 
-  .hc-nav{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2.4rem;
-    margin-bottom: 2.4rem;
-    .hc-steps{
-      cursor: pointer;
-      flex-basis: 19.5rem;
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1.6rem 3.2rem;
-      border-radius: 8px;
-      border: 1px solid map-get($colors, natural-2 );
-    }
-  }
+
 
   .hc-post-manage{
     width: 100%;
