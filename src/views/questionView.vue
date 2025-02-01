@@ -9,39 +9,35 @@
         <h4 class="title bold">您的毛孩叫什麼名字？</h4>
         <div v-show="true" class="options">
             <div class="first">
-            <InputText placeHolder="毛孩姓名" errorMsg="Invalid Input" 
+            <InputText placeHolder="毛孩姓名" textAlign="textCenter" errorMsg="Invalid Input" 
             v-model="inputValue" :hasError="inputError">
             </InputText>
             </div>
-            <Btn btnType="form" btnStyle="option">女生 狗狗</Btn>
+            <!-- <Btn btnType="form" btnStyle="option">女生 狗狗</Btn>
             <Btn btnType="form" btnStyle="option">男生 狗狗</Btn>
             <Btn btnType="form" btnStyle="option">女生 貓貓</Btn>
-            <Btn btnType="form" btnStyle="option">男生 貓貓</Btn>
+            <Btn btnType="form" btnStyle="option">男生 貓貓</Btn> -->
+            <Btn v-for="option in questionPet.options" :key="option"
+            btnType="form" btnStyle="option" 
+            :class="{'-active': optionSelected(questionPet.selected, option)}"
+            @click="questionPet.formChoice(questionPet.selected, option)">{{ option }}</Btn>
         </div>
         <Btn btnType="form" btnStyle="nextQ">下一題</Btn>   
     </div>
      <!-- progress bar -->
-     <div class="progressBarContainer">
-        <div class="progressBar">
-            <div class="progressSegment filled"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-            <div class="progressSegment"></div>
-        </div>
-    </div>
+     <ProgressBar :total="9" :current="1" ></ProgressBar>
 </div>
 <!------------------------ question2 貓---------------------->
 <div class="box">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是哪種體型？</h4>
         <div class="options">
-            <Btn btnType="form" btnStyle="option">幼貓</Btn>
-            <Btn btnType="form" btnStyle="option">成貓</Btn>
+            <!-- <Btn btnType="form" btnStyle="option">幼貓</Btn>
+            <Btn btnType="form" btnStyle="option">成貓</Btn> -->
+            <Btn v-for="option in questionCat.options" :key="option"
+            btnType="form" btnStyle="option" 
+            :class="{'-active': optionSelected(questionCat.selected, option)}"
+            @click="questionCat.formChoice(questionCat.selected, option)">{{ option }}</Btn>
            
         </div>
         <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
@@ -53,9 +49,13 @@
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是哪種體型？</h4>
         <div class="options">
-            <Btn btnType="form" btnStyle="option">小型犬</Btn>
+            <!-- <Btn btnType="form" btnStyle="option">小型犬</Btn>
             <Btn btnType="form" btnStyle="option">中型犬</Btn>
-            <Btn btnType="form" btnStyle="option">大型犬</Btn>
+            <Btn btnType="form" btnStyle="option">大型犬</Btn> -->
+            <Btn v-for="option in questionDog.options" :key="option"
+            btnType="form" btnStyle="option" 
+            :class="{'-active': optionSelected(questionDog.selected, option)}"
+            @click="questionDog.formChoice(questionDog.selected, option)">{{ option }}</Btn>
         </div>
         <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
         <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
@@ -112,7 +112,7 @@
         <h4 class="title bold">請輸入您的Email</h4>
         <div class="options">
             <div class="">
-            <InputText placeHolder="Email" errorMsg="Invalid Input" 
+            <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
             v-model="inputValue" :hasError="inputError">
             </InputText>
             </div>
@@ -320,10 +320,10 @@
             </div>
             <div class="infoBox">
                 <div class="xsText left">信用卡付款</div>
-                <InputText textAlign = "textLeft" placeHolder="卡號" errorMsg="Invalid Input" 
+                <InputText placeHolder="卡號" errorMsg="Invalid Input" 
                 v-model="inputValue" :hasError="inputError">
                 </InputText>
-                <InputText textAlign = "textLeft" placeHolder="持卡人姓名" errorMsg="Invalid Input" 
+                <InputText placeHolder="持卡人姓名" errorMsg="Invalid Input" 
                 v-model="inputValue" :hasError="inputError">
                 </InputText>
                 <div class="cardInfo">
@@ -340,7 +340,7 @@
                         </DropdownMenu>
                     </div>
                     <div class="info">
-                    <InputText textAlign = "textLeft" placeHolder="安全碼" errorMsg="Invalid Input" 
+                    <InputText placeHolder="安全碼" errorMsg="Invalid Input" 
                     v-model="inputValue" :hasError="inputError">
                     </InputText>
                     </div>
@@ -403,10 +403,10 @@
 <p>在您開始使用 SPLOOT布魯家 所經營之網站之前，請詳細閱讀以下所有服務條款：
 當您成為 SPLOOT布魯家 網站的會員時，即表示您已詳細閱讀、明確瞭解並同意接受本服務條款之所有內容。
 若您不同意所列之服務條款，則請您立即離開此網站或者不使用任何網站之任何服務提供。
-帳號 當您向我們註冊新帳號時，請務必確保您所提供的資料皆是最準確、完整並且時常保持更新狀態。違反所列之條款者，將有可能導致被立即停止您的帳號以及網站所提供的所有服務。此外，在使用任何服務以及活動上，您有義務責任確保您的密碼安全、無論該密碼是透過使用我們服務而管理或者第三方服務。您必須立即通知我們，一旦您的密碼被盜用或者處於不安全狀態。
-連結到其他網站 我們的服務可能含有部份連結，將連結到第三方網站或者服務。該些服務將不會處於我們的控制、操作以及擁有管轄權限的範圍內，所以本網站沒有承擔任何內容、隱私政策或者任何第三方網站所提供的服務之義務責任。您同意本網站不需要承擔任何責任、因使用該第三方網站所提供之內容、服務與商品而所導致的；直接或者間接性損失與破壞。我們強烈建議您必須詳細閱讀清楚有關您所造訪的第三方網站之服務條款以及隱私政策，以確保您自身的權益。
-終止服務 在不需要任何事前通知以下，我們有可能隨時終止您使用我們網站服務的權限；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。在不需要任何事前通知以下，我們有可能隨時終止您所持有的登入帳號；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。一旦確定終止，您將會立即無法繼續使用所有服務。若您希望終止您的帳號，您可以隨時終止服務。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。
-政府法律 以上所有條款將會會遵從（國家之法律）無論是否其條款衝突於法律服務條款。若我們未擁有執行以上條款之部份權益，並不等同於我們放棄所有條款的執行權益。若有以上有部份條款不適用於所指定之法庭，其其他之所有條款依然有效。以上所有條款達致雙方在服務使用上的一致性同意與協議，任何事前的協議將有可能影響雙方對於以上所有服務條款的取代或者更改。
+帳號當您向我們註冊新帳號時，請務必確保您所提供的資料皆是最準確、完整並且時常保持更新狀態。違反所列之條款者，將有可能導致被立即停止您的帳號以及網站所提供的所有服務。此外，在使用任何服務以及活動上，您有義務責任確保您的密碼安全、無論該密碼是透過使用我們服務而管理或者第三方服務。您必須立即通知我們，一旦您的密碼被盜用或者處於不安全狀態。
+連結到其他網站我們的服務可能含有部份連結，將連結到第三方網站或者服務。該些服務將不會處於我們的控制、操作以及擁有管轄權限的範圍內，所以本網站沒有承擔任何內容、隱私政策或者任何第三方網站所提供的服務之義務責任。您同意本網站不需要承擔任何責任、因使用該第三方網站所提供之內容、服務與商品而所導致的；直接或者間接性損失與破壞。我們強烈建議您必須詳細閱讀清楚有關您所造訪的第三方網站之服務條款以及隱私政策，以確保您自身的權益。
+終止服務在不需要任何事前通知以下，我們有可能隨時終止您使用我們網站服務的權限；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。在不需要任何事前通知以下，我們有可能隨時終止您所持有的登入帳號；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。一旦確定終止，您將會立即無法繼續使用所有服務。若您希望終止您的帳號，您可以隨時終止服務。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。
+政府法律以上所有條款將會會遵從（國家之法律）無論是否其條款衝突於法律服務條款。若我們未擁有執行以上條款之部份權益，並不等同於我們放棄所有條款的執行權益。若有以上有部份條款不適用於所指定之法庭，其其他之所有條款依然有效。以上所有條款達致雙方在服務使用上的一致性同意與協議，任何事前的協議將有可能影響雙方對於以上所有服務條款的取代或者更改。
 我們保留所有條款的更改、取代之權益，並所做出更改、取代之內容可自行決定。若有任何的更改涉及任何內容，我們將會嘗試提供最少30天的事前通知；該通知將會在新條款正式起效之前公布。至於任何內容的制定則由我們自行決定。若您欲繼續使用網站服務，請務必同意所有新條款；若您不同意新條款，將會要求停止使用網站所有服務。
 若您有任何問題與疑慮，煩請與 SPLOOT布魯家 進行聯繫。</p>
 <h6>隱私權政策</h6>
@@ -426,11 +426,12 @@
 </template>
 
 <script setup>
+    import { ref } from 'vue';
     import MainHeader from "../components/MainHeader.vue";
     import DropdownMenu from "../components/DropdownMenu.vue";
     import Btn from '../components/Btn.vue';
     import InputText from '../components/InputText.vue';
-    import { ref } from 'vue'
+    import ProgressBar from "../components/ProgressBar.vue";
     import PopUp from "@/components/PopUp.vue";
 
   //popup狀態
@@ -447,6 +448,37 @@ function togglePopUp() {
   }
 }
 
+    const questionPet = {
+        formChoice: singleChoice,
+        options: ['女生 狗狗', '男生 狗狗', '女生 貓貓', '男生 貓貓'],
+        selected: ref([]),
+    };
+    const questionCat = {
+        formChoice: singleChoice,
+        options: ['幼貓', '成貓'],
+        selected: ref([]),
+    };
+    const questionDog = {
+        formChoice: singleChoice,
+        options: ['小型犬', '中型犬', '大型犬'],
+        selected: ref([]),
+    };
+
+    function singleChoice(selected, option) {
+    selected.value = [option];
+    // console.log(selected.value);
+    }
+    function multipleChoice(selected, option) {
+        if (optionSelected(selected, option)) {
+            selected.value = selected.value.filter(opt => opt !== option);
+        } else {
+            selected.value.push(option);
+        }
+        // console.log(selected.value);
+    }
+    const optionSelected = (selected, option) => {
+        return selected.value.includes(option);
+    }
 
     const menus = {
   menu1: {

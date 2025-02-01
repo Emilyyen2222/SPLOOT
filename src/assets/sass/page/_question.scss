@@ -97,9 +97,9 @@ body{
     @include box();
 }
 
-.progressBarContainer {
-    @include progressBar();
-}
+// .progressBarContainer {
+//     @include progressBar();
+// }
 .boxSub{
     display: flex;
     flex-direction: column;

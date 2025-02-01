@@ -198,9 +198,7 @@
                     </ul>
                     <div class="input">
                         <InputText
-                        :textAlign="input.textAlign"
                         :placeHolder="input.placeHolder"
-                        :errorMsg="input.errorMsg"
                         :hasError="input.inputError.value"
                         v-model="input.inputValue.value"
                         ></InputText>
@@ -388,9 +386,7 @@ import LightBox from '../components/LightBox.vue';
 
 
 const input = {
-    textAlign: 'textLeft',
     placeHolder: '撰寫評論..',
-    errorMsg: 'Invalid Input',
     inputValue: ref(''),
     inputError: ref(false),
 }
