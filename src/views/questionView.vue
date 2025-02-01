@@ -1,8 +1,6 @@
 <template>
 <MainHeader theme="red" bgc=""></MainHeader>
 
-
-
 <!-- question 1--->
 <div class="box firstBox">
     <div class="questionContainer">
