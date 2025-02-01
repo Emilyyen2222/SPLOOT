@@ -217,8 +217,8 @@
                         </label>
                       </div>
                     </div>
-                    <div class="input-group">
-                        <label for="birthday">生日</label>
+                    <div class="input-group birthday">
+                        <label for="">生日</label>
                         <div class="select-group">
                           <DropdownMenu
                           :placeHolder="menu_birth_m.placeHolder" 
@@ -316,7 +316,7 @@
     
                   <div class="card-content">
                     <div class="input-group">
-                        <p>手機</p>
+                        <label>手機</label>
                         <InputText 
                           :size="input1.size"
                           :textAlign="input1.textAlign"
@@ -327,7 +327,7 @@
                         </InputText>
                     </div>
                     <div class="input-group">
-                        <p>聯絡地址</p>
+                        <label>聯絡地址</label>
                         <InputText 
                           :size="input1.size"
                           :textAlign="input1.textAlign"
@@ -338,7 +338,7 @@
                         </InputText>
                     </div>
                     <div class="input-group">
-                        <p>LineID</p>
+                        <label>LineID</label>
                         <div class="lineid-wrapper">
                           <InputText 
                             :size="input1.size"
@@ -364,16 +364,10 @@
                   <Btn btnStyle="baseline default" @click="toggleLightBox_memberInfo">取消修改</Btn>
                 </div>
             </div>
-            <!-- 驗證程序 : pop up  -->
-  
-              <!-- lightBox 變更信箱 -->
-            
-  
-  
-              <!-- lightBox 重設密碼 -->
-              
-  
+                        
           </LightBox>
+
+          <!-- 驗證程序 : pop up  -->
 
           <!-- 變更信箱 -->
           <LightBox 
