@@ -24,6 +24,17 @@ body.authClicked{
 
         width: 80rem;
 
+        @include lg(){
+            width: 70rem;
+        }
+
+        @include md(){
+            width: 56rem;
+        }
+
+        @include sm(){
+            width: 36rem;
+        }
 
         &.clicked{
             display: flex;
@@ -36,8 +47,20 @@ body.authClicked{
 
 
         .mainLeft{
-            width: 50%;
-            max-width: 40rem;
+            // width: 50%;
+            width: 40rem;
+
+            @include lg(){
+                width: 35rem;
+            }
+
+            @include md(){
+                width: 28rem;
+            }
+
+            @include sm(){
+                width: 100%;
+            }
 
 
             padding: 5.6rem;
@@ -59,7 +82,7 @@ body.authClicked{
                     text-align: center;
                 }
 
-                input{
+                .passwordBox, input{
                     margin-bottom: 0.8rem;
                 }
 
@@ -73,16 +96,17 @@ body.authClicked{
 
 
 
-                .passwordBox{
+                .passwordBox{  
+                    display: flex;
                     position: relative;
 
-                    display: flex;
+                    height: 4rem; //固定高度使theEye絕對定位不會跑掉
 
                     .theEye{
                         cursor: pointer;
 
                         position: absolute;
-                        top: calc(50% - 13px);
+                        top: calc(50% - 10px);
                         right: 16px;
 
                         width: 20px;
@@ -173,8 +197,19 @@ body.authClicked{
 
 
         .mainRight{
-            width: 50%;
-            max-width: 40rem;
+            width: 40rem;
+
+            @include lg(){
+                width: 35rem;
+            }
+
+            @include md(){
+                width: 28rem;
+            }
+
+            @include sm(){
+                display: none;
+            }
 
             .authMainImg{
                 width: 100%;
