@@ -18,32 +18,23 @@
     <!-- mc nav -->
     <div class="mcNav">
       <div class="btn-wrapper">
-        <RouterLink to='/member-center' custom v-slot="{navigate, isActive}">
-          <Btn :btnStyle="isActive ? 'primary default' : 'white default'" 
-          @click="navigate" 
-          class="mcNav-btn"
-          >會員資料</Btn>
+        <RouterLink to='/member-center'>
+          <Btn btnStyle="white default" class="mcNav-btn">會員資料</Btn>
         </RouterLink>        
       </div>      
       <div class="btn-wrapper">
-        <RouterLink to="/member-center/petcard" custom v-slot="{navigate, isActive}">
-          <Btn :btnStyle="isActive ? 'primary default' : 'white default'" 
-          @click="navigate" 
-          class="mcNav-btn">寵物資訊卡</Btn>
+        <RouterLink to="/member-center/petcard">
+          <Btn btnStyle="white default">寵物資訊卡</Btn>
         </RouterLink>
       </div>      
       <div class="btn-wrapper">
-        <RouterLink to="/member-center/subscription" custom v-slot="{navigate, isActive}">
-          <Btn :btnStyle="isActive ? 'primary default' : 'white default'" 
-          @click="navigate" 
-          class="mcNav-btn">寵物盒訂閱紀錄</Btn>
+        <RouterLink to="/member-center/subscription">
+          <Btn btnStyle="white default">寵物盒訂閱紀錄</Btn>
         </RouterLink>        
       </div>      
       <div class="btn-wrapper">
-        <RouterLink to="/member-center/helper" custom v-slot="{navigate, isActive}">
-          <Btn :btnStyle="isActive ? 'primary default' : 'white default'" 
-          @click="navigate" 
-          class="mcNav-btn">小幫手中心</Btn>
+        <RouterLink to="/member-center/helper">
+          <Btn btnStyle="white default">小幫手中心</Btn>
         </RouterLink>          
       </div>      
         
@@ -66,11 +57,12 @@ import Btn from '../components/Btn.vue';
 
 //const
 // mcNav 按鈕狀態
-// const isActive = ref(false);
+// const isActive = ref( false );
 
-// 定義切換方法
-
-
+// const mc_changeColor = () => {
+//   isActive.value = !isActive.value;
+// };
+//
 // function mc_changeColor(){
 //   if(){
     
