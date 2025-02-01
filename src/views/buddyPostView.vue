@@ -182,7 +182,6 @@
         <div class="postComment">
             <div class="postTitle">
                 <h6 class="bold">發表評論</h6>
-                <p class="smallText">請於80個字數內</p>
             </div>
             <div class="inputComment">
                 <div class="avatar">
@@ -197,12 +196,14 @@
                         <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
                     </ul>
                     <div class="input">
-                        <InputText
-                        :placeHolder="input.placeHolder"
-                        :hasError="input.inputError.value"
-                        v-model="input.inputValue.value"
-                        ></InputText>
-                        <!-- <p>用 v-model 監聽: {{ input.inputValue }}</p> -->
+                        <InputText 
+                        class="textBox" 
+                        inputType="textarea"             
+                        size="small" 
+                        placeHolder="請於80個字數內" 
+                        errorMsg="Invalid Input" 
+                        v-model="inputValuePostContent"
+                        :hasError="inputError"></InputText>
                         <Btn btnStyle="primary default">發佈</Btn>
                     </div>
                 </div>

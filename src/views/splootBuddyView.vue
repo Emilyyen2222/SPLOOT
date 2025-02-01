@@ -223,26 +223,24 @@
     <div class="newPostInput">
         <div class="postTitle">
             <p class="smallText inputLabel">發佈主題*</p>
-            <InputText
-                textAlign = "textLeft"
+            <InputText                
                 size = "small"
                 placeHolder="這裡輸入發佈主題"
                 errorMsg="Invalid Input"
-                v-model="inputValue"
+                v-model="inputValuePostTitle"
                 :hasError="inputError">
             </InputText>
         </div>
         <div class="postContent">
             <p class="smallText inputLabel">發佈內容*</p>
-            <!-- <InputText
-                textAlign = "textLeft"
-                size = "small"
-                placeHolder="請於200字內"
-                errorMsg="Invalid Input"
-                v-model="inputValue"
-                :hasError="inputError">
-            </InputText> -->
-            <textarea name="" id="" placeHolder="請於200字內"></textarea>
+            <InputText 
+            class="textBox" 
+            inputType="textarea"             
+            size="small" 
+            placeHolder="請於200字內" 
+            errorMsg="Invalid Input" 
+            v-model="inputValuePostContent"
+            :hasError="inputError"></InputText>
         </div>
     </div>
     <div class="newPostBtn">
@@ -438,7 +436,7 @@ const district = {
 //城市選單監聽
 
 
-// let selectedCity = ref(null); //v-model綁定
+let selectedCity = ref(null); //v-model綁定
 
 // watch(selectedCity, (newValue) => {
 //     console.log("選擇的城市變更為:", newValue);
@@ -636,16 +634,16 @@ function toggleLightBox2() {
 }
 
 // "新增貼文"燈箱裡的input
-let inputValue = ref('');
-let inputError = ref(false);
+// let inputValue = ref('');
+// let inputError = ref(false);
 
-watch(inputValue, (newValue, oldValue) => {
-    if(inputValue.value.includes('123')){
-        inputError.value = true;
-    }else{
-        inputError.value = false;
-    }
-})
+// watch(inputValue, (newValue, oldValue) => {
+//     if(inputValue.value.includes('123')){
+//         inputError.value = true;
+//     }else{
+//         inputError.value = false;
+//     }
+// })
 
 const fileInput = ref(null);
 const hasUploadImg = ref(null);

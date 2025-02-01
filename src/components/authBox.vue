@@ -4,7 +4,11 @@
     <div class="authWrapper">
         <!-- 左半邊 -->
         <div class="mainLeft">
-
+            <div class="closeBtnBox">
+                <div class="closeBtn" @click="toggleAuthBox">
+                    <img src="@/assets/img/icon/close.svg" alt="closeIcon">
+                </div>
+            </div>
             <div class="topSection">
                 <div class="topText" v-show="props.authType === 'signUp'">
                     <p class="smallText">已有帳號？</p>
@@ -23,16 +27,16 @@
                     <!-- 註冊模式 -->
                     <div class="theView" v-show="props.authType === 'signUp'">
                         <h4 class="bold">註冊</h4>
-                        <InputText
-                            placeHolder="輸入信箱"
-                            errorMsg="Invalid Input"
-                            v-model="inputValueMail"
-                            :hasError="inputErrorMail"
-                            textAlign = "textLeft"
-                            size="small">
-                        </InputText>
-                        <!-- <p>用 v-model 監聽: {{ inputValueMail }}</p> -->
-                        <div class="passwordBox">
+                        <div class="inputSetBox">
+                            <InputText
+                                placeHolder="輸入信箱"
+                                errorMsg="Invalid Input"
+                                v-model="inputValueMail"
+                                :hasError="inputErrorMail"
+                                size="small">
+                            </InputText>
+                        </div>
+                        <div class="inputSetBox">
                             <InputText
                                 ref="password1"
                                 class="password1"
@@ -40,13 +44,12 @@
                                 errorMsg="Invalid Input"
                                 v-model="inputValuePassword"
                                 :hasError="inputErrorPassword"
-                                textAlign = "textLeft"
                                 size="small">
                             </InputText>
                             <img class="theEye" :src="eyeState1" alt="" @click="eyeStateToggle1">
                             <!-- <p>用 v-model 監聽: {{ inputValuePassword }}</p> -->
                         </div>
-                        <div class="passwordBox">
+                        <div class="inputSetBox">
                             <InputText
                                 ref="password2"
                                 class="password2"
@@ -54,7 +57,6 @@
                                 errorMsg="Invalid Input"
                                 v-model="inputValuePassword2"
                                 :hasError="inputErrorPassword2"
-                                textAlign = "textLeft"
                                 size="small">
                             </InputText>
                             <img class="theEye" :src="eyeState2" alt="" @click="eyeStateToggle2">
@@ -69,16 +71,17 @@
                     <!-- 登入模式 -->
                     <div class="theView" v-show="props.authType === 'login'">
                         <h4 class="bold">登入</h4>
-                        <InputText
-                            placeHolder="輸入信箱"
-                            errorMsg="Invalid Input"
-                            v-model="inputValueMail"
-                            :hasError="inputErrorMail"
-                            textAlign = "textLeft"
-                            size="small">
-                        </InputText>
+                        <div class="inputSetBox">
+                            <InputText
+                                placeHolder="輸入信箱"
+                                errorMsg="Invalid Input"
+                                v-model="inputValueMail"
+                                :hasError="inputErrorMail"
+                                size="small">
+                            </InputText>
+                        </div>
                         <!-- <p>用 v-model 監聽: {{ inputValueMail }}</p> -->
-                        <div class="passwordBox">
+                        <div class="inputSetBox">
                             <InputText
                                 ref="password3"
                                 class="password3"
@@ -86,7 +89,6 @@
                                 errorMsg="Invalid Input"
                                 v-model="inputValuePassword"
                                 :hasError="inputErrorPassword"
-                                textAlign = "textLeft"
                                 size="small">
                             </InputText>
                             <img class="theEye" :src="eyeState3" alt="" @click="eyeStateToggle3">
@@ -141,7 +143,14 @@
     <!-- 右半邊 -->
 
         <div class="mainRight">
-            <img class="authMainImg" src="../assets/img/splootbox/cat3.jpg" alt="">
+                <div class="closeBtnBox">
+                    <div class="closeBtn" @click="toggleAuthBox">
+                        <img src="@/assets/img/icon/close.svg" alt="closeIcon">
+                    </div>
+                </div>
+                <div class="heroImgBox">
+                    <img class="authMainImg" src="../assets/img/splootbox/cat3.jpg" alt="">
+                </div>
         </div>
         
     </div>

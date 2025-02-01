@@ -194,6 +194,7 @@
                     margin-left: 2.4rem;
                     .input{
                         display: flex;
+                        flex-direction: column;
                         gap: 1.6rem;
                         margin-top: 1.6rem;
                         
@@ -207,7 +208,7 @@
                         }
                         
                         .primary.default{
-                            width: 15.2rem; 
+                            // width: 15.2rem; 
                         }
                     }
                 }

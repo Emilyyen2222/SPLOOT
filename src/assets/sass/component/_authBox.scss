@@ -23,6 +23,8 @@ body.authClicked{
         justify-content: space-between;
 
         width: 80rem;
+        height: 84vh;
+        min-height: 67.2rem;
 
         @include lg(){
             width: 70rem;
@@ -34,10 +36,34 @@ body.authClicked{
 
         @include sm(){
             width: 36rem;
+            min-height: 60rem;
         }
 
         &.clicked{
             display: flex;
+        }
+
+        .closeBtnBox{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            height: 4rem;
+            padding: 1.2rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
+
+            .closeBtn{
+                cursor: pointer;
+
+                width: 4rem;
+                height: 4rem;
+                
+                border-radius: 100px;
+        
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
 
         .underline{
@@ -47,7 +73,8 @@ body.authClicked{
 
 
         .mainLeft{
-            // width: 50%;
+            position: relative;
+
             width: 40rem;
 
             @include lg(){
@@ -60,10 +87,15 @@ body.authClicked{
 
             @include sm(){
                 width: 100%;
+                .closeBtnBox{
+                    display: block;
+                }
             }
-
-
             padding: 5.6rem;
+
+            .closeBtnBox{
+                display: none;
+            }
 
             .topText{
                 display: flex;
@@ -82,10 +114,6 @@ body.authClicked{
                     text-align: center;
                 }
 
-                .passwordBox, input{
-                    margin-bottom: 0.8rem;
-                }
-
                 &.singUp{
                     display: block;
                 }
@@ -96,17 +124,17 @@ body.authClicked{
 
 
 
-                .passwordBox{  
+                .inputSetBox{  
                     display: flex;
                     position: relative;
 
-                    height: 4rem; //固定高度使theEye絕對定位不會跑掉
+                    margin-bottom: 0.8rem;
 
                     .theEye{
                         cursor: pointer;
 
                         position: absolute;
-                        top: calc(50% - 10px);
+                        top: 10px;
                         right: 16px;
 
                         width: 20px;
@@ -197,6 +225,8 @@ body.authClicked{
 
 
         .mainRight{
+            position: relative;
+
             width: 40rem;
 
             @include lg(){
@@ -211,13 +241,22 @@ body.authClicked{
                 display: none;
             }
 
-            .authMainImg{
+            .closeBtnBox{
+          
+            }
+
+            .heroImgBox{
                 width: 100%;
                 height: 100%;
-                border-radius: 0 16px 16px 0
+                border-radius: 0 16px 16px 0;
+
+                .authMainImg{
+                    width: 100%;
+                height: 100%;
+                border-radius: 0 16px 16px 0;
+                }
             }
         }
-
 
     }
 }

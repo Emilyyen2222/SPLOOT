@@ -30,6 +30,7 @@
     }
   }
   textarea{
+    resize: none; /* 禁止使用者調整大小 */
     @include textStyle(p);
     &.small{
       @include textStyle(smallText);
