@@ -81,14 +81,11 @@
     body.#{$theme}Theme{
         .dropdown-menu{
             @include dropdownBasic(menu);
-            @include textStyle(p);
+            @include textStyle(smallText);
             border: 1px solid map-get($colors, natural-1);
 
             &.large{
                 @include textStyle(p);
-            }
-            &.default{
-                @include textStyle(smallText);
             }
         
             .dropdownBtn{

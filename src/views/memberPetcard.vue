@@ -151,7 +151,7 @@
                         <div class="field">
                             <label>毛孩姓名*</label>
                             <div class="petName">
-                                <InputText placeHolder="斯普拉特" size = "small" text-align="left" errorMsg="Invalid Input" 
+                                <InputText placeHolder="斯普拉特" size = "small" errorMsg="Invalid Input" 
                                 v-model="inputValue" :hasError="inputError"></InputText>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                 <div class="fieldWrapper">
                     <div class="field">
                         <label>毛孩簡介*</label>
-                            <InputText class="textBox" textAlign="left" placeHolder="請於80字內" errorMsg="Invalid Input" 
+                            <InputText class="textBox" placeHolder="請於80字內" errorMsg="Invalid Input" 
                             v-model="inputValue" :hasError="inputError"></InputText>
                     </div>
                 </div>

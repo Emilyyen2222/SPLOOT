@@ -1,13 +1,16 @@
 <template>
   <div class="inputBox" :class="{'-error': hasError}">
 
-    <input 
+    <input v-if="inputType == 'text'"
     type="text"
     :class="[textAlign, size]"
     :placeholder="placeHolder"
-    :value="modelValue"
-    @input="updateValue">
-  
+    v-model="inputText"> 
+    <textarea v-else
+    :class="[textAlign, size]"
+    :placeholder="placeHolder"
+    v-model="inputText">
+    </textarea>   
     <p v-if="hasError" class="errorMsg"
       :class="textAlign">{{ errorMsg }}</p>
   </div>
@@ -19,11 +22,14 @@
   const props = defineProps({
     size: {
       type: String,
-      default: '',
     },
     textAlign: {
       type: String,
-      default: 'textCenter'
+      default: 'textLeft'
+    },
+    inputType: {
+      type: String,
+      default: 'text'
     },
     placeHolder: {
       type: String,
@@ -37,15 +43,7 @@
       type: Boolean,
       default: false
     },
-    modelValue: {
-      type: String,
-      default: ''
-    },
   });
 
-  const emit = defineEmits(['update:modelValue']);
-
-  const updateValue = (e) => {
-    emit('update:modelValue', e.target.value);
-  };
+  const inputText = defineModel();
 </script>

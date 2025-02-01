@@ -65,7 +65,7 @@ p{ @include textStyle(p); }
 
 
 // -------- btnSettings --------
-@mixin btnBasic($size){
+@mixin btnBasic($size, $c){
     @if($size == large){
         @include textStyle(h6);
         height: 4.8rem;
@@ -87,6 +87,8 @@ p{ @include textStyle(p); }
 
     width: 100%;
     border-radius: 100px;
+
+    color: map-get($colors, $c);
     text-align: center;
     transition: width .3s ease;
 
@@ -107,7 +109,7 @@ p{ @include textStyle(p); }
     }
 
     width: calc(100% + $t);
-    color: map-get($colors, $c);
+    // color: map-get($colors, $c);
 
     span{ 
         position: relative;

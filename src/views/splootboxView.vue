@@ -185,7 +185,7 @@
                 </p>
                 <div class="emailBtn">
                     <div>
-                        <InputText placeHolder="Email" errorMsg="Invalid Input" 
+                        <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
                         v-model="inputValue" :hasError="inputError"></InputText>
                     </div>
                 </div>

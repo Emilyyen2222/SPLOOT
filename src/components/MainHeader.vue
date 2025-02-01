@@ -100,8 +100,6 @@
     }
     }
 
-
-    
-
+    console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
 
 </script>

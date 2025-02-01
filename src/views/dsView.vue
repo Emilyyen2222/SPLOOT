@@ -53,10 +53,21 @@
             <p>用 v-model 監聽: {{ input3.inputValue }}</p>
 
             <h6>Option</h6>
-            <Btn btnType="form" btnStyle="option" v-model="selectedOptions">選項1</Btn>
-            <Btn btnType="form" btnStyle="option" v-model="selectedOptions">選項2</Btn>
-            <Btn btnType="form" btnStyle="option" v-model="selectedOptions">選項3</Btn>
-            <p>用 v-model 監聽: {{ selectedOptions.join(' , ') }}</p>
+            <Btn v-for="option in form1.options" :key="option"
+            btnType="form" btnStyle="option" 
+            :class="{'-active': optionSelected(form1.selected, option)}"
+            @click="form1.formChoice(form1.selected, option)">{{ option }}</Btn>
+
+            <p>Selected Options: {{ form1.selected.value.join(' , ') }}</p>
+
+
+
+            <Btn v-for="option in form2.options" :key="option"
+            btnType="form" btnStyle="option" 
+            :class="{'-active': optionSelected(form2.selected, option)}"
+            @click="form2.formChoice(form2.selected, option)">{{ option }}</Btn>
+
+            <p>Selected Options: {{ form2.selected.value.join(' , ') }}</p>
 
             <h6>nextQ</h6>
             <Btn btnType="form" btnStyle="nextQ">上一題</Btn>
@@ -83,9 +94,21 @@
             <h6>DropdownQa</h6>
             <DropdownQa question="這裡是問題" answer="這裡是回答"></DropdownQa>
             <h6>DropdownMenu</h6>
-            <DropdownMenu :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
+            <DropdownMenu 
+            :placeHolder="menu1.placeHolder"
+            :options="menu1.options"
+            v-model="menu1.menuValue.value"></DropdownMenu>
+
+            <p>用 v-model 監聽: {{ menu1.menuValue }}</p>
+
+
             <h6>DropdownMenu (size="large")</h6>
-            <DropdownMenu size="large" :placeHolder="menu1.placeHolder" :options="menu1.options"></DropdownMenu>
+            <DropdownMenu size="large"
+            :placeHolder="menu2.placeHolder"
+            :options="menu2.options"
+            v-model="menu2.menuValue.value"></DropdownMenu>
+            
+            <p>用 v-model 監聽: {{ menu2.menuValue }}</p>
         </div>
     </section>
     <section>
@@ -125,7 +148,18 @@
     </section>
 
 
+    <section>
 
+        <h4>TagBtn</h4>
+        <div style="flex-direction: column; gap: 8px; padding: 10px; margin: 0 auto">
+            <Btn v-for="option in tag1.options" :key="option"
+            btnType="tag" 
+            :class="{'-active': optionSelected(tag1.selected, option)}"
+            @click="tag1.formChoice(tag1.selected, option)">{{ option }}</Btn>
+            <p>Selected Options: {{ tag1.selected.value.join(' , ') }}</p>
+        </div>
+    </section>
+    <ProgressBar :total="10" :current="currentProgress" ></ProgressBar>
     <MainFooter class="bg-yellow-2"></MainFooter>
 </template>
 
@@ -138,6 +172,7 @@ import Btn from '../components/Btn.vue';
 import InputText from '../components/InputText.vue';
 import DropdownQa from "../components/DropdownQa.vue";
 import DropdownMenu from "../components/DropdownMenu.vue";
+import ProgressBar from "../components/ProgressBar.vue";
 import LightBox from "../components/LightBox.vue";
 
 const btnStyles = ['primary', 'white', 'outline', 'baseline', 'text'];
@@ -146,24 +181,22 @@ const btnSizes = ['large', 'default', 'small'];
 // 問卷問題的 Input Value 監聽
 const input1 = {
     placeHolder: '這裡填預設文字',
-    errorMsg: 'Invalid Input',
+    errorMsg: '這是錯誤訊息',
     inputValue: ref(''),
     inputError: ref(false),
 }
 const input2 = {
     textAlign: 'textLeft',
     placeHolder: '這裡填預設文字',
-    errorMsg: 'Invalid Input',
-    inputValue: ref(''),
     inputError: ref(false),
+    inputValue: ref(''),
 }
 const input3 = {
     size: 'small',
     textAlign: 'textLeft',
     placeHolder: '這裡填預設文字',
-    errorMsg: 'Invalid Input',
+    inputError: false,
     inputValue: ref(''),
-    inputError: ref(false),
 }
 
 watch(input1.inputValue, (newValue, oldValue) => {
@@ -180,25 +213,60 @@ watch(input2.inputValue, (newValue, oldValue) => {
         input2.inputError.value = false;
     }
 })
-watch(input3.inputValue, (newValue, oldValue) => {
-    if (input3.inputValue.value.includes('123')) {
-        input3.inputError.value = true;
-    } else {
-        input3.inputError.value = false;
-    }
-})
 // 問卷問題的選項
-const selectedOptions = ref([]);
+const form1 = {
+    formChoice: singleChoice,
+    options: ['表單選項1', '表單選項2', '表單選項3', '表單選項4'],
+    selected: ref([]),
+};
+const form2 = {
+    formChoice: multipleChoice,
+    options: ['表單選項1', '表單選項2', '表單選項3', '表單選項4'],
+    selected: ref([]),
+};
+const tag1 = {
+    formChoice: multipleChoice,
+    options: ['標籤選項1', '標籤選項2', '標籤選項3', '標籤選項4'],
+    selected: ref([]),
+};
+
+function singleChoice(selected, option) {
+    selected.value = [option];
+    // console.log(selected.value);
+}
+function multipleChoice(selected, option) {
+    if (optionSelected(selected, option)) {
+        selected.value = selected.value.filter(opt => opt !== option);
+    } else {
+        selected.value.push(option);
+    }
+    // console.log(selected.value);
+}
+const optionSelected = (selected, option) => {
+    return selected.value.includes(option);
+}
+
 
 // 下拉選單的選單管理
 const menu1 = {
     placeHolder: '請選擇一個選項',
     options: [
-        { id: 0, name: '選項1' },
-        { id: 1, name: '選項2' },
-        { id: 2, name: '選項3' },
-        { id: 3, name: '選項4' },
-    ]
+        { id: 0, name: '下拉選項1' },
+        { id: 1, name: '下拉選項2' },
+        { id: 2, name: '下拉選項3' },
+        { id: 3, name: '下拉選項4' },
+    ],
+    menuValue: ref('')
+};
+const menu2 = {
+    placeHolder: '請選擇一個選項',
+    options: [
+        { id: 0, name: '下拉選項1' },
+        { id: 1, name: '下拉選項2' },
+        { id: 2, name: '下拉選項3' },
+        { id: 3, name: '下拉選項4' },
+    ],
+    menuValue: ref('')
 };
 
 // LightBox燈箱
@@ -218,6 +286,8 @@ function toggleLightBox() {
     document.body.classList.remove('clicked');
   }
 }
+
+const currentProgress = ref(3);
 </script>
 
 <style>

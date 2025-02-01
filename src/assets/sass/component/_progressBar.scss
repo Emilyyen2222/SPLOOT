@@ -1,0 +1,24 @@
+.progressBar {
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+
+  display: flex;
+  justify-content: space-between;
+  gap: .8rem;
+
+  width: 100vw;
+  padding: 1.6rem 2.4rem;
+  .progressSegment {
+    flex: 1;
+    margin: 0 auto;
+    width: 14.3rem;
+    width: 100%;
+    height: .4rem;
+    border-radius: 10rem;
+    background-color: map-get($colors, beige);
+    &.filled {
+        background-color: map-get($colors, red);
+    }
+  }
+}
