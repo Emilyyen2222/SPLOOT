@@ -11,22 +11,26 @@ $btnSizes: (large, default, small);
             @each $style in $btnStyles {
                 @each $size, $sizeProps in $btnSizes {
                     .btn.#{$style}.#{$size}{
-                        @include btnBasic($size);
+                        // @include btnBasic($size);
     
                         @if($style == primary){
+                            @include btnBasic($size, beige);
                             @include btnHover($size, beige);
                             background-color: map-get($colors, $theme);
     
                         }@else if($style == white){
+                            @include btnBasic($size, $theme);
                             @include btnHover($size, $theme);
                             background-color: map-get($colors, beige);
     
                         }@else if($style == outline){
+                            @include btnBasic($size, $theme);
                             @include btnHover($size, $theme);
                             border: 1px solid map-get($colors, $theme);
                             background-color: transparent;
     
                         }@else if($style == baseline){
+                            @include btnBasic($size, $theme);
                             @include btnHover($size, $theme);
                             padding: 0;
                             border-radius: 0;
@@ -35,6 +39,7 @@ $btnSizes: (large, default, small);
                             span{ border-bottom: 1px solid map-get($colors, $theme); }
     
                         }@else if($style == text){
+                            @include btnBasic($size, $theme);
                             @include btnHover($size, $theme);
                             padding: 0;
                             border-radius: 0;
@@ -53,17 +58,20 @@ $btnSizes: (large, default, small);
 
     $size: default;
     .btn{
-        @include btnBasic($size);
+        // @include btnBasic($size);
 
         &.option{
+            @include btnBasic($size, brown);
             @include btnHover($size, brown);
             background-color: map-get($colors, beige);
         }
         &.nextQ{
+            @include btnBasic($size, beige);
             @include btnHover($size, beige);
             background-color: map-get($colors, red);
         }
         &.lastQ{
+            @include btnBasic($size, red);
             @include btnHover($size, red);
             border-radius: 0;
             background-color: transparent;
@@ -82,22 +90,26 @@ $btnSizes: (large, default, small);
 
     $size: small;
     .btn{
-        @include btnBasic($size);
+        // @include btnBasic($size);
 
         &.attend{
+            @include btnBasic($size, beige);
             @include btnHover($size, beige);
             background-color: map-get($colors, blue);
         }
         &.edit{
+            @include btnBasic($size, brown);
             @include btnHover($size, brown);
             background-color: map-get($colors, yellow-2);
         }
         &.registered{
+            @include btnBasic($size, blue);
             @include btnHover($size, blue);
             border: 1px solid map-get($colors, blue);
             background-color: transparent;
         }
         &.disable{
+            @include btnBasic($size, natural-2);
             color: map-get($colors, natural-2);
             border: 1px solid map-get($colors, natural-2);
             background-color: transparent;
@@ -105,6 +117,30 @@ $btnSizes: (large, default, small);
             &:hover{
                 cursor: not-allowed;
             }
+        }
+    }
+}
+@each $theme in $themes{
+    body.#{$theme}Theme{
+        .tagBtn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+            $size: default;
+            $c: brown;
+            @if($theme == blue){
+                $c: blue;
+            }
+            .btn{
+                @include btnBasic($size, $c);
+                @include btnHover($size, $c);
+                border: 1px solid map-get($colors, natural-1);
+            }
+            &.-active .btn{
+                border: 1px solid map-get($colors, $theme);
+            }
+            
         }
     }
 }

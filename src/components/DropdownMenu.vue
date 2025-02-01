@@ -4,7 +4,7 @@
     <div class="dropdown-menu" :class="props.size" ref="dropdownMenu"
       @click="toggleDropdown">
       <div class="dropdownBtn">
-          <span>{{ placeHolder }}</span>
+          <span>{{ selectedOption }}</span>
           <img class="expandBtn" :src="themes[route.meta.theme].expandBtn" alt="expandBtn">
       </div>
       <template v-if="isExpand">
@@ -30,7 +30,6 @@
   const props = defineProps({
       size: {
         type: String,
-        default: 'default',
       },
       placeHolder: {
           type: String,
@@ -39,28 +38,29 @@
       options: {
           type: Array,
           required: true,
+      },
+      modelValue: {
+        type: String,
       }
   });
+  const emit = defineEmits('update:modelValue');
 
   const dropdownMenu = ref(null);
-  const placeHolder = ref(props.placeHolder);
+  const selectedOption = ref(props.placeHolder);
   const isExpand = ref(false);
 
   const themes = {
-        red: {
-            expandBtn: new URL('@/assets/img/icon/chev-red.svg', import.meta.url).href,
-        },
-        blue: {
-            expandBtn: new URL('@/assets/img/icon/chev-blue.svg', import.meta.url).href,
-        },
-    }
+    red: { expandBtn: new URL('@/assets/img/icon/chev-red.svg', import.meta.url).href },
+    blue: { expandBtn: new URL('@/assets/img/icon/chev-blue.svg', import.meta.url).href },
+  }
 
   function toggleDropdown(){
     isExpand.value = !isExpand.value;
     dropdownMenu.value.classList.toggle('-expand');
   }
   function selectItem(o){
-    placeHolder.value = o.name;
+    selectedOption.value = o.name;
+    emit('update:modelValue', o.name);
 
     if(!dropdownMenu.value.classList.contains('-active')){
       dropdownMenu.value.classList.add('-active');
