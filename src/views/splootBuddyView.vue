@@ -369,10 +369,10 @@ const togglePetType = (typeClass) => {
 
 //城市選單
     const city = {
-    placeHolder: "請選擇城市",
+    placeHolder: "全部城市",
     options: [
         {
-          name: "全部",
+          name: "全部城市",
           districts:[]
         },
         {
@@ -464,7 +464,7 @@ const togglePetType = (typeClass) => {
 
     let selectedCity = ref(null); //v-model綁定
     let selectDistrict = ref(null); //v-model綁定
-    const districtPlaceHolder = ref("請選擇行政區域");
+    const districtPlaceHolder = ref("全部行政區域");
 
     // 從選擇的城市中尋找他的行政區域 然後以{name: d}物件排列成陣列
     const districtsOptions = computed(() => {
@@ -475,7 +475,7 @@ const togglePetType = (typeClass) => {
     // 點選新的城市後行政區清空
     watch(selectedCity, () => {        
         selectDistrict.value = null; 
-        districtPlaceHolder.value = "請選擇行政區域";
+        districtPlaceHolder.value = "全部行政區域";
     });
 
 

@@ -100,7 +100,7 @@
     }
     }
 
-    console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
-    console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
+    // console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
+    // console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
 
 </script>
