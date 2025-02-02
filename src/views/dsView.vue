@@ -200,7 +200,8 @@ const input3 = {
 }
 
 watch(input1.inputValue, (newValue, oldValue) => {
-    if (input1.inputValue.value.includes('123')) {
+    // console.log(input1.inputValue.value);
+    if (input1.inputValue.value.includes('12345')) {
         input1.inputError.value = true;
     } else {
         input1.inputError.value = false;

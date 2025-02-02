@@ -156,10 +156,5 @@ import { RouterLink } from "vue-router";
         background-color: transparent;
       }
     }
-    footer{
-      position: sticky;
-      bottom: 0;
-      z-index: 0;
-    }
   }
 </style>
