@@ -2,13 +2,13 @@
 <MainHeader theme="red" bgc=""></MainHeader>
 
 <!-- question 1--->
-<div class="box firstBox">
+<div v-if="question==1" class="box firstBox">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩叫什麼名字？</h4>
         <div v-show="true" class="options">
             <div class="first">
             <InputText placeHolder="毛孩姓名" textAlign="textCenter" errorMsg="Invalid Input" 
-            v-model="inputValue" :hasError="inputError">
+            v-model="q1input" :hasError="false">
             </InputText>
             </div>
             <!-- <Btn btnType="form" btnStyle="option">女生 狗狗</Btn>
@@ -20,61 +20,65 @@
             :class="{'-active': optionSelected(questionPet.selected, option)}"
             @click="questionPet.formChoice(questionPet.selected, option)">{{ option }}</Btn>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>   
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(q1input != '' && questionPet.selected.value.length != 0 )">下一題</Btn>   
     </div>
-     <!-- progress bar -->
-     <ProgressBar :total="9" :current="1" ></ProgressBar>
+     
 </div>
 <!------------------------ question2 貓---------------------->
-<div class="box">
+<div v-if="question==2"  class="box firstBox">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是哪種體型？</h4>
         <div class="options">
             <!-- <Btn btnType="form" btnStyle="option">幼貓</Btn>
             <Btn btnType="form" btnStyle="option">成貓</Btn> -->
-            <Btn v-for="option in questionCat.options" :key="option"
+            <Btn v-for="option in q2Form.options" :key="option"
             btnType="form" btnStyle="option" 
-            :class="{'-active': optionSelected(questionCat.selected, option)}"
-            @click="questionCat.formChoice(questionCat.selected, option)">{{ option }}</Btn>
+            :class="{'-active': optionSelected(q2Form.selected, option)}"
+            @click="q2Form.formChoice(q2Form.selected, option)">{{ option }}</Btn>
            
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(q2Form.selected.value.length != 0)">下一題</Btn> 
+        <Btn class="" btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
     </div>
 </div>
 <!------------------------ question 2狗---------------------->
-<div class="box">
+<!-- <div v-if="question==2 && pet=='dog'" class="box">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是哪種體型？</h4>
         <div class="options">
-            <!-- <Btn btnType="form" btnStyle="option">小型犬</Btn>
-            <Btn btnType="form" btnStyle="option">中型犬</Btn>
-            <Btn btnType="form" btnStyle="option">大型犬</Btn> -->
-            <Btn v-for="option in questionDog.options" :key="option"
+            <Btn v-for="option in q2Form.options" :key="option"
             btnType="form" btnStyle="option" 
-            :class="{'-active': optionSelected(questionDog.selected, option)}"
-            @click="questionDog.formChoice(questionDog.selected, option)">{{ option }}</Btn>
+            :class="{'-active': optionSelected(q2Form.selected, option)}"
+            @click="q2Form.formChoice(q2Form.selected, option)">{{ option }}</Btn>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(q2Form.selected.value.length != 0)">下一題</Btn> 
+        <Btn class="borderBottom" btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
     </div>
-</div>
+</div> -->
 <!------------------------ question 3---------------------->
-<div class="box">
+<div v-if="question==3" class="box">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是什麼品種？</h4>
         <div class="options">
             <DropdownMenu size="large"
-                :placeHolder="menus.menu1.placeHolder" 
-                :options="menus.menu1.options">
+                :placeHolder="q3Menu.placeHolder" 
+                :options="q3Menu.options"
+                v-model="q3Menu.menuValue">
             </DropdownMenu>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(q3Menu.menuValue.value != '')">下一題</Btn> 
+        <Btn class="borderBottom" btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
     </div>
 </div>
 <!------------------------ question 4---------------------->
-<div class="box">
+<div v-if="question==4" class="box">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩生日是？</h4>
         <div class="options date">
@@ -83,52 +87,61 @@
                     <div class="year">
                         <DropdownMenu size="large"
                         :placeHolder="menus.year.placeHolder"
-                        :options="menus.year.options">
+                        :options="menus.year.options"
+                        v-model="menus.year.menuValue">
                         </DropdownMenu>
                     </div>
                     <div class="month">
                         <DropdownMenu size="large"
                         :placeHolder="menus.month.placeHolder"
-                        :options="menus.month.options">
+                        :options="menus.month.options"
+                        v-model="menus.month.menuValue">
                         </DropdownMenu>
                     </div>
                     <div class="date">
                         <DropdownMenu size="large"
                         :placeHolder="menus.day.placeHolder"
-                        :options="menus.day.options">
+                        :options="menus.day.options"
+                        v-model="menus.day.menuValue">
                         </DropdownMenu> 
                     </div>
                 </div>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(true)">下一題</Btn> 
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
     </div>
 </div>
 <!-- Question 5 -->
-<div class="box">
+<div v-if="question==5" class="box">
     <div class="questionContainer">
         <h4 class="title bold">請輸入您的Email</h4>
         <div class="options">
             <div class="">
             <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
-            v-model="inputValue" :hasError="inputError">
+            v-model="emailInput" :hasError="inputError">
             </InputText>
             </div>
             <div class="quickLogin">
                 <div class="">已經有帳號？</div>
-                <Btn class="check" btnStyle="baseline small">查看</Btn>
+                <Btn class="check" btnStyle="baseline small">立即登入</Btn>
             </div>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn>  
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(emailInput != '')">下一題</Btn> 
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
     </div>
 </div>
 <!-- Question6 -->
-<div class="boxSub">
+<div v-if="question==6" class="boxSub">
     <div class="questionContainer">
         <h4 class="title bold">為您的毛孩選擇一個方案等級</h4>
         <div class="container">
-                <div class="card">
+                <div class="card" 
+                :class="{'-active': subSelected == '銀卡'}"
+                @click="subToggle('銀卡')">
                     <div class="content">
                         <h6 class="title">銀卡</h6>
                         <div class="boxDivider"></div>
@@ -146,7 +159,10 @@
                         <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
                     </div>
                 </div>
-                <div class="card">
+                <div class="card"
+                :class="{'-active': subSelected == '金卡'}"
+                @click="subToggle('金卡')"
+                 >
                     <div class="content">
                         <h6 class="title">金卡</h6>
                         <div class="boxDivider"></div>
@@ -165,7 +181,9 @@
                         <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
                     </div>
                 </div>
-                <div class="card popular">
+                <div class="card popular"
+                :class="{'-active': subSelected == '白金卡'}"
+                @click="subToggle('白金卡')">
                     <div class="content">
                         <h6 class="title">白金卡</h6>
                         <div class="boxDivider"></div>
@@ -187,13 +205,15 @@
                 </div>
             </div>
         <div class="subBtn">
-            <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-            <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+            <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(subSelected != '')">下一題</Btn> 
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>  
         </div> 
     </div>
 </div>
 <!-- Question7 -->
-<div class="boxSub">
+<div v-if="question==7" class="boxSub">
     <div class="questionContainer">
         <h4 class="title bold">為您的毛孩選擇一個方案等級</h4>
         <div class="container">
@@ -256,13 +276,15 @@
                 </div>
             </div>
         <div class="subBtn">
-            <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-            <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+            <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(subSelected != '')">下一題</Btn> 
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn> 
         </div> 
     </div>
 </div>
 <!---question 8---->
-<div class="box">
+<div v-if="question==8" class="box">
     <div class="questionContainer">
         <h4 class="title bold">選擇付款與運送方式</h4>
         <div class="options date">
@@ -291,12 +313,14 @@
                     <div class="xsText"> *目前僅提供信用卡付款</div>
                 </div>
         </div>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ">上一題</Btn> 
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion">下一題</Btn> 
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>  
     </div>
 </div>
 <!-- Question 9 -->
-<div class="boxPayment">
+<div v-if="question==9" class="boxPayment">
     <div class="questionContainer">
         <h4 class="title bold">完成購買程序</h4>
         <div class="options">
@@ -369,27 +393,35 @@
                     <p class="xsText">我願意接收 SPLOOT 的最新消息、優惠及服務推廣相關資訊</p>
                 </div>
             </li>
-        <Btn btnType="form" btnStyle="nextQ">開始訂閱SPLOOT BOX</Btn>   
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion">開始訂閱SPLOOT BOX</Btn>   
     </div>
 </div>
 <!-- Question 10 -->
-<div class="boxFinish">
+<div v-if="question==10" class="boxFinish">
         <div class="finishBox">
             <h4 class="title bold">感謝您的訂閱</h4>
             <div class="">
                 <p>您已成功訂閱SPLOOT BOX 白金卡(Platinum)三個月方案 </p>
-                <Btn class="padding" btnType="form" btnStyle="nextQ">回到首頁</Btn>  
+                <RouterLink to="/">
+                    <Btn class="padding" btnType="form" btnStyle="nextQ">回到首頁</Btn>  
+                </RouterLink>
             </div>
         </div>
 </div>
-<div class="boxFinish">
+<!-- 非會員 -->
+<div v-if="question==11" class="boxFinish">
         <div class="finishBox">
             <h4 class="title bold">感謝您的訂閱</h4>
             <p>您已成功訂閱SPLOOT BOX 白金卡(Platinum)三個月方案</p>
             <p>請至信箱查閱訂單詳情</p>
-            <Btn class="padding top" btnType="form" btnStyle="nextQ">回到首頁</Btn>
+            <RouterLink to="/">
+                <Btn class="padding" btnType="form" btnStyle="nextQ">回到首頁</Btn>  
+            </RouterLink>
         </div>
 </div>
+<!-- progress bar -->
+<ProgressBar :total="9" :current="question" ></ProgressBar>
 <!-- circle bg -->
 <div class="circleQuestion"></div>
 
@@ -424,7 +456,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, watch } from 'vue';
     import MainHeader from "../components/MainHeader.vue";
     import DropdownMenu from "../components/DropdownMenu.vue";
     import Btn from '../components/Btn.vue';
@@ -432,19 +464,45 @@
     import ProgressBar from "../components/ProgressBar.vue";
     import PopUp from "@/components/PopUp.vue";
 
-  //popup狀態
-let isPopUp =ref(false);
 
-// 控制燈箱的顯示與隱藏
-function togglePopUp() {
-  isPopUp.value = !isPopUp.value;
-  // // 停止捲軸
-  if (isPopUp.value) {
-    document.body.classList.add('clicked');
-  } else {
-    document.body.classList.remove('clicked');
-  }
-}
+
+    const question = ref(6);
+    const pet = ref('');
+    const q1input = ref('');
+    const emailInput = ref('');
+    let q2Form;
+    let q3Menu;
+    const subSelected = ref('');
+
+    function subToggle(card){
+        subSelected.value = (card);
+
+
+
+    };
+
+    function nextQuestion(bol = false){
+        if(bol == true){
+            question.value++;
+        };
+    }
+    function lastQuestion(){
+        question.value--;
+    }
+    
+    //popup狀態
+    let isPopUp = ref(false);
+    
+    // 控制燈箱的顯示與隱藏
+    function togglePopUp() {
+        isPopUp.value = !isPopUp.value;
+        // // 停止捲軸
+        if (isPopUp.value) {
+            document.body.classList.add('clicked');
+        } else {
+            document.body.classList.remove('clicked');
+        }
+    }
 
     const questionPet = {
         formChoice: singleChoice,
@@ -461,6 +519,23 @@ function togglePopUp() {
         options: ['小型犬', '中型犬', '大型犬'],
         selected: ref([]),
     };
+
+    watch(questionPet.selected, (newValue, oldValue) => {
+        console.log(questionPet.selected.value[0]);
+        if (questionPet.selected.value[0].includes('貓貓')) {
+            pet.value = 'cat';
+            q2Form = questionCat;
+            q3Menu = menus.menuCat;
+            console.log(q3Menu);
+        } else if(questionPet.selected.value[0].includes('狗狗')) {
+            pet.value = 'dog';
+            q2Form = questionDog;
+            q3Menu = menus.menuDog;
+            console.log(q3Menu);
+        }
+    })
+
+
 
     function singleChoice(selected, option) {
     selected.value = [option];
@@ -479,102 +554,143 @@ function togglePopUp() {
     }
 
     const menus = {
-  menu1: {
-    placeHolder: '我的毛孩品種是',
-    options: [
-    { id: 0, name: '柴犬' },
-    { id: 1, name: '拉布拉多' },
-    { id: 2, name: '哈士奇' },
-    { id: 3, name: '黃金獵犬' },
-    { id: 4, name: '德國牧羊犬' },
-    { id: 5, name: '法國鬥牛犬' },
-    { id: 6, name: '貴賓犬（泰迪）' },
-    { id: 7, name: '臘腸犬' },
-    { id: 8, name: '比熊犬' },
-    { id: 9, name: '邊境牧羊犬' },
-    { id: 10, name: '雪納瑞' },
-    { id: 11, name: '西施犬' },
-    { id: 12, name: '約克夏' },
-    { id: 13, name: '柯基犬' },
-    { id: 14, name: '馬爾濟斯' },
-    { id: 15, name: '秋田犬' },
-    { id: 16, name: '松獅犬' },
-    { id: 17, name: '沙皮狗' },
-    { id: 18, name: '牛頭梗' },
-    { id: 19, name: '羅威納犬' },
-    { id: 20, name: '大丹犬' },
-    { id: 21, name: '杜賓犬' },
-    { id: 22, name: '博美犬' },
-    { id: 23, name: '喜樂蒂牧羊犬' },
-    { id: 24, name: '阿拉斯加雪橇犬' },
-    { id: 25, name: '巴哥犬' },
-    { id: 26, name: '狐狸犬' },
-    { id: 27, name: '愛斯基摩犬' },
-    { id: 28, name: '大白熊犬' },
-    { id: 29, name: '巴吉度犬' },
-    { id: 30, name: '比格犬' },
-    ],
-  },
-  year: {
-    placeHolder: '年份',
-    options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-      id: i,
-      name: `${2025 - i} 年`,
-    })),
-  },
-  month: {
-    placeHolder: '月份',
-    options: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `${i + 1} 月`,
-    })),
-  },
-  day: {
-    placeHolder: '日期',
-    options: Array.from({ length: 31 }, (_, i) => ({
-      id: i + 1,
-      name: `${i + 1} 日`,
-    })),
-  },
-country: {
-  placeHolder: '送貨地點',
-  options: [
-    { id: 0, name: '台灣' },
-    { id: 1, name: '香港' },
-    { id: 2, name: '澳門' },
-  ],
-},
-shipPlace: {
-  placeHolder: '送貨地點',
-  options: [
-    { id: 0, name: '台灣' },
-    { id: 1, name: '香港' },
-    { id: 2, name: '澳門' },
-  ],
-},
-payment: {
-  placeHolder: '送貨地點',
-  options: [
-    { id: 0, name: '台灣' },
-    { id: 1, name: '香港' },
-    { id: 2, name: '澳門' },
-  ],
-},
-visaYear: {
-    placeHolder: '年份',
-    options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-      id: i,
-      name: `${2025 - i} 年`,
-    })),
-  },
-visaMonth: {
-    placeHolder: '月份',
-    options: Array.from({ length: 12 }, (_, i) => ({
-      id: i + 1,
-      name: `${i + 1} 月`,
-    })),
-  },
-};
+        menuCat: {
+        placeHolder: '我的貓咪品種是',
+        options: [
+            { id: 0, name: '美短（美國短毛貓）' },
+            { id: 1, name: '英短（英國短毛貓）' },
+            { id: 2, name: '緬因貓' },
+            { id: 3, name: '布偶貓' },
+            { id: 4, name: '波斯貓' },
+            { id: 5, name: '金吉拉' },
+            { id: 6, name: '曼赤肯（矮腳貓）' },
+            { id: 7, name: '無毛貓（斯芬克斯）' },
+            { id: 8, name: '加菲貓' },
+            { id: 9, name: '孟加拉貓' },
+            { id: 10, name: '暹羅貓' },
+            { id: 11, name: '折耳貓（蘇格蘭折耳貓）' },
+            { id: 12, name: '俄羅斯藍貓' },
+            { id: 13, name: '橘貓（米克斯）' },
+            { id: 14, name: '三花貓（米克斯）' },
+            { id: 15, name: '狸花貓（米克斯）' },
+            { id: 16, name: '挪威森林貓' },
+            { id: 17, name: '土耳其梵貓' },
+            { id: 18, name: '土耳其安哥拉貓' },
+            { id: 19, name: '埃及貓' },
+            { id: 20, name: '喜馬拉雅貓' },
+            { id: 21, name: '新加坡貓' },
+            { id: 22, name: '美國捲耳貓' },
+            { id: 23, name: '索馬利貓' },
+            { id: 24, name: '巴厘貓' },
+            { id: 25, name: '東方短毛貓' },
+            { id: 26, name: '科拉特貓' },
+            { id: 27, name: '塞爾凱克捲毛貓' },
+            { id: 28, name: '德文捲毛貓' },
+            { id: 29, name: '柯尼斯捲毛貓' },
+            { id: 30, name: '日本短尾貓' },
+            ],
+        menuValue: ref(''),
+        },
+        menuDog: {
+            placeHolder: '我的狗狗品種是',
+            options: [
+            { id: 0, name: '柴犬' },
+            { id: 1, name: '拉布拉多' },
+            { id: 2, name: '哈士奇' },
+            { id: 3, name: '黃金獵犬' },
+            { id: 4, name: '德國牧羊犬' },
+            { id: 5, name: '法國鬥牛犬' },
+            { id: 6, name: '貴賓犬（泰迪）' },
+            { id: 7, name: '臘腸犬' },
+            { id: 8, name: '比熊犬' },
+            { id: 9, name: '邊境牧羊犬' },
+            { id: 10, name: '雪納瑞' },
+            { id: 11, name: '西施犬' },
+            { id: 12, name: '約克夏' },
+            { id: 13, name: '柯基犬' },
+            { id: 14, name: '馬爾濟斯' },
+            { id: 15, name: '秋田犬' },
+            { id: 16, name: '松獅犬' },
+            { id: 17, name: '沙皮狗' },
+            { id: 18, name: '牛頭梗' },
+            { id: 19, name: '羅威納犬' },
+            { id: 20, name: '大丹犬' },
+            { id: 21, name: '杜賓犬' },
+            { id: 22, name: '博美犬' },
+            { id: 23, name: '喜樂蒂牧羊犬' },
+            { id: 24, name: '阿拉斯加雪橇犬' },
+            { id: 25, name: '巴哥犬' },
+            { id: 26, name: '狐狸犬' },
+            { id: 27, name: '愛斯基摩犬' },
+            { id: 28, name: '大白熊犬' },
+            { id: 29, name: '巴吉度犬' },
+            { id: 30, name: '比格犬' },
+            ],
+            menuValue: ref(''),
+        },
+        year: {
+            placeHolder: '年份',
+            options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+            id: i,
+            name: `${2025 - i} 年`,
+            })),
+            menuValue: ref(''),
+        },
+        month: {
+            placeHolder: '月份',
+            options: Array.from({ length: 12 }, (_, i) => ({
+            id: i + 1,
+            name: `${i + 1} 月`,
+            })),
+            menuValue: ref(''),
+        },
+        day: {
+            placeHolder: '日期',
+            options: Array.from({ length: 31 }, (_, i) => ({
+            id: i + 1,
+            name: `${i + 1} 日`,
+            })),
+            menuValue: ref(''),
+        },
+        country: {
+        placeHolder: '送貨地點',
+        options: [
+            { id: 0, name: '台灣' },
+            { id: 1, name: '香港' },
+            { id: 2, name: '澳門' },
+        ],
+        },
+        shipPlace: {
+        placeHolder: '送貨地點',
+        options: [
+            { id: 0, name: '台灣' },
+            { id: 1, name: '香港' },
+            { id: 2, name: '澳門' },
+        ],
+        },
+        payment: {
+        placeHolder: '送貨地點',
+        options: [
+            { id: 0, name: '台灣' },
+            { id: 1, name: '香港' },
+            { id: 2, name: '澳門' },
+        ],
+        },
+        visaYear: {
+            placeHolder: '年份',
+            options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+            id: i,
+            name: `${2025 - i} 年`,
+            })),
+        },
+        visaMonth: {
+            placeHolder: '月份',
+            options: Array.from({ length: 12 }, (_, i) => ({
+            id: i + 1,
+            name: `${i + 1} 月`,
+            })),
+        },
+    };
 
 
 

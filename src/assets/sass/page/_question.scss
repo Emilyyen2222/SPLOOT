@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     max-width: 384px;
-    height: 100vh;
+    height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid;
     .borderBottom{
@@ -105,7 +105,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid ;
     .planItems{
@@ -137,6 +137,7 @@ body{
         gap: 3.2rem;
         margin: 0 auto 4rem;
         .card {
+            cursor: pointer;
             position: relative;
             display: inline-flex;
             flex-direction: column;
@@ -145,6 +146,10 @@ body{
             padding: 0.8rem;
             background-color: map-get($colors, beige);
             border-radius: 1.6rem;
+            &.-active{
+                
+                border:1px solid map-get($colors, red) ;
+            }
             &.popular::before {
                 content: '最熱門';
                 position: absolute;
@@ -186,7 +191,7 @@ body{
     justify-content: center;
     align-items: center;
     max-width: 592px;
-    height: 100vh;
+    height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid;
     h4{
@@ -270,7 +275,7 @@ body{
     justify-content: center;
     align-items: center;
     max-width:537px;
-    height: 100vh;
+    height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid;
 
