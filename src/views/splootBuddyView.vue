@@ -87,21 +87,20 @@
         <ul class="buddyCard">
             <li class="buddyCards" v-for="(card,index) in visibleCards" :key="index">
                 <div class="cardBox">
-                    <div class="cardsImgBox">
-                        <img :src="card.imgSrc" alt="" class="cardsImg">
+                    <div class="cardsImgBox">                        
+                            <img :src="card.imgSrc" alt="" class="cardsImg">                        
                     </div>
                     <div class="cardText">
                         <h6 class="cardsTitle bold">{{ card.title }}</h6>
                         <div class="reviews">
+                            
                             <ul class="stars">
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                                <li v-for="n in 5">
+                                    <img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]">
+                                </li>
                             </ul>
-                            <div class="avgGrade smallText">4.5</div>
-                            <div class="commentCount smallText">(3)</div>
+                            <div class="avgGrade smallText">{{ card.stars }}</div>
+                            <div class="commentCount smallText">({{ testFunction() }})</div>   <!-- 測試用上架後要拿掉 -->
                         </div>
                         <div class="serviceTime smallText">服務時段：{{ card.serviceDaysStart }}至{{ card.serviceDaysEnd }} {{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div>                
                     </div>
@@ -279,6 +278,14 @@
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
     import InputText from '@/components/InputText.vue';
+
+//測試用
+
+const testFunction = () => {
+    return Math.floor(Math.random() * 500) + 1;
+
+}; 
+
 
 // 服務選單
 const buddyTypes =ref([
@@ -469,7 +476,7 @@ const togglePetType = (typeClass) => {
     // 從選擇的城市中尋找他的行政區域 然後以{name: d}物件排列成陣列
     const districtsOptions = computed(() => {
         const cityData = city.options.find((c) => c.name === selectedCity.value);
-        return cityData && selectedCity.value !== "全部" ? cityData.districts.map((d) => ({name: d})) : [];
+        return cityData && selectedCity.value !== "全部城市" ? cityData.districts.map((d) => ({name: d})) : [];
     });
 
     // 點選新的城市後行政區清空
@@ -486,7 +493,7 @@ const cardsData = ref([]); //渲染的卡片
 const cardsRowData = ref([
     {
         imgSrc: new URL("../assets/img/buddy-post/demo.png", import.meta.url).href,
-        title: "台北市中正區puppy高速散步",
+        title: "台北市puppy高速散步",
         serviceDaysStart: "週一",
         serviceDaysEnd: "週五",
         serviceTimeStart: "09:00",
@@ -494,11 +501,12 @@ const cardsRowData = ref([
         city: "台北市",
         district: "中正區",
         serviceType: "walkies",
-        petTypes: ["puppy", "small", "middle", "large", "elder", "kitten", "cat"]
+        petTypes: ["puppy", "small", "middle", "large", "elder", "kitten", "cat"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "新北市板橋區cat快速散步去",
+        title: "板橋區cat快速散步去",
         serviceDaysStart: "週一",
         serviceDaysEnd: "週五",
         serviceTimeStart: "09:00",
@@ -506,11 +514,12 @@ const cardsRowData = ref([
         city: "新北市",
         district: "板橋區",
         serviceType: "walkies",
-        petTypes: ["puppy", "cat"]
+        petTypes: ["puppy", "cat"],
+        stars: 5
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "基隆市中正區kitten基隆陪她走走",
+        title: "基隆市kitten基隆陪她走走",
         serviceDaysStart: "週一",
         serviceDaysEnd: "週六",
         serviceTimeStart: "10:00",
@@ -518,11 +527,12 @@ const cardsRowData = ref([
         city: "基隆市",
         district: "中正區",
         serviceType: "walkies",
-        petTypes: ["puppy", "small", "kitten"]
+        petTypes: ["puppy", "small", "kitten"],
+        stars: 3
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "高雄市鳳山區large安心毛孩散步",
+        title: "鳳山區large安心毛孩散步",
         serviceDaysStart: "週二",
         serviceDaysEnd: "週五",
         serviceTimeStart: "07:00",
@@ -530,11 +540,12 @@ const cardsRowData = ref([
         city: "高雄市",
         district: "鳳山區",
         serviceType: "walkies",
-        petTypes: ["large", "elder"]
+        petTypes: ["large", "elder"],
+        stars: 1
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台中市北屯區elder全新散步體驗",
+        title: "台中市北屯區elder",
         serviceDaysStart: "週六",
         serviceDaysEnd: "週日",
         serviceTimeStart: "06:00",
@@ -542,11 +553,12 @@ const cardsRowData = ref([
         city: "台中市",
         district: "北屯區",
         serviceType: "walkies",
-        petTypes: ["elder", "cat"]
+        petTypes: ["elder", "cat"],
+        stars: 4
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "桃園市桃園區puppy悠閒遛毛孩",
+        title: "桃園市桃園區puppy",
         serviceDaysStart: "週三",
         serviceDaysEnd: "週六",
         serviceTimeStart: "08:00",
@@ -554,11 +566,12 @@ const cardsRowData = ref([
         city: "桃園市",
         district: "桃園區",
         serviceType: "walkies",
-        petTypes: ["puppy", "small"]
+        petTypes: ["puppy", "small"],
+        stars: 5
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "新北市新莊區middle專業狗狗散步",
+        title: "新北市新莊區middle",
         serviceDaysStart: "週五",
         serviceDaysEnd: "週日",
         serviceTimeStart: "07:00",
@@ -566,11 +579,12 @@ const cardsRowData = ref([
         city: "新北市",
         district: "新莊區",
         serviceType: "walkies",
-        petTypes: ["middle", "large"]
+        petTypes: ["middle", "large"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "高雄市三民區small日常毛孩散步",
+        title: "高雄市三民區small",
         serviceDaysStart: "週四",
         serviceDaysEnd: "週六",
         serviceTimeStart: "06:00",
@@ -578,11 +592,12 @@ const cardsRowData = ref([
         city: "高雄市",
         district: "三民區",
         serviceType: "walkies",
-        petTypes: ["small", "elder"]
+        petTypes: ["small", "elder"],
+        stars: 1
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台南市南區large寵物計程車接送",
+        title: "台南市南區large",
         serviceDaysStart: "週二",
         serviceDaysEnd: "週六",
         serviceTimeStart: "07:00",
@@ -590,11 +605,12 @@ const cardsRowData = ref([
         city: "台南市",
         district: "南區",
         serviceType: "petDrop",
-        petTypes: ["middle", "large"]
+        petTypes: ["middle", "large"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台南市安平區middle毛孩接送服務",
+        title: "台南市安平區middle",
         serviceDaysStart: "週五",
         serviceDaysEnd: "週日",
         serviceTimeStart: "06:00",
@@ -602,11 +618,12 @@ const cardsRowData = ref([
         city: "台南市",
         district: "安平區",
         serviceType: "petDrop",
-        petTypes: ["middle", "kitten"]
+        petTypes: ["middle", "kitten"],
+        stars: 4
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "新北市新店區kitten寵物計程車方便出行",
+        title: "新北市新店區kitten",
         serviceDaysStart: "週五",
         serviceDaysEnd: "週日",
         serviceTimeStart: "08:00",
@@ -614,11 +631,12 @@ const cardsRowData = ref([
         city: "新北市",
         district: "新店區",
         serviceType: "petDrop",
-        petTypes: ["large", "kitten"]
+        petTypes: ["large", "kitten"],
+        stars: 4
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "桃園市中壢區puppy毛孩專車運輸",
+        title: "桃園市中壢區puppy",
         serviceDaysStart: "週一",
         serviceDaysEnd: "週四",
         serviceTimeStart: "10:00",
@@ -626,11 +644,12 @@ const cardsRowData = ref([
         city: "桃園市",
         district: "中壢區",
         serviceType: "petDrop",
-        petTypes: ["puppy", "large"]
+        petTypes: ["puppy", "large"],
+        stars: 5
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台北市大安區large寵物專車接送",
+        title: "台北市大安區large",
         serviceDaysStart: "週三",
         serviceDaysEnd: "週六",
         serviceTimeStart: "09:00",
@@ -638,11 +657,12 @@ const cardsRowData = ref([
         city: "台北市",
         district: "大安區",
         serviceType: "petDrop",
-        petTypes: ["large", "small"]
+        petTypes: ["large", "small"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台中市西屯區small快速毛孩專送",
+        title: "台中市西屯區small",
         serviceDaysStart: "週二",
         serviceDaysEnd: "週五",
         serviceTimeStart: "07:00",
@@ -650,11 +670,25 @@ const cardsRowData = ref([
         city: "台中市",
         district: "西屯區",
         serviceType: "petDrop",
-        petTypes: ["small", "elder"]
+        petTypes: ["small", "elder"],
+        stars: 1
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "高雄市左營區cat友善寄宿小站",
+        title: "前進！前進！為人類奉獻！",
+        serviceDaysStart: "週ㄧ",
+        serviceDaysEnd: "週五",
+        serviceTimeStart: "02:00",
+        serviceTimeEnd: "10:00",
+        city: "高雄市",
+        district: "仁武區",
+        serviceType: "petDrop",
+        petTypes: ["cat"],
+        stars: 5
+    },
+    {
+        imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
+        title: "高雄市左營區cat",
         serviceDaysStart: "週三",
         serviceDaysEnd: "週日",
         serviceTimeStart: "08:00",
@@ -662,11 +696,12 @@ const cardsRowData = ref([
         city: "高雄市",
         district: "左營區",
         serviceType: "fostering",
-        petTypes: ["kitten", "cat"]
+        petTypes: ["kitten", "cat"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台中市東區puppy提供長期寄宿",
+        title: "台中市puppy提供長期寄宿",
         serviceDaysStart: "週二",
         serviceDaysEnd: "週五",
         serviceTimeStart: "10:00",
@@ -674,11 +709,12 @@ const cardsRowData = ref([
         city: "台中市",
         district: "東區",
         serviceType: "fostering",
-        petTypes: ["puppy", "elder"]
+        petTypes: ["puppy", "elder"],
+        stars: 4
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "桃園市楊梅區middle短期寵物安置",
+        title: "桃園市middle短期安置",
         serviceDaysStart: "週三",
         serviceDaysEnd: "週六",
         serviceTimeStart: "07:00",
@@ -686,11 +722,12 @@ const cardsRowData = ref([
         city: "桃園市",
         district: "楊梅區",
         serviceType: "fostering",
-        petTypes: ["middle", "small"]
+        petTypes: ["middle", "small"],
+        stars: 4
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台中市西區small到府陪伴你的毛孩",
+        title: "台中市到府陪伴你的毛孩",
         serviceDaysStart: "週四",
         serviceDaysEnd: "週六",
         serviceTimeStart: "09:00",
@@ -698,11 +735,12 @@ const cardsRowData = ref([
         city: "台中市",
         district: "西區",
         serviceType: "homeCare",
-        petTypes: ["small", "elder"]
+        petTypes: ["small", "elder"],
+        stars: 5
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "新北市淡水區elder個人化到府照顧",
+        title: "新北市elder個人化照顧",
         serviceDaysStart: "週六",
         serviceDaysEnd: "週日",
         serviceTimeStart: "08:00",
@@ -710,11 +748,12 @@ const cardsRowData = ref([
         city: "新北市",
         district: "淡水區",
         serviceType: "homeCare",
-        petTypes: ["elder", "cat"]
+        petTypes: ["elder", "cat"],
+        stars: 2
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台南市永康區kitten寵物照顧專家",
+        title: "台南市kitten寵物照顧專家",
         serviceDaysStart: "週一",
         serviceDaysEnd: "週四",
         serviceTimeStart: "06:00",
@@ -722,11 +761,12 @@ const cardsRowData = ref([
         city: "台南市",
         district: "永康區",
         serviceType: "homeCare",
-        petTypes: ["small", "kitten"]
+        petTypes: ["small", "kitten"],
+        stars: 1
     },
     {
         imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台北市大同區cat安心寵物照顧",
+        title: "台北市cat安心寵物照顧",
         serviceDaysStart: "週三",
         serviceDaysEnd: "週六",
         serviceTimeStart: "07:00",
@@ -734,17 +774,30 @@ const cardsRowData = ref([
         city: "台北市",
         district: "大同區",
         serviceType: "homeCare",
-        petTypes: ["cat", "middle"]
+        petTypes: ["cat", "middle"],
+        stars: 2
     }
 ]);
 
 
+//評分星星計算
+
+const isStars = (n, stars) => {
+    if(stars < 1){
+        stars = 1;  //最少要有一顆星
+    };
+
+    if(n <= stars){
+        return new URL('@/assets/img/icon/star-full.svg', import.meta.url).href
+    }else{
+        return new URL('@/assets/img/icon/star-line.svg', import.meta.url).href
+    }
+}; 
 
 //卡片搜尋功能
-
 const searchBuddies = () => {
-    cardsData.value =  cardsRowData.value.filter(card => {
-        const matchesCity = selectedCity.value === "全部" || !selectedCity.value || card.city === selectedCity.value;
+    cardsData.value = cardsRowData.value.filter(card => {
+        const matchesCity = selectedCity.value === "全部城市" || !selectedCity.value || card.city === selectedCity.value;
         const matchesDistrict = !selectDistrict.value || card.district === selectDistrict.value;
         const matchesBuddyType = selcetedBuddyType.value === card.serviceType;
         const matchesPetType =
@@ -761,10 +814,6 @@ onMounted(() => {
     selectedPetTypes.value = petTypes.value.map(type => type.class); // 預設全選
     searchBuddies(); // 立即執行搜尋
 });
-
-
-
-
 
 //卡片查看更多
     const visbleCount = ref(6); //預設顯示6個
@@ -823,7 +872,6 @@ function toggleLightBox2() {
 const fileInput = ref(null);
 const hasUploadImg = ref(null);
 const uploadedImg = ref(null);
-const imgUploadSection = ref(null);
 
 // 按下按鈕呼叫"選擇檔案"
 const callFileInput = () => {
@@ -844,10 +892,6 @@ const uploadFileImage = (event) => {
     const reader = new FileReader();
     reader.onload = (e) => {
         hasUploadImg.value = e.target.result; // 設定預覽圖片的 base64 URL
-
-        // nextTick(() => {
-        //     adjustImageSize();
-        // });
     };
     reader.readAsDataURL(file);
   }

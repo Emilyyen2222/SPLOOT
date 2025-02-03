@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue';
+  import { onBeforeUnmount, onMounted, ref } from 'vue';
   import { useRoute } from 'vue-router';
 
   const route = useRoute();
@@ -66,4 +66,22 @@
       dropdownMenu.value.classList.add('-active');
     }
   }
+
+  // 點擊外部時關閉選單
+
+  function outsideDropdownColse(){
+    if (dropdownMenu.value && !dropdownMenu.value.contains(event.target)) {
+    isExpand.value = false;
+    dropdownMenu.value.classList.remove('-expand');
+  }
+  };
+
+
+  onMounted(()=>{
+    document.addEventListener("click", outsideDropdownColse);
+  });
+
+  onBeforeUnmount(() => {
+    document.removeEventListener("click", outsideDropdownColse);
+  })
 </script>

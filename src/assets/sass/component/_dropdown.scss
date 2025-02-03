@@ -102,7 +102,6 @@
             .dropdownList{
                 display: flex;
                 flex-direction: column;
-                gap: .8rem;
 
                 overflow-y: auto;
                 max-height: 216px;
@@ -113,6 +112,8 @@
                         display: inline-block;
                         position: relative;
                         transition: all .3s ease;
+
+                        padding: .8rem 0;  //Ian
         
                         &::after{
                             content: '';
@@ -149,6 +150,5 @@
         }
     }
 }
-
 
 
