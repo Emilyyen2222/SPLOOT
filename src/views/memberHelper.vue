@@ -20,24 +20,27 @@
       
           <div class="hc-nav">
               <!-- v-if? : 每完成一個步驟就放上打勾的icon? -->
-              <div class="hc-steps" @click="toggleLightBox_hcTest"> 
-                <p>適性測驗</p>
-                <p class="hc-status">(已完成)</p>
+              <div class="hc-steps" 
+              @click="toggleLightBox_hcTest"
+              :class=" {'-disable' : step1}"> 
+                <!-- <p>Step.1 適性測驗 {{ a ? '通過' : '未通過' }}</p> -->
+                <p>Step.1 適性測驗 </p>
+                <p v-if="step1" > 通過</p>
+                <p v-else> 未通過</p>
+                <smallText class="hc-reson" style="display:none;">{{ hcTest.failReson }}</smallText>
               </div>
               <div class="hc-steps" @click="toggleLightBox_hcVarify">
-                <p>資料審核</p>
-                <p class="hc-status">(已審核)</p>
+                <p>Step.2 資料審核 {{  }}</p>
+                <smallText class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</smallText>
               </div>
               <div class="hc-steps" @click="toggleLightBox_hcSign">
-                <p>合約簽署</p>
-                <p class="hc-status">(已簽署)</p>
+                <p>Step.3 合約簽署 {{  }}</p>
+                <smallText class="hc-reson" style="display:none;">{{ hcSign.failReson }}</smallText>
               </div>
       
           </div>
-          
           <div class="hc-post-manage">
             <h6 class="bold">貼文發布管理</h6>
-      
             <div class="divider"></div>
       
             <div class="hc-msg">
@@ -102,8 +105,8 @@
           <div class="questions">
     
             <div class="hcTest-q"
-            v-for="(question, index) in questions" 
-            :key="question.id">
+              v-for="(question, index) in questions" 
+              :key="question.id">
               <p class="content">{{ index + 1 }}. {{ question.text }}</p>
               <div class="radio-group">
                 <label>
@@ -196,7 +199,7 @@
               <p>正面自拍照</p>
               <div class="upload-area">
                 <img v-if="imagePreview" :src="imagePreview" alt="預覽圖片">
-                <p>上傳個人自拍照</p>
+                <smallText class="content">上傳個人自拍照</smallText>
               </div>
               <Btn btnStyle="primary default" @click="triggerFileInput">上傳檔案</Btn>
               <input 
@@ -211,7 +214,7 @@
               <p>身分證圖檔(正面)</p>
               <div class="upload-area">
                 <img src="" alt="">
-                <p>上傳身分證正面</p>
+                <smallText class="content">上傳身分證正面</smallText>
               </div>
               <Btn btnStyle="primary default" @click="triggerFileInput">上傳檔案</Btn>
               <input 
@@ -237,66 +240,74 @@
         @toggle="toggleLightBox_hcSign">
         <div class="hcSign-wrapper">
           <div class="hc-terms"> 
-            <pre class="content">
-              歡迎您使用本網站（以下稱「本網站」或「本平台」）。在註冊或使用本網站所提供之服務前，請詳細閱讀以下使用者條款（以下稱「本條款」）。一旦您註冊或使用本網站，即表示您已閱讀、了解並同意遵守本條款。
-  
-              一、適用範圍
-              本條款適用於本網站所提供之所有功能、資訊與服務（以下合稱「本服務」）。
-              若本條款與本網站所公告的其他規定（例如隱私權政策、活動辦法等）有不一致之處，則依該其他規定或活動辦法為準，但限於該規定或活動辦法所涉之特定範圍內。
-  
-              二、使用資格
-              使用者應確保於註冊或使用本服務時，具備法律上之行為能力；若使用者為未成年人，應在法定代理人（父母或監護人）同意下使用本服務。
-              使用者應提供真實、正確的個人或公司資訊。如因提供不實資料導致任何爭議、損失，概由使用者自行承擔責任。
-  
-              三、資料使用條款
-              1. 資料提供與蒐集
-              使用者在使用本服務時，可能會主動提供個人或寵物相關資訊（包含但不限於姓名、聯絡方式、寵物資料等）。本網站將根據使用者提供之資料與下文所列範圍進行蒐集與使用。
-              使用者同意本網站依照相關法律及本條款，對該等資料進行保存、處理及使用。
-              2. 資料使用目的
-              本網站蒐集之資料，將主要用於提供與改進服務功能，例如：
-              會員身份驗證與管理
-              分析與優化使用者體驗
-              提供個人化的推薦、廣告與行銷內容
-              進行統計與研究以優化本服務
-              非經使用者同意或符合法令規定，本網站不會將使用者的個資任意提供或移轉給第三方。
-              3. 資料保護與安全
-              本網站採取合理技術及管理措施，以保障使用者的個人資料安全。如發生資料洩漏事件，本網站將依照法令規定通報主管機關及使用者。
-              資料保留與刪除
-              使用者如有刪除帳戶或特定資料之需求，請洽本網站客服或依本網站公布之程序辦理。但基於法規、契約或資訊安全要求，部分資料可能需保存於系統或備份中一段時間。
-  
-              四、使用者行為準則
-              使用者承諾以合法且誠實之方式使用本服務，不得從事違反法律或公序良俗之行為。
-              使用者應自行保管帳號與密碼資訊，不得將帳號轉讓或借予他人使用。如有發現未經授權的使用情形，請立即通知本網站。
-  
-              五、免責聲明
-              服務可用性與正確性
-              本網站盡力維護服務的安全與穩定，惟對於因系統維護、網路壅塞、不可抗力或其他非可歸責於本網站之事由所造成的服務中斷、延遲或資料遺失，本網站不負擔任何賠償責任。
-              本網站內的資訊、功能等，由合作夥伴或使用者自行提供，若該資訊不正確、誤導或有漏失，請使用者斟酌自身需求判斷並自行承擔風險。本網站對於此類內容之正確性、完整性及可靠性不負擔保責任。
-              第三方連結與外部內容
-              本網站可能含有連結至外部網站或第三方服務，該等網站或服務並非本網站所管理或控制，使用者應自行判斷並承擔風險。本網站對該第三方網站或服務之內容、政策或行為，不負任何責任。
-              間接或衍生損失
-              本網站對於使用者因使用本服務所導致的間接性、衍生性、懲罰性損害或利潤損失，無論是否已事先知悉該風險，均不承擔賠償責任。
-  
-              六、智慧財產權
-              本網站上所載之文字、圖片、商標、程式碼等智慧財產，除標明為使用者上傳或第三方擁有者外，均歸本網站或其授權人所有。未經本網站或權利人事先同意，使用者不得複製、轉載、改作、轉售或進行任何商業使用。
-              使用者於本網站上傳或分享之內容，其智慧財產權歸屬使用者所有，但使用者同意授權本網站在合理範圍內使用、改編或展示該內容，以進行宣傳、研究分析或服務優化。
-  
-              七、條款修改
-              本網站有權於任何時間修訂或變更本條款，並於本網站公告修訂後生效。修訂後之條款同樣公佈於本網站，請使用者隨時留意並重新確認。
-              若使用者於本條款修訂生效後，仍繼續使用本服務，視為同意接受修訂後之條款。
-  
-              八、準據法與管轄法院
-              本條款之解釋與適用，應以台灣法律為準據法。
-              因本條款或本服務所生爭議，如經協商不成，雙方同意以台灣之法院為第一審管轄法院。
-              如有任何疑問、建議或欲行使個人資料相關權利，歡迎聯繫本網站客服。感謝您使用本服務，並請您確保已詳讀並同意以上內容。
-            </pre>
+            <div class="content">
+
+              <smallText>歡迎您使用本網站（以下稱「本網站」或「本平台」）。在註冊或使用本網站所提供之服務前，請詳細閱讀以下使用者條款（以下稱「本條款」）。一旦您註冊或使用本網站，即表示您已閱讀、了解並同意遵守本條款。</smallText> <br><br>
+
+              <smallText class="bold">一、適用範圍</smallText> <br>
+              <smallText>本條款適用於本網站所提供之所有功能、資訊與服務（以下合稱「本服務」）。</smallText> <br>
+              <smallText>若本條款與本網站所公告的其他規定（例如隱私權政策、活動辦法等）有不一致之處，則依該其他規定或活動辦法為準，但限於該規定或活動辦法所涉之特定範圍內。</smallText> <br><br>
+
+              <smallText class="bold">二、使用資格</smallText> <br>
+              <smallText>使用者應確保於註冊或使用本服務時，具備法律上之行為能力；若使用者為未成年人，應在法定代理人（父母或監護人）同意下使用本服務。</smallText> <br>
+              <smallText>使用者應提供真實、正確的個人或公司資訊。如因提供不實資料導致任何爭議、損失，概由使用者自行承擔責任。</smallText> <br><br>
+
+              <smallText class="bold">三、資料使用條款</smallText> <br><br>
+
+              <smallText>1.資料提供與蒐集</smallText> <br>
+              <smallText>使用者在使用本服務時，可能會主動提供個人或寵物相關資訊（包含但不限於姓名、聯絡方式、寵物資料等）。本網站將根據使用者提供之資料與下文所列範圍進行蒐集與使用。</smallText> <br>
+              <smallText>使用者同意本網站依照相關法律及本條款，對該等資料進行保存、處理及使用。</smallText> <br><br>
+
+              <smallText>2.資料使用目的</smallText> <br>
+              <ul>
+                  <li>會員身份驗證與管理</li>
+                  <li>分析與優化使用者體驗</li>
+                  <li>提供個人化的推薦、廣告與行銷內容</li>
+                  <li>進行統計與研究以優化本服務</li>
+              </ul>
+              <smallText>非經使用者同意或符合法令規定，本網站不會將使用者的個資任意提供或移轉給第三方。</smallText> <br><br>
+
+              <smallText>3.資料保護與安全</smallText> <br>
+              <smallText>本網站採取合理技術及管理措施，以保障使用者的個人資料安全。如發生資料洩漏事件，本網站將依照法令規定通報主管機關及使用者。</smallText> <br><br>
+
+              <smallText>4.資料保留與刪除</smallText> <br>
+              <smallText>使用者如有刪除帳戶或特定資料之需求，請洽本網站客服或依本網站公布之程序辦理。但基於法規、契約或資訊安全要求，部分資料可能需保存於系統或備份中一段時間。</smallText> <br><br>
+
+              <smallText class="bold">四、使用者行為準則</smallText> <br>
+              <smallText>使用者承諾以合法且誠實之方式使用本服務，不得從事違反法律或公序良俗之行為。</smallText> <br>
+              <smallText>使用者應自行保管帳號與密碼資訊，不得將帳號轉讓或借予他人使用。如有發現未經授權的使用情形，請立即通知本網站。</smallText> <br><br>
+
+              <smallText class="bold">五、免責聲明</smallText> <br><br>
+
+              <smallText>服務可用性與正確性</smallText> <br>
+              <smallText>本網站盡力維護服務的安全與穩定，惟對於因系統維護、網路壅塞、不可抗力或其他非可歸責於本網站之事由所造成的服務中斷、延遲或資料遺失，本網站不負擔任何賠償責任。</smallText> <br><br>
+
+              <smallText>第三方連結與外部內容</smallText> <br>
+              <smallText>本網站可能含有連結至外部網站或第三方服務，該等網站或服務並非本網站所管理或控制，使用者應自行判斷並承擔風險。本網站對該第三方網站或服務之內容、政策或行為，不負任何責任。</smallText> <br><br>
+
+              <smallText class="bold">六、智慧財產權</smallText> <br>
+              <smallText>本網站上所載之文字、圖片、商標、程式碼等智慧財產，除標明為使用者上傳或第三方擁有者外，均歸本網站或其授權人所有。未經本網站或權利人事先同意，使用者不得複製、轉載、改作、轉售或進行任何商業使用。</smallText> <br><br>
+
+              <smallText class="bold">七、條款修改</smallText> <br>
+              <smallText>本網站有權於任何時間修訂或變更本條款，並於本網站公告修訂後生效。修訂後之條款同樣公佈於本網站，請使用者隨時留意並重新確認。</smallText> <br>
+              <smallText>若使用者於本條款修訂生效後，仍繼續使用本服務，視為同意接受修訂後之條款。</smallText> <br><br>
+
+              <smallText class="bold">八、準據法與管轄法院</smallText> <br>
+              <smallText>本條款之解釋與適用，應以台灣法律為準據法。</smallText> <br>
+              <smallText>因本條款或本服務所生爭議，如經協商不成，雙方同意以台灣之法院為第一審管轄法院。</smallText> <br>
+              <smallText>如有任何疑問、建議或欲行使個人資料相關權利，歡迎聯繫本網站客服。感謝您使用本服務，並請您確保已詳讀並同意以上內容。</smallText> <br>
+              
+            </div>
           </div>
   
-          <div class="hcSigh-check">
-            <label class="check-content">
-              <input type="checkbox">
-              我已詳細閱讀並同意本契約的所有條款與內容，並願意遵守相關規定
-            </label>
+          <div class="hcSigh-check checkBox">
+            <label class="boxAlign">
+                <input type="checkbox">
+                <p class="smallText">
+                  我已詳細閱讀並同意本契約的所有條款與內容，並願意遵守相關規定                    
+                </p>
+            </label>            
+
           </div>
   
           <div class="btn-group">
@@ -399,15 +410,19 @@
   // pages
   import memberNav from '../views/memberNav.vue' ;
   import helperPostCard from '../views/helperPostCard.vue';
+import { result } from 'lodash';
   
+// hc-nav
+const step1 = ref(false);
+ 
   // 適性測驗
     // 定義題目資料，每個題目包含 id 與題目內容
     const questions = ref([
-      { id: 1, text: "看見流浪動物受傷時，我會儘速協助處理，不會冷漠忽視" },
-      { id: 2, text: "若飼主忽略寵物需要，我會禮貌提醒並提供適度合理建議" },
-      { id: 3, text: "寵物突發疾病時，我會立即送醫並通知飼主，非自行拖延" },
-      { id: 4, text: "若飼主遺漏日常照護，我願提供提醒並協助維護寵物健康" },
-      { id: 5, text: "面對寵物與飼主需求，我會保持充分耐心並展現真誠善意" }
+      { id: 1, text: "看見流浪動物受傷時，我會儘速協助處理，不會冷漠忽視", result: false },
+      { id: 2, text: "若飼主忽略寵物需要，我會禮貌提醒並提供適度合理建議", result: false },
+      { id: 3, text: "寵物突發疾病時，我會立即送醫並通知飼主，非自行拖延", result: false },
+      { id: 4, text: "若飼主遺漏日常照護，我願提供提醒並協助維護寵物健康", result: false },
+      { id: 5, text: "面對寵物與飼主需求，我會保持充分耐心並展現真誠善意", result: false }
     ]);
   
     // 定義一個反應式對象來儲存每題的答案（key 為題目 id，值為 "yes" 或 "no"）
@@ -427,12 +442,32 @@
     };
   
   // lightbox
-    const addPost = {title: "新增貼文", isLightBox: ref(false)};
-    const editPost = {title: "編輯貼文", isLightBox: ref(false)};
-    const hcTest = {title: "適性測驗", isLightBox: ref(false)};
-    const hcVarify = {title: "資料審核", isLightBox: ref(false)};
-    const hcSign = {title: "合約簽署", isLightBox: ref(false)};
-    const hcManage = {title: "小幫手管理", isLightBox: ref(false)};
+    const addPost = {
+      title: "新增貼文", 
+      isLightBox: ref(false),
+      };
+    const editPost = {
+      title: "編輯貼文", 
+      isLightBox: ref(false),
+      };
+
+    const hcTest = {
+      title: "適性測驗", 
+      isLightBox: ref(false),
+      failReson: '*未通過原因'};
+    const hcVarify = {
+      title: "資料審核", 
+      isLightBox: ref(false),
+      failReson: '*未通過原因'};
+    const hcSign = {
+      title: "合約簽署", 
+      isLightBox: ref(false),
+      failReson: '*未通過原因'};
+
+    const hcManage = {
+      title: "小幫手管理", 
+      isLightBox: ref(false),
+      };
   
   // 控制lightbox狀態
     // 適性測驗
@@ -511,19 +546,19 @@
       };
      // 重整 + 關掉
      const reloadAndToggle_hcTest = () =>{
-          handleSubmit();
+          handleCancel();
           toggleLightBox_hcTest();
       };
       const reloadAndToggle_hcVarify = () =>{
-          handleSubmit();
+          handleCancel();
           toggleLightBox_hcVarify();
       };
       const reloadAndToggle_hcSign = () =>{
-          handleSubmit();
+          handleCancel();
           toggleLightBox_hcSign();
       };
       const reloadAndToggle_hcManage = () =>{
-          handleSubmit();
+          handleCancel();
           toggleLightBox_hcManage();
       };
   

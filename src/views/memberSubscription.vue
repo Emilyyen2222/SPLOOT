@@ -17,9 +17,10 @@
       
         <div class="divider"></div>
       
-        <div class="sr-slider"
-         ref="sliderRef" 
-         @wheel="handleWheel">
+        <div 
+          class="sr-slider"
+          ref="sliderRef" 
+          @wheel="handleWheel">
             <div class="cards-container">
                 <!-- v-for -->
                 <div class="card" v-for="card in cards" :key="card.id">
@@ -319,8 +320,8 @@
   // slider
   // 定義一個引用來獲取 slider 的 DOM 元素
   const sliderRef = ref(null);
-  // 調整滾動倍率，1 表示原始滾動距離，1.5 表示增加 50% 距離
-  const scrollMultiplier = 2.5;
+  // 調整滾動倍率，1 表示原始滾動距離(1.5 表示增加 50% 距離)  
+  const scrollMultiplier = 35;
   // 監聽 wheel 事件，並將垂直滾輪轉換為水平滾動
   const handleWheel = (event) => {
     // 防止垂直滾動
@@ -393,16 +394,6 @@
         })),
       },
   };
-  
-  /*const subHistory ={
-    [
-      { id:0, ind: 1, petName: '小白', plan: '銀卡(三個月)', date: '2024/01/15' , total: '$'+1299 },
-    ],
-  };
-  
-  lightbox
-  const lightTitle8 = { title: "" , isLightBox : ref(false) };
-  */
   
   // LightBox
   const lightTitle_resub = { title: "續約" , isLightBox : ref(false) };
