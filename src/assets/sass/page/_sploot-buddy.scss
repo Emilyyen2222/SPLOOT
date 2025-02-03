@@ -285,7 +285,7 @@ body{
                 .buddyCards{
                     width: 100%;
                     max-width:31.2rem;
-                    height: 33.4rem;
+                    height: 36.2rem;
                     .cardBox{
                         background-color: map-get($colors, beige);
                         border-radius: 16px;
@@ -314,9 +314,12 @@ body{
                             width: 100%;
                             padding: 1.2rem 2.4rem 2.4rem;
 
+                            text-align: center;
+
                             .reviews{
                                 display: flex;
                                 align-items: center;
+                                justify-content: center;
 
                                 margin: 4px 0;
 
@@ -333,6 +336,37 @@ body{
 
                                 .avgGrade{
                                     margin-right: 4px;
+                                }
+                            }
+                            .serviceDays{
+                                margin-top: 0.8rem;
+
+                                .serviceDaysBox{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    gap: 4px;
+
+                                    margin: 0.4rem 0;
+
+                                    .daysUl{
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        gap: 4px;
+
+                                        
+
+
+                                        .daysItem{
+                                            width: 2.8rem;
+                                            height: 2.8rem;
+                                            padding: .4rem .8rem;
+
+                                            border: 1px solid map-get($colors, natural-1);
+                                            border-radius: 50%;
+                                        }
+                                    }
                                 }
                             }
 
