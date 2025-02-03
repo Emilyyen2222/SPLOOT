@@ -2,7 +2,6 @@
 
       <VCalendar 
       :title-position="calendarStyle"
-      @dayclick="handleDayClick"
       :attributes="attributes"
       locale="en"
       :masks="{ title: ' YYYY MMM',  weekdays: 'WWW' }"
@@ -63,11 +62,11 @@ onBeforeUnmount(()=>{
 
 //日曆點選
 
-const handleDayClick =(day) => {
+// const handleDayClick =(day) => {
 
-  const selectdate = day.date;
-  alert(selectdate);
-}
+//   const selectdate = day.date;
+//   alert(selectdate);
+// }
 
 
 </script>
