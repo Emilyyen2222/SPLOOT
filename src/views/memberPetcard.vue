@@ -28,11 +28,6 @@
                   <!-- 右側內容區 -->
                   <div class="content">
                       <div class="topSection">
-                      <div class="dot">
-                          <div class="dotActive"></div>
-                          <div class="dotInactive"></div>
-                          <div class="dotInactive"></div>
-                      </div>
                       <div class="number">01</div>
                       </div>
                       <!-- 名稱與距離 -->
@@ -80,11 +75,6 @@
                   <!-- 右側內容區 -->
                   <div class="content">
                       <div class="topSection">
-                      <div class="dot">
-                          <div class="dotActive"></div>
-                          <div class="dotInactive"></div>
-                          <div class="dotInactive"></div>
-                      </div>
                       <div class="number">01</div>
                       </div>
                       <!-- 名稱與距離 -->

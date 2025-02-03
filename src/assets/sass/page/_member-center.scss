@@ -279,6 +279,13 @@ ol {
       padding: 1.6rem 0;
       margin-bottom: 2.4rem;
     }
+
+    label{
+      min-width: 7rem;
+      min-height: 1rem;
+      white-space: nowrap;
+      @include textStyle(smallText);
+    }
   }
 
   .input-group {
@@ -289,6 +296,7 @@ ol {
 .avatars .card-content{
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 1.6rem;
   padding: 2.4rem 0;
@@ -331,21 +339,14 @@ ol {
 
     .input-group {
       display: flex;
-      // justify-content: space-between;
+      justify-content: flex-start;
+      gap: 5.6rem;
       align-items: center;
     }
 
-    label{
-      width: 6.4rem;
-    }
-
-  }
-
-  .input-group {
-    label {
-      display: flex;
-      width: 6.4rem;
-      @include textStyle(smallText);
+    .birthday{
+      height: auto;
+      align-items: flex-start;
     }
 
     &:nth-child(2) {
@@ -360,16 +361,12 @@ ol {
       height: 4rem;
     }
 
-
-
     .sex {
       display: flex;
       justify-content: start;
       align-items: center;
       gap: 2.4rem;
     }
-
-
   }
 
   #sexGroup{
@@ -421,11 +418,6 @@ ol {
 }
 
 .accountInfo .input-group {
-  label{
-    width: 6.5rem;
-    @include textStyle(smallText);
-  }
-
   .group-email, .group-pwd{
     width: 100%;
     display: flex;
@@ -433,7 +425,6 @@ ol {
 
     .defaultBtn{
       width: 8rem;
-      // display: inline-block;
     }
   }
 
@@ -446,18 +437,16 @@ ol {
 
 }
 
-.accountInfo .btn-group {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 12rem;
+.third-login{
+  .btn-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
 
   .defaultBtn{
     width: 8rem;
-    // display: inline-block;
   }
-
-  a {}
 }
 
 //contact info.
@@ -579,16 +568,17 @@ ol {
   .divider {
     margin-bottom: 2.4rem;
   }
-  // 寵物卡片的外層，改用grid?
+  // 寵物卡片的外層，用grid
   .petcard-container {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 3.2rem;
-    grid-template-areas: 
-    "pc1 pc2"
-    "pc3 addpc"
-    ;
-    
+    grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); // 自適應列數，最小 488px
+    grid-gap: 3.2rem;              // 行列間距 
+    max-width: 100%;            // 最大寬度限制 
+    margin: 0 auto;              // 水平置中    
+    // grid-template-areas: 
+    // "pc1 pc2"
+    // "pc3 addpc"
+    // ;    
 
     .petcard{
       width: 100%;
@@ -631,11 +621,34 @@ ol {
     .btn-group{
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 4rem;
       @include textStyle(xsText);
     }
   }
 }
+  /* 螢幕寬度 1008px 及以上，改為 2列 */
+  @media (min-width: 1008px) {
+    .petcard-container {
+      grid-template-columns: repeat(2, 1fr); /* 2列 */
+    }
+  }
+  /* 小於 1007px 改為單列 */
+  @media (max-width: 1007px) {
+    .petcard-container {
+      grid-template-columns: 1fr; /* 單列 */
+      .petcard{
+        .cardWrap .cardwrapper{
+          max-width: unset;
+          max-height: unset;
+          flex-direction: column;
+          .topSection{
+            justify-content: start;
+          }
+        }
+      }
+    }
+  }
 // 喜好設定彈窗
  .matchAdjust{
    height: 100%;
@@ -727,9 +740,17 @@ ol {
       margin-bottom: 2.4rem;
     }
 
-    .sr-slider{
+    .sr-slider {
       display: flex;
-      width: 100%;   
+      width: 100%; 
+      overflow-x: auto;
+      scroll-behavior: smooth; /* 平滑滾動 */
+      -ms-overflow-style: none; /* IE 和 Edge 隱藏滾動條 */
+      scrollbar-width: none;    /* Firefox 隱藏滾動條 */
+    }
+    
+    .sr-slider::-webkit-scrollbar {
+      display: none; /* Chrome, Safari 和 Opera 隱藏滾動條 */
     }
   }
  //歷史紀錄
@@ -854,15 +875,6 @@ ol {
   padding-bottom: 6rem;
   .hc-not-passed{}
   .hc-passed{}
-}
-
- // 無身分
-.hc-not-passed{
-  .hc-title{
-    text-align: left;
-    margin-bottom: 2.4rem;
-  }
-
   .hc-nav{
     display: flex;
     flex-wrap: wrap;
@@ -879,7 +891,179 @@ ol {
       padding: 1.6rem 3.2rem;
       border-radius: 8px;
       border: 1px solid map-get($colors, natural-2 );
+
+      position: relative;
     }
+    .hc-steps:hover{
+      background-color: map-get($colors, natural-1 );
+      transition: all .3s;
+    }
+    .hc-reson{
+      position: absolute;
+      bottom: -20%;
+      left: 0%;
+      color:map-get($colors, red );
+    }
+  }
+}
+
+// 適性測驗
+.hcTest{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4.4rem;
+  padding-top: 4.4rem;
+  .questions{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1.6rem;
+    .hcTest-q{
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+    }
+  }
+  .btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+}
+.hcTest .hcTest-q{
+  p{}
+  .radio-group{
+    display: flex;
+    gap: 2.4rem;
+    padding: 0 1.6rem;
+    label{
+      @include textStyle(p);
+      input{}
+    }
+  }
+
+}
+
+// 資料審核
+.hcVarify-wrapper{
+  padding-top: 4.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 1.6rem;
+    .input-group{
+      display: flex;
+      justify-content: start;
+      gap: 1.6rem;
+    }
+  }
+  .upload-file-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 4.4rem;
+    .selfy,.idCard{
+      width: 100%;
+    }
+  }
+  .btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+}
+.selfy,.idCard{
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  justify-content: start;
+  p{}
+  .upload-area{
+    width: 100%;
+    height: 20rem;
+    border-radius: 8px;
+    border: 1px dashed map-get($colors , natural-2 );
+
+    position: relative;  //內部文字
+    img{}
+    .content{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      color: map-get($colors, natural-2 )
+    }
+  }
+  // btn
+  // text
+}
+.hcVarify-wrapper .input-group{
+  label{
+    @include textStyle(smallText);
+    white-space: nowrap;
+    min-width: 7rem;
+  }
+  input{
+    width: 100%;
+  }
+}
+
+.hcVarify-wrapper .birthday{
+  height: auto;
+  label{}
+  .select-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1.2rem;
+    .dropBirthday{
+      width: 100%;
+    }
+  }
+}
+// 合約簽署
+.hcSign-wrapper{
+  padding-top: 4.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 2.4rem;
+  .hc-terms{
+    .content{
+      li{
+        @include textStyle(xsText);
+      }
+    }
+  }
+  .hcSigh-check{
+    label{
+      display: flex;
+      justify-content: baseline;
+      gap: .8rem;
+      @include textStyle(smallText);
+      input{}
+    }
+  }
+  .btn-group{
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+  }
+}
+ // 無身分
+.hc-not-passed{
+  .hc-title{
+    text-align: left;
+    margin-bottom: 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .hc-post-manage{
@@ -1014,4 +1198,17 @@ ol {
     }
   }
 
+}
+
+// 
+@media (max-width: 576px) {
+  .basicInfo .card-content .input-group,.accountInfo .card-content .input-group,.contactInfo .card-content .input-group{
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    gap: .8rem;
+    label{
+      
+    }
+  }
 }

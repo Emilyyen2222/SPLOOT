@@ -10,7 +10,7 @@
         <div class="title2">
             <h6 class="bold">會員資料</h6>
             <div class="btn-wr">
-              <!-- 打開編輯會員資料的LightBox -->
+              <!-- 點擊打開編輯會員資料的LightBox -->
               <Btn btnStyle="baseline small" id="memberInfoEdit" @click="toggleLightBox_memberInfo">編輯</Btn>
             </div>
         </div>
@@ -113,6 +113,7 @@
         <div class="memberInfo-update">
             
             <!-- 編輯 -->
+             
             <LightBox 
               :title="lightTitle_memberInfo.title"
               :is-light-box="lightTitle_memberInfo.isLightBox.value" 
@@ -133,6 +134,13 @@
                   <div class="divider"></div>
       
                     <div class="card-content">   <!-- 之後用v-for，產6個 -->            
+                      <div class="av-group" v-for="avatar in avatars" :key="avatar.id">
+                          <div class="avatar">           <!-- 頭相框 -->
+                            <img :src="avatar.src" alt="avatar">
+
+                          </div>
+                          <smallText>小白</smallText>
+                      </div>
                       <div class="av-group">
                           <div class="avatar">           <!-- 頭相框 -->
                             <img src="../assets/img/member-center/portrait1.svg" alt="avatar">      <!-- 放頭像用 -->
@@ -192,7 +200,7 @@
                               :placeHolder="input_name.placeHolder"
                               :errorMsg="input_name.errorMsg"
                               :hasError="input_name.inputError.value"
-                              v-model="input_name.inputValue.value">
+                            v-model="input_name.inputValue.value">
                           </InputText>
                       </div>
                       <div class="input-group">
@@ -221,8 +229,13 @@
                           <label for="">生日</label>
                           <div class="select-group">
                             <DropdownMenu
+                            :placeHolder="menu_birth_y.placeHolder" 
+                            :options="menu_birth_y.options.value"
+                            class="dropBirthday">             
+                            </DropdownMenu>                
+                            <DropdownMenu
                             :placeHolder="menu_birth_m.placeHolder" 
-                            :options="menu_birth_m.options"
+                            :options="menu_birth_m.options.value"
                             class="dropBirthday">
                             </DropdownMenu>
                             <DropdownMenu
@@ -292,14 +305,22 @@
                             v-model="input1.inputValue.value">
                           </InputText>
                       </div>
-                      <div class="btn-group">
-                        <Btn btnStyle="outline default">Google</Btn>
-                        <Btn btnStyle="baseline small" @click="togglePopUp_unBind">解除綁訂</Btn>
+                      <div class="input-group third-login">
+                        <label></label>
+                        <div class="btn-group">
+                          <Btn btnStyle="outline default">Google</Btn>
+                          <Btn btnStyle="baseline small" @click="togglePopUp_unBind">解除綁訂</Btn>
+                        </div>
                       </div>
-                      <div class="btn-group">
-                        <Btn btnStyle="outline default">LineID</Btn>
-                        <Btn btnStyle="baseline small" @click="togglePopUp_unBind">綁訂</Btn>
+                      <div class="input-group third-login">
+                        <label></label>
+                        <div class="btn-group">
+                          <Btn btnStyle="outline default">LineID</Btn>
+                          <Btn btnStyle="baseline small" @click="togglePopUp_unBind">綁訂</Btn>
+                        </div>
                       </div>
+
+
                     </div>
       
       
@@ -608,10 +629,10 @@
   
   <script setup>
   
-  import { ref } from 'vue';
+  import { ref,computed } from 'vue';
   // components
-  import MainHeader from '@/components/MainHeader.vue';
-  import Btn from '@/components/Btn.vue';
+  import MainHeader from '../components/MainHeader.vue';
+  import Btn from '../components/Btn.vue';
   import DropdownMenu from '../components/DropdownMenu.vue';
   import InputText from '../components/InputText.vue';
   import LightBox from '../components/LightBox.vue';
@@ -621,60 +642,30 @@
   
   
   // dropDown
-  const menu_birth_m = {
-      placeHolder: '請選擇月份',
-      options: [
-          {
-              id: 0,
-              name: '1月'
-          },
-          {
-              id: 1,
-              name: '2月'
-          },
-          {
-              id: 2,
-              name: '3月'
-          },
-          {
-              id: 3,
-              name: '4月'
-          },
-          {
-              id: 4,
-              name: '5月'
-          },
-          {
-              id: 5,
-              name: '6月'
-          },
-          {
-              id: 6,
-              name: '7月'
-          },
-          {
-              id: 7,
-              name: '8月'
-          },
-          {
-              id: 8,
-              name: '9月'
-          },
-          {
-              id: 9,
-              name: '10月'
-          },
-          {
-              id: 10,
-              name: '11月'
-          },
-          {
-              id: 11,
-              name: '12月'
-          },
-      ]
+   // 取得目前年份
+   const currentYear = new Date().getFullYear();
+   // 利用 computed 動態生成從今年往回推 100 年的選項陣列
+  const menu_birth_y = {
+    placeHolder: '請選擇年份',
+    options: computed(() => {
+      const arr = [];
+      for (let i = 0; i < 100; i++) {
+        arr.push({ id: i, name: String(currentYear - i)+'年' });
+      }
+      return arr;
+    })
   };
   
+  const menu_birth_m = {
+      placeHolder: '請選擇月份',
+      options: computed(() => {
+      const arr = [];
+      for (let i = 1; i <= 12; i++) {
+        arr.push({ id: i, name: String(i)+'月' });
+      }
+      return arr;
+    })
+  };
   const menu_birth_d = {
       placeHolder: '請選擇日期',
       options: [
@@ -779,6 +770,11 @@
   };
   
   
+const avatars=[
+  {id:1,src: "../assets/img/member-center/portrait1.svg"},
+  {id:2,src: "../assets/img/member-center/portrait2.svg"},
+]
+
    // lightBox title
   const lightTitle_memberInfo = {title: "會員資料", isLightBox: ref(false)};
   const lightTitle_resetEmail = {title: "變更信箱", isLightBox: ref(false)};
