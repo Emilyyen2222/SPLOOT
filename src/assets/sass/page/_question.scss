@@ -34,9 +34,35 @@
             gap: 8px;
             margin-top: 4rem;
             margin-bottom: 4rem;
+            .dropdownMenu{
+                position: relative;
+                height: 4.6rem;
+                margin-bottom: 16px;
+
+                text-align: left;
+                &:last-child{
+                    margin: 0;
+                }
+            
+                .dropDown{
+                    position: absolute;
+                    top: 0;
+
+                    width: 100%;
+                    border-color: map-get($colors, natural-1);
+
+                    z-index: 900;
+
+                }
+
+                .city{           
+                    z-index: 950; //上層需要壓過下層選單
+                }
+            }
             .smallText{margin-bottom: 4rem;}
             .birthday{
                 display: flex;
+                gap: .4rem;
                 .year{width: 14.4rem;}
                 .month{width: 11.2rem;}
                 .date{width: 11.2rem;}
@@ -106,8 +132,12 @@ body{
     justify-content: center;
     align-items: center;
     height: calc(100vh - 12.6rem);
-    margin: 0 auto;
+    // margin: 0 auto;
     // border: 1px solid ;
+    @include md(){
+        // display: block;
+        // margin: 0 1.2rem;
+    }
     .planItems{
         list-style: disc;
         padding-left: 2rem;
@@ -118,6 +148,9 @@ body{
         background-color: map-get($colors, pink-1);
         border: none;
         margin: 1.6rem auto;
+        @include md(){
+            // display: none;
+        }
     }
     h4{
         text-align: center;
@@ -136,19 +169,29 @@ body{
         flex-wrap: wrap;
         gap: 3.2rem;
         margin: 0 auto 4rem;
+        @include lg(){
+            flex-wrap: nowrap;
+            // gap: 1.2rem;
+        }
         .card {
             cursor: pointer;
             position: relative;
             display: inline-flex;
             flex-direction: column;
             width: 28rem;
-            height: 44rem;
+            max-height: 44rem;
+            height: 60vh;
             padding: 0.8rem;
             background-color: map-get($colors, beige);
             border-radius: 1.6rem;
+            @include sm(){
+                height: auto;
+            }
             &.-active{
-                
                 border:1px solid map-get($colors, red) ;
+            }
+            &:hover {
+                border: 1px solid map-get($colors, red);
             }
             &.popular::before {
                 content: '最熱門';
@@ -166,13 +209,27 @@ body{
                 color: map-get($colors, beige);
                 border-radius: 0 1.6rem 0 1.6rem;
                 font-size: 1.3rem; 
+                @include md(){
+                    // width: 3.4rem;
+                    // height: 2.2rem;
+                    // top: 0.5rem; 
+                    // right: 0.5rem; 
+                    // transform: translate(15%, -25%);
+                    // border-radius: 0 .8rem 0 .8rem;
+                    // font-size: .9rem; 
+                }
             }
             .red{color: map-get($colors, red);}
             .image {
                 max-width: 26.4rem; 
                 overflow: hidden;
                 border-radius: 1.6rem;
-                img {width: 100%; }
+                img {
+                    width: 100%;
+                    @include sm(){
+                        // display: none;
+                    }
+                }
             }
             .content {
                 display: flex;
@@ -182,10 +239,108 @@ body{
                     display: flex;
                     margin: 0 auto;
                 }
+                @include md(){
+                }
             }
         }
     }
 }
+.boxSubPlan{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 12.6rem);
+    h4{
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+    .subBtn{
+        max-width: 384px;
+        margin: 0 auto;
+        .borderBottom{
+            width: 10rem;
+            margin: 0 auto;
+        }
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .8rem;
+
+        margin: 0 auto 4rem;
+        @include lg(){
+            flex-wrap: nowrap;
+        }
+        .card {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 41.8rem;
+            padding: 1.6rem;
+            background-color: map-get($colors, beige);
+            border-radius: 100rem;
+            gap: 2.4rem;
+            @include sm(){
+                height: auto;
+            }
+            .times{width: 4rem;}
+            .subMonths{width: 8.4rem;}
+            .price{width: 7.8rem;}
+
+
+            &.-active{
+                border:1px solid map-get($colors, red) ;
+            }
+            &:hover {
+                border: 1px solid map-get($colors, red);
+            }
+            &.popular::before {
+                content: '最推薦';
+                position: absolute;
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+                text-align: center;
+                width: 6.4rem;
+                height: 3.2rem;
+                // top: 0.5rem; 
+                right: 0.5rem; 
+                transform: translate(-30%);
+                background-color: map-get($colors, red); 
+                color: map-get($colors, beige);
+                border-radius: 100rem;
+                font-size: 1.3rem; 
+                @include md(){
+                }
+            }
+            .red{color: map-get($colors, red);}
+            .image {
+                max-width: 26.4rem; 
+                overflow: hidden;
+                border-radius: 1.6rem;
+                img {
+                    width: 100%;
+                }
+            }
+            .content {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: auto;
+                .title{
+                    display: flex;
+                    margin: 0 auto;
+                }
+                @include md(){
+                }
+            }
+        }
+    }
+}
+
 .boxPayment{
     display: flex;
     justify-content: center;
@@ -194,6 +349,9 @@ body{
     height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid;
+    @include md(){
+        margin: 0 1.2rem;
+    }
     h4{
         text-align: center;
         margin-bottom: .8rem;
@@ -203,13 +361,13 @@ body{
         padding-left: 2rem;
     }
     .paymentBox{
-        padding-bottom: 1.6rem;
+        // padding-bottom: 1.6rem;
         .textBox{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 1.6rem;
+            padding: .4rem .8rem;
         }
         .boxDivider{
             width: 100%;
@@ -235,7 +393,7 @@ body{
     .checkBox{
         display: flex;
         flex-direction: column;
-        margin-bottom: 2.4rem;
+        margin-bottom: 1.2rem;
         input[type="checkbox"] {
             appearance: none;
             width: 1.6rem;
@@ -264,7 +422,6 @@ body{
         }
         .link{
             cursor: pointer;
-
             color: map-get($colors, red);
             text-decoration: underline;
         }
@@ -278,7 +435,6 @@ body{
     height: calc(100vh - 12.6rem);
     margin: 0 auto;
     // border: 1px solid;
-
     .finishBox{
         display: flex;
         flex-direction: column;

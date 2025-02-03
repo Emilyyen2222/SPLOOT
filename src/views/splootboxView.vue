@@ -3,7 +3,7 @@
  
 <!--- heroSection -->
 <div class="herobox">
-    <img class="img" src="@/assets/img/splootbox/splootboxmain.jpg" alt="">
+    <img class="img" src="@/assets/img/splootbox/banner.svg" alt="">
     <div class="herobtn">
         <h4 class="bold">聖誕禮盒來囉!</h4>
         <div class="btnBox">
