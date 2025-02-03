@@ -499,7 +499,7 @@ const togglePetType = (typeClass) => {
 const cardsData = ref([]); //渲染的卡片
 
 //全部卡片資料
-const cardsRowData = ref([
+const cardsRawData = ref([
 {
         imgSrc: new URL("../assets/img/buddy-post/demo.png", import.meta.url).href,
         title: "台北市puppy高速散步",
@@ -783,7 +783,7 @@ const isStars = (n, stars) => {
 
 //卡片搜尋功能
 const searchBuddies = () => {
-    cardsData.value = cardsRowData.value.filter(card => {
+    cardsData.value = cardsRawData.value.filter(card => {
         const matchesCity = selectedCity.value === "全部城市" || !selectedCity.value || card.city === selectedCity.value;
         const matchesDistrict = !selectDistrict.value || card.district === selectDistrict.value;
         const matchesBuddyType = selcetedBuddyType.value === card.serviceType;

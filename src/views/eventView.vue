@@ -29,7 +29,9 @@
                 <!-- 上右 行程日曆 -->
                 <div class="topRight">
                     <div class="calendar">
-                         <Calendar></Calendar>
+                         <Calendar
+                         @dayclick="filterScheduleCard"
+                         ></Calendar>
                     </div>
                 </div>
         </div>
@@ -91,16 +93,17 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, onMounted } from 'vue';
     
     import MainHeader from "@/components/MainHeader.vue";
     import Btn from '@/components/Btn.vue';
     import Calendar from '@/components/Calendar.vue'
     import MainFooter from "@/components/MainFooter.vue"
 
-
 //data
-const cardsData = ref([
+const cardsData = ref([]);
+
+const cardsRawData = ref([
 {
     title: "聖誕節Splooter聚餐",
     content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
@@ -126,15 +129,15 @@ const cardsData = ref([
     content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
     peopleCount: "不限",
     startTime: {
-        year: "2024",
-        month: "12",
-        day: "31",
+        year: "2025",
+        month: "2",
+        day: "1",
         time: '07:00'
     },
     endTime: {
-        year: "2024",
-        month: "12",
-        day: "31",
+        year: "2025",
+        month: "2",
+        day: "28",
         time: '11:30'
     },
     place: "二二八公園集合",
@@ -153,7 +156,7 @@ const cardsData = ref([
     },
     endTime: {
         year: "2025",
-        month: "01",
+        month: "02",
         day: "26",
         time: '22:00'
     },
@@ -168,13 +171,13 @@ const cardsData = ref([
     startTime: {
         year: "2025",
         month: "02",
-        day: "01",
+        day: "1",
         time: '09:30'
     },
     endTime: {
         year: "2025",
         month: "02",
-        day: "01",
+        day: "20",
         time: '15:50'
     },
     place: "緯育Tibame台北職訓中心",
@@ -190,6 +193,69 @@ const btnText = ref({
     disable : "已額滿",
 })
 
+//把日曆點選的date 物件轉換成字串
+// const isDateObject = (touchedDate) => {
+//     const targetDate = new Date(touchedDate);
+//     // const targetYear = targetDate.getFullYear().toString();
+//     // const targetMonth = (targetDate.getMonth() + 1).toString().padStart(2, '0');  //padStart(2, '0')補零，確保格式為兩位數
+//     // const targetDay = targetDate.getDate().toString().padStart(2, '0');
+
+//     cardsData.value = cardsRawData.value.filter(d => {
+//         const startDate = new Date(`${d.startTime.year}-${d.startTime.month}-${d.startTime.day}`);
+//         const endDate = new Date(`${d.endTime.year}-${d.endTime.month}-${d.endTime.day}`);
+
+//         return startDate <= targetDate && endDate >= targetDate; // 篩選目標日期內的活動
+//     });
+// };
+
+const isDateObject = (touchedDate) => {
+    const targetDate = new Date(touchedDate);
+    targetDate.setHours(0, 0, 0, 0); // 確保時間不影響比較
+
+    if (isNaN(targetDate.getTime())) {
+        console.error("無效的日期格式:", touchedDate);
+        return;
+    }
+
+    console.log("選擇的日期:", targetDate.toISOString().split("T")[0]);
+
+    if (!cardsRawData.value || !Array.isArray(cardsRawData.value)) {
+        console.error("cardsRawData.value 無效或不是陣列");
+        return;
+    }
+
+    cardsData.value = cardsRawData.value.filter(d => {
+        if (!d.startTime || !d.endTime) {
+            console.warn("缺少 startTime 或 endTime，略過:", d);
+            return false;
+        }
+
+        // 確保日期格式正確，並將時間歸零以便精確比較
+        const startDate = new Date(`${d.startTime.year}-${d.startTime.month.padStart(2, '0')}-${d.startTime.day.padStart(2, '0')}T00:00:00`);
+        const endDate = new Date(`${d.endTime.year}-${d.endTime.month.padStart(2, '0')}-${d.endTime.day.padStart(2, '0')}T23:59:59`);
+
+        console.log(`檢查範圍: ${startDate.toISOString().split("T")[0]} - ${endDate.toISOString().split("T")[0]}`);
+
+        return startDate <= targetDate && endDate >= targetDate;
+    });
+
+    console.log("篩選後的 cardsData:", cardsData.value);
+};
+
+
+
+const filterScheduleCard = (day) => {
+    const selectdate = day.date;
+    isDateObject(selectdate);
+    // alert(selectdate);
+};
+
+// 預設篩選今天的活動
+onMounted(() => {
+    const today = new Date();
+    const todayString = today.toISOString().split("T")[0]; // 格式化為 YYYY-MM-DD
+    isDateObject(todayString);
+});
 
 //開始時間～結束時間 物件
 function getTimeObject(theTime){
