@@ -5,13 +5,15 @@
       :attributes="attributes"
       locale="en"
       :masks="{ title: ' YYYY MMM',  weekdays: 'WWW' }"
-      
+      @dayclick="selectDate"
       />
       
     </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
+
+const selectedDate = ref(null);
 
 const attributes = ref([
   {
@@ -35,8 +37,26 @@ const attributes = ref([
         weekdays: [2,3,4,5,6], // 代表星期一到五
       },
     },
+  },
+  {
+    key: 'today',
+    highlight: '',
+    dates: new Date(),
+  },
+  {
+    key: 'selected',
+    highlight: {
+      color: '',
+      fillMode: 'solid',
+    },
+    dates: selectedDate,
   }
 ]);
+
+
+const selectDate = (day) => {
+  selectedDate.value = day.date; // 存儲被點擊的日期
+};
 
 //RWD設置
 
@@ -59,14 +79,6 @@ onBeforeUnmount(()=>{
   window.removeEventListener("resize",updateStyle);
 });
 
-
-//日曆點選
-
-// const handleDayClick =(day) => {
-
-//   const selectdate = day.date;
-//   alert(selectdate);
-// }
 
 
 </script>

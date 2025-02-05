@@ -16,11 +16,11 @@
                         </div>
                         <!-- 滑動switch -->
                         <div class="switch" id="switch">
-                            <input type="radio" id="officialEvent" name="option" class="switch-input">
-                            <input type="radio" id="splooter" name="option" class="switch-input">
+                            <input type="radio" id="official" name="option" class="switch-input" @change="setActive('official')">
+                            <input type="radio" id="splooter" name="option" class="switch-input" @change="setActive('splooter')">
                             <div class="slider"></div>
                             <div class="labels xsText">
-                            <label for="officialEvent">官方活動</label>
+                            <label for="official">官方活動</label>
                             <label for="splooter">Splooter</label>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                 <!-- 活動卡片 -->
                 <ul class="scheduleCard">
                     <!-- 活動卡片們 -->
-                    <li class="scheduleCards" v-for="(card,index) in cardsData" :key="index">
+                    <li class="scheduleCards" v-for="(card,index) in filterData" :key="index">
                         <!-- 卡片標題 -->
                         <div class="cardText">
                             <div class="cardTitle">
@@ -80,7 +80,7 @@
                             </div>
                             </div>
                         </div>
-                        <Btn btnType="event" :btnStyle="card.btnStyle">{{ btnText[card.btnStyle] }}</Btn>
+                        <Btn btnType="event" :btnStyle="card.status">{{ btnText[card.status] }}</Btn>
                     </li>              
                 </ul>
             </div>
@@ -93,7 +93,7 @@
 </template>
 
 <script setup>
-    import { ref, onMounted } from 'vue';
+    import { ref, onMounted, computed } from 'vue';
     
     import MainHeader from "@/components/MainHeader.vue";
     import Btn from '@/components/Btn.vue';
@@ -102,6 +102,10 @@
 
 //data
 const cardsData = ref([]);
+const filterData = computed(() => {
+    return cardsData.value.filter(card => card.type === activeCard.value);
+
+})
 
 const cardsRawData = ref([
 {
@@ -109,20 +113,20 @@ const cardsRawData = ref([
     content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
     peopleCount: "45",
     startTime: {
-        year: "2024",
+        year: "2025",
         month: "12",
         day: "25",
         time: '18:30'
     },
     endTime: {
-        year: "2024",
+        year: "2025",
         month: "12",
         day: "25",
         time: '21:30'
     },
     place: "台北市信義區信義路五段7號86樓 (饗 A Joy)",
     type: "official",
-    btnStyle: "edit",
+    status: "attend",
 }, 
 {
     title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
@@ -130,19 +134,19 @@ const cardsRawData = ref([
     peopleCount: "不限",
     startTime: {
         year: "2025",
-        month: "2",
-        day: "1",
+        month: "02",
+        day: "27",
         time: '07:00'
     },
     endTime: {
         year: "2025",
-        month: "2",
+        month: "02",
         day: "28",
         time: '11:30'
     },
     place: "二二八公園集合",
     type: "official",
-    btnStyle: "attend",
+    status: "attend",
 },
 {
     title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
@@ -150,19 +154,19 @@ const cardsRawData = ref([
     peopleCount: "80",
     startTime: {
         year: "2025",
-        month: "01",
-        day: "23",
+        month: "02",
+        day: "5",
         time: '08:30'
     },
     endTime: {
         year: "2025",
         month: "02",
-        day: "26",
+        day: "28",
         time: '22:00'
     },
     place: "基隆港",
     type: "official",
-    btnStyle: "registered",
+    status: "registered",
 },
 {
     title: "英雄毛孩Cosplay比賽",
@@ -171,7 +175,7 @@ const cardsRawData = ref([
     startTime: {
         year: "2025",
         month: "02",
-        day: "1",
+        day: "05",
         time: '09:30'
     },
     endTime: {
@@ -182,8 +186,308 @@ const cardsRawData = ref([
     },
     place: "緯育Tibame台北職訓中心",
     type: "official",
-    btnStyle: "disable",        
-}
+    status: "disable",        
+},
+{
+        title: "毛孩電影之夜",
+        content: "大螢幕、爆米花，還有最愛的毛孩陪伴，一起享受電影之夜吧！",
+        peopleCount: "55",
+        startTime: {
+            year: "2025",
+            month: "03",
+            day: "12",
+            time: "06:46"
+        },
+        endTime: {
+            year: "2025",
+            month: "03",
+            day: "12",
+            time: "10:11"
+        },
+        place: "基隆海洋廣場",
+        type: "official",
+        status: "registered"
+    },
+    {
+        title: "寵物飛盤挑戰賽",
+        content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
+        peopleCount: "15",
+        startTime: {
+            year: "2025",
+            month: "03",
+            day: "23",
+            time: "06:39"
+        },
+        endTime: {
+            year: "2025",
+            month: "03",
+            day: "29",
+            time: "09:29"
+        },
+        place: "大安森林公園",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "毛孩時裝秀",
+        content: "讓毛孩穿上最時尚的服飾，一起來場可愛的時裝秀吧！",
+        peopleCount: "20",
+        startTime: {
+            year: "2025",
+            month: "03",
+            day: "28",
+            time: "12:52"
+        },
+        endTime: {
+            year: "2025",
+            month: "04",
+            day: "02",
+            time: "22:26"
+        },
+        place: "淡水河畔",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "寵物攝影工作坊",
+        content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
+        peopleCount: "25",
+        startTime: {
+            year: "2025",
+            month: "03",
+            day: "10",
+            time: "20:14"
+        },
+        endTime: {
+            year: "2025",
+            month: "03",
+            day: "31",
+            time: "22:57"
+        },
+        place: "基隆海洋廣場",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "毛孩時裝秀",
+        content: "讓毛孩穿上最時尚的服飾，一起來場可愛的時裝秀吧！",
+        peopleCount: "45",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "19",
+            time: "04:50"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "25",
+            time: "01:37"
+        },
+        place: "台北動物園",
+        type: "official",
+        status: "registered"
+    },
+    {
+        title: "寵物手作DIY",
+        content: "一起動手製作專屬於毛孩的玩具與配件，創造美好回憶！",
+        peopleCount: "5",
+        startTime: {
+            year: "2025",
+            month: "03",
+            day: "28",
+            time: "13:00"
+        },
+        endTime: {
+            year: "2025",
+            month: "04",
+            day: "01",
+            time: "05:38"
+        },
+        place: "台北動物園",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "毛孩露營日",
+        content: "大自然、篝火與毛孩的陪伴，快來參加我們的戶外露營活動！",
+        peopleCount: "55",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "09",
+            time: "16:33"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "15:19"
+        },
+        place: "台中中央公園",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "寵物攝影工作坊",
+        content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "20",
+            time: "23:22"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "24",
+            time: "17:29"
+        },
+        place: "高雄駁二藝術特區",
+        type: "splooter",
+        status: "attend"
+    },
+    {
+        title: "寵物飛盤挑戰賽",
+        content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "14",
+            time: "18:47"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "20",
+            time: "20:25"
+        },
+        place: "基隆海洋廣場",
+        type: "splooter",
+        status: "attend"
+    },
+    {
+        title: "毛孩瑜珈日",
+        content: "來一場寧靜與身心平衡的瑜珈體驗吧！帶著毛孩一起感受身心舒展的樂趣~",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "21",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "27",
+            time: "19:10"
+        },
+        place: "花博公園",
+        type: "splooter",
+        status: "edit"
+    },
+    {
+        title: "哈哈哈哈",
+        content: "哈哈哈哈哈哈",
+        peopleCount: "2",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "28",
+            time: "19:10"
+        },
+        place: "哈哈哈哈哈",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "忍者培訓",
+        content: "忍者 是指忍人所不能忍的",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "28",
+            time: "19:10"
+        },
+        place: "木葉忍者村",
+        type: "official",
+        status: "attend"
+    },
+    {
+        title: "毛小孩你好",
+        content: "你好你好你好",
+        peopleCount: "8",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "28",
+            time: "19:10"
+        },
+        place: "台北101",
+        type: "splooter",
+        status: "attend"
+    },
+    {
+        title: "哥布林團結",
+        content: "我是哥布林",
+        peopleCount: "100",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "28",
+            time: "19:10"
+        },
+        place: "哥布林巢穴",
+        type: "splooter",
+        status: "disable"
+    },
+    {
+        title: "精靈聚會",
+        content: "我們反對哥布林",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "21:11"
+        },
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "28",
+            time: "19:10"
+        },
+        place: "精靈之森",
+        type: "splooter",
+        status: "attend"
+    },
 ]);
 
 const btnText = ref({
@@ -191,75 +495,77 @@ const btnText = ref({
     edit : "編輯",
     registered : "已參加",
     disable : "已額滿",
-})
+});
 
-//把日曆點選的date 物件轉換成字串
-// const isDateObject = (touchedDate) => {
-//     const targetDate = new Date(touchedDate);
-//     // const targetYear = targetDate.getFullYear().toString();
-//     // const targetMonth = (targetDate.getMonth() + 1).toString().padStart(2, '0');  //padStart(2, '0')補零，確保格式為兩位數
-//     // const targetDay = targetDate.getDate().toString().padStart(2, '0');
+// switch分類篩選
+const activeCard = ref('official');
 
-//     cardsData.value = cardsRawData.value.filter(d => {
-//         const startDate = new Date(`${d.startTime.year}-${d.startTime.month}-${d.startTime.day}`);
-//         const endDate = new Date(`${d.endTime.year}-${d.endTime.month}-${d.endTime.day}`);
+const setActive = (cardType) => {
+    activeCard.value = cardType;
+    console.log(activeCard.value);
+};
 
-//         return startDate <= targetDate && endDate >= targetDate; // 篩選目標日期內的活動
-//     });
-// };
 
+
+
+//日曆點選以及載入時間渲染
 const isDateObject = (touchedDate) => {
     const targetDate = new Date(touchedDate);
-    targetDate.setHours(0, 0, 0, 0); // 確保時間不影響比較
+    targetDate.setHours(0, 0, 0, 0); // 使時間變成 00:00 以防時間差比較錯誤 只比較年月日
 
+    //回傳若非數字則出現錯誤警告
     if (isNaN(targetDate.getTime())) {
+        alert(`無效的日期格式:${touchedDate}`);
         console.error("無效的日期格式:", touchedDate);
         return;
     }
 
-    console.log("選擇的日期:", targetDate.toISOString().split("T")[0]);
+    console.log("選擇的日期:", targetDate.toLocaleDateString("zh-TW"));  //選擇日期 YYY/M/D 本地時間
 
+    // 檢查cardsRawData資料
     if (!cardsRawData.value || !Array.isArray(cardsRawData.value)) {
+        alert(`${cardsRawData.value}無效或不是陣列`);
         console.error("cardsRawData.value 無效或不是陣列");
         return;
     }
 
+    // 資料過濾
     cardsData.value = cardsRawData.value.filter(d => {
+
+        //資料缺少開始時間或是結束時間
         if (!d.startTime || !d.endTime) {
-            console.warn("缺少 startTime 或 endTime，略過:", d);
+            console.warn("缺少 startTime 或 endTime");
             return false;
         }
 
-        // 確保日期格式正確，並將時間歸零以便精確比較
+        // 確保日期格式正確，開始時間設定為00:00:00，結束時間設定為23:59:59
         const startDate = new Date(`${d.startTime.year}-${d.startTime.month.padStart(2, '0')}-${d.startTime.day.padStart(2, '0')}T00:00:00`);
         const endDate = new Date(`${d.endTime.year}-${d.endTime.month.padStart(2, '0')}-${d.endTime.day.padStart(2, '0')}T23:59:59`);
 
-        console.log(`檢查範圍: ${startDate.toISOString().split("T")[0]} - ${endDate.toISOString().split("T")[0]}`);
-
         return startDate <= targetDate && endDate >= targetDate;
+    }).sort((a, b) => {
+        const dataA = new Date(`${a.startTime.year}-${a.startTime.month.padStart(2, '0')}-${a.startTime.day.padStart(2, '0')}`);
+        const dataB = new Date(`${b.startTime.year}-${b.startTime.month.padStart(2, '0')}-${b.startTime.day.padStart(2, '0')}`);
+        return dataA - dataB;
     });
 
     console.log("篩選後的 cardsData:", cardsData.value);
-};
+    };
 
+    const filterScheduleCard = (day) => {
+        const selectdate = day.date;
+        isDateObject(selectdate);
+    };
 
+    // 預設篩選今天的活動
+    onMounted(() => {
+        const today = new Date();
+        const todayString = today.toISOString().split("T")[0]; // 格式化為 YYYY-MM-DD
+        isDateObject(todayString);
+    });
 
-const filterScheduleCard = (day) => {
-    const selectdate = day.date;
-    isDateObject(selectdate);
-    // alert(selectdate);
-};
-
-// 預設篩選今天的活動
-onMounted(() => {
-    const today = new Date();
-    const todayString = today.toISOString().split("T")[0]; // 格式化為 YYYY-MM-DD
-    isDateObject(todayString);
-});
-
-//開始時間～結束時間 物件
-function getTimeObject(theTime){
-    return `${theTime.year}年 ${theTime.month}月 ${theTime.day}日 ${theTime.time}`;
-}
-
+    //開始時間～結束時間 物件
+    function getTimeObject(theTime){
+        return `${theTime.year}年 ${theTime.month}月 ${theTime.day}日 ${theTime.time}`;
+    }
 </script>
