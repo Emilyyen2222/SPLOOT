@@ -219,6 +219,85 @@
     }    
 }
 
+//新增行程燈箱
+
+.addEvent{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+
+    padding-top: 4.4rem;
+
+    .newEventText{
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+        .eventlabel{
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+
+            margin-bottom: 0.8rem;
+
+            .eventIcon{
+                width: 22px;
+                height: 22px;
+            }
+        }
+        
+        .peopleNumber{
+            width: 14.4rem;
+        }
+
+    .eventTime{
+        .eventTimeDropDown{
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            .timeDropDownBox{
+                display: flex;
+                gap: 2.4rem;
+
+                .theTimeBox{
+                    display: flex;
+                    gap: 0.8rem;
+
+                        .dropdownMenu{
+                            position: relative;
+                            width: 12rem;
+                            height: 4.6rem;
+                            
+                            .dropDown{
+                                position: absolute;
+                                top: 0;
+    
+                                width: 100%;
+                                border-color: map-get($colors, natural-1);
+    
+                                z-index: 900;
+            
+                            }
+                        }
+                }
+
+
+
+                &.startTime .theTimeBox .dropdownMenu{
+                    .dropDown{
+                        z-index: 950;
+                    }
+                }
+            }
+        }
+    }
+    
+
+
+}
+
 
 
 

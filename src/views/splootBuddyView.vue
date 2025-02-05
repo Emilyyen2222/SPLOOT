@@ -253,20 +253,19 @@
         <div class="postContent">
             <p class="smallText inputLabel">發佈內容*</p>
             <InputText 
-            class="textBox" 
-            inputType="textarea"             
-            size="small" 
-            placeHolder="請於200字內" 
-            errorMsg="Invalid Input" 
-            v-model="inputValuePostContent"
-            :hasError="inputError"></InputText>
+                class="textBox" 
+                inputType="textarea"             
+                size="small" 
+                placeHolder="請於200字內" 
+                errorMsg="Invalid Input" 
+                v-model="inputValuePostContent"
+                :hasError="inputError">
+            </InputText>
         </div>
     </div>
     <div class="newPostBtn">
         <Btn btnStyle="primary small">提交</Btn>
-        <div class="cancelBtn">
-            <Btn btnStyle="baseline small">取消</Btn>
-        </div>
+        <Btn btnStyle="baseline small" @click="toggleLightBox2">取消</Btn>       
     </div>
 </div>
 

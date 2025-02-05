@@ -37,7 +37,7 @@
         </div>
                 <!-- 行程按鈕 -->
                 <div class="scheduleBtnBox">
-                    <div class="scheduleBtn">
+                    <div class="scheduleBtn" @click="toggleAddEvent">
                         <img src="@/assets/img/icon/add-schedule.svg" alt="" class="scheduleIcon">
                         <p class="xsText">新增行程</p>
                     </div>
@@ -89,16 +89,193 @@
             <div class="circle2 circle"></div>
         </div>
     </div>
+
+    <!-- 新增行程燈箱 -->
+    <LightBox 
+        :title="addEventTitle.title"
+        :is-light-box="isAddEvent" 
+        @toggle="toggleAddEvent">
+        <div class="addEvent">
+            <div class="newEventText">
+                <div class="title">
+                    <InputText                
+                        :placeHolder="newEventTitle.placeHolder"
+                        :errorMsg="newEventTitle.errorMsg"
+                        :hasError="newEventTitle.inputError.value"
+                        v-model="newEventTitle.inputValue.value">
+                    </InputText>
+                </div>
+                <div class="newEventContent">
+                    <InputText 
+                        :placeHolder="newEventContent.placeHolder"
+                        :errorMsg="newEventContent.errorMsg"
+                        :hasError="newEventContent.inputError.value"
+                        v-model="newEventContent.inputValue.value">
+                    </InputText>
+                </div>
+            </div>
+            <div class="peopleCount">
+                <div class="peopleCountlabel eventlabel">
+                    <div class="peopleIcon eventIcon">
+                        <img src="../assets/img/icon/peopleCount.svg" alt="" class="iconImg">
+                    </div>
+                    <p class="smallText">人數上限</p>
+                </div>
+                <div class="peopleNumber eventInput">
+                    <InputText                
+                        size = "small"
+                        :placeHolder="peopleNumber.placeHolder"
+                        :errorMsg="peopleNumber.errorMsg"
+                        :hasError="peopleNumber.inputError.value"
+                        v-model="peopleNumber.inputValue.value">
+                    </InputText>
+                </div>
+            </div>
+            <div class="eventTime">
+                <div class="eventTimelabel eventlabel">
+                    <div class="timeIcon eventIcon">
+                        <img src="../assets/img/icon/time.svg" alt="" class="iconImg">
+                    </div>
+                    <p class="smallText">活動時間</p>
+                </div>
+                <div class="eventTimeDropDown">
+                    <div class="startTime timeDropDownBox">
+                        <div class="frontBox theTimeBox">
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown startTimeY"
+                                    :placeHolder="startTimeY.placeHolder"
+                                    :options="startTimeY.options"
+                                    v-model="startTimeY.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown startTimeM"
+                                    :placeHolder="startTimeM.placeHolder"
+                                    :options="startTimeM.options"
+                                    v-model="startTimeM.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown startTimeD"
+                                    :placeHolder="startTimeD.placeHolder"
+                                    :options="startTimeD.options"
+                                    v-model="startTimeD.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                        <div class="backBox theTimeBox">
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown startTimeH"
+                                    :placeHolder="startTimeH.placeHolder"
+                                    :options="startTimeH.options"
+                                    v-model="startTimeH.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown startTime"
+                                    :placeHolder="startTime.placeHolder"
+                                    :options="startTime.options"
+                                    v-model="startTime.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="endTime timeDropDownBox">
+                        <div class="frontBox theTimeBox">
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown endTimeY"
+                                    :placeHolder="endTimeY.placeHolder"
+                                    :options="endTimeY.options"
+                                    v-model="endTimeY.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown endTimeM"
+                                    :placeHolder="endTimeM.placeHolder"
+                                    :options="endTimeM.options"
+                                    v-model="endTimeM.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown endTimeD"
+                                    :placeHolder="endTimeD.placeHolder"
+                                    :options="endTimeD.options"
+                                    v-model="endTimeD.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                        <div class="backBox theTimeBox">
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown endTimeH"
+                                    :placeHolder="endTimeH.placeHolder"
+                                    :options="endTimeH.options"
+                                    v-model="endTimeH.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                            <div class="dropdownMenu">
+                                <DropdownMenu 
+                                    class="dropDown endTime"
+                                    :placeHolder="endTime.placeHolder"
+                                    :options="endTime.options"
+                                    v-model="endTime.menuValue.value">
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eventPlace">
+                <div class="eventPlacelabel eventlabel">
+                    <div class="placeIcon eventIcon">
+                        <img src="../assets/img/icon/location.svg" alt="" class="iconImg">
+                    </div>
+                    <p class="smallText">活動地點</p>
+                </div>
+                <div class="activePlace eventInput">
+                    <InputText                
+                        size = "small"
+                        :placeHolder="activePlace.placeHolder"
+                        :errorMsg="activePlace.errorMsg"
+                        :hasError="activePlace.inputError.value"
+                        v-model="activePlace.inputValue.value">
+                    </InputText>
+                </div>
+            </div>
+            <div class="newEventBtn">
+                    <Btn btnStyle="primary small">提交</Btn>
+                    <Btn btnStyle="baseline small" @click="toggleAddEvent">取消</Btn>
+            </div>
+        </div>
+
+
+
+    </LightBox>
+
     <MainFooter></MainFooter>
 </template>
 
 <script setup>
-    import { ref, onMounted, computed } from 'vue';
+    import { ref, onMounted, computed, watch } from 'vue';
     
     import MainHeader from "@/components/MainHeader.vue";
     import Btn from '@/components/Btn.vue';
     import Calendar from '@/components/Calendar.vue'
     import MainFooter from "@/components/MainFooter.vue"
+    import LightBox  from "../components/LightBox.vue"
+    import InputText from '@/components/InputText.vue';
+    import DropdownMenu from "@/components/DropdownMenu.vue";
+
+
 
 //data
 const cardsData = ref([]);
@@ -355,13 +532,13 @@ const cardsRawData = ref([
         startTime: {
             year: "2025",
             month: "02",
-            day: "14",
+            day: "05",
             time: "18:47"
         },
         endTime: {
             year: "2025",
             month: "02",
-            day: "20",
+            day: "23",
             time: "20:25"
         },
         place: "基隆海洋廣場",
@@ -568,4 +745,159 @@ const isDateObject = (touchedDate) => {
     function getTimeObject(theTime){
         return `${theTime.year}年 ${theTime.month}月 ${theTime.day}日 ${theTime.time}`;
     }
+
+    // －－－－－以下為各式燈箱－－－－－－－
+
+    //--------------新增貼文燈箱-------------
+    // 燈箱標題請輸入
+    const addEventTitle = {title: "發起活動"}
+
+    //燈箱狀態
+    let isAddEvent = ref(true);
+
+    // 控制燈箱的顯示與隱藏
+    function toggleAddEvent() {
+    isAddEvent.value = !isAddEvent.value;
+    // 停止捲軸
+    if (isAddEvent.value) {
+    document.body.classList.add('clicked');
+    } else {
+    document.body.classList.remove('clicked');
+    }
+    }
+
+    // ------------新增貼文輸入以及下拉式選單-------------
+
+    const newEventTitle = {
+    placeHolder: '標題',
+    errorMsg: '未輸入標題',
+    inputValue: ref(''),
+    inputError: ref(false),
+    }
+
+    const newEventContent = {
+    placeHolder: '內文',
+    errorMsg: '未輸入內文',
+    inputValue: ref(''),
+    inputError: ref(false),
+    }
+
+    const peopleNumber = {
+    placeHolder: '人數',
+    errorMsg: '未輸入人數',
+    inputValue: ref(''),
+    inputError: ref(false),
+    }
+
+    const activePlace = {
+    placeHolder: '地點',
+    errorMsg: '未輸入地點',
+    inputValue: ref(''),
+    inputError: ref(false),
+    }
+
+    //下拉式選單
+
+    const currentYear = new Date().getFullYear(); //抓取今年
+
+    // 取得當月天數
+    const getMonthDays = (year, month) => {
+        return new Date(year, month, 0).getDate();
+    };
+
+    // 年
+    const startTimeY = {
+        placeHolder: '年',
+        options: Array.from({length: 6}, (value,index) => ({name: currentYear + index})),
+        menuValue: ref('')
+    };
+    const endTimeY = {
+        placeHolder: '年',
+        options: Array.from({length: 6}, (value,index) => ({name: currentYear + index})),
+        menuValue: ref('')
+    };
+
+    // 月
+    const startTimeM = {
+        placeHolder: '月',
+        options: Array.from({length:12}, (value,index) => ({name: index + 1})),
+        menuValue: ref('')
+    };
+    const endTimeM = {
+        placeHolder: '月',
+        options: Array.from({length: 12}, (value,index) => ({name: index + 1})),
+        menuValue: ref('')
+    };
+
+    // 日
+    const startTimeD = {
+        placeHolder: '日',
+        options: [],
+        menuValue: ref('')
+    };
+    const endTimeD = {
+        placeHolder: '日',
+        options: [],
+        menuValue: ref('')
+    };
+
+    //監聽下拉式選單變化（年和月）
+    watch([startTimeY.menuValue, startTimeM.menuValue],([newYear,newMonth]) => {
+        if(newYear && newMonth){
+            const days = getMonthDays(newYear, newMonth);
+            startTimeD.options = Array.from({length: days},(value, index) => {
+                return index <= 9 ? {name: `0${index + 1}`} : {name: index + 1}
+            })
+            startTimeD.menuValue.value = ""; // 重置選擇
+        }
+    });
+
+    watch([endTimeY.menuValue, endTimeM.menuValue],([newYear,newMonth]) => {
+        if(newYear && newMonth){
+            const days = getMonthDays(newYear, newMonth);
+            endTimeD.options = Array.from({length: days},(value, index) => {
+                return index <= 9 ? {name: `0${index + 1}`} : {name: index + 1}
+            })
+            endTimeD.menuValue.value = ""; // 重置選擇
+        }
+    });
+
+    // 時
+    const startTimeH = {
+        placeHolder: '時',
+        options: Array.from({length:24},(value, index) => {
+          return index <= 9 ? {name: `0${index}`} : {name:index}
+        }),
+        menuValue: ref('')
+    };
+    const endTimeH = {
+        placeHolder: '時',
+        options: Array.from({length: 24},(value, index) => {
+          return index <= 9 ? {name: `0${index}`} : {name:index}
+        }),
+        menuValue: ref('')
+    };
+
+    // 分
+    const startTime = {
+        placeHolder: '分',
+        options: Array.from({length: 6}, (value, index) => {
+           return index == 0 ? {name: "00"} : {name: index * 10}
+        }),
+        menuValue: ref('')
+    };
+    const endTime = {
+        placeHolder: '分',
+        options: Array.from({length: 6}, (value, index) => {
+           return index == 0 ? {name: "00"} : {name: index * 10}
+        }),
+        menuValue: ref('')
+    };
+
+    //---------------------------------
+
+    // 參加成功燈箱
+
+    // 刪除行程燈箱
+
 </script>
