@@ -1,0 +1,101 @@
+//Ian
+    .vc-container.vc-monthly{
+        width: 100%;
+        height: 100%;
+        background-color: map-get($colors, transparent);
+        border: none;
+        
+        .vc-header{
+            padding: 0;
+            margin-bottom: 1.2rem;
+            
+            .vc-title, .vc-arrow{
+                @include bayon(24);
+                color: map-get($colors, blue);
+                font-weight: 400;
+            }
+    
+            .vc-base-icon{
+                stroke-width:1 ;
+            }
+    
+            button{
+                background-color: transparent;
+            }
+        }
+                    
+            .vc-weeks{
+                padding: 0;            
+                border-radius: 16px;
+                background-color: map-get($colors, beige);
+
+                .vc-weekday{
+                    @include bayon(13);
+                    font-weight: 400;
+                }
+                
+                .brownDate, .vc-weekday{
+                    color: map-get($colors, brown);
+                    // opacity: 0.5;
+                }
+            
+                .blueDate, .vc-weekday-1, .vc-weekday-7{
+                    color: map-get($colors, blue);
+                    // opacity: 0.5;
+                }
+            
+                .vc-attr.brownDate, .vc-attr.blueDate{
+                    @include bayon(20);
+                }
+    
+                .vc-week{
+                    margin: 8px;
+
+                    .vc-highlight-content-solid{
+                        font-weight: normal; //取消預設當日粗體
+                    }
+    
+                    .vc-day.is-today{
+                        .vc-highlight-bg-solid {
+                            background-color: map-get($colors, natural-1);
+                        } //當日日期圓形背景                        
+                    } 
+
+                    .vc-day{
+
+                        @include md(){
+
+                            --vc-day-content-hover-bg: transparent;
+                        }
+
+                        .vc-highlight-bg-solid {
+                            background-color: transparent;
+                            outline: 2px solid map-get($colors, natural-1);
+                        }
+                        
+                        &:hover{
+
+                            @include md(){                        
+                                background-color: transparent;
+                            }
+                        }
+
+                        .vc-focus:focus-within{
+                            box-shadow: none;
+                        }
+                    } 
+                }
+    
+                .vc-weekdays{
+                    align-items: center;
+    
+                    height: 4.4rem;
+                    border-radius: 16px 16px 0 0;
+                    background-color: map-get($colors, yellow-2);
+    
+                }
+            }
+        }
+    
+    
+        
