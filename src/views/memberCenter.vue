@@ -11,7 +11,7 @@
             <h6 class="bold">會員資料</h6>
             <div class="btn-wr">
               <!-- 點擊打開編輯會員資料的LightBox -->
-              <Btn btnStyle="baseline small" id="memberInfoEdit" @click="toggleLightBox_memberInfo">編輯</Btn>
+              <Btn btnStyle="baseline small" id="memberInfoEdit" @click="toggleLightBox(lightTitle_memberInfo)">編輯</Btn>
             </div>
         </div>
     
@@ -34,19 +34,19 @@
     
                     <div class="bi-inbox">
                       <div class="label">姓名</div>
-                      <div>派大星</div>
+                      <div>{{ inputs.input_name.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">暱稱</div>
-                      <div>斯普拉特</div>
+                      <div>{{ inputs.input_nickname.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">性別</div>
-                      <div>女生</div>
+                      <div>{{ selectedSex }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">生日</div>
-                      <div>12月22日</div>
+                      <div>{{ selectedYear }} / {{ selectedMonth }} / {{ selectedDay }}</div>
                     </div>
                       
                     
@@ -65,11 +65,11 @@
     
                     <div class="bi-inbox">
                       <div class="label">信箱</div>
-                      <div>abc123@gmail.com</div>
+                      <div>{{ inputs.input_email.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">密碼</div>
-                      <div>******</div>
+                      <div>{{ inputs.input_pwd.inputValue }}</div>
                     </div>
                     
                   </div>
@@ -88,23 +88,23 @@
     
                     <div class="bi-inbox">
                       <div class="setWid">手機</div>
-                      <div>0912 345 678</div>
+                      <div>{{ inputs.input_phone.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="setWid">聯絡地址</div>
-                      <div>104台北市中山區南京東路三段219號4F</div>
+                      <div>{{ inputs.input_address.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="setWid">LineID</div>
-                      <div>qwert012</div>
+                      <div>{{ inputs.input_lineId.inputValue }}</div>
                     </div>
     
               </div>
             </div>
             <!-- 隱私權政策 -->
             <div class="privacy">
-              <Btn btnStyle="text small" @click="toggleLightBox_userP">使用者同意書</Btn>
-              <Btn btnStyle="text small" @click="toggleLightBox_privacy">隱私權政策</Btn>
+              <Btn btnStyle="text small" @click="toggleLightBox(lightTitle_userPolicy)">使用者同意書</Btn>
+              <Btn btnStyle="text small" @click="toggleLightBox(lightTitle_privacy)">隱私權政策</Btn>
             </div>
     
         </div>
@@ -117,7 +117,7 @@
             <LightBox 
               :title="lightTitle_memberInfo.title"
               :is-light-box="lightTitle_memberInfo.isLightBox.value" 
-              @toggle="toggleLightBox_memberInfo"
+              @toggle="toggleLightBox(lightTitle_memberInfo)"
               id="memberInfoPop" 
               class="memberInfo-update">
               
@@ -133,49 +133,14 @@
       
                   <div class="divider"></div>
       
-                    <div class="card-content">   <!-- 之後用v-for，產6個 -->            
+                    <div class="card-content"> 
+                        <!-- 用v-for，產6個 -->            
                       <div class="av-group" v-for="avatar in avatars" :key="avatar.id">
                           <div class="avatar">           <!-- 頭相框 -->
-                            <img :src="avatar.src" alt="avatar">
+                            <img :src="avatar.img" alt="avatar">
 
                           </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait1.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait2.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait3.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait4.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait5.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
-                      </div>
-                      <div class="av-group">
-                          <div class="avatar">           <!-- 頭相框 -->
-                            <img src="../assets/img/member-center/portrait6.svg" alt="avatar">      <!-- 放頭像用 -->
-                          </div>
-                          <smallText>小白</smallText>
+                          <smallText>{{ avatar.name }}</smallText>
                       </div>
       
                     </div>
@@ -195,53 +160,61 @@
                       <div class="input-group">
                           <label for="name">姓名</label>
                           <InputText
-                              :size="input_name.size"
-                              :textAlign="input_name.textAlign"
-                              :placeHolder="input_name.placeHolder"
-                              :errorMsg="input_name.errorMsg"
-                              :hasError="input_name.inputError.value"
-                            v-model="input_name.inputValue.value">
+                            v-model="inputs.input_name.inputValue"
+                            :placeHolder="inputs.input_name.placeHolder"
+                            :size="inputs.input_name.size"
+                            :textAlign="inputs.input_name.textAlign"
+                            :errorMsg="inputs.input_name.errorMsg"
+                            :inputError="inputs.input_name.inputError"
+                            >
                           </InputText>
                       </div>
                       <div class="input-group">
                           <label for="nickname">暱稱</label>
                           <InputText 
-                            :size="input_nickname.size"
-                            :textAlign="input_nickname.textAlign"
-                            :placeHolder="input_nickname.placeHolder"
-                            :errorMsg="input_nickname.errorMsg"
-                            :hasError="input_nickname.inputError.value"
-                            v-model="input_nickname.inputValue.value">
+                            v-model="inputs.input_nickname.inputValue"
+                            :placeHolder="inputs.input_nickname.placeHolder"
+                            :size="inputs.input_nickname.size"
+                            :textAlign="inputs.input_nickname.textAlign"
+                            :errorMsg="inputs.input_nickname.errorMsg"
+                            :inputError="inputs.input_nickname.inputError">
                           </InputText>
                       </div>
                       <div class="input-group" id="sexGroup">
                         <label for="sex">性別</label>
                         <div class="sex" id="sex">
                           <label for="male">
-                              <input type="radio" class="" name="sex" value="男" id="male" style="color : #D14535; ">男
+                              <input type="radio" class="" name="sex" value="男" id="male" style="color : #D14535; " v-model="selectedSex">男
                           </label>
                           <label for="female">
-                              <input type="radio" class="" name="sex" value="女" id="female" style="color : #D14535; ">女
+                              <input type="radio" class="" name="sex" value="女" id="female" style="color : #D14535; " v-model="selectedSex">女
                           </label>
                         </div>
                       </div>
                       <div class="input-group birthday">
                           <label for="">生日</label>
                           <div class="select-group">
+                            <!-- 年分 -->
+                            <DropdownMenu 
+                              :placeHolder="menu_birth_y.placeHolder" 
+                              :options="menu_birth_y.options.value"
+                              class="dropBirthday"
+                              v-model="selectedYear"
+                            >            
+                            </DropdownMenu> 
+                            <!-- 月份 -->
                             <DropdownMenu
-                            :placeHolder="menu_birth_y.placeHolder" 
-                            :options="menu_birth_y.options.value"
-                            class="dropBirthday">             
-                            </DropdownMenu>                
-                            <DropdownMenu
-                            :placeHolder="menu_birth_m.placeHolder" 
-                            :options="menu_birth_m.options.value"
-                            class="dropBirthday">
+                              :placeHolder="menu_birth_m.placeHolder" 
+                              :options="menu_birth_m.options.value"
+                              class="dropBirthday"
+                              v-model="selectedMonth">
                             </DropdownMenu>
+                            <!-- 日期 -->
                             <DropdownMenu
-                            :placeHolder="menu_birth_d.placeHolder" 
-                            :options="menu_birth_d.options"
-                            class="dropBirthday">
+                              :placeHolder="menu_birth_d.placeHolder" 
+                              :options="menu_birth_d.options.value"
+                              class="dropBirthday"
+                              v-model="selectedDay">
                             </DropdownMenu>
                           </div>
                       </div>
@@ -264,14 +237,15 @@
                           <label for="">帳戶</label>
                           <div class="group-email">
                             <InputText 
-                              :size="input_email.size"
-                              :textAlign="input_email.textAlign"
-                              :placeHolder="input_email.placeHolder"
-                              :errorMsg="input_email.errorMsg"
-                              :hasError="input_email.inputError.value"
-                              v-model="input_email.inputValue.value">
-                            </InputText>
-                            <Btn btnStyle="baseline small" @click="toggleLightBox_email">變更信箱</Btn>                      
+                              v-model="inputs.input_email.inputValue"
+                              :placeHolder="inputs.input_email.placeHolder"
+                              :size="inputs.input_email.size"
+                              :textAlign="inputs.input_email.textAlign"
+                              :errorMsg="inputs.input_email.errorMsg"
+                              :inputError="inputs.input_email.inputError"
+                              disabled>
+                            </InputText>                            
+                            <Btn btnStyle="baseline small" @click="toggleLightBox(lightTitle_resetEmail)">變更信箱</Btn>                      
                           </div>
                           
                       </div>
@@ -280,29 +254,30 @@
                         <label for="">密碼</label>
                         <div class="group-pwd">
                           <InputText 
-                            :size="input1.size"
-                            :textAlign="input1.textAlign"
-                            :placeHolder="input1.placeHolder"
-                            :errorMsg="input1.errorMsg"
-                            :hasError="input1.inputError.value"
-                            v-model="input1.inputValue.value"
-                            readoly>
+                             v-model="inputs.input_pwd.inputValue"
+                            :placeHolder="inputs.input_pwd.placeHolder"
+                            :size="inputs.input_pwd.size"
+                            :textAlign="inputs.input_pwd.textAlign"
+                            :errorMsg="inputs.input_pwd.errorMsg"
+                            :inputError="inputs.input_pwd.inputError"
+                            readonly>
                           </InputText>
                           <!-- eye button -->
                           <!-- <Btn btnStyle="text small" id="mcEye">眼</Btn> -->
-                          <Btn btnStyle="baseline small" @click="toggleLightBox_pwd">變更密碼</Btn>
+                          <Btn btnStyle="baseline small" @click="toggleLightBox(lightTitle_resetPwd)">變更密碼</Btn>
                         </div>
                         
                       </div>
                       <div class="input-group account-state">
                           <p>帳號狀態</p>
                           <InputText 
-                            :size="input1.size"
-                            :textAlign="input1.textAlign"
-                            :placeHolder="input1.placeHolder"
-                            :errorMsg="input1.errorMsg"
-                            :hasError="input1.inputError.value"
-                            v-model="input1.inputValue.value">
+                            v-model="inputs.input_accState.inputValue"
+                            :placeHolder="inputs.input_accState.placeHolder"
+                            :size="inputs.input_accState.size"
+                            :textAlign="inputs.input_accState.textAlign"
+                            :errorMsg="inputs.input_accState.errorMsg"
+                            :inputError="inputs.input_accState.inputError"
+                            readonly>
                           </InputText>
                       </div>
                       <div class="input-group third-login">
@@ -339,35 +314,35 @@
                       <div class="input-group">
                           <label>手機</label>
                           <InputText 
-                            :size="input1.size"
-                            :textAlign="input1.textAlign"
-                            :placeHolder="input1.placeHolder"
-                            :errorMsg="input1.errorMsg"
-                            :hasError="input1.inputError.value"
-                            v-model="input1.inputValue.value">
+                          v-model="inputs.input_phone.inputValue"
+                            :placeHolder="inputs.input_phone.placeHolder"
+                            :size="inputs.input_phone.size"
+                            :textAlign="inputs.input_phone.textAlign"
+                            :errorMsg="inputs.input_phone.errorMsg"
+                            :inputError="inputs.input_phone.inputError">
                           </InputText>
                       </div>
                       <div class="input-group">
                           <label>聯絡地址</label>
                           <InputText 
-                            :size="input1.size"
-                            :textAlign="input1.textAlign"
-                            :placeHolder="input1.placeHolder"
-                            :errorMsg="input1.errorMsg"
-                            :hasError="input1.inputError.value"
-                            v-model="input1.inputValue.value">
+                          v-model="inputs.input_address.inputValue"
+                            :placeHolder="inputs.input_address.placeHolder"
+                            :size="inputs.input_address.size"
+                            :textAlign="inputs.input_address.textAlign"
+                            :errorMsg="inputs.input_address.errorMsg"
+                            :inputError="inputs.input_address.inputError">
                           </InputText>
                       </div>
                       <div class="input-group">
                           <label>LineID</label>
                           <div class="lineid-wrapper">
                             <InputText 
-                              :size="input1.size"
-                              :textAlign="input1.textAlign"
-                              :placeHolder="input1.placeHolder"
-                              :errorMsg="input1.errorMsg"
-                              :hasError="input1.inputError.value"
-                              v-model="input1.inputValue.value">
+                            v-model="inputs.input_lineId.inputValue"
+                              :placeHolder="inputs.input_lineId.placeHolder"
+                              :size="inputs.input_lineId.size"
+                              :textAlign="inputs.input_lineId.textAlign"
+                              :errorMsg="inputs.input_lineId.errorMsg"
+                              :inputError="inputs.input_lineId.inputError">
                             </InputText>
                           <p id="lineidnotice">*未提供Line ID 將無法使用 認識新毛友 和 尋找小幫手</p>
                           </div>
@@ -379,10 +354,10 @@
               <!-- 儲存修改紐 -->
               <div class="pu-btn-group">
                   <div>
-                    <Btn btnStyle="primary default" @click="toggleLightBox_memberInfo">儲存</Btn>
+                    <Btn btnStyle="primary default" @click="toggleLightBox(lightTitle_memberInfo)">儲存</Btn>
                   </div>
                   <div>
-                    <Btn btnStyle="baseline default" @click="toggleLightBox_memberInfo">取消修改</Btn>
+                    <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_memberInfo)">取消修改</Btn>
                   </div>
               </div>
                           
@@ -394,7 +369,7 @@
             <LightBox 
                 :title="lightTitle_resetEmail.title"
                 :is-light-box="lightTitle_resetEmail.isLightBox.value" 
-                @toggle="toggleLightBox_email"
+                @toggle="toggleLightBox(lightTitle_resetPwd)"
                 id="resetEmailPop">
               <div>    
                   <!-- 1 輸入新的信箱 -->
@@ -407,19 +382,19 @@
     
                   <label for="resetEmail">
                     <InputText
-                    :size = "input_reEmail.size"
-                    :textAlign = "input_reEmail.textAlign"
-                    :placeHolder="input_reEmail.placeHolder"
-                    :errorMsg="input_reEmail.errorMsg"
-                    :hasError="input_reEmail.inputError.value"
-                    v-model="input_reEmail.inputValue.value"
+                      v-model="inputs.input_reEmail.inputValue"
+                      :placeHolder="inputs.input_reEmail.placeHolder"
+                      :size="inputs.input_reEmail.size"
+                      :textAlign="inputs.input_reEmail.textAlign"
+                      :errorMsg="inputs.input_reEmail.errorMsg"
+                      :inputError="inputs.input_reEmail.inputError"
                     id="resetEmail">
                     </InputText>
                   </label>
     
                   <Btn btnType="form" btnStyle="nextQ">寄送驗證碼</Btn>
-    
-                  <Btn btnStyle="baseline default" @click="toggleLightBox_email">取消</Btn>
+                  <!-- 改成 nextQuestion -->
+                  <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_resetEmail)">取消</Btn>
     
                 </div>  
                   <!-- 2 輸入驗證碼 -->
@@ -429,12 +404,12 @@
     
                   <label for="">
                     <InputText
-                    :size = "input_vCode.size"
-                    :textAlign = "input_vCode.textAlign"
-                    :placeHolder="input_vCode.placeHolder"
-                    :errorMsg="input_vCode.errorMsg"
-                    :hasError="input_vCode.inputError.value"
-                    v-model="input_vCode.inputValue.value"
+                      v-model="inputs.input_vCode.inputValue"
+                      :placeHolder="inputs.input_vCode.placeHolder"
+                      :size="inputs.input_vCode.size"
+                      :textAlign="inputs.input_vCode.textAlign"
+                      :errorMsg="inputs.input_vCode.errorMsg"
+                      :inputError="inputs.input_vCode.inputError"
                     id="">
                     </InputText>
                   </label>
@@ -460,7 +435,7 @@
             <LightBox 
               :is-light-box="lightTitle_resetPwd.isLightBox.value" 
               :title="lightTitle_resetPwd.title"
-              @toggle="toggleLightBox_pwd"
+              @toggle="toggleLightBox(lightTitle_resetPwd)"
               id="resetPwdPop" >
                 <div>
                       
@@ -486,7 +461,7 @@
       
                     <Btn btnStyle="primary default">寄送驗證碼</Btn>
       
-                    <Btn btnStyle="baseline default">取消</Btn>
+                    <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_resetPwd)">取消</Btn>
       
                   </div>  
                     <!-- 2 輸入驗證碼 -->
@@ -563,7 +538,7 @@
             <LightBox 
               :is-light-box="lightTitle_userPolicy.isLightBox.value" 
               :title="lightTitle_userPolicy.title"
-              @toggle="toggleLightBox_userP">
+              @toggle="toggleLightBox(lightTitle_userPolicy)">
               <h6>使用者政策</h6>
               <p>在您開始使用 SPLOOT布魯家 所經營之網站之前，請詳細閱讀以下所有服務條款：
               當您成為 SPLOOT布魯家 網站的會員時，即表示您已詳細閱讀、明確瞭解並同意接受本服務條款之所有內容。
@@ -578,14 +553,14 @@
               <p>以上所有條款將會會遵從（國家之法律）無論是否其條款衝突於法律服務條款。若我們未擁有執行以上條款之部份權益，並不等同於我們放棄所有條款的執行權益。若有以上有部份條款不適用於所指定之法庭，其其他之所有條款依然有效。以上所有條款達致雙方在服務使用上的一致性同意與協議，任何事前的協議將有可能影響雙方對於以上所有服務條款的取代或者更改。
               我們保留所有條款的更改、取代之權益，並所做出更改、取代之內容可自行決定。若有任何的更改涉及任何內容，我們將會嘗試提供最少30天的事前通知；該通知將會在新條款正式起效之前公布。至於任何內容的制定則由我們自行決定。若您欲繼續使用網站服務，請務必同意所有新條款；若您不同意新條款，將會要求停止使用網站所有服務。
               若您有任何問題與疑慮，煩請與 SPLOOT布魯家 進行聯繫。</p>
-              <Btn @click="toggleLightBox_userP" class="padding" btnStyle="primary default">確定</Btn>
+              <Btn @click="toggleLightBox(lightTitle_userPolicy)" class="padding" btnStyle="primary default">確定</Btn>
             </LightBox>
   
             <!-- 隱私權政策 -->
             <LightBox 
               :is-light-box="lightTitle_privacy.isLightBox.value" 
               :title="lightTitle_privacy.title"
-              @toggle="toggleLightBox_privacy">
+              @toggle="toggleLightBox(lightTitle_privacy)">
               <h6>隱私權政策</h6>
               <p>歡迎您使用 SPLOOT布魯家（以下簡稱「本公司」）係依據本服務條款提供 SPLOOT布魯家 (http://www.sploot.co) 服務（以下簡稱「本服務」），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：</p>
               <p class="bold">一、隱私權保護政策的適用範圍</p>
@@ -597,7 +572,7 @@
               <p class="bold">三、資料之保護</p>
               <p>本網站主機均設有防火牆、反病毒系統及其他相關的資訊安全設備及必要的安全防護措施，對於本網站及您的個人資料加以嚴格保護。
                 未經授權之人員不得接觸您的個人資料，且所有接觸之人員均經簽署保密契約，違反保密義務者將受到相關法律處分。</p>
-              <Btn @click="toggleLightBox_privacy" class="padding" btnStyle="primary default">確定</Btn>              
+              <Btn @click="toggleLightBox(lightTitle_privacy)" class="padding" btnStyle="primary default">確定</Btn>              
             </LightBox>
   
             <!-- 綁定/解除綁訂 第三方登入 -->
@@ -629,7 +604,7 @@
   
   <script setup>
   
-  import { ref,computed } from 'vue';
+  import { ref,computed,reactive } from 'vue';
   // components
   import MainHeader from '../components/MainHeader.vue';
   import Btn from '../components/Btn.vue';
@@ -640,140 +615,102 @@
   // pages
   import memberNav from '../views/memberNav.vue' ;
   
-  
+    // avatars
+    const avatars=[
+    {id:1,img: new URL("@/assets/img/member-center/portrait1.svg", import.meta.url).href, name: "小白"},
+    {id:2,img: new URL("@/assets/img/member-center/portrait2.svg", import.meta.url).href,name: "小白"},
+    {id:3,img: new URL("@/assets/img/member-center/portrait3.svg", import.meta.url).href,name: "小白"},
+    {id:4,img: new URL("@/assets/img/member-center/portrait4.svg", import.meta.url).href,name: "小白"},
+    {id:5,img: new URL("@/assets/img/member-center/portrait5.svg", import.meta.url).href,name: "小白"},
+    {id:6,img: new URL("@/assets/img/member-center/portrait6.svg", import.meta.url).href,name: "小白"},
+    {id:7,img: new URL("@/assets/img/member-center/portrait7.svg", import.meta.url).href,name: "小白"},
+    {id:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href,name: "小白"},
+  ]
+
   // dropDown
-   // 取得目前年份
-   const currentYear = new Date().getFullYear();
-   // 利用 computed 動態生成從今年往回推 100 年的選項陣列
+
+// 生日
+  // 取得目前年份
+  const currentYear = new Date().getFullYear();
+
+  // 定義年份下拉選單資料：從當前年份往回推 100 年
   const menu_birth_y = {
     placeHolder: '請選擇年份',
     options: computed(() => {
       const arr = [];
       for (let i = 0; i < 100; i++) {
-        arr.push({ id: i, name: String(currentYear - i)+'年' });
+        arr.push({ id: i, name: String(currentYear - i) });
       }
       return arr;
     })
   };
-  
+
+  // 定義月份下拉選單資料：1 到 12
   const menu_birth_m = {
-      placeHolder: '請選擇月份',
-      options: computed(() => {
+    placeHolder: '請選擇月份',
+    options: computed(() => {
       const arr = [];
       for (let i = 1; i <= 12; i++) {
-        arr.push({ id: i, name: String(i)+'月' });
+        arr.push({ id: i, name: String(i) });
       }
       return arr;
     })
   };
+
+  // 使用 v-model 綁定使用者所選的年份、月份與日期
+  const selectedYear = ref('');
+  const selectedMonth = ref('');
+  const selectedDay = ref('');
+
+  // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
   const menu_birth_d = {
-      placeHolder: '請選擇日期',
-      options: [
-          { id: 0, name: '1' },
-          { id: 1, name: '2' },
-          { id: 2, name: '3' },
-          { id: 3, name: '4' },
-          { id: 4, name: '5' },
-          { id: 5, name: '6' },
-          { id: 6, name: '7' },
-          { id: 7, name: '8' },
-          { id: 8, name: '9' },
-          { id: 9, name: '10' },
-          { id: 10, name: '11' },
-          { id: 11, name: '12' },
-          { id: 12, name: '13' },
-          { id: 13, name: '14' },
-          { id: 14, name: '15' },
-          { id: 15, name: '16' },
-          { id: 16, name: '17' },
-          { id: 17, name: '18' },
-          { id: 18, name: '19' },
-          { id: 19, name: '20' },
-          { id: 20, name: '21' },
-          { id: 21, name: '22' },
-          { id: 22, name: '23' },
-          { id: 23, name: '24' },
-          { id: 24, name: '25' },
-          { id: 25, name: '26' },
-          { id: 26, name: '27' },
-          { id: 27, name: '28' },
-          { id: 28, name: '29' },
-          { id: 29, name: '30' },
-          { id: 30, name: '31' },
-      ]
+    placeHolder: '請選擇日期',
+    options: computed(() => {
+      if (!selectedYear.value || !selectedMonth.value) return [];
+      const year = parseInt(selectedYear.value);
+      const month = parseInt(selectedMonth.value);
+      // 利用 Date 物件計算該月的天數（傳入 month 代表下一個月的第0天即該月最後一天）
+      const days = new Date(year, month, 0).getDate();
+      return Array.from({ length: days }, (_, i) => ({
+        id: i,
+        name: String(i + 1)
+      }));
+    })
   };
   
   // input
-   const input1 = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入預設文字',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
+  // 使用物件來統一管理所有輸入框的狀態
+  const inputs = reactive({
+    input1: { placeHolder: '輸入預設文字' },
+    input_name: { placeHolder: '輸入姓名' },
+    input_nickname: { placeHolder: '輸入暱稱' },
+    input_email: { placeHolder: '輸入信箱' },
+    input_pwd: { placeHolder: '********' },
+    input_accState: { placeHolder: '正常' },
+    input_phone: { placeHolder: '輸入手機' },
+    input_address: { placeHolder: '輸入地址' },
+    input_lineId: { placeHolder: '輸入LineID' },
+    input_reEmail: { placeHolder: '輸入新的信箱' },
+    input_vCode: { placeHolder: '輸入驗證碼' },
+    input_vEmail: { placeHolder: '輸入驗證碼' },
+    input6: { placeHolder: '輸入驗證碼' }
+  });
+
+ // 統一設定每個 inputText 的預設屬性，避免重複
+Object.keys(inputs).forEach(key => {
+  inputs[key] = {
+    ...inputs[key],
+    size: 'small',
+    textAlign: 'textLeft',
+    errorMsg: 'Invalid Input',
+    inputValue: ref(''), // 這樣每個 input 都會擁有獨立的 v-model
+    inputError: ref(false)
   };
-  const input_name = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入姓名',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input_nickname = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入暱稱',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input_email = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入信箱',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input_reEmail = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入新的信箱',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input_vCode = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入驗證碼',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input_vEmail = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入驗證碼',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input6 = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入驗證碼',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  
-  
-const avatars=[
-  {id:1,src: "../assets/img/member-center/portrait1.svg"},
-  {id:2,src: "../assets/img/member-center/portrait2.svg"},
-]
+});
+
+// 性別
+const selectedSex = ref('');
+
 
    // lightBox title
   const lightTitle_memberInfo = {title: "會員資料", isLightBox: ref(false)};
@@ -783,52 +720,17 @@ const avatars=[
   const lightTitle_privacy = {title: "隱私權政策", isLightBox: ref(false)};
   
   // 控制燈箱的顯示與隱藏
-   // 編輯
-  function toggleLightBox_memberInfo() {
-    lightTitle_memberInfo.isLightBox.value = !lightTitle_memberInfo.isLightBox.value;
-    // 根據狀態新增或移除 clicked 類別
-    if (lightTitle_memberInfo.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
-   // 變更信箱
-  function toggleLightBox_email() {
-    lightTitle_resetEmail.isLightBox.value = !lightTitle_resetEmail.isLightBox.value;
-    if (lightTitle_resetEmail.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
-   // 變更密碼
-  function toggleLightBox_pwd() {
-    lightTitle_resetPwd.isLightBox.value = !lightTitle_resetPwd.isLightBox.value;
-    if (lightTitle_resetPwd.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
-   // 使用者政策
-  function toggleLightBox_userP() {
-    lightTitle_userPolicy.isLightBox.value = !lightTitle_userPolicy.isLightBox.value;
-    if (lightTitle_userPolicy.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
-   // 隱私權政策
-   function toggleLightBox_privacy() {
-    lightTitle_privacy.isLightBox.value = !lightTitle_privacy.isLightBox.value;
-    if (lightTitle_privacy.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
+
+// 定義一個共用的 toggle 函式
+function toggleLightBox(lightObj) {
+  lightObj.isLightBox.value = !lightObj.isLightBox.value;
+  if (lightObj.isLightBox.value) {
+    document.body.classList.add('clicked');
+  } else {
+    document.body.classList.remove('clicked');
+  }
+};
+  
   
   //popup狀態
   const unBind = { isPopUp : ref (false )  };

@@ -12,7 +12,7 @@
       <div class="sub-recently">
         <div class="sr-title">
           <h6 class="bold">當前方案</h6>
-          <p>目前有4個訂閱</p>
+          <p>目前有 {{ cardCount }} 個訂閱</p>
         </div>
       
         <div class="divider"></div>
@@ -253,7 +253,7 @@
   
   <script setup>
   
-  import { ref } from 'vue';
+  import { computed, ref } from 'vue';
   // components
   import MainHeader from '@/components/MainHeader.vue';
   import Btn from '@/components/Btn.vue';
@@ -317,6 +317,10 @@
     },
   ]);
   
+   // 計算卡片數量
+  const cardCount = computed(() => cards.value.length);
+
+
   // slider
   // 定義一個引用來獲取 slider 的 DOM 元素
   const sliderRef = ref(null);
