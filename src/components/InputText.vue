@@ -6,11 +6,15 @@
     :class="[textAlign, size]"
     :placeholder="placeHolder"
     v-model="inputText"> 
+
+
     <textarea v-else
     :class="[textAlign, size]"
     :placeholder="placeHolder"
     v-model="inputText">
     </textarea>   
+
+    
     <p v-if="hasError" class="errorMsg"
       :class="textAlign">{{ errorMsg }}</p>
   </div>
