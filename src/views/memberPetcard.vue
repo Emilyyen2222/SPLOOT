@@ -19,11 +19,13 @@
             <!-- card1 -->
             <div class="petcard pc1">
               <div class="cardWrap">
+                <!-- v-for -->
                 <!-- 卡片部分 -->
                 <div class="cardwrapper">
                   <!-- 左側圖片區 -->
                   <div class="imageContainer">
                       <img src="@/assets/img/home/matchCard.svg" alt="">
+                      <!-- <img :src="avatar.img" alt="avatar"> -->
                   </div>
                   <!-- 右側內容區 -->
                   <div class="content">
@@ -40,6 +42,7 @@
                       </div>
                       <!-- 標籤區 -->
                       <div class="tags">
+                        <!-- v-for? -->
                       <span class="xsText tag">邊境牧羊</span>
                       <span class="xsText tag">活潑外向</span>
                       <span class="xsText tag">愛玩球</span>
@@ -453,34 +456,58 @@
           <div class="tag-wrapper">
             
             <div class="tag-container">
-              <p>我想認識</p>
+              <p>我想認識的毛孩朋友是</p>
               <div class="tag-group">
-                <Btn btnType="form" btnStyle="option">貓貓朋友</Btn>
-                <Btn btnType="form" btnStyle="option">狗狗朋友</Btn>
-                <Btn btnType="form" btnStyle="option">不限</Btn>
+                <Btn v-for="option in tag_friend.options" :key="option"
+                btnType="tag" 
+                :class="{'-active': optionSelected(tag_friend.selected, option)}"
+                @click="tag_friend.formChoice(tag_friend.selected, option)">{{ option }}</Btn>
+                <!-- <p>Selected Options: {{ tag_friend.selected.value.join(' , ') }}</p> -->
               </div>
             </div>
-  
-            <div class="tag-container">
-              <p>絕育狀態*</p>
+            <div 
+             class="tag-container"
+             v-show=" selectedOption === '貓貓朋友' ">
+              <p>我想認識的貓貓朋友是</p>
               <div class="tag-group">
-                <Btn btnType="form" btnStyle="option">已結紮</Btn>
-                <Btn btnType="form" btnStyle="option">未結紮</Btn>
-                <Btn btnType="form" btnStyle="option">不限</Btn>
+                <Btn v-for="option in tag_cat.options" :key="option"
+                btnType="tag" 
+                :class="{'-active': optionSelected(tag_cat.selected, option)}"
+                @click="tag_cat.formChoice(tag_cat.selected, option)">{{ option }}</Btn>
+              </div>
+            </div>
+            <div 
+             class="tag-container"
+             v-show=" selectedOption === '狗狗朋友' ">
+              <p>我想認識的狗狗朋友是</p>
+              <div class="tag-group">
+                <Btn v-for="option in tag_dog.options" :key="option"
+                btnType="tag" 
+                :class="{'-active': optionSelected(tag_dog.selected, option)}"
+                @click="tag_dog.formChoice(tag_dog.selected, option)">{{ option }}</Btn>
               </div>
             </div>
   
             <div class="tag-container">
               <p>社交性</p>
               <div class="tag-group">
-                <Btn btnType="form" btnStyle="option">親寵親人</Btn>
-                <Btn btnType="form" btnStyle="option">不親寵親人</Btn>
-                <Btn btnType="form" btnStyle="option">親寵不親人</Btn>
-                <Btn btnType="form" btnStyle="option">慢熟</Btn>
-                <Btn btnType="form" btnStyle="option">小孩友善</Btn>
+                <Btn v-for="option in tag_social.options" :key="option"
+                btnType="tag" 
+                :class="{'-active': optionSelected(tag_social.selected, option)}"
+                @click="tag_social.formChoice(tag_social.selected, option)">{{ option }}</Btn>
               </div>
             </div>
-  
+
+            <div class="tag-container">
+              <p>絕育狀態*</p>
+              <div class="tag-group">
+                <Btn v-for="option in tag_fixed.options" :key="option"
+                btnType="tag" 
+                :class="{'-active': optionSelected(tag_fixed.selected, option)}"
+                @click="tag_fixed.formChoice(tag_fixed.selected, option)">{{ option }}</Btn>
+              </div>
+            </div>
+    
           </div>          
           <div class="btn-group">
             <Btn btnStyle="primary small" @click="toggleLightBox_match">儲存</Btn>
@@ -516,7 +543,7 @@
   
   <script setup>
   
-  import { ref } from 'vue';
+  import { ref,computed,reactive,defineProps } from 'vue';
   // components
   import MainHeader from '@/components/MainHeader.vue';
   import Btn from '@/components/Btn.vue';
@@ -744,8 +771,65 @@
       inputError: ref(false),
   };
   
-  
-  // // lightBox title
+  // 調整喜好
+   // 哪種朋友
+  const tag_friend = {
+    formChoice: singleChoice,
+    options: ['貓貓朋友', '狗狗朋友', '不限'],
+    selected: ref([]),
+  };
+  // 根據上一題的選項決定顯示: 貓貓朋友/狗狗朋友
+   // 貓貓朋友
+  const tag_cat = {
+    formChoice: singleChoice,
+    options: ['幼貓', '成貓', '品種貓','不限'],
+    selected: ref([]),
+  };
+   //  狗狗朋友
+  const tag_dog = {
+    formChoice: singleChoice,
+    options: ['小型犬','中型犬', '大型犬', '不限'],
+    selected: ref([]),
+  };
+   //  社交性
+  const tag_social = {
+    formChoice: singleChoice,
+    options: ['親貓親狗', '親近同類 親人', '不親近同類 親人', '不限'],
+    selected: ref([]),
+  };
+   // 絕育狀態
+    // fixed : 結紮了
+  const tag_fixed = {    
+    formChoice: singleChoice,
+    options: ['已絕育', '未絕育', '不限'],
+    selected: ref([]),
+  };
+
+   // Single choice
+  function singleChoice(selected, option) {
+      selected.value = [option];
+      // console.log(selected.value);
+  };
+   // multiple choice
+  function multipleChoice(selected, option) {
+      if (optionSelected(selected, option)) {
+          selected.value = selected.value.filter(opt => opt !== option);
+      } else {
+          selected.value.push(option);
+      }
+      // console.log(selected.value);
+  };
+   // 判斷是否被選取
+  const optionSelected = (selected, option) => {
+      return selected.value.includes(option);
+  };
+
+  // computed 取得陣列中的第一個值，方便比較
+  const selectedOption = computed(() => {
+    return tag_friend.selected.value.length ? tag_friend.selected.value[0] : null;
+  });
+
+  // lightBox title
   const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
   const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
   const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};

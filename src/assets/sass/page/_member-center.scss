@@ -442,6 +442,7 @@ ol {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-left: .4rem;
   }
 
   .defaultBtn{
@@ -651,12 +652,11 @@ ol {
   }
 // 喜好設定彈窗
  .matchAdjust{
-   height: 100%;
+   padding-top: 4.4rem;
    display: flex;
    flex-direction: column;
    gap: 2.4rem;
    justify-content: center;
-   align-items: center;
    margin: 0 auto;
  }
 
@@ -666,14 +666,16 @@ ol {
   gap: 1.6rem ;
   .tag-container{
     display: flex;
+    flex-direction: column;
     justify-content: start;
-    align-items: center;
-    gap: 5.6rem;
+    align-items: start;
+    gap: .4rem;
     p{
-      width: 7.8rem;
+      white-space: wrap;
     }
     .tag-group{
       display: flex;
+      flex-wrap: wrap;
       justify-content: start;
       gap: .8rem;
     }
@@ -743,7 +745,7 @@ ol {
     .sr-slider {
       display: flex;
       width: 100%; 
-      overflow-x: auto;
+      overflow-y: auto;
       scroll-behavior: smooth; /* 平滑滾動 */
       -ms-overflow-style: none; /* IE 和 Edge 隱藏滾動條 */
       scrollbar-width: none;    /* Firefox 隱藏滾動條 */
@@ -1056,6 +1058,44 @@ ol {
     gap: .8rem;
   }
 }
+// 小幫手管理
+.hcManage-wrapper{
+  padding-top: 4.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+  .input-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    .input-group{
+      height: auto;
+      display: flex;
+      gap: 5.6rem;
+      label{
+        min-width: 6.5rem;
+      }
+      .inputs{
+        width: 100%; 
+        display: flex;
+        .tag-group{
+          display: flex;
+          justify-content: baseline;
+          gap: .8rem;
+          padding-bottom: .8rem;
+        }
+      }
+      .zone{
+        align-items: baseline;
+        gap: 1.2rem;
+        .service-z{
+          width: 100%;
+        }
+      }
+    }
+  }
+  .btn-group{}
+}
  // 無身分
 .hc-not-passed{
   .hc-title{
@@ -1201,14 +1241,27 @@ ol {
 }
 
 // 
+@media (max-width: 711px) {
+  .basicInfo .select-group{
+    flex-wrap: wrap;
+  }
+}
 @media (max-width: 576px) {
-  .basicInfo .card-content .input-group,.accountInfo .card-content .input-group,.contactInfo .card-content .input-group{
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    gap: .8rem;
-    label{
-      
+  .basicInfo,.accountInfo,.contactInfo{
+    .card-content{
+      .input-group{
+        flex-direction: column;
+        align-items: start;
+        height: 100%;
+        gap: .8rem;
+        label{}
+      }
+    }
+  }
+  .accountInfo .input-group{
+    .group-email,.group-pwd{
+      flex-direction: column;
+      align-items: end;
     }
   }
 }
