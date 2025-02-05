@@ -43,7 +43,6 @@
                 &:last-child{
                     margin: 0;
                 }
-            
                 .dropDown{
                     position: absolute;
                     top: 0;
@@ -52,10 +51,8 @@
                     border-color: map-get($colors, natural-1);
 
                     z-index: 900;
-
                 }
-
-                .city{           
+                .city{
                     z-index: 950; //上層需要壓過下層選單
                 }
             }
@@ -78,7 +75,7 @@
 @mixin question-container() {
     display: flex;
     flex-direction: column;
-    // text-align: center;
+    text-align: center;
     width: 100%;
     z-index: 10;
 }
@@ -202,8 +199,8 @@ body{
                 text-align: center;
                 width: 6.4rem;
                 height: 3.2rem;
-                top: 0.5rem; 
-                right: 0.5rem; 
+                top: 0.4rem; 
+                right: 0.4rem; 
                 transform: translate(8%, -15%);
                 background-color: map-get($colors, red); 
                 color: map-get($colors, beige);
@@ -387,6 +384,28 @@ body{
             justify-content: flex-start;
             align-items: flex-start;
             gap: 1.2rem;
+            .dropdownMenu{
+                position: relative;
+                height: 4.6rem;
+                margin-bottom: 16px;
+
+                text-align: left;
+                &:last-child{
+                    margin: 0;
+                }
+                .dropDown{
+                    position: absolute;
+                    top: 0;
+
+                    width: 100%;
+                    border-color: map-get($colors, natural-1);
+
+                    z-index: 900;
+                }
+                .city{
+                    z-index: 950; //上層需要壓過下層選單
+                }
+            }
         }
         .info{width: 100%;}
     }

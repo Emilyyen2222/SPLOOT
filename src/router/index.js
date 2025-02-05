@@ -19,7 +19,7 @@ const routes = [
     meta: {
       title: '元件庫 | Sploot',
       theme: 'red',
-      bodyBg: 'yellow-1',
+      bodyBg: 'pink-2',
       bodyId: 'ds', // 有需要才加
       textColor: 'brown' //有需要才加
     }
