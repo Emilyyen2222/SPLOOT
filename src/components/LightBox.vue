@@ -1,7 +1,11 @@
 <!-- Ian -->
 <template>
 
-    <div v-if="isLightBox" class="lightBox" :class="[{clicked:isLightBox},padding]">
+    <div 
+    v-if="displayMode === 'if' ? isLightBox : true" 
+    v-show="displayMode === 'show' ? isLightBox : true"
+    class="lightBox"
+    :class="[{clicked:isLightBox},padding]">
         <div class="lightBoxContent">
             <div class="closeBtnBox">
                 <div class="closeBtn" @click="toggleLightBox">
@@ -19,7 +23,12 @@
         </div>
     </div>
     
-    <div class="blackCover" :class="{clicked:isLightBox}"></div>
+    <div 
+    class="blackCover" 
+    :class="{clicked:isLightBox}"
+    v-if="displayMode === 'if' ? isLightBox : true" 
+    v-show="displayMode === 'show' ? isLightBox : true"
+    ></div>
 
  </template>
  
@@ -39,6 +48,10 @@
             type: String,
             required: false,
         },
+        displayMode:{
+            type:String,
+            default:'if',
+        }
         
     })
   

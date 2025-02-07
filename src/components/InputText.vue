@@ -5,12 +5,14 @@
     type="text"
     :class="[textAlign, size]"
     :placeholder="placeHolder"
+    :maxlength="maxlength"
     v-model="inputText"> 
 
 
     <textarea v-else
     :class="[textAlign, size]"
     :placeholder="placeHolder"
+    :maxlength="maxlength"
     v-model="inputText">
     </textarea>   
 
@@ -24,6 +26,10 @@
   import { ref, defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
+
+    maxlength: { //Ian
+      type: Number,
+    },
     size: {
       type: String,
     },

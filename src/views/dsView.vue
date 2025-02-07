@@ -22,6 +22,7 @@
     <section>
         <h4>問卷問題</h4>
         <div style="flex-direction: column; gap: 8px; padding: 10px; margin: 0 auto">
+            <p>加上:maxlength 可以設定最高輸入字數</p>
             <h6>Input (預設字置中)</h6>
             <InputText
                 :placeHolder="input1.placeHolder"
