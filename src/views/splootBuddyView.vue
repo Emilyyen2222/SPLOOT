@@ -836,9 +836,10 @@ const postServiceType = {
     placeHolder: "請選擇服務類型",
     options: [
         {name: "散步陪伴"},{name: "到府照顧"},{name: "友善寄宿"},{name: "寵物計程車"},
-    ]}
+    ]
+};
 // 燈箱標題請輸入
-const lightTitle2 = {title: "發佈 散步陪伴 貼文"}
+const lightTitle2 = {title: "發佈 散步陪伴 貼文"};
 
  //燈箱狀態
 let isLightBox2 = ref(false);
