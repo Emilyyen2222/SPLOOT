@@ -134,6 +134,13 @@
                                     </div>
                                     <div class="lineQRcode">
                                         <!-- 這裡放QRcode -->
+                                         <a :href="`https://line.me/ti/p/~${selectedCard.organizer.line}`" target="_blank">
+                                             <QRcode
+                                             v-if="selectedCard.organizer.line"
+                                             :value="`https://line.me/ti/p/~${selectedCard.organizer.line}`"
+                                             :size="64"
+                                             ></QRcode>
+                                         </a>
                                     </div>
                                 </div>
                             </div>
@@ -330,6 +337,7 @@
 
 <script setup>
     import { ref, onMounted, computed, watch } from 'vue';
+    import QRcode from 'qrcode.vue'
     
     import MainHeader from "@/components/MainHeader.vue";
     import Btn from '@/components/Btn.vue';
@@ -356,13 +364,13 @@
         content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
         peopleCount: "45",
         startTime: {
-            year: "2025",
+            year: "2024",
             month: "12",
             day: "25",
             time: "18:30"
         },
         endTime: {
-            year: "2025",
+            year: "2024",
             month: "12",
             day: "25",
             time: "21:30"
@@ -374,6 +382,31 @@
             avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
             name: "派對大師",
             line: "party_master"
+        }
+    },
+    {
+        title: "澀谷事變",
+        content: "19:00-發現澀谷被佈下「帳」/21:14-虎杖祓除蝗Guy，並且破壞「帳」/21:22-五條悟被封印",
+        peopleCount: "777",
+        startTime: {
+            year: "2024",
+            month: "10",
+            day: "31",
+            time: "19:00"
+        },
+        endTime: {
+            year: "2027",
+            month: "10",
+            day: "31",
+            time: "19:00"
+        },
+        place: "澀谷車站B5F",
+        type: "official",
+        status: "attend",
+        organizer: {
+            avatar: new URL("../assets/img/buddy-post/M.svg", import.meta.url).href,
+            name: "神秘人",
+            line: "spop333"
         }
     },
     {
@@ -403,18 +436,18 @@
     },
     {
         title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
-        content: "目標石垣島，帶著毛孩們一起出國吧！",
+        content: "目標石垣島，帶著毛孩們一起自由吧！",
         peopleCount: "80",
         startTime: {
             year: "2025",
             month: "02",
-            day: "05",
+            day: "28",
             time: "08:30"
         },
         endTime: {
             year: "2025",
-            month: "02",
-            day: "28",
+            month: "03",
+            day: "15",
             time: "22:00"
         },
         place: "基隆港",
@@ -422,7 +455,7 @@
         status: "attend",
         organizer: {
             avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "夜王",
+            name: "艾倫",
             line: "yoruou_2025"
         }
     },
@@ -468,7 +501,7 @@
             time: "10:10"
         },
         place: "基隆海洋廣場",
-        type: "official",
+        type: "splooter",
         status: "registered",
         organizer: {
             avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
@@ -772,11 +805,15 @@
     } else {
     document.body.classList.remove('clicked');
     }
-    //清空內容選單
+    //清空內容選單 以及提示錯誤
     newEventTitle.value.inputValue='';
+    newEventTitle.value.inputError = false;
     newEventContent.value.inputValue='';
+    newEventContent.value.inputError = false;
     peopleNumber.value.inputValue='';
+    peopleNumber.value.inputError = false;
     activePlace.value.inputValue='';
+    activePlace.value.inputError = false;
     }
 
     // ------------新增貼文輸入以及下拉式選單-------------
