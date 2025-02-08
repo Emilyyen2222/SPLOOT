@@ -136,6 +136,7 @@ $btnSizes: (large, default, small);
                 @include btnBasic($size, $c);
                 @include btnHover($size, $c);
                 border: 1px solid map-get($colors, natural-1);
+                font-size: 1.3rem;
             }
             &.-active .btn{
                 border: 1px solid map-get($colors, $theme);
