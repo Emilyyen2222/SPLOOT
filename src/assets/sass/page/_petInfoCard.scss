@@ -16,6 +16,33 @@
             align-items: start;
         }
         label{width: 6.4rem;}
+        .fieldInterest{
+            padding-left: 1rem;
+        }
+        .dropdownMenu{
+            position: relative;
+            height: 4.6rem;
+
+            text-align: left;
+            
+            &:last-child{
+                margin: 0;
+            }
+            .dropDown{
+                position: absolute;
+                top: 0;
+
+                width: 100%;
+                border-color: map-get($colors, natural-1);
+
+                z-index: 1000;
+            }
+            .city{
+                z-index: 950; //上層需要壓過下層選單
+            }
+        }
+        
+        
     }
     .tags{
         display: flex;
@@ -23,16 +50,6 @@
         align-content: center;
         justify-content: flex-start;
         gap: .8rem;
-        .tag{
-            padding: 0.8rem 1.6rem;
-            border: 1px solid map-get($colors, natural-1);
-            border-radius: 50px;
-            min-width: 7.5rem;
-            height: 4rem;
-            text-align: center;
-            align-items: center;
-            cursor: pointer;
-        }
     }
     .infoTop{
         padding: 2.4rem;
@@ -55,34 +72,56 @@
         .wPhotoSec{
             display: flex;
             flex-direction: row-reverse;
-            gap: 5.6rem;
-
+            gap: 7.6rem;
             width: 100%;
-            @include md(){gap: .2rem;}
-            .photo{
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: auto;
-                img{
-                    align-self: flex-start;
-                    width: 100%;
-                    border-radius: 8px;
-                    @include sm(){
-                        display: none;
-                    }
-                }  
+            @include lg(){
+                display: block;
+                gap: .2rem;
             }
+                .imgUpload{
+                    cursor: pointer;
+                    .imgUploadSection{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 16rem;
+                        height: 14rem;
+                        margin-bottom: 0.8rem;
+                        border: 1px dashed map-get($colors, natural-1);
+                        border-radius: 8px;
+            
+                        overflow-y: hidden;
+                        @include lg() {
+                            margin: 0 auto 2.4rem; 
+                        }
+                        .imgUploadText{
+                            text-align: center;
+                            color: map-get($colors, natural-2);
+                        }
+                        .uploadImgBox{
+                            border-radius: 8px;
+            
+                            img{
+                                width: 100%;
+                                height: auto;
+                            }
+                        }
+                    } 
+                    .imgUploadBtn{
+                        width: 8.8rem;
+                        margin-left: calc(100% - 8.8rem);
+                    }
+                }
             .infoSection{
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between ;
+                // justify-content: space-between ;
                 gap: 1.2rem;
                 .fieldWrapper{
                     .petName{
                         min-width: 30rem;
                         width: 75%;
-                        max-width: 35rem;
+                        // max-width: 35rem;
                     }
             }
         }
@@ -93,14 +132,18 @@
                     display: flex;
                     flex-wrap: wrap;
                     gap: 1.2rem;
+                    .unknown{
+                        // width: 12rem;
+                        margin-bottom: 16px;
+                    }
                 }
-                .year,.month,.date {width: 12rem;}
+                .year,.month,.date{width: 12rem;}
             }
         }
         .breedOpt{
-            max-width: 35rem;
-            width: 75%;
             min-width: 33rem;
+            width: 75%;
+            // max-width: 35rem;
         }
         .breedOptions{
             display: flex;
