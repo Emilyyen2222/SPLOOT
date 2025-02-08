@@ -277,11 +277,13 @@ const filterData = computed(()=>{
 
     // 移動地圖的處理函式
     function isMobileMapMove(placeName){
-        // console.log(map.value);
-        if(window.innerWidth < 768){
-        mapMove.value = !mapMove.value;
-        document.body.style.overflow = 'hidden'; // 禁止滾動
-        }      
+        
+        setTimeout(() => {
+            if(window.innerWidth < 768){
+            mapMove.value = !mapMove.value;
+            document.body.style.overflow = 'hidden'; // 禁止滾動
+            }            
+        }, 300);
     // 更新地圖 src
         const currentSRC = iframeSrc.value;
         iframeSrc.value = currentSRC.replace(/q=([^&]*)/, `q=${encodeURIComponent(placeName)}`);
