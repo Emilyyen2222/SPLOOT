@@ -80,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <Btn btnType="event" :btnStyle="card.status" @click="toggleSuccess(card)">{{ btnText[card.status] }}</Btn>
+                        <Btn btnType="event" :btnStyle="card.status" @click="isEditOrSuccess(card)">{{ btnText[card.status] }}</Btn>
                     </li>                    
                 </ul>
                 <!-- 參加成功燈箱 -->
@@ -148,7 +148,7 @@
                                 <img src="../assets/img/event/addEventPic.svg" alt="picture">
                             </div>
                         </div>
-                        <Btn btnStyle="primary default" @click="toggleSuccess">確定</Btn>
+                        <Btn btnStyle="primary default" @click="successPopOff">確定</Btn>
                     </div>
                 </div>
                 </PopUp>
@@ -172,7 +172,6 @@
                         :errorMsg="newEventTitle.errorMsg"
                         :hasError="newEventTitle.inputError"
                         :maxlength="12"
-
                         v-model="newEventTitle.inputValue">
                     </InputText>
                 </div>
@@ -325,12 +324,27 @@
                     </InputText>
                 </div>
             </div>
-            <div class="newEventBtn">
+            <div class="newEventBtn" v-if="editMode">
+                    <Btn btnStyle="primary small" @click="submitCard">儲存</Btn>
+                    <Btn btnStyle="baseline small" @click="toggleAddEvent">取消修改</Btn>
+                    <Btn btnStyle="baseline small cancel" @click="checkCancel(false)">刪除貼文</Btn>
+            </div>
+            <div class="newEventBtn" v-else>
                     <Btn btnStyle="primary small" @click="submitCard">提交</Btn>
                     <Btn btnStyle="baseline small" @click="toggleAddEvent">取消</Btn>
             </div>
         </div>
     </LightBox>
+    <!-- 確認刪除popup -->
+     <PopUp
+     :is-pop-up="isCancel"
+     >
+     <div class="checkAgain">
+         <p class="bold">你真的要刪除行程嗎？</p>
+         <Btn btnStyle="primary small" @click="checkCancel(true)">確定</Btn>
+         <Btn btnStyle="baseline small cancel" @click="checkCancel(false)">取消</Btn>
+     </div>
+    </PopUp>
 
     <MainFooter></MainFooter>
 </template>
@@ -382,6 +396,31 @@
             avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
             name: "派對大師",
             line: "party_master"
+        }
+    },
+    {
+        title: "One for All vs All for One",
+        content: "It's okay now!! Why? Because I am here!",
+        peopleCount: "2",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "01",
+            time: "22:00"
+        },
+        endTime: {
+            year: "2027",
+            month: "02",
+            day: "01",
+            time: "22:10"
+        },
+        place: "神野站跡地",
+        type: "splooter",
+        status: "edit",
+        organizer: {
+            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+            name: "All Might",
+            line: "all_might"
         }
     },
     {
@@ -790,6 +829,8 @@
     // －－－－－以下為各式燈箱－－－－－－－
 
     //--------------新增貼文燈箱-------------
+    const editMode = ref(false); //新增貼文以及編輯貼文按鈕模式變更
+
     // 燈箱標題請輸入
     const addEventTitle = {title: "發起活動"}
 
@@ -799,6 +840,7 @@
     // 控制燈箱的顯示與隱藏
     function toggleAddEvent() {
     isAddEvent.value = !isAddEvent.value;
+    editMode.value = false; //關閉燈箱切換回新增貼文模式
     // 停止捲軸
     if (isAddEvent.value) {
     document.body.classList.add('clicked');
@@ -814,6 +856,18 @@
     peopleNumber.value.inputError = false;
     activePlace.value.inputValue='';
     activePlace.value.inputError = false;
+    startTimeD.value.menuValue = '';
+    endTimeD.value.menuValue = '';
+    startTimeY.value.placeHolder = '年';
+    startTimeM.value.placeHolder = '月';
+    startTimeD.value.placeHolder = '日';
+    startTimeH.value.placeHolder = '時';
+    startTime.value.placeHolder = '分';
+    endTimeY.value.placeHolder = '年';
+    endTimeM.value.placeHolder = '月';
+    endTimeD.value.placeHolder = '日';
+    endTimeH.value.placeHolder = '時';
+    endTime.value.placeHolder = '分';
     }
 
     // ------------新增貼文輸入以及下拉式選單-------------
@@ -916,7 +970,7 @@
             startTimeD.value.options = Array.from({length: days},(value, index) => (
             {name: (index + 1).toString().padStart(2,'0')}
         ));
-            startTimeD.value.menuValue = ""; // 重置選擇
+            // startTimeD.value.menuValue = ""; // 重置選擇
         }
     });
 
@@ -926,7 +980,7 @@
             endTimeD.value.options = Array.from({length: days},(value, index) => (
                 { name: (index + 1).toString().padStart(2,'0')}
             ));
-            endTimeD.value.menuValue = ""; // 重置選擇
+            // endTimeD.value.menuValue = ""; // 重置選擇
         }
     });
 
@@ -1003,29 +1057,75 @@
     //---------------------------------
 
     // 參加成功燈箱
-    // 燈箱標題請輸入
 
     //PopUp狀態
     let isSuccess = ref(false);
 
     const selectedCard = ref(null); 
-    // 控制燈箱的顯示與隱藏
-    function toggleSuccess(card) {
-        if (isSuccess.value) {            
-            isSuccess.value = false;
-            document.body.classList.remove('clicked');
-        } else {
-            if(card.status == "attend"){
-                selectedCard.value = card; //儲存當前哪一張卡         
-                isSuccess.value = true;
-                document.body.classList.add('clicked');
+
+    // 控制編輯以及參加成功的按鈕（根據按鈕狀態做改變)
+ 
+
+    // 關閉參加成功popup
+    const successPopOff = () => {
+        isSuccess.value = false;
+        document.body.classList.remove('clicked');
+    };
+
+    function isEditOrSuccess(card) {
+        // 參加成功>開啟參加成功popup
+        if(card.status == "attend"){
+            selectedCard.value = card; //儲存當前哪一張卡
+            isSuccess.value = true;
+            document.body.classList.add('clicked');
+            // 編輯>開啟發起活動燈箱
+        }else if(card.status === "edit"){
+            selectedCard.value = card;
+            isAddEvent.value = true;
+            document.body.classList.add('clicked');
+            //card資料匯入燈箱(card 是一般物件)
+            newEventTitle.value.inputValue = card.title;
+            newEventContent.value.inputValue = card.content;
+            peopleNumber.value.inputValue = card.peopleCount;
+            activePlace.value.inputValue = card.place;
+            startTimeY.value.menuValue = card.startTime.year;
+            startTimeY.value.placeHolder = startTimeY.value.menuValue;
+            startTimeM.value.menuValue = card.startTime.month;
+            startTimeM.value.placeHolder = startTimeM.value.menuValue;
+            startTimeD.value.menuValue = card.startTime.day;
+            startTimeD.value.placeHolder = startTimeD.value.menuValue;
+            startTimeH.value.menuValue = card.startTime.time.split(':')[0];
+            startTimeH.value.placeHolder = startTimeH.value.menuValue;
+            startTime.value.menuValue = card.startTime.time.split(':')[1];
+            startTime.value.placeHolder = startTime.value.menuValue;
+            endTimeY.value.menuValue = card.endTime.year;
+            endTimeY.value.placeHolder = endTimeY.value.menuValue;
+            endTimeM.value.menuValue = card.endTime.month;
+            endTimeM.value.placeHolder = endTimeM.value.menuValue;
+            endTimeD.value.menuValue = card.endTime.day;
+            endTimeD.value.placeHolder = endTimeD.value.menuValue;
+            endTimeH.value.menuValue = card.endTime.time.split(':')[0];
+            endTimeH.value.placeHolder = endTimeH.value.menuValue;
+            endTime.value.menuValue = card.endTime.time.split(':')[1];
+            endTime.value.placeHolder = endTime.value.menuValue;
+
+            editMode.value = true;
+        };
+    };
+    // 刪除行程popup
+    const isCancel = ref(false);
+
+    // 確認是否刪除貼文
+    const checkCancel = (isComform) => {
+        if(isComform){
+            if (selectedCard.value) {
+                // 移除該行程
+                cardsData.value = cardsData.value.filter(card => card !== selectedCard.value);
+                cardsRawData.value = cardsRawData.value.filter(card => card !== selectedCard.value);
             }
+            toggleAddEvent();
         }
-    }
-
-    // QR code轉換
-
-
-    // 刪除行程燈箱
+        isCancel.value = !isCancel.value;
+    };
 
 </script>

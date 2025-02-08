@@ -84,8 +84,8 @@
     
                            width: 100%;
                            margin: 0.8rem 1.6rem;
-    
-                           color: map-get($colors, brown);
+                           
+                           line-height: 3.6rem;
     
                            label {
                                cursor: pointer;
@@ -400,9 +400,23 @@
             }
         }
     }
-    
+    .newEventBtn{
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
 
-
+        .cancel span{
+            @include textStyle(xsText)
+        }
+    }
+}
+.checkAgain{
+    p{
+        margin-bottom: 2.4rem;
+    }    
+    .primary.small{
+        margin-bottom: 0.8rem;
+    }
 }
 
 
