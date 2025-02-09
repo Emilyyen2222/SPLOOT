@@ -94,6 +94,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 0.8rem;
         @include lg(){
             display: flex;
             flex-direction: column;
@@ -121,6 +122,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
             h4.bold {
                 margin: 0;
             }
@@ -142,6 +144,7 @@
     @include circle(map-get($colors, pink-1));
     z-index: -20;
     position: absolute;
+    object-fit: cover;
     top: 67%; 
     left: 50%;
 }

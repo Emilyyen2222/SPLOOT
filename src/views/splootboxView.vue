@@ -25,26 +25,27 @@
 <div class="boxContainer">
     <div class="boxSection">
         <div class="boxImage">
-            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox1.jpg" alt="">
         </div>
         <div class="boxText">
             <h4 class="bold">必備日用品</h4>
             <p class="default">簡單實用，清潔護理一步到位，呵護毛孩健康</p>
         </div>
     </div>
+    <div class="boxDivider"></div>
     <div class="boxSection">
         <div class="text boxText">
             <h4 class="bold">原肉鮮零食</h4>
             <p class="default">100%純肉製作，無人工添加，營養滿分，美味安心</p>
         </div>
         <div class="img boxImage">
-            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox2.jpg" alt="">
         </div>
     </div>
     <div class="boxDivider"></div>
     <div class="boxSection">
         <div class="boxImage">
-            <img src="@/assets/img/splootbox/splootbox1.avif" alt="">
+            <img src="@/assets/img/splootbox/splootbox3.jpg" alt="">
         </div>
         <div class="boxText">
             <h4 class="bold">功能玩具</h4>
@@ -59,60 +60,59 @@
     </div>
 </div>
 <!-- 如何訂閱區塊 -->
-        <section class="howitworks">
-            <ul class="howitworks_section">
-                <div class="reviews-container">
-                    <div class="review-card">
-                    <div class="review-content">
-                        <div class="title">01</div>
-                        <p class="bold">幫您的毛孩填寫<br>客製化問卷</p>
-                    </div>
-                    <div class="review-image">
-                        <img src="../assets/img/splootbox/questionaire.jpeg"  alt="">
-                    </div>
-                </div>
-                <!--  -->
+<section class="howitworks">
+    <div class="howitworks_section">
+        <div class="reviews-container">
                 <div class="review-card">
-                    <div class="review-content">
-                        <div class="title">02</div>
-                        <p class="bold">選擇方案 <br>（銀卡，金卡，白金卡）</p>
-                    </div>
-                    <div class="review-image">
-                        <img src="@/assets/img/splootbox/subscribe.jpg"  alt="">
-                    </div>
+                <div class="review-content">
+                    <div class="title">01</div>
+                    <p class="bold">幫您的毛孩填寫<br>客製化問卷</p>
                 </div>
-                <!--  -->
-                <div class="review-card">
-                    <div class="review-content">
-                        <div class="title">03</div>
-                        <p class="bold">當月份SPLOOT BOX會在下單後<br>五日內寄出</p>
-                    </div>
-                    <div class="review-image">
-                        <img src="@/assets/img/splootbox/ship.avif"  alt="">
-                    </div>
-                </div>
-                <!--  -->
-                <div class="review-card">
-                    <div class="review-content">
-                        <div class="title">04</div>
-                        <p class="bold">SPLOOT BOX<br>讓毛孩每個月都充滿期待！</p>
-                    </div>
-                    <div class="review-image">
-                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
-                    </div>
+                <div class="review-image">
+                    <img src="../assets/img/splootbox/step1.svg"  alt="">
                 </div>
             </div>
-        </ul>
-        
-        <!-- 立即訂閱按鈕 -->
-        <div class="howitworksbtn">
-            <div class="btnBox">
-                <RouterLink to="/question">
-                    <Btn btnStyle="primary large">立即訂閱</Btn>
-                </RouterLink>
+            <!--  -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="title">02</div>
+                    <p class="bold">選擇方案 <br>（銀卡，金卡，白金卡）</p>
+                </div>
+                <div class="review-image">
+                    <img src="@/assets/img/splootbox/step2.svg"  alt="">
+                </div>
+            </div>
+            <!--  -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="title">03</div>
+                    <p class="bold">當月份SPLOOT BOX會在下單後<br>五日內寄出</p>
+                </div>
+                <div class="review-image">
+                    <img src="@/assets/img/splootbox/step3.svg"  alt="">
+                </div>
+            </div>
+            <!--  -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="title">04</div>
+                    <p class="bold">SPLOOT BOX<br>讓毛孩每個月都充滿期待！</p>
+                </div>
+                <div class="review-image">
+                    <img src="@/assets/img/splootbox/step4.svg"  alt="">
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- 立即訂閱按鈕 -->
+    <div class="howitworksbtn">
+        <div class="btnBox">
+            <RouterLink to="/question">
+                <Btn btnStyle="primary large">立即訂閱</Btn>
+            </RouterLink>
+        </div>
+    </div>
+</section>
 <!--狗狗評語文字區塊  -->
         <div class="reviewTitle">
             <div class="boxTitle3">
@@ -178,39 +178,39 @@
                 </div>
             </div>
 <!-- 電子報區塊 -->
- <div class="news">
-        <div class="newsSection">
-                <p class="smallText">
-                    訂閱SPLOOT BOX電子報，讓毛孩的生活充滿驚喜與期待！
-                </p>
-                <div class="emailBtn">
-                    <div>
-                        <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
-                        v-model="inputValue" :hasError="inputError"></InputText>
-                    </div>
-                </div>
-                <div class="newsButton">
-                    <div class="btnBox">
-                        <RouterLink to="/question">
-                            <Btn btnStyle="primary large">訂閱電子報</Btn>
-                        </RouterLink>
-                    </div>
-                </div>
+<div class="news">
+    <div class="newsSection">
+        <p class="smallText">
+            訂閱SPLOOT BOX電子報，讓毛孩的生活充滿驚喜與期待！
+        </p>
+        <div class="emailBtn">
+            <div>
+                <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
+                v-model="inputValue" :hasError="inputError"></InputText>
             </div>
         </div>
+        <div class="newsButton">
+            <div class="btnBox">
+                <RouterLink to="/question">
+                    <Btn btnStyle="primary large">訂閱電子報</Btn>
+                </RouterLink>
+            </div>
+        </div>
+    </div>
+</div>
 <!--FAQ區塊-->            
 <div class="faqWrapper">
-                <div class="faqTitle">FAQ</div>
-                <div class="faqContainer">
-                    <DropdownQa  question="可以隨時更改方案嗎？" answer="是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
-                                如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！"></DropdownQa>
-                    <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
-                    <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
-                </div>
-            </div>
+    <div class="faqTitle">FAQ</div>
+    <div class="faqContainer">
+        <DropdownQa  question="可以隨時更改方案嗎？" answer="是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
+                    如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！"></DropdownQa>
+        <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
+        <DropdownQa  question="QQQQQ" answer="AAAAA"></DropdownQa>
+    </div>
+</div>
             
-            <!-- circle bg -->
-                <div class="circleSplootBox"></div>
+<!-- circle bg -->
+<div class="circleSplootBox"></div>
 <MainFooter></MainFooter>         
 
          

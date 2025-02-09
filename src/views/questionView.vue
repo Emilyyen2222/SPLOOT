@@ -154,7 +154,7 @@
                         </ul>
                     </div>
                     <div class="image">
-                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                        <img src="@/assets/img/splootbox/planSilver.svg"  alt="">
                     </div>
                 </div>
                 <div class="card"
@@ -175,7 +175,7 @@
                         </ul>
                     </div>
                     <div class="image">
-                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                        <img src="@/assets/img/splootbox/planGold.svg"  alt="">
                     </div>
                 </div>
                 <div class="card popular"
@@ -197,7 +197,7 @@
                         </ul>
                     </div>
                     <div class="image">
-                        <img src="@/assets/img/splootbox/dogbox.avif"  alt="">
+                        <img src="@/assets/img/splootbox/planPlatinum.svg"  alt="">
                     </div>
                 </div>
             </div>
