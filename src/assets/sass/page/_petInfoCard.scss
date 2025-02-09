@@ -23,16 +23,16 @@
         align-content: center;
         justify-content: flex-start;
         gap: .8rem;
-        .tag{
-            padding: 0.8rem 1.6rem;
-            border: 1px solid map-get($colors, natural-1);
-            border-radius: 50px;
-            min-width: 7.5rem;
-            height: 4rem;
-            text-align: center;
-            align-items: center;
-            cursor: pointer;
-        }
+        // .tag{
+        //     padding: 0.8rem 1.6rem;
+        //     border: 1px solid map-get($colors, natural-1);
+        //     border-radius: 50px;
+        //     min-width: 7.5rem;
+        //     height: 4rem;
+        //     text-align: center;
+        //     align-items: center;
+        //     cursor: pointer;
+        // }
     }
     .infoTop{
         padding: 2.4rem;

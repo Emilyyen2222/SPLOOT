@@ -10,158 +10,151 @@
 
     <div class="infoContainer">
 <!-- 狗狗資訊卡標題 -->
-    <!-- <div class="infoTop">
-        <div class="closeBtn">
-            <img src="../assets/img/icon/close.svg">
-        </div>
-        <div class="">
-            <h4>狗狗資訊卡</h4>
-        </div>
-    </div> -->
-    <!-- 資訊卡內文 -->
-    <div class="infoWrap">
-        <!-- 毛孩姓名，性別，品種 -->
-        <div class="wPhotoSec">
-            <div class="photo">
-                <img src="../assets/img/splootbox/splootbox1.avif" alt="">
+
+        <!-- 資訊卡內文 -->
+        <div class="infoWrap">
+            <!-- 毛孩姓名，性別，品種 -->
+            <div class="wPhotoSec">
+                <div class="photo">
+                    <img src="../assets/img/splootbox/splootbox1.avif" alt="">
+                </div>
+                <div class="infoSection">
+                    <div class="fieldWrapper">
+                        <div class="field">
+                            <label>毛孩姓名*</label>
+                            <div class="petName">
+                                <InputText placeHolder="斯普拉特" size = "small" text-align="left" errorMsg="Invalid Input" 
+                                v-model="inputValue" :hasError="inputError"></InputText>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fieldWrapper">
+                        <div class="field">
+                            <label>性別*</label>
+                            <div class="tags">
+                                <span class="smallText tag">男生</span>
+                                <span class="smallText tag">生</span>
+                                <span class="smallText tag">未知</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fieldWrapper">
+                        <div class="field">
+                            <label>品種*</label>
+                            <div class="breedOpt">
+                                <DropdownMenu
+                                :placeHolder="menus.menu1.placeHolder"
+                                :options="menus.menu1.options">
+                                </DropdownMenu>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="infoSection">
+            <!-- 生日 -->
+            <div class="birthdaySection">
+                <div class="birthFieldWrapper">
+                    <div class="field">
+                        <label>生日</label>
+                        <div class="birthBox">
+                            <div class="year">
+                                <DropdownMenu 
+                                :placeHolder="menus.year.placeHolder"
+                                :options="menus.year.options">
+                                </DropdownMenu>
+                            </div>
+                            <div class="month">
+                                <DropdownMenu 
+                                :placeHolder="menus.month.placeHolder"
+                                :options="menus.month.options">
+                                </DropdownMenu>
+                            </div>
+                            <div class="date">
+                                <DropdownMenu 
+                                :placeHolder="menus.day.placeHolder"
+                                :options="menus.day.options">
+                                </DropdownMenu> 
+                            </div>
+                            <div class="tags">
+                                <span class="smallText tag">未知</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 體型 -->
+            <div class="petSize">
+                <div class="sizeFieldWrapper">
+                    <div class="field">
+                        <label>體型</label>
+                        <div class="sizeOptions">
+                            <div class="tags">
+                                <span class="smallText tag">小型犬10公斤以下</span>
+                                <span class="smallText tag">中型犬11-25公斤</span>
+                                <span class="smallText tag">大型犬26公斤以上</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 社交 -->
+            <div class="social">
+                <div class="socialfieldWrapper">
+                    <div class="field">
+                        <label>社交性</label>
+                        <div class="sizeOptions">
+                            <div class="tags">
+                                <span class="smallText tag">親寵親人</span>
+                                <span class="smallText tag">不親寵親人</span>
+                                <span class="smallText tag">親寵不親人</span>
+                                <span class="smallText tag">慢熟</span>
+                                <span class="smallText tag">小孩友善</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 興趣愛好 -->
+            <div class="interest">
                 <div class="fieldWrapper">
                     <div class="field">
-                        <label>毛孩姓名*</label>
-                        <div class="petName">
-                            <InputText placeHolder="斯普拉特" size = "small" text-align="left" errorMsg="Invalid Input" 
+                        <label>興趣愛好</label>
+                        <div class="sizeOptions">
+                            <div class="tags">
+                                <span class="smallText tag">喜歡散步</span>
+                                <span class="smallText tag">喜歡玩球</span>
+                                <span class="smallText tag">喜歡玩飛盤</span>
+                                <span class="smallText tag">熱愛玩水</span>
+                                <span class="smallText tag">喜歡跳舞</span>
+                                <span class="smallText tag">熱衷學習指令</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 絕育狀態 -->
+            <div class="neuter">
+                <div class="neuterFieldWrapper">
+                    <div class="field">
+                        <label>絕育狀態*</label>
+                        <div class="breedOptions">
+                            <input type="radio" name="" class="nRadioBtn">已絕育
+                            <input type="radio" name="" class="nRadioBtn">未絕育
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 毛孩簡介文字區 -->
+            <div class="infoInput">
+                <div class="fieldWrapper">
+                    <div class="field">
+                        <label>毛孩簡介*</label>
+                            <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
                             v-model="inputValue" :hasError="inputError"></InputText>
-                        </div>
-                    </div>
-                </div>
-                <div class="fieldWrapper">
-                    <div class="field">
-                        <label>性別*</label>
-                        <div class="tags">
-                            <span class="smallText tag">男生</span>
-                            <span class="smallText tag">女生</span>
-                            <span class="smallText tag">未知</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="fieldWrapper">
-                    <div class="field">
-                        <label>品種*</label>
-                        <div class="breedOpt">
-                            <DropdownMenu
-                            :placeHolder="menus.menu1.placeHolder"
-                            :options="menus.menu1.options">
-                            </DropdownMenu>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- 生日 -->
-        <div class="birthdaySection">
-            <div class="birthFieldWrapper">
-                <div class="field">
-                    <label>生日</label>
-                    <div class="birthBox">
-                        <div class="year">
-                            <DropdownMenu 
-                            :placeHolder="menus.year.placeHolder"
-                            :options="menus.year.options">
-                            </DropdownMenu>
-                        </div>
-                        <div class="month">
-                            <DropdownMenu 
-                            :placeHolder="menus.month.placeHolder"
-                            :options="menus.month.options">
-                            </DropdownMenu>
-                        </div>
-                        <div class="date">
-                            <DropdownMenu 
-                            :placeHolder="menus.day.placeHolder"
-                            :options="menus.day.options">
-                            </DropdownMenu> 
-                        </div>
-                        <div class="tags">
-                            <span class="smallText tag">未知</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 體型 -->
-        <div class="petSize">
-            <div class="sizeFieldWrapper">
-                <div class="field">
-                    <label>體型</label>
-                    <div class="sizeOptions">
-                        <div class="tags">
-                            <span class="smallText tag">小型犬10公斤以下</span>
-                            <span class="smallText tag">中型犬11-25公斤</span>
-                            <span class="smallText tag">大型犬26公斤以上</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 社交 -->
-        <div class="social">
-            <div class="socialfieldWrapper">
-                <div class="field">
-                    <label>社交性</label>
-                    <div class="sizeOptions">
-                        <div class="tags">
-                            <span class="smallText tag">親寵親人</span>
-                            <span class="smallText tag">不親寵親人</span>
-                            <span class="smallText tag">親寵不親人</span>
-                            <span class="smallText tag">慢熟</span>
-                            <span class="smallText tag">小孩友善</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 興趣愛好 -->
-        <div class="interest">
-            <div class="fieldWrapper">
-                <div class="field">
-                    <label>興趣愛好</label>
-                    <div class="sizeOptions">
-                        <div class="tags">
-                            <span class="smallText tag">喜歡散步</span>
-                            <span class="smallText tag">喜歡玩球</span>
-                            <span class="smallText tag">喜歡玩飛盤</span>
-                            <span class="smallText tag">熱愛玩水</span>
-                            <span class="smallText tag">喜歡跳舞</span>
-                            <span class="smallText tag">熱衷學習指令</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 絕育狀態 -->
-        <div class="neuter">
-            <div class="neuterFieldWrapper">
-                <div class="field">
-                    <label>絕育狀態*</label>
-                    <div class="breedOptions">
-                        <input type="radio" name="" class="nRadioBtn">已絕育
-                        <input type="radio" name="" class="nRadioBtn">未絕育
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 毛孩簡介文字區 -->
-        <div class="infoInput">
-            <div class="fieldWrapper">
-                <div class="field">
-                    <label>毛孩簡介*</label>
-                        <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
-                        v-model="inputValue" :hasError="inputError"></InputText>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
     <div class="saveBtnBox">
         <RouterLink to="/match" style="cursor: pointer;">
@@ -175,11 +168,13 @@
     </template>
     
     <script setup>
+        import { ref } from 'vue'
+
         import MainHeader from "../components/MainHeader.vue";
+        
         import DropdownMenu from "../components/DropdownMenu.vue";
         import Btn from '../components/Btn.vue';
         import InputText from '../components/InputText.vue';
-        import { ref } from 'vue'
         import LightBox from "@/components/LightBox.vue";
 
     const lightTitle = {title: "狗狗資訊卡"}
@@ -197,7 +192,7 @@
     }
     }
 
-        const menus = {
+const menus = {
   menu1: {
     placeHolder: '米克斯',
     options: [

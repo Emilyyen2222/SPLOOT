@@ -5,7 +5,6 @@
     <main class="whole-bg">
       <!-- top nav -->
       <memberNav/>
-    
       <!-- v-if : 審核判斷 -->
       <div class="helperCenter">
         <!-- hc : helper-center -->
@@ -63,7 +62,9 @@
             <div class="hc-grid-container">
               <!-- 1 -->
               <div class="hc-postCard" id="hcPostBuddy">
-                <helperPostCard class="helperPostCard"/>
+
+                <helperPostCard/>
+
                 <div class="hc-btn-group">
                   <Btn btnStyle="primary default" id="editPostCard" @click="toggleLightBox_editPost">編輯</Btn>                
                   <Btn btnStyle="baseline small" id="deletePostCard" @click="togglePopUp_deleteCard">刪除貼文</Btn>            
@@ -195,34 +196,38 @@
           </div>
           <!-- 上傳檔案 -->
           <div class="upload-file-wrapper">
+            <!-- 正面自拍 -->
             <div class="selfy">
               <p>正面自拍照</p>
-              <div class="upload-area">
-                <img v-if="imagePreview" :src="imagePreview" alt="預覽圖片">
-                <smallText class="content">上傳個人自拍照</smallText>
+              <div class="imgUpload">
+                <div class="imgUploadSection">
+                  <p class="smallText imgUploadText" v-if="!selfyImg">上傳個人自拍照*</p>
+                  <div class="uploadImgBox" v-if="selfyImg">
+                    <img :src="selfyImg" alt="uploadImg">
+                  </div>
+                </div>
+                <div class="imgUploadBtn">
+                  <input type="file" hidden ref="selfyFileInput" accept="image/*" @change="(event) => uploadFileImage(event, 'selfy')">
+                  <Btn btnStyle="primary small" @click="callFileInput('selfy')">上傳圖檔</Btn>
+                </div>
               </div>
-              <Btn btnStyle="primary default" @click="triggerFileInput">上傳檔案</Btn>
-              <input 
-              type="file" 
-              ref="fileInput" 
-              style="display: none" 
-              accept="image/*" 
-              @change="handleFileChange" />
-              <smallText>* 請提供2年內正面且清晰的個人照，可清楚辨識為身分證件上之同一人，方能通過審核。</smallText>
             </div>
+
+            <!-- 身分證正面 -->
             <div class="idCard">
               <p>身分證圖檔(正面)</p>
-              <div class="upload-area">
-                <img src="" alt="">
-                <smallText class="content">上傳身分證正面</smallText>
+              <div class="imgUpload">
+                <div class="imgUploadSection">
+                  <p class="smallText imgUploadText" v-if="!idCardImg">上傳身分證正面*</p>
+                  <div class="uploadImgBox" v-if="idCardImg">
+                    <img :src="idCardImg" alt="uploadImg">
+                  </div>
+                </div>
+                <div class="imgUploadBtn">
+                  <input type="file" hidden ref="idCardFileInput" accept="image/*" @change="(event) => uploadFileImage(event, 'idCard')">
+                  <Btn btnStyle="primary small" @click="callFileInput('idCard')">上傳圖檔</Btn>
+                </div>
               </div>
-              <Btn btnStyle="primary default" @click="triggerFileInput">上傳檔案</Btn>
-              <input 
-              type="file" 
-              ref="fileInput" 
-              style="display: none" 
-              accept="image/*" 
-              @change="handleFileChange" />
             </div>
           </div>
           
@@ -242,60 +247,60 @@
           <div class="hc-terms"> 
             <div class="content">
 
-              <smallText>歡迎您使用本網站（以下稱「本網站」或「本平台」）。在註冊或使用本網站所提供之服務前，請詳細閱讀以下使用者條款（以下稱「本條款」）。一旦您註冊或使用本網站，即表示您已閱讀、了解並同意遵守本條款。</smallText> <br><br>
+              <p>歡迎您使用本網站（以下稱「本網站」或「本平台」）。在註冊或使用本網站所提供之服務前，請詳細閱讀以下使用者條款（以下稱「本條款」）。一旦您註冊或使用本網站，即表示您已閱讀、了解並同意遵守本條款。</p> <br>
 
-              <smallText class="bold">一、適用範圍</smallText> <br>
-              <smallText>本條款適用於本網站所提供之所有功能、資訊與服務（以下合稱「本服務」）。</smallText> <br>
-              <smallText>若本條款與本網站所公告的其他規定（例如隱私權政策、活動辦法等）有不一致之處，則依該其他規定或活動辦法為準，但限於該規定或活動辦法所涉之特定範圍內。</smallText> <br><br>
+              <p class="bold">一、適用範圍</p> <br>
+              <p>本條款適用於本網站所提供之所有功能、資訊與服務（以下合稱「本服務」）。</p> <br>
+              <p>若本條款與本網站所公告的其他規定（例如隱私權政策、活動辦法等）有不一致之處，則依該其他規定或活動辦法為準，但限於該規定或活動辦法所涉之特定範圍內。</p> <br>
 
-              <smallText class="bold">二、使用資格</smallText> <br>
-              <smallText>使用者應確保於註冊或使用本服務時，具備法律上之行為能力；若使用者為未成年人，應在法定代理人（父母或監護人）同意下使用本服務。</smallText> <br>
-              <smallText>使用者應提供真實、正確的個人或公司資訊。如因提供不實資料導致任何爭議、損失，概由使用者自行承擔責任。</smallText> <br><br>
+              <p class="bold">二、使用資格</p> <br>
+              <p>使用者應確保於註冊或使用本服務時，具備法律上之行為能力；若使用者為未成年人，應在法定代理人（父母或監護人）同意下使用本服務。</p> <br>
+              <p>使用者應提供真實、正確的個人或公司資訊。如因提供不實資料導致任何爭議、損失，概由使用者自行承擔責任。</p> <br>
 
-              <smallText class="bold">三、資料使用條款</smallText> <br><br>
+              <p class="bold">三、資料使用條款</p> <br>
 
-              <smallText>1.資料提供與蒐集</smallText> <br>
-              <smallText>使用者在使用本服務時，可能會主動提供個人或寵物相關資訊（包含但不限於姓名、聯絡方式、寵物資料等）。本網站將根據使用者提供之資料與下文所列範圍進行蒐集與使用。</smallText> <br>
-              <smallText>使用者同意本網站依照相關法律及本條款，對該等資料進行保存、處理及使用。</smallText> <br><br>
+              <p>1.資料提供與蒐集</p> <br>
+              <p>使用者在使用本服務時，可能會主動提供個人或寵物相關資訊（包含但不限於姓名、聯絡方式、寵物資料等）。本網站將根據使用者提供之資料與下文所列範圍進行蒐集與使用。</p> <br>
+              <p>使用者同意本網站依照相關法律及本條款，對該等資料進行保存、處理及使用。</p> <br>
 
-              <smallText>2.資料使用目的</smallText> <br>
+              <p>2.資料使用目的</p> <br>
               <ul>
                   <li>會員身份驗證與管理</li>
                   <li>分析與優化使用者體驗</li>
                   <li>提供個人化的推薦、廣告與行銷內容</li>
                   <li>進行統計與研究以優化本服務</li>
               </ul>
-              <smallText>非經使用者同意或符合法令規定，本網站不會將使用者的個資任意提供或移轉給第三方。</smallText> <br><br>
+              <p>非經使用者同意或符合法令規定，本網站不會將使用者的個資任意提供或移轉給第三方。</p> <br>
 
-              <smallText>3.資料保護與安全</smallText> <br>
-              <smallText>本網站採取合理技術及管理措施，以保障使用者的個人資料安全。如發生資料洩漏事件，本網站將依照法令規定通報主管機關及使用者。</smallText> <br><br>
+              <p>3.資料保護與安全</p> <br>
+              <p>本網站採取合理技術及管理措施，以保障使用者的個人資料安全。如發生資料洩漏事件，本網站將依照法令規定通報主管機關及使用者。</p> <br>
 
-              <smallText>4.資料保留與刪除</smallText> <br>
-              <smallText>使用者如有刪除帳戶或特定資料之需求，請洽本網站客服或依本網站公布之程序辦理。但基於法規、契約或資訊安全要求，部分資料可能需保存於系統或備份中一段時間。</smallText> <br><br>
+              <p>4.資料保留與刪除</p> <br>
+              <p>使用者如有刪除帳戶或特定資料之需求，請洽本網站客服或依本網站公布之程序辦理。但基於法規、契約或資訊安全要求，部分資料可能需保存於系統或備份中一段時間。</p> <br>
 
-              <smallText class="bold">四、使用者行為準則</smallText> <br>
-              <smallText>使用者承諾以合法且誠實之方式使用本服務，不得從事違反法律或公序良俗之行為。</smallText> <br>
-              <smallText>使用者應自行保管帳號與密碼資訊，不得將帳號轉讓或借予他人使用。如有發現未經授權的使用情形，請立即通知本網站。</smallText> <br><br>
+              <p class="bold">四、使用者行為準則</p> <br>
+              <p>使用者承諾以合法且誠實之方式使用本服務，不得從事違反法律或公序良俗之行為。</p> <br>
+              <p>使用者應自行保管帳號與密碼資訊，不得將帳號轉讓或借予他人使用。如有發現未經授權的使用情形，請立即通知本網站。</p> <br>
 
-              <smallText class="bold">五、免責聲明</smallText> <br><br>
+              <p class="bold">五、免責聲明</p> <br>
 
-              <smallText>服務可用性與正確性</smallText> <br>
-              <smallText>本網站盡力維護服務的安全與穩定，惟對於因系統維護、網路壅塞、不可抗力或其他非可歸責於本網站之事由所造成的服務中斷、延遲或資料遺失，本網站不負擔任何賠償責任。</smallText> <br><br>
+              <p>服務可用性與正確性</p> <br>
+              <p>本網站盡力維護服務的安全與穩定，惟對於因系統維護、網路壅塞、不可抗力或其他非可歸責於本網站之事由所造成的服務中斷、延遲或資料遺失，本網站不負擔任何賠償責任。</p> <br>
 
-              <smallText>第三方連結與外部內容</smallText> <br>
-              <smallText>本網站可能含有連結至外部網站或第三方服務，該等網站或服務並非本網站所管理或控制，使用者應自行判斷並承擔風險。本網站對該第三方網站或服務之內容、政策或行為，不負任何責任。</smallText> <br><br>
+              <p>第三方連結與外部內容</p> <br>
+              <p>本網站可能含有連結至外部網站或第三方服務，該等網站或服務並非本網站所管理或控制，使用者應自行判斷並承擔風險。本網站對該第三方網站或服務之內容、政策或行為，不負任何責任。</p> <br>
 
-              <smallText class="bold">六、智慧財產權</smallText> <br>
-              <smallText>本網站上所載之文字、圖片、商標、程式碼等智慧財產，除標明為使用者上傳或第三方擁有者外，均歸本網站或其授權人所有。未經本網站或權利人事先同意，使用者不得複製、轉載、改作、轉售或進行任何商業使用。</smallText> <br><br>
+              <p class="bold">六、智慧財產權</p> <br>
+              <p>本網站上所載之文字、圖片、商標、程式碼等智慧財產，除標明為使用者上傳或第三方擁有者外，均歸本網站或其授權人所有。未經本網站或權利人事先同意，使用者不得複製、轉載、改作、轉售或進行任何商業使用。</p> <br>
 
-              <smallText class="bold">七、條款修改</smallText> <br>
-              <smallText>本網站有權於任何時間修訂或變更本條款，並於本網站公告修訂後生效。修訂後之條款同樣公佈於本網站，請使用者隨時留意並重新確認。</smallText> <br>
-              <smallText>若使用者於本條款修訂生效後，仍繼續使用本服務，視為同意接受修訂後之條款。</smallText> <br><br>
+              <p class="bold">七、條款修改</p> <br>
+              <p>本網站有權於任何時間修訂或變更本條款，並於本網站公告修訂後生效。修訂後之條款同樣公佈於本網站，請使用者隨時留意並重新確認。</p> <br>
+              <p>若使用者於本條款修訂生效後，仍繼續使用本服務，視為同意接受修訂後之條款。</p> <br>
 
-              <smallText class="bold">八、準據法與管轄法院</smallText> <br>
-              <smallText>本條款之解釋與適用，應以台灣法律為準據法。</smallText> <br>
-              <smallText>因本條款或本服務所生爭議，如經協商不成，雙方同意以台灣之法院為第一審管轄法院。</smallText> <br>
-              <smallText>如有任何疑問、建議或欲行使個人資料相關權利，歡迎聯繫本網站客服。感謝您使用本服務，並請您確保已詳讀並同意以上內容。</smallText> <br>
+              <p class="bold">八、準據法與管轄法院</p> <br>
+              <p>本條款之解釋與適用，應以台灣法律為準據法。</p> <br>
+              <p>因本條款或本服務所生爭議，如經協商不成，雙方同意以台灣之法院為第一審管轄法院。</p> <br>
+              <p>如有任何疑問、建議或欲行使個人資料相關權利，歡迎聯繫本網站客服。感謝您使用本服務，並請您確保已詳讀並同意以上內容。</p> <br>
               
             </div>
           </div>
@@ -324,10 +329,11 @@
         @toggle="toggleLightBox_hcManage">
         <div class="hcManage-wrapper">
           <div class="input-wrapper">
+            <!-- 服務地區 -->
             <div class="input-group">
               <label class="smallText">服務地區*</label>
               <div class="inputs zone">
-                <!-- <DropdownMenu class="service-z"
+                <DropdownMenu class="service-z"
                   :placeHolder="city.placeHolder"
                   :options="city.options"
                   v-model="selectedCity">
@@ -337,9 +343,10 @@
                   :options="districtsOptions"
                   v-model="selectDistrict"
                   :key="selectedCity"> 
-                </DropdownMenu> -->
+                </DropdownMenu>
               </div>
             </div>
+            <!-- 寵物類型 -->
             <div class="input-group">
               <label class="smallText" for="">寵物類型*</label>
               <div class="inputs">
@@ -348,32 +355,57 @@
                   btnType="tag" 
                   :class="{'-active': optionSelected(tag_petKind.selected, option)}"
                   @click="tag_petKind.formChoice(tag_petKind.selected, option)">{{ option }}</Btn>
-                  <!-- <p>Selected Options: {{ tag_petKind.selected.value.join(' , ') }}</p> -->
                 </div>
                 <div class="select-group">
 
                 </div>
               </div>
             </div>
+            <!-- 服務時段 -->
             <div class="input-group">
               <label class="smallText" for="">服務時段*</label>
-              <div class="inputs">
+              <div class="inputs service-time">
                 <div class="tag-group">
                   <Btn v-for="option in tag_weekDay.options" :key="option"
                   btnType="tag" 
                   :class="{'-active': optionSelected(tag_weekDay.selected, option)}"
                   @click="tag_weekDay.formChoice(tag_weekDay.selected, option)">{{ option }}</Btn>
-                  <!-- <p>Selected Options: {{ tag_weekDay.selected.value.join(' , ') }}</p> -->
                 </div>
                 <div class="select-group">
+                  <!-- 開始時間 -->
+                  <DropdownMenu
+                    class="service-t"
+                    :placeHolder="timeStart.placeHolder"
+                    :options="timeStart.options"
+                    v-model="timeStart.selected"
+                  />
 
+                  <p>至</p>
+
+                  <!-- 結束時間 -->
+                  <DropdownMenu
+                    class="service-t"
+                    :placeHolder="timeEnd.placeHolder"
+                    :options="timeEnd.options"
+                    v-model="timeEnd.selected"
+                  />
                 </div>
               </div>
             </div>
+            <!-- 自介 -->
             <div class="input-group">
               <label class="smallText">自我介紹</label>
               <div class="inputs">
-                <textarea name="" id=""></textarea>
+                <InputText
+                  :size = "input_selfIntro.size"
+                  :textAlign = "input_selfIntro.textAlign"
+                  :placeHolder="input_selfIntro.placeHolder"
+                  :errorMsg="input_selfIntro.errorMsg"
+                  :hasError="input_selfIntro.inputError.value"
+                  v-model="input_selfIntro.inputValue.value">
+              </InputText>
+                <textarea name="" id=""
+                rows="5" cols="50"></textarea>
               </div>
             </div>
           </div>
@@ -384,11 +416,129 @@
         </div>
       </LightBox>    
   
-  
+ 
+      <!-- lightbox，新增貼文 -->
+      <LightBox 
+        :title="addPost.title"
+        :is-light-box="addPost.isLightBox.value" 
+        @toggle="toggleLightBox_addPost">
+        <div class="newPost">
+          <div class="postType ">
+              <p class="smallText inputLabel">服務類型*</p>
+              <div class="dropdownMenu">
+                  <DropdownMenu class="typeDropDown dropDown"
+                      :placeHolder="postServiceType.placeHolder"
+                      :options="postServiceType.options"
+                      v-model="selectService">
+                  </DropdownMenu>
+              </div>
+          </div>
+          <div class="imgUpload">
+              <div class="imgUploadSection">
+                  <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+                  <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                      <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
+                  </div>
+              </div>
+              <div class="imgUploadBtn">
+                  <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage_addPost">
+                  <Btn btnStyle="primary small" @click="callFileInput_addPost">上傳圖檔</Btn>
+              </div>
+          </div>
+          <div class="newPostInput">
+              <div class="postTitle">
+                  <p class="smallText inputLabel">發佈主題*</p>
+                  <InputText                
+                      size = "small"
+                      placeHolder="這裡輸入發佈主題"
+                      errorMsg="Invalid Input"
+                      v-model="inputValuePostTitle"
+                      :hasError="inputError">
+                  </InputText>
+              </div>
+              <div class="postContent">
+                  <p class="smallText inputLabel">發佈內容*</p>
+                  <InputText 
+                  class="textBox" 
+                  inputType="textarea"             
+                  size="small" 
+                  placeHolder="請於200字內" 
+                  errorMsg="Invalid Input" 
+                  v-model="inputValuePostContent"
+                  :hasError="inputError"></InputText>
+              </div>
+          </div>
+          <div class="newPostBtn">
+              <Btn btnStyle="primary small">提交</Btn>
+              <div class="cancelBtn">
+                  <Btn btnStyle="baseline small">取消</Btn>
+              </div>
+          </div>
+        </div>
+      </LightBox>
+      <!-- lightbox，編輯貼文 -->
+      <LightBox 
+        :title="editPost.title"
+        :is-light-box="editPost.isLightBox.value" 
+        @toggle="toggleLightBox_editPost">
+        <div class="newPost">
+          <div class="postType ">
+              <p class="smallText inputLabel">服務類型*</p>
+              <div class="dropdownMenu">
+                  <DropdownMenu class="typeDropDown dropDown"
+                      :placeHolder="postServiceType.placeHolder"
+                      :options="postServiceType.options"
+                      v-model="selectService">
+                  </DropdownMenu>
+              </div>
+          </div>
+          <div class="imgUpload">
+              <div class="imgUploadSection">
+                  <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+                  <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                      <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
+                  </div>
+              </div>
+              <div class="imgUploadBtn">
+                  <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage_addPost">
+                  <Btn btnStyle="primary small" @click="callFileInput_addPost">上傳圖檔</Btn>
+              </div>
+          </div>
+          <div class="newPostInput">
+              <div class="postTitle">
+                  <p class="smallText inputLabel">發佈主題*</p>
+                  <InputText                
+                      size = "small"
+                      placeHolder="這裡輸入發佈主題"
+                      errorMsg="Invalid Input"
+                      v-model="inputValuePostTitle"
+                      :hasError="inputError">
+                  </InputText>
+              </div>
+              <div class="postContent">
+                  <p class="smallText inputLabel">發佈內容*</p>
+                  <InputText 
+                  class="textBox" 
+                  inputType="textarea"             
+                  size="small" 
+                  placeHolder="請於200字內" 
+                  errorMsg="Invalid Input" 
+                  v-model="inputValuePostContent"
+                  :hasError="inputError"></InputText>
+              </div>
+          </div>
+          <div class="newPostBtn">
+              <Btn btnStyle="primary small">提交</Btn>
+              <div class="cancelBtn">
+                  <Btn btnStyle="baseline small">取消</Btn>
+              </div>
+          </div>
+        </div>
+      </LightBox>
+      
       <!-- PopUp，刪除卡片 -->
       <PopUp
-      :is-pop-up="deleteCard.isPopUp.value"
-      @toggle="togglePopUp_deleteCard">
+      :is-pop-up="deleteCard.isPopUp.value">
         <div class="delete-petcard">
           <div class="title">
             <p class="bold">確定刪除資訊卡?</p>
@@ -399,20 +549,6 @@
           </div>
         </div>
       </PopUp>
-  
-      <!-- lightbox，新增貼文 -->
-      <LightBox 
-        :title="addPost.title"
-        :is-light-box="addPost.isLightBox.value" 
-        @toggle="toggleLightBox_addPost">
-      </LightBox>
-      <!-- lightbox，編輯貼文 -->
-      <LightBox 
-        :title="editPost.title"
-        :is-light-box="editPost.isLightBox.value" 
-        @toggle="toggleLightBox_editPost">
-      </LightBox>
-      
   
   
       <!-- circle bg -->
@@ -437,7 +573,6 @@
   // pages
   import memberNav from '../views/memberNav.vue' ;
   import helperPostCard from '../views/helperPostCard.vue';
-import { result } from 'lodash';
   
 // hc-nav
 const step1 = ref(false);
@@ -623,21 +758,54 @@ const step1 = ref(false);
       inputValue: ref(''),
       inputError: ref(false),
   };
-  // 上傳檔案
-  const fileInput = ref(null);
-  
-  const triggerFileInput = () => {
-    fileInput.value?.click();
+  const input_selfIntro = {
+      size: 'small',
+      textAlign: 'textLeft',
+      placeHolder: '輸入身分證號碼',
+      errorMsg: '請輸入正確的格式',
+      inputValue: ref(''),
+      inputError: ref(false),
   };
-  
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      console.log("選擇的檔案：", file.name);
-      // 可以在這裡進行上傳處理
+
+
+  // 資料審核~
+ // 兩個不同的上傳區塊
+  const selfyImg = ref(null);   // 自拍照
+  const idCardImg = ref(null);  // 身分證照片
+
+  // 兩個不同的 input 參考
+  const selfyFileInput = ref(null);
+  const idCardFileInput = ref(null);
+
+  // 按下按鈕時觸發對應的檔案上傳
+  const callFileInput = (type) => {
+    if (type === "selfy" && selfyFileInput.value) {
+      selfyFileInput.value.click();
+    } else if (type === "idCard" && idCardFileInput.value) {
+      idCardFileInput.value.click();
     }
   };
-  
+
+  // 上傳圖片
+  const uploadFileImage = (event, type) => {
+    if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+      return; // 防止 `event` 或 `files` 為空
+    }
+
+    const file = event.target.files[0];
+
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (type === "selfy") {
+          selfyImg.value = e.target.result; // 設定自拍照
+        } else if (type === "idCard") {
+          idCardImg.value = e.target.result; // 設定身分證照
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   // dropDown
    // 取得目前年份
   const currentYear = new Date().getFullYear();
@@ -698,6 +866,59 @@ const step1 = ref(false);
           { id: 29, name: '30' },
           { id: 30, name: '31' },
       ]
+  };
+
+  // "新增貼文"燈箱
+
+  const postServiceType = {
+      placeHolder: "請選擇服務類型",
+      options: [
+          {name: "散步陪伴"},{name: "到府照顧"},{name: "友善寄宿"},{name: "寵物計程車"},
+      ]}
+  // 燈箱標題請輸入
+  const lightTitle2 = {title: "發佈 散步陪伴 貼文"}
+
+  //燈箱狀態
+  let isLightBox2 = ref(false);
+
+  // 控制燈箱的顯示與隱藏
+  function toggleLightBox2() {
+    isLightBox2.value = !isLightBox2.value;
+    // 停止捲軸
+    if (isLightBox2.value) {
+      document.body.classList.add('clicked');
+    } else {
+      document.body.classList.remove('clicked');
+    }
+  }
+
+  // 上傳圖片
+  const fileInput = ref(null);
+  const hasUploadImg = ref(null);
+  const uploadedImg = ref(null);
+
+  // 按下按鈕呼叫"選擇檔案"
+  const callFileInput_addPost = () => {
+      if(fileInput.value){
+          fileInput.value.click();
+      };
+  }
+
+  // 上傳
+  const uploadFileImage_addPost = (event) => {
+      if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+          return; //防止 `event` 或 `files` 為空
+      };
+
+      const file = event.target.files[0];
+
+      if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+          hasUploadImg.value = e.target.result; // 設定預覽圖片的 base64 URL
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   // 小幫手管理
@@ -816,13 +1037,13 @@ const city = {
    // 寵物類型
    const tag_petKind = {    
     formChoice: singleChoice,
-    options: ['已絕育', '未絕育', '不限'],
+    options: ['幼犬', '小型犬', '中型犬','大型犬','老年犬','幼貓','成貓'],
     selected: ref([]),
   };
    // 服務時段
    const tag_weekDay = {    
     formChoice: singleChoice,
-    options: ['已絕育', '未絕育', '不限'],
+    options: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
     selected: ref([]),
   };
      // Single choice
@@ -843,6 +1064,29 @@ const city = {
     const optionSelected = (selected, option) => {
         return selected.value.includes(option);
     };
+
+    // 服務時段-24hr制
+     // 開始
+    const timeStart = reactive({
+      placeHolder: '起始時間',
+      selected: '',
+      options: computed(() => {
+        return Array.from({ length: 24 }, (_, i) => ({
+          id: i,
+          name: `${String(i).padStart(2, '0')}:00` // 格式化為 00:00 ~ 23:00
+        }));
+      })
+    });
+     // 結束
+    const timeEnd = reactive({
+      placeHolder: '結束時間',
+      selected: '',
+      options: computed(() => {
+        if (!timeStart.selected) return timeStart.options; // 若未選擇起始時間，顯示所有選項
+        const startIndex = parseInt(timeStart.selected.split(':')[0]); // 取得起始時間數字 (00 ~ 23)
+        return timeStart.options.filter(option => parseInt(option.name.split(':')[0]) > startIndex);
+      })
+    });
   
   
   </script>
