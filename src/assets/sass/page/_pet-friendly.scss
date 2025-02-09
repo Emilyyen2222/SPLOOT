@@ -66,6 +66,8 @@
                     width: 100%;
                     margin: 0.8rem 0.8rem;
 
+                    line-height: 3.6rem;
+
                     label {
                         cursor: pointer;
                         display: flex;
@@ -99,7 +101,7 @@
                     grid-template-columns: repeat(2, 1fr); /* 2欄，欄位寬度相等 */
                     gap: 3.2rem;
 
-                    @include lg(){
+                    @include sm(){
                         grid-template-columns: repeat(1, 1fr); /* 1欄，欄位寬度相等 */
 
                     }
@@ -154,7 +156,7 @@
         .rightMain {
             width: 376px;
 
-            @include md() {
+            @include lg() {
                 position: fixed;
                 top: 0;
                 left: 100%;

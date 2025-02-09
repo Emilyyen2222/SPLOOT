@@ -2,28 +2,24 @@
     <MainHeader theme="red" bgc="purple-1"></MainHeader>
     <!-- <main class="bg-purple-1" style="z-index: -10;"> -->
     <!------------------------match question 1---------------------->
-<div class="matchWrap firstBox">
+<div v-if="question==1" class="matchWrap firstBox">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的毛孩朋友是</h4>
         <div class="image">
             <RouterLink to="/match/matchCard" style="cursor: pointer;">
                 <div class="imgFlex">
-                <img class="img2" src="@/assets/img/splootbox/dogbox.avif" alt="">
+                <img class="img2" src="@/assets/img/match/match1.svg" alt="">
                 </div>
             </RouterLink>    
         </div>
     </div>
     <div class="options">
-        <!-- <RouterLink to="/match/petInfoCard" style="cursor: pointer;"> -->
-            <!-- <Btn btnType="form" btnStyle="option">貓貓</Btn> -->
-        <!-- </RouterLink
-        <Btn btnType="form" btnStyle="option">狗狗</Btn> -->
-        <!-- <Btn btnType="form" btnStyle="option">不限</Btn> -->
         <Btn v-for="option in matchPet.options" :key="option"
         btnType="form" btnStyle="option" 
         :class="{'-active': optionSelected(matchPet.selected, option)}"
         @click="matchPet.formChoice(matchPet.selected, option)">{{ option }}</Btn>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(matchPet.selected.value.length != 0 )">下一題</Btn>
     </div>
     <!-- progress bar -->
     <ProgressBar :total="4" :current="1" ></ProgressBar>
@@ -33,19 +29,13 @@
 </div>
 
    <!------------------------match question2貓---------------------->
-<div class="matchWrap">
+<div v-if="question==2" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的貓咪朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/cat1.jpg" alt="">
+                <img class="img1" src="@/assets/img/match/match2-1.svg" alt="">
             </div>
-            <div class="imgFlex">
-                <img class="img2" src="@/assets/img/splootbox/cat2.jpg" alt="">
-            </div> 
-            <div class="imgFlex">
-                <img class="img3" src="@/assets/img/splootbox/cat3.jpg" alt="">
-            </div> 
         </div>
     </div>
     <div v-show="true" class="options">
@@ -53,24 +43,20 @@
         btnType="form" btnStyle="option" 
         :class="{'-active': optionSelected(matchCat.selected, option)}"
         @click="matchCat.formChoice(matchCat.selected, option)">{{ option }}</Btn>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>
-        <Btn btnType="form" btnStyle="lastQ">上一題</Btn>
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(matchCat.selected.value.length != 0)">下一題</Btn>
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>
     </div>
 </div>
-   <!------------------------match question2狗---------------------->
-<div class="matchWrap">
+   <!------------------------match question3狗---------------------->
+<div v-if="question==3" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的狗狗朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dog1.jpg" alt="">
+                <img class="img1" src="@/assets/img/match/match2-2.svg" alt="">
             </div>
-            <div class="imgFlex">
-                <img class="img2" src="@/assets/img/splootbox/dog2.jpg" alt="">
-            </div> 
-            <div class="imgFlex">
-                <img class="img3" src="@/assets/img/splootbox/dog3.jpg" alt="">
-            </div> 
         </div>
     </div>
     <div v-show="true" class="options">
@@ -78,17 +64,19 @@
         btnType="form" btnStyle="option" 
         :class="{'-active': optionSelected(matchDog.selected, option)}"
         @click="matchDog.formChoice(matchDog.selected, option)">{{ option }}</Btn>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>
-        <Btn btnType="form" btnStyle="lastQ">上一題</Btn>
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(matchDog.selected.value.length != 0)">下一題</Btn>
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>
     </div>
 </div>
-   <!------------------------match question3---------------------->
-<div class="matchWrap">
+   <!------------------------match question4---------------------->
+<div v-if="question==4" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我喜歡哪一種社交性</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/dog2.jpg" alt="">
+                <img class="img1" src="@/assets/img/match/match3.svg" alt="">
             </div>
         </div>
     </div>
@@ -97,17 +85,19 @@
         btnType="form" btnStyle="option" 
         :class="{'-active': optionSelected(matchSocial.selected, option)}"
         @click="matchSocial.formChoice(matchSocial.selected, option)">{{ option }}</Btn>
-        <Btn btnType="form" btnStyle="nextQ">下一題</Btn>
-        <Btn btnType="form" btnStyle="lastQ">上一題</Btn>
+        <Btn btnType="form" btnStyle="nextQ"
+        @click="nextQuestion(matchSocial.selected.value.length != 0)">下一題</Btn>
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>
     </div>
 </div>
-   <!------------------------match question4---------------------->
-<div class="matchWrap">
+   <!------------------------match question5---------------------->
+<div v-if="question==5" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我希望的毛孩朋友結紮狀態</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/splootbox/doghospital.avif" alt="">
+                <img class="img1" src="@/assets/img/match/match4.svg" alt="">
             </div>
         </div>
     </div>
@@ -116,14 +106,16 @@
         btnType="form" btnStyle="option" 
         :class="{'-active': optionSelected(matchNeutered.selected, option)}"
         @click="matchNeutered.formChoice(matchNeutered.selected, option)">{{ option }}</Btn>
-        <Btn btnType="form" btnStyle="nextQ">完成</Btn>
-        <Btn btnType="form" btnStyle="lastQ">上一題</Btn>
+        <RouterLink to="/match/matchCard">
+            <Btn btnType="form" btnStyle="nextQ">完成</Btn>
+        </RouterLink>
+        <Btn btnType="form" btnStyle="lastQ"
+        @click="lastQuestion">上一題</Btn>
     </div>
 </div>
     <!-- circle bg -->
         <div class="circleMatch"></div>
     <!-- </main> -->
-    
 </template>
     
 <script setup>
@@ -133,6 +125,22 @@
     import DropdownMenu from "../components/DropdownMenu.vue";
     import InputText from '../components/InputText.vue';
     import ProgressBar from "../components/ProgressBar.vue";
+
+
+    const question = ref(1);
+
+
+    // 下一題按鈕
+    function nextQuestion(bol = false) {
+    if (bol == true) {
+        question.value++;
+    } else {
+        alert("請輸入選項");
+    }
+    }
+    function lastQuestion(){
+        question.value--;
+    }
 
     const matchPet = {
         formChoice: singleChoice,
