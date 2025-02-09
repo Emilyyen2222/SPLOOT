@@ -370,8 +370,6 @@
     </template>
     
     <script setup>
-        import { ref } from 'vue'
-
         import MainHeader from "../components/MainHeader.vue";
         
         import DropdownMenu from "../components/DropdownMenu.vue";
