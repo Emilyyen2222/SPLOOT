@@ -50,10 +50,10 @@
 </div>
 <div class="preferenceBox">
     <div class="preferenceBtns">
-        <img src="@/assets/img/icon/rightArrow.svg">
+        <!-- <img src="@/assets/img/icon/rightArrow.svg"> -->
         <div class="preBox">
         <Btn class="preferenceBtn" btnStyle="baseline small">更改喜好</Btn>
-        <Btn class="preferenceBtn" btnStyle="outline small">鍵盤</Btn>
+        <!-- <Btn class="preferenceBtn" btnStyle="outline small">鍵盤</Btn> -->
         </div>
     </div>
 </div>
