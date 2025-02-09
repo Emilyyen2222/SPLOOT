@@ -903,7 +903,6 @@
     // input監看是否空白
     watch(() => newEventTitle.value.inputValue, (newValue) => {
         newEventTitle.value.inputError = newValue.trim() === '';
-
     });
 
     watch(() => newEventContent.value.inputValue, (newValue) => {
@@ -1044,7 +1043,7 @@
         !startTimeH.value.menuValue ||
         !endTimeH.value.menuValue ||
         !startTime.value.menuValue ||
-        !endTime.value.menuValue)       
+        !endTime.value.menuValue);       
     });
 
     //開始時間結束時間檢查（結束時間大於開始時間的話為false）

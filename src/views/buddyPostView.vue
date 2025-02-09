@@ -11,10 +11,7 @@
                 </Router-link>
             </div>
             <ul class="navTag">
-                <li class="navTags"><Btn btnStyle="primary small">散步陪伴</Btn></li>
-                <li class="navTags"><Btn btnStyle="outline small">到府照顧</Btn></li>
-                <li class="navTags"><Btn btnStyle="outline small">友善寄宿</Btn></li>
-                <li class="navTags"><Btn btnStyle="outline small">寵物計程車</Btn></li>
+                <li class="navTags" v-for="(tags, index) in navTag" :key="index"><Btn :btnStyle="`small ${tags.btnStyle}`" @click="getServiceType(tags)">{{ tags.name }}</Btn></li>
             </ul>
         </div>
         <div class="heroContent">
@@ -22,83 +19,74 @@
             <div class="postContent">
                 <div class="postTop">
                     <div class="postImg">
-                        <img src="../assets/img/buddy-post/demo.png" alt="">
+                        <img :src="post.imgSrc" alt="postImg">
                     </div>
                 <div class="postMain">                
                         <div class="postTitle">
-                            <h5 class="bold">高速散步</h5>
+                            <h5 class="bold">{{ post.title }}</h5>
                             <div class="reviews">
                                 <ul class="stars">
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                    <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                                    <li v-for="n in 5"><img :src="isStars(n, post.stars)" alt="star" :class="['star', 'star' + n]"></li>
                                 </ul>
-                                <div class="avgGrade smallText">4.5</div>
-                                <div class="commentCount smallText">(3)</div>
+                                <div class="avgGrade smallText">{{ post.avgGrade }}</div>
+                                <div class="commentCount smallText">({{ post.commentCount }})</div>
                             </div>
                         </div>
                         <div class="postText">
-                            <p>唉，散步陪伴這種事，說實話有點麻煩，不過既然你需要，我會盡量幫忙。需要陪你的毛孩散步嗎？我提供的服務可是高速散步，速度快到連詛咒隧道附近都能快速穿越，保證不會耽誤太久。雖然有點累，還是得做好，畢竟毛孩的安全是最重要的。放心，牠們會平安無事……應該。<br>預計散步的地點在小桃他們家的神社附近，阿，我好想你，小桃。</p>
+                            <p>{{ post.content }}</p>
                         </div>                
                         <div class="editBtn">
-                            <Btn btnStyle="baseline small">編輯貼文</Btn>  <!-- 要改成xs字型 -->
+                            <Btn btnStyle="baseline small">編輯貼文</Btn>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- 貼文者資訊 -->
             <div class="poster">
                 <div class="userBox">
                     <div class="avatar">
-                        <img class="avatarImg" src="../assets/img/buddy-post/avatarImg.svg" alt="avatar">
+                        <img class="avatarImg" :src="poster.avatarSrc" alt="avatar">
                     </div>
                     <div class="topContent">
-                        <h5 class="bold name">高倉健</h5>
+                        <h5 class="bold name">{{ poster.name }}</h5>
                         <div class="location">
                             <img class="locationIcon" src="@/assets/img/icon/location.svg" alt="locationIcon">
-                            <p class="smallText">文山區, 臺北</p>
+                            <p class="smallText">{{ poster.city }}, {{ poster.district }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="information">
                     <div class="middleContent">
                         <div class="petType tagBox">
-                            <p class=" smallText">寵物類型</p>
+                            <p class="boxLabel smallText">寵物類型</p>
                             <ul class="typeTag tagUl">
-                                <li class="typeTags tagLi">幼犬</li>
-                                <li class="typeTags tagLi">小型犬</li>
-                                <li class="typeTags tagLi">中型犬</li>
-                                <li class="typeTags tagLi">大型犬</li>
-                                <li class="typeTags tagLi">老年犬</li>
-                                <li class="typeTags tagLi">幼貓</li>
-                                <li class="typeTags tagLi">成貓</li>
+                                <li class="typeTags tagLi" v-for="(type, index) in poster.petType" :key="index">{{ type }}</li>
                             </ul>
                         </div>
                         <div class="serviceTime tagBox">
-                            <p class=" smallText">服務時間</p>
+                            <p class="boxLabel smallText">服務時間</p>
                             <ul class="timeTag tagUl">
-                                <li class="timeTags tagLi">週一</li>
-                                <li class="timeTags tagLi">週二</li>
-                                <li class="timeTags tagLi">週三</li>
-                                <li class="timeTags tagLi">週四</li>
-                                <li class="timeTags tagLi">週五</li>
-                                <li class="timeTags tagLi">週六</li>
-                                <li class="timeTags tagLi">週日</li>
+                                <li class="timeTags tagLi" v-for="(day,index) in poster.serviceDays" :key="index">週{{ day }}</li>
                             </ul>
                             <div class="time">
-                                <p class="smallText">08:00 - 17:00</p>
+                                <p class="smallText">{{ poster.serviceTimeStart }} - {{ poster.serviceTimeEnd }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="bottomContent">
-                        <p>唉，真沒勁……不過，我會盡量照顧好你的毛孩，我擅長高速散步、高速接送，都交給我。就算覺得好累，還是得做好這些事，反正我能應付。別擔心，牠們會安全的，應該。</p>
+                        <p>{{ poster.introduce }}</p>
                     </div>
                 </div>
                 <div class="connect">
                     <div class="lineQRCode">
-                        <img src="../assets/img/buddy-post/demoQR.png" alt="account" class="QRcode">
+                        <a :href="`https://line.me/ti/p/~${poster.line}`" target="_blank">
+                            <QRcode      
+                                v-if="poster.line"
+                                :value="`https://line.me/ti/p/~${poster.line}`"
+                                :size="96"
+                            ></QRcode>
+                        </a>
                     </div>
                     <p class="smallText">聯繫小幫手</p>
                 </div>
@@ -113,67 +101,22 @@
             </div>
             <!-- 評論卡片 -->
             <ul class="commentCards">
-                <li class="commenmtCard">
+                <li class="commenmtCard" v-for="(card, index) in latestCommentCards" :key="index">
                     <div class="commenter">
                         <div class="avatar">
-                            <img class="avatarImg" src="../assets/img/buddy-post/demologo.svg" alt="avatar">
+                            <img class="avatarImg" :src="card.avatarSrc" alt="avatar">
                         </div>
                         <div class="commentInfo">
-                            <h6 class="bold">Emily</h6>
-                            <p class="xsText">2025/1/22</p>
+                            <h6 class="bold">{{ card.name }}</h6>
+                            <p class="xsText">
+                                {{ card.time.year }}/{{ card.time.month }}/{{ card.time.day }}</p>
                             <ul class="stars">
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                                <li v-for="n in 5"><img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]"></li>
                             </ul>
                         </div>
                     </div>
                     <div class="comment">
-                        <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。</p>
-                    </div>
-                </li>
-                <li class="commenmtCard">
-                    <div class="commenter">
-                        <div class="avatar">
-                            <img class="avatarImg" src="../assets/img/buddy-post/L.svg" alt="avatar">
-                        </div>
-                        <div class="commentInfo">
-                            <h6 class="bold">Lupe</h6>
-                            <p class="xsText">2025/1/19</p>
-                            <ul class="stars">
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star4"></li>
-                                <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <p class="smallText">C'est dommage! 雖然服務不錯，我的愛犬也看起來很開心，但他似乎有點心不在焉，少了些專注感。</p>
-                    </div>
-                </li>
-                <li class="commenmtCard">
-                    <div class="commenter">
-                        <div class="avatar">
-                            <img class="avatarImg" src="../assets/img/buddy-post/e.svg" alt="avatar">
-                        </div>
-                        <div class="commentInfo">
-                            <h6 class="bold">艾倫．葉卡</h6>
-                            <p class="xsText">2025/1/15</p>
-                            <ul class="stars">
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <p class="smallText">散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把霍普交給他時，內心有些猶豫，但看到霍普回來時興奮又快樂，那種擔憂全都消散了。</p>
+                        <p class="smallText">{{ card.content }}</p>
                     </div>
                 </li>
             </ul>
@@ -185,26 +128,24 @@
             </div>
             <div class="inputComment">
                 <div class="avatar">
-                    <img class="avatarImg" src="../assets/img/buddy-post/Kosoku-baba.svg" alt="avatar">
+                    <img class="avatarImg" :src="userInfo.avatar" alt="avatar">
                 </div>
                 <div class="content">
                     <ul class="stars">
-                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                        <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                        <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
+                        <li v-for="n in 5"><img :src="isStars(n, mountedStars)" alt="star" :class="['star', 'star' + n]" @click="setStars(n)"></li>
                     </ul>
                     <div class="input">
                         <InputText 
-                        class="textBox" 
-                        inputType="textarea"             
-                        size="small" 
-                        placeHolder="請於80個字數內" 
-                        errorMsg="Invalid Input" 
-                        v-model="inputValuePostContent"
-                        :hasError="inputError"></InputText>
-                        <Btn btnStyle="primary default">發佈</Btn>
+                            class="textBox" 
+                            inputType="textarea"             
+                            size="small"
+                            maxlength="80" 
+                            :placeHolder="getComment.placeHolder" 
+                            :errorMsg="getComment.errorMsg" 
+                            v-model="getComment.inputValue"
+                            :hasError="getComment.inputError">
+                        </InputText>
+                        <Btn btnStyle="primary default" @click="commentSubmit">發佈</Btn>
                     </div>
                 </div>
             </div>
@@ -220,153 +161,24 @@
             :is-light-box="isLightBox" 
             @toggle="toggleLightBox">
            <ul class="commentCards inLightBox">
-                   <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/demologo.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">Emily</h6>
-                               <p class="xsText">2025/1/22</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">雖然他說很累，但還是完成了任務，感覺不錯。</p>
-                       </div>
-                   </li>
-                   <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/L.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">Lupe</h6>
-                               <p class="xsText">2025/1/19</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">C'est dommage! 雖然服務不錯，我的愛犬也看起來很開心，但他似乎有點心不在焉，少了些專注感。</p>
-                       </div>
-                   </li>
-                   <li class="commenmtCard">
-                        <div class="commenter">
-                            <div class="avatar">
-                                <img class="avatarImg" src="../assets/img/buddy-post/e.svg" alt="avatar">
-                            </div>
-                            <div class="commentInfo">
-                                <h6 class="bold">艾倫．葉卡</h6>
-                                <p class="xsText">2025/1/15</p>
-                                <ul class="stars">
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                    <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
-                                </ul>
-                            </div>
+                <li class="commenmtCard" v-for="(card, index) in sortedCommentCards" :key="index">
+                    <div class="commenter">
+                        <div class="avatar">
+                            <img class="avatarImg" :src="card.avatarSrc" alt="avatar">
                         </div>
-                        <div class="comment">
-                            <p class="smallText">散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把霍普交給他時，內心有些猶豫，但看到霍普回來時興奮又快樂，那種擔憂全都消散了。</p>
+                        <div class="commentInfo">
+                            <h6 class="bold">{{ card.name }}</h6>
+                            <p class="xsText">
+                                {{ card.time.year }}/{{ card.time.month }}/{{ card.time.day }}</p>
+                            <ul class="stars">
+                                <li v-for="n in 5"><img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]"></li>
+                            </ul>
                         </div>
-                    </li>
-                     <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/S.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">鄒宗翰</h6>
-                               <p class="xsText">2025/1/14</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">散步路線很特別，還有經過詛咒隧道，挺有趣的。</p>
-                       </div>
-                   </li>
-                   <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/H.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">Haooooo</h6>
-                               <p class="xsText">2025/1/1</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-line.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">The service was good, but he seemed a bit distracted and somewhat unfocused.!!</p>
-                       </div>
-                   </li>
-                   <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/M.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">Mysterio</h6>
-                               <p class="xsText">2024/12/25</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">雪拉輕踏風中行，步伐輕快心自清，隨風自在醉我流。</p>
-                       </div>
-                   </li>
-                   <li class="commenmtCard">
-                       <div class="commenter">
-                           <div class="avatar">
-                               <img class="avatarImg" src="../assets/img/buddy-post/Kosoku-baba.svg" alt="avatar">
-                           </div>
-                           <div class="commentInfo">
-                               <h6 class="bold">Kosoku baba</h6>
-                               <p class="xsText">2024/12/12</p>
-                               <ul class="stars">
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star1"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star2"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star3"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star4"></li>
-                                   <li><img src="@/assets/img/icon/star-full.svg" alt="star" class="star star5"></li>
-                               </ul>
-                           </div>
-                       </div>
-                       <div class="comment">
-                           <p class="smallText">這小子速度快得讓我都差點跟不上。不過，看他那副萎掉的樣子，竟然還能堅持，倒是讓我有點佩服</p>
-                       </div>
-                   </li>
+                    </div>
+                    <div class="comment">
+                        <p class="smallText">{{ card.content }}</p>
+                    </div>
+                </li>
            </ul>     
         </LightBox>
     </div>
@@ -377,35 +189,242 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+    import {computed, ref, watch} from "vue";
+    import QRcode from 'qrcode.vue'
 
-import MainHeader from "@/components/MainHeader.vue";
-import Btn from '@/components/Btn.vue';
-import MainFooter from "@/components/MainFooter.vue"
-import InputText from '../components/InputText.vue';
-import LightBox from '../components/LightBox.vue';
+    import MainHeader from "@/components/MainHeader.vue";
+    import Btn from '@/components/Btn.vue';
+    import MainFooter from "@/components/MainFooter.vue"
+    import InputText from '../components/InputText.vue';
+    import LightBox from '../components/LightBox.vue';
 
+    // 導航列標籤
+    const navTag = ref([
+        {
+        name:  '散步陪伴',
+        btnStyle: 'primary',
+        },
+        {
+        name:  '到府照顧',
+        btnStyle: 'outline',
+        },
+        {
+        name:  '友善寄宿',
+        btnStyle: 'outline',
+        },
+        {
+        name:  '寵物計程車',
+        btnStyle: 'outline',
+        },
+    ])
 
-const input = {
-    placeHolder: '撰寫評論..',
-    inputValue: ref(''),
-    inputError: ref(false),
-}
+    //導航列標籤點選
+    const getServiceType = (selectedTags) => {
+        navTag.value.forEach(tags => tags.btnStyle = 'outline');
+        selectedTags.btnStyle = 'primary';
+    };
 
-// 燈箱標題請輸入
-const lightTitle = {title: "所有評論"}
+    // 文章主內容
+    const post = ref({
+        imgSrc: new URL("@/assets/img/buddy-post/demo.png", import.meta.url).href,
+        title:"高速散步",
+        stars:5,
+        avgGrade:4.5,
+        commentCount:3,
+        content:"唉，散步陪伴這種事，說實話有點麻煩，不過既然你需要，我會盡量幫忙。需要陪你的毛孩散步嗎？我提供的服務可是高速散步，速度快到連詛咒隧道附近都能快速穿越，保證不會耽誤太久。雖然有點累，還是得做好，畢竟毛孩的安全是最重要的。放心，牠們會平安無事……應該。預計散步的地點在小桃他們家的神社附近，阿，我好想你，小桃。"
+    });
 
-//燈箱狀態
-let isLightBox = ref(false);
+    // 貼文者資訊
+    const poster = ref({
+        avatarSrc: new URL("@/assets/img/buddy-post/avatarImg.svg", import.meta.url).href,
+        name: '高倉健',
+        city: "台北市",
+        district: "文山區",
+        petType:["幼犬", "小型犬", "中型犬", "大型犬", "老年犬", "幼貓", "成貓"],
+        serviceDays: ["一", "四", "六", "日"],
+        serviceTimeStart: "10:00",
+        serviceTimeEnd: "20:00",
+        introduce:"唉，真沒勁……不過，我會盡量照顧好你的毛孩，我擅長高速散步、高速接送，都交給我。就算覺得好累，還是得做好這些事，反正我能應付。別擔心，牠們會安全的，應該。",
+        line: "spop333",
+    });
 
-// 控制燈箱的顯示與隱藏
-function toggleLightBox() {
-  isLightBox.value = !isLightBox.value;
-  // 停止捲軸
-  if (isLightBox.value) {
-    document.body.classList.add('clicked');
-  } else {
-    document.body.classList.remove('clicked');
-  }
-}
+    // 評論者資料
+
+    //前三筆資料
+    const latestCommentCards = computed(() => {
+        return sortedCommentCards.value.slice(0, 3);
+    });
+
+    //由新到舊
+    const sortedCommentCards = computed(() => {
+        // slice()先複製一份 以防原始資料排列被影響
+        return commentCards.value.slice().sort((a, b) => {
+            const dateA = new Date(a.time.year,(a.time.month -1),a.time.day);
+            const dateB = new Date(b.time.year,(b.time.month -1),b.time.day);
+            return dateB - dateA; //大的排前面
+        });
+    });
+
+    // 原始資料
+    const commentCards =ref([
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/demologo.svg", import.meta.url).href,
+            name: "Emily",
+            time: {
+                year: "2025",
+                month: "02",
+                day: "18"
+            },
+            stars: 5,
+            content: "雖然他說很累，但還是完成了任務，感覺不錯。"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/L.svg", import.meta.url).href,
+            name: "Lupe",
+            time: {
+                year: "2025",
+                month: "02",
+                day: "01"
+            },
+            stars: 3,
+            content: "C'est dommage! 雖然服務不錯，我的愛犬也看起來很開心，但他似乎有點心不在焉，少了些專注感。"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/e.svg", import.meta.url).href,
+            name: "艾倫．葉卡",
+            time: {
+                year: "2025",
+                month: "02",
+                day: " 28"
+            },
+            stars: 5,
+            content: "散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把萊納交給他時，內心有些猶豫，但看到萊納回來時興奮又快樂，那種擔憂全都消散了。"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/S.svg", import.meta.url).href,
+            name: "鄒宗翰",
+            time: {
+                year: "2025",
+                month: "01",
+                day: "31"
+            },
+            stars: 5,
+            content: "散步路線很特別，還有經過詛咒隧道，挺有趣的。"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/H.svg", import.meta.url).href,
+            name: "Haooooo",
+            time: {
+                year: "2025",
+                month: "01",
+                day: "22"
+            },
+            stars: 4,
+            content: "The service was good, but he seemed a bit distracted and somewhat unfocused!!"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/M.svg", import.meta.url).href,
+            name: "Mysterio",
+            time: {
+                year: "2024",
+                month: "12",
+                day: "25"
+            },
+            stars: 5,
+            content: "You maybe wondering why the red suit?That's so bad guys can't see me bleed."
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/Kosoku-baba.svg", import.meta.url).href,
+            name: "Kosoku baba",
+            time: {
+                year: "2024",
+                month: "11",
+                day: "11"
+            },
+            stars: 5,
+            content: "這小子速度快得讓我都差點跟不上。不過，看他那副萎掉的樣子，竟然還能堅持，倒是讓我有點佩服"
+        },
+        {
+            avatarSrc: new URL("@/assets/img/buddy-post/v.svg", import.meta.url).href,
+            name: "Alley",
+            time: {
+                year: "2024",
+                month: "12",
+                day: "09"
+            },
+            stars: 4,
+            content: "很棒，哈密瓜很好吃！！！VVVVVVVVVVVVV"
+        },
+    ]);
+
+    // 使用者資料
+    const userInfo = ref({
+        name:"USAGI",
+        avatar: new URL("@/assets/img/buddy-post/usagi.svg", import.meta.url).href,
+    })
+
+    console.log(`現在的使用者為${userInfo.value.name}`)
+
+    //評論input資料
+    const getComment = ref({
+        placeHolder: "請於80個字數內",
+        errorMsg: "",
+        inputValue: "",
+        inputError: false,
+    })
+
+    //資料：星星數量
+    const isStars = (n, stars) => {
+        if(stars < 1 && stars != 0){
+            stars = 1;
+        }else if(stars == 0){
+            stars = 0;
+        }
+        if(n <= stars){
+            return new URL('@/assets/img/icon/star-full.svg', import.meta.url).href
+        }else{
+            return new URL('@/assets/img/icon/star-line.svg', import.meta.url).href
+        }
+    };
+
+    // 點選評論：星星數量
+    const mountedStars = ref(0); //初始星星分數
+    const setStars = (n) => {
+        mountedStars.value = n;
+        getComment.value.inputError = false;
+    };
+
+    const commentSubmit = () => {
+        if(getComment.value.inputValue.trim() === ""){
+            getComment.value.inputError = true;
+            getComment.value.errorMsg = "請填寫完整評論";
+        }else if(mountedStars.value === 0){
+            getComment.value.inputError = true;
+            getComment.value.errorMsg = "請點選星星評分";
+        }else{
+            getComment.value.inputError = false;
+        }
+    };
+
+    //監看有輸入時取消警告
+    watch(() => getComment.value.inputValue, (newValue) => {
+        getComment.value.inputError = !newValue.inputValue === '';
+    });
+
+    // 燈箱標題請輸入
+    const lightTitle = {title: "所有評論"}
+
+    //燈箱狀態
+    let isLightBox = ref(false);
+
+    // 控制燈箱的顯示與隱藏
+    function toggleLightBox() {
+        isLightBox.value = !isLightBox.value;
+        // 停止捲軸
+        if (isLightBox.value) {
+            document.body.classList.add('clicked');
+        } else {
+            document.body.classList.remove('clicked');
+        }
+    }
 </script>

@@ -777,9 +777,9 @@ const isStars = (n, stars) => {
     };
 
     if(n <= stars){
-        return new URL('@/assets/img/icon/star-full.svg', import.meta.url).href
+        return new URL('@/assets/img/icon/star-full.svg', import.meta.url).href;
     }else{
-        return new URL('@/assets/img/icon/star-line.svg', import.meta.url).href
+        return new URL('@/assets/img/icon/star-line.svg', import.meta.url).href;
     }
 }; 
 
