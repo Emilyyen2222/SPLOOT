@@ -6,17 +6,13 @@
      position: fixed;
      top: 50%;
      left: 50%;
-     translate: -50% -50%;
+     transform: translate(-50%, -50%);
      z-index: 1015;
 
      display: none;
 
      width: 90%;
      max-width: 80rem;
-     
-     @include lg(){
-        
-     }
 
     &.clicked{
         display: block;
@@ -35,7 +31,7 @@
         .closeBtnBox{
             height: 4rem;
 
-            padding: 2.4rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
+            padding: 0.8rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
 
             .closeBtn{
                 cursor: pointer;
@@ -67,6 +63,10 @@
                 height:80vh; //上層標題加上p & m 若移動需重新計算
                 padding: 0 5.6rem 5.6rem 0;
                 overflow-y: auto;
+
+                @include sm(){
+                    height: 60vh;
+                }
             }
             
         }

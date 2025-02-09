@@ -37,7 +37,7 @@
         </div>
                 <!-- 行程按鈕 -->
                 <div class="scheduleBtnBox">
-                    <div class="scheduleBtn" @click="toggleAddEvent">
+                    <div class="scheduleBtn" @click="toggleAddEvent" v-if="activeCard === 'splooter'">
                         <img src="@/assets/img/icon/add-schedule.svg" alt="" class="scheduleIcon">
                         <p class="xsText">新增行程</p>
                     </div>

@@ -120,9 +120,14 @@
         }
         
         .scheduleBtnBox{
+            height: 5.1rem;
             padding-bottom: 1.8rem;
             margin-bottom: 2.8rem;
             border-bottom: 1px solid map-get($colors ,natural-2 );
+
+            @include sm(){
+                margin-top: 3.2rem;
+            }
 
             .scheduleBtn{
                 cursor: pointer;
@@ -364,18 +369,34 @@
             flex-direction: column;
             gap: 0.8rem;
 
+            @include md(){
+                flex-direction: row;
+            }
+
             .timeDropDownBox{
                 display: flex;
                 gap: 2.4rem;
+
+                @include md(){
+                    flex-direction: column;
+                }
 
                 .theTimeBox{
                     display: flex;
                     gap: 0.8rem;
 
+                    @include md(){
+                        flex-direction: column;
+                    }
+
                         .dropdownMenu{
                             position: relative;
                             width: 12rem;
                             height: 4.6rem;
+
+                            @include lg(){
+                                width: 10rem;
+                            }
                             
                             .dropDown{
                                 position: absolute;
