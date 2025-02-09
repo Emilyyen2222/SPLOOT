@@ -46,3 +46,5 @@ http://localhost:5173/_Emily/vue-question.html
 //     border: 1px solid;
 // }
 
+看rwd
+npm run dev -- --host

@@ -183,7 +183,7 @@
             <div class="infoInput">
                 <div class="fieldWrapper">
                     <div class="field">
-                        <label>毛孩簡介*</label>
+                        <label class="petInfo">毛孩簡介*</label>
                             <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
                             v-model="inputValue" :hasError="inputError"></InputText>
                     </div>

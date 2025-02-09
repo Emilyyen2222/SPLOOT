@@ -8,14 +8,21 @@
     border-radius: 4rem;
     .field{
         display: flex;
-        align-items: center;
+        align-items: start;
         gap: 5.6rem;
         @include md(){
             flex-direction: column;
             gap: 1.2rem;
             align-items: start;
         }
-        label{width: 6.4rem;}
+        .petInfo{
+            width: 8rem;
+        }
+        label{
+            width: 6.4rem;
+            @include textStyle(smallText);
+    
+        }
         .fieldInterest{
             padding-left: 1rem;
         }
@@ -121,7 +128,9 @@
                     .petName{
                         min-width: 30rem;
                         width: 75%;
-                        // max-width: 35rem;
+                        @include sm(){
+                            min-width: 22rem;
+                        }
                     }
             }
         }
@@ -133,7 +142,6 @@
                     flex-wrap: wrap;
                     gap: 1.2rem;
                     .unknown{
-                        // width: 12rem;
                         margin-bottom: 16px;
                     }
                 }
@@ -143,7 +151,9 @@
         .breedOpt{
             min-width: 33rem;
             width: 75%;
-            // max-width: 35rem;
+            @include sm(){
+                min-width: 22rem;
+            }
         }
         .breedOptions{
             display: flex;
