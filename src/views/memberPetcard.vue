@@ -17,19 +17,23 @@
         <!-- view -->
         <div class="petcard-container">
             <!-- card1 -->
+            <!-- v-for : 卡片與按鈕:pc1、pc2、...-->
             <div class="petcard pc1">
               <div class="cardWrap">
-                <!-- v-for -->
                 <!-- 卡片部分 -->
                 <div class="cardwrapper">
                   <!-- 左側圖片區 -->
                   <div class="imageContainer">
                       <img src="@/assets/img/home/matchCard.svg" alt="">
-                      <!-- <img :src="avatar.img" alt="avatar"> -->
                   </div>
                   <!-- 右側內容區 -->
                   <div class="content">
                       <div class="topSection">
+                      <div class="dot">
+                          <div class="dotActive"></div>
+                          <div class="dotInactive"></div>
+                          <div class="dotInactive"></div>
+                      </div>
                       <div class="number">01</div>
                       </div>
                       <!-- 名稱與距離 -->
@@ -42,7 +46,6 @@
                       </div>
                       <!-- 標籤區 -->
                       <div class="tags">
-                        <!-- v-for? -->
                       <span class="xsText tag">邊境牧羊</span>
                       <span class="xsText tag">活潑外向</span>
                       <span class="xsText tag">愛玩球</span>
@@ -53,7 +56,7 @@
                       </div>
                       <!-- 內文 -->
                       <p class="description bold">
-                        汪!你好我是COCO，雖然叫做COCO，但其實最愛麻古，純鮮奶茶大推，阿然後，珍珠就是要像狗糧一樣嘎蹦脆才好吃啊!
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
                       </p>
                   </div>
                 </div>
@@ -67,9 +70,9 @@
               </div>
             </div>
               <!-- card2 -->
-            <div class="petcard pc2">
+              <div class="petcard pc2">
               <div class="cardWrap">
-                <!-- 卡片部分，v-module>編輯彈窗的輸入內容 -->
+                <!-- 卡片部分 -->
                 <div class="cardwrapper">
                   <!-- 左側圖片區 -->
                   <div class="imageContainer">
@@ -78,6 +81,11 @@
                   <!-- 右側內容區 -->
                   <div class="content">
                       <div class="topSection">
+                      <div class="dot">
+                          <div class="dotActive"></div>
+                          <div class="dotInactive"></div>
+                          <div class="dotInactive"></div>
+                      </div>
                       <div class="number">01</div>
                       </div>
                       <!-- 名稱與距離 -->
@@ -99,8 +107,8 @@
                       <span class="xsText tag">已結紮</span>
                       </div>
                       <!-- 內文 -->
-                      <p class="description bold" >
-                        汪!汪汪汪汪汪汪!汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪汪!
+                      <p class="description bold">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
                       </p>
                   </div>
                 </div>
@@ -144,7 +152,7 @@
                           <div class="field">
                               <label>毛孩姓名*</label>
                               <div class="petName">
-                                  <InputText placeHolder="斯普拉特" size = "small" errorMsg="Invalid Input" 
+                                  <InputText placeHolder="輸入姓名" size = "small" errorMsg="Invalid Input" 
                                   v-model="inputValue" :hasError="inputError"></InputText>
                               </div>
                           </div>
@@ -210,9 +218,11 @@
                           <label>體型</label>
                           <div class="sizeOptions">
                               <div class="tags">
-                                  <span class="smallText tag">小型犬10公斤以下</span>
-                                  <span class="smallText tag">中型犬11-25公斤</span>
-                                  <span class="smallText tag">大型犬26公斤以上</span>
+                                <Btn v-for="option in tag_dogSize.options" :key="option"
+                                  btnType="tag" 
+                                  :class="{'-active': optionSelected(tag_dogSize.selected, option)}"
+                                  @click="tag_dogSize.formChoice(tag_dogSize.selected, option)">{{ option }}</Btn>
+                                  <!-- <p>Selected Options: {{ tag_dogSize.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -225,11 +235,11 @@
                           <label>社交性</label>
                           <div class="sizeOptions">
                               <div class="tags">
-                                  <span class="smallText tag">親寵親人</span>
-                                  <span class="smallText tag">不親寵親人</span>
-                                  <span class="smallText tag">親寵不親人</span>
-                                  <span class="smallText tag">慢熟</span>
-                                  <span class="smallText tag">小孩友善</span>
+                                <Btn v-for="option in tag_dogSocial.options" :key="option"
+                                  btnType="tag" 
+                                  :class="{'-active': optionSelected(tag_dogSocial.selected, option)}"
+                                  @click="tag_dogSocial.formChoice(tag_dogSocial.selected, option)">{{ option }}</Btn>
+                                  <!-- <p>Selected Options: {{ tag_dogSocial.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -242,12 +252,11 @@
                           <label>興趣愛好</label>
                           <div class="sizeOptions">
                               <div class="tags">
-                                  <span class="smallText tag">喜歡散步</span>
-                                  <span class="smallText tag">喜歡玩球</span>
-                                  <span class="smallText tag">喜歡玩飛盤</span>
-                                  <span class="smallText tag">熱愛玩水</span>
-                                  <span class="smallText tag">喜歡跳舞</span>
-                                  <span class="smallText tag">熱衷學習指令</span>
+                                <Btn v-for="option in tag_dogInterest.options" :key="option"
+                                  btnType="tag" 
+                                  :class="{'-active': optionSelected(tag_dogInterest.selected, option)}"
+                                  @click="tag_dogInterest.formChoice(tag_dogInterest.selected, option)">{{ option }}</Btn>
+                                  <!-- <p>Selected Options: {{ tag_dogInterest.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -313,9 +322,11 @@
                           <div class="field">
                               <label>性別*</label>
                               <div class="tags">
-                                  <span class="smallText tag">男生</span>
-                                  <span class="smallText tag">女生</span>
-                                  <span class="smallText tag">未知</span>
+                                <Btn v-for="option in tag_gender.options" :key="option"
+                                btnType="tag" 
+                                :class="{'-active': optionSelected(tag_gender.selected, option)}"
+                                @click="tag_gender.formChoice(tag_gender.selected, option)">{{ option }}</Btn>
+                                <!-- <p>Selected Options: {{ tag_gender.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -363,21 +374,7 @@
                       </div>
                   </div>
               </div>
-              <!-- 體型 -->
-              <div class="petSize">
-                  <div class="sizeFieldWrapper">
-                      <div class="field">
-                          <label>體型</label>
-                          <div class="sizeOptions">
-                              <div class="tags">
-                                  <span class="smallText tag">小型犬10公斤以下</span>
-                                  <span class="smallText tag">中型犬11-25公斤</span>
-                                  <span class="smallText tag">大型犬26公斤以上</span>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+              <!-- 體型-貓貓沒有體型分類 -->
               <!-- 社交 -->
               <div class="social">
                   <div class="socialfieldWrapper">
@@ -385,11 +382,11 @@
                           <label>社交性</label>
                           <div class="sizeOptions">
                               <div class="tags">
-                                  <span class="smallText tag">親寵親人</span>
-                                  <span class="smallText tag">不親寵親人</span>
-                                  <span class="smallText tag">親寵不親人</span>
-                                  <span class="smallText tag">慢熟</span>
-                                  <span class="smallText tag">小孩友善</span>
+                                <Btn v-for="option in tag_catSocial.options" :key="option"
+                                btnType="tag" 
+                                :class="{'-active': optionSelected(tag_catSocial.selected, option)}"
+                                @click="tag_catSocial.formChoice(tag_catSocial.selected, option)">{{ option }}</Btn>
+                                <!-- <p>Selected Options: {{ tag_catSocial.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -402,12 +399,11 @@
                           <label>興趣愛好</label>
                           <div class="sizeOptions">
                               <div class="tags">
-                                  <span class="smallText tag">喜歡散步</span>
-                                  <span class="smallText tag">喜歡玩球</span>
-                                  <span class="smallText tag">喜歡玩飛盤</span>
-                                  <span class="smallText tag">熱愛玩水</span>
-                                  <span class="smallText tag">喜歡跳舞</span>
-                                  <span class="smallText tag">熱衷學習指令</span>
+                                <Btn v-for="option in tag_catInterest.options" :key="option"
+                                btnType="tag" 
+                                :class="{'-active': optionSelected(tag_catInterest.selected, option)}"
+                                @click="tag_catInterest.formChoice(tag_catInterest.selected, option)">{{ option }}</Btn>
+                                <!-- <p>Selected Options: {{ tag_catInterest.selected.value.join(' , ') }}</p> -->
                               </div>
                           </div>
                       </div>
@@ -419,8 +415,12 @@
                       <div class="field">
                           <label>絕育狀態*</label>
                           <div class="breedOptions">
-                              <input type="radio" name="" class="nRadioBtn">已絕育
-                              <input type="radio" name="" class="nRadioBtn">未絕育
+                            <label >
+                              <input type="radio" name="catInfoFixed" class="nRadioBtn">已絕育
+                            </label>
+                            <label >
+                              <input type="radio" name="catInfoFixed" class="nRadioBtn">未絕育
+                            </label>
                           </div>
                       </div>
                   </div>
@@ -448,9 +448,7 @@
       <LightBox 
         :title="lightTitle_matchReset.title"
         :is-light-box="lightTitle_matchReset.isLightBox.value" 
-        @toggle="toggleLightBox_match"
-        id="matchAdjustPop" 
-        class="matchAdjust-wrapper">
+        @toggle="toggleLightBox_match">
   
         <div class="matchAdjust">
           <div class="tag-wrapper">
@@ -518,9 +516,7 @@
   
       <!-- PopUp，刪除卡片 -->
       <PopUp
-      :is-pop-up="deleteCard.isPopUp.value"
-      @toggle="togglePopUp_deleteCard"
-      id="deletePetcardPop">
+      :is-pop-up="deleteCard.isPopUp.value">
       <div class="delete-petcard">
         <div class="title">
           <p class="bold">確定刪除資訊卡?</p>
@@ -556,177 +552,102 @@
   // import petInfoCardView from '../views/petInfoCardView.vue' ;
   
   // dropDown
-  const menu1 = {
-      placeHolder: '請選擇月份',
-      options: [
-          {
-              id: 0,
-              name: '1'
-          },
-          {
-              id: 1,
-              name: '2'
-          },
-          {
-              id: 2,
-              name: '3'
-          },
-          {
-              id: 3,
-              name: '4'
-          },
-          {
-              id: 4,
-              name: '5'
-          },
-          {
-              id: 5,
-              name: '6'
-          },
-          {
-              id: 6,
-              name: '7'
-          },
-          {
-              id: 7,
-              name: '8'
-          },
-          {
-              id: 8,
-              name: '9'
-          },
-          {
-              id: 9,
-              name: '10'
-          },
-          {
-              id: 10,
-              name: '11'
-          },
-          {
-              id: 11,
-              name: '12'
-          },
-      ]
-  };
-  
-  const menu2 = {
-      placeHolder: '請選擇日期',
-      options: [
-          {
-              id: 0,
-              name: '選項1'
-          },
-          {
-              id: 1,
-              name: '選項2'
-          },
-          {
-              id: 2,
-              name: '選項3'
-          },
-          {
-              id: 3,
-              name: '選項4'
-          },
-      ]
-  };
   const menus = {
-    menu1: {
-      placeHolder: '米克斯',
-      options: [
-      { id: 0, name: '柴犬' },
-      { id: 1, name: '拉布拉多' },
-      { id: 2, name: '哈士奇' },
-      { id: 3, name: '黃金獵犬' },
-      { id: 4, name: '德國牧羊犬' },
-      { id: 5, name: '法國鬥牛犬' },
-      { id: 6, name: '貴賓犬（泰迪）' },
-      { id: 7, name: '臘腸犬' },
-      { id: 8, name: '比熊犬' },
-      { id: 9, name: '邊境牧羊犬' },
-      { id: 10, name: '雪納瑞' },
-      { id: 11, name: '西施犬' },
-      { id: 12, name: '約克夏' },
-      { id: 13, name: '柯基犬' },
-      { id: 14, name: '馬爾濟斯' },
-      { id: 15, name: '秋田犬' },
-      { id: 16, name: '松獅犬' },
-      { id: 17, name: '沙皮狗' },
-      { id: 18, name: '牛頭梗' },
-      { id: 19, name: '羅威納犬' },
-      { id: 20, name: '大丹犬' },
-      { id: 21, name: '杜賓犬' },
-      { id: 22, name: '博美犬' },
-      { id: 23, name: '喜樂蒂牧羊犬' },
-      { id: 24, name: '阿拉斯加雪橇犬' },
-      { id: 25, name: '巴哥犬' },
-      { id: 26, name: '狐狸犬' },
-      { id: 27, name: '愛斯基摩犬' },
-      { id: 28, name: '大白熊犬' },
-      { id: 29, name: '巴吉度犬' },
-      { id: 30, name: '比格犬' },
-      ],
-    },
-    year: {
-      placeHolder: '年份',
-      options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-        id: i,
-        name: `${2025 - i} 年`,
-      })),
-    },
-    month: {
-      placeHolder: '月份',
-      options: Array.from({ length: 12 }, (_, i) => ({
-        id: i + 1,
-        name: `${i + 1} 月`,
-      })),
-    },
-    day: {
-      placeHolder: '日期',
-      options: Array.from({ length: 31 }, (_, i) => ({
-        id: i + 1,
-        name: `${i + 1} 日`,
-      })),
-    },
-  country: {
-    placeHolder: '送貨地點',
+  menu1: {
+    placeHolder: '米克斯',
     options: [
-      { id: 0, name: '台灣' },
-      { id: 1, name: '香港' },
-      { id: 2, name: '澳門' },
+    { id: 0, name: '柴犬' },
+    { id: 1, name: '拉布拉多' },
+    { id: 2, name: '哈士奇' },
+    { id: 3, name: '黃金獵犬' },
+    { id: 4, name: '德國牧羊犬' },
+    { id: 5, name: '法國鬥牛犬' },
+    { id: 6, name: '貴賓犬（泰迪）' },
+    { id: 7, name: '臘腸犬' },
+    { id: 8, name: '比熊犬' },
+    { id: 9, name: '邊境牧羊犬' },
+    { id: 10, name: '雪納瑞' },
+    { id: 11, name: '西施犬' },
+    { id: 12, name: '約克夏' },
+    { id: 13, name: '柯基犬' },
+    { id: 14, name: '馬爾濟斯' },
+    { id: 15, name: '秋田犬' },
+    { id: 16, name: '松獅犬' },
+    { id: 17, name: '沙皮狗' },
+    { id: 18, name: '牛頭梗' },
+    { id: 19, name: '羅威納犬' },
+    { id: 20, name: '大丹犬' },
+    { id: 21, name: '杜賓犬' },
+    { id: 22, name: '博美犬' },
+    { id: 23, name: '喜樂蒂牧羊犬' },
+    { id: 24, name: '阿拉斯加雪橇犬' },
+    { id: 25, name: '巴哥犬' },
+    { id: 26, name: '狐狸犬' },
+    { id: 27, name: '愛斯基摩犬' },
+    { id: 28, name: '大白熊犬' },
+    { id: 29, name: '巴吉度犬' },
+    { id: 30, name: '比格犬' },
     ],
   },
-  shipPlace: {
-    placeHolder: '送貨地點',
-    options: [
-      { id: 0, name: '台灣' },
-      { id: 1, name: '香港' },
-      { id: 2, name: '澳門' },
-    ],
+  year: {
+    placeHolder: '年份',
+    options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+      id: i,
+      name: `${2025 - i} 年`,
+    })),
   },
-  payment: {
-    placeHolder: '送貨地點',
-    options: [
-      { id: 0, name: '台灣' },
-      { id: 1, name: '香港' },
-      { id: 2, name: '澳門' },
-    ],
+  month: {
+    placeHolder: '月份',
+    options: Array.from({ length: 12 }, (_, i) => ({
+      id: i + 1,
+      name: `${i + 1} 月`,
+    })),
   },
-  visaYear: {
-      placeHolder: '年份',
-      options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-        id: i,
-        name: `${2025 - i} 年`,
-      })),
-    },
-  visaMonth: {
-      placeHolder: '月份',
-      options: Array.from({ length: 12 }, (_, i) => ({
-        id: i + 1,
-        name: `${i + 1} 月`,
-      })),
-    },
+  day: {
+    placeHolder: '日期',
+    options: Array.from({ length: 31 }, (_, i) => ({
+      id: i + 1,
+      name: `${i + 1} 日`,
+    })),
+  },
+country: {
+  placeHolder: '送貨地點',
+  options: [
+    { id: 0, name: '台灣' },
+    { id: 1, name: '香港' },
+    { id: 2, name: '澳門' },
+  ],
+},
+shipPlace: {
+  placeHolder: '送貨地點',
+  options: [
+    { id: 0, name: '台灣' },
+    { id: 1, name: '香港' },
+    { id: 2, name: '澳門' },
+  ],
+},
+payment: {
+  placeHolder: '送貨地點',
+  options: [
+    { id: 0, name: '台灣' },
+    { id: 1, name: '香港' },
+    { id: 2, name: '澳門' },
+  ],
+},
+visaYear: {
+    placeHolder: '年份',
+    options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+      id: i,
+      name: `${2025 - i} 年`,
+    })),
+  },
+visaMonth: {
+    placeHolder: '月份',
+    options: Array.from({ length: 12 }, (_, i) => ({
+      id: i + 1,
+      name: `${i + 1} 月`,
+    })),
+  },
   };
   // input
    // basic name 姓名
@@ -755,14 +676,6 @@
       inputError: ref(false),
   };
   const input5 = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '輸入驗證碼',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  };
-  const input6 = {
       size: 'small',
       textAlign: 'textLeft',
       placeHolder: '輸入驗證碼',
@@ -804,6 +717,50 @@
     options: ['已絕育', '未絕育', '不限'],
     selected: ref([]),
   };
+  // 寵物資訊卡-貓
+   // 性別
+  const tag_gender = {
+    formChoice: singleChoice,
+    options: ['男生', '女生', '未知'],
+    selected: ref([]),
+  };
+   // 社交性
+  const tag_catSocial = {
+    formChoice: singleChoice,
+    options: ['親寵親人', '不親寵親人', '親寵不親人','慢熟','小孩友善'],
+    selected: ref([]),
+  };
+   // 興趣愛好
+  const tag_catInterest = {
+    formChoice: singleChoice,
+    options: ['喜歡玩蟑螂', '喜歡嗑貓草', '喜歡逗貓棒','熱愛貓抓板','喜歡踩鍵盤','喜歡空紙箱'],
+    selected: ref([]),
+  };
+  // 寵物資訊卡-狗
+   // 體型
+  const tag_dogSize = {
+    formChoice: singleChoice,
+    options: ['小型犬10公斤以下', '5公斤', '大型犬26公斤以上'],
+    selected: ref([]),
+  };
+     // 社交性
+  const tag_dogSocial = {
+    formChoice: singleChoice,
+    options: ['親寵親人', '不親寵親人', '親寵不親人','慢熟','小孩友善'],
+    selected: ref([]),
+  };
+   // 興趣愛好
+   const tag_dogInterest = {
+    formChoice: singleChoice,
+    options: ['喜歡散步', '喜歡玩球', '喜歡玩飛盤','熱愛玩水','喜歡跳舞','熱衷學習指令'],
+    selected: ref([]),
+  };
+
+
+  // lightBox title
+  const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
+  const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
+  const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};
 
    // Single choice
   function singleChoice(selected, option) {
@@ -828,11 +785,6 @@
   const selectedOption = computed(() => {
     return tag_friend.selected.value.length ? tag_friend.selected.value[0] : null;
   });
-
-  // lightBox title
-  const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
-  const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
-  const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};
   
   // 控制燈箱的顯示與隱藏
    // 編輯卡片

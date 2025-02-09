@@ -64,19 +64,5 @@ import Btn from '../components/Btn.vue';
 
 // data
 
-//const
-// mcNav 按鈕狀態
-// const isActive = ref(false);
-
-// 定義切換方法
-
-
-// function mc_changeColor(){
-//   if(){
-    
-//   } else{
-
-//   }
-// };
 
 </script>
