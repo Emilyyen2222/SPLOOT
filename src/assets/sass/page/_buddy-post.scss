@@ -17,10 +17,6 @@
                 display: flex;
                 gap: 8px;
 
-                // @include sm(){
-                //     gap: 4px;                   
-                // }
-
                 .navTags .small{
                     @include sm(){                   
                         @include textStyle(xsText);
@@ -181,6 +177,11 @@
                 }
             }
             //評論卡規格統一在下方
+
+            .swiper{
+                width: 100%;
+                overflow-x: auto;
+            }
         } 
         .postComment{
             .postTitle{
@@ -263,24 +264,31 @@
 
                 padding: 2.4rem 0 4rem;
 
-                @include lg(){
-                grid-template-columns: repeat(2, 1fr);
+        &.latest{
+            gap: 2rem;
+        }
+
+        &.inLightBox{
+            @include lg(){
+            grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include md(){
+                grid-template-columns: repeat(1, 1fr);
                 }
 
+            &.inLightBox{
+                grid-template-columns: repeat(2, 1fr); /* 2欄，欄位寬度相等 */
+                
                 @include md(){
                     grid-template-columns: repeat(1, 1fr);
                     }
+            }
 
-                &.inLightBox{
-                    grid-template-columns: repeat(2, 1fr); /* 2欄，欄位寬度相等 */
-                    
-                    @include md(){
-                        grid-template-columns: repeat(1, 1fr);
-                        }
-                }
+        }
                 
                 .commenmtCard{
-                    width: 31.2rem;
+                    max-width: 31.2rem;
                     height: 20.8rem;
                     padding: 1.6rem;
                     margin-bottom: 0.8rem;

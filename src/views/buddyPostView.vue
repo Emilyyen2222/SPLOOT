@@ -100,26 +100,28 @@
                 <Btn btnStyle="baseline small" @click="toggleLightBox">所有評論</Btn>  <!-- 要改成xs字型 -->
             </div>
             <!-- 評論卡片 -->
-            <ul class="commentCards">
-                <li class="commenmtCard" v-for="(card, index) in latestCommentCards" :key="index">
-                    <div class="commenter">
-                        <div class="avatar">
-                            <img class="avatarImg" :src="card.avatarSrc" alt="avatar">
-                        </div>
-                        <div class="commentInfo">
-                            <h6 class="bold">{{ card.name }}</h6>
-                            <p class="xsText">
-                                {{ card.time.year }}/{{ card.time.month }}/{{ card.time.day }}</p>
-                            <ul class="stars">
-                                <li v-for="n in 5"><img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]"></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <p class="smallText">{{ card.content }}</p>
-                    </div>
-                </li>
-            </ul>
+             <div class="swiper">
+                 <ul class="commentCards latest">
+                     <li class="commenmtCard" v-for="(card, index) in latestCommentCards" :key="index">
+                         <div class="commenter">
+                             <div class="avatar">
+                                 <img class="avatarImg" :src="card.avatarSrc" alt="avatar">
+                             </div>
+                             <div class="commentInfo">
+                                 <h6 class="bold">{{ card.name }}</h6>
+                                 <p class="xsText">
+                                     {{ card.time.year }}/{{ card.time.month }}/{{ card.time.day }}</p>
+                                 <ul class="stars">
+                                     <li v-for="n in 5"><img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]"></li>
+                                 </ul>
+                             </div>
+                         </div>
+                         <div class="comment">
+                             <p class="smallText">{{ card.content }}</p>
+                         </div>
+                     </li>
+                 </ul>
+             </div>
         </div>
         <!-- 發表評論 -->
         <div class="postComment">
@@ -298,7 +300,7 @@
                 day: " 28"
             },
             stars: 5,
-            content: "散步……這就是自由的味道吧？那雙腳踏過的每一步，都像是在宣告——我還活著！。當我把萊納交給他時，內心有些猶豫，但看到萊納回來時興奮又快樂，那種擔憂全都消散了。"
+            content: "散步，這就是自由的味道吧？雙腳踏過的每一步，都像是在宣告——我還活著！坐啊，萊納。"
         },
         {
             avatarSrc: new URL("@/assets/img/buddy-post/S.svg", import.meta.url).href,
