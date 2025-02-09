@@ -132,7 +132,7 @@
     margin: 0 auto;
     .preferenceBtns{
         display: flex;
-        justify-content: space-between;
+        justify-content: end;
         gap: 1.6rem;
         margin-bottom: 1.2rem;
         @include md(){
