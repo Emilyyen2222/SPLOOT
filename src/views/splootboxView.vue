@@ -107,7 +107,7 @@
     <!-- 立即訂閱按鈕 -->
     <div class="howitworksbtn">
         <div class="btnBox">
-            <RouterLink to="/question">
+            <RouterLink to="/sploot-box/question">
                 <Btn btnStyle="primary large">立即訂閱</Btn>
             </RouterLink>
         </div>

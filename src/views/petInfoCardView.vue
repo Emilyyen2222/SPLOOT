@@ -9,8 +9,8 @@
     <P class="bold" style="margin-bottom: 2.4rem;">請先建立寵物卡</P>
     <RouterLink to="/member-center/petcard" style="cursor: pointer;">
         <Btn btnType="form" btnStyle="nextQ">確定</Btn> 
-        <Btn btnType="form" btnStyle="nextQ">配對問卷</Btn> 
-        <Btn btnType="form" btnStyle="nextQ">開始配對</Btn> 
+        <!-- <Btn btnType="form" btnStyle="nextQ">配對問卷</Btn> 
+        <Btn btnType="form" btnStyle="nextQ">開始配對</Btn>  -->
     </RouterLink>
 </PopUp>
 
@@ -382,7 +382,7 @@
         import PopUp from "@/components/PopUp.vue";
 
     // popup 請先建立寵物卡
-    const CreatePetCard = { isPopUp : ref (true)  };
+    const CreatePetCard = { isPopUp : ref (false)  };
     // 控制燈箱的顯示與隱藏
     function togglePopUpCreatePetCard() {
         CreatePetCard.isPopUp.value = !CreatePetCard.isPopUp.value;
