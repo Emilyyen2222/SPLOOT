@@ -72,11 +72,13 @@
         <div class="toBeBuddy">
             <p class="smallText">你是喜愛動物又擁有照顧經驗的人嗎?</p>
             <div class="btnBox">
-                <Btn btnStyle="outline small">成為小幫手</Btn>
+                <Router-link  to="/member-center/helper">
+                    <Btn btnStyle="outline small">成為小幫手</Btn>
+                </Router-link>
             </div>
         </div>        
         <!-- 行程按鈕 -->       
-        <div class="scheduleBtn" @click="toggleLightBox2">
+        <div class="scheduleBtn" @click="toggleNewPost">
             <img src="@/assets/img/icon/add-schedule.svg" alt="" class="scheduleIcon">
             <p class="xsText">新增貼文</p>
         </div>        
@@ -212,9 +214,9 @@
 
 <!-- "新增貼文"燈箱 -->
 <LightBox 
-    :title="lightTitle2.title"
-    :is-light-box="isLightBox2" 
-    @toggle="toggleLightBox2">
+    :title="newPostTitle.title"
+    :is-light-box="newPostLightBox" 
+    @toggle="toggleNewPost">
 
 <div class="newPost">
     <div class="postType ">
@@ -223,7 +225,7 @@
             <DropdownMenu class="typeDropDown dropDown"
                 :placeHolder="postServiceType.placeHolder"
                 :options="postServiceType.options"
-                v-model="selectService">
+                v-model="postServiceType.selectService">
             </DropdownMenu>
         </div>
     </div>
@@ -244,10 +246,11 @@
             <p class="smallText inputLabel">發佈主題*</p>
             <InputText                
                 size = "small"
-                placeHolder="這裡輸入發佈主題"
-                errorMsg="Invalid Input"
-                v-model="inputValuePostTitle"
-                :hasError="inputError">
+                :placeHolder="postTitle.placeHolder"
+                :errorMsg="postTitle.errorMsg"
+                v-model="postTitle.inputValue"
+                :hasError="postTitle.inputError"
+                maxlength="12">
             </InputText>
         </div>
         <div class="postContent">
@@ -256,16 +259,17 @@
                 class="textBox" 
                 inputType="textarea"             
                 size="small" 
-                placeHolder="請於200字內" 
-                errorMsg="Invalid Input" 
-                v-model="inputValuePostContent"
-                :hasError="inputError">
+                :placeHolder="postContent.placeHolder" 
+                :errorMsg="postContent.errorMsg" 
+                v-model="postContent.inputValue"
+                :hasError="postContent.inputError"
+                maxlength="200">
             </InputText>
         </div>
     </div>
     <div class="newPostBtn">
-        <Btn btnStyle="primary small">提交</Btn>
-        <Btn btnStyle="baseline small" @click="toggleLightBox2">取消</Btn>       
+        <Btn btnStyle="primary small" @click="submitCard">提交</Btn>
+        <Btn btnStyle="baseline small" @click="toggleNewPost">取消</Btn>       
     </div>
 </div>
 
@@ -501,7 +505,7 @@ const cardsData = ref([]); //渲染的卡片
 const cardsRawData = ref([
 {
         imgSrc: new URL("../assets/img/buddy-post/demo.png", import.meta.url).href,
-        title: "台北市puppy高速散步",
+        title: "我我我我我我我我我我我我",
         serviceDays: ["一", "二"],
         serviceTimeStart: "09:00",
         serviceTimeEnd: "18:00",
@@ -765,7 +769,6 @@ const cardsRawData = ref([
     },
 ]);
 
-
 //評分星星計算
 
 const isStars = (n, stars) => {
@@ -832,23 +835,56 @@ function toggleLightBox() {
 
 // "新增貼文"燈箱
 
-const postServiceType = {
+// 新增貼文資料
+const postServiceType = ref({
     placeHolder: "請選擇服務類型",
     options: [
         {name: "散步陪伴"},{name: "到府照顧"},{name: "友善寄宿"},{name: "寵物計程車"},
-    ]
-};
-// 燈箱標題請輸入
-const lightTitle2 = {title: "發佈 散步陪伴 貼文"};
+    ],
+    selectService:'', //v-model
+});
 
- //燈箱狀態
-let isLightBox2 = ref(false);
+const postTitle = ref({
+    placeHolder: "請輸入主題",
+    errorMsg: '未輸入標題',
+    inputValue: '',
+    inputError: false,
+})
+
+const postContent = ref({
+    placeHolder: "請輸入內容",
+    errorMsg: '請輸入至少20字',
+    inputValue: '',
+    inputError: false,
+})
+
+// 監控輸入內容是否回空白
+watch(() => postTitle.value.inputValue,(newValue) => {
+    postTitle.value.inputError = newValue.trim() === '';
+});
+
+watch(() => postContent.value.inputValue,(newValue) => {
+    postContent.value.inputError = newValue.trim().length < 20;
+});
+
+// 燈箱標題請輸入
+const newPostTitle = {title: `發佈貼文`};
+
+//燈箱狀態
+let newPostLightBox = ref(false);
 
 // 控制燈箱的顯示與隱藏
-function toggleLightBox2() {
-  isLightBox2.value = !isLightBox2.value;
-  // 停止捲軸
-  if (isLightBox2.value) {
+function toggleNewPost() {
+    newPostLightBox.value = !newPostLightBox.value;
+// 清空資料
+    postServiceType.value.selectService = '';
+    postTitle.value.inputValue = '';
+    postTitle.value.inputError = false;
+    postContent.value.inputValue = '';
+    postContent.value.inputError = false;
+    hasUploadImg.value = null;
+// 停止捲軸
+  if (newPostLightBox.value) {
     document.body.classList.add('clicked');
   } else {
     document.body.classList.remove('clicked');
@@ -883,4 +919,22 @@ const uploadFileImage = (event) => {
     reader.readAsDataURL(file);
   }
 };
+
+// 提交按鈕
+const submitCard = () => {
+        if(submitCheck){
+            alert('填寫未完成');
+        }else{
+            alert('填寫完成');
+        }
+    };
+//提交前檢查是否有空白未填及時間(有異常為true)
+const submitCheck = computed(() => {
+    return (postServiceType.selectService === '' ||
+        postTitle.value.inputValue === '' ||
+        postContent.value.inputValue === '' ||
+        hasUploadImg.value === null
+    )
+});
+
 </script>
