@@ -10,7 +10,7 @@
     // background-color: transparent;
     @include md(){
         // background-color: map-get($colors, pink-2);
-    }
+    }                  
     .img {
         position: absolute;
         z-index: -5;
