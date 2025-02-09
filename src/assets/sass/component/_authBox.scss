@@ -50,7 +50,6 @@ body.authClicked{
 
             height: 4rem;
             padding: 1.2rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
-
             .closeBtn{
                 cursor: pointer;
 
@@ -95,6 +94,10 @@ body.authClicked{
 
             .closeBtnBox{
                 display: none;
+
+                @include sm(){
+                    display: block;
+                }
             }
 
             .topText{
@@ -239,10 +242,6 @@ body.authClicked{
 
             @include sm(){
                 display: none;
-            }
-
-            .closeBtnBox{
-          
             }
 
             .heroImgBox{
