@@ -5,39 +5,52 @@
     <main class="whole-bg">
       <!-- top nav -->
       <memberNav/>
-      <!-- v-if : 審核判斷 -->
-      <div class="helperCenter">
+      <!-- v-show : 審核判斷 -->
         <!-- hc : helper-center -->
-    
-        <!-- 無身分 -->
-        <div class="hc-not-passed">
-      
-          <div class="hc-title">
-            <h6 class="bold">想成為小幫手嗎？簡單四步驟成為最可靠的小幫手</h6>
-            <Btn btnStyle="outline small" @click="toggleLightBox_hcManage">小幫手管理</Btn>
-          </div>
-      
-          <div class="hc-nav">
+      <div class="helperCenter">
+        <div class="hc-title">
+          <h6 class="bold">想成為小幫手嗎？簡單四步驟成為最可靠的小幫手</h6>
+          <Btn btnStyle="outline small" @click="toggleHcManage">小幫手管理</Btn>
+        </div>
+        <div class="hc-nav">
               <!-- v-if? : 每完成一個步驟就放上打勾的icon? -->
               <div class="hc-steps" 
-              @click="toggleLightBox_hcTest"
+              @click="toggleHcTest"
               :class=" {'-disable' : step1}"> 
                 <!-- <p>Step.1 適性測驗 {{ a ? '通過' : '未通過' }}</p> -->
                 <p>Step.1 適性測驗 </p>
-                <p v-if="step1" > 通過</p>
-                <p v-else> 未通過</p>
-                <smallText class="hc-reson" style="display:none;">{{ hcTest.failReson }}</smallText>
+                <i></i>
+                <i></i>
+                <p v-if="step1" class="stepStatues" >已通過</p>
+                <p v-else class="stepStatues"> 未通過</p>
+                <p class="hc-reson" style="display:none;">{{ hcTest.failReson }}</p>
               </div>
-              <div class="hc-steps" @click="toggleLightBox_hcVarify">
-                <p>Step.2 資料審核 {{  }}</p>
-                <smallText class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</smallText>
+              <div class="hc-steps" @click="toggleHcVarify">
+                <p>Step.2 資料審核</p>
+                <i></i>
+                <i></i>
+                <p v-if="step1" class="stepStatues" > 通過</p>
+                 <!-- 中間有個審核中的文字
+                <p>審核中</p> -->
+                <p v-else class="stepStatues"> 未通過</p>
+                <p class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</p>
               </div>
-              <div class="hc-steps" @click="toggleLightBox_hcSign">
-                <p>Step.3 合約簽署 {{  }}</p>
-                <smallText class="hc-reson" style="display:none;">{{ hcSign.failReson }}</smallText>
+              <div class="hc-steps" @click="toggleHcSign">
+                <p>Step.3 合約簽署</p>
+                <i></i>
+                <i></i>
+                <p v-if="step1" class="stepStatues" > 通過</p>
+                <p v-else class="stepStatues"> 未通過</p>
+                <p class="hc-reson" style="display:none;">{{ hcSign.failReson }}</p>
               </div>
       
-          </div>
+        </div>
+    
+        <!-- 無身分 -->
+        <div v-if="!isHelperPassed"
+         class="hc-not-passed">      
+      
+
           <div class="hc-post-manage">
             <h6 class="bold">貼文發布管理</h6>
             <div class="divider"></div>
@@ -52,7 +65,8 @@
         </div>
       
         <!-- 有身分 ，貼文管理-->
-        <div class="hc-passed">
+        <div v-else="isHelperPassed"
+         class="hc-passed">
           <div class="hc-post-manage">
       
             <h6 class="bold">貼文發布管理</h6>
@@ -61,32 +75,23 @@
       
             <div class="hc-grid-container">
               <!-- 1 -->
-              <div class="hc-postCard" id="hcPostBuddy">
-
-                <helperPostCard/>
-
-                <div class="hc-btn-group">
-                  <Btn btnStyle="primary default" id="editPostCard" @click="toggleLightBox_editPost">編輯</Btn>                
-                  <Btn btnStyle="baseline small" id="deletePostCard" @click="togglePopUp_deleteCard">刪除貼文</Btn>            
-                </div>                
-                
-              </div>
+              <helperPostCard/>
               <!-- 2 -->
               <div class="hc-postCard empty" id="hcPostCare">     <!-- 之後 empty 改用監聽加上watch -->
                 <div class="btn-group">
-                  <Btn btnStyle="baseline small" @click="toggleLightBox_addPost">+ 到府照顧</Btn>
+                  <Btn btnStyle="baseline small" @click="toggleAddpost">+ 到府照顧</Btn>
                 </div>
               </div>
               <!-- 3 -->
               <div class="hc-postCard empty" id="hcPostStay">
                 <div class="btn-group">
-                  <Btn btnStyle="baseline small" @click="toggleLightBox_addPost">+ 友善寄宿</Btn>
+                  <Btn btnStyle="baseline small" @click="toggleAddpost">+ 友善寄宿</Btn>
                 </div>                
               </div>
               <!-- 4 -->
               <div class="hc-postCard empty" id="hcPostUber">
                 <div class="btn-group">
-                  <Btn btnStyle="baseline small" @click="toggleLightBox_addPost">+ 到府接送</Btn>
+                  <Btn btnStyle="baseline small" @click="toggleAddpost">+ 到府接送</Btn>
                 </div>                
               </div>
             </div>          
@@ -101,7 +106,7 @@
       <LightBox 
         :title="hcTest.title"
         :is-light-box="hcTest.isLightBox.value" 
-        @toggle="toggleLightBox_hcTest">
+        @toggle="toggleHcTest">
         <div class="hcTest">
           <div class="questions">
     
@@ -144,7 +149,7 @@
       <LightBox 
         :title="hcVarify.title"
         :is-light-box="hcVarify.isLightBox.value" 
-        @toggle="toggleLightBox_hcVarify">
+        @toggle="toggleHcVarify">
         <div class="hcVarify-wrapper">
   
           <div class="input-wrapper">
@@ -242,7 +247,7 @@
       <LightBox 
         :title="hcSign.title"
         :is-light-box="hcSign.isLightBox.value" 
-        @toggle="toggleLightBox_hcSign">
+        @toggle="toggleHcSign">
         <div class="hcSign-wrapper">
           <div class="hc-terms"> 
             <div class="content">
@@ -326,7 +331,7 @@
       <LightBox 
         :title="hcManage.title"
         :is-light-box="hcManage.isLightBox.value" 
-        @toggle="toggleLightBox_hcManage">
+        @toggle="toggleHcManage">
         <div class="hcManage-wrapper">
           <div class="input-wrapper">
             <!-- 服務地區 -->
@@ -421,7 +426,7 @@
       <LightBox 
         :title="addPost.title"
         :is-light-box="addPost.isLightBox.value" 
-        @toggle="toggleLightBox_addPost">
+        @toggle="toggleAddpost">
         <div class="newPost">
           <div class="postType ">
               <p class="smallText inputLabel">服務類型*</p>
@@ -480,7 +485,7 @@
       <LightBox 
         :title="editPost.title"
         :is-light-box="editPost.isLightBox.value" 
-        @toggle="toggleLightBox_editPost">
+        @toggle="toggleEditPost">
         <div class="newPost">
           <div class="postType ">
               <p class="smallText inputLabel">服務類型*</p>
@@ -537,7 +542,7 @@
       </LightBox>
       
       <!-- PopUp，刪除卡片 -->
-      <PopUp
+      <!-- <PopUp
       :is-pop-up="deleteCard.isPopUp.value">
         <div class="delete-petcard">
           <div class="title">
@@ -548,7 +553,7 @@
             <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">取消</Btn>
           </div>
         </div>
-      </PopUp>
+      </PopUp> -->
   
   
       <!-- circle bg -->
@@ -568,14 +573,28 @@
   import DropdownMenu from '../components/DropdownMenu.vue';
   import InputText from '../components/InputText.vue';
   import LightBox from '../components/LightBox.vue';
-  import PopUp from '../components/PopUp.vue';
+  // import PopUp from '../components/PopUp.vue';
   
   // pages
   import memberNav from '../views/memberNav.vue' ;
   import helperPostCard from '../views/helperPostCard.vue';
   
 // hc-nav
-const step1 = ref(false);
+const step1 = ref(true);
+const step2 = ref(false);
+const step3 = ref(true);
+// 當三個步驟都通過，賦予小幫手身分=>貼文管理的區塊變換
+const stepsCompoleted = computed(()=>{
+    if(step1 && step2 && step3){
+      isHelperPassed = ref(true);
+    }else{
+      isHelperPassed = ref(false);
+    }
+    return isHelperPassed;
+  });
+// 判斷是否有小幫手身分(通過與否)=> 下方管理小幫手貼文的區塊切換
+let isHelperPassed = ref(stepsCompoleted);
+
  
   // 適性測驗
     // 定義題目資料，每個題目包含 id 與題目內容
@@ -586,23 +605,7 @@ const step1 = ref(false);
       { id: 4, text: "若飼主遺漏日常照護，我願提供提醒並協助維護寵物健康", result: false },
       { id: 5, text: "面對寵物與飼主需求，我會保持充分耐心並展現真誠善意", result: false }
     ]);
-  
-    // 定義一個反應式對象來儲存每題的答案（key 為題目 id，值為 "yes" 或 "no"）
-    const answers = reactive({});
-  
-    // 提交時，這裡只是示範輸出答案
-    const handleSubmit = () => {
-      // 之後要用ajax把資料傳給後端
-      console.log("問卷答案：", answers);
-    };
-  
-    // 放棄時，重置所有答案
-    const handleCancel = () => {
-      for (const key in answers) {
-        answers[key] = '';
-      }
-    };
-  
+    
   // lightbox
     const addPost = {
       title: "新增貼文", 
@@ -632,97 +635,81 @@ const step1 = ref(false);
       };
   
   // 控制lightbox狀態
-    // 適性測驗
-    function toggleLightBox_hcTest() {
-      hcTest.isLightBox.value = !hcTest.isLightBox.value;
-      if(hcTest.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
-    // 資料審核
-    function toggleLightBox_hcVarify() {
-      hcVarify.isLightBox.value = !hcVarify.isLightBox.value;
-      if(hcVarify.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
-    // 合約簽署
-    function toggleLightBox_hcSign() {
-      hcSign.isLightBox.value = !hcSign.isLightBox.value;
-      if(hcSign.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
-    // 小幫手管理
-    function toggleLightBox_hcManage() {
-      hcManage.isLightBox.value = !hcManage.isLightBox.value;
-      if(hcManage.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
+  const toggleLightBox = (targetBox) =>{
+    targetBox.isLightBox.value = !targetBox.isLightBox.value;;
+    document.body.classList.toggle('clicked',targetBox.isLightBox.value);
+  };
+
+  // 建立專門的處裡含數->放進要使用的事件中
+  const toggleAddpost = () => toggleLightBox(addPost);
+  const toggleEditPost = () => toggleLightBox(editPost);
+  const toggleHcTest = () => toggleLightBox(hcTest);
+  const toggleHcVarify = () => toggleLightBox(hcVarify);
+  const toggleHcSign = () => toggleLightBox(hcSign);
+  const toggleHcManage = () => toggleLightBox(hcManage);
+
+  // 回傳函數，使之可以在 template 中使用
+  // return{
+  //   toggleLightBox,
+  //   toggleAddpost,
+  //   toggleEditPost,
+  //   toggleHcTest,
+  //   toggleHcVarify,
+  //   toggleHcSign,
+  //   toggleHcManage
+  // };
+
+  // 定義一個反應式對象來儲存每題的答案（key 為題目 id，值為 "yes" 或 "no"）
+  const answers = ref({});
   
-      // 新增貼文
-    function toggleLightBox_addPost() {
-      addPost.isLightBox.value = !addPost.isLightBox.value;
-      if(addPost.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
-    // 編輯貼文
-    function toggleLightBox_editPost() {
-      editPost.isLightBox.value = !editPost.isLightBox.value;
-      if(editPost.isLightBox.value){
-        document.body.classList.add('clicked');
-      }else{
-        document.body.classList.remove('clicked');
-      }
-    };
+  // 提交時，這裡只是示範輸出答案
+  const handleSubmit = () => {
+    // 之後要寫邏輯，用ajax把資料傳給後端
+    // 確保輸出的是普通物件
+    console.log("問卷答案：", {...answers.value});
+  };
+
+  // 放棄時，重置所有答案
+  const handleCancel = () => {
+    // 直接賦值一個新物件，確保 Vue 能偵測變更
+    answers.value = {};
+  };  
   
-    // 依序觸發 兩個事件: 
-     // 儲存 + 關掉
-      const submitAndToggle_test = () =>{
-        handleSubmit();
-        toggleLightBox_hcTest();
-      };
-      const submitAndToggle_hcVarify = () =>{
-        handleSubmit();
-        toggleLightBox_hcVarify();
-      };
-      const submitAndToggle_hcSign = () =>{
-        handleSubmit();
-        toggleLightBox_hcSign();
-      };
-      const submitAndToggle_hcManage = () =>{
-        handleSubmit();
-        toggleLightBox_hcManage();
-      };
-     // 重整 + 關掉
-     const reloadAndToggle_hcTest = () =>{
-          handleCancel();
-          toggleLightBox_hcTest();
-      };
-      const reloadAndToggle_hcVarify = () =>{
-          handleCancel();
-          toggleLightBox_hcVarify();
-      };
-      const reloadAndToggle_hcSign = () =>{
-          handleCancel();
-          toggleLightBox_hcSign();
-      };
-      const reloadAndToggle_hcManage = () =>{
-          handleCancel();
-          toggleLightBox_hcManage();
-      };
+  // 儲存或取消時，依序觸發 兩個事件: 
+    // 儲存 + 關掉
+    const submitAndToggle_test = () =>{
+      handleSubmit();
+      toggleHcTest;
+    };
+    const submitAndToggle_hcVarify = () =>{
+      handleSubmit();
+      toggleHcVarify;
+    };
+    const submitAndToggle_hcSign = () =>{
+      handleSubmit();
+      toggleHcSign;
+    };
+    const submitAndToggle_hcManage = () =>{
+      handleSubmit();
+      toggleHcManage;
+    };
+    // 重整 + 關掉
+    const reloadAndToggle_hcTest = () =>{
+        handleCancel();
+        toggleHcTest_hcTest();
+    };
+    const reloadAndToggle_hcVarify = () =>{
+        handleCancel();
+        toggleHcVarify;
+    };
+    const reloadAndToggle_hcSign = () =>{
+        handleCancel();
+        toggleHcSign;
+    };
+    const reloadAndToggle_hcManage = () =>{
+        handleCancel();
+        toggleHcManage;
+    };
   
   
   

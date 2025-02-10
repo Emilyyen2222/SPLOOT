@@ -9,119 +9,69 @@
   <div class="petcardView">
         <div class="petcard-title">
             <h6 class="bold">寵物資訊卡</h6>
-            <p>目前有2張資訊卡</p>
+            <p>目前有 {{ petCardCount }} 張資訊卡</p>
         </div>
     
         <div class="divider"></div>
     
         <!-- view -->
         <div class="petcard-container">
-            <!-- card1 -->
+            <!-- card1~n -->
             <!-- v-for : 卡片與按鈕:pc1、pc2、...-->
-            <div class="petcard pc1">
+            <div class="petcard" 
+                v-for=" petcard in petcards "
+                :key="petcard.petcardId">
               <div class="cardWrap">
                 <!-- 卡片部分 -->
                 <div class="cardwrapper">
-                  <!-- 左側圖片區 -->
-                  <div class="imageContainer">
-                      <img src="@/assets/img/home/matchCard.svg" alt="">
-                  </div>
-                  <!-- 右側內容區 -->
-                  <div class="content">
-                      <div class="topSection">
-                      <div class="dot">
-                          <div class="dotActive"></div>
-                          <div class="dotInactive"></div>
-                          <div class="dotInactive"></div>
-                      </div>
-                      <div class="number">01</div>
-                      </div>
-                      <!-- 名稱與距離 -->
-                      <div class="info">
-                          <h4 class="name">COCO</h4>
-                          <div class="distance">
-                          <div class="smallText distanceIcon"></div>
-                          距離你6公里
-                          </div>
-                      </div>
-                      <!-- 標籤區 -->
-                      <div class="tags">
-                      <span class="xsText tag">邊境牧羊</span>
-                      <span class="xsText tag">活潑外向</span>
-                      <span class="xsText tag">愛玩球</span>
-                      <span class="xsText tag">台北市</span>
-                      <span class="xsText tag">松山區</span>
-                      <span class="xsText tag">大型犬</span>
-                      <span class="xsText tag">已結紮</span>
-                      </div>
-                      <!-- 內文 -->
-                      <p class="description bold">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-                      </p>
-                  </div>
+                <!-- 左側圖片區 -->
+                <div class="imageContainer">
+                    <img src="@/assets/img/home/matchCard.svg" alt="">
+                </div>
+                <!-- 右側內容區 -->
+                <div class="content">
+                    <div class="topSection">
+                    <div class="dot">
+                        <div class="dotActive"></div>
+                        <div class="dotInactive"></div>
+                        <div class="dotInactive"></div>
+                    </div>
+                    <div class="number">{{ '0' + petcard.petcardId }}</div>
+                    </div>
+                    <!-- 名稱與距離 -->
+                    <div class="info">
+                        <h4 class="name">COCO</h4>
+                        <div class="distance">
+                        <div class="smallText distanceIcon"></div>
+                        距離你6公里
+                        </div>
+                    </div>
+                    <!-- 標籤區 -->
+                    <div class="tags">
+                    <span class="xsText tag">邊境牧羊</span>
+                    <span class="xsText tag">活潑外向</span>
+                    <span class="xsText tag">愛玩球</span>
+                    <span class="xsText tag">台北市</span>
+                    <span class="xsText tag">松山區</span>
+                    <span class="xsText tag">大型犬</span>
+                    <span class="xsText tag">已結紮</span>
+                    </div>
+                    <!-- 內文 -->
+                    <p class="description bold">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
+                    </p>
+                </div>
                 </div>
               </div>
               <div class="ptc-btn-group">
-                <Btn btnStyle="primary default" @click="toggleLightBox_editDog">編輯</Btn>
+                <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo('dog')">編輯</Btn>
                 <div class="btn-group">
                   <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">刪除卡片</Btn>
                   <Btn btnStyle="baseline small" @click="toggleLightBox_match">配對喜好設定</Btn>
                 </div>
               </div>
             </div>
-              <!-- card2 -->
-              <div class="petcard pc2">
-              <div class="cardWrap">
-                <!-- 卡片部分 -->
-                <div class="cardwrapper">
-                  <!-- 左側圖片區 -->
-                  <div class="imageContainer">
-                      <img src="@/assets/img/home/matchCard.svg" alt="">
-                  </div>
-                  <!-- 右側內容區 -->
-                  <div class="content">
-                      <div class="topSection">
-                      <div class="dot">
-                          <div class="dotActive"></div>
-                          <div class="dotInactive"></div>
-                          <div class="dotInactive"></div>
-                      </div>
-                      <div class="number">01</div>
-                      </div>
-                      <!-- 名稱與距離 -->
-                      <div class="info">
-                          <h4 class="name">COCO</h4>
-                          <div class="distance">
-                          <div class="smallText distanceIcon"></div>
-                          距離你6公里
-                          </div>
-                      </div>
-                      <!-- 標籤區 -->
-                      <div class="tags">
-                      <span class="xsText tag">邊境牧羊</span>
-                      <span class="xsText tag">活潑外向</span>
-                      <span class="xsText tag">愛玩球</span>
-                      <span class="xsText tag">台北市</span>
-                      <span class="xsText tag">松山區</span>
-                      <span class="xsText tag">大型犬</span>
-                      <span class="xsText tag">已結紮</span>
-                      </div>
-                      <!-- 內文 -->
-                      <p class="description bold">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-                      </p>
-                  </div>
-                </div>
-              </div>
-              <div class="ptc-btn-group">
-                <Btn btnStyle="primary default" @click="toggleLightBox_editDog">編輯</Btn>
-                <div class="btn-group">
-                  <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">刪除卡片</Btn>
-                  <Btn btnStyle="baseline small" @click="toggleLightBox_match">配對喜好設定</Btn>
-                </div>
-              </div>
-            </div>
-              <!-- card3 -->
+            <!-- cardn+1 -->
             <div class="petcard addpc" id="addPetCard">
               <div class="" id="addPetCardBtn">
                 <Btn btnStyle="baseline small" @click="toggleLightBoxPetInfo('dog')">+ 狗狗資訊卡</Btn>
@@ -705,6 +655,15 @@
       inputError: ref(false),
   }
 
+  // 寵物資訊卡的卡片資料
+  const petcards = [
+    { petcardId:1 },
+    { petcardId:2 },
+    { petcardId:3 },
+  ];
+
+    // 計算資訊卡的卡片數量
+    const petCardCount = computed(() => petcards.length);
   
   // 調整喜好
    // 哪種朋友
@@ -786,9 +745,9 @@
     selected: ref([]),
     };
     const tag5 = {
-        formChoice: multipleChoice,
-        options: ['未知'],
-        selected: ref([]),
+    formChoice: multipleChoice,
+    options: ['未知'],
+    selected: ref([]),
     };
     const tag6 = {
     formChoice: multipleChoice,
@@ -820,7 +779,7 @@
     const lightTitlePetInfo = ref({
         title: '狗狗資訊卡'
     });
-    let isLightBoxPetInfo = ref(true);
+    let isLightBoxPetInfo = ref(false);
     // 狗狗貓貓資訊卡切換
     const selectedPetType = ref('dog');
     // 狗狗資訊卡
@@ -848,24 +807,24 @@
   // 控制燈箱的顯示與隱藏
    // 編輯卡片
      // 狗
-  function toggleLightBox_editDog() {  
-    lightTitle_editDog.isLightBox.value = !lightTitle_editDog.isLightBox.value;
-    // 根據狀態新增或移除 clicked 類別
-    if (lightTitle_editDog.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
+  // function toggleLightBox_editDog() {  
+  //   lightTitle_editDog.isLightBox.value = !lightTitle_editDog.isLightBox.value;
+  //   // 根據狀態新增或移除 clicked 類別
+  //   if (lightTitle_editDog.isLightBox.value) {
+  //     document.body.classList.add('clicked');
+  //   } else {
+  //     document.body.classList.remove('clicked');
+  //   }
+  // };
      // 貓
-  function toggleLightBox_editCat() {  
-    lightTitle_editCat.isLightBox.value = !lightTitle_editCat.isLightBox.value;
-    if (lightTitle_editCat.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
+  // function toggleLightBox_editCat() {  
+  //   lightTitle_editCat.isLightBox.value = !lightTitle_editCat.isLightBox.value;
+  //   if (lightTitle_editCat.isLightBox.value) {
+  //     document.body.classList.add('clicked');
+  //   } else {
+  //     document.body.classList.remove('clicked');
+  //   }
+  // };
    // 配對喜好設定 
   function toggleLightBox_match() {
     lightTitle_matchReset.isLightBox.value = !lightTitle_matchReset.isLightBox.value;

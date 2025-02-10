@@ -1044,11 +1044,23 @@ ol {
       padding: 1.6rem 3.2rem;
       border-radius: 8px;
       border: 1px solid map-get($colors, natural-2 );
+      @include textStyle(smallText);
 
       position: relative;
+      .stepStatues{
+        margin-left: 1.6rem;
+      }
     }
+    // 步驟完成後，按鈕變成"不可點擊
+    .-disable{
+      // 滑鼠變叉叉
+      cursor: not-allowed; 
+      // 禁止點擊
+      pointer-events: none;
+    }
+
     .hc-steps:hover{
-      background-color: map-get($colors, natural-1 );
+      background-color: map-get($colors, natural-0 );
       transition: all .3s;
     }
     .hc-reson{
@@ -1057,6 +1069,13 @@ ol {
       left: 0%;
       color:map-get($colors, red );
     }
+  }
+  .hc-title{
+    text-align: left;
+    margin-bottom: 2.4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
 
@@ -1287,15 +1306,9 @@ ol {
   }
   .btn-group{}
 }
+
  // 無身分
 .hc-not-passed{
-  .hc-title{
-    text-align: left;
-    margin-bottom: 2.4rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
 
   .hc-post-manage{
     width: 100%;
@@ -1308,6 +1321,7 @@ ol {
     .hc-msg{
       width: 100%;
       height: 100%;
+      min-height: 30rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1337,10 +1351,9 @@ ol {
       width: 100%;
       height: 100%;
       min-height: 40rem;
-      // display: flex;
-      // flex-direction: column;
-      // justify-content: flex-start;
-      // gap: .8rem ;
+      .buddyCards{
+        margin: 0 auto;
+      }
     }
 
     .postCard{
