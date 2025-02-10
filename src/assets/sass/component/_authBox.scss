@@ -146,9 +146,9 @@ body.authClicked{
                     display: flex;
                     align-items: center;
 
-                    #agree{
-                        margin: 0.3rem;
-                    }
+                    #agree{ margin: 0.3rem; }
+
+                    &.-error{ color: map-get($colors, red); }
                 }
 
                 .forgotPassword{
@@ -172,6 +172,8 @@ body.authClicked{
                         align-items: center;
                         gap: 0.8rem;
                     }
+
+                    &.-error{ border: 1px solid map-get($colors, red); }
                 }
 
                 .dividerBox{
