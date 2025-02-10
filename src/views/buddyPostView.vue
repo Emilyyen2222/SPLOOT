@@ -337,7 +337,7 @@
         },
         {
             avatarSrc: new URL("@/assets/img/buddy-post/Kosoku-baba.svg", import.meta.url).href,
-            name: "Kosoku baba",
+            name: "Kosokubaba",
             time: {
                 year: "2024",
                 month: "11",
