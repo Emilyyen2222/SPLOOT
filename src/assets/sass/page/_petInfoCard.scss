@@ -21,7 +21,6 @@
         label{
             width: 6.4rem;
             @include textStyle(smallText);
-    
         }
         .fieldInterest{
             padding-left: 1rem;
@@ -48,8 +47,6 @@
                 z-index: 950; //上層需要壓過下層選單
             }
         }
-        
-        
     }
     .tags{
         display: flex;
@@ -161,7 +158,6 @@
             text-align: center;
             gap: 1.2rem;
         }
-        
     }
     .saveBtnBox{
         position: absolute;

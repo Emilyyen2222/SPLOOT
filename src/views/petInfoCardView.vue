@@ -7,7 +7,7 @@
     :is-pop-up="CreatePetCard.isPopUp.value"
     @toggle="togglePopUpCreatePetCard">
     <P class="bold" style="margin-bottom: 2.4rem;">請先建立寵物卡</P>
-    <RouterLink to="/member-center/petcard" style="cursor: pointer;">
+    <RouterLink to="/match" style="cursor: pointer;">
         <Btn btnType="form" btnStyle="nextQ">確定</Btn> 
         <!-- <Btn btnType="form" btnStyle="nextQ">配對問卷</Btn> 
         <Btn btnType="form" btnStyle="nextQ">開始配對</Btn>  -->
@@ -15,28 +15,25 @@
 </PopUp>
 
 <!-- 寵物資訊卡 -->
-<button @click="toggleLightBoxPetInfo('dog')">狗狗資訊卡</button>
-<button @click="toggleLightBoxPetInfo('cat')">貓貓資訊卡</button>
+<!-- <button @click="toggleLightBoxPetInfo('dog')">狗狗資訊卡</button>
+<button @click="toggleLightBoxPetInfo('cat')">貓貓資訊卡</button> -->
 
-<LightBox 
+<!-- <LightBox 
     :title="lightTitlePetInfo.title"
     :is-light-box="isLightBoxPetInfo" 
     @toggle="toggleLightBoxPetInfo()">
     <div v-if="selectedPetType === 'dog'" class="infoContainer">
-    <!-- 資訊卡內文 -->
         <div class="infoWrap">
-            <!-- 毛孩姓名，性別，品種 -->
             <div class="wPhotoSec">
                 <div class="imgUpload" @click="callFileInput">
                     <div class="imgUploadSection">
                         <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
-                        <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                        <div class="uploadImgBox" v-if="hasUploadImg">
                             <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
                         </div>
                     </div>
                     <div class="imgUploadBtn">
                         <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
-                        <!-- <Btn btnStyle="primary small" >上傳圖檔</Btn> -->
                     </div>
                 </div>
                 <div class="infoSection">
@@ -75,7 +72,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 生日 -->
             <div class="birthdaySection">
                 <div class="birthFieldWrapper">
                     <div class="field">
@@ -117,7 +113,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 體型 -->
             <div class="petSize">
                 <div class="sizeFieldWrapper">
                     <div class="field">
@@ -133,7 +128,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 社交 -->
             <div class="social">
                 <div class="socialfieldWrapper">
                     <div class="field">
@@ -149,7 +143,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 興趣愛好 -->
             <div class="interest">
                 <div class="fieldWrapper">
                     <div class="field ">
@@ -167,7 +160,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 絕育狀態 -->
             <div class="neuter">
                 <div class="neuterFieldWrapper">
                     <div class="field">
@@ -179,7 +171,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 毛孩簡介文字區 -->
             <div class="infoInput">
                 <div class="fieldWrapper">
                     <div class="field">
@@ -192,20 +183,17 @@
         </div>
     </div>
     <div v-if="selectedPetType === 'cat'" class="infoContainer">
-    <!-- 資訊卡內文 -->
         <div class="infoWrap">
-            <!-- 毛孩姓名，性別，品種 -->
             <div class="wPhotoSec">
                 <div class="imgUpload" @click="callFileInput">
                     <div class="imgUploadSection">
                         <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
-                        <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                        <div class="uploadImgBox" v-if="hasUploadImg"> 
                             <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
                         </div>
                     </div>
                     <div class="imgUploadBtn">
                         <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
-                        <!-- <Btn btnStyle="primary small" >上傳圖檔</Btn> -->
                     </div>
                 </div>
                 <div class="infoSection">
@@ -244,7 +232,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 生日 -->
             <div class="birthdaySection">
                 <div class="birthFieldWrapper">
                     <div class="field">
@@ -286,23 +273,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 體型 -->
-            <!-- <div class="petSize">
-                <div class="sizeFieldWrapper">
-                    <div class="field">
-                        <label>體型</label>
-                        <div class="sizeOptions">
-                            <div class="tags">
-                                <Btn v-for="option in tag2.options" :key="option"
-                                btnType="tag" 
-                                :class="{'-active': optionSelected(tag2.selected, option)}"
-                                @click="tag2.formChoice(tag2.selected, option)">{{ option }}</Btn>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- 社交 -->
             <div class="social">
                 <div class="socialfieldWrapper">
                     <div class="field">
@@ -318,7 +288,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 興趣愛好 -->
             <div class="interest">
                 <div class="fieldWrapper">
                     <div class="field ">
@@ -336,7 +305,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 絕育狀態 -->
             <div class="neuter">
                 <div class="neuterFieldWrapper">
                     <div class="field">
@@ -348,7 +316,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 毛孩簡介文字區 -->
             <div class="infoInput">
                 <div class="fieldWrapper">
                     <div class="field">
@@ -366,12 +333,11 @@
         </RouterLink>
         <Btn class="borderBottom" btnType="form" btnStyle="lastQ">取消編輯</Btn>
     </div> 
-</LightBox>
+</LightBox> -->
     </template>
     
     <script setup>
         import MainHeader from "../components/MainHeader.vue";
-        
         import DropdownMenu from "../components/DropdownMenu.vue";
         import Btn from '../components/Btn.vue';
         import InputText from '../components/InputText.vue';
@@ -380,7 +346,7 @@
         import PopUp from "@/components/PopUp.vue";
 
     // popup 請先建立寵物卡
-    const CreatePetCard = { isPopUp : ref (false)  };
+    const CreatePetCard = { isPopUp : ref (true)  };
     // 控制燈箱的顯示與隱藏
     function togglePopUpCreatePetCard() {
         CreatePetCard.isPopUp.value = !CreatePetCard.isPopUp.value;
