@@ -20,7 +20,6 @@
         @click="nextQuestion(q1input != '' 
         && questionPet.selected.value.length != 0 )">下一題</Btn> 
     </div>
-     
 </div>
 <!------------------------ question2 貓---------------------->
 <div v-if="question==2"  class="box firstBox">
@@ -40,22 +39,6 @@
         @click="lastQuestion">上一題</Btn> 
     </div>
 </div>
-<!------------------------ question 2狗---------------------->
-<!-- <div v-if="question==2 && pet=='dog'" class="box">
-    <div class="questionContainer">
-        <h4 class="title bold">您的毛孩是哪種體型？</h4>
-        <div class="options">
-            <Btn v-for="option in q2Form.options" :key="option"
-            btnType="form" btnStyle="option" 
-            :class="{'-active': optionSelected(q2Form.selected, option)}"
-            @click="q2Form.formChoice(q2Form.selected, option)">{{ option }}</Btn>
-        </div>
-        <Btn btnType="form" btnStyle="nextQ"
-        @click="nextQuestion(q2Form.selected.value.length != 0)">下一題</Btn> 
-        <Btn class="borderBottom" btnType="form" btnStyle="lastQ"
-        @click="lastQuestion">上一題</Btn> 
-    </div>
-</div> -->
 <!------------------------ question 3---------------------->
 <div v-if="question==3" class="box">
     <div class="questionContainer">

@@ -1,7 +1,6 @@
 <template>
     <MainHeader theme="red" bgc="purple-1"></MainHeader>
-    <!-- <main class="bg-purple-1" style="z-index: -10;"> -->
-    <!------------------------match question 1---------------------->
+<!------------------------match question 1---------------------->
 <div v-if="question==1" class="matchWrap firstBox">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的毛孩朋友是</h4>
@@ -21,14 +20,8 @@
         <Btn btnType="form" btnStyle="nextQ"
         @click="nextQuestion(matchPet.selected.value.length != 0 )">下一題</Btn>
     </div>
-    <!-- progress bar -->
-    <ProgressBar :total="4" :current="1" ></ProgressBar>
-    <div class="btnContainer">
-        <Btn class="" btnStyle="baseline default">直接配對</Btn>
-    </div>
 </div>
-
-   <!------------------------match question2貓---------------------->
+<!------------------------match question2貓---------------------->
 <div v-if="question==2" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的貓咪朋友是</h4>
@@ -49,7 +42,7 @@
         @click="lastQuestion">上一題</Btn>
     </div>
 </div>
-   <!------------------------match question3狗---------------------->
+<!------------------------match question3狗---------------------->
 <div v-if="question==3" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我想認識的狗狗朋友是</h4>
@@ -70,7 +63,7 @@
         @click="lastQuestion">上一題</Btn>
     </div>
 </div>
-   <!------------------------match question4---------------------->
+<!------------------------match question4---------------------->
 <div v-if="question==4" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我喜歡哪一種社交性</h4>
@@ -88,10 +81,11 @@
         <Btn btnType="form" btnStyle="nextQ"
         @click="nextQuestion(matchSocial.selected.value.length != 0)">下一題</Btn>
         <Btn btnType="form" btnStyle="lastQ"
-        @click="lastQuestion">上一題</Btn>
+        @click="lastQuestion"
+        >上一題</Btn>
     </div>
 </div>
-   <!------------------------match question5---------------------->
+<!------------------------match question5---------------------->
 <div v-if="question==5" class="matchWrap">
     <div class="questionContainer">
         <h4 class="title bold">我希望的毛孩朋友結紮狀態</h4>
@@ -107,15 +101,23 @@
         :class="{'-active': optionSelected(matchNeutered.selected, option)}"
         @click="matchNeutered.formChoice(matchNeutered.selected, option)">{{ option }}</Btn>
         <RouterLink to="/match/matchCard">
-            <Btn btnType="form" btnStyle="nextQ">完成</Btn>
+            <Btn btnType="form" btnStyle="nextQ">開始配對</Btn>
         </RouterLink>
         <Btn btnType="form" btnStyle="lastQ"
         @click="lastQuestion">上一題</Btn>
     </div>
 </div>
+    <!-- progress bar -->
+    <ProgressBar :total="5" :current="question" ></ProgressBar>
     <!-- circle bg -->
         <div class="circleMatch"></div>
-    <!-- </main> -->
+    <!-- 直接配對 -->
+    <div class="btnContainer">
+        <RouterLink to="/match/matchCard">
+            <Btn class="" btnStyle="baseline default" v-if="goMatch">直接配對</Btn>
+        </RouterLink>
+    </div>
+
 </template>
     
 <script setup>
@@ -128,12 +130,16 @@
 
 
     const question = ref(1);
-
+    const goMatch  = ref(true);
 
     // 下一題按鈕
     function nextQuestion(bol = false) {
     if (bol == true) {
         question.value++;
+        if (question.value == 5){
+            goMatch.value = false;
+        }
+
     } else {
         alert("請輸入選項");
     }
