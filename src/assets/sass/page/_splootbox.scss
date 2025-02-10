@@ -1,16 +1,16 @@
  body{
     background-color: map-get($colors, pink-0);
     position: relative;
-    overflow-x: hidden !important;
 } 
+.page-splootbox{
+    overflow: hidden;
+}
+
 .herobox {
     position: relative;
     width: 100%; 
-    height: 56rem; 
-    // background-color: transparent;
-    @include md(){
-        // background-color: map-get($colors, pink-2);
-    }                  
+    height: 56rem;
+
     .img {
         position: absolute;
         z-index: -5;
@@ -18,27 +18,36 @@
         height: 100%;
         object-fit: cover; 
         object-position: 50% 100%; 
-        @include md(){
-        // display: none;
-      }
     }
     .herobtn {
       position: absolute;
       top: 50%; 
-      left: 30%; 
-      transform: translate(-50%, -50%); 
+      left: 10%; 
       z-index: 5; 
       text-align: center;
-      @include lg(){left: 50%;}
+
+      @include md(){
+        top: 60%; 
+        left: 50%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 30rem;
+
+        transform: translate(-50%, -50%); 
+      }
+
       h4.bold {
         color: map-get($colors, beige);
-        @include md(){
-            // color: map-get($colors, red);  
-        }
       }
       .btnBox {
-        margin-top: 10px;
-        width: 22rem;
+        margin-top: 24px;
+        width: 24rem;
+      }
+      @include lg(){
       }
     }
   }
@@ -48,10 +57,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    max-width: 1300px;
+    max-width: 1240px;
     margin: 0 auto;
-     margin-top: 30rem;
-     margin-bottom: 3rem;
+    margin-top: 24rem;
+    margin-bottom: 4rem;
     .boxTitle {
         display: flex;
         position: relative;
@@ -59,9 +68,6 @@
         color: map-get($colors, red);
        
         width: 100%;
-        @include md(){
-            font-size: 2rem;
-        }
         h4{
             z-index: 10;
         }
@@ -69,13 +75,13 @@
             z-index: -5;
             position: absolute;
             top: 0.1rem;
-            transform: translate(20px, -120px);
+            transform: translate(0, -128px);
             color: map-get($colors, pink-1);
-            @include bayon(190);
+            @include bayon(168);
             font-weight: 400;
             line-height: 171px;
             @include md(){
-                @include bayon(80);
+                @include bayon(120);
             }
         }
     }
@@ -85,16 +91,14 @@
     flex-direction: column;
     max-width: 121.6rem;
     width: 85%;
-    padding: 4rem;
+    padding: 2.4rem;
     margin: 0 auto;
     background-color: map-get($colors, beige);
     border-radius: 2rem;
     .boxSection {
         z-index: 10;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.8rem;
+        gap: 1.6rem;
         @include lg(){
             display: flex;
             flex-direction: column;
@@ -139,27 +143,75 @@
         margin: 3.2rem 0;
     }
 }
-// 背景圓圈
-.circleSplootBox {
-    @include circle(map-get($colors, pink-1));
-    z-index: -20;
-    position: absolute;
-    object-fit: cover;
-    top: 67%; 
-    left: 50%;
-}
+
 // 如何訂閱區塊
 .howitworks {
     display: flex;
     flex-direction: column;
     position: relative;
-    max-width: 132.8rem;
+    justify-content:  center;
+    align-items: center;
+    //max-width: 132.8rem;
     margin: 0 auto; 
     text-align: center;
     width: 100%;
-    .howitworks_section {
+    .step-container {
         display: flex;
-      .title {
+        flex-wrap: nowrap;
+        justify-content: center ;
+        align-items: center;
+        gap: 4rem;
+        height: 392px;
+        padding: 0 2.4rem;
+    
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        white-space: nowrap; 
+        width: 100%;
+        max-width: 100vw;
+        @include lg(){
+            justify-content:  flex-start;
+        }
+        .step-card {
+            display: flex;
+            flex-direction: column;
+            padding: 0.8rem;
+            background-color: map-get($colors, beige);
+            border-radius: 0.8rem;
+            gap: 0.8rem;
+            height: 36.8rem;
+    
+            flex: 0 0 auto;
+            width: 280px;
+            scroll-snap-align: start;
+            .review-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                border-radius: 0.8rem;
+                img {
+                    width: 100%; 
+                    height: 20.8rem;
+                    object-fit: cover; 
+                }
+            }
+            .review-content {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        .step-card:nth-child(1), .step-card:nth-child(3) { 
+            transform: rotate(-4deg);
+        }
+        .step-card:nth-child(2), .step-card:nth-child(4) { 
+            transform: rotate(4deg);
+        }
+        .title {
             color: map-get($colors, brown);
             @include bayon(56);
             padding: 0.8rem;
@@ -171,78 +223,105 @@
             border-radius: 0.4rem;
         }
       }
+    
     }
+    
+
 }
 .howitworksbtn {
     position: relative;
     display: flex; 
     justify-content: center; 
     top: 8rem;
+    
     .btnBox{
         width: 18rem;
     }
+
 }
+
+
 // 評語區塊
 .reviewTitle {
-    display: block;
+    display: flex;;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    max-width: 590px;
+    max-width: 800px;
     text-align: center;
-    margin: 20rem auto;
+    margin: 20rem auto 4rem auto;
     color: map-get($colors, red);
-    @include sm(){
-        max-width: 342px;
+    .feedback-content {
+        margin: 2.4rem;
+        max-width: 600px;
     }
-    .boxTitle3 {
-        text-align: center;
-        .feedback-content {
-            margin: 2.4rem auto;
-            max-width: 600px;
-        }
+    //circle bg
+    .circleSplootBox {
+        @include circle(map-get($colors, pink-1));
+        z-index: -20;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
     }
 }
+// 狗狗的評語圖文區塊
 .reviews-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    justify-content: center ;
     align-items: center;
-    margin: 0 auto;
-    gap: 5rem;
+    gap: 4rem;
+    padding: 0 2.4rem;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    white-space: nowrap; 
+    width: 100%;
+    max-width: 100vw;
+    @include lg(){
+        justify-content:  flex-start;
+    }
     .review-card {
-        display: inline-flex;
         flex-direction: column;
-        max-width: 280px;
+        width: 28rem;
         padding: 0.8rem;
         background-color: map-get($colors, beige);
-        border-radius: 0.8rem;
+        border-radius: 1.2rem;
         gap: 0.8rem;
-        padding: 0.8rem;
         height: 36.8rem;
+        
         .review-image {
-            max-width: 26.4rem; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border-radius: 0.8rem;
+            width: 26.4rem; 
+            
             img {
                 width: 100%; 
-                height: 20.8rem;
                 object-fit: cover; 
+                border-radius: 0.8rem;
+                aspect-ratio: 3 / 2;
             }
         }
         .review-content {
+            margin-top: 1rem;
             display: flex;
             flex-direction: column;
+            .review-text {
+                white-space: normal;
+            }
         }
     }
 }
+
 // testmonial大字
 .box4 {
     z-index: -10;
     position: relative;
     text-align: center;
-    top: -3rem;
     color: map-get($colors, red);
     p{
         @include lg(){
@@ -250,9 +329,6 @@
         }
         @include md(){
             @include bayon(80);
-        }
-        @include sm(){
-            @include bayon(64);
         }
     }
 }
@@ -271,7 +347,7 @@
         flex-direction: column;
         display: inline-flex;
         align-items: stretch;
-        gap: 1rem;
+        gap: 1.6rem;
     }
 }
 // FAQ區塊
@@ -288,9 +364,9 @@
     .faqTitle {
         display: flex;
         justify-content: center;
-        margin-top: 6rem;
+        margin-top: 8rem;
         color: map-get($colors, red);
-        // margin-bottom: 14rem;
+        margin-bottom: 2.4rem;
     }
     .faqContainer {
         width: 100%;
