@@ -649,103 +649,103 @@
         }
     },
     {
-        "title": "毛孩露營日",
-        "content": "大自然、篝火與毛孩的陪伴，快來參加我們的戶外露營活動！",
-        "peopleCount": "55",
-        "startTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "09",
-            "time": "16:33"
+        title: "毛孩露營日",
+        content: "大自然、篝火與毛孩的陪伴，快來參加我們的戶外露營活動！",
+        peopleCount: "55",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "09",
+            time: "16:33"
         },
-        "endTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "15",
-            "time": "15:19"
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "15",
+            time: "15:19"
         },
-        "place": "台中中央公園",
-        "type": "official",
-        "status": "attend",
-        "organizer": {
-            "avatar": new URL("../assets/img/event/129.svg", import.meta.url).href,
-            "name": "喵星人王國",
-            "line": "love_forever"
+        place: "台中中央公園",
+        type: "official",
+        status: "attend",
+        organizer: {
+            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+            name: "喵星人王國",
+            line: "love_forever"
         }
     },
     {
-        "title": "寵物攝影工作坊",
-        "content": "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
-        "peopleCount": "10",
-        "startTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "20",
-            "time": "23:22"
+        title: "寵物攝影工作坊",
+        content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "20",
+            time: "23:22"
         },
-        "endTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "24",
-            "time": "17:29"
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "24",
+            time: "17:29"
         },
-        "place": "高雄駁二藝術特區",
-        "type": "splooter",
-        "status": "attend",
-        "organizer": {
-            "avatar": new URL("../assets/img/event/129.svg", import.meta.url).href,
-            "name": "寵愛一生",
-            "line": "furry_diary"
+        place: "高雄駁二藝術特區",
+        type: "splooter",
+        status: "attend",
+        organizer: {
+            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+            name: "寵愛一生",
+            line: "furry_diary"
         }
     },
     {
-        "title": "寵物飛盤挑戰賽",
-        "content": "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
-        "peopleCount": "10",
-        "startTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "05",
-            "time": "18:47"
+        title: "寵物飛盤挑戰賽",
+        content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "05",
+            time: "18:47"
         },
-        "endTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "23",
-            "time": "20:25"
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "23",
+            time: "20:25"
         },
-        "place": "基隆海洋廣場",
-        "type": "splooter",
-        "status": "attend",
-        "organizer": {
-            "avatar": new URL("../assets/img/event/129.svg", import.meta.url).href,
-            "name": "毛孩俱樂部",
-            "line": "fashion_dog_cat"
+        place: "基隆海洋廣場",
+        type: "splooter",
+        status: "attend",
+        organizer: {
+            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+            name: "毛孩俱樂部",
+            line: "fashion_dog_cat"
         }
     },
     {
-        "title": "毛孩瑜珈日",
-        "content": "來一場寧靜與身心平衡的瑜珈體驗吧！帶著毛孩一起感受身心舒展的樂趣~",
-        "peopleCount": "10",
-        "startTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "21",
-            "time": "21:11"
+        title: "毛孩瑜珈日",
+        content: "來一場寧靜與身心平衡的瑜珈體驗吧！帶著毛孩一起感受身心舒展的樂趣~",
+        peopleCount: "10",
+        startTime: {
+            year: "2025",
+            month: "02",
+            day: "21",
+            time: "21:11"
         },
-        "endTime": {
-            "year": "2025",
-            "month": "02",
-            "day": "27",
-            "time": "19:10"
+        endTime: {
+            year: "2025",
+            month: "02",
+            day: "27",
+            time: "19:10"
         },
-        "place": "花博公園",
-        "type": "splooter",
-        "status": "edit",
-        "organizer": {
-            "avatar": new URL("../assets/img/event/129.svg", import.meta.url).href,
-            "name": "萌寵生活",
-            "line": "cat_kingdom"
+        place: "花博公園",
+        type: "splooter",
+        status: "edit",
+        organizer: {
+            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+            name: "萌寵生活",
+            line: "cat_kingdom"
         }
     }
     ]);
