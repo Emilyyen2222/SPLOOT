@@ -17,29 +17,36 @@
               <div class="hc-steps" 
               @click="toggleHcTest"
               :class=" {'-disable' : step1}"> 
-                <!-- <p>Step.1 適性測驗 {{ a ? '通過' : '未通過' }}</p> -->
                 <p>Step.1 適性測驗 </p>
-                <i></i>
-                <i></i>
+                <img v-if="step1" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
                 <p v-if="step1" class="stepStatues" >已通過</p>
                 <p v-else class="stepStatues"> 未通過</p>
                 <p class="hc-reson" style="display:none;">{{ hcTest.failReson }}</p>
               </div>
-              <div class="hc-steps" @click="toggleHcVarify">
+              <div class="hc-steps" 
+              @click="toggleHcVarify"
+              :class="{ '-disable': step2 }">
                 <p>Step.2 資料審核</p>
-                <i></i>
-                <i></i>
-                <p v-if="step1" class="stepStatues" > 通過</p>
-                 <!-- 中間有個審核中的文字
-                <p>審核中</p> -->
+                <img v-if="step2" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+                <!-- 未審核 -->
+                <img v-else-if="unreviewed" src="../assets/img/icon/mc_stepbtn_unreviewed.svg" alt="icon">
+                <!-- 審核中 -->
+                <img v-else-if="underReview" src="../assets/img/icon/mc_stepbtn_under-review.svg" alt="icon">
+                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
+                <p v-if="step2" class="stepStatues" > 通過</p>
+                <p v-else-if="unreviewed">未審核</p>
+                <p v-else-if="underReview">審核中</p>
                 <p v-else class="stepStatues"> 未通過</p>
                 <p class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</p>
               </div>
-              <div class="hc-steps" @click="toggleHcSign">
+              <div class="hc-steps" 
+              @click="toggleHcSign"
+              :class="{ '-disable': step3 }">
                 <p>Step.3 合約簽署</p>
-                <i></i>
-                <i></i>
-                <p v-if="step1" class="stepStatues" > 通過</p>
+                <img v-if="step3" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
+                <p v-if="step3" class="stepStatues" > 通過</p>
                 <p v-else class="stepStatues"> 未通過</p>
                 <p class="hc-reson" style="display:none;">{{ hcSign.failReson }}</p>
               </div>
@@ -120,7 +127,7 @@
                     type="radio"
                     :name="'question' + question.id"
                     value="yes"
-                    v-model="answers[question.id]"
+                    v-model="question.answer"
                   />
                   是
                 </label>
@@ -129,7 +136,7 @@
                     type="radio"
                     :name="'question' + question.id"
                     value="no"
-                    v-model="answers[question.id]"
+                    v-model="question.answer"
                   />
                   否
                 </label>
@@ -164,28 +171,35 @@
                     :hasError="input_name.inputError.value"
                     v-model="input_name.inputValue.value">
                 </InputText>
+                <!-- <p>{{ input_name.inputValue.value }}</p> -->
             </div>        
             <!-- 生日 -->
             <div class="input-group birthday">
-                <label for="">生日</label>
-                <div class="select-group">
-                  <DropdownMenu
+              <label for="">生日</label>
+              <div class="select-group">
+                <!-- 年分 -->
+                <DropdownMenu 
                   :placeHolder="menu_birth_y.placeHolder" 
                   :options="menu_birth_y.options.value"
-                  class="dropBirthday">             
-                  </DropdownMenu>                
-                  <DropdownMenu
+                  class="dropBirthday"
+                  v-model="selectedYear">            
+                </DropdownMenu> 
+                <!-- 月份 -->
+                <DropdownMenu
                   :placeHolder="menu_birth_m.placeHolder" 
                   :options="menu_birth_m.options.value"
-                  class="dropBirthday">
-                  </DropdownMenu>
-                  <DropdownMenu
+                  class="dropBirthday"
+                  v-model="selectedMonth">
+                </DropdownMenu>
+                <!-- 日期 -->
+                <DropdownMenu
                   :placeHolder="menu_birth_d.placeHolder" 
-                  :options="menu_birth_d.options"
-                  class="dropBirthday">
-                  </DropdownMenu>
-                </div>
-            </div> 
+                  :options="menu_birth_d.options.value"
+                  class="dropBirthday"
+                  v-model="selectedDay">
+                </DropdownMenu>
+              </div>
+            </div>
             <!-- 身分證號碼 -->
             <div class="input-group">
                 <label for="idCard">身分證號碼</label>
@@ -237,7 +251,7 @@
           </div>
           
           <div class="btn-group">
-              <Btn btnStyle="primary default" @click="submitAndToggle_hcVarify">提交</Btn>
+              <Btn btnStyle="primary default" @click="checkAndSubmit2">提交</Btn>
               <Btn btnStyle="baseline default" @click="reloadAndToggle_hcVarify">取消</Btn>
           </div>      
         </div>
@@ -312,7 +326,7 @@
   
           <div class="hcSigh-check checkBox">
             <label class="boxAlign">
-                <input type="checkbox">
+                <input type="checkbox" v-model="helperAgree" >
                 <p class="smallText">
                   我已詳細閱讀並同意本契約的所有條款與內容，並願意遵守相關規定                    
                 </p>
@@ -564,7 +578,7 @@
     
   </template>
   
-  <script setup>
+<script setup>
   
   import { ref,reactive,computed,watch } from 'vue';
   // components
@@ -579,31 +593,14 @@
   import memberNav from '../views/memberNav.vue' ;
   import helperPostCard from '../views/helperPostCard.vue';
   
-// hc-nav
-const step1 = ref(true);
-const step2 = ref(false);
-const step3 = ref(true);
-// 當三個步驟都通過，賦予小幫手身分=>貼文管理的區塊變換
-const stepsCompoleted = computed(()=>{
-    if(step1 && step2 && step3){
-      isHelperPassed = ref(true);
-    }else{
-      isHelperPassed = ref(false);
-    }
-    return isHelperPassed;
-  });
-// 判斷是否有小幫手身分(通過與否)=> 下方管理小幫手貼文的區塊切換
-let isHelperPassed = ref(stepsCompoleted);
-
- 
   // 適性測驗
     // 定義題目資料，每個題目包含 id 與題目內容
     const questions = ref([
-      { id: 1, text: "看見流浪動物受傷時，我會儘速協助處理，不會冷漠忽視", result: false },
-      { id: 2, text: "若飼主忽略寵物需要，我會禮貌提醒並提供適度合理建議", result: false },
-      { id: 3, text: "寵物突發疾病時，我會立即送醫並通知飼主，非自行拖延", result: false },
-      { id: 4, text: "若飼主遺漏日常照護，我願提供提醒並協助維護寵物健康", result: false },
-      { id: 5, text: "面對寵物與飼主需求，我會保持充分耐心並展現真誠善意", result: false }
+      { id: 1, text: "看見流浪動物受傷時，我會儘速協助處理，不會冷漠忽視", answer: "" },
+      { id: 2, text: "若飼主忽略寵物需要，我會禮貌提醒並提供適度合理建議", answer: "" },
+      { id: 3, text: "寵物突發疾病時，我會立即送醫並通知飼主，非自行拖延", answer: "" },
+      { id: 4, text: "若飼主遺漏日常照護，我願提供提醒並協助維護寵物健康", answer: "" },
+      { id: 5, text: "面對寵物與飼主需求，我會保持充分耐心並展現真誠善意", answer: "" }
     ]);
     
   // lightbox
@@ -638,6 +635,7 @@ let isHelperPassed = ref(stepsCompoleted);
   const toggleLightBox = (targetBox) =>{
     targetBox.isLightBox.value = !targetBox.isLightBox.value;;
     document.body.classList.toggle('clicked',targetBox.isLightBox.value);
+    console.log('觸發關閉');
   };
 
   // 建立專門的處裡含數->放進要使用的事件中
@@ -660,55 +658,68 @@ let isHelperPassed = ref(stepsCompoleted);
   // };
 
   // 定義一個反應式對象來儲存每題的答案（key 為題目 id，值為 "yes" 或 "no"）
-  const answers = ref({});
+  // const questions.answer = ref({});
   
-  // 提交時，這裡只是示範輸出答案
+  // 提交時，這裡檢查輸出答案
   const handleSubmit = () => {
     // 之後要寫邏輯，用ajax把資料傳給後端
     // 確保輸出的是普通物件
-    console.log("問卷答案：", {...answers.value});
+    console.log("提交了");
   };
 
   // 放棄時，重置所有答案
   const handleCancel = () => {
     // 直接賦值一個新物件，確保 Vue 能偵測變更
-    answers.value = {};
+    questions.value.forEach( q=>q.answer = "" );
+    console.log('重置了')
+  };
+  const handleCancelHcVarify = () => {
+    // 直接賦值一個新物件，確保 Vue 能偵測變
+    console.log('重置了')
+  };  
+  const handleCancelSign = () => {
+    // 直接賦值一個新物件，確保 Vue 能偵測變更
+    helperAgree.value = false;
+    console.log('重置了-取消勾選')
   };  
   
   // 儲存或取消時，依序觸發 兩個事件: 
     // 儲存 + 關掉
     const submitAndToggle_test = () =>{
+      checkAndSubmit1();
       handleSubmit();
-      toggleHcTest;
+      toggleHcTest();
     };
     const submitAndToggle_hcVarify = () =>{
+      checkAndSubmit2();
       handleSubmit();
-      toggleHcVarify;
     };
     const submitAndToggle_hcSign = () =>{
+      checkAndSubmit3();
       handleSubmit();
-      toggleHcSign;
+      toggleHcSign();
     };
     const submitAndToggle_hcManage = () =>{
       handleSubmit();
-      toggleHcManage;
+      toggleHcManage();
     };
     // 重整 + 關掉
     const reloadAndToggle_hcTest = () =>{
         handleCancel();
-        toggleHcTest_hcTest();
+        toggleHcTest();
+        console.log('重置並且關閉');
     };
     const reloadAndToggle_hcVarify = () =>{
         handleCancel();
-        toggleHcVarify;
+        toggleHcVarify();
     };
     const reloadAndToggle_hcSign = () =>{
-        handleCancel();
-        toggleHcSign;
+        handleCancelSign();
+        toggleHcSign();
     };
     const reloadAndToggle_hcManage = () =>{
         handleCancel();
-        toggleHcManage;
+        toggleHcManage();
     };
   
   
@@ -748,8 +759,8 @@ let isHelperPassed = ref(stepsCompoleted);
   const input_selfIntro = {
       size: 'small',
       textAlign: 'textLeft',
-      placeHolder: '輸入身分證號碼',
-      errorMsg: '請輸入正確的格式',
+      placeHolder: '輸入自我介紹',
+      errorMsg: '請輸入內容',
       inputValue: ref(''),
       inputError: ref(false),
   };
@@ -793,67 +804,54 @@ let isHelperPassed = ref(stepsCompoleted);
       reader.readAsDataURL(file);
     }
   };
-  // dropDown
-   // 取得目前年份
-  const currentYear = new Date().getFullYear();
-   // 利用 computed 動態生成從今年往回推 100 年的選項陣列
-  const menu_birth_y = {
-    placeHolder: '請選擇年份',
-    options: computed(() => {
-      const arr = [];
-      for (let i = 0; i < 100; i++) {
-        arr.push({ id: i, name: String(currentYear - i)+'年' });
-      }
-      return arr;
-    })
-  };
-  
-  const menu_birth_m = {
+  // 選擇生日 的 dropdown
+    // 取得目前年份
+    const currentYear = new Date().getFullYear();
+
+    // 定義年份下拉選單資料：從當前年份往回推 100 年
+    const menu_birth_y = {
+      placeHolder: '請選擇年份',
+      options: computed(() => {
+        const arr = [];
+        for (let i = 0; i < 100; i++) {
+          arr.push({ id: i, name: String(currentYear - i) });
+        }
+        return arr;
+      })
+    };
+
+    // 定義月份下拉選單資料：1 到 12
+    const menu_birth_m = {
       placeHolder: '請選擇月份',
       options: computed(() => {
-      const arr = [];
-      for (let i = 1; i <= 12; i++) {
-        arr.push({ id: i, name: String(i)+'月' });
-      }
-      return arr;
-    })
-  };
-  const menu_birth_d = {
+        const arr = [];
+        for (let i = 1; i <= 12; i++) {
+          arr.push({ id: i, name: String(i) });
+        }
+        return arr;
+      })
+    };
+
+    // 使用 v-model 綁定使用者所選的年份、月份與日期
+    const selectedYear = ref('');
+    const selectedMonth = ref('');
+    const selectedDay = ref('');
+
+    // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
+    const menu_birth_d = {
       placeHolder: '請選擇日期',
-      options: [
-          { id: 0, name: '1' },
-          { id: 1, name: '2' },
-          { id: 2, name: '3' },
-          { id: 3, name: '4' },
-          { id: 4, name: '5' },
-          { id: 5, name: '6' },
-          { id: 6, name: '7' },
-          { id: 7, name: '8' },
-          { id: 8, name: '9' },
-          { id: 9, name: '10' },
-          { id: 10, name: '11' },
-          { id: 11, name: '12' },
-          { id: 12, name: '13' },
-          { id: 13, name: '14' },
-          { id: 14, name: '15' },
-          { id: 15, name: '16' },
-          { id: 16, name: '17' },
-          { id: 17, name: '18' },
-          { id: 18, name: '19' },
-          { id: 19, name: '20' },
-          { id: 20, name: '21' },
-          { id: 21, name: '22' },
-          { id: 22, name: '23' },
-          { id: 23, name: '24' },
-          { id: 24, name: '25' },
-          { id: 25, name: '26' },
-          { id: 26, name: '27' },
-          { id: 27, name: '28' },
-          { id: 28, name: '29' },
-          { id: 29, name: '30' },
-          { id: 30, name: '31' },
-      ]
-  };
+      options: computed(() => {
+        if (!selectedYear.value || !selectedMonth.value) return [];
+        const year = parseInt(selectedYear.value);
+        const month = parseInt(selectedMonth.value);
+        // 利用 Date 物件計算該月的天數（傳入 month 代表下一個月的第0天即該月最後一天）
+        const days = new Date(year, month, 0).getDate();
+        return Array.from({ length: days }, (_, i) => ({
+          id: i,
+          name: String(i + 1)
+        }));
+      })
+    };
 
   // "新增貼文"燈箱
 
@@ -1075,5 +1073,81 @@ const city = {
       })
     });
   
-  
-  </script>
+  // 身分審核步驟
+
+  // hc-nav
+  const step1 = ref(false);
+  const step2 = ref(false);
+  const step3 = ref(false);
+  // 當三個步驟都通過，賦予小幫手身分=>貼文管理的區塊變換
+  const stepsCompeleted = computed(()=>{
+    return step1.value && step2.value && step3.value;
+    });
+  // 判斷是否有小幫手身分(通過與否)=> 下方管理小幫手貼文的區塊切換
+  const isHelperPassed = computed(() => stepsCompeleted.value);
+
+  // 適性測驗
+    // 按下按鈕時，手動觸發"檢查"、"提交"
+    const checkAndSubmit1 = ()=>{
+      // checkStep1;
+      step1.value = questions.value.every( q => q.answer ==='yes' );
+      if( step1.value ){
+        console.log('step1成立，將結果提交')
+      }else{
+        console.log('step1不成立，顯示錯誤訊息')
+      };        
+    };
+
+
+  // 資料審核
+    // 未審核
+    let unreviewed = ref(false);
+    // 審核中
+    let underReview = ref(false);
+    const isStep2Passed = computed(()=>{
+      return !unreviewed.value && !underReview.value;
+    });
+
+
+    const checkAndSubmit2 = () => {
+      const hcVarifyFields = ref({
+      name: input_name.inputValue.value,
+      birthday: selectedYear.value && selectedMonth.value && selectedDay.value ? `${selectedYear.value}-${selectedMonth.value}-${selectedDay.value}` : "",
+      idNumbers: input_idCard.inputValue.value,
+      selfy: selfyImg.value,
+      idCard: idCardImg.value
+      });
+
+      // 檢查是否有欄位空的
+      const isInCompolete = Object.values(hcVarifyFields.value).some(value => value=== "")
+      
+      if( isInCompolete ){
+        alert("請完整填寫表單")
+        // 中斷執行
+        return
+      }else{
+        // 寫submit
+
+        step2.value = false;    // 確保 step2 初始為 false
+        unreviewed.value = true; 
+        underReview.value = false; 
+        toggleHcVarify();
+      };
+
+      console.log("所有欄位都已填寫，可以提交了")
+    };  
+
+  // 和約簽署
+  const helperAgree = ref(false);
+    const checkAndSubmit3 = ()=>{
+      // checkStep3;
+      step3.value = helperAgree.value;
+      if( step3.value ){
+        console.log('step3成立，將結果提交')
+      }else{
+        console.log('step3不成立，顯示錯誤訊息')
+      };        
+    };
+
+
+</script>
