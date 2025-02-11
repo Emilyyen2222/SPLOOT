@@ -53,7 +53,7 @@
                   </div>
               </div>
               <!-- card 2 -->
-              <div class="card card-account" id="">
+              <div class="card card-account">
     
                   <div class="card-title">
                     <p class="bold">帳戶</p>
@@ -69,7 +69,7 @@
                     </div>
                     <div class="bi-inbox">
                       <div class="label">密碼</div>
-                      <div>{{ inputs.input_pwd.inputValue }}</div>
+                      <div>{{ "******" }}</div>
                     </div>
                     
                   </div>
@@ -195,21 +195,21 @@
                             <!-- 年分 -->
                             <DropdownMenu 
                               :placeHolder="menu_birth_y.placeHolder" 
-                              :options="menu_birth_y.options.value"
+                              :options="menu_birth_y.options"
                               class="dropBirthday"
                               v-model="selectedYear">            
                             </DropdownMenu> 
                             <!-- 月份 -->
                             <DropdownMenu
                               :placeHolder="menu_birth_m.placeHolder" 
-                              :options="menu_birth_m.options.value"
+                              :options="menu_birth_m.options"
                               class="dropBirthday"
                               v-model="selectedMonth">
                             </DropdownMenu>
                             <!-- 日期 -->
                             <DropdownMenu
                               :placeHolder="menu_birth_d.placeHolder" 
-                              :options="menu_birth_d.options.value"
+                              :options="menu_birth_d.options"
                               class="dropBirthday"
                               v-model="selectedDay">
                             </DropdownMenu>
@@ -240,7 +240,9 @@
                         </div>
                         <div class="group-pwd">
                           <div class="inputSetBox">
-                            <p>{{ '******'}}</p>
+                            <!-- 眼睛切換顯示與否 -->
+                            <p v-if="isPwdVisible">{{ member.pwd }}</p>
+                            <p v-else>{{ '******' }}</p>
                             <!-- <InputText
                                 ref="password_member"
                                 class="password_member"
@@ -253,7 +255,7 @@
                             <!-- <img class="theEye" :src="eyeState_member" alt="" @click="eyeStateToggle_member"> -->
                             <!-- <p>用 v-model 監聽: {{ inputValuePassword }}</p> -->
                           </div>
-                          <Btn btnStyle="baseline small" @click="toggleLightBox(lightTitle_resetPwd)">變更密碼</Btn>                          
+                          <Btn btnStyle="baseline small" @click="togglePopUp_resetPwd">變更密碼</Btn>                          
                         </div>
                         
                       </div>
@@ -361,171 +363,110 @@
   
             <!-- 驗證程序 : light box  -->
   
-            <!-- 變更信箱 -->
-            <LightBox 
-                :title="lightTitle_resetEmail.title"
-                :is-light-box="lightTitle_resetEmail.isLightBox.value" 
-                @toggle="toggleLightBox(lightTitle_resetPwd)">
-              <div>    
-                  <!-- 1 輸入新的信箱 -->
-                <div class="mc-update-verify">
+  
+            <!-- 變更密碼 -->
+            <PopUp
+            :is-pop-up="resetPwd.isPopUp.value">
+              <div>
+                    
+                <!-- 1 驗證信箱 -->
+                <div v-if="step ==1" class="mc-update-verify">
     
-                  <h5 class="bold">驗證新信箱</h5>
+                  <h5 class="bold">驗證信箱</h5>
     
-                  <p>請輸入新的信箱，我們會寄一封信到您的信箱</p>
+                  <p>請輸入註冊時的信箱，我們會寄一封信到您的信箱</p>
                   
-    
-                  <label for="resetEmail">
-                    <InputText
-                      v-model="inputs.input_reEmail.inputValue"
-                      :placeHolder="inputs.input_reEmail.placeHolder"
-                      :size="inputs.input_reEmail.size"
-                      :textAlign="inputs.input_reEmail.textAlign"
-                      :errorMsg="inputs.input_reEmail.errorMsg"
-                      :inputError="inputs.input_reEmail.inputError"
-                    id="resetEmail">
+                  <label>
+                    <InputText 
+                    v-model="inputs.input_vEmail.inputValue"
+                      :placeHolder="inputs.input_vEmail.placeHolder"
+                      :size="inputs.input_vEmail.size"
+                      :textAlign="inputs.input_vEmail.textAlign"
+                      :errorMsg="inputs.input_vEmail.errorMsg"
+                      :inputError="inputs.input_vEmail.inputError"
+                      required>
                     </InputText>
                   </label>
     
-                  <Btn btnType="form" btnStyle="nextQ">寄送驗證碼</Btn>
-                  <!-- 改成 nextQuestion -->
-                  <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_resetEmail)">取消</Btn>
+                  <Btn btnStyle="primary default" @click="nextStep()">寄送驗證碼</Btn>
+    
+                  <Btn btnStyle="baseline default" @click="togglePopUp_resetPwd">取消</Btn>
     
                 </div>  
-                  <!-- 2 輸入驗證碼 -->
-                <div class="mc-update-verify">
+                <!-- 2 輸入驗證碼 -->
+                <div v-if="step ==2" class="mc-update-verify">
     
-                  <h5 class="bold">驗證新信箱</h5>              
+                  <h5 class="bold">驗證信箱</h5>              
     
-                  <label for="">
-                    <InputText
-                      v-model="inputs.input_vCode.inputValue"
+                  <label>
+                    <InputText 
+                    v-model="inputs.input_vCode.inputValue"
                       :placeHolder="inputs.input_vCode.placeHolder"
                       :size="inputs.input_vCode.size"
                       :textAlign="inputs.input_vCode.textAlign"
                       :errorMsg="inputs.input_vCode.errorMsg"
                       :inputError="inputs.input_vCode.inputError"
-                    id="">
+                      required>
                     </InputText>
                   </label>
-                  <!-- setinterval? -->
-                  <Btn btnStyle="outline default">重新寄送驗證碼</Btn>
-    
-                  <Btn btnStyle="primary default">送出</Btn>
+                  
+                  <div class="btn-group">
+                    <Btn btnStyle="outline default">重新寄送驗證碼</Btn>        
+                    <Btn btnStyle="primary default" @click="nextStep()">送出</Btn>
+                  </div>
     
                 </div>
-                  <!-- 3 更改成功 -->
-                <div class="mc-update-verify">
+                <!-- 3 輸入新密碼 -->
+                <div v-if="step ==3" class="mc-update-verify">
+    
+                  <h5 class="bold">重設密碼</h5>              
+    
+                  <label>
+                    <InputText 
+                    v-model="inputs.input_newPwd.inputValue"
+                      :placeHolder="inputs.input_newPwd.placeHolder"
+                      :size="inputs.input_newPwd.size"
+                      :textAlign="inputs.input_newPwd.textAlign"
+                      :errorMsg="inputs.input_newPwd.errorMsg"
+                      :inputError="inputs.input_newPwd.inputError"
+                      required>
+                    </InputText>
+                  </label>
+                  <label>
+                    <InputText 
+                    v-model="inputs.input_newPwd2.inputValue"
+                      :placeHolder="inputs.input_newPwd2.placeHolder"
+                      :size="inputs.input_newPwd2.size"
+                      :textAlign="inputs.input_newPwd2.textAlign"
+                      :errorMsg="inputs.input_newPwd2.errorMsg"
+                      :inputError="inputs.input_newPwd2.inputError"
+                      required>
+                    </InputText>
+                  </label>              
+    
+                  <label class="resetPwdAgree">
+                    <input type="checkbox" name="agree" v-model="resetPwdAgree">
+                    <p>我已閱讀並同意使用者政策和我們的隱私權政策。</p>
+                  </label>
+    
+                  <Btn btnStyle="primary default" @click="nextStep()">進行重設</Btn>
+    
+                </div>
+                <!-- 4 更改成功 -->
+                <div v-if="step ==4" class="mc-update-verify">
     
                   <h5 class="bold">更改成功!</h5>              
     
                   <div class="tick"></div>
     
-                  <p>您的信箱已重設，請用新的信箱登入帳戶</p>
-                </div>
+                  <p>您的密碼已重設，請用新的密碼登入帳戶</p>
+
+                  <Btn btnStyle="primary default" @click="togglePopUp_resetPwd">確認</Btn>
+
+                </div>   
+    
               </div>
-            </LightBox>
-  
-            <!-- 變更密碼 -->
-            <LightBox 
-              :is-light-box="lightTitle_resetPwd.isLightBox.value" 
-              :title="lightTitle_resetPwd.title"
-              @toggle="toggleLightBox(lightTitle_resetPwd)">
-                <div>
-                      
-                    <!-- 1 驗證信箱 -->
-                  <div class="mc-update-verify">
-      
-                    <h5 class="bold">驗證信箱</h5>
-      
-                    <p>請輸入註冊時的信箱，我們會寄一封信到您的信箱</p>
-                    
-      
-                    <label for="">
-                      <InputText
-                      :size = "inputs.input_vEmail.size"
-                      :textAlign = "inputs.input_vEmail.textAlign"
-                      :placeHolder="inputs.input_vEmail.placeHolder"
-                      :errorMsg="inputs.input_vEmail.errorMsg"
-                      :hasError="inputs.input_vEmail.inputError.value"
-                      v-model="inputs.input_vEmail.inputValue.value">
-                      </InputText>
-                    </label>
-      
-                    <Btn btnStyle="primary default">寄送驗證碼</Btn>
-      
-                    <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_resetPwd)">取消</Btn>
-      
-                  </div>  
-                    <!-- 2 輸入驗證碼 -->
-                  <div class="mc-update-verify">
-      
-                    <h5 class="bold">驗證信箱</h5>              
-      
-                    <label for="">
-                      <!-- <InputText
-                      :size = "input6.size"
-                      :textAlign = "input6.textAlign"
-                      :placeHolder="input6.placeHolder"
-                      :errorMsg="input6.errorMsg"
-                      :hasError="input6.inputError.value"
-                      v-model="input6.inputValue.value"
-                      id="">
-                      </InputText> -->
-                    </label>
-      
-                    <Btn btnStyle="white default">重新寄送驗證碼</Btn>
-      
-                    <Btn btnStyle="primary default">送出</Btn>
-      
-                  </div>
-                    <!-- 3 輸入新密碼 -->
-                  <div class="mc-update-verify">
-      
-                    <h5 class="bold">重設密碼</h5>              
-      
-                    <label for="">
-                      <!-- <InputText
-                      :size = "input6.size"
-                      :textAlign = "input6.textAlign"
-                      :placeHolder="input6.placeHolder"
-                      :errorMsg="input6.errorMsg"
-                      :hasError="input6.inputError.value"
-                      v-model="input6.inputValue.value"
-                      id="">
-                      </InputText> -->
-                    </label>
-                    <label for="">
-                      <!-- <InputText
-                      :size = "input6.size"
-                      :textAlign = "input6.textAlign"
-                      :placeHolder="input6.placeHolder"
-                      :errorMsg="input6.errorMsg"
-                      :hasError="input6.inputError.value"
-                      v-model="input6.inputValue.value"
-                      id="">
-                      </InputText> -->
-                    </label>              
-      
-                    <label for="resetPwdAgree">
-                      <input type="checkbox" name="agree" id="resetPwdAgree">我已閱讀並同意使用者政策和我們的隱私權政策。
-                    </label>
-      
-                    <Btn btnStyle="primary default">進行重設</Btn>
-      
-                  </div>
-                    <!-- 4 更改成功 -->
-                  <div class="mc-update-verify">
-      
-                    <h5 class="bold">更改成功!</h5>              
-      
-                    <div class="tick"></div>
-      
-                    <p>您的密碼已重設，請用新的密碼登入帳戶</p>
-                  </div>   
-      
-                </div>
-            </LightBox>
+            </PopUp>
   
           <!-- 網站服務條款 -->
           <Policy
@@ -597,10 +538,23 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     input_phone: { placeHolder: '輸入手機' },
     input_address: { placeHolder: '輸入剩下地址'},
     input_lineId: { placeHolder: '輸入LineID' },
-    input_reEmail: { placeHolder: '輸入新的信箱' },
+    // 變更密碼 SOP
+    input_vEmail: { placeHolder: '輸入信箱' },
     input_vCode: { placeHolder: '輸入驗證碼' },
-    input_vEmail: { placeHolder: '輸入驗證碼' },
-    input6: { placeHolder: '輸入驗證碼' }
+    input_newPwd: { placeHolder: '輸入新密碼' },
+    input_newPwd2: { placeHolder: '確認新密碼' }
+  });
+
+  // 統一設定每個 inputText 的預設屬性，避免重複
+  Object.keys(inputs).forEach(key => {
+    inputs[key] = {
+      ...inputs[key],
+      size: 'small',
+      textAlign: 'textLeft',
+      errorMsg: '請輸入正確格式',
+      inputValue: ref(''), // 這樣每個 input 都會擁有獨立的 v-model
+      inputError: ref(false)
+    };
   });
 
   // avatar
@@ -712,44 +666,35 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
   // lightBox title
   const lightTitle_memberInfo = {title: "會員資料", isLightBox: ref(false)};
-  const lightTitle_resetEmail = {title: "變更信箱", isLightBox: ref(false)};
   const lightTitle_resetPwd = {title: "變更密碼", isLightBox: ref(false)};
-  // const titlePolicy = {title: "網站服務條款", isLightBox: ref(false)};
-  // const titlePrivacy = {title: "隱私權政策", isLightBox: ref(false)};
 
 // function
-  // 統一設定每個 inputText 的預設屬性，避免重複
-  Object.keys(inputs).forEach(key => {
-    inputs[key] = {
-      ...inputs[key],
-      size: 'small',
-      textAlign: 'textLeft',
-      errorMsg: '請輸入正確格式',
-      inputValue: ref(''), // 這樣每個 input 都會擁有獨立的 v-model
-      inputError: ref(false)
-    };
-  });
 
   // 監聽input的內容，驗證
-  // test
     // 手機
+      // check formation  
     const isValidPhone = computed(() => {
-      // 允許數字 (0-9)、加號 (+)、減號 (-)
-      const phonePattern = /^[0-9+\-]+$/;
-      return phonePattern.test(inputs.input_phone.inputValue);
+      // 允許數字 (0-9)、加號 (+)、減號 (-)、空格、國際碼
+      const phonePattern = /^(\+?[0-9]{1,3})?(\s|-)?[0-9]{4}(\s|-)?[0-9]{3}(\s|-)?[0-9]{3}$/;
+      return phonePattern.test(inputs.input_phone.inputValue.value);
     });
 
     watch(
-      () => inputs.input_phone.inputValue, 
+      () => inputs.input_phone.inputValue.value, 
       (newValue, oldValue) => {
       console.log("輸入的手機",inputs.input_phone.inputValue);
       console.log("驗證結果",isValidPhone.value);
 
-      if(isValidPhone.value){
-          inputs.input_phone.inputError= false;
-      }else{
-          inputs.input_phone.inputError= true;
-      }
+      inputs.input_phone.inputError.value = !isValidPhone.value;
+
+      // 和上面那段相等，同樣是"控制錯誤訊息的顯示與否"
+      // if(isValidPhone.value){
+      //   // 通過就不顯示錯誤訊息
+      //     inputs.input_phone.inputError.value= false;
+      // }else{
+      //   // 不通過就顯示錯誤訊息
+      //     inputs.input_phone.inputError.value= true;
+      // }
       });
     
 
@@ -769,12 +714,22 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   //PopUp狀態
     // 用isPopUp控制
   const unBind = { isPopUp : ref (false ) };
+  const resetPwd = { isPopUp : ref (false ) };
   
     // 控制燈箱的顯示與隱藏
     function togglePopUp_unBind() {
       unBind.isPopUp.value = !unBind.isPopUp.value;
-      // // 停止捲軸
+      // 停止捲軸
       if (unBind.isPopUp.value) {
+        document.body.classList.add('clicked');
+      } else {
+        document.body.classList.remove('clicked');
+      }
+    };
+    function togglePopUp_resetPwd() {
+      resetPwd.isPopUp.value = !resetPwd.isPopUp.value;
+      // 停止捲軸
+      if (resetPwd.isPopUp.value) {
         document.body.classList.add('clicked');
       } else {
         document.body.classList.remove('clicked');
@@ -800,50 +755,55 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         // 取得目前年份
         const currentYear = new Date().getFullYear();
 
-        // 定義年份下拉選單資料：從當前年份往回推 100 年
-        const menu_birth_y = {
+        // 年份：從當前年份往回推 100 年
+        const menu_birth_y = computed(() => ({
           placeHolder: '請選擇年份',
-          options: computed(() => {
-            const arr = [];
-            for (let i = 0; i < 100; i++) {
-              arr.push({ id: i, name: String(currentYear - i) });
-            }
-            return arr;
-          })
-        };
+          options: Array.from({ length: 100 }, (_, i) => ({
+            id: currentYear - i,  
+            name: String(currentYear - i)
+          }))
+        }));
 
-        // 定義月份下拉選單資料：1 到 12
-        const menu_birth_m = {
+        // 月份：1 到 12
+        const menu_birth_m = computed(() => ({
           placeHolder: '請選擇月份',
-          options: computed(() => {
-            const arr = [];
-            for (let i = 1; i <= 12; i++) {
-              arr.push({ id: i, name: String(i) });
-            }
-            return arr;
-          })
-        };
+          options: Array.from({ length: 12 }, (_, i) => ({
+            // there's no 0月
+            id: i + 1, 
+            name: String(i + 1)
+          }))
+        }));
 
         // 使用 v-model 綁定使用者所選的年份、月份與日期
-        const selectedYear = ref('');
-        const selectedMonth = ref('');
-        const selectedDay = ref('');
+        const selectedYear = ref(null);
+        const selectedMonth = ref(null);
+        const selectedDay = ref(null);
 
         // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
-        const menu_birth_d = {
-          placeHolder: '請選擇日期',
-          options: computed(() => {
-            if (!selectedYear.value || !selectedMonth.value) return [];
-            const year = parseInt(selectedYear.value);
-            const month = parseInt(selectedMonth.value);
-            // 利用 Date 物件計算該月的天數（傳入 month 代表下一個月的第0天即該月最後一天）
-            const days = new Date(year, month, 0).getDate();
-            return Array.from({ length: days }, (_, i) => ({
-              id: i,
-              name: String(i + 1)
-            }));
-          })
-        };      
+        const menu_birth_d = computed(() => {
+          const result = {
+            placeHolder: '請選擇日期',
+            options: []
+          };
+
+          if ( !selectedYear.value || !selectedMonth.value ){
+            return result;
+          };
+
+          // Number 轉換成數字
+          const year = Number(selectedYear.value);
+          const month = Number(selectedMonth.value);
+
+          // 計算當月的天數
+          const days = new Date(year, month, 0).getDate();
+
+          result.options = Array.from({ length: days }, (_,i) => ({
+            id: i + 1,
+            name: String( i + 1 )
+          }));
+          
+          return result;
+        });
 
       // 性別
       const selectedSex = ref('');
@@ -852,30 +812,21 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         // 帳戶/號(信箱)
         const member = reactive({
             email : 'hao@gmail.com',   // 暫時寫死
-            password: 'password'
+            pwd: 'password'
           });
       //密碼
       //密碼顯示
 
         let eyeState_member = ref(closedEye);
-        // let eyeState2 = ref(closedEye);
-        // let eyeState3 = ref(closedEye);
 
-        //抓取input type 改成password
-        // onMounted(() => {
-        //     const passwordInput_member = document.querySelector(".password_member input");
-        //         passwordInput_member.type = 'password';
-        //     const passwordInput2 = document.querySelector(".password2 input");
-        //         passwordInput2.type = 'password';
-        //     const passwordInput3 = document.querySelector(".password3 input");
-        //         passwordInput3.type = 'password';
-        // });
-
+        const isPwdVisible = ref(false)
         function eyeStateToggle_member() {
             const passwordInput_member = document.querySelector(".password_member input");
             // passwordInput_member.type = passwordInput_member.type == 'password' ? 'text' : 'password';
             eyeState_member.value = eyeState_member.value == closedEye ? eyeState_member.value = openedEye : eyeState_member.value = closedEye;
             // 這裡讓這裡讓isPwdVisible的值在true/false來回切換
+            isPwdVisible.value = !isPwdVisible.value;
+            console.log("isPwdVisible.value switch")
         };
 
       let inputValuePassword = ref('');
@@ -894,8 +845,6 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 聯絡資料
       // 手機
       // 地址
-
-
         let selectedCity = ref(null); //v-model綁定
         let selectDistrict = ref(null); //v-model綁定
         const districtPlaceHolder = ref("全部行政區域");
@@ -931,6 +880,81 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       watch(wholeAddress, (newVal) => {
         console.log("更新後的 wholeAddress:", newVal);
       });
+
+      // 變更密碼的彈窗
+        // 步驟
+        const step = ref(1);
+        const maxStep = 4; // 設定最大步驟數
+
+        // 
+        const emailInputValue = computed(() => inputs.input_vEmail.inputValue);
+
+        const nextStep = () => {
+          console.log("當前步驟:", step.value);
+          console.log("Email 輸入值:", inputs.input_vEmail.inputValue.value);
+
+          // if (step.value === 1) {
+          //   if (!inputs.input_vEmail.inputValue.value) {
+          //     alert("請輸入您的電子郵件");
+          //     console.log("Email 未輸入");
+          //     return;
+          //   }
+          //   if (!validateEmail(inputs.input_vEmail.inputValue.value)) {
+          //     alert("請輸入正確的電子郵件格式");
+          //     console.log("Email 格式錯誤");
+          //     return;
+          //   }
+          // } else if (step.value === 2) {
+          //   if (!inputs.input_vCode.inputValue.value) {
+          //     alert("請輸入驗證碼");
+          //     console.log("驗證碼未輸入");
+          //     return;
+          //   }
+          // } else if (step.value === 3) {
+          //   if (!inputs.input_newPwd.inputValue.value || !inputs.input_newPwd2.inputValue.value) {
+          //     alert("請輸入密碼");
+          //     console.log("新密碼未輸入");
+          //     return;
+          //   }
+          //   if (inputs.input_newPwd.inputValue.value !== inputs.input_newPwd2.inputValue.value) {
+          //     alert("兩次輸入的密碼不一致");
+          //     console.log("密碼不一致");
+          //     return;
+          //   }
+          //   if (!resetPwdAgree.value) {
+          //     alert("請勾選同意使用者政策");
+          //     console.log("使用者未勾選政策");
+          //     return;
+          //   }
+          // }
+
+          // 進入下一步
+          if (step.value < maxStep) {
+            step.value++;
+            console.log("進入下一步，現在 step:", step.value);
+          } else {
+            alert("已經是最後一步");
+          }
+        };
+
+        // 驗證 Email 格式
+        const validateEmail = (email) => {
+          console.log("驗證 Email:", email);
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailPattern.test(email);
+        };
+
+
+        // const step = ref(1);
+
+        // const nextStep = ( bol = false ) =>{
+        //   if( bol == true){
+        //     step.value++;
+        //   }else{
+        //     alert('請檢查是否輸入正確');
+        //     return
+        //   }
+        // };
 
       // 隱私權元件，Policy Component
       const isLightBoxPolicy = ref(false);
