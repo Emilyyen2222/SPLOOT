@@ -21,7 +21,7 @@
         && questionPet.selected.value.length != 0 )">下一題</Btn> 
     </div>
 </div>
-<!------------------------ question2 貓---------------------->
+<!------------------------ question2 貓 狗---------------------->
 <div v-if="question==2"  class="box firstBox">
     <div class="questionContainer">
         <h4 class="title bold">您的毛孩是哪種體型？</h4>
@@ -435,7 +435,6 @@
     const pet = ref('');
     const q1input = ref('');
     const q8input = ref('');
- 
     let q2Form;
     let q3Menu;
     const subSelected = ref('');

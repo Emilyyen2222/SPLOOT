@@ -5,11 +5,11 @@
     <div class="questionContainer">
         <h4 class="title bold">我想認識的毛孩朋友是</h4>
         <div class="image">
-            <RouterLink to="/match/matchCard" style="cursor: pointer;">
+            <!-- <RouterLink to="/match/matchCard" style="cursor: pointer;"> -->
                 <div class="imgFlex">
                 <img class="img2" src="@/assets/img/match/match1.svg" alt="">
                 </div>
-            </RouterLink>    
+            <!-- </RouterLink>     -->
         </div>
     </div>
     <div class="options">
@@ -108,7 +108,7 @@
     </div>
 </div>
     <!-- progress bar -->
-    <ProgressBar :total="5" :current="question" ></ProgressBar>
+    <ProgressBar :total="4" :current="progress" ></ProgressBar>
     <!-- circle bg -->
         <div class="circleMatch"></div>
     <!-- 直接配對 -->
@@ -121,32 +121,78 @@
 </template>
     
 <script setup>
-    import {ref} from "vue";
+    import {ref, watch} from "vue";
     import MainHeader from "../components/MainHeader.vue";
     import Btn from '../components/Btn.vue';
-    import DropdownMenu from "../components/DropdownMenu.vue";
-    import InputText from '../components/InputText.vue';
     import ProgressBar from "../components/ProgressBar.vue";
 
 
     const question = ref(1);
-    const goMatch  = ref(true);
+    const progress = ref(1);
+    const goMatch  = ref(true); //直接配對按鈕
 
-    // 下一題按鈕
+    // 下一題/上一題按鈕
     function nextQuestion(bol = false) {
     if (bol == true) {
+
+        if(question.value == 2 
+        && matchPet.selected.value[0] == '貓貓'){
+            question.value = 4;
+            progress.value = 3;
+            return;
+        }
+        if(question.value == 1 
+        && matchPet.selected.value[0] == '狗狗'){
+            question.value = 3;
+            progress.value = 2;
+            return;
+        }
+        if(question.value == 2 
+        && matchPet.selected.value[0] == '不限'){
+            question.value = 3;
+            progress.value = 2;
+            return;
+        }
         question.value++;
+        progress.value++;
+
         if (question.value == 5){
             goMatch.value = false;
         }
-
     } else {
         alert("請輸入選項");
     }
     }
+
     function lastQuestion(){
+        if(question.value == 4 
+        && matchPet.selected.value[0] == '貓貓'){
+            question.value = 2;
+            progress.value = 2;
+            return;
+        }
+        if(question.value == 4 
+        && matchPet.selected.value[0] == '狗狗'){
+            question.value = 3;
+            progress.value = 2;
+            return;
+        }
+        if(question.value == 3 
+        && matchPet.selected.value[0] == '狗狗'){
+            question.value = 1;
+            progress.value = 1;
+            return;
+        }
+        if(question.value == 4 
+        && matchPet.selected.value[0] == '不限'){
+            question.value = 2;
+            progress.value = 2;
+            return;
+        }
         question.value--;
+        progress.value--;
     }
+
 
     const matchPet = {
         formChoice: singleChoice,
@@ -184,11 +230,19 @@
         } else {
             selected.value.push(option);
         }
-        // console.log(selected.value);
     }
     const optionSelected = (selected, option) => {
         return selected.value.includes(option);
     }
     
+    let matchq1;
+    // question 1 監看是貓貓還是狗狗
+    watch(matchPet.selected, (newValue, oldValue) => {
+        if (matchPet.selected.value[0].includes('貓貓')) {
+            matchq1 = matchCat;
+        } else if(matchPet.selected.value[0].includes('狗狗')) {
+            matchq1 = matchDog;
+        }
+    })
 
 </script>
