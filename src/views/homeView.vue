@@ -149,12 +149,12 @@ import { RouterLink } from "vue-router";
 
 <style lang="scss" scoped>
   // @import "../assets/sass/style.scss";
-  #home{
-    header{
-      position: fixed;
-      &.bg-yellow-1{
-        background-color: transparent;
-      }
-    }
-  }
+  // #home{
+  //   header{
+  //     position: fixed;
+  //     &.bg-yellow-1{
+  //       background-color: transparent;
+  //     }
+  //   }
+  // }
 </style>

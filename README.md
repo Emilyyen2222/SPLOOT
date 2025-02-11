@@ -1,3 +1,45 @@
+# Pinia 
+
+## 登入燈箱套用
+
+引用pinia全域環境下的會員登入介面 以及 設定變數
+```vue
+<script setup>
+
+    import { useAuthStores } from '@/stores/AuthBoxStores.js';  
+    const authBoxStore = useAuthStores();
+
+</script>
+```
+## 全域變數
+
+可以使用在任何地方的變數以及函式(不需要再次宣告直接使用)，需要在前面加上authBoxStore.
+且使用時不用再加上.value，Pinia 會自動幫你做 ref() 的解包
+下面有使用範例
+```script
+<!-- 登入狀態(未登入為false) -->
+isLoggedIn
+
+<!-- 登入燈箱開關 -->
+toggleAuthBox()
+```
+## 要啟動登入燈箱的按鈕函式上加上判斷式（使用範例在這～）
+# vue
+```vue
+<button @click="isActionNow">按我(如果我不是會員則跳出登入視窗)</button>
+
+<script setup>
+
+  function isActionNow(){
+    if(authBoxStore.isLoggedIn){
+      //do somtings
+    }else{
+      authBoxStore.toggleAuthBox(); //執行開啟燈箱
+    }
+  };
+
+</script>
+```
 # Sass / Scss
 
 ## Sass 監控

@@ -38,7 +38,7 @@
                         </div>
                         <div class="inputSetBox">
                             <InputText
-                                textType="password"
+                                :textType="authBoxStore.passwords[1]"
                                 ref="password1"
                                 class="password1"
                                 placeHolder="密碼"
@@ -47,11 +47,11 @@
                                 :hasError="authBoxStore.signUpPassword.hasError"
                                 size="small">
                             </InputText>
-                            <img class="theEye" :src="authBoxStore.eyeState1" alt="" @click="authBoxStore.eyeStateToggle1()">
+                            <img class="theEye" :src="authBoxStore.eyeState[1]" alt="" @click="authBoxStore.eyeStateToggle(1)">
                         </div>
                         <div class="inputSetBox">
                             <InputText
-                                textType="password"
+                                :textType="authBoxStore.passwords[2]"
                                 ref="password2"
                                 class="password2"
                                 placeHolder="再次輸入密碼"
@@ -60,7 +60,7 @@
                                 :hasError="authBoxStore.signUpPasswordCheck.hasError"
                                 size="small">
                             </InputText>
-                            <img class="theEye" :src="authBoxStore.eyeState2" alt="" @click="authBoxStore.eyeStateToggle2()">
+                            <img class="theEye" :src="authBoxStore.eyeState[2]" alt="" @click="authBoxStore.eyeStateToggle(2)">
                         </div>
 
                         <div class="checkBox"
@@ -84,7 +84,7 @@
                         </div>
                         <div class="inputSetBox">
                             <InputText
-                                textType="password"
+                                :textType="authBoxStore.passwords[3]"
                                 ref="password3"
                                 class="password3"
                                 placeHolder="密碼"
@@ -93,7 +93,7 @@
                                 :hasError="authBoxStore.loginPassword.hasError"
                                 size="small">
                             </InputText>
-                            <img class="theEye" :src="authBoxStore.eyeState3" alt="" @click="authBoxStore.eyeStateToggle3()">
+                            <img class="theEye" :src="authBoxStore.eyeState[3]" alt="" @click="authBoxStore.eyeStateToggle(3)">
                         </div>
                         <div class="forgotPassword">
                             <p class=" smallText underline">忘記密碼？</p>
@@ -181,7 +181,7 @@
 </template>
 
 <script setup>
-    import { ref,onMounted } from 'vue';
+    import { ref } from 'vue';
     import { useAuthStores } from '@/stores/AuthBoxStores.js';  // 導入 Pinia Store
 
     import InputText from '@/components/InputText.vue';
@@ -195,18 +195,6 @@
 
     const titlePolicy = ref("網站服務條款");
     const titlePrivacy = ref("隱私權政策");
+    
 
-    function toggleAuthBox(){
-        authBoxStore.toggleAuthBox();
-    }
-
-    //抓取input type 改成password
-    // onMounted(() => {
-    //     const passwordInput1 = document.querySelector(".password1 input");
-    //     passwordInput1.type = 'password';
-    //     const passwordInput2 = document.querySelector(".password2 input");
-    //     passwordInput2.type = 'password';
-    //     const passwordInput3 = document.querySelector(".password3 input");
-    //     passwordInput3.type = 'password';
-    // });
 </script>

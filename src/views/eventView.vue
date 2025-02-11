@@ -351,6 +351,7 @@
 
 <script setup>
     import { ref, onMounted, computed, watch } from 'vue';
+    import { useAuthStores } from '@/stores/AuthBoxStores.js';  
     import QRcode from 'qrcode.vue'
     
     import MainHeader from "@/components/MainHeader.vue";
@@ -361,6 +362,9 @@
     import InputText from '@/components/InputText.vue';
     import DropdownMenu from "@/components/DropdownMenu.vue";
     import PopUp from "@/components/PopUp.vue"
+
+    //登入狀態
+    const authBoxStore = useAuthStores();
 
     //data
     // 點選日曆後的資料過濾在這裡
@@ -1073,42 +1077,46 @@
 
     function isEditOrSuccess(card) {
         // 參加成功>開啟參加成功popup
-        if(card.status == "attend"){
-            selectedCard.value = card; //儲存當前哪一張卡
-            isSuccess.value = true;
-            document.body.classList.add('clicked');
-            // 編輯>開啟發起活動燈箱
-        }else if(card.status === "edit"){
-            selectedCard.value = card;
-            isAddEvent.value = true;
-            document.body.classList.add('clicked');
-            //card資料匯入燈箱(card 是一般物件)
-            newEventTitle.value.inputValue = card.title;
-            newEventContent.value.inputValue = card.content;
-            peopleNumber.value.inputValue = card.peopleCount;
-            activePlace.value.inputValue = card.place;
-            startTimeY.value.menuValue = card.startTime.year;
-            startTimeY.value.placeHolder = startTimeY.value.menuValue;
-            startTimeM.value.menuValue = card.startTime.month;
-            startTimeM.value.placeHolder = startTimeM.value.menuValue;
-            startTimeD.value.menuValue = card.startTime.day;
-            startTimeD.value.placeHolder = startTimeD.value.menuValue;
-            startTimeH.value.menuValue = card.startTime.time.split(':')[0];
-            startTimeH.value.placeHolder = startTimeH.value.menuValue;
-            startTime.value.menuValue = card.startTime.time.split(':')[1];
-            startTime.value.placeHolder = startTime.value.menuValue;
-            endTimeY.value.menuValue = card.endTime.year;
-            endTimeY.value.placeHolder = endTimeY.value.menuValue;
-            endTimeM.value.menuValue = card.endTime.month;
-            endTimeM.value.placeHolder = endTimeM.value.menuValue;
-            endTimeD.value.menuValue = card.endTime.day;
-            endTimeD.value.placeHolder = endTimeD.value.menuValue;
-            endTimeH.value.menuValue = card.endTime.time.split(':')[0];
-            endTimeH.value.placeHolder = endTimeH.value.menuValue;
-            endTime.value.menuValue = card.endTime.time.split(':')[1];
-            endTime.value.placeHolder = endTime.value.menuValue;
-
-            editMode.value = true;
+        if(authBoxStore.isLoggedIn){
+            if(card.status == "attend"){
+                selectedCard.value = card; //儲存當前哪一張卡
+                isSuccess.value = true;
+                document.body.classList.add('clicked');
+                // 編輯>開啟發起活動燈箱
+            }else if(card.status === "edit"){
+                selectedCard.value = card;
+                isAddEvent.value = true;
+                document.body.classList.add('clicked');
+                //card資料匯入燈箱(card 是一般物件)
+                newEventTitle.value.inputValue = card.title;
+                newEventContent.value.inputValue = card.content;
+                peopleNumber.value.inputValue = card.peopleCount;
+                activePlace.value.inputValue = card.place;
+                startTimeY.value.menuValue = card.startTime.year;
+                startTimeY.value.placeHolder = startTimeY.value.menuValue;
+                startTimeM.value.menuValue = card.startTime.month;
+                startTimeM.value.placeHolder = startTimeM.value.menuValue;
+                startTimeD.value.menuValue = card.startTime.day;
+                startTimeD.value.placeHolder = startTimeD.value.menuValue;
+                startTimeH.value.menuValue = card.startTime.time.split(':')[0];
+                startTimeH.value.placeHolder = startTimeH.value.menuValue;
+                startTime.value.menuValue = card.startTime.time.split(':')[1];
+                startTime.value.placeHolder = startTime.value.menuValue;
+                endTimeY.value.menuValue = card.endTime.year;
+                endTimeY.value.placeHolder = endTimeY.value.menuValue;
+                endTimeM.value.menuValue = card.endTime.month;
+                endTimeM.value.placeHolder = endTimeM.value.menuValue;
+                endTimeD.value.menuValue = card.endTime.day;
+                endTimeD.value.placeHolder = endTimeD.value.menuValue;
+                endTimeH.value.menuValue = card.endTime.time.split(':')[0];
+                endTimeH.value.placeHolder = endTimeH.value.menuValue;
+                endTime.value.menuValue = card.endTime.time.split(':')[1];
+                endTime.value.placeHolder = endTime.value.menuValue;
+    
+                editMode.value = true;
+            }            
+        }else{
+            authBoxStore.toggleAuthBox();
         };
     };
     // 刪除行程popup
