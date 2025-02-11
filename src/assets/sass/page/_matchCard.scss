@@ -25,15 +25,20 @@
 }
 .matchbox{
     // border: 1px solid red;
-    // height: calc(100vh);
+    // height: calc(100vh - 7rem);
+    // position: relative;
+    // transition: transform 0.5s ease; 
 }
 .cardWrap{
+    // height: calc(100vh - 24rem);
+    // border: 1px solid white;
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 7rem auto 0;
+    // margin: 7rem auto 0;
     // border: 1px solid red;
     @include sm(){
         margin-top: 1.4rem;
@@ -42,95 +47,140 @@
         display: flex;
         justify-content: center;
         gap: 1.6rem;
-        margin-top: 2.4rem;
+        margin-top: 42.4rem;
+        @include md(){
+            margin-top: 65.4rem;
+            
+        }
         @include sm(){
             width: 90%;
+            // margin-top: 70.4rem;
         }
         .likeBtn{
             width: 18rem;
         }
     }
-    .cardwrapper {
-        // border: 1px solid red;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.6rem;
-        padding: 1.6rem;
-        border-radius: 1.6rem;
-        background-color: map-get($colors, beige);
-        @include md(){flex-direction: column;}
-        .imageContainer {
+    // .cardWrapMatch{
+    //     border: 1px solid red;
+    //     position: relative;
+        .cardwrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            height: 30rem;
-            width: 28.8rem;
+            gap: 1.6rem;
+            padding: 1.6rem;
+            margin-top: 5rem;
             border-radius: 1.6rem;
-            img {
-                width: 28.8rem;
+            background-color: map-get($colors, beige);
+            @include md(){
+                flex-direction: column;
+                margin-top: 1rem;
             }
-        }
-        .content {
-            display: flex;
-            flex-direction: column;
-            width: 34.4rem;
-            p {margin-top: 1.6rem;}
-            .tags {
+            .imageContainer {
+                position: relative;
                 display: flex;
-                flex-wrap: wrap;
-                gap: 8px;
-                margin-top: 1.6rem;
-                .tag {
-                    padding: 4px 8px;
-                    border: 1px solid map-get($colors, natural-1);
-                    border-radius: 50px;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                height: 30rem;
+                width: 28.8rem;
+                border-radius: 1.6rem;
+                @include sm(){
+                    // position: static;
                 }
+                img {
+                    border-radius: 1.6rem;
+                    width: 28.8rem;
+                }
+            .iconOverlay{
+                position: absolute;
+                bottom: 1rem;
             }
-            .number {
-                @include bayon(30);
-                color: map-get($colors, brown);
             }
-            .info {
+            .content {
+                position: relative;
                 display: flex;
                 flex-direction: column;
-                .nameAndGender{
-                    display: flex;
+                width: 34.4rem;
+                p {margin-top: 1.6rem;}
+                .iconOverlay{
+                    position: absolute;
+                    left: 10rem;
+                    top: 17rem;
                 }
-                .distance {
+                .tags {
                     display: flex;
-                    align-items: center;
-                    gap: .8rem;
-                }
-                .distanceIcon {
-                    width: 2.4rem;
-                    height: 2.4rem;
-                    border: 1px solid map-get($colors, natural-1);
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    &::before {
-                        content: "";
-                        width: 1.6rem;
-                        height: 1.6rem;
-                        background: map-get($colors, natural-2);
-                        border-radius: 50%;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    margin-top: 1.6rem;
+                    .tag {
+                        padding: 4px 8px;
+                        border: 1px solid map-get($colors, natural-1);
+                        border-radius: 50px;
                     }
                 }
+                .number {
+                    @include bayon(30);
+                    color: map-get($colors, brown);
+                }
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    .nameAndGender{
+                        display: flex;
+                    }
+                    .distance {
+                        display: flex;
+                        align-items: center;
+                        gap: .8rem;
+                    }
+                    .distanceIcon {
+                        width: 2.4rem;
+                        height: 2.4rem;
+                        border: 1px solid map-get($colors, natural-1);
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        &::before {
+                            content: "";
+                            width: 1.6rem;
+                            height: 1.6rem;
+                            background: map-get($colors, natural-2);
+                            border-radius: 50%;
+                        }
+                    }
+                }
+                .topSection {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    gap: 1.6rem;
+                }
+                .dot {
+                    @include dot();
+                }
             }
-            .topSection {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-                gap: 1.6rem;
+            &:nth-child(n){
+                // border: 1px solid red;
+                position: absolute;
+                // top:16%;
+                @include sm(){
+                    // top: 10%;
+                }
             }
-            .dot {
-                @include dot();
+            &:nth-child(4).movedLeft{
+                transform: translate(-500px, -600px);
+                transition: all 0.5s ease; 
             }
+            &:nth-child(4).movedRight {
+                transform: translate(500px, -600px);
+                transition: all 0.5s ease; 
+              }
         }
-    }
+    // }
+
+    
 }
 .preferenceBox{
     max-width: 1200px;
@@ -207,6 +257,7 @@
     margin: 2.4rem auto;
     @include sm(){
         margin-top: 1.4rem;
+        margin-left: .8rem;
     }
     .likeBtns{
         display: flex;
@@ -354,6 +405,7 @@
             display: flex;
             justify-content: start;
             gap: 4rem;
+            margin-left: .4rem;
         }
         .connect{
             display: flex;
