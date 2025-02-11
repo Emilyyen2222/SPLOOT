@@ -1,15 +1,15 @@
 <template>
   <div class="inputBox" :class="{'-error': hasError}">
 
-    <input v-if="inputType == 'text'"
-    type="text"
+    <input v-if="inputType === 'text'"
+    :type="textType"
     :class="[textAlign, size]"
     :placeholder="placeHolder"
     :maxlength="maxlength"
     v-model="inputText"> 
 
 
-    <textarea v-else
+    <textarea v-if="inputType == 'textarea'"
     :class="[textAlign, size]"
     :placeholder="placeHolder"
     :maxlength="maxlength"
@@ -26,7 +26,11 @@
   import { ref, defineProps, defineEmits } from 'vue';
 
   const props = defineProps({
-
+  
+    textType: { //Ian
+      type: Number,
+      default: 'text'
+    },
     maxlength: { //Ian
       type: Number,
     },

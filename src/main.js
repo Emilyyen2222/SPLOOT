@@ -6,6 +6,5 @@ import Main from "@/Main.vue";
 import VCalendar from "v-calendar"; //Ian
 import 'v-calendar/style.css'; //Ian
 
-const pinia = createPinia();
 
-createApp(Main).use(router).use(pinia).use(VCalendar, {}).mount('#app');
+createApp(Main).use(createPinia()).use(router).use(VCalendar, {}).mount('#app');

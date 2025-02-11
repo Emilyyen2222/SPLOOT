@@ -2,6 +2,12 @@
 // @use 'member-nav';  //不能，因為沒法取用base裡面的變數
 //===============================================
 
+body{
+  ::-webkit-scrollbar{
+    display: none;
+  }
+}
+
 .divider{
   width: 100%;
   height: 1px;
