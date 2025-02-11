@@ -4,7 +4,7 @@
 <div class="wrapper">
 
 <!-- 主要功能 -->
- <div class="splootBuddy">
+<div class="splootBuddy">
     <div class="heroTitle">
         <h3 class="bold">最值得信任的</h3>
         <div class="enTitle">SPLOOT Buddy</div>        
@@ -148,14 +148,14 @@
         </div>
         <div class="introSectionBox">
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">身分認證介紹</p>
                     <p>我們要求每位小幫手提供身分證明，並進行身份核對，確保所有小幫手都是可信的真實人物，給寵物主人更多的安心保障。</p>
                 </div>
             </div>
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">篩選小幫手</p>
                     <p>嚴格篩選登記的小幫手，杜絕假冒身分與重複登記情況，確保每位小幫手都能提供高品質的服務與專業保障。</p>
@@ -169,14 +169,14 @@
 
         <div class="introSectionBox">
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">排斥關籠、需要陪伴</p>
                     <p>有些毛孩通常不喜歡被關在籠子裡，並且對陪伴需求較高，小幫手可以提供陪伴以及散步等活動，使毛孩心情更加舒緩。</p>
                 </div>
             </div>
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">不適合外宿</p>
                     <p>毛孩們對固定的環境較為依賴，尤其是貓咪，若家長在擔心因為出遠門而被留下的毛孩，小幫手就是你最佳的好夥伴!</p>
@@ -192,14 +192,14 @@
 
         <div class="introSectionBox">
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">喜愛動物，樂於與寵物互動的人</p>
                     <p>適合那些對動物有高度熱情，喜歡與各類毛孩互動、建立良好關係的人，能提供毛孩所需的關愛與陪伴。</p>
                 </div>
             </div>
             <div class="introSection">
-                <img src="" alt="" class="introImg">
+                <img src="/src/assets/img/buddyLightBox/" alt="" class="introImg">
                 <div class="introText">
                     <p class="bold">有責任心，能確保寵物安全與健康的人</p>
                     <p>小幫手需要具備高度責任感，確保在照顧過程中提供寵物安全、健康的生活環境，讓主人無後顧之憂。</p>
