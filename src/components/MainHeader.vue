@@ -111,9 +111,9 @@
         };
     });
 
-    // function toggleNav(){
-    //     isNavFocus.value = !isNavFocus.value
-    // }
+    function toggleNav(){
+        isNavFocus.value = !isNavFocus.value
+    }
     //     // 控制登入或註冊框的顯示與隱藏
     // function toggleAuthBox() {
     //     isAuthBox.value = !isAuthBox.value;
