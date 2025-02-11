@@ -151,6 +151,15 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
+  {
+    path: '/test',
+    component: () => import('@/views/test.vue'),
+    meta: {
+      title: '測試用頁面 | ＴＨＥTEST',
+      theme: 'red',
+      bodyBg: 'natural-1',
+    }
+  },
   
   
 ];
