@@ -46,7 +46,7 @@
                 <p>Step.3 合約簽署</p>
                 <img v-if="step3" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
                 <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
-                <p v-if="step3" class="stepStatues" > 通過</p>
+                <p v-if="step3" class="stepStatues" > 已同意</p>
                 <p v-else class="stepStatues"> 未通過</p>
                 <p class="hc-reson" style="display:none;">{{ hcSign.failReson }}</p>
               </div>
@@ -414,8 +414,8 @@
             <!-- 自介 -->
             <div class="input-group">
               <label class="smallText">自我介紹</label>
-              <div class="inputs">
-                <InputText
+              <InputText
+                  inputType = "textarea"
                   :size = "input_selfIntro.size"
                   :textAlign = "input_selfIntro.textAlign"
                   :placeHolder="input_selfIntro.placeHolder"
@@ -423,9 +423,6 @@
                   :hasError="input_selfIntro.inputError.value"
                   v-model="input_selfIntro.inputValue.value">
               </InputText>
-                <textarea name="" id=""
-                rows="5" cols="50"></textarea>
-              </div>
             </div>
           </div>
           <div class="btn-group">
@@ -668,19 +665,29 @@
   };
 
   // 放棄時，重置所有答案
-  const handleCancel = () => {
-    // 直接賦值一個新物件，確保 Vue 能偵測變更
+  const handleCancelTest = () => {
+    // 清空所有答案
     questions.value.forEach( q=>q.answer = "" );
-    console.log('重置了')
+    console.log('重置:適性測驗')
   };
   const handleCancelHcVarify = () => {
-    // 直接賦值一個新物件，確保 Vue 能偵測變
-    console.log('重置了')
+    // input
+    input_name.inputValue.value = "";
+    input_idCard.inputValue.value = "";
+    // birthday
+    selectedYear.value = "";
+    selectedMonth.value = "";
+    selectedDay.vlaue = "";
+    // img
+    selfyImg.value = "";
+    idCardImg.value = "";
+
+    console.log('重置了: 資料審核')
   };  
   const handleCancelSign = () => {
     // 直接賦值一個新物件，確保 Vue 能偵測變更
     helperAgree.value = false;
-    console.log('重置了-取消勾選')
+    console.log('重置了:取消勾選')
   };  
   
   // 儲存或取消時，依序觸發 兩個事件: 
@@ -705,17 +712,19 @@
     };
     // 重整 + 關掉
     const reloadAndToggle_hcTest = () =>{
-        handleCancel();
+        handleCancelTest();
         toggleHcTest();
-        console.log('重置並且關閉');
+        console.log('關閉: 適性測驗');
     };
     const reloadAndToggle_hcVarify = () =>{
-        handleCancel();
+        handleCancelHcVarify();
         toggleHcVarify();
+        console.log('關閉: 資料審核');
     };
     const reloadAndToggle_hcSign = () =>{
         handleCancelSign();
         toggleHcSign();
+        console.log('關閉: 合約簽署');
     };
     const reloadAndToggle_hcManage = () =>{
         handleCancel();
@@ -752,7 +761,7 @@
       size: 'small',
       textAlign: 'textLeft',
       placeHolder: '輸入身分證號碼',
-      errorMsg: '請輸入正確的格式',
+      errorMsg: '請輸入正確格式',
       inputValue: ref(''),
       inputError: ref(false),
   };
@@ -764,6 +773,36 @@
       inputValue: ref(''),
       inputError: ref(false),
   };
+
+  // 監聽input的內容
+    // 身分證 idCard
+    watch(
+      // 監聽輸入變化
+      ()=> input_idCard.inputValue.value,
+      (newValue,oldValue)=> {
+        // 讓清空的時候不顯示錯誤
+        if( !newValue ){
+          input_idCard.inputError.value = false;
+          return;
+        }
+
+      // 防呆，將第一個英文字母 自動轉大寫
+      if ( /^[a-z]/.test(newValue) ){
+        input_idCard.inputValue.value = newValue.charAt(0).toUpperCase() + newValue.slice(1);
+      };
+
+      // 驗證台灣身分格式
+      const idCardPattern = /^[A-Z][0-9]{9}$/; // 正確格式：1個大寫字母 + 9個數字
+      const isValid = idCardPattern.test(input_idCard.inputValue.value);
+
+      // 更新錯誤狀態
+      input_idCard.inputError.value = !isValid;
+
+      // 在主控台查看結果
+      console.log("輸入的身分證號碼:", input_idCard.inputValue.value);
+      console.log("驗證結果:", isValid);
+      }
+    )
 
 
   // 資料審核~
@@ -1119,12 +1158,19 @@ const city = {
       });
 
       // 檢查是否有欄位空的
-      const isInCompolete = Object.values(hcVarifyFields.value).some(value => value=== "")
+      const isInCompolete = 
+        Object.values(hcVarifyFields.value).some(value => value=== "")
+        || input_idCard.inputError.value;
       
       if( isInCompolete ){
-        alert("請完整填寫表單")
-        // 中斷執行
-        return
+        if( input_idCard.inputError.value ){
+          alert("請正確填寫表單")
+          return
+        }else{
+          alert("請完整填寫表單")
+          // 中斷執行
+          return
+        }
       }else{
         // 寫submit
 

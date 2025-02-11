@@ -568,14 +568,18 @@ ol {
 
  // 設定新信箱
 .mc-update-verify{
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  padding: 8rem 7.1rem;
-  max-width: 50rem;
-  height: 42rem;
+  justify-content: start;
+  gap: 2rem;
+  // height: 42rem;
   text-align: center;
+  .btn-group{
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+  }
   h5{}
 
   p{}
@@ -594,7 +598,7 @@ ol {
 
 }
 
-#resetPwdAgree{
+.resetPwdAgree{
   display: flex;
   justify-content: start;
   align-items: center;
@@ -620,9 +624,19 @@ ol {
   .petcard-title {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.6rem;
+    .title-container{
+      white-space: nowrap;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      justify-content: space-between;
+      align-items: end;
+      padding-right: .8rem;
+    }
   }
   // 氣直線
   .divider {
@@ -647,6 +661,24 @@ ol {
       flex-direction: column;
       justify-content: start;
       gap: .8rem;
+      .cardwrapper{
+        width: 100%;
+        .imageContainer{
+          width: 20rem;
+          transition: width 0.8s ease-in-out;
+          img{
+            width: unset;
+            height: 100%;
+          }
+          &:hover{
+            width: 100%;
+          }
+        }
+        .content{
+          width: unset;
+        }
+      }
+
     }
 
     .cardWrap{
@@ -802,6 +834,12 @@ ol {
           flex-direction: column;
           .topSection{
             justify-content: start;
+          }
+          .imageContainer{
+            // 根據圖片大小自適應寬度
+            width: min-content;
+            // 防止過大
+            max-width: 100%;
           }
         }
       }
@@ -1045,6 +1083,7 @@ ol {
       flex-basis: 19.5rem;
       flex-grow: 1;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
       padding: 1.6rem 3.2rem;
@@ -1290,9 +1329,6 @@ ol {
           .service-t{
             flex-grow: 1;
           }
-        }
-        textarea{
-          width: 100%;
         }
       }
       .zone{

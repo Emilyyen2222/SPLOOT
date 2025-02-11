@@ -85,22 +85,16 @@
           </div>
           <div class="sh-h-content">
             <!-- v-for -->
-            <!-- <div class="sh-h-items" v-for{ subHistory through in items } :key="id"> -->
-            <div class="sh-h-items">
-              <p class="tb_index">01</p>
-              <p class="tb_petName">小白</p>
-              <p class="tb_plan">銀卡(三個月)</p>
-              <p class="tb_date">2024/01/15</p>
-              <p class="tb_total">$300</p>
-            </div>
-            <div class="sh-h-items">
-              <p>02</p>
-              <p>小白</p>
-              <p>銀卡(三個月)</p>
-              <p>2024/01/15</p>
-              <p>$300</p>
-            </div>
-      
+            <div class="sh-h-items" 
+             v-for=" subHistory in subHistories " 
+             :key="subHistory.id">
+            <!-- <div class="sh-h-items"> -->
+              <p class="tb_index">{{ '0'+ subHistory.shId }}</p>
+              <p class="tb_petName">{{ subHistory.petName }}</p>
+              <p class="tb_plan">{{ subHistory.plan }}</p>
+              <p class="tb_date">{{ subHistory.date }}</p>
+              <p class="tb_total">{{ '$' + subHistory.total }}</p>
+            </div>      
           </div>
         </div>
       
@@ -319,6 +313,15 @@
   
    // 計算卡片數量
   const cardCount = computed(() => cards.value.length);
+
+  // 歷史紀錄，subHistory
+  const subHistories = ref([
+    {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
+    {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  ]);
 
 
   // slider
