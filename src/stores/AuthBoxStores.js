@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
-import { ref, watch} from 'vue';
+import { ref, watch, onBeforeMount} from 'vue';
 
 import openedEye from '@/assets/img/icon/login/openedEye.svg';
 import closedEye from '@/assets/img/icon/login/closedEye.svg';
 
 export const useAuthStores = defineStore('auth',() => {
 
+    const isLoggedIn = ref(false);
     
     const authType = ref('login');
     const isAuthBox = ref(false);
@@ -46,9 +47,17 @@ export const useAuthStores = defineStore('auth',() => {
         hasError: false
     });
 
-    const eyeState1 = ref(closedEye);
-    const eyeState2 = ref(closedEye);
-    const eyeState3 = ref(closedEye);
+    const passwords =ref({
+        1: 'password',
+        2: 'password',
+        3: 'password',
+    });
+
+    const eyeState =ref({
+        1: closedEye,
+        2: closedEye,
+        3: closedEye,
+    });
 
     const isLightBoxPolicy = ref(false);
     const isLightBoxPrivacy = ref(false);
@@ -61,8 +70,7 @@ export const useAuthStores = defineStore('auth',() => {
         signUpPasswordCheck.value.inputMsg ='';
         loginEmail.value.inputMsg ='';
         loginPassword.value.inputMsg ='';
-        console.log("彈窗狀態變更:", isAuthBox.value);
-    }
+    };
 
     function toggleAuthType() {
         authType.value = authType.value === 'login' ? 'signUp' : 'login'; // 通知父層更新 authType
@@ -76,22 +84,11 @@ export const useAuthStores = defineStore('auth',() => {
         robotCheck.value.checkValue = false;
         robotCheck.value.hasError = false;
         // console.log("authType 切換為:", authType.value)
-    }
+    };
     
-    function eyeStateToggle1() {
-        const passwordInput1 = document.querySelector(".password1 input");
-        passwordInput1.type = passwordInput1.type == 'password' ? 'text' : 'password';
-        eyeState1.value = eyeState1.value == closedEye ? eyeState1.value = openedEye : eyeState1.value = closedEye;
-    };
-    function eyeStateToggle2() {
-        const passwordInput2 = document.querySelector(".password2 input");
-        passwordInput2.type = passwordInput2.type == 'password' ? 'text' : 'password';
-        eyeState2.value = eyeState2.value == closedEye ? eyeState2.value = openedEye : eyeState2.value = closedEye;
-    };
-    function eyeStateToggle3() {
-        const passwordInput3 = document.querySelector(".password3 input");
-        passwordInput3.type = passwordInput3.type == 'password' ? 'text' : 'password';
-        eyeState3.value = eyeState3.value == closedEye ? eyeState3.value = openedEye : eyeState3.value = closedEye;
+    function eyeStateToggle(number){
+        passwords.value[number] = passwords.value[number] == 'password' ? 'text' : 'password';
+        eyeState.value[number] = eyeState.value[number] == closedEye ? openedEye : closedEye;
     };
 
     function isValidEmail(email){
@@ -254,7 +251,34 @@ export const useAuthStores = defineStore('auth',() => {
         }
     });
 
+    //登入狀態儲存
+
+    async function checkLoginStatus(){
+        const resp = await fetch('php/checkLogin.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        try{
+            const loginStatus = await resp.json();
+            if(loginStatus.status == 'loggedIn'){
+                isLoggedIn.value = true;
+            }else{
+                isLoggedIn.value = false;
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
+
+    onBeforeMount(() => {
+        checkLoginStatus();
+    });
+
     return {
+        isLoggedIn,
         authType,
         isAuthBox,
         loginEmail,
@@ -264,19 +288,17 @@ export const useAuthStores = defineStore('auth',() => {
         signUpPasswordCheck,
         signUpAgreeCheck,
         robotCheck,
-        eyeState1,
-        eyeState2,
-        eyeState3,
+        passwords,
+        eyeState,
         isLightBoxPolicy,
         isLightBoxPrivacy,
         toggleAuthType,
-        eyeStateToggle1,
-        eyeStateToggle2,
-        eyeStateToggle3,
         togglePolicy,
         togglePrivacy,
         loginPhp,
         signUpPhp,
-        toggleAuthBox
+        toggleAuthBox,
+        eyeStateToggle,
+        checkLoginStatus
     };
 });
