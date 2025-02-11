@@ -431,7 +431,7 @@
     import ProgressBar from "../components/ProgressBar.vue";
     import Policy from '../components/Policy.vue';
 
-    const question = ref(1);
+    const question = ref(6);
     const pet = ref('');
     const q1input = ref('');
     const q8input = ref('');
