@@ -1,5 +1,4 @@
 @mixin box(){
-    // border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,7 +7,6 @@
     height: calc(100vh - 10rem);
     padding: 0 2rem;
     margin: 0 auto;
-    border: 1px solid;
     .borderBottom{
         width: 10rem;
         margin: 0 auto;
@@ -131,7 +129,8 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 6.4rem);
+    height: calc(100vh);
+    // padding-top: 10rem;
     // margin: 0 auto;
     // border: 1px solid ;
     .planItems{
@@ -321,7 +320,7 @@ body{
                 border-radius: 100rem;
                 font-size: 1.3rem; 
                 @include md(){
-                    width: 5.5rem;
+                    width: 4.8rem;
                     right: -0.5rem;
                 }
             }
@@ -354,11 +353,13 @@ body{
     justify-content: center;
     align-items: center;
     max-width: 592px;
-    height: calc(100vh - 6.4rem);
+    height: calc(100vh);
     margin: 0 auto;
     // border: 1px solid;
     @include md(){
         margin: 0 1.2rem;
+        padding-top: 7.2rem;
+        align-items: flex-start;
     }
     h4{
         text-align: center;

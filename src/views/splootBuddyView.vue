@@ -70,12 +70,10 @@
     <!-- 成為小幫手＋新增貼文 -->
     <div class="middleSection">
         <div class="toBeBuddy">
-            <p class="smallText">你是喜愛動物又擁有照顧經驗的人嗎?</p>
-            <div class="btnBox">
+            <p class="smallText">你是喜愛動物又擁有照顧經驗的人嗎?</p>            
                 <Router-link  to="/member-center/helper">
                     <Btn btnStyle="outline small">成為小幫手</Btn>
-                </Router-link>
-            </div>
+                </Router-link>            
         </div>        
         <!-- 行程按鈕 -->       
         <div class="scheduleBtn" @click="toggleNewPost">
