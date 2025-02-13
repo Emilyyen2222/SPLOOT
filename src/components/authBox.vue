@@ -318,7 +318,7 @@
             return;
         };
 
-        const resp = await fetch('php/login.php', {
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/login.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -377,7 +377,7 @@
             return;
         };
 
-        const resp = await fetch('php/signup.php', {
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/signup.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
