@@ -677,7 +677,7 @@
     // birthday
     selectedYear.value = "";
     selectedMonth.value = "";
-    selectedDay.vlaue = "";
+    selectedDay.value = "";
     // img
     selfyImg.value = "";
     idCardImg.value = "";

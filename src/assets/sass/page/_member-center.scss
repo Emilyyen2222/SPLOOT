@@ -661,21 +661,25 @@ ol {
       flex-direction: column;
       justify-content: start;
       gap: .8rem;
-      .cardwrapper{
-        width: 100%;
-        .imageContainer{
-          width: 20rem;
-          transition: width 0.8s ease-in-out;
-          img{
+      .cardWrap{
+      // height: 100%;
+        .cardwrapper{
+          // width: 100%;
+          // min-height: 30rem;
+          .imageContainer{
+            width: 20rem;
+            transition: width 0.8s ease-in-out;
+            img{
+              width: unset;
+              height: 100%;
+            }
+            &:hover{
+              width: 100%;
+            }
+          }
+          .content{
             width: unset;
-            height: 100%;
           }
-          &:hover{
-            width: 100%;
-          }
-        }
-        .content{
-          width: unset;
         }
       }
 
@@ -1038,12 +1042,12 @@ ol {
     padding: .8rem 2.4rem;
     display: grid;
     grid-template-columns: repeat(5,1fr);
-    gap: auto;
-    grid-area: 
-    "th_index th_petName th_plan th_plan th_total";
+    gap: 1rem;
+    // grid-area: 
+    // "th_index th_petName th_plan th_plan th_total";
     border-bottom: 1px solid map-get($colors, natural-2);
-    &:not(:nth-child(20)){
-      flex:1 0 0;
+    p{
+      white-space: nowrap;
     }
   }
 
@@ -1051,18 +1055,21 @@ ol {
     width: 100%;
     padding: 0 2.4rem;
     .sh-h-items{
-      display: flex;
       display: grid;
+      // grid-template-columns: repeat(auto-fit,min-max(15rem,1fr));
       grid-template-columns: repeat(5,1fr);
-      grid-template-rows: repeat(1,1fr);
-      gap: auto;
-      grid-template-areas: 
-      "tb_index tb_petName tb_plan tb_date tb_total";
+      // grid-template-rows: repeat(1,1fr);
+      gap: 1rem;
+      // grid-template-areas: 
+      // "tb_index tb_petName tb_plan tb_date tb_total";
+      p{
+        white-space: nowrap;
+      }
     }
 
-    .sh-h-items:not(:nth-child(200)){
-      flex:1 0 0;
-    }
+    // .sh-h-items:not(:nth-child(200)){
+    //   flex:1 0 0;
+    // }
   }
 }
 
@@ -1517,5 +1524,14 @@ ol {
         .zone{
           flex-wrap:wrap;
         }
+      }
+    }
+    @media (max-width:760px) {
+      .sh-h .sh-h-title{
+        grid-template-columns: repeat(3,1fr);
+      }
+      .sh-h .sh-h-content .sh-h-items{
+        grid-template-columns: repeat(3,1fr);
+        border-bottom: 1px solid #e1dede;
       }
     }
