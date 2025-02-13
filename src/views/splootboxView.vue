@@ -181,8 +181,9 @@
             </p>
             <div class="emailBtn">
                 <div>
-                    <InputText placeHolder="Email" textAlign="textCenter" errorMsg="Invalid Input" 
-                    v-model="inputValue" :hasError="inputError"></InputText>
+                    <InputText placeHolder="Email" textAlign="textCenter" errorMsg="請輸入正確的 email 格式" 
+                             v-model="emailInput" :hasError="emailError">
+                    </InputText>
                 </div>
             </div>
             <div class="newsButton">
@@ -220,13 +221,30 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+    import { ref, watch, computed } from 'vue';
     import MainHeader from "../components/MainHeader.vue";
     import DropdownQa from "../components/DropdownQa.vue";
     import Btn from '../components/Btn.vue';
     import InputText from '../components/InputText.vue';
     import MainFooter from "../components/MainFooter.vue";
     import PopUp from "../components/PopUp.vue";
+
+    // email格式驗證
+    const emailInput = ref('');
+    const emailError = ref();
+    const isValidEmail = computed(() => {
+    // 使用正規表達式來驗證email格式
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(emailInput.value);
+    });
+
+    watch(emailInput, (newValue, oldValue) => {
+    if(isValidEmail.value){
+        emailError.value = false;
+    }else{
+        emailError.value = true;
+    }
+    });
 
     // popup 
     const isPopUpSubscribe = ref(false);
