@@ -99,15 +99,15 @@ const memberPortrait = computed(()=> {
       });
 // data
   // 確保本身有值 
-const injectedAvatar = inject('memberPortrait',ref(""));
-const selectedAvatar = computed(()=>injectedAvatar.value);
-console.log("收到的 selectedAvatar:", selectedAvatar.value);
+// const injectedAvatar = inject('memberPortrait',ref(""));
+// const selectedAvatar = computed(()=>injectedAvatar.value);
+// console.log("收到的 selectedAvatar:", selectedAvatar.value);
 
 
-  if(selectedAvatar){
-    console.log("nav收到的值(格式化之前):",selectedAvatar.value
+//   if(selectedAvatar){
+//     console.log("nav收到的值(格式化之前):",selectedAvatar.value
 
-  )};
+//   )};
 
 
 

@@ -666,7 +666,6 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
   // lightBox title
   const lightTitle_memberInfo = {title: "會員資料", isLightBox: ref(false)};
-  const lightTitle_resetPwd = {title: "變更密碼", isLightBox: ref(false)};
 
 // function
 
@@ -787,9 +786,10 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         };
       });
 
+
       // share 出去
-      provide('memberPortrait',memberPortrait);
-      console.log("提供的 memberPortrait:", memberPortrait.value);
+      // provide('memberPortrait',memberPortrait);
+      // console.log("提供的 memberPortrait:", memberPortrait.value);
 
       // const sharedAvatar = ref({
       //   avatarId: 1,

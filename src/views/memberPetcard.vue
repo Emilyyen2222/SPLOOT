@@ -22,53 +22,49 @@
             <!-- card1~n -->
             <!-- v-for : 卡片與按鈕:pc1、pc2、...-->
             <div class="petcard" 
-                v-for=" petcard in petcards "
-                :key="petcard.petcardId">
-              <div class="cardWrap">
-                <!-- 卡片部分 -->
-                <div class="cardwrapper">
-                    <!-- 左側圖片區 -->
-                    <div class="imageContainer">
-                        <img :src="petcard.cardImg" alt="petImage">
-                    </div>
-                    <!-- 右側內容區 -->
-                    <div class="content">
-                        <div class="topSection">
-                        <div class="dot">
-                            <div class="dotActive"></div>
-                            <div class="dotInactive"></div>
-                            <div class="dotInactive"></div>
-                        </div>
-                        <div class="number">01</div>
-                        </div>
-                        <!-- 名稱與距離 -->
-                        <div class="info">
-                            <div class="nameAndGender">
-                                <h4 class="bold name">COCO</h4>
-                                <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
-                            </div>
-                            <div class="distance">
-                            <div class="smallText distanceIcon"></div>
-                            距離你6公里
-                            </div>
-                        </div>
-                        <!-- 標籤區 -->
-                        <div class="tags">
-                        <span class="xsText tag">邊境牧羊</span>
-                        <span class="xsText tag">活潑外向</span>
-                        <span class="xsText tag">愛玩球</span>
-                        <span class="xsText tag">台北市</span>
-                        <span class="xsText tag">松山區</span>
-                        <span class="xsText tag">大型犬</span>
-                        <span class="xsText tag">已結紮</span>
-                        </div>
-                        <!-- 內文 -->
-                        <p class="description bold">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-                        </p>
-                    </div>
+            v-for="plan in filteredCards" :key="plan.label">
+            <!-- 卡片區 -->
+              <div class="matchbox">
+                <div class="upperSection">
+                  <div class="cardWrapMatch">
+                      <div class="cardwrapper">
+                          <!-- 左側圖片區 -->
+                          <div class="imageContainer">
+                              <img :src="plan.imageSrc" alt="">
+                          </div>
+                          <!-- 右側內容區 -->
+                          <div class="content">
+                              <div class="topSection">
+                                  <div class="dot">
+                                  <div class="dotActive"></div>
+                                  <div class="dotInactive"></div>
+                                  <div class="dotInactive"></div>
+                                  </div>
+                                  <div class="number">{{ plan.number }}</div>
+                              </div>
+                              <!-- 名稱與距離 -->
+                              <div class="info">
+                                  <div class="nameAndGender">
+                                  <h4 class="bold name">{{ plan.name }}</h4>
+                                  <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
+                                  </div>
+                                  <div class="distance">
+                                  <div class="smallText distanceIcon"></div>
+                                  距離你{{ plan.distance }}公里
+                                  </div>
+                              </div>
+                              <!-- 標籤區 -->
+                              <div class="tags">
+                                  <span class="xsText tag" v-for="tag in plan.tags" :key="tag">{{ tag }}</span>
+                              </div>
+                              <!-- 內文 -->
+                              <p class="description bold">{{ plan.description }}</p>
+                          </div>
+                      </div>
+                  </div>
                 </div>
               </div>
+            <!-- 案扭區 -->
               <div class="ptc-btn-group">
                 <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo('dog')">編輯</Btn>
                 <div class="btn-group">
@@ -667,6 +663,19 @@
     { petcardId:2 ,cardImg: new URL ("../assets/img/splootbox/dog2.jpg", import.meta.url).href},
     { petcardId:3 ,cardImg: new URL ("../assets/img/splootbox/dog3.jpg", import.meta.url).href},
   ];
+  
+  const cardsData = ref([
+        { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+        { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+        ]);
+
+  const filteredCards = ref([
+  { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+  { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+  { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+  ]); 
 
     // 計算資訊卡的卡片數量
     const petCardCount = computed(() => petcards.length);
