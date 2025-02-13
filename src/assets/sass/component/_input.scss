@@ -2,7 +2,9 @@
   width: 100%;
 
   text-align: center;
-  input[type="text"], input[type="password"]{
+  input[type="text"], 
+  input[type="text"]:disabled,
+  input[type="password"]{
     @include textStyle(p);
     &.small{
       @include textStyle(smallText);
@@ -14,7 +16,7 @@
     border-radius: 16px;
   
     color: map-get($colors, brown);
-
+    background-color: map-get($colors, beige);
     &::placeholder{
       color: map-get($colors, natural-2);
       opacity: 1;

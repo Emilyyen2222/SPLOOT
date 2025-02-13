@@ -26,22 +26,43 @@ const routes = [
   },
   {
     path: '/sploot-box',
-    component: () => import('@/views/splootboxView.vue'),
-    meta: {
-      title: '訂閱寵物盒 | Sploot',
-      theme: 'red',
-      bodyBg: 'pink-0',
-    }
+    // component: () => import('@/views/splootboxView.vue'),
+    // meta: {
+    //   title: '訂閱寵物盒 | Sploot',
+    //   theme: 'red',
+    //   bodyBg: 'pink-0',
+    // },
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/splootboxView.vue'),
+        meta: {
+          title: '訂閱寵物盒 | Sploot',
+          theme: 'red',
+          bodyBg: 'pink-0',
+        }
+      },
+      {
+        path: 'question',
+        component: () => import('@/views/questionView.vue'),
+        meta: {
+          title: '訂閱寵物盒 | Sploot',
+          theme: 'red',
+          bodyBg: 'pink-2',
+        }
+      }
+
+    ]
   },
-  {
-    path: '/sploot-box/question',
-    component: () => import('@/views/questionView.vue'),
-    meta: {
-      title: '訂閱寵物盒 | Sploot',
-      theme: 'red',
-      bodyBg: 'pink-2',
-    }
-  },
+  // {
+  //   path: '/sploot-box/question',
+  //   component: () => import('@/views/questionView.vue'),
+  //   meta: {
+  //     title: '訂閱寵物盒 | Sploot',
+  //     theme: 'red',
+  //     bodyBg: 'pink-2',
+  //   }
+  // },
   {
     path: '/match',
     component: () => import('@/views/matchView.vue'),
@@ -114,16 +135,15 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
- /*
-  {
-    path: '/backend/member',
-    component: () => import('@/views/backend/memberManage.vue'),
-    meta: {
-      title: '會員管理 | Sploot',
-      theme: 'red',
-      bodyBg: 'yellow-1',
-    }
-  },*/
+  // {
+  //   path: '/backend/member',
+  //   component: () => import('@/views/backend/memberManage.vue'),
+  //   meta: {
+  //     title: '會員管理 | Sploot',
+  //     theme: 'red',
+  //     bodyBg: 'yellow-1',
+  //   }
+  // },
   {
     path: '/member-center/petcard',
     component: () => import('@/views/memberPetcard.vue'),

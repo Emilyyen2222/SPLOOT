@@ -2,9 +2,7 @@
 <template>
     <header :class="[`bg-${props.bgc}`, {'loggedIn': authBoxStore.isLoggedIn} ]">
         <nav>
-            <div class="navHamburger"
-                :class="{'-navFocus': isNavFocus}"
-                @click="toggleNav">
+            <div class="navHamburger" :class="{ '-navFocus': isNavFocus }" @click="toggleNav">
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
@@ -14,13 +12,12 @@
                 </RouterLink>
             </div>
             <ul class="headerList" :class="[{ '-navFocus': isNavFocus }, `bg-${props.bgc}`]">
-                <li class="headerItem" 
-                v-for="(item, index) in [
-                    { name: '認識新毛友', link: '/petInfoCard'},
-                    { name: '訂閱寵物盒', link: '/sploot-box'},
-                    { name: '尋找小幫手', link: '/sploot-buddy'},
-                    { name: '毛孩日曆', link: '/sploot-event'},
-                    { name: '友善設施', link: '/sploot-pet-friendly'},
+                <li class="headerItem" v-for="(item, index) in [
+                    { name: '認識新毛友', link: '/petInfoCard' },
+                    { name: '訂閱寵物盒', link: '/sploot-box' },
+                    { name: '尋找小幫手', link: '/sploot-buddy' },
+                    { name: '毛孩日曆', link: '/sploot-event' },
+                    { name: '友善設施', link: '/sploot-pet-friendly' },
                 ]" :key="index">
 
                     <RouterLink :to="item.link">{{ item.name }}</RouterLink>
@@ -36,7 +33,7 @@
             <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox">
                 <Btn btnStyle="baseline small" @click="logOutPhp">登出</Btn>
                 <RouterLink to="/member-center">
-                    <img  class="memberLogo" :src="memberLogo" alt="memberLogo">
+                    <img class="memberLogo" :src="memberLogo" alt="memberLogo">
                 </RouterLink>
             </div>
         </nav>
@@ -47,7 +44,7 @@
     @toggle="toggleAuthBox"
     ></AuthBox> -->
 </template>
-  
+
 <script setup>
     import { ref, computed} from 'vue';
     import { useAuthStores } from '@/stores/AuthBoxStores.js';  
@@ -77,39 +74,39 @@
     // const authType = ref('login'); // 初始為登入模式
     const memberLogoPortrait = ref(8);
 
-    const isMDScreen = computed(()=>{ return window.innerWidth <= 768; });
+const isMDScreen = computed(() => { return window.innerWidth <= 768; });
 
-    const memberLogo = computed(()=>{
-        switch (memberLogoPortrait.value){
-            case 1:
-                return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
-                break;
-            case 2:
-                return new URL(`@/assets/img/member-center/portrait2.svg`, import.meta.url).href;
-                break; 
-            case 3:
-                return new URL(`@/assets/img/member-center/portrait3.svg`, import.meta.url).href;
-                break;
-            case 4:
-                return new URL(`@/assets/img/member-center/portrait4.svg`, import.meta.url).href;
-                break;
-            case 5:
-                return new URL(`@/assets/img/member-center/portrait5.svg`, import.meta.url).href;
-                break;
-            case 6:
-                return new URL(`@/assets/img/member-center/portrait6.svg`, import.meta.url).href;
-                break;
-            case 7:
-                return new URL(`@/assets/img/member-center/portrait7.svg`, import.meta.url).href;
-                break;
-            case 8:
-                return new URL(`@/assets/img/member-center/portrait8.svg`, import.meta.url).href;
-                break;
-            default:
-                return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
-                break;
-        };
-    });
+const memberLogo = computed(() => {
+    switch (memberLogoPortrait.value) {
+        case 1:
+            return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
+            break;
+        case 2:
+            return new URL(`@/assets/img/member-center/portrait2.svg`, import.meta.url).href;
+            break;
+        case 3:
+            return new URL(`@/assets/img/member-center/portrait3.svg`, import.meta.url).href;
+            break;
+        case 4:
+            return new URL(`@/assets/img/member-center/portrait4.svg`, import.meta.url).href;
+            break;
+        case 5:
+            return new URL(`@/assets/img/member-center/portrait5.svg`, import.meta.url).href;
+            break;
+        case 6:
+            return new URL(`@/assets/img/member-center/portrait6.svg`, import.meta.url).href;
+            break;
+        case 7:
+            return new URL(`@/assets/img/member-center/portrait7.svg`, import.meta.url).href;
+            break;
+        case 8:
+            return new URL(`@/assets/img/member-center/portrait8.svg`, import.meta.url).href;
+            break;
+        default:
+            return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
+            break;
+    };
+});
 
     function toggleNav(){
         isNavFocus.value = !isNavFocus.value
@@ -126,22 +123,24 @@
     //     }
     // }
 
-    async function logOutPhp() {
-        const resp = await fetch('php/logout.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        try{
-            const logoutResp = await resp.json();
-        }catch(error){
-            console.error('Error parsing JSON:', error);
+async function logOutPhp() {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/logout.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         }
+    });
 
-        window.location.reload();
+    try {
+        const logoutResp = await resp.json();
+    } catch (error) {
+        console.error('Error parsing JSON:', error);
     }
+
+    window.location.reload();
+}
+// http://localhost/tid103/g3/php/checkLogin.php
+// https://tibamef2e.com/tid103/g3/php/checkLogin.php
 
     // onBeforeMount(async () => {
     //     const resp = await fetch('php/checkLogin.php', {
@@ -163,7 +162,7 @@
     //     }
     // });
 
-    // console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
-    // console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
+// console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
+// console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
 
 </script>
