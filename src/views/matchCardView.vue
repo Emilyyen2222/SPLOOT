@@ -1,21 +1,18 @@
 <template>
     <MainHeader theme="red" bgc="purple-1"></MainHeader>
-    <!-- <main class="bg-purple-1" style="z-index: -10;"> -->
-    <!------------------------match question 1---------------------->
+<!-- 全部內容 -->
 <div class="matchbox">
-    <div class="cardWrap">
+    <!-- 遮罩以上 -->
+    <div class="upperSection">
         <!-- 卡片部分 -->
-         <!-- <div class="cardWrapMatch"> -->
-             <div class="cardwrapper" v-for="plan in filteredPlans" :key="plan.label" 
-             :class="[{'movedLeft': movedLeft}, {'movedRight': movedRight}]">
-             <!-- 左側圖片區 -->
+         <div class="cardWrapMatch">
+             <div class="cardwrapper" 
+                v-for="plan in filteredCards" :key="plan.label" 
+                :class="[{'movedLeft': movedLeft}, {'movedRight': movedRight}]">
+                <!-- 左側圖片區 -->
                  <div class="imageContainer">
                      <img :src="plan.imageSrc" alt="">
-                     <div class="iconOverlay">
-                         <img v-if="disliked" src="../assets/img/icon/dislikeIcon.svg" alt="Icon" style="width: 17.1rem;">
-                     </div>
                  </div>
-             
                  <!-- 右側內容區 -->
                  <div class="content">
                      <div class="topSection">
@@ -23,10 +20,9 @@
                          <div class="dotActive"></div>
                          <div class="dotInactive"></div>
                          <div class="dotInactive"></div>
-                         </div>
-                         <div class="number">{{ plan.number }}</div>
-                     </div>
-                 
+                        </div>
+                        <div class="number">{{ plan.number }}</div>
+                    </div>
                      <!-- 名稱與距離 -->
                      <div class="info">
                          <div class="nameAndGender">
@@ -38,26 +34,26 @@
                          距離你{{ plan.distance }}公里
                          </div>
                      </div>
-     
                      <!-- 標籤區 -->
                      <div class="tags">
                          <span class="xsText tag" v-for="tag in plan.tags" :key="tag">{{ tag }}</span>
                      </div>
-                     
                      <!-- 內文 -->
                      <p class="description bold">{{ plan.description }}</p>
-                 
-                     <div class="iconOverlay">
-                         <img v-if="liked" src="../assets/img/icon/likeIcon.svg" alt="Icon" style="width: 14.3rem;">
-                     </div>
                  </div>
              </div>
-         <!-- </div> -->
+         </div>
         <div class="likeBtns">
             <Btn class="likeBtn" btnStyle="outline default"
             @click="dislikeClick">不喜歡</Btn> 
             <Btn class="likeBtn" btnType="form" btnStyle="nextQ"
-            @click="likeClick">喜歡</Btn> 
+            @click="likeClick">喜歡</Btn>
+            <div class="iconOverlayDislike">
+                <img v-if="dislikedIcon" src="../assets/img/icon/dislikeIcon.svg" alt="Icon" style="width: 17.1rem;">
+            </div>
+            <div class="iconOverlayLike">
+                <img v-if="likedIcon" src="../assets/img/icon/likeIcon.svg" alt="Icon" style="width: 14.3rem;">
+            </div>
         </div>
         <div class="preferenceBox">
             <div class="preferenceBtns">
@@ -73,7 +69,8 @@
         <div class="cardSlotsScroll">
             <div class="cardSlots"
             @click="toggleLightBoxPetInfo">
-                <div v-for="(image, index) in petImages" :key="index" class="cardContainer">
+                <div class="cardContainer" style="cursor: pointer;"
+                 v-for="(image, index) in petImages" :key="index">
                     <div class="petImage">
                     <img :src="image" alt="Pet Image">
                     <div class="dot">
@@ -92,19 +89,22 @@
     :title="lightTitleMatchAll.title"
     :is-light-box="isLightBoxMatchAll" 
     @toggle="toggleLightBoxMatchAll()">
-    <div class="cardSlotsPopUp">
-        <div class="cardSlots"
-        @click="toggleLightBoxPetInfo">
-        <div v-for="(image, index) in petImages" :key="index" class="cardContainer">
-            <div class="petImage">
-            <img :src="image" alt="Pet Image">
-            <div class="dot">
-                <div class="dotActive"></div>
-                <div class="dotInactive"></div>
-                <div class="dotInactive"></div>
+    <div class="matchAllBox">
+        <div class="cardSlotsPopUp">
+            <div class="cardSlots"
+            @click="toggleLightBoxPetInfo">
+            <div class="cardContainer" style="cursor: pointer;"
+            v-for="(image, index) in petImages" :key="index">
+                <div class="petImage">
+                <img :src="image" alt="Pet Image">
+                <div class="dot">
+                    <div class="dotActive"></div>
+                    <div class="dotInactive"></div>
+                    <div class="dotInactive"></div>
+                </div>
+                </div>
             </div>
             </div>
-        </div>
         </div>
     </div>
 </LightBox>
@@ -113,98 +113,100 @@
     :title="lightTitlePetInfo.title"
     :is-light-box="isLightBoxPetInfo" 
     @toggle="toggleLightBoxPetInfo()">
-    <div class="cardWrapPopUp">
-        <!-- 卡片部分 -->
-        <div class="cardwrapper">
-            <!-- 左側圖片區 -->
-            <div class="imageContainer">
-                <img src="../assets/img/splootbox/dog3.jpg" alt="">
+    <div class="petInfoBoxPopUp">
+        <div class="cardWrapPopUp">
+            <!-- 卡片部分 -->
+            <div class="cardwrapper">
+                <!-- 左側圖片區 -->
+                <div class="imageContainer">
+                    <img src="../assets/img/splootbox/dog3.jpg" alt="">
+                </div>
+                <!-- 右側內容區 -->
+                <div class="content">
+                    <div class="topSection">
+                    <div class="dot">
+                        <div class="dotActive"></div>
+                        <div class="dotInactive"></div>
+                        <div class="dotInactive"></div>
+                    </div>
+                    <div class="number">01</div>
+                    </div>
+                    <!-- 名稱與距離 -->
+                    <div class="info">
+                        <div class="nameAndGender">
+                            <h4 class="bold name">COCO</h4>
+                            <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
+                        </div>
+                        <div class="distance">
+                        <div class="smallText distanceIcon"></div>
+                        距離你6公里
+                        </div>
+                    </div>
+                    <!-- 標籤區 -->
+                    <div class="tags">
+                    <span class="xsText tag">邊境牧羊</span>
+                    <span class="xsText tag">活潑外向</span>
+                    <span class="xsText tag">愛玩球</span>
+                    <span class="xsText tag">台北市</span>
+                    <span class="xsText tag">松山區</span>
+                    <span class="xsText tag">大型犬</span>
+                    <span class="xsText tag">已結紮</span>
+                    </div>
+                    <!-- 內文 -->
+                    <p class="description bold">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
+                    </p>
+                </div>
             </div>
-            <!-- 右側內容區 -->
-            <div class="content">
-                <div class="topSection">
-                <div class="dot">
-                    <div class="dotActive"></div>
-                    <div class="dotInactive"></div>
-                    <div class="dotInactive"></div>
-                </div>
-                <div class="number">01</div>
-                </div>
-                <!-- 名稱與距離 -->
-                <div class="info">
-                    <div class="nameAndGender">
-                        <h4 class="bold name">COCO</h4>
-                        <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
-                    </div>
-                    <div class="distance">
-                    <div class="smallText distanceIcon"></div>
-                    距離你6公里
+        </div>
+        <!-- 右側內容區 -->
+        <div class="ownerContent">
+            <div class="boxDivider"></div>
+            <!-- 名稱-->
+                <div class="ownerName">
+                    <h4 class="bold">芙琳</h4>
+                    <div class="ownerTag">
+                        <span class="xsText tag">小幫手</span>
                     </div>
                 </div>
+            <!-- 內文 -->
+             <div class="owerText">
+                <p class="description bold">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
+                </p>
+            </div>
+            <div class="ownerInfoSec">
+                <!-- 基本資料 -->
+                <div class="smallText">基本資料</div>
                 <!-- 標籤區 -->
                 <div class="tags">
                 <span class="xsText tag">邊境牧羊</span>
                 <span class="xsText tag">活潑外向</span>
                 <span class="xsText tag">愛玩球</span>
-                <span class="xsText tag">台北市</span>
-                <span class="xsText tag">松山區</span>
-                <span class="xsText tag">大型犬</span>
-                <span class="xsText tag">已結紮</span>
-                </div>
-                <!-- 內文 -->
-                <p class="description bold">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-                </p>
-            </div>
-        </div>
-    </div>
-    <!-- 右側內容區 -->
-    <div class="ownerContent">
-        <div class="boxDivider"></div>
-        <!-- 名稱-->
-            <div class="ownerName">
-                <h4 class="bold">芙琳</h4>
-                <div class="ownerTag">
-                    <span class="xsText tag">小幫手</span>
                 </div>
             </div>
-        <!-- 內文 -->
-         <div class="owerText">
-            <p class="description bold">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-            </p>
-        </div>
-        <div class="ownerInfoSec">
-            <!-- 基本資料 -->
-            <div class="smallText">基本資料</div>
-            <!-- 標籤區 -->
-            <div class="tags">
-            <span class="xsText tag">邊境牧羊</span>
-            <span class="xsText tag">活潑外向</span>
-            <span class="xsText tag">愛玩球</span>
-            </div>
-        </div>
-        <div class="ownerInfoSec">
-            <!-- 基本資料 -->
-            <div class="smallText">正在舉辦</div>
-            <!-- 標籤區 -->
-            <div class="tags">
-            <span class="xsText bold tagRed">12/12碧潭野餐</span>
-            <span class="xsText bold tagRed">2/24迎風狗公園聚會</span>
-            </div>
-        </div>
-        <div class="boxDivider"></div>
-        
-        <div class="lineSec">
-            <div class="blockUser">
-                    <Btn class="check" btnStyle="baseline small">檢舉</Btn>
-                    <Btn class="check" btnStyle="baseline small">封鎖</Btn>
-            </div>
-            <div class="connect">
-                <div class="lineQRCode">
-                    <img src="../assets/img/buddy-post/demoQR.png" alt="account" class="QRcode">
+            <div class="ownerInfoSec">
+                <!-- 基本資料 -->
+                <div class="smallText">正在舉辦</div>
+                <!-- 標籤區 -->
+                <div class="tags">
+                <span class="xsText bold tagRed">12/12碧潭野餐</span>
+                <span class="xsText bold tagRed">2/24迎風狗公園聚會</span>
                 </div>
-                <Btn class="check" btnStyle="baseline small">芙琳的LINE</Btn>
+            </div>
+            <div class="boxDivider"></div>
+            
+            <div class="lineSec">
+                <div class="blockUser">
+                        <Btn class="check" btnStyle="baseline small">檢舉</Btn>
+                        <Btn class="check" btnStyle="baseline small">封鎖</Btn>
+                </div>
+                <div class="connect">
+                    <div class="lineQRCode">
+                        <img src="../assets/img/buddy-post/demoQR.png" alt="account" class="QRcode">
+                    </div>
+                    <Btn class="check" btnStyle="baseline small">芙琳的LINE</Btn>
+                </div>
             </div>
         </div>
     </div>
@@ -289,86 +291,96 @@
         import LightBox from "@/components/LightBox.vue";
 
 
-    const filteredPlans = ref([
-      {
-        label: 'card1',
-        name: 'Coco',
-        imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href,
-        number: '01',
-        distance: 6,
-        tags: ['邊境牧羊', '活潑外向', '愛玩球'],
-        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-      },
-      {
-        label: 'card2',
-        name: 'Buddy',
-        imageSrc:new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href,
-        number: '01',
-        distance: 8,
-        tags: ['拉布拉多', '活潑外向', '愛吃'],
-        description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.'
-      },
-      {
-        label: 'card3',
-        name: 'Brady',
-        imageSrc:new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href,
-        number: '01',
-        distance: 8,
-        tags: ['黃金獵犬', '活潑外向', '愛吃'],
-        description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.'
-      },
-      {
-        label: 'card4',
-        name: 'Luka',
-        imageSrc:new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href,
-        number: '01',
-        distance: 8,
-        tags: ['柴犬', '活潑外向', '愛吃'],
-        description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.'
-      },
-    ]);
+        //if cardsData label=last one   cardsData.value.length - 1
+        //moveCardLeft/moveCardRight disable
+        //matchDislike/matchLike works
+        
+        const movedLeft = ref(false);
+        const movedRight = ref(false);
+        const likedIcon = ref(false);
+        const dislikedIcon = ref(false);
 
-        const movedLeft = ref(false); 
-        const movedRight = ref(false); 
-        //
-        const dislikeClick = () => {
-            matchDislike();
-            moveCardLeft();
-        };
 
+        const cardsData = ref([
+        { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+        { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+        ]);
+
+        const filteredCards = ref([
+        { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+        { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+        ]); 
+
+
+
+        function deleted(){
+            filteredCards.value.pop();
+            filteredCards.value.unshift(cardsData.value[0]);
+            cardsData.value.splice(0,1);
+        }
+
+        // const cardFlying = ref(false);
+
+        // like/dislike 按鈕
         const likeClick = () => {
-            matchLike();
-            moveCardRight();
+            // if(cardFlying.value == false){
+                matchLike();
+                moveCardRight();
+                // cardFlying.value == true;
+            // }
+        };
+    
+        const dislikeClick = () => {
+            // if(cardFlying.value == false){
+                matchDislike();
+                moveCardLeft();
+                // cardFlying.value == true;
+            // }
         };
 
+        // 動畫處理 + 刪除卡片
         const moveCardLeft = () => {
-        movedLeft.value = !movedLeft.value; 
+            movedLeft.value = true;
+            movedRight.value = false;
+
+            setTimeout(() => {
+                movedLeft.value = false;
+                deleted(); // 動畫結束後才刪除
+            }, 300);
+
+            // if(movedRight.value == false){
+
+            // }
         };
+
         const moveCardRight = () => {
-        movedRight.value = !movedRight.value; 
+        movedRight.value = true;
+        movedLeft.value = false;
+        
+        setTimeout(() => {
+            movedRight.value = false;
+            deleted(); // 動畫結束後才刪除
+        }, 300);
         };
 
-
-        // like/dislike icon active
-        const liked = ref(false);
-        const disliked = ref(false);
-
-        // 點擊按鈕後讓icon自動消失
-        function matchLike() {
-        liked.value = true;
-
+        // like/dislike icon 動畫
+        const matchLike = () => {
+        likedIcon.value = true;
         setTimeout(() => {
-            liked.value = false;
-        }, 800);
-        }
+            likedIcon.value = false;
+        }, 500);
+        };
 
-        function matchDislike() {
-        disliked.value = true;
-
-        setTimeout(() => {
-            disliked.value = false;
-        }, 800);
-        }
+        const matchDislike = () => {
+            dislikedIcon.value = true;
+            setTimeout(() => {
+                dislikedIcon.value = false;
+                // cardFlying.value = false;
+            }, 500);
+        };
 
         const petImages = ref([
         new URL('../assets/img/splootbox/dog1.avif', import.meta.url).href,
