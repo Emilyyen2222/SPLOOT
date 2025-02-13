@@ -1558,3 +1558,13 @@ ol {
         border-bottom: 1px solid #e1dede;
       }
     }
+    @media (max-width:760px) {
+      .hcVarify-wrapper{
+        .select-group{
+          flex-wrap: wrap;
+        }
+      }
+      .upload-file-wrapper{
+        flex-wrap: wrap;
+      }
+    }
