@@ -187,9 +187,10 @@
             </div>
             <div class="newsButton">
                 <div class="btnBox">
-                    <RouterLink to="/question">
-                        <Btn btnStyle="primary large">訂閱電子報</Btn>
-                    </RouterLink>
+                    <!-- <RouterLink to="/sploot-box/question"> -->
+                        <Btn btnStyle="primary large"
+                        @click="togglePopUpSubscribe">訂閱電子報</Btn>
+                    <!-- </RouterLink> -->
                 </div>
             </div>
         </div>
@@ -198,27 +199,48 @@
     <div class="faqWrapper">
         <div class="faqTitle">FAQ</div>
         <div class="faqContainer">
-            <DropdownQa  question="可以隨時更改方案嗎？" answer="是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
+            <DropdownQa  question="SPLOOTBOX 可以隨時更改方案嗎？" answer="是的，您可以隨時更改您的方案！只需進入您的會員帳戶設定，選擇“我的訂閱”，然後根據您的需求升級、降級或切換至其他方案。
                         如果您在更改方案時有任何問題，歡迎聯繫我們的客服團隊，我們將竭誠為您服務！"></DropdownQa>
-            <DropdownQa  question="什麼時候會扣款呢？" answer="訂閱制的宗旨在於節省您重複訂購的時間，您不需每個月回到訂單重新購買付款。完成訂閱後，訂閱期間將以30天為一個週期定期扣款，直到訂閱方案截止。"></DropdownQa>
-            <DropdownQa  question="什麼時候會出貨呢？" answer="Sploot Box將於下單後約1~3個工作天安排出貨（不含例假日），出貨後約1~5天抵達。如有更改訂單將視商品狀況出貨，有延遲敬請見諒。出貨後，您將會收到email通知出貨與預計送達日期。"></DropdownQa>
+            <DropdownQa  question="SPLOOTBOX 什麼時候會扣款呢？" answer="訂閱制的宗旨在於節省您重複訂購的時間，您不需每個月回到訂單重新購買付款。完成訂閱後，訂閱期間將以30天為一個週期定期扣款，直到訂閱方案截止。"></DropdownQa>
+            <DropdownQa  question="SPLOOTBOX 什麼時候會出貨呢？" answer="Sploot Box將於下單後約1~3個工作天安排出貨（不含例假日），出貨後約1~5天抵達。如有更改訂單將視商品狀況出貨，有延遲敬請見諒。出貨後，您將會收到email通知出貨與預計送達日期。"></DropdownQa>
         </div>
     </div>
-                
-
     <MainFooter></MainFooter>      
 </div>
    
 
-         
+<PopUp
+    :is-pop-up="isPopUpSubscribe"
+    @toggle="togglePopUpSubscribe">
+    
+    <p class="bold" style="margin-bottom: 2.4rem;">感謝訂閱電子報</p>
+    <Btn btnType="form" btnStyle="nextQ" @click="togglePopUpSubscribe">確定</Btn>
+</PopUp>
+
 </template>
 
 <script setup>
-import MainHeader from "../components/MainHeader.vue";
-import DropdownQa from "../components/DropdownQa.vue";
-import Btn from '../components/Btn.vue';
-import InputText from '../components/InputText.vue';
-import MainFooter from "../components/MainFooter.vue";
+    import { ref } from 'vue';
+    import MainHeader from "../components/MainHeader.vue";
+    import DropdownQa from "../components/DropdownQa.vue";
+    import Btn from '../components/Btn.vue';
+    import InputText from '../components/InputText.vue';
+    import MainFooter from "../components/MainFooter.vue";
+    import PopUp from "../components/PopUp.vue";
 
+    // popup 
+    const isPopUpSubscribe = ref(false);
+
+    // 控制燈箱的顯示與隱藏
+    function togglePopUpSubscribe() {
+        isPopUpSubscribe.value = !isPopUpSubscribe.value;
+    
+    // 停止捲軸
+    if (isPopUpSubscribe.value) {
+        document.body.classList.add("clicked");
+        } else {
+            document.body.classList.remove("clicked");
+        }
+    }
 
 </script>
