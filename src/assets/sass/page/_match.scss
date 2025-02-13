@@ -26,6 +26,9 @@
         margin-top: 3.6rem;
         text-align: center;
         // border: 1px solid;
+        @include sm(){
+            margin-top: .8rem;
+        }
         h4{
             margin-bottom: 3.6rem;
         }
@@ -92,5 +95,6 @@
     position: fixed;
     bottom: 36px;
     right: 30px;
+    
 }
 
