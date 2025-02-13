@@ -9,7 +9,8 @@
         <div class="avatar">
           <!-- 改ref -->
           <!-- <img src="../assets/img/member-center/portrait1.svg" alt=""> -->
-          <img :src="selectedAvatar.value" alt="avatar">
+          <!-- <img :src="selectedAvatar.value" alt="avatar"> -->
+          <img :src="memberPortrait" alt="avatar">
         </div>
         <!-- msg -->
         <div class="msg-welcome">
@@ -63,6 +64,39 @@ import Btn from '../components/Btn.vue';
 // import InputText from '../components/InputText.vue';
 // import LightBox from '../components/LightBox.vue';
 
+const props = defineProps({
+  avatar: {
+    type: Number,
+    default: 1
+  }
+})
+
+// const memberPortraitChosed = computed(() => {
+//   return props.avatar;
+// });
+const memberPortrait = computed(()=> {      
+        console.log("帶進switch的值:", props.avatar);
+        switch (props.avatar){
+          case 1 : 
+            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+          case 2 : 
+            return new URL(`@/assets/img/member-center/portrait2.svg`,import.meta.url).href;
+          case 3 : 
+            return new URL(`@/assets/img/member-center/portrait3.svg`,import.meta.url).href;
+          case 4 : 
+            return new URL(`@/assets/img/member-center/portrait4.svg`,import.meta.url).href;
+          case 5 : 
+            return new URL(`@/assets/img/member-center/portrait5.svg`,import.meta.url).href;
+          case 6 : 
+            return new URL(`@/assets/img/member-center/portrait6.svg`,import.meta.url).href;
+          case 7 : 
+            return new URL(`@/assets/img/member-center/portrait7.svg`,import.meta.url).href;
+          case 8 : 
+            return new URL(`@/assets/img/member-center/portrait8.svg`,import.meta.url).href;
+          default:
+            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+        };
+      });
 // data
   // 確保本身有值 
 const injectedAvatar = inject('memberPortrait',ref(""));

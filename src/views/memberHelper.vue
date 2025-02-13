@@ -1060,13 +1060,13 @@ const city = {
 
    // 寵物類型
    const tag_petKind = {    
-    formChoice: singleChoice,
+    formChoice: multipleChoice,
     options: ['幼犬', '小型犬', '中型犬','大型犬','老年犬','幼貓','成貓'],
     selected: ref([]),
   };
    // 服務時段
    const tag_weekDay = {    
-    formChoice: singleChoice,
+    formChoice: multipleChoice,
     options: ['週一', '週二', '週三', '週四', '週五', '週六', '週日'],
     selected: ref([]),
   };

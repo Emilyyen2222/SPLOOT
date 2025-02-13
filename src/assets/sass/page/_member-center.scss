@@ -311,10 +311,9 @@ ol {
     flex-direction: column;
     align-items: center;
     gap: .8rem;
-    // transition: .3s;
+    // transition: .3s; 註解，因為會從方框變成圓形
     .avatar {
       cursor: pointer;
-      //頭相框，可以在選擇(focus?)的時候，出現外框(outline)，並且名字變成粗體
       width: 6.4rem;
       height: 6.4rem;
       border-radius: 50%;
@@ -328,9 +327,9 @@ ol {
 
   }
   .-selected {
-    outline: 3px solid map-get($colors, red ); /* 選中時的外框顏色 */
+    outline: 2px solid map-get($colors, red ); /* 選中時的外框顏色 */
     border-radius: 50%;
-    padding: 5px; /* 增加內距，確保 outline 不會太靠近 */
+    padding: 1px; /* 增加內距，確保 outline 不會太靠近 */
   }
 
   &:first-child p {
@@ -670,15 +669,15 @@ ol {
             width: 20rem;
             transition: width 0.8s ease-in-out;
             img{
-              width: unset;
-              height: 100%;
-            }
-            &:hover{
               width: 100%;
+              // height: 100%;
             }
+          //   &:hover{
+          //     width: 100%;
+          //   }
           }
           .content{
-            width: unset;
+            // width: unset;
           }
         }
       }

@@ -4,8 +4,8 @@
   <!-- 主內容 -->
   <main class="whole-bg">
     <!-- top nav -->
-    <memberNav/>
-  
+    <memberNav :avatar="memberPortraitChosed"/>
+    
     <div class="memberInfo"> 
         <div class="title2">
             <h6 class="bold">會員資料</h6>
@@ -752,8 +752,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       // UI change
       const chosed = (avatarId) => {
         selectedAvatarId.value = avatarId;
-        console.log("選中的avatar:",avatarId);
         memberPortraitChosed.value = avatarId;
+        console.log("選中的avatar:",memberPortraitChosed.value);
       };
 
       // const memberPortrait = computed(()=> {
@@ -763,7 +763,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           
       // });
 
-      const memberPortrait = computed(()=> {        
+      const memberPortrait = computed(()=> {      
+        console.log("帶進switch的值:",memberPortraitChosed.value);
         switch (memberPortraitChosed.value){
           case 1 : 
             return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
@@ -784,7 +785,6 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           default:
             return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
         };
-        console.log(memberPortraitChosed.value);
       });
 
       // share 出去
