@@ -8,7 +8,8 @@
         <!-- avatar -->
         <div class="avatar">
           <!-- 改ref -->
-          <img src="../assets/img/member-center/portrait1.svg" alt="">
+          <!-- <img src="../assets/img/member-center/portrait1.svg" alt=""> -->
+          <img :src="selectedAvatar.value" alt="avatar">
         </div>
         <!-- msg -->
         <div class="msg-welcome">
@@ -54,7 +55,7 @@
 
 <script setup>
 
-import { ref } from 'vue';
+import { ref,inject, computed } from 'vue';
 
 // components
 import Btn from '../components/Btn.vue';
@@ -63,6 +64,43 @@ import Btn from '../components/Btn.vue';
 // import LightBox from '../components/LightBox.vue';
 
 // data
+  // 確保本身有值 
+const injectedAvatar = inject('memberPortrait',ref(""));
+const selectedAvatar = computed(()=>injectedAvatar.value);
+console.log("收到的 selectedAvatar:", selectedAvatar.value);
+
+
+  if(selectedAvatar){
+    console.log("nav收到的值(格式化之前):",selectedAvatar.value
+
+  )};
+
+
+
+// // 重新格式化 URL
+// const formattedAvatarURL = computed(() => {
+//   if (!selectedAvatar.value) return "";
+
+//   // ✅ 提取文件名稱
+//   const fileName = selectedAvatar.value.split("/").pop(); // 取得 `portrait6.svg`
+
+//   // ✅ 重新構造 Vue `@/assets/...` 路徑
+//   return new URL(`@/assets/img/member-center/${fileName}`, import.meta.url).href;
+// });
+// console.log("nav收到的值(格式化之後):",formattedAvatarURL.value);
+
+
+  // avatar
+  const avatars=[
+  {avatarId:1,img: new URL("@/assets/img/member-center/portrait1.svg", import.meta.url).href},
+  {avatarId:2,img: new URL("@/assets/img/member-center/portrait2.svg", import.meta.url).href},
+  {avatarId:3,img: new URL("@/assets/img/member-center/portrait3.svg", import.meta.url).href},
+  {avatarId:4,img: new URL("@/assets/img/member-center/portrait4.svg", import.meta.url).href},
+  {avatarId:5,img: new URL("@/assets/img/member-center/portrait5.svg", import.meta.url).href},
+  {avatarId:6,img: new URL("@/assets/img/member-center/portrait6.svg", import.meta.url).href},
+  {avatarId:7,img: new URL("@/assets/img/member-center/portrait7.svg", import.meta.url).href},
+  {avatarId:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href},
+];
 
 
 </script>

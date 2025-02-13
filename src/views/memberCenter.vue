@@ -511,7 +511,7 @@
   
 <script setup>
   
-import { ref,computed,reactive,watch,watchEffect} from 'vue';
+import { ref,computed,reactive,watch,provide} from 'vue';
 // components
 import MainHeader from '../components/MainHeader.vue';
 import Btn from '../components/Btn.vue';
@@ -727,6 +727,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       }
     };
     function togglePopUp_resetPwd() {
+      step.value=1; 
       resetPwd.isPopUp.value = !resetPwd.isPopUp.value;
       // 停止捲軸
       if (resetPwd.isPopUp.value) {
@@ -743,12 +744,74 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // avatars 頭像
 
       // 選擇的頭像 ID，會加上框框
-      const selectedAvatarId = ref(null);
+      const selectedAvatarId = ref(1);
+      console.log("selectedAvatarId:", selectedAvatarId.value);
 
-      // 點擊頭像時，變更選中狀態
+      const memberPortraitChosed = ref(1);
+
+      // UI change
       const chosed = (avatarId) => {
         selectedAvatarId.value = avatarId;
+        console.log("選中的avatar:",avatarId);
+        memberPortraitChosed.value = avatarId;
       };
+
+      // const memberPortrait = computed(()=> {
+      //   console.log(memberPortraitChosed.value);
+        
+      //   return new URL(`@/assets/img/member-center/portrait${selectedAvatarId.value}.svg`,import.meta.url).href;
+          
+      // });
+
+      const memberPortrait = computed(()=> {        
+        switch (memberPortraitChosed.value){
+          case 1 : 
+            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+          case 2 : 
+            return new URL(`@/assets/img/member-center/portrait2.svg`,import.meta.url).href;
+          case 3 : 
+            return new URL(`@/assets/img/member-center/portrait3.svg`,import.meta.url).href;
+          case 4 : 
+            return new URL(`@/assets/img/member-center/portrait4.svg`,import.meta.url).href;
+          case 5 : 
+            return new URL(`@/assets/img/member-center/portrait5.svg`,import.meta.url).href;
+          case 6 : 
+            return new URL(`@/assets/img/member-center/portrait6.svg`,import.meta.url).href;
+          case 7 : 
+            return new URL(`@/assets/img/member-center/portrait7.svg`,import.meta.url).href;
+          case 8 : 
+            return new URL(`@/assets/img/member-center/portrait8.svg`,import.meta.url).href;
+          default:
+            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+        };
+        console.log(memberPortraitChosed.value);
+      });
+
+      // share 出去
+      provide('memberPortrait',memberPortrait);
+      console.log("提供的 memberPortrait:", memberPortrait.value);
+
+      // const sharedAvatar = ref({
+      //   avatarId: 1,
+      //   img: new URL("../assets/img/member-center/portrait1.svg",import.meta.url).href
+      // });
+
+      // // 提供給有inject的檔案
+      // provide('avatarData',sharedAvatar);
+       
+      // 點擊頭像時，
+      //  1.變更選中狀態
+      //  2.將選中的avatar數據共享
+      // const chosed = (avatarId) => {
+      //   selectedAvatarId.value = avatarId;
+      //   console.log("選中的avatar:",avatarId);
+        // 找到對應的avatar的數據
+        // const selectedAvaterData = avatars.find(avatar => avatar.avatarId === avatarId);
+        // // 若有選，則將選中的avatar傳進sharedAvatar
+        // if (selectedAvaterData){
+        //  sharedAvatar.value = selectedAvaterData; 
+        // }
+      // };
 
     // 基本資料
       // 選擇生日 的下拉選單
@@ -886,47 +949,81 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         const step = ref(1);
         const maxStep = 4; // 設定最大步驟數
 
+        const resetPwdAgree = ref(false);
+        // 重設密碼的三個條件
+        const rePwd1 = ref(false)
+        const rePwd2 = ref(false)
+        const rePwd3 = ref(false)
+
+
         // 
         const emailInputValue = computed(() => inputs.input_vEmail.inputValue);
 
+          // 驗證 Email 格式
+          const varifyEmail = (email) => {
+          email = email.trim().replace(/\s/g, '');
+          console.log("驗證 Email:", email);
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailPattern.test(email);
+        };
+
         const nextStep = () => {
           console.log("當前步驟:", step.value);
-          console.log("Email 輸入值:", inputs.input_vEmail.inputValue.value);
+          console.log("Email 輸入值:", inputs.input_vEmail.inputValue);
 
-          // if (step.value === 1) {
-          //   if (!inputs.input_vEmail.inputValue.value) {
-          //     alert("請輸入您的電子郵件");
-          //     console.log("Email 未輸入");
-          //     return;
-          //   }
-          //   if (!validateEmail(inputs.input_vEmail.inputValue.value)) {
-          //     alert("請輸入正確的電子郵件格式");
-          //     console.log("Email 格式錯誤");
-          //     return;
-          //   }
-          // } else if (step.value === 2) {
-          //   if (!inputs.input_vCode.inputValue.value) {
-          //     alert("請輸入驗證碼");
-          //     console.log("驗證碼未輸入");
-          //     return;
-          //   }
-          // } else if (step.value === 3) {
-          //   if (!inputs.input_newPwd.inputValue.value || !inputs.input_newPwd2.inputValue.value) {
-          //     alert("請輸入密碼");
-          //     console.log("新密碼未輸入");
-          //     return;
-          //   }
-          //   if (inputs.input_newPwd.inputValue.value !== inputs.input_newPwd2.inputValue.value) {
-          //     alert("兩次輸入的密碼不一致");
-          //     console.log("密碼不一致");
-          //     return;
-          //   }
-          //   if (!resetPwdAgree.value) {
-          //     alert("請勾選同意使用者政策");
-          //     console.log("使用者未勾選政策");
-          //     return;
-          //   }
-          // }
+          if (step.value === 1) {
+            if (!inputs.input_vEmail.inputValue) {
+              alert("請輸入電子郵件");
+              console.log("錯誤的輸入值:",inputs.input_vEmail.inputValue)
+              console.log("Email 未輸入");
+              return;
+            }
+            // if (!varifyEmail(inputs.input_vEmail.inputValue.value)) {
+            //   alert("請輸入正確的電子郵件格式");
+            //   console.log("Email 格式錯誤");
+            //   return;
+            // }
+          }
+           else if (step.value === 2) {
+            if (!inputs.input_vCode.inputValue) {
+              alert("請輸入驗證碼");
+              console.log("驗證碼未輸入");
+              return;
+            }
+          } 
+          else if (step.value === 3) {
+            // 檢查 新密碼&確認密碼
+            if (!inputs.input_newPwd.inputValue || !inputs.input_newPwd2.inputValue) {
+              alert("請輸入密碼");
+              console.log("新密碼未輸入");
+              return;
+            }else{
+              rePwd1.value=true;
+              console.log("rePwd1=true")
+            }
+            if (inputs.input_newPwd.inputValue !== inputs.input_newPwd2.inputValue) {
+              alert("兩次輸入的密碼不一致");
+              console.log("新密碼的輸入值:",inputs.input_newPwd.inputValue);
+              console.log("確認密碼的輸入值:",inputs.input_newPwd2.inputValue);
+              console.log("密碼不一致");
+              return;
+            }else{
+              rePwd2.value=true;
+            }
+            // 檢查是否勾選同意政策
+            if (!resetPwdAgree.value) {
+              alert("請勾選同意使用者政策");
+              console.log("使用者未勾選政策");
+              return;
+            }else{
+              rePwd3.value=true;
+            }
+            // 更改密碼
+            if( rePwd1 && rePwd2 &&rePwd3 ){
+              member.pwd = inputs.input_newPwd.inputValue;
+              // 並且將membr.pwd傳到後端更新
+            }
+          }
 
           // 進入下一步
           if (step.value < maxStep) {
@@ -937,12 +1034,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           }
         };
 
-        // 驗證 Email 格式
-        const validateEmail = (email) => {
-          console.log("驗證 Email:", email);
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailPattern.test(email);
-        };
+
 
 
         // const step = ref(1);

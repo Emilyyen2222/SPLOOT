@@ -28,7 +28,7 @@
   const props = defineProps({
   
     textType: { //Ian
-      type: Number,
+      type: String,
       default: 'text'
     },
     maxlength: { //Ian
