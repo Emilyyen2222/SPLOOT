@@ -215,7 +215,8 @@
     @toggle="togglePopUpSubscribe">
     
     <p class="bold" style="margin-bottom: 2.4rem;">感謝訂閱電子報</p>
-    <Btn btnType="form" btnStyle="nextQ" @click="togglePopUpSubscribe">確定</Btn>
+    <Btn btnType="form" btnStyle="nextQ" 
+    @click="togglePopUpSubscribe">確定</Btn>
 </PopUp>
 
 </template>

@@ -18,9 +18,12 @@
                      <div class="topSection">
                          <div class="dot">
                          <div class="dotActive"></div>
-                         <div class="dotInactive"></div>
-                         <div class="dotInactive"></div>
+                         <div class="dotActive"></div>
+                         <div class="dotActive"></div>
                         </div>
+
+
+
                         <div class="number">{{ plan.number }}</div>
                     </div>
                      <!-- 名稱與距離 -->
@@ -116,10 +119,10 @@
     <div class="petInfoBoxPopUp">
         <div class="cardWrapPopUp">
             <!-- 卡片部分 -->
-            <div class="cardwrapper">
+            <div class="cardwrapper" v-if="lightBoxPetInfo">
                 <!-- 左側圖片區 -->
                 <div class="imageContainer">
-                    <img src="../assets/img/splootbox/dog3.jpg" alt="">
+                    <img :src="lightBoxPetInfo.imageSrc" alt="">
                 </div>
                 <!-- 右側內容區 -->
                 <div class="content">
@@ -129,33 +132,25 @@
                         <div class="dotInactive"></div>
                         <div class="dotInactive"></div>
                     </div>
-                    <div class="number">01</div>
+                    <div class="number">{{ lightBoxPetInfo.number }}</div>
                     </div>
                     <!-- 名稱與距離 -->
                     <div class="info">
                         <div class="nameAndGender">
-                            <h4 class="bold name">COCO</h4>
+                            <h4 class="bold name">{{ lightBoxPetInfo.name }}</h4>
                             <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
                         </div>
                         <div class="distance">
                         <div class="smallText distanceIcon"></div>
-                        距離你6公里
+                        距離你{{ lightBoxPetInfo.distance }}公里
                         </div>
                     </div>
                     <!-- 標籤區 -->
                     <div class="tags">
-                    <span class="xsText tag">邊境牧羊</span>
-                    <span class="xsText tag">活潑外向</span>
-                    <span class="xsText tag">愛玩球</span>
-                    <span class="xsText tag">台北市</span>
-                    <span class="xsText tag">松山區</span>
-                    <span class="xsText tag">大型犬</span>
-                    <span class="xsText tag">已結紮</span>
-                    </div>
+                         <span class="xsText tag" v-for="tag in lightBoxPetInfo.tags" :key="tag">{{ tag }}</span>
+                     </div>
                     <!-- 內文 -->
-                    <p class="description bold">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur 
-                    </p>
+                    <p class="description bold">{{ lightBoxPetInfo.description }}</p>
                 </div>
             </div>
         </div>
@@ -290,55 +285,66 @@
         import Btn from '../components/Btn.vue';
         import LightBox from "@/components/LightBox.vue";
 
-
-        //if cardsData label=last one   cardsData.value.length - 1
-        //moveCardLeft/moveCardRight disable
-        //matchDislike/matchLike works
-        
         const movedLeft = ref(false);
         const movedRight = ref(false);
         const likedIcon = ref(false);
         const dislikedIcon = ref(false);
+        const cardFlying = ref(false);
+        const isLightBoxlightTitleMatchReset = ref(false);
+        const isLightBoxPetInfo = ref(false);
+        const isLightBoxMatchAll = ref(false);
 
 
-        const cardsData = ref([
-        { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-        { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-        { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        const lightBoxPetInfo = ref(
         { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
-        ]);
+        );
+        const cardsData = ref([
+            {
+            owner: 'Emily',
+            pets: [
+                { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
+                { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+                { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+                { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+                ]
+            }
+            ]);
 
         const filteredCards = ref([
-        { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
+        { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '03', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
         { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
         { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
         ]); 
 
+        // const dotNumber = ref();
+        
 
 
+
+        // 刪除卡片
         function deleted(){
             filteredCards.value.pop();
-            filteredCards.value.unshift(cardsData.value[0]);
-            cardsData.value.splice(0,1);
+            if(cardsData.value.length > 0){
+                filteredCards.value.unshift(cardsData.value[0]);
+                cardsData.value.splice(0,1);
+            }
         }
-
-        // const cardFlying = ref(false);
 
         // like/dislike 按鈕
         const likeClick = () => {
-            // if(cardFlying.value == false){
+            if(cardFlying.value == false){
                 matchLike();
                 moveCardRight();
-                // cardFlying.value == true;
-            // }
+                cardFlying.value == true;
+            }
         };
     
         const dislikeClick = () => {
-            // if(cardFlying.value == false){
+            if(cardFlying.value == false){
                 matchDislike();
                 moveCardLeft();
-                // cardFlying.value == true;
-            // }
+                cardFlying.value == true;
+            }
         };
 
         // 動畫處理 + 刪除卡片
@@ -351,9 +357,9 @@
                 deleted(); // 動畫結束後才刪除
             }, 300);
 
-            // if(movedRight.value == false){
+            if(movedRight.value == false){
 
-            // }
+            }
         };
 
         const moveCardRight = () => {
@@ -378,7 +384,7 @@
             dislikedIcon.value = true;
             setTimeout(() => {
                 dislikedIcon.value = false;
-                // cardFlying.value = false;
+                cardFlying.value = false;
             }, 500);
         };
 
@@ -411,8 +417,6 @@
         ]);
 
         // 燈箱 配對喜好設定
-        const isLightBoxlightTitleMatchReset = ref(false);
-
         const lightTitleMatchReset = ref({
                 title: '配對喜好設定'
         });
@@ -422,9 +426,6 @@
         };
 
         // 燈箱 狗狗資訊卡 & 配對成功一覽
-        const isLightBoxPetInfo = ref(false);
-        const isLightBoxMatchAll = ref(false);
-
         const lightTitlePetInfo = ref({
             title: '狗狗資訊卡'
         });
@@ -497,19 +498,6 @@
         const optionSelected = (selected, option) => {
             return selected.value.includes(option);
         }
-
-        // 圖片路徑
-        const resolveImagePath = (image) => {
-        // console.log("Resolving image path:", image);
-        try {
-            const resolvedPath = new URL(`../assets/images/${image}`, import.meta.url).href;
-            // console.log("Resolved Path:", resolvedPath);
-            return resolvedPath;
-        } catch (error) {
-            console.error("Failed to resolve image path:", error);
-            return new URL('../assets/images/default.png', import.meta.url).href;
-        }
-        };
     </script>
     
     
