@@ -1100,9 +1100,12 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           inputs.input_lastName.inputValue = memberInfo['lastName'];
           inputs.input_lastName.inputValue = memberInfo['nickName'];
           inputs.input_lastName.inputValue = memberInfo['gender'];
-          inputs.input_lastName.inputValue = memberInfo['lastName'];
-          inputs.input_lastName.inputValue = memberInfo['lastName'];
-          inputs.input_lastName.inputValue = memberInfo['lastName'];
+          inputs.input_lastName.inputValue = memberInfo['birthDate'];
+          inputs.input_lastName.inputValue = memberInfo['lineId'];
+          inputs.input_lastName.inputValue = memberInfo['phone'];
+          inputs.input_lastName.inputValue = memberInfo['addressCity'];
+          inputs.input_lastName.inputValue = memberInfo['addressDistrict'];
+          inputs.input_lastName.inputValue = memberInfo['addressStreet'];
           console.log(memberInfo['email']);
           console.log(memberInfo['firstName']);
           console.log(memberInfo['lastName']);
