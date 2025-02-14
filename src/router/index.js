@@ -114,16 +114,6 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
- /*
-  {
-    path: '/backend/member',
-    component: () => import('@/views/backend/memberManage.vue'),
-    meta: {
-      title: '會員管理 | Sploot',
-      theme: 'red',
-      bodyBg: 'yellow-1',
-    }
-  },*/
   {
     path: '/member-center/petcard',
     component: () => import('@/views/memberPetcard.vue'),
@@ -151,15 +141,81 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
+
+  // 後台
   {
-    path: '/test',
-    component: () => import('@/views/test.vue'),
+    path: '/backend/member',
+    component: () => import('@/views/backend/memberManage.vue'),
     meta: {
-      title: '測試用頁面 | ＴＨＥTEST',
+      title: '會員管理 | Sploot',
       theme: 'red',
-      bodyBg: 'natural-1',
+      bodyBg: 'yellow-1',
     }
   },
+  {
+    path: '/backend/match',
+    component: () => import('@/views/backend/matchManage.vue'),
+    meta: {
+      title: '配對管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/petCard-verify',
+    component: () => import('@/views/backend/cardVerifyManage.vue'),
+    meta: {
+      title: '寵物照片審核 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/sploot-box',
+    component: () => import('@/views/backend/splootBoxManage.vue'),
+    meta: {
+      title: '寵物盒方案管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/order',
+    component: () => import('@/views/backend/orderManage.vue'),
+    meta: {
+      title: '訂單管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/splootBuddy-verify',
+    component: () => import('@/views/backend/buddyVerifyManage.vue'),
+    meta: {
+      title: '小幫手身份審核 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/event',
+    component: () => import('@/views/backend/eventManage.vue'),
+    meta: {
+      title: '活動管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  {
+    path: '/backend/news',
+    component: () => import('@/views/backend/newsManage.vue'),
+    meta: {
+      title: '消息管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
+  
   
   
 ];

@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="小幫手身份審核" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>小幫手身份審核</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -18,12 +18,12 @@
     <table>
       <thead>
         <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
+        <th>真實姓名</th>
+        <th>身份審核</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th></th>
       </thead>
       <tbody>        
@@ -31,10 +31,10 @@
           <td>{{ member.memberId }}</td>
           <td>{{ member.memberName }}</td>
           <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -71,7 +71,7 @@
   const members = ref(
     Array.from({length:103},(value,x) => ({
       memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
+      memberName: `易烊千璽${x+1}`,
       email:`tibame${x+1}@tibame.com`, 
       petNumber: 4, 
       splootBoxSub: 3, 

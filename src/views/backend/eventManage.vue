@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="活動管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>活動管理</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -17,13 +17,13 @@
 
     <table>
       <thead>
-        <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
+        <th>活動 ID</th>
+        <th>日期</th>
+        <th>時間</th>
+        <th>活動名稱</th>
+        <th>發起人</th>
+        <th>參與人數</th>
+        <th>活動狀態</th>
         <th></th>
       </thead>
       <tbody>        

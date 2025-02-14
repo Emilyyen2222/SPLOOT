@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="配對管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>配對管理</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -17,25 +17,25 @@
 
     <table>
       <thead>
+        <th>配對 ID</th>
         <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
-        <th></th>
+        <th>會員姓名</th>
+        <th>對象 ID</th>
+        <th>對象姓名</th>
+        <th>配對選擇</th>
+        <th>配對狀態</th>
+        <th>配對時間</th>
       </thead>
       <tbody>        
         <tr v-for="member in viewData" :key="member.memberId">
+          <td>{{ member.matchId}}</td>
           <td>{{ member.memberId }}</td>
           <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
           <td>{{ member.petNumber }}</td>
           <td>{{ member.splootBoxSub }}</td>
           <td>{{ member.helperPost }}</td>
           <td>{{ member.accountStatues }}</td>
-          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
+          <td>wait</td>
         </tr>
       </tbody>
     </table>
@@ -69,9 +69,10 @@
   const inputValue = ref("");
   
   const members = ref(
-    Array.from({length:103},(value,x) => ({
-      memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
+    Array.from({length:666},(value,x) => ({
+      matchId: `${x % 2 === 0 ? x + 2 : x}`.padStart(4, '0'),
+      memberId: `${x + 1}`.padStart(4, '0'), 
+      memberName: x % 2 == 0 ? `芙莉蓮${x + 1}` : `欣梅爾${x + 1}`,  //以下資料都還沒改
       email:`tibame${x+1}@tibame.com`, 
       petNumber: 4, 
       splootBoxSub: 3, 
