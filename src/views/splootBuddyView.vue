@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-
+        <div class="boxDivider"></div>
         <div class="middleText littleTitle">
             <h6 class="bold">什麼樣的毛孩適合寵物小幫手?</h6>
         </div>
@@ -181,9 +181,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="buddyIntroduction introBottom">
+        <div class="boxDivider"></div>
         <div class="littleTitle">
             <h6 class="bold">什麼人適合成為小幫手</h6>
         </div>
@@ -204,6 +202,9 @@
                 </div>
             </div>
         </div>
+    </div>
+    
+    <div class="buddyIntroduction introBottom">
         <div class="introBtn">
             <Btn btnStyle="primary default">成為小幫手</Btn>
         </div>
