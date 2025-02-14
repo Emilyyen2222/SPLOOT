@@ -509,7 +509,7 @@
   
 <script setup>
   
-import { ref,computed,reactive,watch,provide} from 'vue';
+import { ref,computed,reactive,watch,provide, onBeforeMount} from 'vue';
 // components
 import MainHeader from '../components/MainHeader.vue';
 import Btn from '../components/Btn.vue';
@@ -1071,6 +1071,29 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       }
       }
 
+
+      async function showMemberInfoPhp() {
+        const resp = await fetch(`http://localhost/tid103/g3/php/showMemberInfo.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        try{
+          const memberInfo = await resp.json();
+          inputs.input_name.inputValue = memberInfo['firstName'];
+          console.log(memberInfo['email']);
+          console.log(memberInfo['firstName']);
+          console.log(memberInfo['lastName']);
+          console.log(memberInfo['nickname']);
+        } catch (error){
+          console.error('Error parsing JSON:', error);
+        }
+      }
+
+
+      showMemberInfoPhp();
 
       
       
