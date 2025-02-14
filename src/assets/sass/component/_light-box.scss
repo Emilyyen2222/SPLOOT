@@ -30,7 +30,6 @@
 
         .closeBtnBox{
             height: 4rem;
-
             padding: 2rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
 
             .closeBtn{
@@ -64,9 +63,9 @@
                 padding: 0 5.6rem 5.6rem 0;
                 overflow-y: auto;
 
-                @include sm(){
-                    height: 60vh;
-                }
+                // @include sm(){
+                //     height: 60vh;
+                // }
             }
             
         }
