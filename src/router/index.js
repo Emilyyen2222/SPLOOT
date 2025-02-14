@@ -114,7 +114,7 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
- /*
+ 
   {
     path: '/backend/member',
     component: () => import('@/views/backend/memberManage.vue'),
@@ -123,7 +123,7 @@ const routes = [
       theme: 'red',
       bodyBg: 'yellow-1',
     }
-  },*/
+  },
   {
     path: '/member-center/petcard',
     component: () => import('@/views/memberPetcard.vue'),
