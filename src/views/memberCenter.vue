@@ -34,7 +34,7 @@
     
                     <div class="bi-inbox">
                       <div class="label">姓名</div>
-                      <div>{{ inputs.input_name.inputValue }}</div>
+                      <div>{{ inputs.input_firstName.inputValue + inputs.input_lastName.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">暱稱</div>
@@ -157,15 +157,27 @@
                     <div class="card-content">
                       <div class="input-group">
                           <label for="name">姓名</label>
-                          <InputText
-                            v-model="inputs.input_name.inputValue"
-                            :placeHolder="inputs.input_name.placeHolder"
-                            :size="inputs.input_name.size"
-                            :textAlign="inputs.input_name.textAlign"
-                            :errorMsg="inputs.input_name.errorMsg"
-                            :inputError="inputs.input_name.inputError"
-                            >
-                          </InputText>
+                          <div class="inputs">
+                            <InputText
+                              v-model="inputs.input_firstName.inputValue"
+                              :placeHolder="inputs.input_firstName.placeHolder"
+                              :size="inputs.input_firstName.size"
+                              :textAlign="inputs.input_firstName.textAlign"
+                              :errorMsg="inputs.input_firstName.errorMsg"
+                              :inputError="inputs.input_firstName.inputError"
+                              >
+                            </InputText>
+                            <InputText
+                              v-model="inputs.input_lastName.inputValue"
+                              :placeHolder="inputs.input_lastName.placeHolder"
+                              :size="inputs.input_lastName.size"
+                              :textAlign="inputs.input_lastName.textAlign"
+                              :errorMsg="inputs.input_lastName.errorMsg"
+                              :inputError="inputs.input_lastName.inputError"
+                              >
+                            </InputText>
+
+                          </div>
                       </div>
                       <div class="input-group">
                           <label for="nickname">暱稱</label>
@@ -529,7 +541,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 使用物件來統一管理所有輸入框的狀態
   const inputs = reactive({
     // input1: { placeHolder: '輸入預設文字' , errorMsg : '請輸入正確格式的'},
-    input_name: { placeHolder: '輸入姓名' },
+    input_firstName: { placeHolder: '輸入姓名' },
+    input_lastName: { placeHolder: '輸入姓名' },
     input_nickname: { placeHolder: '輸入暱稱' },
     // input_email: { placeHolder: 'hao@gmail.com' },
     input_pwd: { placeHolder: '********' },
@@ -1072,6 +1085,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       }
 
 
+  // 和後端溝通
       async function showMemberInfoPhp() {
         const resp = await fetch(`http://localhost/tid103/g3/php/showMemberInfo.php`, {
             method: 'POST',
@@ -1082,7 +1096,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
         try{
           const memberInfo = await resp.json();
-          inputs.input_name.inputValue = memberInfo['firstName'];
+          inputs.input_firstName.inputValue = memberInfo['firstName'];
           console.log(memberInfo['email']);
           console.log(memberInfo['firstName']);
           console.log(memberInfo['lastName']);
