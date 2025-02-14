@@ -427,10 +427,8 @@
                 </div>
             </div>
         </div>
-        <div class="saveBtnBox">
-            <RouterLink to="/match" style="cursor: pointer;">
-                <Btn btnType="form" btnStyle="nextQ">儲存</Btn> 
-            </RouterLink>
+        <div class="saveBtnBox">            
+            <Btn btnType="form" btnStyle="nextQ" @click="toggleLightBoxPetInfo()">儲存</Btn>             
             <Btn class="borderBottom" btnType="form" btnStyle="lastQ">取消編輯</Btn>
         </div> 
       </LightBox>
@@ -846,5 +844,17 @@
       document.body.classList.remove('clicked');
     }
   };
+  // 刪除卡片
+//   const cardsAfterDelete = ref(null)
+//   const conFirmDeleteCard = () => {
+//     if(petcards.length>0){
+//         cardsAfterDelete = petcards.length -1;
+//     }else{
+//         alert("沒有卡片可以刪囉!")
+//         return
+//     }
+//     togglePopUp_deleteCard();
+//   };
+
   
   </script>

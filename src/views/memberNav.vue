@@ -14,7 +14,7 @@
         </div>
         <!-- msg -->
         <div class="msg-welcome">
-        <h5 class="bold">嗨! <span id="msgUsername">username</span> 歡迎回來</h5>
+        <h5 class="bold">嗨! <span id="msgUsername">{{ userName.name }}</span> 歡迎回來</h5>
         </div>
     </div>
     <!-- mc nav -->
@@ -63,6 +63,11 @@ import Btn from '../components/Btn.vue';
 // import DropdownMenu from '../components/DropdownMenu.vue';
 // import InputText from '../components/InputText.vue';
 // import LightBox from '../components/LightBox.vue';
+
+  // username
+  const userName = ref(
+    {name: 'Hao'},
+  )
 
 const props = defineProps({
   avatar: {

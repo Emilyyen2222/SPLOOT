@@ -135,15 +135,15 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
-  // {
-  //   path: '/backend/member',
-  //   component: () => import('@/views/backend/memberManage.vue'),
-  //   meta: {
-  //     title: '會員管理 | Sploot',
-  //     theme: 'red',
-  //     bodyBg: 'yellow-1',
-  //   }
-  // },
+  {
+    path: '/backend/member',
+    component: () => import('@/views/backend/memberManage.vue'),
+    meta: {
+      title: '會員管理 | Sploot',
+      theme: 'red',
+      bodyBg: 'yellow-1',
+    }
+  },
   {
     path: '/member-center/petcard',
     component: () => import('@/views/memberPetcard.vue'),
