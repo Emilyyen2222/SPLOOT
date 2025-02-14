@@ -254,7 +254,7 @@ export const useAuthStores = defineStore('auth',() => {
     //登入狀態儲存
 
     async function checkLoginStatus(){
-        const resp = await fetch('php/checkLogin.php', {
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/checkLogin.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
