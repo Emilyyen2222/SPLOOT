@@ -49,7 +49,7 @@
   import Btn from "../../components/Btn.vue";
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../assets/sass/style.scss';
 @import '../../assets/sass/page/backend';
 </style>
