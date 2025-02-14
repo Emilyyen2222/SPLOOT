@@ -151,7 +151,6 @@
     position: relative;
     justify-content:  center;
     align-items: center;
-    //max-width: 132.8rem;
     margin: 0 auto; 
     text-align: center;
     width: 100%;
@@ -189,12 +188,6 @@
             width: 280px;
             scroll-snap-align: start;
             
-            // transition: all 0.3s ease-in-out;
-            &:hover {
-                // box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-                border: 1px solid map-get($colors, red);
-                // transform: scale(1.05); 
-            }
             .review-image {
                 display: flex;
                 justify-content: center;
@@ -214,9 +207,17 @@
         }
         .step-card:nth-child(1), .step-card:nth-child(3) { 
             transform: rotate(-4deg);
+            &:hover {
+                transform: rotate(0deg);
+                box-shadow: 0px 4px 12px rgba(77, 40, 40, 0.1);
+            }
         }
         .step-card:nth-child(2), .step-card:nth-child(4) { 
             transform: rotate(4deg);
+            &:hover {
+                transform: rotate(0deg);
+                box-shadow: 0px 4px 12px rgba(77, 40, 40, 0.1);
+            }
         }
         .title {
             color: map-get($colors, brown);
@@ -230,19 +231,16 @@
             border-radius: 0.4rem;
         }
       }
-    
     }
-    
-
 }
 .howitworksbtn {
     position: relative;
     display: flex; 
     justify-content: center; 
     top: 8rem;
-    
+
     .btnBox{
-        width: 18rem;
+        width: 32rem;
     }
 
 }
@@ -303,7 +301,7 @@
         gap: 0.8rem;
         height: 36.8rem;
         &:hover {
-            border: 1px solid map-get($colors, red);
+            box-shadow: 0px 4px 12px rgba(77, 40, 40, 0.1);
         }
         
         .review-image {
