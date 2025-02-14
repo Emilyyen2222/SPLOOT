@@ -100,11 +100,11 @@
                     </div>
                     <div class="quickLogin">
                         <div class="">已經有帳號？</div>
-                        <Btn class="check" btnStyle="baseline small">立即登入</Btn>
+                        <Btn class="check" btnStyle="baseline small" @click="authBoxStore.toggleAuthBox()">立即登入</Btn>
                     </div>
                 </template>
                 <div v-else class="inputBox">
-                    <input type="text" class="textCenter" value="123@gmail.com" disabled>
+                    <input type="text" class="textCenter" :value="userEmail" disabled>
                 </div>
             </div>
 
@@ -232,7 +232,8 @@
             </div>
 
             <Btn btnType="form" btnStyle="nextQ"
-                @click="nextQuestion(selectedCity.value != '' && selectedDistrict.value != '' && deliverStreet != '')">下一題
+                @click="nextQuestion(selectedCity.value != '' && selectedDistrict.value != '' && deliverStreet != '')">
+                下一題
             </Btn>
             <Btn btnType="form" btnStyle="lastQ" @click="lastQuestion">上一題</Btn>
         </div>
@@ -352,6 +353,7 @@
 
 <script setup>
 import { ref, watch, computed, onBeforeMount } from 'vue';
+import { useAuthStores } from '@/stores/AuthBoxStores.js';
 import MainHeader from "../components/MainHeader.vue";
 import DropdownMenu from "../components/DropdownMenu.vue";
 import Btn from '../components/Btn.vue';
@@ -359,10 +361,13 @@ import InputText from '../components/InputText.vue';
 import ProgressBar from "../components/ProgressBar.vue";
 import Policy from '../components/Policy.vue';
 
-// 下一題按鈕
+const authBoxStore = useAuthStores();
 
+const isLoggedIn = ref(authBoxStore.isLoggedIn);
+const userEmail = ref('123@gmail.com');
 
-const isLoggedIn = ref(false);
+if (isLoggedIn) getUserEmailPhp();
+
 const question = ref(1);
 
 const petName = ref({
@@ -903,6 +908,27 @@ const districtsOptions = computed(() => {
     return cityData && selectedCity.value !== "全部" ? cityData.districts.map((d) => ({ name: d })) : [];
 });
 
+async function getUserEmailPhp() {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/getUserEmail.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    try {
+        const user = await resp.json();
+        if (user.status == 'success') {
+            console.log(user['email']);
+            userEmail.value = user['email'];
+        } else {
+            console.log(user['status']);
+        }
+    } catch (error) {
+        console.error('Error parsing JSON:', error);
+    }
+}
+
 async function subscribeSplootBoxPhp() {
 
     console.log(petName.value.inputMsg);
@@ -922,7 +948,7 @@ async function subscribeSplootBoxPhp() {
     console.log(holderName.value);
     console.log(cvc.value);
 
-    const resp = await fetch('../php/subscribeSplootBox.php', {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/subscribeSplootBox.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -956,12 +982,12 @@ async function subscribeSplootBoxPhp() {
 
 }
 onBeforeMount(() => {
-    if(isLoggedIn.value && sessionStorage.getItem('question') == 5 ){
-        question.value = 6;
+    if (isLoggedIn.value && sessionStorage.getItem('question') == 5) {
+        question.value = 5;
         petName.value.inputMsg = sessionStorage.getItem('petName');
         questionPet.value.selected[0] = sessionStorage.getItem('questionPetSelected');
-        if(sessionStorage.getItem('dogSizeSelected')) questionDog.value.selected[0] = sessionStorage.getItem('dogSizeSelected');
-        if(sessionStorage.getItem('catSizeSelected')) questionCat.value.selected[0] = sessionStorage.getItem('catSizeSelected');
+        if (sessionStorage.getItem('dogSizeSelected')) questionDog.value.selected[0] = sessionStorage.getItem('dogSizeSelected');
+        if (sessionStorage.getItem('catSizeSelected')) questionCat.value.selected[0] = sessionStorage.getItem('catSizeSelected');
         menus.dogBreedsMenu.value.menuValue = sessionStorage.getItem('dogBreedSelected');
         menus.catBreedsMenu.value.menuValue = sessionStorage.getItem('catBreedSelected');
         birth.value.year = sessionStorage.getItem('birthYear');
