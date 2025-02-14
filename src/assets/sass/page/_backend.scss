@@ -65,8 +65,28 @@
         }
       }
     }
+  .pagesContainer{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 2rem 0 10rem;
 
-    .defaultBtn{
-      white-space: nowrap;
+    .pageBtn{
+      width: 40px;
+      height: 40px;
+
+      .defaultBtn{
+
+        .btn.small{
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
+
+          &.text{
+            pointer-events: none;
+          }          
+        }
+      }
     }
+  }
 }

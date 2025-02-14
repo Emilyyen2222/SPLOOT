@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="寵物照片審核" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>寵物照片審核</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -18,13 +18,11 @@
     <table>
       <thead>
         <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
-        <th></th>
+        <th>品種</th>
+        <th>年齡</th>
+        <th>照片審核</th>
+        <th>創建時間</th>
+        <th>寵物照片</th>
       </thead>
       <tbody>        
         <tr v-for="member in viewData" :key="member.memberId">
@@ -34,8 +32,6 @@
           <td>{{ member.petNumber }}</td>
           <td>{{ member.splootBoxSub }}</td>
           <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
-          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
     </table>

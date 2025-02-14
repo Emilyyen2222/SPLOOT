@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="訂單管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>訂單管理</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -17,14 +17,14 @@
 
     <table>
       <thead>
+        <th>訂單 ID</th>
         <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
-        <th></th>
+        <th>寵物盒訂閱 ID</th>
+        <th>訂閱方案</th>
+        <th>應寄出日</th>
+        <th>會員取貨方式</th>
+        <th>寄出狀態</th>
+        <th>寄出物流</th>
       </thead>
       <tbody>        
         <tr v-for="member in viewData" :key="member.memberId">
@@ -35,7 +35,7 @@
           <td>{{ member.splootBoxSub }}</td>
           <td>{{ member.helperPost }}</td>
           <td>{{ member.accountStatues }}</td>
-          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
+          <td>黑貓</td>
         </tr>
       </tbody>
     </table>

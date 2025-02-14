@@ -1,9 +1,9 @@
 <template>
-  <BackendHeader active="會員管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
+  <BackendHeader active="消息管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
     <div class="title">
-      <h6>會員管理</h6>
+      <h6>消息管理</h6>
       <div class="searchBar">
         <InputText
         size="small"
@@ -17,13 +17,14 @@
 
     <table>
       <thead>
-        <th>會員 ID</th>
-        <th>姓名</th>
-        <th>電子信箱</th>
-        <th>寵物數量</th>
-        <th>寵物盒訂閱數</th>
-        <th>小幫手貼文數量</th>
-        <th>帳號狀態正常</th>
+        <th>消息 ID</th>
+        <th>分類</th>
+        <th>名稱</th>
+        <th>作者</th>
+        <th>發布位置</th>
+        <th>上稿日期</th>
+        <th>上稿時間</th>
+        <th>消息狀態</th>
         <th></th>
       </thead>
       <tbody>        
@@ -34,6 +35,7 @@
           <td>{{ member.petNumber }}</td>
           <td>{{ member.splootBoxSub }}</td>
           <td>{{ member.helperPost }}</td>
+          <td>{{ member.accountStatues }}</td>
           <td>{{ member.accountStatues }}</td>
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
