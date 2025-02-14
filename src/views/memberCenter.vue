@@ -457,8 +457,6 @@
     
                   <h5 class="bold">更改成功!</h5>              
     
-                  <div class="tick"></div>
-    
                   <p>您的密碼已重設，請用新的密碼登入帳戶</p>
 
                   <Btn btnStyle="primary default" @click="togglePopUp_resetPwd">確認</Btn>
