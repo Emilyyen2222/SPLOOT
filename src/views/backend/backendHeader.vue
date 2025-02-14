@@ -41,20 +41,28 @@
 </script>
 
 <style lang="scss" scoped>
+template{
+  box-sizing: border-box;
+}
 header{
   width: 100vw;
+
   nav{
     width: 100%;
     max-width: 1216px;
     ul{
       display: flex;
-      justify-content: space-between;
-
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: .4rem;
+      
+      padding-top: 2rem;
       width: 100%;
       li{
-        flex-grow: 1;
+        // flex-grow: 1;
+        max-width: max-content;
         a{
-          
+          white-space: nowrap;
         }
       }
     }
