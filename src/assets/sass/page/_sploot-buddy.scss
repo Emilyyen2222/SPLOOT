@@ -107,11 +107,18 @@ body{
             }
             .selcetPlaceAndPetType{
                 display: flex;
-                gap: 32px;
-    
+                gap: 24px;
+                @include sm() {
+                    flex-direction: column;
+                    gap: 0px;
+                }
+
                 .leftSection{
                     width: 50%;
-    
+                    margin-top: 8px;
+                    @include sm(){
+                        width: 100%;
+                    }
                     .leftLabel{
                         margin-bottom: 4px;
                     }
@@ -127,12 +134,9 @@ body{
                         .dropDown{
                             position: absolute;
                             top: 0;
-
                             width: 100%;
                             border-color: map-get($colors, natural-1);
-
                             z-index: 900;
-        
                         }
 
                         .city{           
@@ -143,7 +147,11 @@ body{
                 
                 .rightSection{
                     width: 50%;
-                    
+                    margin-top: 8px;
+                    @include sm(){
+                        width: 100%;
+                    }
+
                     .rightLabel{
                         display: flex;
                         justify-content: space-between;
@@ -209,7 +217,6 @@ body{
                             }
 
                             @include md(){
-                                padding: 0 1.2rem;
                                 @include textStyle(xsText);
                             }
     
