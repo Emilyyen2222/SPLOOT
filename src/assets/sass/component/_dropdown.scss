@@ -1,5 +1,5 @@
 @mixin dropdownBasic($type){
-    cursor: pointer;
+    cursor: $hoverPointer;
 
     display: flex;
     flex-direction: column;
