@@ -51,7 +51,7 @@ body.authClicked{
             height: 4rem;
             padding: 1.2rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
             .closeBtn{
-                cursor: pointer;
+                cursor: $hoverPointer;
 
                 width: 4rem;
                 height: 4rem;
@@ -66,7 +66,7 @@ body.authClicked{
         }
 
         .underline{
-            cursor: pointer;
+            cursor: $hoverPointer;
             border-bottom: 1px solid;
         }
 
@@ -134,7 +134,7 @@ body.authClicked{
                     margin-bottom: 0.8rem;
 
                     .theEye{
-                        cursor: pointer;
+                        cursor: $hoverPointer;
 
                         position: absolute;
                         top: 10px;
@@ -197,7 +197,7 @@ body.authClicked{
                 }
 
                 .quickWay{
-                    cursor: pointer;
+                    cursor: $hoverPointer;
 
                     display: flex;
                     justify-content: space-between;

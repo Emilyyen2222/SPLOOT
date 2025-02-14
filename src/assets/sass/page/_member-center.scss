@@ -313,7 +313,7 @@ ol {
     gap: .8rem;
     // transition: .3s; 註解，因為會從方框變成圓形
     .avatar {
-      cursor: pointer;
+      cursor: $hoverPointer;
       width: 6.4rem;
       height: 6.4rem;
       border-radius: 50%;

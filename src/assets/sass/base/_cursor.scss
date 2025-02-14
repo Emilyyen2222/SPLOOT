@@ -4,6 +4,9 @@ body {
 
 $hoverPointer: url('@/assets/img/icon/cursor-hover.svg') 13 13, auto;
 
+a{ 
+    cursor: $hoverPointer;
+}
 // div:hover {
 //     cursor: $hoverPointer;
 // }
