@@ -38,7 +38,7 @@
                     </div>
                     <div class="bi-inbox">
                       <div class="label">暱稱</div>
-                      <div>{{ inputs.input_nickname.inputValue }}</div>
+                      <div>{{ inputs.input_nickName.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">性別</div>
@@ -180,14 +180,14 @@
                           </div>
                       </div>
                       <div class="input-group">
-                          <label for="nickname">暱稱</label>
+                          <label for="nickName">暱稱</label>
                           <InputText 
-                            v-model="inputs.input_nickname.inputValue"
-                            :placeHolder="inputs.input_nickname.placeHolder"
-                            :size="inputs.input_nickname.size"
-                            :textAlign="inputs.input_nickname.textAlign"
-                            :errorMsg="inputs.input_nickname.errorMsg"
-                            :inputError="inputs.input_nickname.inputError">
+                            v-model="inputs.input_nickName.inputValue"
+                            :placeHolder="inputs.input_nickName.placeHolder"
+                            :size="inputs.input_nickName.size"
+                            :textAlign="inputs.input_nickName.textAlign"
+                            :errorMsg="inputs.input_nickName.errorMsg"
+                            :inputError="inputs.input_nickName.inputError">
                           </InputText>
                       </div>
                       <div class="input-group" id="sexGroup">
@@ -543,7 +543,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // input1: { placeHolder: '輸入預設文字' , errorMsg : '請輸入正確格式的'},
     input_firstName: { placeHolder: '輸入姓名' },
     input_lastName: { placeHolder: '輸入姓名' },
-    input_nickname: { placeHolder: '輸入暱稱' },
+    input_nickName: { placeHolder: '輸入暱稱' },
     // input_email: { placeHolder: 'hao@gmail.com' },
     input_pwd: { placeHolder: '********' },
     input_phone: { placeHolder: '輸入手機' },
@@ -1087,7 +1087,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
   // 和後端溝通
       async function showMemberInfoPhp() {
-        const resp = await fetch(`http://localhost/tid103/g3/php/showMemberInfo.php`, {
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/showMemberInfo.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -1097,10 +1097,16 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         try{
           const memberInfo = await resp.json();
           inputs.input_firstName.inputValue = memberInfo['firstName'];
+          inputs.input_lastName.inputValue = memberInfo['lastName'];
+          inputs.input_lastName.inputValue = memberInfo['nickName'];
+          inputs.input_lastName.inputValue = memberInfo['gender'];
+          inputs.input_lastName.inputValue = memberInfo['lastName'];
+          inputs.input_lastName.inputValue = memberInfo['lastName'];
+          inputs.input_lastName.inputValue = memberInfo['lastName'];
           console.log(memberInfo['email']);
           console.log(memberInfo['firstName']);
           console.log(memberInfo['lastName']);
-          console.log(memberInfo['nickname']);
+          console.log(memberInfo['nickName']);
         } catch (error){
           console.error('Error parsing JSON:', error);
         }
