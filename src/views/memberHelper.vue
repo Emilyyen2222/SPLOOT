@@ -375,9 +375,6 @@
                   :class="{'-active': optionSelected(tag_petKind.selected, option)}"
                   @click="tag_petKind.formChoice(tag_petKind.selected, option)">{{ option }}</Btn>
                 </div>
-                <div class="select-group">
-
-                </div>
               </div>
             </div>
             <!-- 服務時段 -->

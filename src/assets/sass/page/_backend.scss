@@ -11,11 +11,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     width: 100%;
     padding: 0 32px;
     .searchBar{
       display: flex;
+      gap: .8rem;
       .inputBox{
         width: 240px;
         input{
@@ -33,10 +35,14 @@
         text-align: left;
         // border-radius: 16px;
       thead{
+        width: 100%;
+
         background-color: map-get($colors, yellow-2);
   
         th{ 
           padding: 8px;
+
+          white-space: nowrap;
   
           &:first-child{ 
             padding-left: 32px; 
@@ -58,5 +64,9 @@
           &:last-child{ padding-right: 32px; }
         }
       }
+    }
+
+    .defaultBtn{
+      white-space: nowrap;
     }
 }

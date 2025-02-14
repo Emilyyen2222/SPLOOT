@@ -704,6 +704,7 @@ ol {
   .matchbox{
     position: unset;
     width: 100%;
+
     .upperSection{
         width: 100%;
         position: unset;
@@ -717,16 +718,26 @@ ol {
         }
         .cardWrapMatch{
             // border: 1px solid red;
+            width: 100%;
             position: unset;
             .cardwrapper {
+              width: 100%;
               transform: unset;
               margin-top: unset;
               &:nth-child(n){
                 position: unset;
-              .imageContainer{
-                width: auto;
               }
-            }
+              .imageContainer{
+                width: 20rem;
+                transition: .3s ease-in-out;
+                img{
+                  width: unset;
+                  height: 100%;
+                }
+                &:hover{
+                  width: 100%;
+                }
+              }
           }
 
         }
@@ -1545,5 +1556,15 @@ ol {
       .sh-h .sh-h-content .sh-h-items{
         grid-template-columns: repeat(3,1fr);
         border-bottom: 1px solid #e1dede;
+      }
+    }
+    @media (max-width:760px) {
+      .hcVarify-wrapper{
+        .select-group{
+          flex-wrap: wrap;
+        }
+      }
+      .upload-file-wrapper{
+        flex-wrap: wrap;
       }
     }
