@@ -28,14 +28,14 @@
       </thead>
       <tbody>        
         <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.matchId}}</td>
           <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
-          <td>wait</td>
+          <td>{{ member.memberId }}</td>
+          <td>{{ member.memberName}}</td>
+          <td>{{ member.matchedMemberID }}</td>
+          <td>{{ member.matchedMemberName }}</td>
+          <td>{{ member.matchSelected }}</td>
+          <td>{{ member.matchStatus }}</td>
+          <td>{{ member.matchTimes }}</td>
         </tr>
       </tbody>
     </table>
@@ -61,99 +61,54 @@
 </template>
 
 <script setup>
-  import {computed, ref} from "vue";
+  import {ref} from "vue";
+  import {useBackend} from "@/utils/backendUtils"
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const inputValue = ref("");
-  
-  const members = ref(
+  const match = ref(
     Array.from({length:666},(value,x) => ({
-      matchId: `${x % 2 === 0 ? x + 2 : x}`.padStart(4, '0'),
+      matchId: `${x + 1}`.padStart(4, '0'),
       memberId: `${x + 1}`.padStart(4, '0'), 
-      memberName: x % 2 == 0 ? `芙莉蓮${x + 1}` : `欣梅爾${x + 1}`,  //以下資料都還沒改
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+      memberName: x % 2 == 0 ? `芙莉蓮${x + 1}` : `欣梅爾${x + 1}`,
+      matchedMemberID:`${x % 2 === 0 ? x + 2 : x}`.padStart(4, '0'),
+      matchedMemberName: x % 2 == 0 ? `欣梅爾${x+2}` : `芙莉蓮${x}`,
+      matchSelected: '喜歡(右滑)',
+      matchStatus:'成功',
+      matchTimes:'2025-01-01',      
     }))
   );
 
-  const filterData = ref([...members.value]);
+  const {
+        filterData,
+        currentPage,
+        perPage,
+        totalPages,
+        viewData,
+        visiblePages,
+        prePage,
+        nextPage,
+        thisPage
+    } = useBackend(match);  
 
-  const currentPage = ref(1); //預設第一頁開始
-  const perPage = ref(10); //每頁渲染幾筆
-
-  const totalPages = computed(() => {  //總共幾頁
-    return  Math.ceil(filterData.value.length/perPage.value);
-  });
-
-  const viewData = computed(() => {  //渲染幾筆
-    const start = (currentPage.value - 1) * perPage.value;
-    const end = start + perPage.value;
-    return  filterData.value.slice(start, end);
-  });
-
-  const visiblePages = computed(() => {
-    const visible = [];
-    const total = totalPages.value;
-    const current = currentPage.value;
-
-    if(total <= 4){
-      for(let i = 1; i<= total; i++){
-        visible.push(i);
-      }
-    }else{
-      if(current <= 3){
-        visible.push(1,2,3,"・・・",total);
-      }else if(current >= total -2){
-        visible.push("・・・",total -2, total - 1, total)
-      }else{
-        visible.push("・・・",current - 1, current, current +1, "・・・",total);
-      }
-    }
-
-    return visible;
-  });
-
-
-  // 分頁按鈕函式
-  const prePage = () => {
-    if(currentPage.value > 1){
-      currentPage.value--;
-    }
-  };
-
-  const nextPage = () => {
-    if(currentPage.value < totalPages.value){
-      currentPage.value++;
-    }
-  };
-
-  const thisPage = (page) => {
-    if(page >= 1 && page !== "・・・")
-    currentPage.value = page;
-  };
-
+    // 搜尋框輸入資料
+    const inputValue =ref(""); 
+  
   // 搜尋
   const isSearchId = () => {
     const searchId = inputValue.value.trim();
 
     if(searchId === ""){
-      filterData.value = [...members.value];
+      filterData.value = [...match.value];
     }else{
-      filterData.value = members.value.filter(data =>
+      filterData.value = match.value.filter(data =>
         String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
+        data.memberName.includes(searchId)
       );
     }
-
     currentPage.value = 1;
   };
-
 
 </script>
 
