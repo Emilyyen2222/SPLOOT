@@ -41,7 +41,7 @@
                         :placeHolder="districtPlaceHolder"
                         :options="districtsOptions"
                         v-model="selectDistrict"
-                        :key="selectedCity"> //
+                        :key="selectedCity">
                     </DropdownMenu>
                 </div>
             </div>

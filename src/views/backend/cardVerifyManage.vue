@@ -3,7 +3,13 @@
 
   <div class="wrapper">
     <div class="title">
-      <h6>寵物照片審核</h6>
+      <div class="container">
+        <h6>寵物照片審核</h6>
+        <div class="pending">
+          <input type="checkbox" id="pending" v-model="isPending" @change="dataFilter">
+          <label for="pending">待審核</label>
+        </div>
+      </div>
       <div class="searchBar">
         <InputText
         size="small"
@@ -11,7 +17,7 @@
         placeHolder="以 ID,姓名,電子信箱 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -26,12 +32,20 @@
       </thead>
       <tbody>        
         <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
+          <td class="forImg">{{ member.memberId }}</td>
+          <td class="forImg">{{ member.breed }}</td>
+          <td class="forImg">{{ member.age }}</td>
+          <td class="forImg dropdown">
+            <DropdownMenu class="dropdownInput"
+              :placeHolder="member.photoReview"
+              :options="photoReview"
+              v-model="reviewStatus">
+            </DropdownMenu>
+          </td>
+          <td class="forImg">{{ member.creationTime }}</td>
+          <td class="imgTd">
+            <img :src="member.petPhoto" alt="petPhoto">
+          </td>
         </tr>
       </tbody>
     </table>
@@ -62,16 +76,16 @@
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
+  import DropdownMenu from "../../components/DropdownMenu.vue"
 
-  const members = ref(
+  const cardVerifications = ref(
     Array.from({length:103},(value,x) => ({
       memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+      breed: `奧米加咆哮獸${x+1}`,
+      age: 66, 
+      photoReview: x%3 === 0 ? '待審核' : '已審核', 
+      creationTime: '2025-02-14', 
+      petPhoto: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href, 
     }))
   );
 
@@ -85,25 +99,45 @@
         prePage,
         nextPage,
         thisPage
-    } = useBackend(members);  
+    } = useBackend(cardVerifications);  
+
+    const photoReview =ref([
+      {name:'已審核'},
+      {name:'未通過'},
+    ]);
+
+    // 審核雙向綁定
+    const reviewStatus = ref('');
+
+    // 待審核checkbox boolean值
+    const isPending = ref(false);
 
     // 搜尋框輸入資料
     const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
+
+
+  //搜尋＋審核篩選
+  const dataFilter = () => {
+    let result = cardVerifications.value;
+
     const searchId = inputValue.value.trim();
 
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
+    //篩選會員id
+    if(searchId !== ""){
+      result = result.filter((data) => {
+        return  String(data.memberId).includes(searchId)
+      });
     }
+    //審核按鈕是否被勾選
+    if(isPending.value){
+      result = result.filter((data) => {
+        return  data.photoReview === '待審核'
+      });
+    }
+    //更新過濾資料
+    filterData.value = [...result];
     currentPage.value = 1;
+
   };
 
 </script>
