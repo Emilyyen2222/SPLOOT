@@ -354,6 +354,16 @@ ol {
       justify-content: flex-start;
       gap: 5.6rem;
       align-items: center;
+      .inputs{
+        width: 100%;  
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: .8rem;
+        input{
+          width: 100%;
+        }
+      }
     }
 
     .birthday{
@@ -1515,12 +1525,18 @@ ol {
 
 }
 
-// 
+// RWD
 @media (max-width: 711px) {
   .basicInfo .select-group{
     flex-wrap: wrap;
   }
 }
+@media (max-width:560px) {
+  .basicInfo .card-content .input-group .inputs{
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 576px) {
   .basicInfo,.accountInfo,.contactInfo{
     .card-content{
