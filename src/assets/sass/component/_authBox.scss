@@ -27,16 +27,7 @@ body.authClicked{
         min-height: 67.2rem;
 
         @include lg(){
-            width: 70rem;
-        }
-
-        @include md(){
-            width: 56rem;
-        }
-
-        @include sm(){
-            width: 36rem;
-            min-height: 60rem;
+            width: 80vw;
         }
 
         &.clicked{
@@ -73,29 +64,17 @@ body.authClicked{
 
         .mainLeft{
             position: relative;
-
             width: 40rem;
+            padding: 5.6rem;
 
             @include lg(){
-                width: 35rem;
-            }
-
-            @include md(){
-                width: 28rem;
-            }
-
-            @include sm(){
                 width: 100%;
-                .closeBtnBox{
-                    display: block;
-                }
             }
-            padding: 5.6rem;
 
             .closeBtnBox{
                 display: none;
 
-                @include sm(){
+                @include md(){
                     display: block;
                 }
             }
@@ -104,7 +83,7 @@ body.authClicked{
                 display: flex;
                 justify-content: flex-end;
                 gap: 1.6rem;
-
+                align-items: center;
                 margin-bottom: 2.4rem;
             }
             
@@ -203,7 +182,7 @@ body.authClicked{
                     justify-content: space-between;
                     align-items: center;
 
-                    padding: 0.4rem 1.6rem;
+                    padding: 0.4rem 0.8rem;
                     border: 1px solid map-get($colors, natural-1);
                     border-radius: 20px;
 
@@ -223,7 +202,12 @@ body.authClicked{
                     &.gmail{
                         margin-bottom: 0.8rem;
                     }
+                    
+                    &:hover{border: 1px solid map-get($colors, natural-2);}
+
+                    &:active{background-color: map-get($colors, natural-0);}
                 }
+
             }        
         }
 
@@ -235,26 +219,28 @@ body.authClicked{
             width: 40rem;
 
             @include lg(){
-                width: 35rem;
+                width: 100%;
             }
 
             @include md(){
-                width: 28rem;
+                //width: 28rem;
+                display: none;
             }
 
             @include sm(){
-                display: none;
+                
             }
 
             .heroImgBox{
                 width: 100%;
                 height: 100%;
                 border-radius: 0 16px 16px 0;
+                background-color: map-get($colors , yellow-2);
 
                 .authMainImg{
                     width: 100%;
-                height: 100%;
-                border-radius: 0 16px 16px 0;
+                    height: 100%;
+                    border-radius: 0 16px 16px 0;
                 }
             }
         }
