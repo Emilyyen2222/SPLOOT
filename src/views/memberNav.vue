@@ -114,21 +114,6 @@ const memberPortrait = computed(()=> {
 
 //   )};
 
-
-
-// // 重新格式化 URL
-// const formattedAvatarURL = computed(() => {
-//   if (!selectedAvatar.value) return "";
-
-//   // ✅ 提取文件名稱
-//   const fileName = selectedAvatar.value.split("/").pop(); // 取得 `portrait6.svg`
-
-//   // ✅ 重新構造 Vue `@/assets/...` 路徑
-//   return new URL(`@/assets/img/member-center/${fileName}`, import.meta.url).href;
-// });
-// console.log("nav收到的值(格式化之後):",formattedAvatarURL.value);
-
-
   // avatar
   const avatars=[
   {avatarId:1,img: new URL("@/assets/img/member-center/portrait1.svg", import.meta.url).href},
