@@ -3,15 +3,21 @@
 
   <div class="wrapper">
     <div class="title">
-      <h6>訂單管理</h6>
+      <div class="container">
+        <h6>訂單管理</h6>
+        <div class="pending">
+          <input type="checkbox" id="pending" v-model="isPending" @change="dataFilter">
+          <label for="pending">尚未寄出</label>
+        </div>
+      </div>
       <div class="searchBar">
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 ID 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -25,17 +31,19 @@
         <th>會員取貨方式</th>
         <th>寄出狀態</th>
         <th>寄出物流</th>
+        <th></th>
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
-          <td>黑貓</td>
+        <tr v-for="data in viewData" :key="data.orderId">
+          <td>{{ data.orderId }}</td>
+          <td>{{ data.memberId }}</td>
+          <td>{{ data.boxId }}</td>
+          <td>{{ data.planName }}</td>
+          <td>{{ data.shipmentDate }}</td>
+          <td>{{ data.pickupMethod }}</td>
+          <td>{{ data.shipmentStatus }}</td>
+          <td>{{ data.shippingCarrier }}</td>
+          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
     </table>
@@ -67,15 +75,16 @@
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const members = ref(
+  const orders = ref(
     Array.from({length:103},(value,x) => ({
+      orderId: `${x+1}`.padStart(4,'0'),
       memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+      boxId:`${x+1}`.padStart(4,'0'), 
+      planName: '銀卡(十二個月)', 
+      shipmentDate: '2025-03-01', 
+      pickupMethod: '全家取貨', 
+      shipmentStatus: x % 3 === 0 ? '未寄出' : '已寄出',
+      shippingCarrier: x % 2 ===0 || x % 5 === 0 ? '黑貓' : '店到店'
     }))
   );
 
@@ -88,27 +97,11 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(members);  
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(orders, 'orderId', 'shipmentStatus', '未寄出');
 
 </script>
 

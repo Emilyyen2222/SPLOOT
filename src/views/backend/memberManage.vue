@@ -8,7 +8,7 @@
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 ID 查詢"
         v-model="inputValue"
         ></InputText>
         <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
@@ -27,14 +27,14 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatus }}</td>
+        <tr v-for="data in viewData" :key="data.memberId">
+          <td>{{ data.memberId }}</td>
+          <td>{{ data.memberName }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data.petNumber }}</td>
+          <td>{{ data.splootBoxSub }}</td>
+          <td>{{ data.helperPost }}</td>
+          <td>{{ data.accountStatus }}</td>
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -62,7 +62,7 @@
 
 <script setup>
   import {ref} from "vue";
-  import {useBackend} from "@/utils/backendUtils"
+  import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
