@@ -14,7 +14,7 @@
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 ID 查詢"
         v-model="inputValue"
         ></InputText>
         <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
@@ -31,20 +31,20 @@
         <th>寵物照片</th>
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td class="forImg">{{ member.memberId }}</td>
-          <td class="forImg">{{ member.breed }}</td>
-          <td class="forImg">{{ member.age }}</td>
+        <tr v-for="data in viewData" :key="data.memberId">
+          <td class="forImg">{{ data.memberId }}</td>
+          <td class="forImg">{{ data.breed }}</td>
+          <td class="forImg">{{ data.age }}</td>
           <td class="forImg dropdown">
             <DropdownMenu class="dropdownInput"
-              :placeHolder="member.photoReview"
+              :placeHolder="data.photoReview"
               :options="photoReview"
               v-model="reviewStatus">
             </DropdownMenu>
           </td>
-          <td class="forImg">{{ member.creationTime }}</td>
+          <td class="forImg">{{ data.creationTime }}</td>
           <td class="imgTd">
-            <img :src="member.petPhoto" alt="petPhoto">
+            <img :src="data.petPhoto" alt="petPhoto">
           </td>
         </tr>
       </tbody>
@@ -83,7 +83,7 @@
       memberId: `${x+1}`.padStart(4,'0'), 
       breed: `奧米加咆哮獸${x+1}`,
       age: 66, 
-      photoReview: x%3 === 0 ? '待審核' : '已審核', 
+      photoReview: x % 3 === 0 ? '待審核' : '已審核', 
       creationTime: '2025-02-14', 
       petPhoto: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href, 
     }))
@@ -102,7 +102,7 @@
         isPending, //審核專用
         inputValue,
         dataFilter,
-    } = useBackend(cardVerifications, 'memberId');  
+    } = useBackend(cardVerifications, 'memberId', 'photoReview', '待審核');  
 
     const photoReview =ref([
       {name:'已審核'},

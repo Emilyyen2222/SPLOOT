@@ -3,15 +3,20 @@
 
   <div class="wrapper">
     <div class="title">
-      <h6>消息管理</h6>
+      <div class="container">
+        <h6>消息管理</h6>
+        <div class="add">
+          <Btn btnStyle="outline small">＋ 新增</Btn>
+        </div>
+      </div>
       <div class="searchBar">
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 消息名稱 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -28,15 +33,15 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
-          <td>{{ member.accountStatues }}</td>
+        <tr v-for="data in viewData" :key="data.newsId">
+          <td>{{ data.newsId }}</td>
+          <td>{{ data.category }}</td>
+          <td>{{ data.title }}</td>
+          <td>{{ data.author }}</td>
+          <td>{{ data.publishLocation }}</td>
+          <td>{{ data.publishDate }}</td>
+          <td>{{ data.publishTime }}</td>
+          <td>{{ data.newsStatus }}</td>
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -69,15 +74,16 @@
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const members = ref(
+  const news = ref(
     Array.from({length:103},(value,x) => ({
-      memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+      newsId: `${x+1}`.padStart(4,'0'), 
+      category: `寵物盒`,
+      title: x % 3 === 1 ? '下一季SPLOOT BOX！！' : x % 2 === 0 ? 'SPLOOT周年慶特輯' : '夏日毛孩有福啦～', 
+      author: 'Mysterio', 
+      publishLocation: '首頁及新聞中心', 
+      publishDate: '2025-02-10', 
+      publishTime: '22:22',
+      newsStatus: x % 5 === 0 && x !==0 ? '未上架' : '上架',
     }))
   );
 
@@ -90,27 +96,11 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(members);  
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(news, 'title');  
 
 </script>
 

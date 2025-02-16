@@ -1,7 +1,8 @@
 //Ian
 import {ref, computed, watch} from 'vue';
 
-export function useBackend(backendData, searchUseData){
+//useBackend(匯入的資料名,搜尋用的資料名稱,checkbox用的資料名稱,checkbox篩選條件)
+export function useBackend(backendData, searchUseData, checkBoxTarget,checkBoxCondition){
     //傳入該頁面的原始資料
     const rawData = ref([...backendData.value]);
 
@@ -42,9 +43,9 @@ export function useBackend(backendData, searchUseData){
           if(current <= 3){
             visible.push(1,2,3,"・・・",total);
           }else if(current >= total -2){
-            visible.push("・・・",total -2, total - 1, total)
+            visible.push(1,"・・・",total -2, total - 1, total)
           }else{
-            visible.push("・・・",current - 1, current, current +1, "・・・",total);
+            visible.push(1,"・・・",current - 1, current, current +1, "・・・",total);
           }
         }    
         return visible;        
@@ -92,7 +93,7 @@ export function useBackend(backendData, searchUseData){
     //審核按鈕是否被勾選
     if(isPending.value){
       result = result.filter((data) => {
-        return  data.photoReview === '待審核'
+        return  data[checkBoxTarget] === checkBoxCondition
       });
     }
     //更新過濾資料

@@ -3,15 +3,21 @@
 
   <div class="wrapper">
     <div class="title">
-      <h6>小幫手身份審核</h6>
+      <div class="container">
+        <h6>小幫手身份審核</h6>
+        <div class="pending">
+          <input type="checkbox" id="pending" v-model="isPending" @change="dataFilter">
+          <label for="pending">待審核</label>
+        </div>
+      </div>
       <div class="searchBar">
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 ID 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -21,20 +27,14 @@
         <th>真實姓名</th>
         <th>身份審核</th>
         <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr v-for="data in viewData" :key="data.memberId">
+          <td>{{ data.memberId }}</td>
+          <td>{{ data.realName }}</td>
+          <td>{{ data.identityVerification }}</td>
+          
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -67,15 +67,11 @@
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const members = ref(
+  const buddyVerifications = ref(
     Array.from({length:103},(value,x) => ({
       memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+      realName: `易烊千璽${x+1}`,
+      identityVerification: x % 2 === 0 ? '待審核' : '已審核',
     }))
   );
 
@@ -88,27 +84,12 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(members);  
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(buddyVerifications, 'memberId', 'identityVerification', '待審核');    
 
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
 
 </script>
 

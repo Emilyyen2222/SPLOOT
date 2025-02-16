@@ -3,15 +3,20 @@
 
   <div class="wrapper">
     <div class="title">
-      <h6>活動管理</h6>
+      <div class="container">
+        <h6>活動管理</h6>
+        <div class="add">
+          <Btn btnStyle="outline small">＋ 新增</Btn>
+        </div>
+      </div>
       <div class="searchBar">
         <InputText
         size="small"
         textAlign="textLeft"
-        placeHolder="以 ID,姓名,電子信箱 查詢"
+        placeHolder="以 活動名稱 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -27,14 +32,14 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="member in viewData" :key="member.memberId">
-          <td>{{ member.memberId }}</td>
-          <td>{{ member.memberName }}</td>
-          <td>{{ member.email }}</td>
-          <td>{{ member.petNumber }}</td>
-          <td>{{ member.splootBoxSub }}</td>
-          <td>{{ member.helperPost }}</td>
-          <td>{{ member.accountStatues }}</td>
+        <tr v-for="data in viewData" :key="data.eventId">
+          <td>{{ data.eventId }}</td>
+          <td>{{ data.date }}</td>
+          <td>{{ data.time }}</td>
+          <td>{{ data.eventName }}</td>
+          <td>{{ data.organizer }}</td>
+          <td>{{ data.peopleCount }}</td>
+          <td>{{ data.eventStatus }}</td>
           <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -67,15 +72,15 @@
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const members = ref(
-    Array.from({length:103},(value,x) => ({
-      memberId: `${x+1}`.padStart(4,'0'), 
-      memberName: `海綿寶寶${x+1}`,
-      email:`tibame${x+1}@tibame.com`, 
-      petNumber: 4, 
-      splootBoxSub: 3, 
-      helperPost: 2, 
-      accountStatues: '正常'
+  const events = ref(
+    Array.from({length:77},(value,x) => ({
+      eventId: `${x+1}`.padStart(4,'0'), 
+      date: x === 0 ? '2025-02-18' : '2025-01-20',
+      time: x === 0 ? '13:30 - 16:30' : '10:00 - 16:35', 
+      eventName: x === 0 ? 'SPLOOT創立剪綵會' : `紅蓮的弓矢${x}`, 
+      organizer: x === 0 ? '官方活動' : `尼多力諾${x}`, 
+      peopleCount: x === 0 ? 999 : 20, 
+      eventStatus: x % 9 === 0 && x !== 0 ? '暫停舉行' : '正常舉行',
     }))
   );
 
@@ -88,28 +93,12 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(members);  
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(events, 'eventName');    
   
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
-
 </script>
 
 <style lang="scss">
