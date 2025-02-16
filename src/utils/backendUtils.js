@@ -1,7 +1,7 @@
 //Ian
 import {ref, computed, watch} from 'vue';
 
-export function useBackend(backendData){
+export function useBackend(backendData, searchUseData){
     //傳入該頁面的原始資料
     const rawData = ref([...backendData.value]);
 
@@ -24,8 +24,8 @@ export function useBackend(backendData){
 
     // 監聽來源資料變化 以便於搜尋功能
     watch(() => backendData.value, (newData) => {
-        rawData.value = [...newData.value];
-        filterData.value = [...newData.value];
+        rawData.value = [...newData];
+        filterData.value = [...newData];
     });
 
     // 分頁按鈕顯示狀態(用於按鈕v-for)
@@ -68,6 +68,39 @@ export function useBackend(backendData){
         currentPage.value = page;
     };
 
+    
+    // -----------如有篩選按鈕需要再把以下函式引用到vue檔案---------------
+
+    // 待審核checkbox boolean值
+    const isPending = ref(false);
+  
+    // 搜尋框輸入資料
+    const inputValue =ref(""); 
+
+    //搜尋＋審核篩選
+  const dataFilter = () => {
+    let result = rawData.value;
+
+    const searchId = inputValue.value.trim();
+
+    //篩選會員id
+    if(searchId !== ""){
+      result = result.filter((data) => {
+        return  String(data[searchUseData]).includes(searchId)
+      });
+    }
+    //審核按鈕是否被勾選
+    if(isPending.value){
+      result = result.filter((data) => {
+        return  data.photoReview === '待審核'
+      });
+    }
+    //更新過濾資料
+    filterData.value = [...result];
+    currentPage.value = 1;
+
+  };
+
     // 回傳所有可能用得到的變數以及函式
     return{
         filterData,
@@ -78,6 +111,9 @@ export function useBackend(backendData){
         visiblePages,
         prePage,
         nextPage,
-        thisPage
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
     };
 };

@@ -11,7 +11,7 @@
         placeHolder="以 ID,姓名,電子信箱 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -88,27 +88,11 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(members);  
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...members.value];
-    }else{
-      filterData.value = members.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId) ||
-        data.email.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(members, 'memberId');  
 
 </script>
 

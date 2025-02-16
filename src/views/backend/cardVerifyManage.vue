@@ -98,8 +98,11 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(cardVerifications);  
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(cardVerifications, 'memberId');  
 
     const photoReview =ref([
       {name:'已審核'},
@@ -108,37 +111,6 @@
 
     // 審核雙向綁定
     const reviewStatus = ref('');
-
-    // 待審核checkbox boolean值
-    const isPending = ref(false);
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-
-
-  //搜尋＋審核篩選
-  const dataFilter = () => {
-    let result = cardVerifications.value;
-
-    const searchId = inputValue.value.trim();
-
-    //篩選會員id
-    if(searchId !== ""){
-      result = result.filter((data) => {
-        return  String(data.memberId).includes(searchId)
-      });
-    }
-    //審核按鈕是否被勾選
-    if(isPending.value){
-      result = result.filter((data) => {
-        return  data.photoReview === '待審核'
-      });
-    }
-    //更新過濾資料
-    filterData.value = [...result];
-    currentPage.value = 1;
-
-  };
 
 </script>
 

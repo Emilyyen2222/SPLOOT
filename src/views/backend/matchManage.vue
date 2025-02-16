@@ -11,7 +11,7 @@
         placeHolder="以 ID,姓名,電子信箱 查詢"
         v-model="inputValue"
         ></InputText>
-        <Btn btnStyle="primary default" @click="isSearchId">搜尋</Btn>
+        <Btn btnStyle="primary default" @click="dataFilter">搜尋</Btn>
       </div>
     </div>
 
@@ -67,7 +67,7 @@
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
 
-  const match = ref(
+  const matchs = ref(
     Array.from({length:666},(value,x) => ({
       matchId: `${x + 1}`.padStart(4, '0'),
       memberId: `${x + 1}`.padStart(4, '0'), 
@@ -89,26 +89,11 @@
         visiblePages,
         prePage,
         nextPage,
-        thisPage
-    } = useBackend(match);  
-
-    // 搜尋框輸入資料
-    const inputValue =ref(""); 
-  
-  // 搜尋
-  const isSearchId = () => {
-    const searchId = inputValue.value.trim();
-
-    if(searchId === ""){
-      filterData.value = [...match.value];
-    }else{
-      filterData.value = match.value.filter(data =>
-        String(data.memberId).includes(searchId) ||
-        data.memberName.includes(searchId)
-      );
-    }
-    currentPage.value = 1;
-  };
+        thisPage,
+        isPending, //審核專用
+        inputValue,
+        dataFilter,
+    } = useBackend(matchs, 'matchId'); 
 
 </script>
 
