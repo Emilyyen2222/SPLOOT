@@ -683,29 +683,29 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   // 監聽input的內容，驗證
     // 手機
       // check formation  
-    const isValidPhone = computed(() => {
-      // 允許數字 (0-9)、加號 (+)、減號 (-)、空格、國際碼
-      const phonePattern = /^(\+?[0-9]{1,3})?(\s|-)?[0-9]{4}(\s|-)?[0-9]{3}(\s|-)?[0-9]{3}$/;
-      return phonePattern.test(inputs.input_phone.inputValue.value);
-    });
+    // const isValidPhone = computed(() => {
+    //   // 允許數字 (0-9)、加號 (+)、減號 (-)、空格、國際碼
+    //   const phonePattern = /^(\+?[0-9]{1,3})?(\s|-)?[0-9]{4}(\s|-)?[0-9]{3}(\s|-)?[0-9]{3}$/;
+    //   return phonePattern.test(inputs.input_phone.inputValue.value);
+    // });
 
-    watch(
-      () => inputs.input_phone.inputValue.value, 
-      (newValue, oldValue) => {
-      console.log("輸入的手機",inputs.input_phone.inputValue);
-      console.log("驗證結果",isValidPhone.value);
+    // watch(
+    //   () => inputs.input_phone.inputValue.value, 
+    //   (newValue, oldValue) => {
+    //   console.log("輸入的手機",inputs.input_phone.inputValue);
+    //   console.log("驗證結果",isValidPhone.value);
 
-      inputs.input_phone.inputError.value = !isValidPhone.value;
+    //   inputs.input_phone.inputError.value = !isValidPhone.value;
 
-      // 和上面那段相等，同樣是"控制錯誤訊息的顯示與否"
-      // if(isValidPhone.value){
-      //   // 通過就不顯示錯誤訊息
-      //     inputs.input_phone.inputError.value= false;
-      // }else{
-      //   // 不通過就顯示錯誤訊息
-      //     inputs.input_phone.inputError.value= true;
-      // }
-      });
+    //   // 和上面那段相等，同樣是"控制錯誤訊息的顯示與否"
+    //   // if(isValidPhone.value){
+    //   //   // 通過就不顯示錯誤訊息
+    //   //     inputs.input_phone.inputError.value= false;
+    //   // }else{
+    //   //   // 不通過就顯示錯誤訊息
+    //   //     inputs.input_phone.inputError.value= true;
+    //   // }
+    //   });
     
 
   // LightBox 燈箱
@@ -849,9 +849,9 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         }));
 
         // 使用 v-model 綁定使用者所選的年份、月份與日期
-        const selectedYear = ref(null);
-        const selectedMonth = ref(null);
-        const selectedDay = ref(null);
+        const selectedYear = ref('');
+        const selectedMonth = ref('');
+        const selectedDay = ref('');
 
         // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
         const menu_birth_d = computed(() => {
@@ -860,13 +860,13 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
             options: []
           };
 
-          if ( !selectedYear.value || !selectedMonth.value ){
+          if ( !selectedYear.value || !selectedMonth.value || !selectedDay){
             return result;
           };
 
           // Number 轉換成數字
-          const year = Number(selectedYear.value);
-          const month = Number(selectedMonth.value);
+          let year = Number(selectedYear.value);
+          let month = Number(selectedMonth.value);
 
           // 計算當月的天數
           const days = new Date(year, month, 0).getDate();
@@ -878,7 +878,41 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           
           return result;
         });
+        // 組合起來，為了傳給後端
+        const birthDate= computed(
+        //   ()=>{
+        //   const year = selectedYear.value || "";  // 確保不為 null
+        //   const month = selectedMonth.value || "";
+        //   const day = selectedDay.value || ""; // 確保 day 存在
 
+        //   return `${year} ${month} ${day}`.trim();
+
+          {get (){
+            if( !selectedYear || !selectedMonth || !selectedDay ){
+              return "";
+            } 
+            // return `${selectedYear}-${selectedMonth}-${selectedDay}`;
+            return `${selectedYear.value}-${String(selectedMonth.value).padStart(2, "0")}-${String(selectedDay.value).padStart(2, "0")}`;
+            
+          },
+          set(value){
+            if(!value){
+              selectedYear.value = "";
+              selectedMonth.value = "";
+              selectedDay.value = "";
+              return
+            }
+
+            const [seperateDate] = value.split(" "); // 分離日期與時間
+            const [year, month, day] = seperateDate.split("-");
+
+            selectedYear.value = year;
+            selectedMonth.value = month;
+            selectedDay.value = day;
+          }}
+        );
+
+       
       // 性別
       const selectedSex = ref('');
 
@@ -919,8 +953,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 聯絡資料
       // 手機
       // 地址
-        let selectedCity = ref(null); //v-model綁定
-        let selectDistrict = ref(null); //v-model綁定
+        let selectedCity = ref(''); //v-model綁定
+        let selectDistrict = ref(''); //v-model綁定
         const districtPlaceHolder = ref("全部行政區域");
 
         // 從選擇的城市中尋找他的行政區域 然後以{name: d}物件排列成陣列
@@ -930,9 +964,23 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         });
 
         // 點選新的城市後行政區清空
-        watch(selectedCity, () => {        
-            selectDistrict.value = null; 
-            districtPlaceHolder.value = "全部行政區域";
+        watch(selectedCity, (newValue, oldValue) => {  
+          // console.log(" watch(selectedCity) 被觸發！");
+          // console.log(" newValue:", newValue, " oldValue:", oldValue);
+
+          // // **區分執行時機**
+          // if (oldValue === undefined) {
+          //   console.log(" 這是 `watch()` 初始化時執行！");
+          // } else {
+          //   console.log(" 這是 `selectedCity` 被後端資料庫載入時觸發！");
+          // }
+          
+          if (!oldValue || oldValue === newValue) return;
+
+          console.log("城市變更，清空行政區");
+          console.log('here',newValue, oldValue);
+          selectDistrict.value = null; 
+          districtPlaceHolder.value = "全部行政區域";
         });
         // 將地址合併成一個(前端顯示用)；保持三個傳到後端
         // 用computed確保
@@ -944,11 +992,18 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
         return `${city} ${district} ${address}`.trim();
       });
-      // 讓 selectDistrict 變成空字串，而不是 null
-      watch(selectedCity, () => {        
-          selectDistrict.value = ""; 
-          districtPlaceHolder.value = "全部行政區域";
-      });
+
+        
+        console.log(wholeAddress);
+
+
+      console.log("更新 selectDistrict:", selectDistrict.value);
+
+
+      console.log("selectDistrict:", selectDistrict.value);
+      console.log("selectedCity:", selectedCity.value);
+      console.log("inputs.input_address.inputValue:", inputs.input_address.inputValue);
+
 
       // 監聽是否成功
       watch(wholeAddress, (newVal) => {
@@ -1045,9 +1100,6 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           }
         };
 
-
-
-
         // const step = ref(1);
 
         // const nextStep = ( bol = false ) =>{
@@ -1096,27 +1148,83 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
         try{
           const memberInfo = await resp.json();
+
           inputs.input_firstName.inputValue = memberInfo['firstName'];
           inputs.input_lastName.inputValue = memberInfo['lastName'];
-          inputs.input_lastName.inputValue = memberInfo['nickName'];
-          inputs.input_lastName.inputValue = memberInfo['gender'];
-          inputs.input_lastName.inputValue = memberInfo['birthDate'];
-          inputs.input_lastName.inputValue = memberInfo['lineId'];
-          inputs.input_lastName.inputValue = memberInfo['phone'];
-          inputs.input_lastName.inputValue = memberInfo['addressCity'];
-          inputs.input_lastName.inputValue = memberInfo['addressDistrict'];
-          inputs.input_lastName.inputValue = memberInfo['addressStreet'];
-          console.log(memberInfo['email']);
-          console.log(memberInfo['firstName']);
-          console.log(memberInfo['lastName']);
-          console.log(memberInfo['nickName']);
+          inputs.input_nickName.inputValue = memberInfo['nickname'];
+          selectedSex.value = memberInfo['gender'];
+
+          // ${selectedYear}/${selectedMonth}/${selectedDay} = memberInfo['birthDate'];
+          // selectedYear,selectedMonth,selectedDay = memberInfo['birthDate'];
+
+          inputs.input_lineId.inputValue = memberInfo['lineId'];
+          inputs.input_phone.inputValue = memberInfo['phone'];
+
+          console.log('here1');
+          selectedCity.value = memberInfo['addressCity'];
+          console.log('here2');
+          city.placeHolder = memberInfo['addressCity'];
+          console.log('here3');
+          selectDistrict.value = memberInfo['addressDistrict'];
+          console.log('here4');
+          districtPlaceHolder.value = memberInfo['addressDistrict'];
+          // console.log(memberInfo['addressDistrict']);
+          console.log('here5');
+          inputs.input_address.inputValue = memberInfo['addressStreet'];
+          console.log('here6');
+
+          birthDate.value = memberInfo['birthDate'];
+
+
+          // console.log(memberInfo['email']);
+          // console.log(memberInfo['firstName']);
+          // console.log(memberInfo['lastName']);
+          // console.log(memberInfo['nickName']);
+          // console.log(memberInfo['gender']);
+          // console.log(memberInfo['birthDate']);
+          // console.log(memberInfo['lineId']);
+          // console.log(memberInfo['phone']);
+          // console.log(memberInfo['addressCity']);
+          // console.log(memberInfo['addressDistrict']);
+          // console.log(memberInfo['addressStreet']);
+
+          // console.log(memberInfo['email','firstName','lastName','gender','birthDate','lineId','phone','addressCity','addressDistrict','addressStreet']);          
         } catch (error){
           console.error('Error parsing JSON:', error);
         }
       }
 
+      // const memberInfo = {
+      //   addressCity: 'tAPIEI',
+      //   addressDistrict: 'bEITOU'
+      // }
+      // console.log('here1');
+      // selectedCity.value = memberInfo['addressCity'];
+      // console.log('here2');
+      //     city.placeHolder = memberInfo['addressCity'];
+      //     console.log('here3');
+      //     selectDistrict.value = memberInfo['addressDistrict'];
+      //     console.log('here4');
+      //     districtPlaceHolder.value = memberInfo['addressDistrict'];
+      //     console.log('here5');
+      //     console.log(memberInfo['addressDistrict']);
+
+      // async function sendMemberInfoPhp() {
+      //   const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/showMemberInfo.php`, {
+      //       method: 'POST',
+      //       headers: {
+      //           'Content-Type': 'application/json'
+      //       },
+      //       body:JSON.stringify({
+
+      //       })
+      //   });
+
+       
+      // }
 
       showMemberInfoPhp();
+      console.log('here7');
 
       
       
