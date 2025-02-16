@@ -12,11 +12,17 @@
             <div class="topSection">
                 <div class="topText" v-if="authBoxStore.authType === 'signUp'">
                     <p class="smallText">已有帳號？</p>
-                    <p class="smallText underline" @click="authBoxStore.toggleAuthType">登入</p>
+                    <div class="signupBtn">
+                        <Btn class="signupBtn" btnStyle="baseline small"
+                        @click="authBoxStore.toggleAuthType">登入</Btn>
+                    </div>
                 </div>
                 <div class="topText" v-if="authBoxStore.authType === 'login'">
                     <p class="smallText">還沒有帳號？</p>
-                    <p class="smallText underline" @click="authBoxStore.toggleAuthType">快速註冊</p>
+                    <div class="loginBtn">
+                        <Btn class="loginBtn" btnStyle="baseline small"
+                        @click="authBoxStore.toggleAuthType">快速註冊</Btn>
+                    </div>
                 </div>
             </div>
             
@@ -66,7 +72,10 @@
                         <div class="checkBox"
                         :class="{'-error': authBoxStore.signUpAgreeCheck.hasError}">
                             <input type="checkbox" id="agree" v-model="authBoxStore.signUpAgreeCheck.checkValue">
-                            <label class="xsText" for="agree">我已閱讀並同意 <span class="termsAgreement underline" @click="authBoxStore.togglePolicy">網站服務條款</span> 及 <span class="agreementSection underline" @click="authBoxStore.togglePrivacy">隱私權政策</span></label>
+                            <label class="xsText" for="agree">我已閱讀並同意 
+                                <span class="termsAgreement underline" @click="authBoxStore.togglePolicy">網站服務條款</span> 及 
+                                <span class="agreementSection underline" @click="authBoxStore.togglePrivacy">隱私權政策</span>
+                            </label>
                         </div>
                     </div>
 
@@ -96,7 +105,8 @@
                             <img class="theEye" :src="authBoxStore.eyeState[3]" alt="" @click="authBoxStore.eyeStateToggle(3)">
                         </div>
                         <div class="forgotPassword">
-                            <p class=" smallText underline">忘記密碼？</p>
+                            <Btn class="signupBtn" btnStyle="baseline small"
+                            @click="">忘記密碼</Btn>
                         </div>
 
 
@@ -153,7 +163,7 @@
                     </div>
                 </div>
                 <div class="heroImgBox">
-                    <img class="authMainImg" src="../assets/img/splootbox/cat3.jpg" alt="">
+                    <img class="authMainImg" src="../assets/img/icon/login/login.svg" alt="">
                 </div>
         </div>
         
