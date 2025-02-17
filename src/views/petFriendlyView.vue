@@ -112,16 +112,16 @@
             content: "位於高雄的綜合性動物醫療服務，設備齊全，關愛每個毛孩的健康需求。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/hospital-3.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-5.jpg", import.meta.url).href,
             type: "hospital",
-            name: "王樣動物醫院",
-            content: "永康街上的動物醫院，醫療品質好，專精於小動物及癱瘓治療。",
+            name: "寵樂動物醫院",
+            content: "以安養為主的動物醫院，獲得台北市動保處動物安養機構安心認證。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/hospital-4.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/hospital-6.jpg", import.meta.url).href,
             type: "hospital",
-            name: "梅西動物醫療中心",
-            content: "位於高雄的綜合性動物醫療服務，設備齊全，關愛每個毛孩的健康需求。",
+            name: "大安動物醫院",
+            content: "最專業的貓狗急診專科。24小時醫師護理師駐守，全天候守護毛孩健康。",
         },
 
         //餐廳
@@ -150,16 +150,16 @@
             content: "寵物可落地可上椅，有提供寵物餐點，環境舒服，是假日放鬆好去處。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-3.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-5.jpg", import.meta.url).href,
             type: "restaurant",
-            name: "哈time貓咪咖啡",
-            content: "寵物友善咖啡廳，本店全採預約制，近菜寮捷運站2號出口。",
+            name: "Tower Cafe 鐵塔咖啡",
+            content: "店內環境的舒適乾淨還有可愛的兔子陪伴，寵物可自由到處走動。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-4.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/restaurant-6.jpeg", import.meta.url).href,
             type: "restaurant",
-            name: "沐 • Moon Street Cafe",
-            content: "寵物可落地可上椅，有提供寵物餐點，環境舒服，是假日放鬆好去處。",
+            name: "TMJ_TAIPEI",
+            content: "隱身在大安區巷弄的無菜單料理餐酒館，一進門就有柯基小店長熱情迎接",
         },
 
         //公園
@@ -188,16 +188,16 @@
             content: "設備完善，場地空曠好停車，十分適合家庭帶毛小孩來玩耍的好地方",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/park-3.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/park-5.jpg", import.meta.url).href,
             type: "park",
-            name: "竹東狗狗公園",
-            content: "環境地點佳，停車方便，夜幕來臨時公園裡的燈光優美，適合親子共遊。",
+            name: "苗栗市河濱寵物公園",
+            content: "占地300坪寵物運動場域，設施包含跳躍跨欄、棧橋、隧道及草皮空間。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/park-4.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/park-6.jpg", import.meta.url).href,
             type: "park",
-            name: "高屏溪河濱寵物公園",
-            content: "設備完善，場地空曠好停車，十分適合家庭帶毛小孩來玩耍的好地方",
+            name: "蘆堤寵物公園",
+            content: "依傍著池塘的寬敞狗狗公園，有大型與小型寵物的獨立玩耍區。",
         },
 
         //旅館
@@ -226,16 +226,16 @@
             content: "環境溫馨，傢俱與佈置對寵物相當友善，旁邊有大公園讓毛孩散步。",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/hotel-3.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-5.jpg", import.meta.url).href,
             type: "hotel",
-            name: "月亮慢慢走",
-            content: "自助式check in，旅館內會有店貓不時出來巡邏與陪玩陪睡。",
+            name: "沐石原宿 Mu shi B&B",
+            content: "位於九份附近寧靜街道中的民宿，非常歡迎毛小孩一起來玩!",
         },
         {
-            imgSrc: new URL("@/assets/img/pet-friendly/hotel-4.jpg", import.meta.url).href,
+            imgSrc: new URL("@/assets/img/pet-friendly/hotel-6.jpg", import.meta.url).href,
             type: "hotel",
-            name: "牠的足跡寵物友善民宿",
-            content: "環境溫馨，傢俱與佈置對寵物相當友善，旁邊有大公園讓毛孩散步。",
+            name: "彩虹山舍民宿",
+            content: "不僅寵物友善還有許多吸睛的裝置藝術，夜間點燈好夢幻",
         },
         
     ])
