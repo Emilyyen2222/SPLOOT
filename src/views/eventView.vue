@@ -1,8 +1,8 @@
 <template>
-<MainHeader theme="blue" bgc="yellow-1"></MainHeader>
-<!-- 主內容 -->
-<div class="wrapper">
-<!-- 主要功能 -->
+    <MainHeader theme="blue" bgc="yellow-1"></MainHeader>
+    <!-- 主內容 -->
+    <div class="wrapper">
+    <!-- 主要功能 -->
     <div class="petCalendarBox">
             <!-- 上 標題＋日曆 -->
         <div class="topMain">
@@ -29,9 +29,9 @@
                 <!-- 上右 行程日曆 -->
                 <div class="topRight">
                     <div class="calendar">
-                         <Calendar
-                         @dayclick="filterScheduleCard"
-                         ></Calendar>
+                            <Calendar
+                            @dayclick="filterScheduleCard"
+                            ></Calendar>
                     </div>
                 </div>
         </div>
@@ -134,13 +134,13 @@
                                     </div>
                                     <div class="lineQRcode">
                                         <!-- 這裡放QRcode -->
-                                         <a :href="`https://line.me/ti/p/~${selectedCard.organizer.line}`" target="_blank">
-                                             <QRcode
-                                             v-if="selectedCard.organizer.line"
-                                             :value="`https://line.me/ti/p/~${selectedCard.organizer.line}`"
-                                             :size="64"
-                                             ></QRcode>
-                                         </a>
+                                            <a :href="`https://line.me/ti/p/~${selectedCard.organizer.line}`" target="_blank">
+                                                <QRcode
+                                                v-if="selectedCard.organizer.line"
+                                                :value="`https://line.me/ti/p/~${selectedCard.organizer.line}`"
+                                                :size="64"
+                                                ></QRcode>
+                                            </a>
                                     </div>
                                 </div>
                             </div>
@@ -336,14 +336,14 @@
         </div>
     </LightBox>
     <!-- 確認刪除popup -->
-     <PopUp
-     :is-pop-up="isCancel"
-     >
-     <div class="checkAgain">
-         <p class="bold">你真的要刪除行程嗎？</p>
-         <Btn btnStyle="primary small" @click="checkCancel(true)">確定</Btn>
-         <Btn btnStyle="baseline small cancel" @click="checkCancel(false)">取消</Btn>
-     </div>
+        <PopUp
+        :is-pop-up="isCancel"
+        >
+        <div class="checkAgain">
+            <p class="bold">你真的要刪除行程嗎？</p>
+            <Btn btnStyle="primary small" @click="checkCancel(true)">確定</Btn>
+            <Btn btnStyle="baseline small cancel" @click="checkCancel(false)">取消</Btn>
+        </div>
     </PopUp>
 
     <MainFooter></MainFooter>
@@ -952,16 +952,16 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                title: '會員活動3（新增的）',
-                eventStartDate: '2025-02-07 00:00:00',
-                timeStart: '09:30',
-                eventEndDate: '2025-02-28 00:00:00',
-                timeEnd: '15:50',
-                location: '緯育Tibame台北職訓中心',
-                description: 'Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！',
-                capacity: 60,
-                fullCapacity : 1,
-                contact: ''
+                title: newEventTitle.value.inputValue,
+                eventStartDate: `${startTimeY.value.menuValue}-${startTimeM.value.menuValue}-${startTimeD.value.menuValue} 00:00:00`,
+                timeStart: `${startTimeH.value.menuValue}:${startTime.value.menuValue}`,
+                eventEndDate: `${endTimeY.value.menuValue}-${endTimeM.value.menuValue}-${endTimeD.value.menuValue} 00:00:00`,
+                timeEnd: `${endTimeH.value.menuValue}:${endTime.value.menuValue}`,
+                location: activePlace.value.inputValue,
+                description: newEventContent.value.inputValue,
+                capacity: peopleNumber.value.inputValue,
+                fullCapacity : 0,
+                contact: '',
             }),
         });
 
