@@ -1,12 +1,13 @@
 <template>
-  <MainHeader theme="red" bgc="yellow-1"></MainHeader>
+  <MainHeader v-if="isMDScreen" theme="red" bgc="yellow-1"></MainHeader>
+  <MainHeader v-else theme="red" bgc="transparent"></MainHeader>
   <section class="scrollSection landing bg-yellow-1">
     <div class="mainBox">
       <div class="bigText text-red">CONNECT THROUGH SPLOOT</div>
-      <img src="@/assets/img/home/landing.svg" alt="landing">
+      <img src="@/assets/img/home/home1.svg" alt="landing">
     </div>
 
-     <img class="landingCircle" src="@/assets/img/home/landingCircle.svg" alt="landingCircle">
+     <!-- <img class="landingCircle" src="@/assets/img/home/landingCircle.svg" alt="landingCircle"> -->
   </section>
 
 
@@ -22,7 +23,7 @@
           <Btn btnStyle="primary large">立即配對</Btn>
         </RouterLink>
       </div>
-      <img src="@/assets/img/home/match.svg" alt="match">
+      <img src="@/assets/img/home/home2.svg" alt="match">
     </div>
 
     <div class="homeCircle"></div>
@@ -40,7 +41,7 @@
         <Btn btnStyle="primary large">立即訂閱寵物盒</Btn>
       </RouterLink>
       </div>
-      <img src="@/assets/img/home/splootBox.svg" alt="splootBox">
+      <img src="@/assets/img/home/home3.svg" alt="splootBox">
     </div>
 
     <div class="homeCircle"></div>
@@ -58,7 +59,7 @@
           <Btn btnStyle="primary large">立即尋找</Btn>
         </RouterLink>
       </div>
-      <img src="@/assets/img/home/splootBuddy.svg" alt="splootBuddy">
+      <img src="@/assets/img/home/home4.svg" alt="splootBuddy">
     </div>
 
     <div class="homeCircle"></div>
@@ -76,7 +77,7 @@
           <Btn btnStyle="primary large">查看日曆</Btn>
         </RouterLink>
       </div>
-      <img src="@/assets/img/home/event.svg" alt="event">
+      <img src="@/assets/img/home/home5.svg" alt="event">
     </div>
 
     <div class="homeCircle"></div>
@@ -94,7 +95,7 @@
           <Btn btnStyle="primary large">立即探索</Btn>
         </RouterLink>
       </div>
-      <img src="@/assets/img/home/splootFriendly.svg" alt="splootFriendly">
+      <img src="@/assets/img/home/home6.svg" alt="splootFriendly">
     </div>
 
     <div class="homeCircle"></div>
@@ -110,7 +111,12 @@ import MainFooter from '../components/MainFooter.vue';
 import Btn from '../components/Btn.vue';
 import { RouterLink } from "vue-router";
 
+const isMDScreen = ref(window.innerWidth <= 768);
+const updateScreenSize = () => isMDScreen.value = window.innerWidth <= 768;
 
+onMounted(() => {
+  window.addEventListener('resize', updateScreenSize);
+});
 // onMounted(() => {
 //   const sections = document.querySelectorAll('.scrollSection'); // querySelect 去找每一個會滑動的 section
 //   let currentSectionIndex = 0; // 追蹤目前在第幾個區塊
@@ -148,13 +154,4 @@ import { RouterLink } from "vue-router";
 </script>
 
 <style lang="scss" scoped>
-  // @import "../assets/sass/style.scss";
-  // #home{
-  //   header{
-  //     position: fixed;
-  //     &.bg-yellow-1{
-  //       background-color: transparent;
-  //     }
-  //   }
-  // }
 </style>
