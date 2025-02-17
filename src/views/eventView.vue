@@ -376,383 +376,384 @@
     })
 
     // 原始陣列(全部資料存入)
-    const cardsRawData = ref([
-    {
-        title: "聖誕節Splooter聚餐",
-        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
-        peopleCount: "45",
-        startTime: {
-            year: "2024",
-            month: "12",
-            day: "25",
-            time: "18:30"
-        },
-        endTime: {
-            year: "2024",
-            month: "12",
-            day: "25",
-            time: "21:30"
-        },
-        place: "台北市信義區信義路五段7號86樓 (饗 A Joy)",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "派對大師",
-            line: "party_master"
-        }
-    },
-    {
-        title: "One for All vs All for One",
-        content: "It's okay now!! Why? Because I am here!",
-        peopleCount: "2",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "01",
-            time: "22:00"
-        },
-        endTime: {
-            year: "2027",
-            month: "02",
-            day: "01",
-            time: "22:10"
-        },
-        place: "神野站跡地",
-        type: "splooter",
-        status: "edit",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "All Might",
-            line: "all_might"
-        }
-    },
-    {
-        title: "澀谷事變",
-        content: "19:00-發現澀谷被佈下「帳」/21:14-虎杖祓除蝗Guy，並且破壞「帳」/21:22-五條悟被封印",
-        peopleCount: "777",
-        startTime: {
-            year: "2024",
-            month: "10",
-            day: "31",
-            time: "19:00"
-        },
-        endTime: {
-            year: "2027",
-            month: "10",
-            day: "31",
-            time: "19:00"
-        },
-        place: "澀谷車站B5F",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/buddy-post/M.svg", import.meta.url).href,
-            name: "神秘人",
-            line: "spop333"
-        }
-    },
-    {
-        title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
-        content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
-        peopleCount: "100",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "07",
-            time: "07:00"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "10",
-            time: "11:30"
-        },
-        place: "二二八公園集合",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "鯉魚王",
-            line: "magikarp"
-        }
-    },
-    {
-        title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
-        content: "目標石垣島，帶著毛孩們一起自由吧！",
-        peopleCount: "80",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "28",
-            time: "08:30"
-        },
-        endTime: {
-            year: "2025",
-            month: "03",
-            day: "15",
-            time: "22:00"
-        },
-        place: "基隆港",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "艾倫",
-            line: "yoruou_2025"
-        }
-    },
-    {
-        title: "英雄毛孩Cosplay比賽",
-        content: "Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！",
-        peopleCount: "60",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "05",
-            time: "09:30"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "20",
-            time: "15:50"
-        },
-        place: "緯育Tibame台北職訓中心",
-        type: "official",
-        status: "disable",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "變裝達人",
-            line: "cosplay_king"
-        }
-    },
-    {
-        title: "毛孩電影之夜",
-        content: "大螢幕、爆米花，還有最愛的毛孩陪伴，一起享受電影之夜吧！",
-        peopleCount: "55",
-        startTime: {
-            year: "2025",
-            month: "03",
-            day: "01",
-            time: "06:40"
-        },
-        endTime: {
-            year: "2025",
-            month: "03",
-            day: "12",
-            time: "10:10"
-        },
-        place: "基隆海洋廣場",
-        type: "splooter",
-        status: "registered",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "影視迷",
-            line: "movielover"
-        }
-    },
-    {
-        title: "寵物飛盤挑戰賽",
-        content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
-        peopleCount: "15",
-        startTime: {
-            year: "2025",
-            month: "03",
-            day: "2",
-            time: "06:30"
-        },
-        endTime: {
-            year: "2025",
-            month: "03",
-            day: "29",
-            time: "09:29"
-        },
-        place: "大安森林公園",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "飛盤達人",
-            line: "frisbee_master"
-        }
-    },
-    {
-        title: "毛孩時裝秀",
-        content: "讓毛孩穿上最時尚的服飾，一起來場可愛的時裝秀吧！",
-        peopleCount: "20",
-        startTime: {
-            year: "2025",
-            month: "03",
-            day: "28",
-            time: "12:52"
-        },
-        endTime: {
-            year: "2025",
-            month: "04",
-            day: "02",
-            time: "22:26"
-        },
-        place: "淡水河畔",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "時尚寵物",
-            line: "fashion_pet"
-        }
-    },
-    {
-        title: "寵物攝影工作坊",
-        content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
-        peopleCount: "25",
-        startTime: {
-            year: "2025",
-            month: "03",
-            day: "10",
-            time: "20:14"
-        },
-        endTime: {
-            year: "2025",
-            month: "03",
-            day: "31",
-            time: "22:57"
-        },
-        place: "基隆海洋廣場",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "攝影大師",
-            line: "photo_master"
-        }
-    },
-    {
-        title: "寵物手作DIY",
-        content: "一起動手製作專屬於毛孩的玩具與配件，創造美好回憶！",
-        peopleCount: "5",
-        startTime: {
-            year: "2025",
-            month: "03",
-            day: "28",
-            time: "13:00"
-        },
-        endTime: {
-            year: "2025",
-            month: "04",
-            day: "01",
-            time: "05:38"
-        },
-        place: "台北動物園",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "DIY專家",
-            line: "diy_crafts"
-        }
-    },
-    {
-        title: "毛孩露營日",
-        content: "大自然、篝火與毛孩的陪伴，快來參加我們的戶外露營活動！",
-        peopleCount: "55",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "09",
-            time: "16:33"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "15",
-            time: "15:19"
-        },
-        place: "台中中央公園",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "喵星人王國",
-            line: "love_forever"
-        }
-    },
-    {
-        title: "寵物攝影工作坊",
-        content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
-        peopleCount: "10",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "20",
-            time: "23:22"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "24",
-            time: "17:29"
-        },
-        place: "高雄駁二藝術特區",
-        type: "splooter",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "寵愛一生",
-            line: "furry_diary"
-        }
-    },
-    {
-        title: "寵物飛盤挑戰賽",
-        content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
-        peopleCount: "10",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "05",
-            time: "18:47"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "23",
-            time: "20:25"
-        },
-        place: "基隆海洋廣場",
-        type: "splooter",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "毛孩俱樂部",
-            line: "fashion_dog_cat"
-        }
-    },
-    {
-        title: "毛孩瑜珈日",
-        content: "來一場寧靜與身心平衡的瑜珈體驗吧！帶著毛孩一起感受身心舒展的樂趣~",
-        peopleCount: "10",
-        startTime: {
-            year: "2025",
-            month: "02",
-            day: "21",
-            time: "21:11"
-        },
-        endTime: {
-            year: "2025",
-            month: "02",
-            day: "27",
-            time: "19:10"
-        },
-        place: "花博公園",
-        type: "splooter",
-        status: "edit",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "萌寵生活",
-            line: "cat_kingdom"
-        }
-    }
-    ]);
+    // const cardsRawData = ref([
+    // {
+    //     title: "聖誕節Splooter聚餐",
+    //     content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
+    //     peopleCount: "45",
+    //     startTime: {
+    //         year: "2024",
+    //         month: "12",
+    //         day: "25",
+    //         time: "18:30"
+    //     },
+    //     endTime: {
+    //         year: "2024",
+    //         month: "12",
+    //         day: "25",
+    //         time: "21:30"
+    //     },
+    //     place: "台北市信義區信義路五段7號86樓 (饗 A Joy)",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "派對大師",
+    //         line: "party_master"
+    //     }
+    // },
+    // {
+    //     title: "One for All vs All for One",
+    //     content: "It's okay now!! Why? Because I am here!",
+    //     peopleCount: "2",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "01",
+    //         time: "22:00"
+    //     },
+    //     endTime: {
+    //         year: "2027",
+    //         month: "02",
+    //         day: "01",
+    //         time: "22:10"
+    //     },
+    //     place: "神野站跡地",
+    //     type: "splooter",
+    //     status: "edit",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "All Might",
+    //         line: "all_might"
+    //     }
+    // },
+    // {
+    //     title: "澀谷事變",
+    //     content: "19:00-發現澀谷被佈下「帳」/21:14-虎杖祓除蝗Guy，並且破壞「帳」/21:22-五條悟被封印",
+    //     peopleCount: "777",
+    //     startTime: {
+    //         year: "2024",
+    //         month: "10",
+    //         day: "31",
+    //         time: "19:00"
+    //     },
+    //     endTime: {
+    //         year: "2027",
+    //         month: "10",
+    //         day: "31",
+    //         time: "19:00"
+    //     },
+    //     place: "澀谷車站B5F",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/buddy-post/M.svg", import.meta.url).href,
+    //         name: "神秘人",
+    //         line: "spop333"
+    //     }
+    // },
+    // {
+    //     title: "我們的暗號是爆炸頭軍曹GOGOGO~~",
+    //     content: "帶著藍星的毛孩子們跟我們一起參加征服藍星路跑吧～～！",
+    //     peopleCount: "100",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "07",
+    //         time: "07:00"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "10",
+    //         time: "11:30"
+    //     },
+    //     place: "二二八公園集合",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "鯉魚王",
+    //         line: "magikarp"
+    //     }
+    // },
+    // {
+    //     title: "心臓を捧げよ！三天兩夜豪華郵輪寵物派對",
+    //     content: "目標石垣島，帶著毛孩們一起自由吧！",
+    //     peopleCount: "80",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "28",
+    //         time: "08:30"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "15",
+    //         time: "22:00"
+    //     },
+    //     place: "基隆港",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "艾倫",
+    //         line: "yoruou_2025"
+    //     }
+    // },
+    // {
+    //     title: "英雄毛孩Cosplay比賽",
+    //     content: "Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！",
+    //     peopleCount: "60",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "05",
+    //         time: "09:30"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "20",
+    //         time: "15:50"
+    //     },
+    //     place: "緯育Tibame台北職訓中心",
+    //     type: "official",
+    //     status: "disable",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "變裝達人",
+    //         line: "cosplay_king"
+    //     }
+    // },
+    // {
+    //     title: "毛孩電影之夜",
+    //     content: "大螢幕、爆米花，還有最愛的毛孩陪伴，一起享受電影之夜吧！",
+    //     peopleCount: "55",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "01",
+    //         time: "06:40"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "12",
+    //         time: "10:10"
+    //     },
+    //     place: "基隆海洋廣場",
+    //     type: "splooter",
+    //     status: "registered",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "影視迷",
+    //         line: "movielover"
+    //     }
+    // },
+    // {
+    //     title: "寵物飛盤挑戰賽",
+    //     content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
+    //     peopleCount: "15",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "2",
+    //         time: "06:30"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "29",
+    //         time: "09:29"
+    //     },
+    //     place: "大安森林公園",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "飛盤達人",
+    //         line: "frisbee_master"
+    //     }
+    // },
+    // {
+    //     title: "毛孩時裝秀",
+    //     content: "讓毛孩穿上最時尚的服飾，一起來場可愛的時裝秀吧！",
+    //     peopleCount: "20",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "28",
+    //         time: "12:52"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "04",
+    //         day: "02",
+    //         time: "22:26"
+    //     },
+    //     place: "淡水河畔",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "時尚寵物",
+    //         line: "fashion_pet"
+    //     }
+    // },
+    // {
+    //     title: "寵物攝影工作坊",
+    //     content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
+    //     peopleCount: "25",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "10",
+    //         time: "20:14"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "31",
+    //         time: "22:57"
+    //     },
+    //     place: "基隆海洋廣場",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "攝影大師",
+    //         line: "photo_master"
+    //     }
+    // },
+    // {
+    //     title: "寵物手作DIY",
+    //     content: "一起動手製作專屬於毛孩的玩具與配件，創造美好回憶！",
+    //     peopleCount: "5",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "03",
+    //         day: "28",
+    //         time: "13:00"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "04",
+    //         day: "01",
+    //         time: "05:38"
+    //     },
+    //     place: "台北動物園",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "DIY專家",
+    //         line: "diy_crafts"
+    //     }
+    // },
+    // {
+    //     title: "毛孩露營日",
+    //     content: "大自然、篝火與毛孩的陪伴，快來參加我們的戶外露營活動！",
+    //     peopleCount: "55",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "09",
+    //         time: "16:33"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "15",
+    //         time: "15:19"
+    //     },
+    //     place: "台中中央公園",
+    //     type: "official",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "喵星人王國",
+    //         line: "love_forever"
+    //     }
+    // },
+    // {
+    //     title: "寵物攝影工作坊",
+    //     content: "學習如何拍出超可愛的寵物照片，專業攝影師親自指導！",
+    //     peopleCount: "10",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "20",
+    //         time: "23:22"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "24",
+    //         time: "17:29"
+    //     },
+    //     place: "高雄駁二藝術特區",
+    //     type: "splooter",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "寵愛一生",
+    //         line: "furry_diary"
+    //     }
+    // },
+    // {
+    //     title: "寵物飛盤挑戰賽",
+    //     content: "測試你的毛孩接飛盤的技巧，一起來場激烈的比賽吧！",
+    //     peopleCount: "10",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "05",
+    //         time: "18:47"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "23",
+    //         time: "20:25"
+    //     },
+    //     place: "基隆海洋廣場",
+    //     type: "splooter",
+    //     status: "attend",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "毛孩俱樂部",
+    //         line: "fashion_dog_cat"
+    //     }
+    // },
+    // {
+    //     title: "毛孩瑜珈日",
+    //     content: "來一場寧靜與身心平衡的瑜珈體驗吧！帶著毛孩一起感受身心舒展的樂趣~",
+    //     peopleCount: "10",
+    //     startTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "21",
+    //         time: "21:11"
+    //     },
+    //     endTime: {
+    //         year: "2025",
+    //         month: "02",
+    //         day: "27",
+    //         time: "19:10"
+    //     },
+    //     place: "花博公園",
+    //     type: "splooter",
+    //     status: "edit",
+    //     organizer: {
+    //         avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
+    //         name: "萌寵生活",
+    //         line: "cat_kingdom"
+    //     }
+    // }
+    // ]);
+    const cardsRawData = ref([]);
 
     const btnText = ref({
         attend : "參加",
@@ -1134,5 +1135,183 @@
         }
         isCancel.value = !isCancel.value;
     };
+
+    async function findAllEventsPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllEvents.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        try{
+            const eventResp = await resp.json();
+            if(eventResp['status'] == 'success'){
+                const events = eventResp['data'];
+
+                for(let event of events){
+                    const startDate = new Date(event['eventStartDate']);
+                    const endDate = new Date(event['eventEndDate']);
+                    cardsRawData.value.push(
+                        {
+                            id: event['eventId'],
+                            title: event['title'],
+                            content: event['description'],
+                            peopleCount: String(event['capacity']),
+                            startTime: {
+                                year: String(startDate.getFullYear()),
+                                month: String(startDate.getMonth() + 1),
+                                day: String(startDate.getDate()),
+                                time: event['timeStart']
+                            },
+                            endTime: {
+                                year: String(endDate.getFullYear()),
+                                month: String(endDate.getMonth() + 1),
+                                day: String(endDate.getDate()),
+                                time: event['timeEnd']
+                            },
+                            place: event['location'],
+                            type: event['eventType'],
+                            status: event['attendStatus'],
+                            organizer: {
+                                avatar: authBoxStore.memberPortrait(event['userPortrait']),
+                                name: event['nameShown'],
+                                line: event['lindId']
+                            }
+                        }
+                    );
+                }
+            }else if(eventResp['status'] == 'error'){
+                console.log(eventResp['message']);
+            }
+        } catch (error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+    findAllEventsPhp();
+    console.log(cardsRawData.value);
+
+    // attend: 1 是參加 ,0是不參加
+    async function attendEventPhp(attend, eventId){
+
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/attendEvent.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                eventId: eventId,
+                attendStatus: attend
+            }),
+        });
+
+        try{
+            const attendResp = await resp.json();
+            if(attendResp.status == 'success'){
+                // 把參加狀態改成 registered / attend
+            }else if(attendResp.status == 'error'){
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+    attendEventPhp(0,2); // user 不參加 event_id = 2
+    attendEventPhp(1,2); // user 參加 event_id = 2 
+
+    // update = 'System' 代表是會員更新的
+    async function updateEventPhp(eventId, updater = 'System'){
+
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updateEvent.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                eventId: eventId,
+                title: '會員活動3',
+                eventStartDate: '2025-02-07 00:00:00',
+                timeStart: '09:30',
+                eventEndDate: '2025-02-28 00:00:00',
+                timeEnd: '15:50',
+                location: '緯育Tibame台北職訓中心',
+                description: 'Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！',
+                capacity: 60,
+                fullCapacity : 1,
+                contact: '',
+                updater: updater
+            }),
+        });
+
+        try{
+            const eventUpdate = await resp.json();
+            if(eventUpdate.status == 'success'){
+                
+            }else if(eventUpdate.status == 'error'){
+                console.log(eventUpdate.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+    updateEventPhp(3); // 更新 event_id = 3
+
+    async function userCreateEventPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/userCreateEvent.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                title: '會員活動3（新增的）',
+                eventStartDate: '2025-02-07 00:00:00',
+                timeStart: '09:30',
+                eventEndDate: '2025-02-28 00:00:00',
+                timeEnd: '15:50',
+                location: '緯育Tibame台北職訓中心',
+                description: 'Splooter與毛孩們選擇喜歡的英雄角色來進行Cosplay,一同化身成正義的夥伴吧！',
+                capacity: 60,
+                fullCapacity : 1,
+                contact: ''
+            }),
+        });
+
+        try{
+            const eventCreated = await resp.json();
+            if(eventCreated.status == 'success'){
+                console.log(eventCreated);
+            }else if(eventCreated.status == 'error'){
+                console.log(eventCreated.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+    // userCreateEventPhp();
+
+
+    async function deleteEventPhp(eventId, updater = 'System'){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deleteEvent.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                eventId: eventId,
+                updater: updater
+            }),
+        });
+
+        try{
+            const eventDeleted = await resp.json();
+            if(eventDeleted.status == 'success'){
+                console.log(eventDeleted);
+            }else if(eventDeleted.status == 'error'){
+                console.log(eventDeleted.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+    deleteEventPhp(8);
 
 </script>
