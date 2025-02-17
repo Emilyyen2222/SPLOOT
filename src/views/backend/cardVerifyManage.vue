@@ -72,11 +72,11 @@
 
 <script setup>
   import {ref} from "vue";
-  import {useBackend} from "@/utils/backendUtils"
+  import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
-  import DropdownMenu from "../../components/DropdownMenu.vue"
+  import DropdownMenu from "../../components/DropdownMenu.vue";
 
   const cardVerifications = ref(
     Array.from({length:103},(value,x) => ({

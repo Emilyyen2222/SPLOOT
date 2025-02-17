@@ -102,6 +102,22 @@ export function useBackend(backendData, searchUseData, checkBoxTarget,checkBoxCo
 
   };
 
+  // 彈出式視窗按鈕
+  const isPopUp =ref(false);
+
+  // 儲存點選資料變數
+  const thisData =ref(null);
+
+  const popUpToggle = (index) => {
+    thisData.value = {...backendData.value[index]}
+
+    isPopUp.value = !isPopUp.value;
+    document.body.classList.toggle('clicked');
+  };
+
+
+  
+
     // 回傳所有可能用得到的變數以及函式
     return{
         filterData,
@@ -116,5 +132,8 @@ export function useBackend(backendData, searchUseData, checkBoxTarget,checkBoxCo
         isPending, //審核專用
         inputValue,
         dataFilter,
+        isPopUp,
+        thisData,
+        popUpToggle,
     };
 };
