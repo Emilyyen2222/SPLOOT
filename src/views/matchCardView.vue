@@ -73,27 +73,31 @@
     </div>
     <!-- 遮罩部分 -->
     <div class="overlay">
-        <div class="cardSlotsScroll">
-            <div class="cardSlots">
-                <div class="cardContainer" 
-                 v-for="(image, index) in petImages" :key="index">
-                    <div class="petImage">
-                    <img :src="image" alt="Pet Image"
-                    style="cursor: pointer;"
-                    @click="toggleLightBoxPetInfo">
+    <div class="cardSlotsScroll">
+        <div class="cardSlots">
+            <div class="cardContainer" 
+                v-for="(matchedOwner, cardIndex) in matchedCard" 
+                :key="cardIndex">
+                
+                <div class="petImage">
+                    <img :src="matchedOwner.pets[0].imageSrc" alt="Pet Image"style="cursor: pointer;"
+                        @click="toggleLightBoxPetInfo">
+                    
                     <div class="dot">
                         <div 
-                            v-for="(pet, index) in matchedCard" 
-                            :key="index"
-                            :class="{ 'dotActive': index === clickedIndexOverlay, 'dotInactive': index !== clickedIndexOverlay }"
-                            @click="clickedIndexOverlay = index;"
-                        ></div>
-                    </div>
+                            v-for="(pet, dotIndex) in matchedOwner.pets" 
+                            :key="dotIndex"
+                            :class="{ 'dotActive': clickedIndexOverlay[cardIndex] === dotIndex, 'dotInactive': clickedIndexOverlay[cardIndex] !== dotIndex }"
+                            @click="clickedIndexOverlay[cardIndex] = dotIndex;">
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+    </div>
+
 </div>
 <!-- lightTitleMatchAll -->
 <LightBox 
@@ -101,40 +105,47 @@
     :is-light-box="isLightBoxMatchAll" 
     @toggle="toggleLightBoxMatchAll()">
     <div class="matchAllBox">
-        <div class="cardSlotsPopUp">
-            <div class="cardSlots">
+    <div class="cardSlotsPopUp">
+        <div class="cardSlots">
             <div class="cardContainer" 
-            v-for="(image, index) in petImages" :key="index">
-                <div class="petImage">
-                <img :src="image" alt="Pet Image"
-                style="cursor: pointer;"
-                @click="toggleLightBoxPetInfo">
-                <div class="dot">
-                    <div 
-                        v-for="(pet, index) in matchedCard" 
-                        :key="index"
-                        :class="{ 'dotActive': index === clickedIndexMatchAll, 'dotInactive': index !== clickedIndexMatchAll }"
-                        @click="clickedIndexMatchAll = index;"
-                    ></div>
+                v-for="(owner, ownerIndex) in matchedCard" 
+                :key="ownerIndex">
+                
+                <div class="petImage"
+                    v-for="(pet, petIndex) in owner.pets" 
+                    :key="petIndex">
+                    <img :src="pet.imageSrc" alt="Pet Image"
+                        style="cursor: pointer;"
+                        @click="toggleLightBoxPetInfo">
+                    
+                    <div class="dot">
+                        <div 
+                            v-for="(pet, dotIndex) in matchedCard" 
+                            :key="dotIndex"
+                            :class="{ 'dotActive': clickedIndexMatchAll[cardIndex] === dotIndex, 'dotInactive': clickedIndexMatchAll[cardIndex] !== dotIndex }"
+                            @click="clickedIndexMatchAll[cardIndex] = dotIndex;">
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
+
             </div>
         </div>
     </div>
+    </div>
+
 </LightBox>
 <!-- lightTitlePetInfo -->
 <LightBox 
     :title="lightTitlePetInfo.title"
     :is-light-box="isLightBoxPetInfo" 
-    @toggle="toggleLightBoxPetInfo()">
+    @toggle="toggleLightBoxPetInfo">
     <div class="petInfoBoxPopUp">
         <div class="cardWrapPopUp">
             <!-- 卡片部分 -->
             <div class="cardwrapper" v-if="lightBoxPetInfo">
                 <!-- 左側圖片區 -->
                 <div class="imageContainer">
-                    <img :src="lightBoxPetInfo.imageSrc" alt="">
+                    <img :src="matchedCard[0].pets[0].imageSrc" alt="">
                 </div>
                 <!-- 右側內容區 -->
                 <div class="content">
@@ -158,7 +169,9 @@
                     <div class="info">
                         <div class="nameAndGender">
                             <h4 class="bold name">{{ lightBoxPetInfo.name }}</h4>
-                            <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
+                            <!-- gender icon -->
+                            <img v-if="plan.pets[plan.petShowing].gender == 'Female'" src="../assets/img/icon/femaleIcon.svg" alt="Female Icon" style="width: 2rem;" />
+                            <img v-else-if="plan.pets[plan.petShowing].gender == 'Male'" src="../assets/img/icon/maleIcon.svg" alt="Male Icon" style="width: 2rem;" />
                         </div>
                         <div class="distance">
                         <div class="smallText distanceIcon"></div>
@@ -314,11 +327,65 @@
         const isLightBoxPetInfo = ref(false);
         const isLightBoxMatchAll = ref(false);
 
+
         const matchedCard = ref([
-            { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '03', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-            { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-            { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-        ]); 
+            {
+                owner: 'Emily',
+                pets: [
+                    { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的金毛，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male' },
+                    { label: 'card5', name: 'Bella', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '02', distance: 7, tags: ['貴賓犬', '聰明', '喜歡散步'], description: 'Bella 是一隻聰明的貴賓犬，會很多小技巧，還是個愛散步的小天使！', gender: 'Female' },
+                    { label: 'card7', name: 'Charlie', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '03', distance: 3, tags: ['拉布拉多', '熱心', '愛啃骨頭'], description: 'Charlie 喜歡和人玩，對每個人都很熱心，最愛啃骨頭。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Sam',
+                pets: [
+                    { label: 'card4', name: 'Lucy', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 4, tags: ['柯基', '外向', '喜歡跑步'], description: 'Lucy 是隻活潑的小柯基，喜歡跑步，總是跑得飛快！', gender: 'Female' },
+                    { label: 'card5', name: 'Oscar', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 6, tags: ['法國鬥牛犬', '粘人', '喜歡睡覺'], description: 'Oscar 喜歡在主人旁邊黏著，特別愛睡覺。', gender: 'Male' },
+                    { label: 'card6', name: 'Rusty', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '03', distance: 5, tags: ['比格犬', '調皮', '愛追球'], description: 'Rusty 喜歡追著球跑，總是能讓周圍充滿活力！', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Lupe',
+                pets: [
+                    { label: 'card4', name: 'Toby', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '01', distance: 3, tags: ['邊境牧羊犬', '機警', '喜歡挑戰'], description: 'Toby 很機警，總能迅速應對各種挑戰，最愛玩各種智力遊戲。', gender: 'Male' },
+                    { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    { label: 'card7', name: 'Zara', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 6, tags: ['臘腸犬', '堅毅', '喜歡挖洞'], description: 'Zara 喜歡在花園裡挖洞，是隻非常堅毅的小臘腸犬。', gender: 'Female' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Hao',
+                pets: [
+                    { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    { label: 'card5', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Ian',
+                pets: [
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Olivia',
+                pets: [
+                    { label: 'card4', name: 'Zeus', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '01', distance: 12, tags: ['大丹犬', '穩重', '喜歡散步'], description: 'Zeus 是一隻穩重的大丹犬，喜歡悠閒地散步，步伐穩定，極具威風。', gender: 'Male' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' }
+                ],
+                petShowing: 0
+            }
+        ]);
+
 
         const lightBoxPetInfo = ref(
             { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
@@ -383,8 +450,11 @@
 
         const clickedOwnerIndex = ref(0); //目前選中的owner,default為第一個
         const clickedIndex = ref(0); //目前選中的寵物index
-        const clickedIndexOverlay = ref(0); 
-        const clickedIndexMatchAll = ref(0); 
+        // const clickedIndexOverlay = ref(0); 
+        // const clickedIndexMatchAll = ref(0); 
+        const clickedIndexOverlay = ref(Array(matchedCard.value.length).fill(null)); 
+        const clickedIndexMatchAll = ref(Array(matchedCard.value.length).fill(null));   
+
 
 
         const dotClicked = (index, ownerIndex = -1) => {
@@ -504,11 +574,6 @@
         const lightTitleMatchReset = ref({
                 title: '配對喜好設定'
         });
-        function toggleLightBoxMatch() {
-            isLightBoxlightTitleMatchReset.value = !isLightBoxlightTitleMatchReset.value;
-            updateBodyClass();
-        };
-
         // 燈箱 狗狗資訊卡 & 配對成功一覽
         const lightTitlePetInfo = ref({
             title: '狗狗資訊卡'
@@ -516,9 +581,14 @@
         const lightTitleMatchAll = ref({
             title: '配對成功一覽'
         });
-
-        function toggleLightBoxPetInfo() {
+        function toggleLightBoxMatch() {
+            isLightBoxlightTitleMatchReset.value = !isLightBoxlightTitleMatchReset.value;
+            updateBodyClass();
+        };
+        // const currentLightBoxPet = ref(0);
+        function toggleLightBoxPetInfo(ownerIndex) {
             isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
+            // currentLightBoxPet.value = ownerIndex;
         updateBodyClass();
         }
 
