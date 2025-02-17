@@ -618,8 +618,7 @@ const isValidEmail = computed(() => {
 
 // 動態篩選訂閱週期
 const filteredPlans = computed(() => planOptions[subSelected.value] || planOptions[""]);
-// console.log("目前選擇的方案:", subSelected.value);
-// console.log("對應的訂閱方案:", planOptions[subSelected.value]);
+
 
 const selectedPrice = computed(() => {
     const selectedPlanObj = planOptions[subSelected.value].find(
@@ -919,10 +918,9 @@ async function getUserEmailPhp() {
     try {
         const user = await resp.json();
         if (user.status == 'success') {
-            console.log(user['email']);
             userEmail.value = user['email'];
         } else {
-            console.log(user['status']);
+            console.log(user['status'], user['message']);
         }
     } catch (error) {
         console.error('Error parsing JSON:', error);
@@ -930,23 +928,6 @@ async function getUserEmailPhp() {
 }
 
 async function subscribeSplootBoxPhp() {
-
-    console.log(petName.value.inputMsg);
-    console.log(petSelected.value);
-    console.log(genderSelected.value);
-    console.log(petSize.value.selected[0]);
-    console.log(petBreed.value.menuValue);
-    console.log(birthDate.value);
-    console.log(subSelected.value);
-    console.log(monthFee[planSelected.value]);
-    console.log(selectedCity.value);
-    console.log(selectedDistrict.value);
-    console.log(deliverStreet.value);
-    console.log(cardNumber.value);
-    console.log(expireMonth.value);
-    console.log(expireYear.value);
-    console.log(holderName.value);
-    console.log(cvc.value);
 
     const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/subscribeSplootBox.php`, {
         method: 'POST',
@@ -975,7 +956,7 @@ async function subscribeSplootBoxPhp() {
 
     try {
         const user = await resp.json();
-        console.log(user.status);
+        if(user['status'] == 'error') console.log(user['message']);
     } catch (error) {
         console.error('Error parsing JSON:', error)
     }
