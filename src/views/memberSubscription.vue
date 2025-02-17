@@ -293,14 +293,14 @@
   // 定義一個引用來獲取 slider 的 DOM 元素
   const sliderRef = ref(null);
   // 調整滾動倍率，1 表示原始滾動距離(1.5 表示增加 50% 距離)  
-  const scrollMultiplier = 35;
+  const scrollMultiplier = 45;
   // 監聽 wheel 事件，並將垂直滾輪轉換為水平滾動
   const handleWheel = (event) => {
     // 防止垂直滾動
     event.preventDefault();
     // 根據滾輪垂直滾動的距離來更新 scrollLeft
     if (sliderRef.value) {
-      sliderRef.value.scrollLeft += event.deltaY * scrollMultiplier;
+      sliderRef.value.scrollLeft += event.deltaX * scrollMultiplier;
     }
   };
   
