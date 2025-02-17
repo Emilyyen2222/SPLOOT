@@ -367,73 +367,23 @@
     const authBoxStore = useAuthStores();
 
     //data
-    // 點選日曆後的資料過濾在這裡
-    const cardsData = ref([]);
+    const cardsRawData = ref({});
+
+
+    // popup選擇的卡片
+    const selectedCard = ref([]); 
+
     
     //switch篩選器過濾後的陣列
     const filterData = computed(() => {
-        return cardsData.value.filter(card => card.type === activeCard.value);
+        return cardsRawData.value.filter(card => card.type === activeCard.value);
     })
     
-    const cardsRawData = ref([
-    {
-        eventId: '0022',
-        title: "聖誕節Splooter聚餐",
-        content: "帶著你的毛孩們一起和我們Splooter共襄盛舉吧~現場有精美聖誕禮物喔!!",
-        peopleCount: "45",
-        startTime: {
-            year: "2024",
-            month: "12",
-            day: "25",
-            time: "18:30"
-        },
-        endTime: {
-            year: "2025",
-            month: "12",
-            day: "25",
-            time: "21:30"
-        },
-        place: "台北市信義區信義路五段7號86樓 (饗 A Joy)",
-        type: "official",
-        status: "attend",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "派對大師",
-            line: "party_master"
-        }
-    },
-    {
-        eventId: '0023',
-        title: "One for All vs All for One",
-        content: "It's okay now!! Why? Because I am here!",
-        peopleCount: "2",
-        startTime: {
-            year: "2024",
-            month: "02",
-            day: "01",
-            time: "22:00"
-        },
-        endTime: {
-            year: "2026",
-            month: "02",
-            day: "01",
-            time: "22:10"
-        },
-        place: "神野站跡地",
-        type: "splooter",
-        status: "edit",
-        organizer: {
-            avatar: new URL("../assets/img/event/129.svg", import.meta.url).href,
-            name: "All Might",
-            line: "all_might"
-        }
-    },
-    ]);
 
     const btnText = ref({
         attend : "參加",
         edit : "編輯",
-        registered : "已參加",
+        registered : "取消參加",
         disable : "已額滿",
     });
 
@@ -446,7 +396,9 @@
     };
 
     //日曆點選以及載入時間渲染
-    const isDateObject = (touchedDate) => {
+    const isDateObject = async (touchedDate) => {
+        await findAllEventsPhp();
+
         const targetDate = new Date(touchedDate);
         targetDate.setHours(0, 0, 0, 0); // 使時間變成 00:00 以防時間差比較錯誤 只比較年月日
 
@@ -459,7 +411,7 @@
 
         console.log("選擇的日期:", targetDate.toLocaleDateString("zh-TW"));  //選擇日期 YYY/M/D 本地時間
 
-        // 檢查cardsRawData資料
+        // 檢查allEventsRawData資料
         if (!cardsRawData.value || !Array.isArray(cardsRawData.value)) {
             alert(`${cardsRawData.value}無效或不是陣列`);
             console.error("cardsRawData.value 無效或不是陣列");
@@ -467,26 +419,28 @@
         }
 
         // 資料過濾
-        cardsData.value = cardsRawData.value.filter(d => {
+        const filteredData = cardsRawData.value.filter(d => {
 
             //資料缺少開始時間或是結束時間
             if (!d.startTime || !d.endTime) {
                 console.warn("缺少 startTime 或 endTime");
                 return false;
             }
-
+            
             // 確保日期格式正確，開始時間設定為00:00:00，結束時間設定為23:59:59
             const startDate = new Date(`${d.startTime.year}-${d.startTime.month.padStart(2, '0')}-${d.startTime.day.padStart(2, '0')}T00:00:00`);
             const endDate = new Date(`${d.endTime.year}-${d.endTime.month.padStart(2, '0')}-${d.endTime.day.padStart(2, '0')}T23:59:59`);
-
+            
             return startDate <= targetDate && endDate >= targetDate;
-        }).sort((a, b) => {
+        });
+
+        cardsRawData.value = filteredData.sort((a, b) => {
             const dataA = new Date(`${a.startTime.year}-${a.startTime.month.padStart(2, '0')}-${a.startTime.day.padStart(2, '0')}`);
             const dataB = new Date(`${b.startTime.year}-${b.startTime.month.padStart(2, '0')}-${b.startTime.day.padStart(2, '0')}`);
             return dataA - dataB;
         });
 
-        console.log("篩選後的 cardsData:", cardsData.value);
+        console.log("篩選後的 cardsRawData:", cardsRawData.value);
     };
 
     const filterScheduleCard = (day) => {
@@ -519,35 +473,38 @@
 
     // 控制燈箱的顯示與隱藏
     function toggleAddEvent() {
-    isAddEvent.value = !isAddEvent.value;
-    editMode.value = false; //關閉燈箱切換回新增貼文模式
-    // 停止捲軸
-    if (isAddEvent.value) {
-    document.body.classList.add('clicked');
-    } else {
-    document.body.classList.remove('clicked');
-    }
-    //清空內容選單 以及提示錯誤
-    newEventTitle.value.inputValue='';
-    newEventTitle.value.inputError = false;
-    newEventContent.value.inputValue='';
-    newEventContent.value.inputError = false;
-    peopleNumber.value.inputValue='';
-    peopleNumber.value.inputError = false;
-    activePlace.value.inputValue='';
-    activePlace.value.inputError = false;
-    startTimeD.value.menuValue = '';
-    endTimeD.value.menuValue = '';
-    startTimeY.value.placeHolder = '年';
-    startTimeM.value.placeHolder = '月';
-    startTimeD.value.placeHolder = '日';
-    startTimeH.value.placeHolder = '時';
-    startTime.value.placeHolder = '分';
-    endTimeY.value.placeHolder = '年';
-    endTimeM.value.placeHolder = '月';
-    endTimeD.value.placeHolder = '日';
-    endTimeH.value.placeHolder = '時';
-    endTime.value.placeHolder = '分';
+        isAddEvent.value = !isAddEvent.value;
+        editMode.value = false; //關閉燈箱切換回新增貼文模式
+        // 停止捲軸
+        if (isAddEvent.value) {
+        document.body.classList.add('clicked');
+        } else {
+        document.body.classList.remove('clicked');
+        }
+
+        if((!editMode.value)){
+            //清空內容選單 以及提示錯誤
+            newEventTitle.value.inputValue='';
+            newEventTitle.value.inputError = false;
+            newEventContent.value.inputValue='';
+            newEventContent.value.inputError = false;
+            peopleNumber.value.inputValue='';
+            peopleNumber.value.inputError = false;
+            activePlace.value.inputValue='';
+            activePlace.value.inputError = false;
+            startTimeD.value.menuValue = '';
+            endTimeD.value.menuValue = '';
+            startTimeY.value.placeHolder = '年';
+            startTimeM.value.placeHolder = '月';
+            startTimeD.value.placeHolder = '日';
+            startTimeH.value.placeHolder = '時';
+            startTime.value.placeHolder = '分';
+            endTimeY.value.placeHolder = '年';
+            endTimeM.value.placeHolder = '月';
+            endTimeD.value.placeHolder = '日';
+            endTimeH.value.placeHolder = '時';
+            endTime.value.placeHolder = '分';
+        }
     }
 
     // ------------新增貼文輸入以及下拉式選單-------------
@@ -695,18 +652,19 @@
         menuValue:''
     });
 
-    //提交按鈕
+    //新增
     const submitCard = () => {
         if(submitCheck.value){
             alert('填寫未完成');
         }else if(timeCheck.value){
             alert('開始時間不能大於等於結束時間！');
         }else{
-            alert('填寫完成');
+            userCreateEventPhp();
+            toggleAddEvent();
         }
     };
 
-    //更新：儲存
+    //修改
     const updateCard = () => {
         if(submitCheck.value){
             alert('填寫未完成');
@@ -715,6 +673,8 @@
         }else{
             updateEventPhp(selectedCard.value.eventId);
             toggleAddEvent();
+
+            console.log(selectedCard.value.eventId);
         }
     };
 
@@ -754,8 +714,6 @@
     //PopUp狀態
     let isSuccess = ref(false);
 
-    const selectedCard = ref(null); 
-
     // 控制編輯以及參加成功的按鈕（根據按鈕狀態做改變)
  
 
@@ -765,17 +723,25 @@
         document.body.classList.remove('clicked');
     };
 
-    function isEditOrSuccess(card) {
+    async function isEditOrSuccess(card) {
         // 參加成功>開啟參加成功popup
         if(authBoxStore.isLoggedIn){
             if(card.status == "attend"){
                 selectedCard.value = card; //儲存當前哪一張卡
+                // 回傳資料庫更改活動狀態
                 isSuccess.value = true;
                 document.body.classList.add('clicked');
+                // 切換按鈕樣式
+                const success = await attendEventPhp(1, card.eventId);
+                if(success){
+                    card.status = "registered";
+                };
+
                 // 編輯>開啟發起活動燈箱
             }else if(card.status === "edit"){
                 selectedCard.value = card;
                 isAddEvent.value = true;
+                editMode.value = true; // 開啟編輯模式
                 document.body.classList.add('clicked');
                 //card資料匯入燈箱(card 是一般物件)
                 newEventTitle.value.inputValue = card.title;
@@ -804,6 +770,13 @@
                 endTime.value.placeHolder = endTime.value.menuValue;
     
                 editMode.value = true;
+            }else if(card.status == "registered"){
+                const success = await attendEventPhp(0, card.eventId);
+                if (success) {
+                    card.status = "attend";
+                }
+            }else if(card.status == "disable"){
+                return;
             }            
         }else{
             authBoxStore.toggleAuthBox();
@@ -817,8 +790,8 @@
         if(isComform){
             if (selectedCard.value) {
                 // 移除該行程
-                cardsData.value = cardsData.value.filter(card => card !== selectedCard.value);
                 cardsRawData.value = cardsRawData.value.filter(card => card !== selectedCard.value);
+                deleteEventPhp(selectedCard.value.eventId);
             }
             toggleAddEvent();
         }
@@ -828,6 +801,8 @@
     // php
 
     async function findAllEventsPhp(){
+        // 清空陣列
+        cardsRawData.value = [];
         const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllEvents.php`, {
             method: 'POST',
             headers: {
@@ -843,9 +818,16 @@
                 for(let event of events){
                     const startDate = new Date(event['eventStartDate']);
                     const endDate = new Date(event['eventEndDate']);
+
+                    // 判斷是否已額滿
+                    let status = event['attendStatus'];
+                    if (event['currentParticipants'] >= event['capacity']) {
+                        status = "disable"; // 設為已額滿
+                    }
+                    
                     cardsRawData.value.push(
                         {
-                            id: event['eventId'],
+                            eventId: event['eventId'],
                             title: event['title'],
                             content: event['description'],
                             peopleCount: String(event['capacity']),
@@ -878,8 +860,13 @@
         } catch (error){
             console.error('Error parsing JSON:', error);
         }
+        cardsRawData.value.sort((a, b) => {
+            const dataA = new Date(`${a.startTime.year}-${a.startTime.month.padStart(2, '0')}-${a.startTime.day.padStart(2, '0')}`);
+            const dataB = new Date(`${b.startTime.year}-${b.startTime.month.padStart(2, '0')}-${b.startTime.day.padStart(2, '0')}`);
+            return dataA - dataB;
+        });
     }
-    findAllEventsPhp();
+    // findAllEventsPhp();
     console.log(cardsRawData.value);
 
     // attend: 1 是參加 ,0是不參加
@@ -900,14 +887,16 @@
             const attendResp = await resp.json();
             if(attendResp.status == 'success'){
                 // 把參加狀態改成 registered / attend
+                return true;
             }else if(attendResp.status == 'error'){
+                return false;
             }
         }catch(error){
             console.error('Error parsing JSON:', error);
         }
     }
-    attendEventPhp(0,2); // user 不參加 event_id = 2
-    attendEventPhp(1,2); // user 參加 event_id = 2 
+    // attendEventPhp(0,2); // user 不參加 event_id = 2
+    // attendEventPhp(1,2); // user 參加 event_id = 2 
 
     // update = 'System' 代表是會員更新的
     async function updateEventPhp(eventId, updater = 'System'){
@@ -943,6 +932,7 @@
         }catch(error){
             console.error('Error parsing JSON:', error);
         }
+        findAllEventsPhp();//重新渲染
     }
 
     async function userCreateEventPhp(){
@@ -975,6 +965,12 @@
         }catch(error){
             console.error('Error parsing JSON:', error);
         }
+        findAllEventsPhp();//重新渲染
+        cardsRawData.value.sort((a, b) => {
+            const dataA = new Date(`${a.startTime.year}-${a.startTime.month.padStart(2, '0')}-${a.startTime.day.padStart(2, '0')}`);
+            const dataB = new Date(`${b.startTime.year}-${b.startTime.month.padStart(2, '0')}-${b.startTime.day.padStart(2, '0')}`);
+            return dataA - dataB;
+        });
     }
     // userCreateEventPhp();
 
