@@ -114,128 +114,93 @@
             <div class="options">
                 <div class="paymentBox">
                     <div class="textBox">
-                        <p>SPLOOT BOX 三個月方案 - 白金卡(Platinum)</p> 
-                        <p>$3,597</p> 
+                        <p>SPLOOT BOX
+                            <!-- {{ periodName.three }}方案 - {{ subSelected }}
+                            ({{ planName }})</p> -->
+                            {{ plan.twelve }}方案 - {{ cardLevel.gold }}
+                            ({{ metal.gold }})</p>
+                        <p>{{ "$" + total.money }}</p>
                     </div>
                     <div class="boxDivider"></div>
                     <div class="textBox">
-                        <p>月費</p> 
-                        <p>$3,597</p> 
+                        <p>月費</p>
+                        <p>{{ "$" + monthly.money }}</p>
+
                     </div>
                     <div class="boxDivider"></div>
                     <div class="textBox">
-                        <p>今日應付金額</p> 
-                        <p>$3,597</p> 
+                        <p>今日應付金額</p>
+                        <p>{{ "$" + monthly.money }}</p>
                     </div>
                 </div>
                 <div class="infoBox">
                     <div class="xsText left">信用卡付款</div>
-                    <InputText 
-                    textAlign = "textLeft" 
-                    placeHolder="卡號" 
-                    errorMsg="Invalid Input" 
-                    v-model="inputValue" 
-                    :hasError="inputError">
+                    <InputText size="small" placeHolder="卡號" errorMsg="請輸入信用卡資訊" v-model="formattedCardNumber"
+                        :hasError="creditCardError" @input="formatCardNumber">
                     </InputText>
-                    <InputText textAlign = "textLeft" 
-                    placeHolder="持卡人姓名" errorMsg="Invalid Input" 
-                    v-model="inputValue" 
-                    :hasError="inputError">
+                    <InputText size="small" placeHolder="持卡人姓名" errorMsg="請輸入持卡人姓名" v-model="holderName"
+                        :hasError="holderNameError">
                     </InputText>
                     <div class="cardInfo">
-                        <div class="info">
-                            <DropdownMenu 
-                            size=""
-                            :placeHolder="menus.visaYear.placeHolder"
-                            :options="menus.visaYear.options">
+                        <div class="info dropdownMenu">
+                            <DropdownMenu class="dropDown" :placeHolder="menus.visaYear.placeHolder"
+                                :options="menus.visaYear.options" v-model="expireYear">
+                            </DropdownMenu>
+                        </div>
+                        <div class="info dropdownMenu">
+                            <DropdownMenu class="dropDown" :placeHolder="menus.visaMonth.placeHolder"
+                                :options="menus.visaMonth.options" v-model="expireMonth">
                             </DropdownMenu>
                         </div>
                         <div class="info">
-                            <DropdownMenu 
-                            size=""
-                            :placeHolder="menus.visaMonth.placeHolder"
-                            :options="menus.visaMonth.options">
-                            </DropdownMenu>
-                        </div>
-                        <div class="info">
-                        <InputText textAlign = "textLeft" 
-                        placeHolder="安全碼" errorMsg="Invalid Input" 
-                        v-model="inputValue" 
-                        :hasError="inputError">
-                        </InputText>
+                            <InputText size="small" placeHolder="安全碼" errorMsg="請輸入3~4位安全碼" v-model="cvc"
+                                :hasError="cvvError" @input="validateCVV">
+                            </InputText>
                         </div>
                     </div>
                 </div>
+                <p v-if="formHasError" class="xsText text-red textCenter">請填寫信用卡資訊</p>
             </div>
-                <ul class="planItems">
-                    <li class="xsText">SHOPLINE將會使用本次交易資訊作為後續定期扣款，點擊提交即同意 《SHOPLINE Payments 支付服務條款》及《SHOPLINE Payments 隱私權政策》。</li>
-                    <li class="xsText">本金流服務由 SHOPLINE Payments 提供，通過 PCI-DSS 國際信用卡組織最高等級認證，提供安全的交易服務，支援國內外信用卡刷卡。</li>
-                </ul>
-  
-                <li class="checkBox">
-                    <div class="boxAlign">
-                        <input type="checkbox">
-                        <p class="xsText">
-                            我同意 
-  
-                            <span class="xsText link" @click="toggleLightBox_userP" href="">網站服務條款</span> 及 
-                            <span class="xsText link" @click="toggleLightBox_privacy" href="">隱私權政策</span>
-                        </p>
-                    </div>
-                    <div class="boxAlign">
-                        <input type="checkbox">
-                        <p class="xsText">我同意成為 SPLOOT 的會員</p>
-                    </div>
-                    <div class="boxAlign">
-                        <input type="checkbox">
-                        <p class="xsText">我願意接收 SPLOOT 的最新消息、優惠及服務推廣相關資訊</p>
-                    </div>
+            <ul class="planItems">
+                <li class="xsText">SHOPLINE將會使用本次交易資訊作為後續定期扣款，點擊提交即同意 《SHOPLINE Payments 支付服務條款》及《SHOPLINE Payments
+                    隱私權政策》。
                 </li>
-            <Btn btnStyle="primary default" @click="toggleLightBox_resub">開始訂閱SPLOOT BOX</Btn>   
+                <li class="xsText">本金流服務由 SHOPLINE Payments 提供，通過 PCI-DSS 國際信用卡組織最高等級認證，提供安全的交易服務，支援國內外信用卡刷卡。</li>
+            </ul>
+
+            <li class="checkBox">
+                <div class="boxAlign">
+                    <input type="checkbox" v-model="q9Checkbox">
+                    <p class="xsText">
+                        我同意
+                        <span class="xsText link" href="" @click="togglePolicy">網站服務條款</span> 及
+                        <span class="xsText link" href="" @click="togglePrivacy">隱私權政策</span>
+                    </p>
+                    <br>
+                    <p v-if="policyHasError" class="xsText text-red textCenter">*請勾選我同意</p>
+                </div>
+                <div class="boxAlign">
+                    <input type="checkbox">
+                    <p class="xsText">我同意成為 SPLOOT 的會員</p>
+                </div>
+                <div class="boxAlign">
+                    <input type="checkbox">
+                    <p class="xsText">我願意接收 SPLOOT 的最新消息、優惠及服務推廣相關資訊</p>
+                </div>
+            </li>
+
+            <Btn btnType="form" btnStyle="nextQ"
+                @click="nextQuestion(cardNumber != '' && holderName != '' && expireYear != '' && expireMonth != '' && cvc != '' && q9Checkbox)">
+                繼續訂閱SPLOOT BOX</Btn>            
         </div>
       </div>    
     </LightBox>
     
-      <!-- 使用者政策 -->
-      <LightBox 
-        :is-light-box="lightTitle_userPolicy.isLightBox.value" 
-        :title="lightTitle_userPolicy.title"
-        @toggle="toggleLightBox_userP">
-        <h6>使用者政策</h6>
-        <p>在您開始使用 SPLOOT布魯家 所經營之網站之前，請詳細閱讀以下所有服務條款：
-        當您成為 SPLOOT布魯家 網站的會員時，即表示您已詳細閱讀、明確瞭解並同意接受本服務條款之所有內容。
-        若您不同意所列之服務條款，則請您立即離開此網站或者不使用任何網站之任何服務提供。</p>
-        <p class="bold">帳號</p>
-        <p>當您向我們註冊新帳號時，請務必確保您所提供的資料皆是最準確、完整並且時常保持更新狀態。違反所列之條款者，將有可能導致被立即停止您的帳號以及網站所提供的所有服務。此外，在使用任何服務以及活動上，您有義務責任確保您的密碼安全、無論該密碼是透過使用我們服務而管理或者第三方服務。您必須立即通知我們，一旦您的密碼被盜用或者處於不安全狀態。</p>
-        <p class="bold">連結到其他網站</p>
-        <p>我們的服務可能含有部份連結，將連結到第三方網站或者服務。該些服務將不會處於我們的控制、操作以及擁有管轄權限的範圍內，所以本網站沒有承擔任何內容、隱私政策或者任何第三方網站所提供的服務之義務責任。您同意本網站不需要承擔任何責任、因使用該第三方網站所提供之內容、服務與商品而所導致的；直接或者間接性損失與破壞。我們強烈建議您必須詳細閱讀清楚有關您所造訪的第三方網站之服務條款以及隱私政策，以確保您自身的權益。</p>
-        <p class="bold">終止服務</p>
-        <p>在不需要任何事前通知以下，我們有可能隨時終止您使用我們網站服務的權限；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。在不需要任何事前通知以下，我們有可能隨時終止您所持有的登入帳號；以上終止服務決定並不需要任何理由即可即時生效，包括但不限於您違反本服務條款。一旦確定終止，您將會立即無法繼續使用所有服務。若您希望終止您的帳號，您可以隨時終止服務。終止服務適用於所有條款的規定，包括但不限於所有權規定、擔保聲明、賠款以及有限責任。</p>
-        <p class="bold">政府法律</p>
-        <p>以上所有條款將會會遵從（國家之法律）無論是否其條款衝突於法律服務條款。若我們未擁有執行以上條款之部份權益，並不等同於我們放棄所有條款的執行權益。若有以上有部份條款不適用於所指定之法庭，其其他之所有條款依然有效。以上所有條款達致雙方在服務使用上的一致性同意與協議，任何事前的協議將有可能影響雙方對於以上所有服務條款的取代或者更改。
-        我們保留所有條款的更改、取代之權益，並所做出更改、取代之內容可自行決定。若有任何的更改涉及任何內容，我們將會嘗試提供最少30天的事前通知；該通知將會在新條款正式起效之前公布。至於任何內容的制定則由我們自行決定。若您欲繼續使用網站服務，請務必同意所有新條款；若您不同意新條款，將會要求停止使用網站所有服務。
-        若您有任何問題與疑慮，煩請與 SPLOOT布魯家 進行聯繫。</p>
-        <Btn @click="toggleLightBox_userP" class="padding" btnStyle="primary default">確定</Btn>
-      </LightBox>
-  
-      <!-- 隱私權政策 -->
-      <LightBox 
-        :is-light-box="lightTitle_privacy.isLightBox.value" 
-        :title="lightTitle_privacy.title"
-        @toggle="toggleLightBox_privacy">
-        <h6>隱私權政策</h6>
-        <p>歡迎您使用 SPLOOT布魯家（以下簡稱「本公司」）係依據本服務條款提供 SPLOOT布魯家 (http://www.sploot.co) 服務（以下簡稱「本服務」），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：</p>
-        <p class="bold">一、隱私權保護政策的適用範圍</p>
-        <p>隱私權保護政策內容，包括本網站如何處理您在使用網站服務時收集到的個人識別資料。隱私權保護政策不適用於其他相關連結的網站，也不適用於非本網站所委託或參與管理的人員。</p>
-        <p class="bold">二、個人資料的蒐集、處理及利用方式</p>
-        <p>當您造訪本網站或使用本網站所提供之功能服務時，我們將視該服務功能性別，請您提供必要的個人資料，並於特定目的範圍內處理及使用您的個人資料；未經您的書面同意，將不會將個人資料用於其他用途。
-        本網站在您使用服務信箱、填寫問卷、參加活動時，會保存您所提供的姓名、電子郵件信箱、聯絡方式及使用時間等。
-        於一般瀏覽時，伺服器會自行記錄相關行為，包括您使用連線設備之IP位址、使用時間、瀏覽器及點擊紀錄等，做為我們增進網站服務的參考依據，此記錄為內部應用，決不對外公開。</p>
-        <p class="bold">三、資料之保護</p>
-        <p>本網站主機均設有防火牆、反病毒系統及其他相關的資訊安全設備及必要的安全防護措施，對於本網站及您的個人資料加以嚴格保護。
-          未經授權之人員不得接觸您的個人資料，且所有接觸之人員均經簽署保密契約，違反保密義務者將受到相關法律處分。</p>
-        <Btn @click="toggleLightBox_privacy" class="padding" btnStyle="primary default">確定</Btn>              
-      </LightBox>
+    <!-- 網站服務條款 -->
+    <Policy :is-light-box="isLightBoxPolicy" :title="titlePolicy" @toggle="togglePolicy" policies="policyInfo"></Policy>
+    <!-- 隱私權政策 -->
+    <Policy :is-light-box="isLightBoxPrivacy" :title="titlePrivacy" @toggle="togglePrivacy" policies="privacyInfo">
+    </Policy>
   
     <!-- circle bg -->
     <div class="member-circle"></div>
@@ -339,69 +304,279 @@
     }
   };
   
-  // 續約
+  // 續約(Emily)
+    // 假資料(Hao)
+    const plan = ref({twelve:"十二個月"});
+    const cardLevel = ref({gold:"金卡"});
+    const metal = ref({gold:"gold"});
+    const total = ref({money:1919});
+    const monthly = ref({money:749});
+
+  const subSelected = ref({
+    
+  });
+  const planSelected = ref("");
+  const planName = {
+      // s:"Sliver",
+      "銀卡": "Silver",
+      // "金卡": "Gold",
+      // "白金卡": "Platinum"
+  };
+  const periodName = {
+      three: "三個月",
+      // "單次體驗": "單次體驗",
+      // "3個月": "三個月",
+      // "6個月": "六個月",
+      // "12個月": "十二個月"
+  };
+  const monthFee = {
+      "單次體驗": 1,
+      "3個月": 3,
+      "6個月": 6,
+      "12個月": 12
+  }
+  // 訂閱週期對應表
+  const planOptions = {
+      "銀卡": [
+          { label: "單次體驗", times: "x1", price: 799 },
+          { label: "3個月", times: "x3", price: 2097 },
+          { label: "6個月", times: "x6", price: 3774 },
+          { label: "12個月", times: "x12", price: 7128 }
+      ],
+      "金卡": [
+          { label: "單次體驗", times: "x1", price: 999 },
+          { label: "3個月", times: "x3", price: 2697 },
+          { label: "6個月", times: "x6", price: 4854 },
+          { label: "12個月", times: "x12", price: 9168 }
+      ],
+      "白金卡": [
+          { label: "單次體驗", times: "x1", price: 1299 },
+          { label: "3個月", times: "x3", price: 3597 },
+          { label: "6個月", times: "x6", price: 6474 },
+          { label: "12個月", times: "x12", price: 12228 }
+      ]
+  };
+  // question 9 信用卡號驗證
+  const cardNumber = ref('');
+  const formattedCardNumber = ref(''); // 經過格式化的信用卡號（每4位加空格）
+  const creditCardError = ref(false);
+
+  const holderName = ref('');
+  const expireYear = ref('');
+  const expireMonth = ref('');
+
+  //question 9 安全碼驗證
+  const cvc = ref('');
+  const holderNameError = ref(false);
+  const cvvError = ref(false);
+
+  const q9Checkbox = ref(false);
+  const policyHasError = ref(false);
+
+  const isLightBoxPolicy = ref(false);
+  const isLightBoxPrivacy = ref(false);
+
+  const titlePolicy = ref("網站服務條款");
+  const titlePrivacy = ref("隱私權政策");
+
   const menus = {
-    year: {
-      placeHolder: '年份',
-      options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-        id: i,
-        name: `${2025 - i} 年`,
-      })),
-    },
-    month: {
-      placeHolder: '月份',
-      options: Array.from({ length: 12 }, (_, i) => ({
-        id: i + 1,
-        name: `${i + 1} 月`,
-      })),
-    },
-    day: {
-      placeHolder: '日期',
-      options: Array.from({ length: 31 }, (_, i) => ({
-        id: i + 1,
-        name: `${i + 1} 日`,
-      })),
-    },
-    country: {
-      placeHolder: '送貨地點',
-      options: [
-        { id: 0, name: '台灣' },
-        { id: 1, name: '香港' },
-        { id: 2, name: '澳門' },
-      ],
-    },
-    shipPlace: {
-      placeHolder: '送貨地點',
-      options: [
-        { id: 0, name: '台灣' },
-        { id: 1, name: '香港' },
-        { id: 2, name: '澳門' },
-      ],
-    },
-    payment: {
-      placeHolder: '送貨地點',
-      options: [
-        { id: 0, name: '台灣' },
-        { id: 1, name: '香港' },
-        { id: 2, name: '澳門' },
-      ],
-    },
-    visaYear: {
-        placeHolder: '年份',
-        options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
-          id: i,
-          name: `${2025 - i} 年`,
-        })),
+      catBreedsMenu: ref({
+          placeHolder: '我的貓咪品種是',
+          options: [
+              { id: 0, name: '美短（美國短毛貓）' },
+              { id: 1, name: '英短（英國短毛貓）' },
+              { id: 2, name: '緬因貓' },
+              { id: 3, name: '布偶貓' },
+              { id: 4, name: '波斯貓' },
+              { id: 5, name: '金吉拉' },
+              { id: 6, name: '曼赤肯（矮腳貓）' },
+              { id: 7, name: '無毛貓（斯芬克斯）' },
+              { id: 8, name: '加菲貓' },
+              { id: 9, name: '孟加拉貓' },
+              { id: 10, name: '暹羅貓' },
+              { id: 11, name: '折耳貓（蘇格蘭折耳貓）' },
+              { id: 12, name: '俄羅斯藍貓' },
+              { id: 13, name: '橘貓（米克斯）' },
+              { id: 14, name: '三花貓（米克斯）' },
+              { id: 15, name: '狸花貓（米克斯）' },
+              { id: 16, name: '挪威森林貓' },
+              { id: 17, name: '土耳其梵貓' },
+              { id: 18, name: '土耳其安哥拉貓' },
+              { id: 19, name: '埃及貓' },
+              { id: 20, name: '喜馬拉雅貓' },
+              { id: 21, name: '新加坡貓' },
+              { id: 22, name: '美國捲耳貓' },
+              { id: 23, name: '索馬利貓' },
+              { id: 24, name: '巴厘貓' },
+              { id: 25, name: '東方短毛貓' },
+              { id: 26, name: '科拉特貓' },
+              { id: 27, name: '塞爾凱克捲毛貓' },
+              { id: 28, name: '德文捲毛貓' },
+              { id: 29, name: '柯尼斯捲毛貓' },
+              { id: 30, name: '日本短尾貓' },
+          ],
+          menuValue: '',
+      }),
+      dogBreedsMenu: ref({
+          placeHolder: '我的狗狗品種是',
+          options: [
+              { id: 0, name: '柴犬' },
+              { id: 1, name: '拉布拉多' },
+              { id: 2, name: '哈士奇' },
+              { id: 3, name: '黃金獵犬' },
+              { id: 4, name: '德國牧羊犬' },
+              { id: 5, name: '法國鬥牛犬' },
+              { id: 6, name: '貴賓犬（泰迪）' },
+              { id: 7, name: '臘腸犬' },
+              { id: 8, name: '比熊犬' },
+              { id: 9, name: '邊境牧羊犬' },
+              { id: 10, name: '雪納瑞' },
+              { id: 11, name: '西施犬' },
+              { id: 12, name: '約克夏' },
+              { id: 13, name: '柯基犬' },
+              { id: 14, name: '馬爾濟斯' },
+              { id: 15, name: '秋田犬' },
+              { id: 16, name: '松獅犬' },
+              { id: 17, name: '沙皮狗' },
+              { id: 18, name: '牛頭梗' },
+              { id: 19, name: '羅威納犬' },
+              { id: 20, name: '大丹犬' },
+              { id: 21, name: '杜賓犬' },
+              { id: 22, name: '博美犬' },
+              { id: 23, name: '喜樂蒂牧羊犬' },
+              { id: 24, name: '阿拉斯加雪橇犬' },
+              { id: 25, name: '巴哥犬' },
+              { id: 26, name: '狐狸犬' },
+              { id: 27, name: '愛斯基摩犬' },
+              { id: 28, name: '大白熊犬' },
+              { id: 29, name: '巴吉度犬' },
+              { id: 30, name: '比格犬' },
+          ],
+          menuValue: '',
+      }),
+      year: {
+          placeHolder: '年份',
+          options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+              id: i,
+              name: `${2025 - i} 年`,
+          })),
+          menuValue: ref(''),
       },
-    visaMonth: {
-        placeHolder: '月份',
-        options: Array.from({ length: 12 }, (_, i) => ({
-          id: i + 1,
-          name: `${i + 1} 月`,
-        })),
+      month: {
+          placeHolder: '月份',
+          options: Array.from({ length: 12 }, (_, i) => ({
+              id: i + 1,
+              name: `${i + 1} 月`,
+          })),
+          menuValue: ref(''),
+      },
+      day: {
+          placeHolder: '日期',
+          options: Array.from({ length: 31 }, (_, i) => ({
+              id: i + 1,
+              name: `${i + 1} 日`,
+          })),
+          menuValue: ref(''),
+      },
+      visaYear: {
+          placeHolder: '年份',
+          options: Array.from({ length: 2025 - 2005 + 1 }, (_, i) => ({
+              id: i,
+              name: `${2025 - i} 年`,
+          })),
+      },
+      visaMonth: {
+          placeHolder: '月份',
+          options: Array.from({ length: 12 }, (_, i) => ({
+              id: i + 1,
+              name: `${i + 1} 月`,
+          })),
       },
   };
-  
+
+  // const selectedPrice = computed(() => {
+  //     const selectedPlanObj = planOptions[subSelected.value].find(
+  //         (p) => p.label == planSelected.value
+  //     );
+  //     return selectedPlanObj.price
+  // });
+
+  // const monthlyPrice = computed(() => {
+  //     const months = monthFee[planSelected.value] || 1;
+  //     return selectedPrice.value / months;
+  // });
+
+  const formatCardNumber = () => {
+      // 移除所有非數字字符
+      let numbersOnly = formattedCardNumber.value.replace(/\D/g, '');
+
+      // 限制最大長度為16 
+      numbersOnly = numbersOnly.slice(0, 16);
+
+      // 每4位加一個空格
+      formattedCardNumber.value = numbersOnly.replace(/(\d{4})/g, '$1 ').trim();
+
+      // 更新原始卡號（去掉空格）
+      cardNumber.value = numbersOnly;
+  };
+  const validateCVV = () => {
+      // 只允許輸入數字
+      cvc.value = cvc.value.replace(/\D/g, '');
+
+      // 限制最多 4 位數
+      if (cvc.value.length > 4) {
+          cvc.value = cvc.value.slice(0, 4);
+      }
+  };
+  function nextQuestion(bol = false) {
+    formHasError.value = false;
+    petName.value.hasError = petName.value.inputMsg == '';
+
+    if (bol && question.value == 4) {
+        sessionStorage.setItem('question', 5);
+        sessionStorage.setItem('petName', petName.value.inputMsg);
+        sessionStorage.setItem('questionPetSelected', questionPet.value.selected[0]);
+        if (questionDog.value.selected[0]) sessionStorage.setItem('dogSizeSelected', questionDog.value.selected[0]);
+        if (questionCat.value.selected[0]) sessionStorage.setItem('catSizeSelected', questionCat.value.selected[0]);
+        sessionStorage.setItem('dogBreedSelected', menus.dogBreedsMenu.value.menuValue ? menus.dogBreedsMenu.value.menuValue : '');
+        sessionStorage.setItem('catBreedSelected', menus.catBreedsMenu.value.menuValue ? menus.catBreedsMenu.value.menuValue : '');
+        sessionStorage.setItem('birthYear', birth.value.year);
+        sessionStorage.setItem('birttMonth', birth.value.month);
+        sessionStorage.setItem('birthDay', birth.value.day);
+    }
+    if (bol && question.value == 9) subscribeSplootBoxPhp();
+
+    if (bol == true) {
+        console.log('question.value++');
+    } else {
+        switch (question.value) {
+            case 1:
+                formHasError.value = questionPet.value.selected.length == 0;
+                return;
+            case 2:
+                formHasError.value = petSize.value.selected.length == 0;
+                return;
+            case 3:
+                formHasError.value = petBreed.value.menuValue == '';
+                return;
+            case 6:
+                formHasError.value = subSelected.value == '';
+                return;
+            case 7:
+                formHasError.value = planSelected.value == '';
+                return;
+            case 8:
+                formHasError.value = selectedCity.value == '' || selectedDistrict.value == '' || deliverStreet.value == '';
+                return;
+            case 9:
+                policyHasError.value = !q9Checkbox.value;
+                formHasError.value = formattedCardNumber.value == ''
+                    || holderName.value == '' || expireYear.value == '' || expireMonth.value == '' || cvc.value == '';
+                return;
+
+        }
+    }
+}
   // LightBox
   const lightTitle_resub = { title: "續約" , isLightBox : ref(false) };
   const lightTitle_userPolicy = {title: "使用者政策", isLightBox: ref(false)};
@@ -418,23 +593,22 @@
       document.body.classList.remove('clicked');
     }
   };
-   // 使用者政策
-   function toggleLightBox_userP() {
-    lightTitle_userPolicy.isLightBox.value = !lightTitle_userPolicy.isLightBox.value;
-    if (lightTitle_userPolicy.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
-   // 隱私權政策
-   function toggleLightBox_privacy() {
-    lightTitle_privacy.isLightBox.value = !lightTitle_privacy.isLightBox.value;
-    if (lightTitle_privacy.isLightBox.value) {
-      document.body.classList.add('clicked');
-    } else {
-      document.body.classList.remove('clicked');
-    }
-  };
+  function togglePolicy() {
+    isLightBoxPolicy.value = !isLightBoxPolicy.value;
+    updateBodyClass();
+  }
+
+  function togglePrivacy() {
+      isLightBoxPrivacy.value = !isLightBoxPrivacy.value;
+      updateBodyClass();
+  }
+
+  function updateBodyClass() {
+      if (isLightBoxPolicy.value || isLightBoxPrivacy.value) {
+          document.body.classList.add('clicked');
+      } else {
+          document.body.classList.remove('clicked');
+      }
+  }
   
   </script>
