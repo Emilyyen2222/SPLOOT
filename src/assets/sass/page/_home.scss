@@ -35,7 +35,7 @@
 
     width: 100vw;
     height: 100vh;
-    padding-top: 6.4rem;
+    //padding-top: 6.4rem;
 
     
     .mainBox{
@@ -71,7 +71,7 @@
 
       img{
         position: absolute;
-        bottom: 0;
+        bottom:0rem;
         width: 100%;
 
         @include lg(){
@@ -159,7 +159,7 @@
       max-height: calc(714 / 1440 * 100) + vw;
     }
     @include lg(){
-      max-height: calc(100vh - 6.4rem);
+      max-height: calc(100vh - 8rem);
     }
 
     .bigText{
@@ -174,19 +174,19 @@
     img{
       left: 50%;
       transform: translateX(-50%);
-      width: 60%;
+      width: 100%;
       @include lg(){
         transform: none;
       }
     }
   }
-  .landingCircle{
-    position: absolute;
-    top: 58rem;
-    left: 50%;
-    z-index: -5;
-    transform: translate(-50%, -50%); 
-  }
+  // .landingCircle{
+  //   position: absolute;
+  //   top: 58rem;
+  //   left: 50%;
+  //   z-index: -5;
+  //   transform: translate(-50%, -50%); 
+  // }
   
 }
 
