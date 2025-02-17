@@ -110,6 +110,42 @@ export const useAuthStores = defineStore('auth',() => {
         isLightBoxPrivacy.value = !isLightBoxPrivacy.value;
     };
 
+
+    function memberPortrait(num){
+        switch (num) {
+            case 0:
+                return new URL(`@assets/img/header-red.svg`, import.meta.url).href;
+                break;
+            case 1:
+                return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
+                break;
+            case 2:
+                return new URL(`@/assets/img/member-center/portrait2.svg`, import.meta.url).href;
+                break;
+            case 3:
+                return new URL(`@/assets/img/member-center/portrait3.svg`, import.meta.url).href;
+                break;
+            case 4:
+                return new URL(`@/assets/img/member-center/portrait4.svg`, import.meta.url).href;
+                break;
+            case 5:
+                return new URL(`@/assets/img/member-center/portrait5.svg`, import.meta.url).href;
+                break;
+            case 6:
+                return new URL(`@/assets/img/member-center/portrait6.svg`, import.meta.url).href;
+                break;
+            case 7:
+                return new URL(`@/assets/img/member-center/portrait7.svg`, import.meta.url).href;
+                break;
+            case 8:
+                return new URL(`@/assets/img/member-center/portrait8.svg`, import.meta.url).href;
+                break;
+            default:
+                return new URL(`@/assets/img/member-center/portrait1.svg`, import.meta.url).href;
+                break;
+        };
+    };
+
     async function loginPhp(){
         loginEmail.value.hasError = false;
         loginPassword.value.hasError = false;
@@ -299,6 +335,7 @@ export const useAuthStores = defineStore('auth',() => {
         signUpPhp,
         toggleAuthBox,
         eyeStateToggle,
-        checkLoginStatus
+        checkLoginStatus,
+        memberPortrait
     };
 });
