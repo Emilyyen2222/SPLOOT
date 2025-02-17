@@ -27,7 +27,7 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="data in viewData" :key="data.memberId">
+        <tr v-for="(data, index) in viewData" :key="data.memberId">
           <td>{{ data.memberId }}</td>
           <td>{{ data.memberName }}</td>
           <td>{{ data.email }}</td>
@@ -35,7 +35,7 @@
           <td>{{ data.splootBoxSub }}</td>
           <td>{{ data.helperPost }}</td>
           <td>{{ data.accountStatus }}</td>
-          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
+          <td><Btn btnStyle="outline small" @click="popUpToggle(index)">查看與編輯</Btn></td>
         </tr>
       </tbody>
     </table>
@@ -58,6 +58,75 @@
     </div>
   </div>
 
+  <!-- 彈出視窗 -->
+  <PopUp
+  :is-pop-up="isPopUp"
+  >
+  <div class="popUpContainer">
+    <div class="nav">
+      <ul v-for ="(nav, index) in navs">
+        <li class="navli">
+          <Btn @click="navSelected(index)" :btnStyle="['small',selectedNav === nav.name ? 'primary' : 'outline']">{{ nav.name }}</Btn> 
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <div class="leftContent">
+        <div class="leftItem">
+          <p class="item">會員ID：</p>
+          <p class="item">姓名：</p>
+          <p class="item">暱稱：</p>
+          <p class="item">性別：</p>
+          <p class="item">生日：</p>
+          <p class="item">電子信箱：</p>
+          <p class="item">手機號碼：</p>
+          <p class="item">聯絡地址：</p>
+          <p class="item">LINE：</p>
+        </div>
+        <div class="rightItem">
+          <p class="item">{{ thisData.memberId }}</p>
+          <p class="item">海綿寶寶方褲褲</p>
+          <p class="item">{{ thisData.memberName }}</p>
+          <p class="item">男生</p>
+          <p class="item">{{ thisData.email }}</p>
+          <p class="item">1896-07-14</p>
+          <p class="item">0900000000</p>
+          <p class="item">比奇堡貝殼街 124 號</p>
+          <p class="item">squarepants</p>
+        </div>
+      </div>
+      <div class="rightContent">
+        <div class="leftItem">
+          <p class="item">帳號狀態：</p>
+          <p class="item">寵物數量：</p>
+          <p class="item">寵物訂閱盒數量：</p>
+          <p class="item">小幫手貼文數量：</p>
+          <p class="item">帳號創建時間：</p>
+        </div>
+        <div class="rightItem">
+          <p class="item">
+            <DropdownMenu class="dropdownInput"
+              :placeHolder="thisData.accountStatus"
+              :options="accountType"
+              v-model="accountEditData">
+            </DropdownMenu>
+          </p>
+          <p class="item">{{ thisData.petNumber }}</p>
+          <p class="item">{{ thisData.splootBoxSub }}</p>
+          <p class="item">{{ thisData.helperPost }}</p>
+          <p class="item">1897-01-01</p>
+        </div>
+      </div>
+    </div>
+    <div class="popBtnBox">
+      <Btn btnStyle="primary small" @click="popUpToggle">儲存</Btn>
+      <Btn btnStyle="outline small" @click="popUpToggle">關閉</Btn>
+    </div>
+
+  </div>
+
+  </PopUp>
+
 </template>
 
 <script setup>
@@ -66,6 +135,8 @@
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
+  import PopUp from "@/components/PopUp.vue"
+  import DropdownMenu from "../../components/DropdownMenu.vue";
 
   const members = ref(
     Array.from({length:103},(value,x) => ({
@@ -92,11 +163,89 @@
         isPending, //審核專用
         inputValue,
         dataFilter,
-    } = useBackend(members, 'memberId');  
+        isPopUp,
+        thisData,
+        popUpToggle,
+  } = useBackend(members, 'memberId');  
 
+  //專用函式
+  //查看與編輯導航
+       
+    const selectedNav = ref("會員資訊");
+
+    const navs = ref([
+      {name: '會員資訊'},
+      {name: '寵物資訊'},
+      {name: '寵物盒訂閱資訊'},
+      {name: '小幫手資訊'},
+    ]);
+    
+    const navSelected = (index) => {
+      selectedNav.value = navs.value[index].name;
+    };
+
+    // 帳號狀態
+    const accountType =ref([
+      {name:'正常'},
+      {name:'已停用'},
+    ]);
+
+    // 帳號狀態雙向綁定
+    const accountEditData = ref("");
+
+    
 </script>
 
 <style lang="scss">
 @import '@/assets/sass/style.scss';
 @import '@/assets/sass/page/backend';
+
+
+// 彈出視窗
+.popUpContainer{
+  padding: 0 80px;
+
+  .nav{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .content{
+    display: flex;
+    gap: 80px;
+
+    margin: 16px 0;
+
+    .item{
+      margin-bottom: 20px;
+    }
+
+    .leftContent{
+      display: flex;
+
+      .leftItem{
+        width: 128px;
+      }
+    }
+
+    .rightContent{
+      display: flex;
+
+      .leftItem{
+        width: 200px;
+      }
+
+      .rightItem{
+        width: 160px;
+      }
+    }
+  }
+
+  .popBtnBox{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}
 </style>
