@@ -367,7 +367,7 @@
     const authBoxStore = useAuthStores();
 
     //data
-    const cardsRawData = ref({});
+    const cardsRawData = ref([]);
 
 
     // popup選擇的卡片
@@ -398,7 +398,6 @@
     //日曆點選以及載入時間渲染
     const isDateObject = async (touchedDate) => {
         await findAllEventsPhp();
-
         const targetDate = new Date(touchedDate);
         targetDate.setHours(0, 0, 0, 0); // 使時間變成 00:00 以防時間差比較錯誤 只比較年月日
 
@@ -451,7 +450,11 @@
     // 預設篩選今天的活動
     onMounted(() => {
         const today = new Date();
-        const todayString = today.toISOString().split("T")[0]; // 格式化為 YYYY-MM-DD
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2,'0');
+        const day = String(today.getDate()).padStart(2,'0');
+        // 格式化為 YYYY-MM-DD
+        const todayString = `${year}-${month}-${day}`;
         isDateObject(todayString);
     });
 
