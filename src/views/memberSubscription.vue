@@ -79,7 +79,7 @@
           <div class="sh-h-title">
             <p class="bold th_index">索引</p>
             <p class="bold th_petName">寵物名稱</p>
-            <p class="bold th_plan">定月方案</p>
+            <p class="bold th_plan">定閱方案</p>
             <p class="bold th_date">訂閱日期</p>
             <p class="bold th_total">金額</p>
           </div>
@@ -93,7 +93,7 @@
               <p class="tb_petName">{{ subHistory.petName }}</p>
               <p class="tb_plan">{{ subHistory.plan }}</p>
               <p class="tb_date">{{ subHistory.date }}</p>
-              <p class="tb_total">{{ '$' + subHistory.total }}</p>
+              <p class="tb_total">{{ subHistory.total }}</p>
             </div>      
           </div>
         </div>
