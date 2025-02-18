@@ -93,7 +93,7 @@
               <p class="tb_petName">{{ subHistory.petName }}</p>
               <p class="tb_plan">{{ subHistory.plan }}</p>
               <p class="tb_date">{{ subHistory.date }}</p>
-              <p class="tb_total">{{ '$' + subHistory.total }}</p>
+              <p class="tb_total">{{ subHistory.total }}</p>
             </div>      
           </div>
         </div>
@@ -212,7 +212,7 @@
   
   <script setup>
   
-  import { computed, ref } from 'vue';
+  import { computed, ref, onBeforeMount } from 'vue';
   // components
   import MainHeader from '@/components/MainHeader.vue';
   import Btn from '@/components/Btn.vue';
@@ -223,70 +223,72 @@
   import memberNav from '../views/memberNav.vue' ;
   
   // cards
-  const cards = ref([
-    {
-      id: 1,
-      name: '小白',
-      subscription: '銀卡 (3個月方案)',
-      subscribeDate: '2025/01/02',
-      deliveryDate: '每月10日',
-      delivered: 0,
-      remaining: 3,
-      amount: '$1299',
-    },
-    {
-      id: 2,
-      name: '小黑',
-      subscription: '銀卡 (6個月方案)',
-      subscribeDate: '2025/02/05',
-      deliveryDate: '每月10日',
-      delivered: 2,
-      remaining: 4,
-      amount: '$2299',
-    },
-    {
-      id: 3,
-      name: '小花',
-      subscription: '銀卡 (1個月方案)',
-      subscribeDate: '2025/03/10',
-      deliveryDate: '每月10日',
-      delivered: 1,
-      remaining: 0,
-      amount: '$699',
-    },
-    {
-      id: 4,
-      name: '小藍',
-      subscription: '白金卡 (12個月方案)',
-      subscribeDate: '2025/04/15',
-      deliveryDate: '每月10日',
-      delivered: 5,
-      remaining: 7,
-      amount: '$3999',
-    },
-    {
-      id: 5,
-      name: '小綠',
-      subscription: '白金卡 (3個月方案)',
-      subscribeDate: '2025/04/15',
-      deliveryDate: '每月10日',
-      delivered: 5,
-      remaining: 7,
-      amount: '$3999',
-    },
-  ]);
+  // const cards = ref([
+  //   // {
+  //   //   id: 1,
+  //   //   name: '小白',
+  //   //   subscription: '銀卡 (3個月方案)',
+  //   //   subscribeDate: '2025/01/02',
+  //   //   deliveryDate: '每月10日',
+  //   //   delivered: 0,
+  //   //   remaining: 3,
+  //   //   amount: '$1299',
+  //   // },
+  //   // {
+  //   //   id: 2,
+  //   //   name: '小黑',
+  //   //   subscription: '銀卡 (6個月方案)',
+  //   //   subscribeDate: '2025/02/05',
+  //   //   deliveryDate: '每月10日',
+  //   //   delivered: 2,
+  //   //   remaining: 4,
+  //   //   amount: '$2299',
+  //   // },
+  //   // {
+  //   //   id: 3,
+  //   //   name: '小花',
+  //   //   subscription: '銀卡 (1個月方案)',
+  //   //   subscribeDate: '2025/03/10',
+  //   //   deliveryDate: '每月10日',
+  //   //   delivered: 1,
+  //   //   remaining: 0,
+  //   //   amount: '$699',
+  //   // },
+  //   // {
+  //   //   id: 4,
+  //   //   name: '小藍',
+  //   //   subscription: '白金卡 (12個月方案)',
+  //   //   subscribeDate: '2025/04/15',
+  //   //   deliveryDate: '每月10日',
+  //   //   delivered: 5,
+  //   //   remaining: 7,
+  //   //   amount: '$3999',
+  //   // },
+  //   // {
+  //   //   id: 5,
+  //   //   name: '小綠',
+  //   //   subscription: '白金卡 (3個月方案)',
+  //   //   subscribeDate: '2025/04/15',
+  //   //   deliveryDate: '每月10日',
+  //   //   delivered: 5,
+  //   //   remaining: 7,
+  //   //   amount: '$3999',
+  //   // },
+  // ]);
+  const cards = ref([]);
+  const subHistories = ref([]);
   
    // 計算卡片數量
   const cardCount = computed(() => cards.value.length);
 
   // 歷史紀錄，subHistory
-  const subHistories = ref([
-    {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
-    {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-  ]);
+  // const subHistories = ref([
+    // {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
+    // {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    // {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    // {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+    // {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  // ]);
 
 
   // slider
@@ -610,5 +612,50 @@
           document.body.classList.remove('clicked');
       }
   }
-  
+  // 當前方案/歷史紀錄
+  async function findAllSubsPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllSubs.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        try{
+          const subsResp = await resp.json();
+          const allSubs = subsResp['data'];
+          for(let [index, sub] of allSubs.entries()){
+            const subDate = new Date(sub['createdDate']);
+            const subYear = subDate.getFullYear();
+            const subMonth = subDate.getMonth() + 1;
+            const subDay = subDate.getDate();
+            cards.value.push(
+              {
+                id: 1,
+                name: sub['petName'],
+                subscription: `${sub['plan']} (${sub['period']}個月方案)`,
+                subscribeDate: `${subYear}/${subMonth}/${subDay}`,
+                deliveryDate: '每月10日',
+                delivered: sub['period'] - sub['remainDeliverCount'],
+                remaining: sub['remainDeliverCount'],
+                amount: `$${sub['monthlyPrice']}`,
+              }
+            );
+            subHistories.value.push(
+              {
+                shId: index + 1,
+                petName: sub['petName'],
+                plan: `${sub['plan']} (${sub['period']}個月方案)`,
+                date: `${subYear}/${subMonth}/${subDay}`,
+                total: `$${sub['monthlyPrice']}`,
+              });
+          }
+
+        }catch(error){
+          console.error('Error parsing JSON:', error);
+        };
+  }
+  onBeforeMount(() => {
+    findAllSubsPhp();
+  });
   </script>

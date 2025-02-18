@@ -27,7 +27,7 @@
         <h4 class="title bold">我想認識的貓咪朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/match/match2-1.svg" alt="">
+                <img class="img1" src="@/assets/img/match/match2-2.svg" alt="">
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <h4 class="title bold">我想認識的狗狗朋友是</h4>
         <div class="image">
             <div class="imgFlex">
-                <img class="img1" src="@/assets/img/match/match2-2.svg" alt="">
+                <img class="img1" src="@/assets/img/match/match2-1.svg" alt="">
             </div>
         </div>
     </div>
