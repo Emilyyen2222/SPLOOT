@@ -20,50 +20,59 @@
         <!-- view -->
         <div class="petcard-container">
             <!-- card1~n -->
-            <!-- v-for : 卡片與按鈕:pc1、pc2、...-->
+            <!-- v-for : 卡片與按鈕-->
             <div class="petcard" 
-            v-for="plan in filteredCards" :key="plan.label">
+            v-for="plan in cardsData" :key="plan.label">
             <!-- 卡片區 -->
-              <div class="matchbox">
-                <div class="upperSection">
-                  <div class="cardWrapMatch">
-                      <div class="cardwrapper">
-                          <!-- 左側圖片區 -->
-                          <div class="imageContainer">
-                              <img :src="plan.imageSrc" alt="">
-                          </div>
-                          <!-- 右側內容區 -->
-                          <div class="content">
-                              <div class="topSection">
-                                  <div class="dot">
-                                  <div class="dotActive"></div>
-                                  <div class="dotInactive"></div>
-                                  <div class="dotInactive"></div>
-                                  </div>
-                                  <div class="number">{{ plan.number }}</div>
-                              </div>
-                              <!-- 名稱與距離 -->
-                              <div class="info">
-                                  <div class="nameAndGender">
-                                  <h4 class="bold name">{{ plan.name }}</h4>
-                                  <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
-                                  </div>
-                                  <div class="distance">
-                                  <div class="smallText distanceIcon"></div>
-                                  距離你{{ plan.distance }}公里
-                                  </div>
-                              </div>
-                              <!-- 標籤區 -->
-                              <div class="tags">
-                                  <span class="xsText tag" v-for="tag in plan.tags" :key="tag">{{ tag }}</span>
-                              </div>
-                              <!-- 內文 -->
-                              <p class="description bold">{{ plan.description }}</p>
-                          </div>
-                      </div>
-                  </div>
+            <div class="matchbox">
+            <div class="upperSection">
+                <div class="cardWrapMatch">
+                    <div class="cardwrapper" 
+                        v-for="(plan, ownerIndex) in cardsData" :key="plan.owner" 
+                        :class="[{'movedLeft': movedLeft}, {'movedRight': movedRight}]">
+
+                        <!-- 左側圖片區 -->
+                        <div class="imageContainer">
+                            <img :src="plan.pets[plan.petShowing].imageSrc" alt="">
+                        </div>
+                        <!-- 右側內容區 -->
+                        <div class="content">
+                            <div class="topSection">
+                                <div class="dot">
+                                    <div 
+                                        v-for="(pet, index) in plan.pets" 
+                                        :key="index"
+                                        :id="index"
+                                        :class="{ 'dotActive': index === plan.petShowing, 'dotInactive': index !== plan.petShowing }"
+                                        @click="dotClicked(index, ownerIndex)"
+                                    ></div>
+                                </div>
+                                <div class="number">{{ dottedNumber }}</div>
+                            </div>
+                            <!-- 名稱與距離 -->
+                            <div class="info">
+                                <div class="nameAndGender">
+                                <h4 class="bold name">{{ plan.pets[plan.petShowing].name }}</h4>
+                                    <!-- gender icon -->
+                                    <img v-if="plan.pets[plan.petShowing].gender == 'Female'" src="../assets/img/icon/femaleIcon.svg" alt="Female Icon" style="width: 2rem;" />
+                                    <img v-else-if="plan.pets[plan.petShowing].gender == 'Male'" src="../assets/img/icon/maleIcon.svg" alt="Male Icon" style="width: 2rem;" />
+                                </div>
+                                <div class="distance">
+                                <div class="smallText distanceIcon"></div>
+                                距離你{{ plan.pets[plan.petShowing].distance }}公里
+                                </div>
+                            </div>
+                            <!-- 標籤區 -->
+                            <div class="tags">
+                                <span class="xsText tag" v-for="tag in plan.pets[plan.petShowing].tags" :key="tag">{{ tag }}</span>
+                            </div>
+                            <!-- 內文 -->
+                            <p class="description bold">{{ plan.pets[plan.petShowing].description }}</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            </div>
+        </div>
             <!-- 案扭區 -->
               <div class="ptc-btn-group">
                 <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo('dog')">編輯</Btn>
@@ -541,8 +550,6 @@
   // import petInfoCardView from '../views/petInfoCardView.vue' ;
   
   // lightBox title
-  const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
-  const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
   const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};
 
   // dropDown
@@ -644,39 +651,157 @@
     },
     };
 
-  // input
-   // basic name 姓名
-  const input1 = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '這裡填預設文字',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  }
-
   // 寵物資訊卡的卡片資料
-  const petcards = [
-    { petcardId:1 ,cardImg: new URL ("../assets/img/splootbox/dog1.jpg", import.meta.url).href},
-    { petcardId:2 ,cardImg: new URL ("../assets/img/splootbox/dog2.jpg", import.meta.url).href},
-    { petcardId:3 ,cardImg: new URL ("../assets/img/splootbox/dog3.jpg", import.meta.url).href},
-  ];
+  const matchedCard = ref([
+            {
+                owner: 'Emily',
+                pets: [
+                    { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的金毛，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male' },
+                    { label: 'card5', name: 'Bella', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '02', distance: 7, tags: ['貴賓犬', '聰明', '喜歡散步'], description: 'Bella 是一隻聰明的貴賓犬，會很多小技巧，還是個愛散步的小天使！', gender: 'Female' },
+                    { label: 'card7', name: 'Charlie', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '03', distance: 3, tags: ['拉布拉多', '熱心', '愛啃骨頭'], description: 'Charlie 喜歡和人玩，對每個人都很熱心，最愛啃骨頭。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Sam',
+                pets: [
+                    { label: 'card4', name: 'Lucy', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 4, tags: ['柯基', '外向', '喜歡跑步'], description: 'Lucy 是隻活潑的小柯基，喜歡跑步，總是跑得飛快！', gender: 'Female' },
+                    { label: 'card5', name: 'Oscar', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 6, tags: ['法國鬥牛犬', '粘人', '喜歡睡覺'], description: 'Oscar 喜歡在主人旁邊黏著，特別愛睡覺。', gender: 'Male' },
+                    { label: 'card6', name: 'Rusty', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '03', distance: 5, tags: ['比格犬', '調皮', '愛追球'], description: 'Rusty 喜歡追著球跑，總是能讓周圍充滿活力！', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Lupe',
+                pets: [
+                    { label: 'card4', name: 'Toby', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '01', distance: 3, tags: ['邊境牧羊犬', '機警', '喜歡挑戰'], description: 'Toby 很機警，總能迅速應對各種挑戰，最愛玩各種智力遊戲。', gender: 'Male' },
+                    { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    { label: 'card7', name: 'Zara', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 6, tags: ['臘腸犬', '堅毅', '喜歡挖洞'], description: 'Zara 喜歡在花園裡挖洞，是隻非常堅毅的小臘腸犬。', gender: 'Female' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Hao',
+                pets: [
+                    { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    { label: 'card5', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Ian',
+                pets: [
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Olivia',
+                pets: [
+                    { label: 'card4', name: 'Zeus', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '01', distance: 12, tags: ['大丹犬', '穩重', '喜歡散步'], description: 'Zeus 是一隻穩重的大丹犬，喜歡悠閒地散步，步伐穩定，極具威風。', gender: 'Male' },
+                    { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' }
+                ],
+                petShowing: 0
+            }
+        ]);
   
   const cardsData = ref([
-        { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-        { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-        { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-        { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
+            {
+                owner: 'Emily',
+                pets: [
+                    { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的金毛，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male' },
+                    { label: 'card5', name: 'Bella', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '02', distance: 7, tags: ['貴賓犬', '聰明', '喜歡散步'], description: 'Bella 是一隻聰明的貴賓犬，會很多小技巧，還是個愛散步的小天使！', gender: 'Female' },
+                    { label: 'card7', name: 'Charlie', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '03', distance: 3, tags: ['拉布拉多', '熱心', '愛啃骨頭'], description: 'Charlie 喜歡和人玩，對每個人都很熱心，最愛啃骨頭。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Sam',
+                pets: [
+                    { label: 'card4', name: 'Lucy', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 4, tags: ['柯基', '外向', '喜歡跑步'], description: 'Lucy 是隻活潑的小柯基，喜歡跑步，總是跑得飛快！', gender: 'Female' },
+                    // { label: 'card5', name: 'Oscar', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 6, tags: ['法國鬥牛犬', '粘人', '喜歡睡覺'], description: 'Oscar 喜歡在主人旁邊黏著，特別愛睡覺。', gender: 'Male' },
+                    // { label: 'card6', name: 'Rusty', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '03', distance: 5, tags: ['比格犬', '調皮', '愛追球'], description: 'Rusty 喜歡追著球跑，總是能讓周圍充滿活力！', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Lupe',
+                pets: [
+                    { label: 'card4', name: 'Toby', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '01', distance: 3, tags: ['邊境牧羊犬', '機警', '喜歡挑戰'], description: 'Toby 很機警，總能迅速應對各種挑戰，最愛玩各種智力遊戲。', gender: 'Male' },
+                    // { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    // { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    // { label: 'card7', name: 'Zara', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 6, tags: ['臘腸犬', '堅毅', '喜歡挖洞'], description: 'Zara 喜歡在花園裡挖洞，是隻非常堅毅的小臘腸犬。', gender: 'Female' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Hao',
+                pets: [
+                    { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    { label: 'card5', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Ian',
+                pets: [
+                    { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+                    // { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog4.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' },
+                    // { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' }
+                ],
+                petShowing: 0
+            },
+            {
+                owner: 'Olivia',
+                pets: [
+                    { label: 'card4', name: 'Zeus', imageSrc: new URL('../assets/img/match/dog3.avif', import.meta.url).href, number: '01', distance: 12, tags: ['大丹犬', '穩重', '喜歡散步'], description: 'Zeus 是一隻穩重的大丹犬，喜歡悠閒地散步，步伐穩定，極具威風。', gender: 'Male' },
+                    // { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/match/dog2.avif', import.meta.url).href, number: '02', distance: 7, tags: ['柴犬', '堅韌', '喜歡獨處'], description: 'Buddy 是隻堅韌的柴犬，雖然愛獨處，但也會在主人需要時給予陪伴。', gender: 'Male' },
+                    // { label: 'card5', name: 'Maya', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '02', distance: 9, tags: ['拉布拉多', '活潑', '喜歡游泳'], description: 'Maya 是一隻喜歡游泳的拉布拉多，游泳時格外自在。', gender: 'Female' }
+                ],
+                petShowing: 0
+            }
         ]);
 
-  const filteredCards = ref([
-  { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-  { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-  { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-  ]); 
+    // member memberPetCardsData 會員中心的卡片資料
+    const memberPetCardsData = ref([
+        { label: 'card4', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+        { label: 'card4', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+        { label: 'card5', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }                
+    ])
 
     // 計算資訊卡的卡片數量
-    const petCardCount = computed(() => petcards.length);
+    const petCardCount = computed(() => memberPetCardsData.length);
+    // by Emily
+    const clickedOwnerIndex = ref(0); //目前選中的owner,default為第一個
+    const clickedIndex = ref(0); //目前選中的寵物index
+    // const clickedIndexOverlay = ref(0); 
+    // const clickedIndexMatchAll = ref(0); 
+    const clickedIndexOverlay = ref(Array(matchedCard.value.length).fill(null)); 
+    const clickedIndexMatchAll = ref(Array(matchedCard.value.length).fill(null));   
+
+    const dotClicked = (index, ownerIndex = -1) => {
+        clickedIndex.value = index;
+        if(ownerIndex != -1){
+            filteredCards.value[ownerIndex].petShowing = index;
+        }
+    };
+
+    //格式化數字
+    const dottedNumber = computed(() => {
+        return (clickedIndex.value + 1).toString().padStart(2, '0'); //index+1並轉換為兩位數字, 前面加上0
+    });
+
+    //依照 clickedOwnerIndex 動態過濾對應的寵物資料
+    const filteredCards = computed(() => {
+        // return cardsData.value[clickedOwnerIndex.value].pets;
+        return cardsData.value.slice(0,3).reverse();
+    });
   
   // 調整喜好
    // 哪種朋友
@@ -816,9 +941,6 @@
         }
     }
 
-  
-  // 控制燈箱的顯示與隱藏
-
    // 配對喜好設定 
   function toggleLightBox_match() {
     lightTitle_matchReset.isLightBox.value = !lightTitle_matchReset.isLightBox.value;
@@ -827,17 +949,14 @@
     } else {
       document.body.classList.remove('clicked');
     }
-  };
-  
+  };  
   
   //popup狀態
   const deleteCard = { isPopUp : ref (false )  };
   
   // 刪除資訊卡
-  // 控制燈箱的顯示與隱藏
   function togglePopUp_deleteCard() {
     deleteCard.isPopUp.value = !deleteCard.isPopUp.value;
-    // // 停止捲軸
     if (deleteCard.isPopUp.value) {
       document.body.classList.add('clicked');
     } else {

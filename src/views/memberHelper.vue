@@ -13,43 +13,42 @@
           <Btn btnStyle="outline small" @click="toggleHcManage">小幫手管理</Btn>
         </div>
         <div class="hc-nav">
-              <!-- v-if? : 每完成一個步驟就放上打勾的icon? -->
-              <div class="hc-steps" 
-              @click="toggleHcTest"
-              :class=" {'-disable' : step1}"> 
-                <p>Step.1 適性測驗 </p>
-                <img v-if="step1" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
-                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
-                <p v-if="step1" class="stepStatues" >已通過</p>
-                <p v-else class="stepStatues"> 未通過</p>
-                <p class="hc-reson" style="display:none;">{{ hcTest.failReson }}</p>
-              </div>
-              <div class="hc-steps" 
-              @click="toggleHcVarify"
-              :class="{ '-disable': step2 }">
-                <p>Step.2 資料審核</p>
-                <img v-if="step2" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
-                <!-- 未審核 -->
-                <img v-else-if="unreviewed" src="../assets/img/icon/mc_stepbtn_unreviewed.svg" alt="icon">
-                <!-- 審核中 -->
-                <img v-else-if="underReview" src="../assets/img/icon/mc_stepbtn_under-review.svg" alt="icon">
-                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
-                <p v-if="step2" class="stepStatues" > 通過</p>
-                <p v-else-if="unreviewed">未審核</p>
-                <p v-else-if="underReview">審核中</p>
-                <p v-else class="stepStatues"> 未通過</p>
-                <p class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</p>
-              </div>
-              <div class="hc-steps" 
-              @click="toggleHcSign"
-              :class="{ '-disable': step3 }">
-                <p>Step.3 合約簽署</p>
-                <img v-if="step3" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
-                <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
-                <p v-if="step3" class="stepStatues" > 已同意</p>
-                <p v-else class="stepStatues"> 未通過</p>
-                <p class="hc-reson" style="display:none;">{{ hcSign.failReson }}</p>
-              </div>
+          <div class="hc-steps" 
+          @click="toggleHcTest"
+          :class=" {'-disable' : step1}"> 
+            <p>Step.1 適性測驗 </p>
+            <img v-if="step1" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+            <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
+            <p v-if="step1" class="stepStatues" >已通過</p>
+            <p v-else class="stepStatues"> 未通過</p>
+            <p class="hc-reson" style="display:none;">{{ hcTest.failReson }}</p>
+          </div>
+          <div class="hc-steps" 
+          @click="toggleHcVarify"
+          :class="{ '-disable': step2 }">
+            <p>Step.2 資料審核</p>
+            <img v-if="step2" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+            <!-- 未審核 -->
+            <img v-else-if="unreviewed" src="../assets/img/icon/mc_stepbtn_unreviewed.svg" alt="icon">
+            <!-- 審核中 -->
+            <img v-else-if="underReview" src="../assets/img/icon/mc_stepbtn_under-review.svg" alt="icon">
+            <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
+            <p v-if="step2" class="stepStatues" > 通過</p>
+            <p v-else-if="unreviewed">未審核</p>
+            <p v-else-if="underReview">審核中</p>
+            <p v-else class="stepStatues"> 未通過</p>
+            <p class="hc-reson" style="display:none;">{{ hcVarify.failReson }}</p>
+          </div>
+          <div class="hc-steps" 
+          @click="toggleHcSign"
+          :class="{ '-disable': step3 }">
+            <p>Step.3 合約簽署</p>
+            <img v-if="step3" src="../assets/img/icon/mc_stepbtn_pass.svg" alt="icon">
+            <img v-else src="../assets/img/icon/mc_stepbtn_failed.svg" alt="icon">
+            <p v-if="step3" class="stepStatues" > 已同意</p>
+            <p v-else class="stepStatues"> 未通過</p>
+            <p class="hc-reson" style="display:none;">{{ hcSign.failReson }}</p>
+          </div>
       
         </div>
     
@@ -395,9 +394,7 @@
                     :options="timeStart.options"
                     v-model="timeStart.selected"
                   />
-
                   <p>至</p>
-
                   <!-- 結束時間 -->
                   <DropdownMenu
                     class="service-t"
@@ -639,20 +636,6 @@
   const toggleHcVarify = () => toggleLightBox(hcVarify);
   const toggleHcSign = () => toggleLightBox(hcSign);
   const toggleHcManage = () => toggleLightBox(hcManage);
-
-  // 回傳函數，使之可以在 template 中使用
-  // return{
-  //   toggleLightBox,
-  //   toggleAddpost,
-  //   toggleEditPost,
-  //   toggleHcTest,
-  //   toggleHcVarify,
-  //   toggleHcSign,
-  //   toggleHcManage
-  // };
-
-  // 定義一個反應式對象來儲存每題的答案（key 為題目 id，值為 "yes" 或 "no"）
-  // const questions.answer = ref({});
   
   // 提交時，這裡檢查輸出答案
   const handleSubmit = () => {
@@ -663,7 +646,6 @@
 
   // 放棄時，重置所有答案
   const handleCancelTest = () => {
-    // 清空所有答案
     questions.value.forEach( q=>q.answer = "" );
     console.log('重置:適性測驗')
   };
@@ -744,8 +726,7 @@
     }
   };
   
-  // 
-   // 姓名
+  // 姓名
   const input_name = {
       size: 'small',
       textAlign: 'textLeft',
@@ -802,7 +783,7 @@
     )
 
 
-  // 資料審核~
+// 資料審核~
  // 兩個不同的上傳區塊
   const selfyImg = ref(null);   // 自拍照
   const idCardImg = ref(null);  // 身分證照片
@@ -890,13 +871,12 @@
     };
 
   // "新增貼文"燈箱
-
   const postServiceType = {
       placeHolder: "請選擇服務類型",
       options: [
           {name: "散步陪伴"},{name: "到府照顧"},{name: "友善寄宿"},{name: "寵物計程車"},
       ]}
-  // 燈箱標題請輸入
+  // 燈箱標題
   const lightTitle2 = {title: "發佈 散步陪伴 貼文"}
 
   //燈箱狀態
@@ -1070,7 +1050,6 @@ const city = {
      // Single choice
      function singleChoice(selected, option) {
       selected.value = [option];
-      // console.log(selected.value);
     };
     // multiple choice
     function multipleChoice(selected, option) {
@@ -1079,7 +1058,6 @@ const city = {
         } else {
             selected.value.push(option);
         }
-        // console.log(selected.value);
     };
     // 判斷是否被選取
     const optionSelected = (selected, option) => {
@@ -1126,14 +1104,8 @@ const city = {
     // 按下按鈕時，手動觸發"檢查"、"提交"
     const checkAndSubmit1 = ()=>{
       // checkStep1;
-      step1.value = questions.value.every( q => q.answer ==='yes' );
-      if( step1.value ){
-        console.log('step1成立，將結果提交')
-      }else{
-        console.log('step1不成立，顯示錯誤訊息')
-      };        
+      step1.value = questions.value.every( q => q.answer ==='yes' );      
     };
-
 
   // 資料審核
     // 未審核
@@ -1143,7 +1115,6 @@ const city = {
     const isStep2Passed = computed(()=>{
       return !unreviewed.value && !underReview.value;
     });
-
 
     const checkAndSubmit2 = () => {
       const hcVarifyFields = ref({
@@ -1168,9 +1139,7 @@ const city = {
           // 中斷執行
           return
         }
-      }else{
-        // 寫submit
-
+      }else{        
         step2.value = false;    // 確保 step2 初始為 false
         unreviewed.value = true; 
         underReview.value = false; 

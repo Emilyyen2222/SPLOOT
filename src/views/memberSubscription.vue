@@ -67,14 +67,11 @@
       </div>
       
       <!-- history sub -->
-      <div class="sub-history">
-      
+      <div class="sub-history">      
         <div class="sh-title">
           <h6 class="bold">歷史紀錄</h6>
-        </div>
-      
-        <div class="divider"></div>
-      
+        </div>      
+        <div class="divider"></div>      
         <div class="sh-h">
           <div class="sh-h-title">
             <p class="bold th_index">索引</p>
@@ -83,6 +80,7 @@
             <p class="bold th_date">訂閱日期</p>
             <p class="bold th_total">金額</p>
           </div>
+
           <div class="sh-h-content">
             <!-- v-for -->
             <div class="sh-h-items" 
@@ -494,18 +492,6 @@
       },
   };
 
-  // const selectedPrice = computed(() => {
-  //     const selectedPlanObj = planOptions[subSelected.value].find(
-  //         (p) => p.label == planSelected.value
-  //     );
-  //     return selectedPlanObj.price
-  // });
-
-  // const monthlyPrice = computed(() => {
-  //     const months = monthFee[planSelected.value] || 1;
-  //     return selectedPrice.value / months;
-  // });
-
   const formatCardNumber = () => {
       // 移除所有非數字字符
       let numbersOnly = formattedCardNumber.value.replace(/\D/g, '');
@@ -578,10 +564,7 @@
     }
 }
   // LightBox
-  const lightTitle_resub = { title: "續約" , isLightBox : ref(false) };
-  const lightTitle_userPolicy = {title: "使用者政策", isLightBox: ref(false)};
-  const lightTitle_privacy = {title: "隱私權政策", isLightBox: ref(false)};
-  
+  const lightTitle_resub = { title: "續約" , isLightBox : ref(false) }; 
   
   // 控制lightbox狀態
    // 續約
