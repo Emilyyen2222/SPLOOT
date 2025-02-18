@@ -7,9 +7,6 @@
     <div class="msg-n-avatar">
         <!-- avatar -->
         <div class="avatar">
-          <!-- 改ref -->
-          <!-- <img src="../assets/img/member-center/portrait1.svg" alt=""> -->
-          <!-- <img :src="selectedAvatar.value" alt="avatar"> -->
           <img :src="memberPortrait" alt="avatar">
         </div>
         <!-- msg -->
@@ -56,13 +53,10 @@
 
 <script setup>
 
-import { ref,inject, computed } from 'vue';
+import { ref, computed } from 'vue';
 
 // components
 import Btn from '../components/Btn.vue';
-// import DropdownMenu from '../components/DropdownMenu.vue';
-// import InputText from '../components/InputText.vue';
-// import LightBox from '../components/LightBox.vue';
 
   // username
   const userName = ref(
@@ -76,9 +70,6 @@ const props = defineProps({
   }
 })
 
-// const memberPortraitChosed = computed(() => {
-//   return props.avatar;
-// });
 const memberPortrait = computed(()=> {      
         console.log("帶進switch的值:", props.avatar);
         switch (props.avatar){
@@ -102,17 +93,6 @@ const memberPortrait = computed(()=> {
             return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
         };
       });
-// data
-  // 確保本身有值 
-// const injectedAvatar = inject('memberPortrait',ref(""));
-// const selectedAvatar = computed(()=>injectedAvatar.value);
-// console.log("收到的 selectedAvatar:", selectedAvatar.value);
-
-
-//   if(selectedAvatar){
-//     console.log("nav收到的值(格式化之前):",selectedAvatar.value
-
-//   )};
 
   // avatar
   const avatars=[

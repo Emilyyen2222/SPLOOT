@@ -3,10 +3,10 @@ include 'PdoConnection.php';
 
 header("Content-Type:application/json");
 
-// 解包JSON
 $postData = json_decode(file_get_contents("php://input"), true);
 $response = [];
 
+// $catchData = [];
 
 // 查詢
 $user_id = '3';
@@ -55,6 +55,8 @@ if ($user){
     'message' => '無使用者'
   ];
 }
+
+
 
 
 echo json_encode($response);

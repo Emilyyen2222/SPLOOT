@@ -67,22 +67,20 @@
       </div>
       
       <!-- history sub -->
-      <div class="sub-history">
-      
+      <div class="sub-history">      
         <div class="sh-title">
           <h6 class="bold">歷史紀錄</h6>
-        </div>
-      
-        <div class="divider"></div>
-      
+        </div>      
+        <div class="divider"></div>      
         <div class="sh-h">
           <div class="sh-h-title">
             <p class="bold th_index">索引</p>
             <p class="bold th_petName">寵物名稱</p>
-            <p class="bold th_plan">定月方案</p>
+            <p class="bold th_plan">定閱方案</p>
             <p class="bold th_date">訂閱日期</p>
             <p class="bold th_total">金額</p>
           </div>
+
           <div class="sh-h-content">
             <!-- v-for -->
             <div class="sh-h-items" 
@@ -295,14 +293,14 @@
   // 定義一個引用來獲取 slider 的 DOM 元素
   const sliderRef = ref(null);
   // 調整滾動倍率，1 表示原始滾動距離(1.5 表示增加 50% 距離)  
-  const scrollMultiplier = 35;
+  const scrollMultiplier = 45;
   // 監聽 wheel 事件，並將垂直滾輪轉換為水平滾動
   const handleWheel = (event) => {
     // 防止垂直滾動
     event.preventDefault();
     // 根據滾輪垂直滾動的距離來更新 scrollLeft
     if (sliderRef.value) {
-      sliderRef.value.scrollLeft += event.deltaY * scrollMultiplier;
+      sliderRef.value.scrollLeft += event.deltaX * scrollMultiplier;
     }
   };
   
@@ -496,18 +494,6 @@
       },
   };
 
-  // const selectedPrice = computed(() => {
-  //     const selectedPlanObj = planOptions[subSelected.value].find(
-  //         (p) => p.label == planSelected.value
-  //     );
-  //     return selectedPlanObj.price
-  // });
-
-  // const monthlyPrice = computed(() => {
-  //     const months = monthFee[planSelected.value] || 1;
-  //     return selectedPrice.value / months;
-  // });
-
   const formatCardNumber = () => {
       // 移除所有非數字字符
       let numbersOnly = formattedCardNumber.value.replace(/\D/g, '');
@@ -580,10 +566,7 @@
     }
 }
   // LightBox
-  const lightTitle_resub = { title: "續約" , isLightBox : ref(false) };
-  const lightTitle_userPolicy = {title: "使用者政策", isLightBox: ref(false)};
-  const lightTitle_privacy = {title: "隱私權政策", isLightBox: ref(false)};
-  
+  const lightTitle_resub = { title: "續約" , isLightBox : ref(false) }; 
   
   // 控制lightbox狀態
    // 續約
