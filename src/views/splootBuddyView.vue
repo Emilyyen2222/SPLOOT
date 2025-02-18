@@ -230,7 +230,7 @@
     </div>
     <div class="imgUpload">
         <div class="imgUploadSection">
-            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px<br>1 MB以下</p>
             <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
                 <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
             </div>
@@ -798,10 +798,12 @@ const searchBuddies = () => {
     })
 };
 
+
 // 頁面載入時預設條件
-onMounted(() => {
+onMounted( async () => {
     selectedPetTypes.value = petTypes.value.map(type => type.class); // 預設全選
-    searchBuddies(); // 立即執行搜尋
+    // 立即執行搜尋
+    await findAllBuddyPostsPhp();
 });
 
 //卡片查看更多
@@ -908,8 +910,15 @@ const uploadFileImage = (event) => {
     if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
         return; //防止 `event` 或 `files` 為空
     };
-
+    
     const file = event.target.files[0];
+
+    // 限制圖片大小（最大 1MB）
+    const maxSize = 1 * 1024 * 1024; // 1MB
+    if (file.size > maxSize) {
+        alert("圖片太大，請上傳 1MB 以下的圖片！");
+        return;
+    }
 
     if (file && file.type.startsWith('image/')) {
     const reader = new FileReader();
@@ -922,17 +931,20 @@ const uploadFileImage = (event) => {
 
 // 提交按鈕
 const submitCard = () => {
-        if(submitCheck){
+        if(submitCheck.value){
             alert('填寫未完成');
         }else{
-            alert('填寫完成');
+            createBuddyPostPhp();
+            toggleNewPost();
         }
     };
+
+
 //提交前檢查是否有空白未填及時間(有異常為true)
 const submitCheck = computed(() => {
-    return (postServiceType.selectService === '' ||
-        postTitle.value.inputValue === '' ||
-        postContent.value.inputValue === '' ||
+    return (postServiceType.value.selectService === '' ||
+        postTitle.value.inputError ||
+        postContent.value.inputError ||
         hasUploadImg.value === null
     )
 });
@@ -944,14 +956,17 @@ async function createBuddyPostPhp(){
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            service: '散步陪伴',
-            title: '新增小幫手貼文',
-            serviceCity: '台北市',
-            serviceDistrict: '大同區',
+            postImg: hasUploadImg.value,
+            title: postTitle.value.inputValue,
+            acceptDays: ["一", "二"],
             serviceTimeStart: '09:00',
             serviceTimeEnd: '18:00',
-            description: '唉，散步陪伴這種事，說實話有點麻煩，不過既然你需要，我會盡量幫忙。需要陪你的毛孩散步嗎？我提供的服務可是高速散步，速度快到連詛咒隧道附近都能快速穿越，保證不會耽誤太久。雖然有點累，還是得做好，畢竟毛孩的安全是最重要的。放心，牠們會平安無事……應該。預計散步的地點在小桃他們家的神社附近，阿，我好想你，小桃。',
-            postImg: hasUploadImg.value
+            serviceCity: '台北市',
+            serviceDistrict: '大同區',
+            service: postServiceType.value.selectService,
+            acceptPets: ["puppy", "small", "middle", "large", "elder", "kitten", "cat"],
+            stars: 5,
+            description: postContent.value.inputValue,
         })
     });
 
@@ -965,10 +980,13 @@ async function createBuddyPostPhp(){
     } catch(error){
         console.error('Error parsing JSON:', error);
     }
+    findAllBuddyPostsPhp();
 }
 // createBuddyPostPhp();
 
 async function findAllBuddyPostsPhp(){
+    // 清空陣列
+    cardsRawData.value = [];
     const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllBuddyPosts.php`, {
         method: 'POST',
         headers: {
@@ -991,7 +1009,7 @@ async function findAllBuddyPostsPhp(){
                     district: post.serviceDistrict,
                     serviceType: post.serviceType,
                     petTypes: post.acceptPets,
-                    stars: 5,
+                    stars: post.stars,
                     serviceDays: post.acceptDays,
                 });
             }
@@ -1002,8 +1020,9 @@ async function findAllBuddyPostsPhp(){
     } catch(error){
         console.error('Error parsing JSON:', error);
     }
+    searchBuddies();
 }
-findAllBuddyPostsPhp();
+// findAllBuddyPostsPhp();
 
 async function deleteBuddyPostPhp(postId, updater = 'System'){
     const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deleteBuddyPost.php`, {
