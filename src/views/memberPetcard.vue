@@ -856,5 +856,132 @@
 //     togglePopUp_deleteCard();
 //   };
 
-  
+    async function createPetCardPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/createPetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                pet: '狗狗',
+                name: 'CoCo',
+                gender: '男',
+                breed: '柴犬',
+                birthDate: '2025-02-02',
+                size: '中型犬',
+                neutured: '已絕育',
+                description: '描述',
+                petImg: '',
+                petHobby: ['興趣', '興趣'],
+                petSocial: ['社交', '社交']
+            })
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
+    // createPetCardPhp();
+
+    async function updatePetCardPhp(petId, updater = 'System'){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updatePetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                petId: petId,
+                pet: '狗狗',
+                name: 'CoCo',
+                gender: '男',
+                breed: '柴犬',
+                birthDate: '2025-02-02',
+                size: '中型犬',
+                neutured: '已絕育',
+                description: '描述',
+                petImg: '',
+                petHobby: ['興趣', '興趣'],
+                petSocial: ['社交', '社交'],
+                updater: updater
+            })
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
+    updatePetCardPhp(3);
+
+    async function findAllPetCardsPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllPetCards.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                const petCards = petCardResp['data'];
+                for(let pet of petCards){
+                    // pet['petId'],
+                    // pet['pet'],
+                    // pet['name'],
+                    // pet['gender'],
+                    // pet['breed'],
+                    // pet['birthDate'],
+                    // pet['size'],
+                    // pet['neutured'],
+                    // pet['description']
+                }
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+
+    findAllPetCardsPhp();
+
+    async function deletePetCardPhp(petId, updater = 'System'){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deletePetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                petId: petId,
+                updater: updater
+            }),
+        });
+
+        try{
+            const petDeleted = await resp.json();
+            if(petDeleted.status == 'success'){
+                console.log(petDeleted);
+            }else if(petDeleted.status == 'error'){
+                console.log(petDeleted.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+
+    deletePetCardPhp(1);
   </script>
