@@ -6,7 +6,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg';
 
 export const useAuthStores = defineStore('auth',() => {
 
-    const isLoggedIn = ref(true);
+    const isLoggedIn = ref(false);
     
     const authType = ref('login');
     const isAuthBox = ref(false);
