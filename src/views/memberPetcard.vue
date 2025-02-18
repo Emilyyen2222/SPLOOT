@@ -20,63 +20,69 @@
         <!-- view -->
         <div class="petcard-container">
             <!-- card1~n -->
-            <!-- v-for : 卡片與按鈕:pc1、pc2、...-->
+            <!-- v-for : 卡片與按鈕-->
             <div class="petcard" 
-            v-for="plan in filteredCards" :key="plan.label">
+            v-for="memberPetCard in memberPetCards" :key="memberPetCard.label">
             <!-- 卡片區 -->
-              <div class="matchbox">
-                <div class="upperSection">
-                  <div class="cardWrapMatch">
-                      <div class="cardwrapper">
-                          <!-- 左側圖片區 -->
-                          <div class="imageContainer">
-                              <img :src="plan.imageSrc" alt="">
-                          </div>
-                          <!-- 右側內容區 -->
-                          <div class="content">
-                              <div class="topSection">
-                                  <div class="dot">
-                                  <div class="dotActive"></div>
-                                  <div class="dotInactive"></div>
-                                  <div class="dotInactive"></div>
-                                  </div>
-                                  <div class="number">{{ plan.number }}</div>
-                              </div>
-                              <!-- 名稱與距離 -->
-                              <div class="info">
-                                  <div class="nameAndGender">
-                                  <h4 class="bold name">{{ plan.name }}</h4>
-                                  <img src="../assets/img/icon/genderIcon.svg" alt="" style="width: 2rem;">
-                                  </div>
-                                  <div class="distance">
-                                  <div class="smallText distanceIcon"></div>
-                                  距離你{{ plan.distance }}公里
-                                  </div>
-                              </div>
-                              <!-- 標籤區 -->
-                              <div class="tags">
-                                  <span class="xsText tag" v-for="tag in plan.tags" :key="tag">{{ tag }}</span>
-                              </div>
-                              <!-- 內文 -->
-                              <p class="description bold">{{ plan.description }}</p>
-                          </div>
-                      </div>
-                  </div>
+            <div class="matchbox">
+            <div class="upperSection">
+                <div class="cardWrapMatch">
+                    <div class="cardwrapper" 
+                        >
+
+                        <!-- 左側圖片區 -->
+                        <div class="imageContainer">
+                            <img :src="memberPetCard.imageSrc" alt="petPicture">
+                        </div>
+                        <!-- 右側內容區 -->
+                        <div class="content">
+                            <div class="topSection">
+                                <div class="dot">
+                                    <div>
+                                        <div class="dotActive"></div>
+                                        <div class="dotInActive"></div>
+                                        <div class="dotInActive"></div>
+                                    </div>
+                                </div>
+                                <div class="number">{{ String(memberPetCard.label).padStart(2,"0") }}</div>
+                            </div>
+                            <!-- 名稱與距離 -->
+                            <div class="info">
+                                <div class="nameAndGender">
+                                <h4 class="bold name">{{ memberPetCard.name }}</h4>
+                                    <!-- gender icon -->
+                                    <img v-if="memberPetCard.gender == 'Female'" src="../assets/img/icon/femaleIcon.svg" alt="Female Icon" style="width: 2rem;" />
+                                    <img v-else-if="memberPetCard.gender == 'Male'" src="../assets/img/icon/maleIcon.svg" alt="Male Icon" style="width: 2rem;" />
+                                </div>
+                                <div class="distance">
+                                <div class="smallText distanceIcon"></div>
+                                距離你{{ memberPetCard.distance }}公里
+                                </div>
+                            </div>
+                            <!-- 標籤區 -->
+                            <div class="tags">
+                                <span class="xsText tag" v-for="tag in memberPetCard.tags" :key="tag">{{ tag }}</span>
+                            </div>
+                            <!-- 內文 -->
+                            <p class="description bold">{{ memberPetCard.description }}</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            </div>
+        </div>
             <!-- 案扭區 -->
               <div class="ptc-btn-group">
-                <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo('dog')">編輯</Btn>
+                <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo('dog','edit')">編輯</Btn>
                 <div class="btn-group">
-                  <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard">刪除卡片</Btn>
+                  <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard()">刪除卡片</Btn>
                 </div>
               </div>
             </div>
             <!-- cardn+1 -->
             <div class="petcard addpc" id="addPetCard">
               <div class="" id="addPetCardBtn">
-                <Btn btnStyle="baseline small" @click="toggleLightBoxPetInfo('dog')">+ 狗狗資訊卡</Btn>
-                <Btn btnStyle="baseline small" @click="toggleLightBoxPetInfo('cat')">+ 貓貓資訊卡</Btn>
+                <Btn btnStyle="baseline small" @click="toggleLightBoxPetInfo('dog','create')">+ 狗狗資訊卡</Btn>
+                <Btn btnStyle="baseline small" @click="toggleLightBoxPetInfo('cat','create')">+ 貓貓資訊卡</Btn>
               </div>
             </div>           
         </div>
@@ -87,7 +93,7 @@
       <LightBox 
         :title="lightTitlePetInfo.title"
         :is-light-box="isLightBoxPetInfo" 
-        @toggle="toggleLightBoxPetInfo()">
+        @toggle="toggleLightBoxPetInfo(goal)">
         <div v-if="selectedPetType === 'dog'" class="infoContainer">
         <!-- 資訊卡內文 -->
             <div class="infoWrap">
@@ -112,7 +118,7 @@
                                 <label>毛孩姓名*</label>
                                 <div class="petName">
                                     <InputText placeHolder="Splooter" size = "small" text-align="left" errorMsg="Invalid Input" 
-                                    v-model="inputValue" :hasError="inputError"></InputText>
+                                    v-model="petName" :hasError="inputError"></InputText>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +129,8 @@
                                     <Btn v-for="option in tag1.options" :key="option"
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag1.selected, option)}"
-                                    @click="tag1.formChoice(tag1.selected, option)">{{ option }}</Btn>
+                                    @click="tag1.formChoice(tag1.selected, option)"
+                                    v-model="selectedGender">{{ option }}</Btn>
                                 </div>
                             </div>
                         </div>
@@ -134,8 +141,10 @@
                                     <div class="dropdownMenu">
                                         <DropdownMenu class="dropDown"
                                         :placeHolder="menus.menuDog.placeHolder"
-                                        :options="menus.menuDog.options">
+                                        :options="menus.menuDog.options"
+                                        v-model="menus.menuDog.options">
                                         </DropdownMenu>
+                                        <!-- <p>{{ menus.menuDog.options }}</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -194,7 +203,9 @@
                                     <Btn v-for="option in tag2.options" :key="option"
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag2.selected, option)}"
-                                    @click="tag2.formChoice(tag2.selected, option)">{{ option }}</Btn>
+                                    @click="tag2.formChoice(tag2.selected, option)"
+                                    v-model="tag2.selected.value">{{ option }}</Btn>
+                                    <!-- <p>{{ tag2.selected.value }}</p> -->
                                 </div>
                             </div>
                         </div>
@@ -428,8 +439,8 @@
             </div>
         </div>
         <div class="saveBtnBox">            
-            <Btn btnType="form" btnStyle="nextQ" @click="toggleLightBoxPetInfo()">儲存</Btn>             
-            <Btn class="borderBottom" btnType="form" btnStyle="lastQ">取消編輯</Btn>
+            <Btn btnType="form" btnStyle="nextQ" @click="toggleAndUpdateCard()">儲存</Btn>             
+            <Btn class="borderBottom" btnType="form" btnStyle="lastQ" @click="toggleLightBoxPetInfo()">取消編輯</Btn>
         </div> 
       </LightBox>
   
@@ -541,9 +552,11 @@
   // import petInfoCardView from '../views/petInfoCardView.vue' ;
   
   // lightBox title
-  const lightTitle_editDog = {title: "狗狗資訊卡", isLightBox: ref(false)};
-  const lightTitle_editCat = {title: "貓貓資訊卡", isLightBox: ref(false)};
   const lightTitle_matchReset = {title: "配對喜好設定", isLightBox: ref(false)};
+
+  // v-model
+  const petName = ref('')
+  const selectedGender = ref('')
 
   // dropDown
   const menus = {
@@ -644,40 +657,24 @@
     },
     };
 
-  // input
-   // basic name 姓名
-  const input1 = {
-      size: 'small',
-      textAlign: 'textLeft',
-      placeHolder: '這裡填預設文字',
-      errorMsg: 'Invalid Input',
-      inputValue: ref(''),
-      inputError: ref(false),
-  }
-
-  // 寵物資訊卡的卡片資料
-  const petcards = [
-    { petcardId:1 ,cardImg: new URL ("../assets/img/splootbox/dog1.jpg", import.meta.url).href},
-    { petcardId:2 ,cardImg: new URL ("../assets/img/splootbox/dog2.jpg", import.meta.url).href},
-    { petcardId:3 ,cardImg: new URL ("../assets/img/splootbox/dog3.jpg", import.meta.url).href},
-  ];
-  
-  const cardsData = ref([
-        { label: 'card4', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '04', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-        { label: 'card5', name: 'Buddy', imageSrc: new URL('../assets/img/splootbox/dog3.jpg', import.meta.url).href, number: '05', distance: 8, tags: ['拉布拉多', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-        { label: 'card6', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-        { label: 'card7', name: 'Luka', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '07', distance: 4, tags: ['薩摩耶', '活潑外向', '愛吃肉肉'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' }
-        ]);
-
-  const filteredCards = ref([
-  { label: 'card3', name: 'Brady', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '06', distance: 8, tags: ['黃金獵犬', '活潑外向', '愛吃'], description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse.' },
-  { label: 'card2', name: 'Coco', imageSrc: new URL('../assets/img/splootbox/dog2.jpg', import.meta.url).href, number: '02', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-  { label: 'card1', name: 'Coco', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 6, tags: ['邊境牧羊', '活潑外向', '愛玩球'], description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' },
-  ]); 
-
+  // 會員中心的 寵物資訊卡的 卡片資料
+    const memberPetCards = ref([
+        { label: '1', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
+        { label: '2', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
+        { label: '3', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }
+    ])
+    // console.log(memberPetCards.value[].tags[0])
     // 計算資訊卡的卡片數量
-    const petCardCount = computed(() => petcards.length);
-  
+    const petCardCount = computed(() => memberPetCards.value.length);
+    // by Emily
+    
+
+    //格式化數字
+    const dottedNumber = computed(() => {
+        return (clickedIndex.value + 1).toString().padStart(2, '0'); //index+1並轉換為兩位數字, 前面加上0
+    });
+
+      
   // 調整喜好
    // 哪種朋友
   const tag_friend = {
@@ -797,7 +794,7 @@
     const selectedPetType = ref('dog');
     // 狗狗資訊卡
     // 控制燈箱的顯示與隱藏
-    function toggleLightBoxPetInfo(petType) {
+    function toggleLightBoxPetInfo(petType,goal) {
         isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
         if (petType) {
             selectedPetType.value = petType; 
@@ -808,6 +805,16 @@
         } else if (petType == 'cat') {
             lightTitlePetInfo.value.title = '貓貓資訊卡';
         }
+        // 根據goal 決定打開 "新增" 還是 "編輯"
+        if (goal == 'create' && petType == 'dog') {
+            lightTitlePetInfo.value.title = '新增狗狗資訊卡';
+        } else if (goal == 'edit' && petType == 'dog') {
+            lightTitlePetInfo.value.title = '編輯狗狗資訊卡';
+        }else if (goal == 'create' && petType == 'cat') {
+            lightTitlePetInfo.value.title = '新增貓貓資訊卡';
+        } else if (goal == 'edit' && petType == 'cat') {
+            lightTitlePetInfo.value.title = '編輯貓貓資訊卡';
+        }
         // 根據狀態新增或移除 clicked 類別
         if (isLightBoxPetInfo.value) {
             document.body.classList.add('clicked');
@@ -815,9 +822,21 @@
             document.body.classList.remove('clicked');
         }
     }
-
-  
-  // 控制燈箱的顯示與隱藏
+    // 編輯>儲存
+    function toggleAndUpdateCard(petId,petType,goal){
+        updatePetCardPhp(petId);
+        toggleLightBoxPetInfo(petType,goal);
+    }
+    // 新增>儲存
+    function toggleAndCreateCard(pet,petType,goal){
+        createPetCardPhp(pet);
+        toggleLightBoxPetInfo(petType,goal);
+    }
+    // 刪除>儲存
+    function toggleAndDeleteCard(petId){
+        deletePetCardPhp(petId);
+        togglePopUp_deleteCard();
+    }
 
    // 配對喜好設定 
   function toggleLightBox_match() {
@@ -827,26 +846,23 @@
     } else {
       document.body.classList.remove('clicked');
     }
-  };
-  
+  };  
   
   //popup狀態
   const deleteCard = { isPopUp : ref (false )  };
   
   // 刪除資訊卡
-  // 控制燈箱的顯示與隱藏
   function togglePopUp_deleteCard() {
     deleteCard.isPopUp.value = !deleteCard.isPopUp.value;
-    // // 停止捲軸
     if (deleteCard.isPopUp.value) {
       document.body.classList.add('clicked');
     } else {
       document.body.classList.remove('clicked');
     }
   };
-  // 刪除卡片
+  // 刪除卡片 額外msg
 //   const cardsAfterDelete = ref(null)
-//   const conFirmDeleteCard = () => {
+//   const conFirmDeleteCard = compted(() => {
 //     if(petcards.length>0){
 //         cardsAfterDelete = petcards.length -1;
 //     }else{
@@ -854,7 +870,134 @@
 //         return
 //     }
 //     togglePopUp_deleteCard();
-//   };
+//   });
 
-  
+    async function createPetCardPhp(pet){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/createPetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                // pet: pet,
+                // name: memberPetCards.name,
+                // gender: memberPetCards.gender,
+                // breed: memberPetCards.value.tags[0],
+                // birthDate: '2025-02-02',
+                // size: '中型犬',
+                // neutured: '已絕育',
+                // description: '描述',
+                // petImg: hasUploadImg.value,
+                // petHobby: ['興趣', '興趣'],
+                // petSocial: ['社交', '社交']
+            })
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
+    createPetCardPhp('狗狗');
+
+    async function updatePetCardPhp(petId, updater = 'System'){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updatePetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                petId: petId,
+                pet: '狗狗',
+                name: 'CoCo',
+                gender: '男',
+                breed: '柴犬',
+                birthDate: '2025-02-02',
+                size: '中型犬',
+                neutured: '已絕育',
+                description: '描述',
+                petImg: hasUploadImg.value,
+                petHobby: ['興趣', '興趣'],
+                petSocial: ['社交', '社交'],
+                updater: updater
+            })
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
+    updatePetCardPhp(3);
+
+    async function findAllPetCardsPhp(){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllPetCards.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
+                const petCards = petCardResp['data'];
+                for(let pet of petCards){
+                    // pet['petId'],
+                    // pet['pet'],
+                    // pet['name'],
+                    // pet['gender'],
+                    // pet['breed'],
+                    // pet['birthDate'],
+                    // pet['size'],
+                    // pet['neutured'],
+                    // pet['description']
+                }
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+
+    findAllPetCardsPhp();
+
+    async function deletePetCardPhp(petId, updater = 'System'){
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deletePetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                petId: petId,
+                updater: updater
+            }),
+        });
+
+        try{
+            const petDeleted = await resp.json();
+            if(petDeleted.status == 'success'){
+                console.log(petDeleted);
+            }else if(petDeleted.status == 'error'){
+                console.log(petDeleted.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    }
+
+    deletePetCardPhp(1);
   </script>

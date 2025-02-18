@@ -1020,6 +1020,14 @@ ol {
 
   overflow-x: scroll;          /* 啟用水平滑動 */
   scroll-behavior: smooth;     /* 平滑滑動效果（可選） */ 
+
+  // flex-wrap: nowrap;
+  //   overflow-x: auto;
+  //   -webkit-overflow-scrolling: touch;
+  //   scrollbar-width: none;   
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  // }   
   .card{
     flex: 0 0 auto;  //不允許伸縮
     width: 31.2rem;
@@ -1027,6 +1035,8 @@ ol {
     padding: 0;
     background-color: map-get($colors, natural-0 );
     border-radius: 16px;
+
+    scroll-snap-align: start;
     .card-title{
       display: flex;
       justify-content: start;

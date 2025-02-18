@@ -11,7 +11,7 @@
     </RouterLink>
     
     <RouterLink to="/match" style="cursor: pointer;">
-        <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">前往配對問卷</Btn> 
+        <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;" class="toMatchQuestion">前往配對問卷</Btn> 
     </RouterLink>
 
     <RouterLink to="/match/matchCard" style="cursor: pointer;">

@@ -172,3 +172,8 @@
     }
   }
   
+  .toMatchQuestion span{
+    @include sm(){
+        width: 100px;
+    }
+  }

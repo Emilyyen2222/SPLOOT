@@ -38,7 +38,7 @@
                     </div>
                     <div class="bi-inbox">
                       <div class="label">暱稱</div>
-                      <div>{{ inputs.input_nickName.inputValue }}</div>
+                      <div>{{ inputs.input_nickname.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">性別</div>
@@ -76,7 +76,7 @@
               </div>
             </div>
             <!-- card 3 聯絡資料 -->
-            <div class="card card-contact" id="">
+            <div class="card card-contact">
     
               <div class="card-title">
                   <p class="bold">聯絡資訊</p>
@@ -164,7 +164,7 @@
                               :size="inputs.input_firstName.size"
                               :textAlign="inputs.input_firstName.textAlign"
                               :errorMsg="inputs.input_firstName.errorMsg"
-                              :inputError="inputs.input_firstName.inputError"
+                              :hasError="inputs.input_firstName.hasError"
                               >
                             </InputText>
                             <InputText
@@ -173,7 +173,7 @@
                               :size="inputs.input_lastName.size"
                               :textAlign="inputs.input_lastName.textAlign"
                               :errorMsg="inputs.input_lastName.errorMsg"
-                              :inputError="inputs.input_lastName.inputError"
+                              :hasError="inputs.input_lastName.hasError"
                               >
                             </InputText>
 
@@ -182,27 +182,27 @@
                       <div class="input-group">
                           <label for="nickName">暱稱</label>
                           <InputText 
-                            v-model="inputs.input_nickName.inputValue"
-                            :placeHolder="inputs.input_nickName.placeHolder"
-                            :size="inputs.input_nickName.size"
-                            :textAlign="inputs.input_nickName.textAlign"
-                            :errorMsg="inputs.input_nickName.errorMsg"
-                            :inputError="inputs.input_nickName.inputError">
+                            v-model="inputs.input_nickname.inputValue"
+                            :placeHolder="inputs.input_nickname.placeHolder"
+                            :size="inputs.input_nickname.size"
+                            :textAlign="inputs.input_nickname.textAlign"
+                            :errorMsg="inputs.input_nickname.errorMsg"
+                            :hasError="inputs.input_nickname.hasError">
                           </InputText>
                       </div>
                       <div class="input-group" id="sexGroup">
                         <label for="sex">性別</label>
                         <div class="sex" id="sex">
                           <label for="male">
-                              <input type="radio" class="" name="sex" value="男" id="male" style="color : #D14535; " v-model="selectedSex">男
+                              <input type="radio" name="sex" value="男" id="male" style="color : #D14535; " v-model="selectedSex">男
                           </label>
                           <label for="female">
-                              <input type="radio" class="" name="sex" value="女" id="female" style="color : #D14535; " v-model="selectedSex">女
+                              <input type="radio" name="sex" value="女" id="female" style="color : #D14535; " v-model="selectedSex">女
                           </label>
                         </div>
                       </div>
                       <div class="input-group birthday">
-                          <label for="">生日</label>
+                          <label>生日</label>
                           <div class="select-group">
                             <!-- 年分 -->
                             <DropdownMenu 
@@ -242,7 +242,7 @@
       
                     <div class="card-content">
                       <div class="input-group">                          
-                          <label for="">帳戶</label>
+                          <label>帳戶</label>
                           <p>{{ member.email }}</p>                          
                       </div>
                       <div class="input-group">
@@ -255,17 +255,6 @@
                             <!-- 眼睛切換顯示與否 -->
                             <p v-if="isPwdVisible">{{ member.pwd }}</p>
                             <p v-else>{{ '******' }}</p>
-                            <!-- <InputText
-                                ref="password_member"
-                                class="password_member"
-                                placeHolder="密碼"
-                                errorMsg="Invalid Input"
-                                v-model="inputValuePassword"
-                                :hasError="inputErrorPassword"
-                                size="small">
-                            </InputText> -->
-                            <!-- <img class="theEye" :src="eyeState_member" alt="" @click="eyeStateToggle_member"> -->
-                            <!-- <p>用 v-model 監聽: {{ inputValuePassword }}</p> -->
                           </div>
                           <Btn btnStyle="baseline small" @click="togglePopUp_resetPwd">變更密碼</Btn>                          
                         </div>
@@ -311,7 +300,7 @@
                             :size="inputs.input_phone.size"
                             :textAlign="inputs.input_phone.textAlign"
                             :errorMsg="inputs.input_phone.errorMsg"
-                            :inputError="inputs.input_phone.inputError">
+                            :hasError="inputs.input_phone.hasError">
                           </InputText>
                       </div>
                       <div class="input-group">
@@ -321,7 +310,8 @@
                               <DropdownMenu class="address"
                                 :placeHolder="city.placeHolder"
                                 :options="city.options"
-                                v-model="selectedCity">
+                                v-model="selectedCity"
+                                @change="handleUserSelectCity($event.target.value)">
                               </DropdownMenu>
                               <DropdownMenu class="address"
                                 :placeHolder="districtPlaceHolder"
@@ -337,7 +327,7 @@
                               :size="inputs.input_address.size"
                               :textAlign="inputs.input_address.textAlign"
                               :errorMsg="inputs.input_address.errorMsg"
-                              :inputError="inputs.input_address.inputError">
+                              :hasError="inputs.input_address.hasError">
                             </InputText>
 
                           </div>
@@ -351,7 +341,7 @@
                               :size="inputs.input_lineId.size"
                               :textAlign="inputs.input_lineId.textAlign"
                               :errorMsg="inputs.input_lineId.errorMsg"
-                              :inputError="inputs.input_lineId.inputError"
+                              :hasError="inputs.input_lineId.hasError"
                               required>
                             </InputText>
                           <p id="lineidnotice">*未提供Line ID 將無法使用 認識新毛友 和 尋找小幫手</p>
@@ -364,7 +354,7 @@
               <!-- 儲存修改紐 -->
               <div class="pu-btn-group">
                   <div>
-                    <Btn btnStyle="primary default" @click="toggleLightBox(lightTitle_memberInfo)">儲存</Btn>
+                    <Btn btnStyle="primary default" @click="toggleAndSave(lightTitle_memberInfo)">儲存</Btn>
                   </div>
                   <div>
                     <Btn btnStyle="baseline default" @click="toggleLightBox(lightTitle_memberInfo)">取消修改</Btn>
@@ -395,7 +385,7 @@
                       :size="inputs.input_vEmail.size"
                       :textAlign="inputs.input_vEmail.textAlign"
                       :errorMsg="inputs.input_vEmail.errorMsg"
-                      :inputError="inputs.input_vEmail.inputError"
+                      :hasError="inputs.input_vEmail.hasError"
                       required>
                     </InputText>
                   </label>
@@ -417,7 +407,7 @@
                       :size="inputs.input_vCode.size"
                       :textAlign="inputs.input_vCode.textAlign"
                       :errorMsg="inputs.input_vCode.errorMsg"
-                      :inputError="inputs.input_vCode.inputError"
+                      :hasError="inputs.input_vCode.hasError"
                       required>
                     </InputText>
                   </label>
@@ -440,7 +430,7 @@
                       :size="inputs.input_newPwd.size"
                       :textAlign="inputs.input_newPwd.textAlign"
                       :errorMsg="inputs.input_newPwd.errorMsg"
-                      :inputError="inputs.input_newPwd.inputError"
+                      :hasError="inputs.input_newPwd.hasError"
                       required>
                     </InputText>
                   </label>
@@ -451,7 +441,7 @@
                       :size="inputs.input_newPwd2.size"
                       :textAlign="inputs.input_newPwd2.textAlign"
                       :errorMsg="inputs.input_newPwd2.errorMsg"
-                      :inputError="inputs.input_newPwd2.inputError"
+                      :hasError="inputs.input_newPwd2.hasError"
                       required>
                     </InputText>
                   </label>              
@@ -521,7 +511,7 @@
   
 <script setup>
   
-import { ref,computed,reactive,watch,provide, onBeforeMount} from 'vue';
+import { ref,computed,reactive,watch} from 'vue';
 // components
 import MainHeader from '../components/MainHeader.vue';
 import Btn from '../components/Btn.vue';
@@ -541,19 +531,19 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 使用物件來統一管理所有輸入框的狀態
   const inputs = reactive({
     // input1: { placeHolder: '輸入預設文字' , errorMsg : '請輸入正確格式的'},
-    input_firstName: { placeHolder: '輸入姓名' },
-    input_lastName: { placeHolder: '輸入姓名' },
-    input_nickName: { placeHolder: '輸入暱稱' },
+    input_firstName: { placeHolder: '輸入姓名',inputValue : ref('') },
+    input_lastName: { placeHolder: '輸入姓名' ,inputValue : ref('')},
+    input_nickname: { placeHolder: '輸入暱稱' ,inputValue : ref('')},
     // input_email: { placeHolder: 'hao@gmail.com' },
-    input_pwd: { placeHolder: '********' },
-    input_phone: { placeHolder: '輸入手機' },
-    input_address: { placeHolder: '輸入剩下地址'},
-    input_lineId: { placeHolder: '輸入LineID' },
+    input_pwd: { placeHolder: '********',inputValue : ref('') },
+    input_phone: { placeHolder: '輸入手機',inputValue : ref('') },
+    input_address: { placeHolder: '輸入剩下地址',inputValue : ref('')},
+    input_lineId: { placeHolder: '輸入LineID',inputValue : ref('') },
     // 變更密碼 SOP
-    input_vEmail: { placeHolder: '輸入信箱' },
-    input_vCode: { placeHolder: '輸入驗證碼' },
-    input_newPwd: { placeHolder: '輸入新密碼' },
-    input_newPwd2: { placeHolder: '確認新密碼' }
+    input_vEmail: { placeHolder: '輸入信箱' ,inputValue : ref('')},
+    input_vCode: { placeHolder: '輸入驗證碼',inputValue : ref('') },
+    input_newPwd: { placeHolder: '輸入新密碼',inputValue : ref('') },
+    input_newPwd2: { placeHolder: '確認新密碼',inputValue : ref('') }
   });
 
   // 統一設定每個 inputText 的預設屬性，避免重複
@@ -563,23 +553,24 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       size: 'small',
       textAlign: 'textLeft',
       errorMsg: '請輸入正確格式',
-      inputValue: ref(''), // 這樣每個 input 都會擁有獨立的 v-model
-      inputError: ref(false)
+      hasError: ref(false)
     };
   });
 
   // avatar
   const avatars=[
-  {avatarId:1,img: new URL("@/assets/img/member-center/portrait1.svg", import.meta.url).href},
-  {avatarId:2,img: new URL("@/assets/img/member-center/portrait2.svg", import.meta.url).href},
-  {avatarId:3,img: new URL("@/assets/img/member-center/portrait3.svg", import.meta.url).href},
-  {avatarId:4,img: new URL("@/assets/img/member-center/portrait4.svg", import.meta.url).href},
-  {avatarId:5,img: new URL("@/assets/img/member-center/portrait5.svg", import.meta.url).href},
-  {avatarId:6,img: new URL("@/assets/img/member-center/portrait6.svg", import.meta.url).href},
-  {avatarId:7,img: new URL("@/assets/img/member-center/portrait7.svg", import.meta.url).href},
-  {avatarId:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href},
-];
-
+    {avatarId:1,img: new URL("@/assets/img/member-center/portrait1.svg", import.meta.url).href},
+    {avatarId:2,img: new URL("@/assets/img/member-center/portrait2.svg", import.meta.url).href},
+    {avatarId:3,img: new URL("@/assets/img/member-center/portrait3.svg", import.meta.url).href},
+    {avatarId:4,img: new URL("@/assets/img/member-center/portrait4.svg", import.meta.url).href},
+    {avatarId:5,img: new URL("@/assets/img/member-center/portrait5.svg", import.meta.url).href},
+    {avatarId:6,img: new URL("@/assets/img/member-center/portrait6.svg", import.meta.url).href},
+    {avatarId:7,img: new URL("@/assets/img/member-center/portrait7.svg", import.meta.url).href},
+    {avatarId:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href},
+  ];
+  // UI 切換
+  const selectedAvatarId = ref(1);
+  const memberPortraitChosed = ref(1);
   // 居住地區--城市選單
   const city = {
     placeHolder: "全部城市",
@@ -678,38 +669,144 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   // lightBox title
   const lightTitle_memberInfo = {title: "會員資料", isLightBox: ref(false)};
 
-// function
+  // popup 預設
+  const unBind = { isPopUp : ref (false ) };
+  const resetPwd = { isPopUp : ref (false ) };
 
+  // 基本資料 性別
+  const selectedSex = ref('');
+  // 帳戶/號(信箱)
+  const member = reactive({
+    email : 'hao@gmail.com',   // 暫時寫死
+    pwd: 'password'
+  });
+  // avatar 切換事件
+  const chosed = (avatarId) => {
+      selectedAvatarId.value = avatarId;
+      memberPortraitChosed.value = avatarId;
+    };
+
+  const memberPortrait = computed(()=> {      
+    switch (memberPortraitChosed.value){
+      case 1 : 
+        return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+      case 2 : 
+        return new URL(`@/assets/img/member-center/portrait2.svg`,import.meta.url).href;
+      case 3 : 
+        return new URL(`@/assets/img/member-center/portrait3.svg`,import.meta.url).href;
+      case 4 : 
+        return new URL(`@/assets/img/member-center/portrait4.svg`,import.meta.url).href;
+      case 5 : 
+        return new URL(`@/assets/img/member-center/portrait5.svg`,import.meta.url).href;
+      case 6 : 
+        return new URL(`@/assets/img/member-center/portrait6.svg`,import.meta.url).href;
+      case 7 : 
+        return new URL(`@/assets/img/member-center/portrait7.svg`,import.meta.url).href;
+      case 8 : 
+        return new URL(`@/assets/img/member-center/portrait8.svg`,import.meta.url).href;
+      default:
+        return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
+    };
+  });
+  // 選擇生日 的下拉選單
+    // 取得目前年份
+    const currentYear = new Date().getFullYear();
+
+    // 年份：從當前年份往回推 100 年
+    const menu_birth_y = computed(() => ({
+      placeHolder: '請選擇年份',
+      options: Array.from({ length: 100 }, (_, i) => ({
+        id: currentYear - i,  
+        name: String(currentYear - i)
+      }))
+    }));
+
+    // 月份：1 到 12
+    const menu_birth_m = computed(() => ({
+      placeHolder: '請選擇月份',
+      options: Array.from({ length: 12 }, (_, i) => ({
+        id: i + 1, 
+        name: String(i + 1)
+      }))
+    }));
+
+    // 使用 v-model 綁定使用者所選的年份、月份與日期
+    const selectedYear = ref('');
+    const selectedMonth = ref('');
+    const selectedDay = ref('');
+
+    // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
+    const menu_birth_d = computed(() => {
+      const result = {
+        placeHolder: '請選擇日期',
+        options: []
+      };
+
+      if ( !selectedYear.value || !selectedMonth.value || !selectedDay){
+        return result;
+      };
+
+      // Number 轉換成數字
+      let year = Number(selectedYear.value);
+      let month = Number(selectedMonth.value);
+
+      // 計算當月的天數
+      const days = new Date(year, month, 0).getDate();
+
+      result.options = Array.from({ length: days }, (_,i) => ({
+        id: i + 1,
+        name: String( i + 1 )
+      }));
+      
+      return result;
+    });
+
+    // 組合起來，為了傳給後端
+    const birthDate= computed(()=>{
+      if ( selectedYear.value && selectedMonth.value && selectedDay.value ){
+        console.log(typeof(`${selectedYear.value}-${String(selectedMonth.value).padStart(2,"0")}-${String(selectedDay.value).padStart(2,"0")}`))
+        return `${selectedYear.value}-${String(selectedMonth.value).padStart(2,"0")}-${String(selectedDay.value).padStart(2,"0")}`
+      }
+      return "未填寫";
+    });
+    
+    // 隱私權元件，Policy Component
+    const isLightBoxPolicy = ref(false);
+    const isLightBoxPrivacy = ref(false);
+
+    const titlePolicy = ref("網站服務條款");
+    const titlePrivacy = ref("隱私權政策");
+    // 重設密碼
+    // 步驟
+    const step = ref(1);
+    const maxStep = 4; // 設定最大步驟數
+    const resetPwdAgree = ref(false);
+    // 重設密碼的三個條件
+    const rePwd1 = ref(false)
+    const rePwd2 = ref(false)
+    const rePwd3 = ref(false)
+
+
+// function
   // 監聽input的內容，驗證
     // 手機
-      // check formation  
-    // const isValidPhone = computed(() => {
-    //   // 允許數字 (0-9)、加號 (+)、減號 (-)、空格、國際碼
-    //   const phonePattern = /^(\+?[0-9]{1,3})?(\s|-)?[0-9]{4}(\s|-)?[0-9]{3}(\s|-)?[0-9]{3}$/;
-    //   return phonePattern.test(inputs.input_phone.inputValue.value);
-    // });
+      // 檢查格式  
+    const isValidPhone = computed(() => {
+      // 允許數字 (0-9)、加號 (+)、減號 (-)、空格、國際碼
+      const phonePattern = /^(\+?[0-9]{1,3})?([ -]?[0-9]{4}){2}[ -]?[0-9]{2}$/;
+      return phonePattern.test(inputs.input_phone.inputValue);
+    });
+    watch(
+      () => inputs.input_phone.inputValue, 
+      (newValue, oldValue) => {
+        if(!isValidPhone.value){
+          inputs.input_phone.hasError = true;
+        }else{
+          inputs.input_phone.hasError = false;
+        }
+      });    
 
-    // watch(
-    //   () => inputs.input_phone.inputValue.value, 
-    //   (newValue, oldValue) => {
-    //   console.log("輸入的手機",inputs.input_phone.inputValue);
-    //   console.log("驗證結果",isValidPhone.value);
-
-    //   inputs.input_phone.inputError.value = !isValidPhone.value;
-
-    //   // 和上面那段相等，同樣是"控制錯誤訊息的顯示與否"
-    //   // if(isValidPhone.value){
-    //   //   // 通過就不顯示錯誤訊息
-    //   //     inputs.input_phone.inputError.value= false;
-    //   // }else{
-    //   //   // 不通過就顯示錯誤訊息
-    //   //     inputs.input_phone.inputError.value= true;
-    //   // }
-    //   });
-    
-
-  // LightBox 燈箱
-  
+  // LightBox 燈箱  
     // 控制燈箱的顯示與隱藏
     // 定義一個共用的 toggle 函式
     function toggleLightBox(lightObj) {
@@ -718,14 +815,22 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         document.body.classList.add('clicked');
       } else {
         document.body.classList.remove('clicked');
-      }
+      }      
     };
+    function toggleAndReload(lightObj){
+      toggleLightBox(lightObj);
+      setTimeout(()=>{
+        window.location.reload();
+      },300)
+    };
+    //推送更新後的inputs
+    function toggleAndSave(lightObj){
+      updateMemberInfoPhp();
+      toggleLightBox(lightObj);
+    }
 
   //PopUp狀態
-    // 用isPopUp控制
-  const unBind = { isPopUp : ref (false ) };
-  const resetPwd = { isPopUp : ref (false ) };
-  
+    // 用isPopUp控制    
     // 控制燈箱的顯示與隱藏
     function togglePopUp_unBind() {
       unBind.isPopUp.value = !unBind.isPopUp.value;
@@ -747,214 +852,28 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       }
     };
 
-
-
   // 編輯會員資料 的彈窗
-
     // avatars 頭像
-
-      // 選擇的頭像 ID，會加上框框
-      const selectedAvatarId = ref(1);
-      console.log("selectedAvatarId:", selectedAvatarId.value);
-
-      const memberPortraitChosed = ref(1);
-
-      // UI change
-      const chosed = (avatarId) => {
-        selectedAvatarId.value = avatarId;
-        memberPortraitChosed.value = avatarId;
-        console.log("選中的avatar:",memberPortraitChosed.value);
-      };
-
-      // const memberPortrait = computed(()=> {
-      //   console.log(memberPortraitChosed.value);
-        
-      //   return new URL(`@/assets/img/member-center/portrait${selectedAvatarId.value}.svg`,import.meta.url).href;
-          
-      // });
-
-      const memberPortrait = computed(()=> {      
-        console.log("帶進switch的值:",memberPortraitChosed.value);
-        switch (memberPortraitChosed.value){
-          case 1 : 
-            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
-          case 2 : 
-            return new URL(`@/assets/img/member-center/portrait2.svg`,import.meta.url).href;
-          case 3 : 
-            return new URL(`@/assets/img/member-center/portrait3.svg`,import.meta.url).href;
-          case 4 : 
-            return new URL(`@/assets/img/member-center/portrait4.svg`,import.meta.url).href;
-          case 5 : 
-            return new URL(`@/assets/img/member-center/portrait5.svg`,import.meta.url).href;
-          case 6 : 
-            return new URL(`@/assets/img/member-center/portrait6.svg`,import.meta.url).href;
-          case 7 : 
-            return new URL(`@/assets/img/member-center/portrait7.svg`,import.meta.url).href;
-          case 8 : 
-            return new URL(`@/assets/img/member-center/portrait8.svg`,import.meta.url).href;
-          default:
-            return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
-        };
-      });
-
-
-      // share 出去
-      // provide('memberPortrait',memberPortrait);
-      // console.log("提供的 memberPortrait:", memberPortrait.value);
-
-      // const sharedAvatar = ref({
-      //   avatarId: 1,
-      //   img: new URL("../assets/img/member-center/portrait1.svg",import.meta.url).href
-      // });
-
-      // // 提供給有inject的檔案
-      // provide('avatarData',sharedAvatar);
-       
-      // 點擊頭像時，
-      //  1.變更選中狀態
-      //  2.將選中的avatar數據共享
-      // const chosed = (avatarId) => {
-      //   selectedAvatarId.value = avatarId;
-      //   console.log("選中的avatar:",avatarId);
-        // 找到對應的avatar的數據
-        // const selectedAvaterData = avatars.find(avatar => avatar.avatarId === avatarId);
-        // // 若有選，則將選中的avatar傳進sharedAvatar
-        // if (selectedAvaterData){
-        //  sharedAvatar.value = selectedAvaterData; 
-        // }
-      // };
-
     // 基本資料
-      // 選擇生日 的下拉選單
-        // 取得目前年份
-        const currentYear = new Date().getFullYear();
-
-        // 年份：從當前年份往回推 100 年
-        const menu_birth_y = computed(() => ({
-          placeHolder: '請選擇年份',
-          options: Array.from({ length: 100 }, (_, i) => ({
-            id: currentYear - i,  
-            name: String(currentYear - i)
-          }))
-        }));
-
-        // 月份：1 到 12
-        const menu_birth_m = computed(() => ({
-          placeHolder: '請選擇月份',
-          options: Array.from({ length: 12 }, (_, i) => ({
-            // there's no 0月
-            id: i + 1, 
-            name: String(i + 1)
-          }))
-        }));
-
-        // 使用 v-model 綁定使用者所選的年份、月份與日期
-        const selectedYear = ref('');
-        const selectedMonth = ref('');
-        const selectedDay = ref('');
-
-        // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
-        const menu_birth_d = computed(() => {
-          const result = {
-            placeHolder: '請選擇日期',
-            options: []
-          };
-
-          if ( !selectedYear.value || !selectedMonth.value || !selectedDay){
-            return result;
-          };
-
-          // Number 轉換成數字
-          let year = Number(selectedYear.value);
-          let month = Number(selectedMonth.value);
-
-          // 計算當月的天數
-          const days = new Date(year, month, 0).getDate();
-
-          result.options = Array.from({ length: days }, (_,i) => ({
-            id: i + 1,
-            name: String( i + 1 )
-          }));
-          
-          return result;
-        });
-        // 組合起來，為了傳給後端
-        const birthDate= computed(
-        //   ()=>{
-        //   const year = selectedYear.value || "";  // 確保不為 null
-        //   const month = selectedMonth.value || "";
-        //   const day = selectedDay.value || ""; // 確保 day 存在
-
-        //   return `${year} ${month} ${day}`.trim();
-
-          {get (){
-            if( !selectedYear || !selectedMonth || !selectedDay ){
-              return "";
-            } 
-            // return `${selectedYear}-${selectedMonth}-${selectedDay}`;
-            return `${selectedYear.value}-${String(selectedMonth.value).padStart(2, "0")}-${String(selectedDay.value).padStart(2, "0")}`;
-            
-          },
-          set(value){
-            if(!value){
-              selectedYear.value = "";
-              selectedMonth.value = "";
-              selectedDay.value = "";
-              return
-            }
-
-            const [seperateDate] = value.split(" "); // 分離日期與時間
-            const [year, month, day] = seperateDate.split("-");
-
-            selectedYear.value = year;
-            selectedMonth.value = month;
-            selectedDay.value = day;
-          }}
-        );
-
-       
+      // 生日
       // 性別
-      const selectedSex = ref('');
-
     // 帳戶
-        // 帳戶/號(信箱)
-        const member = reactive({
-            email : 'hao@gmail.com',   // 暫時寫死
-            pwd: 'password'
-          });
-      //密碼
       //密碼顯示
-
         let eyeState_member = ref(closedEye);
 
         const isPwdVisible = ref(false)
         function eyeStateToggle_member() {
             const passwordInput_member = document.querySelector(".password_member input");
-            // passwordInput_member.type = passwordInput_member.type == 'password' ? 'text' : 'password';
             eyeState_member.value = eyeState_member.value == closedEye ? eyeState_member.value = openedEye : eyeState_member.value = closedEye;
-            // 這裡讓這裡讓isPwdVisible的值在true/false來回切換
+            // 這裡讓isPwdVisible的值在true/false來回切換
             isPwdVisible.value = !isPwdVisible.value;
-            console.log("isPwdVisible.value switch")
-        };
-
-      let inputValuePassword = ref('');
-      let inputErrorPassword = ref(false);
-
-      watch(inputValuePassword, (newValue, oldValue) => {
-          if(inputValuePassword.value.includes('123')){
-              inputErrorPassword.value = true;
-          }else{
-              inputErrorPassword.value = false;
-          }
-      });
-
-  
+        };   
 
     // 聯絡資料
       // 手機
       // 地址
-        let selectedCity = ref(''); //v-model綁定
-        let selectDistrict = ref(''); //v-model綁定
+        let selectedCity = ref(''); //v-model
+        let selectDistrict = ref(''); //v-model
         const districtPlaceHolder = ref("全部行政區域");
 
         // 從選擇的城市中尋找他的行政區域 然後以{name: d}物件排列成陣列
@@ -964,28 +883,24 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         });
 
         // 點選新的城市後行政區清空
-        watch(selectedCity, (newValue, oldValue) => {  
-          // console.log(" watch(selectedCity) 被觸發！");
-          // console.log(" newValue:", newValue, " oldValue:", oldValue);
+        let isUserSelecting = false; // 用來判斷是否是使用者手動選擇
 
-          // // **區分執行時機**
-          // if (oldValue === undefined) {
-          //   console.log(" 這是 `watch()` 初始化時執行！");
-          // } else {
-          //   console.log(" 這是 `selectedCity` 被後端資料庫載入時觸發！");
-          // }
-          
-          if (!oldValue || oldValue === newValue) return;
-
-          console.log("城市變更，清空行政區");
-          console.log('here',newValue, oldValue);
+        watch(selectedCity, (newValue, oldValue) => { 
+          if (!oldValue || oldValue === newValue || !isUserSelecting) return;
+          console.log(" 使用者變更城市，清空行政區");
           selectDistrict.value = null; 
           districtPlaceHolder.value = "全部行政區域";
         });
+
+        // 當使用者手動選擇時，標記 `isUserSelecting`，綁到city的@change事件
+        function handleUserSelectCity(value) {
+          isUserSelecting = true;
+          selectedCity.value = value;
+          setTimeout(() => { isUserSelecting = false; }, 500); // 延遲 500ms 避免影響 `fetch()`
+        };
+
         // 將地址合併成一個(前端顯示用)；保持三個傳到後端
-        // 用computed確保
       const wholeAddress = computed(() => {
-        // console.log(inputs.input_address.inputValue);
         const city = selectedCity.value || "";  // 確保不為 null
         const district = selectDistrict.value || "";
         const address = inputs.input_address.inputValue || ""; // 確保 address 存在
@@ -993,50 +908,18 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
         return `${city} ${district} ${address}`.trim();
       });
 
-        
-        console.log(wholeAddress);
-
-
-      console.log("更新 selectDistrict:", selectDistrict.value);
-
-
-      console.log("selectDistrict:", selectDistrict.value);
-      console.log("selectedCity:", selectedCity.value);
-      console.log("inputs.input_address.inputValue:", inputs.input_address.inputValue);
-
-
-      // 監聽是否成功
-      watch(wholeAddress, (newVal) => {
-        console.log("更新後的 wholeAddress:", newVal);
-      });
-
-      // 變更密碼的彈窗
-        // 步驟
-        const step = ref(1);
-        const maxStep = 4; // 設定最大步驟數
-
-        const resetPwdAgree = ref(false);
-        // 重設密碼的三個條件
-        const rePwd1 = ref(false)
-        const rePwd2 = ref(false)
-        const rePwd3 = ref(false)
-
-
-        // 
+      // 變更密碼的彈窗      
         const emailInputValue = computed(() => inputs.input_vEmail.inputValue);
 
           // 驗證 Email 格式
           const varifyEmail = (email) => {
           email = email.trim().replace(/\s/g, '');
-          console.log("驗證 Email:", email);
+          // console.log("驗證 Email:", email);
           const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           return emailPattern.test(email);
         };
 
         const nextStep = () => {
-          console.log("當前步驟:", step.value);
-          console.log("Email 輸入值:", inputs.input_vEmail.inputValue);
-
           if (step.value === 1) {
             if (!inputs.input_vEmail.inputValue) {
               alert("請輸入電子郵件");
@@ -1044,20 +927,13 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
               console.log("Email 未輸入");
               return;
             }
-            // if (!varifyEmail(inputs.input_vEmail.inputValue.value)) {
-            //   alert("請輸入正確的電子郵件格式");
-            //   console.log("Email 格式錯誤");
-            //   return;
-            // }
-          }
-           else if (step.value === 2) {
+          }else if (step.value === 2) {
             if (!inputs.input_vCode.inputValue) {
               alert("請輸入驗證碼");
               console.log("驗證碼未輸入");
               return;
             }
-          } 
-          else if (step.value === 3) {
+          }else if (step.value === 3) {
             // 檢查 新密碼&確認密碼
             if (!inputs.input_newPwd.inputValue || !inputs.input_newPwd2.inputValue) {
               alert("請輸入密碼");
@@ -1094,30 +970,11 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           // 進入下一步
           if (step.value < maxStep) {
             step.value++;
-            console.log("進入下一步，現在 step:", step.value);
           } else {
             alert("已經是最後一步");
           }
         };
-
-        // const step = ref(1);
-
-        // const nextStep = ( bol = false ) =>{
-        //   if( bol == true){
-        //     step.value++;
-        //   }else{
-        //     alert('請檢查是否輸入正確');
-        //     return
-        //   }
-        // };
-
-      // 隱私權元件，Policy Component
-      const isLightBoxPolicy = ref(false);
-      const isLightBoxPrivacy = ref(false);
-
-      const titlePolicy = ref("網站服務條款");
-      const titlePrivacy = ref("隱私權政策");
-
+      // 控制隱私權元件
       function togglePolicy() {
       isLightBoxPolicy.value = !isLightBoxPolicy.value;
       updateBodyClass();
@@ -1136,8 +993,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       }
       }
 
-
   // 和後端溝通
+      // 撈資料 顯示
       async function showMemberInfoPhp() {
         const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/showMemberInfo.php`, {
             method: 'POST',
@@ -1151,82 +1008,81 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
           inputs.input_firstName.inputValue = memberInfo['firstName'];
           inputs.input_lastName.inputValue = memberInfo['lastName'];
-          inputs.input_nickName.inputValue = memberInfo['nickname'];
+          inputs.input_nickname.inputValue = memberInfo['nickname'];
           selectedSex.value = memberInfo['gender'];
-
-          // ${selectedYear}/${selectedMonth}/${selectedDay} = memberInfo['birthDate'];
-          // selectedYear,selectedMonth,selectedDay = memberInfo['birthDate'];
-
-          inputs.input_lineId.inputValue = memberInfo['lineId'];
           inputs.input_phone.inputValue = memberInfo['phone'];
+          inputs.input_lineId.inputValue = memberInfo['lineId'];
 
-          console.log('here1');
           selectedCity.value = memberInfo['addressCity'];
-          console.log('here2');
           city.placeHolder = memberInfo['addressCity'];
-          console.log('here3');
           selectDistrict.value = memberInfo['addressDistrict'];
-          console.log('here4');
           districtPlaceHolder.value = memberInfo['addressDistrict'];
-          // console.log(memberInfo['addressDistrict']);
-          console.log('here5');
           inputs.input_address.inputValue = memberInfo['addressStreet'];
-          console.log('here6');
 
           birthDate.value = memberInfo['birthDate'];
 
-
-          // console.log(memberInfo['email']);
-          // console.log(memberInfo['firstName']);
-          // console.log(memberInfo['lastName']);
-          // console.log(memberInfo['nickName']);
-          // console.log(memberInfo['gender']);
-          // console.log(memberInfo['birthDate']);
-          // console.log(memberInfo['lineId']);
-          // console.log(memberInfo['phone']);
-          // console.log(memberInfo['addressCity']);
-          // console.log(memberInfo['addressDistrict']);
-          // console.log(memberInfo['addressStreet']);
-
-          // console.log(memberInfo['email','firstName','lastName','gender','birthDate','lineId','phone','addressCity','addressDistrict','addressStreet']);          
         } catch (error){
           console.error('Error parsing JSON:', error);
         }
       }
 
-      // const memberInfo = {
-      //   addressCity: 'tAPIEI',
-      //   addressDistrict: 'bEITOU'
-      // }
-      // console.log('here1');
-      // selectedCity.value = memberInfo['addressCity'];
-      // console.log('here2');
-      //     city.placeHolder = memberInfo['addressCity'];
-      //     console.log('here3');
-      //     selectDistrict.value = memberInfo['addressDistrict'];
-      //     console.log('here4');
-      //     districtPlaceHolder.value = memberInfo['addressDistrict'];
-      //     console.log('here5');
-      //     console.log(memberInfo['addressDistrict']);
+      // 將資料丟給後端
+      async function updateMemberInfoPhp() {
+        console.log("送出前的 `inputs`:", {
+            firstName: inputs.input_firstName.inputValue,
+            lastName: inputs.input_lastName.inputValue,
+            nickname: inputs.input_nickname.inputValue,
+            gender: selectedSex.value,
+            birthDate: birthDate.value,
+            phone: inputs.input_phone.inputValue,
+            address_city: selectedCity.value || "未選擇",
+            address_district: selectDistrict.value || "未選擇",
+            address_street: inputs.input_address.inputValue,
+            lineId: inputs.input_lineId.inputValue,
+            avatarPortrait: memberPortraitChosed.value
+        });
 
-      // async function sendMemberInfoPhp() {
-      //   const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/showMemberInfo.php`, {
-      //       method: 'POST',
-      //       headers: {
-      //           'Content-Type': 'application/json'
-      //       },
-      //       body:JSON.stringify({
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updateMemberInfo.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            // 執行php
+            body: JSON.stringify({
+              firstName: inputs.input_firstName.inputValue ,
+              lastName :inputs.input_lastName.inputValue ,
+              nickname :inputs.input_nickname.inputValue ,
+              gender: selectedSex.value ,
+              birthDate: `${birthDate.value} 00:00:00` ,
+              phone: inputs.input_phone.inputValue ,
+              address_city:selectedCity.value ,
+              address_district: selectDistrict.value ,
+              address_street: inputs.input_address.inputValue ,
+              lineId :inputs.input_lineId.inputValue ,
+              avatarPortrait:memberPortraitChosed.value ,
+            })
+        });
+        
+        // 
+        try{
+          const newMemberInfo = await resp.json();
 
-      //       })
-      //   });
+          console.log('後端回應:',newMemberInfo);
 
-       
-      // }
+          if (newMemberInfo.status === "success") {
+              alert("會員資訊已更新成功！");
+          } else {
+              alert(`更新失敗`);
+          }
 
+        }catch(error){
+          console.error('Error parsing JSON:', error);          
+        }
+      };
+
+      // 拉
       showMemberInfoPhp();
-      console.log('here7');
-
-      
-      
+      // 推
+      // updateMemberInfoPhp(); 
   
 </script>
