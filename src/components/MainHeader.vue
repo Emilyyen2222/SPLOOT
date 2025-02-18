@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-    import { ref, computed} from 'vue';
+    import { ref, computed, onBeforeMount} from 'vue';
     import { useAuthStores } from '@/stores/AuthBoxStores.js';  
     
     import Btn from './Btn.vue';
@@ -139,6 +139,27 @@ async function logOutPhp() {
 
     window.location.reload();
 }
+async function getUserPortraitPhp() {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/getUserPortrait.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    try {
+        const portraitResp = await resp.json();
+        memberLogoPortrait.value = portraitResp.portrait;
+    } catch (error) {
+        console.error('Error parsing JSON:', error);
+    }
+}
+
+onBeforeMount(()=>{
+    if(authBoxStore.isLoggedIn){
+        getUserPortraitPhp();
+    }
+})
 // http://localhost/tid103/g3/php/checkLogin.php
 // https://tibamef2e.com/tid103/g3/php/checkLogin.php
 
