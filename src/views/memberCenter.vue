@@ -569,8 +569,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     {avatarId:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href},
   ];
   // UI 切換
-  const selectedAvatarId = ref(1);
-  const memberPortraitChosed = ref(1);
+  const selectedAvatarId = ref('');
+  const memberPortraitChosed = ref('');
   // 居住地區--城市選單
   const city = {
     placeHolder: "全部城市",
@@ -678,7 +678,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   // 帳戶/號(信箱)
   const member = reactive({
     email : 'hao@gmail.com',   // 暫時寫死
-    pwd: 'password'
+    pwd: '12345'
   });
   // avatar 切換事件
   const chosed = (avatarId) => {
@@ -714,7 +714,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
     // 年份：從當前年份往回推 100 年
     const menu_birth_y = computed(() => ({
-      placeHolder: '請選擇年份',
+      placeHolder: "請選擇年份",
       options: Array.from({ length: 100 }, (_, i) => ({
         id: currentYear - i,  
         name: String(currentYear - i)
@@ -723,7 +723,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
     // 月份：1 到 12
     const menu_birth_m = computed(() => ({
-      placeHolder: '請選擇月份',
+      placeHolder: "請選擇月份",
       options: Array.from({ length: 12 }, (_, i) => ({
         id: i + 1, 
         name: String(i + 1)
@@ -738,7 +738,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 定義日期下拉選單資料：根據 selectedYear 與 selectedMonth 動態生成
     const menu_birth_d = computed(() => {
       const result = {
-        placeHolder: '請選擇日期',
+        placeHolder: "請選擇日期",
         options: []
       };
 
@@ -1019,7 +1019,15 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
           districtPlaceHolder.value = memberInfo['addressDistrict'];
           inputs.input_address.inputValue = memberInfo['addressStreet'];
 
+          memberPortraitChosed.value = memberInfo['portrait'];
           birthDate.value = memberInfo['birthDate'];
+
+          if(memberInfo.birthDate){
+            const[year,month,day] = memberInfo.birthDate.split("-");
+            selectedYear.value = year;
+            selectedMonth.value = month;
+            selectedDay.value = day;
+          }
 
         } catch (error){
           console.error('Error parsing JSON:', error);
@@ -1029,16 +1037,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       // 將資料丟給後端
       async function updateMemberInfoPhp() {
         console.log("送出前的 `inputs`:", {
-            firstName: inputs.input_firstName.inputValue,
-            lastName: inputs.input_lastName.inputValue,
-            nickname: inputs.input_nickname.inputValue,
-            gender: selectedSex.value,
             birthDate: birthDate.value,
-            phone: inputs.input_phone.inputValue,
-            address_city: selectedCity.value || "未選擇",
-            address_district: selectDistrict.value || "未選擇",
-            address_street: inputs.input_address.inputValue,
-            lineId: inputs.input_lineId.inputValue,
             avatarPortrait: memberPortraitChosed.value
         });
 
@@ -1059,16 +1058,12 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
               address_district: selectDistrict.value ,
               address_street: inputs.input_address.inputValue ,
               lineId :inputs.input_lineId.inputValue ,
-              avatarPortrait:memberPortraitChosed.value ,
+              portrait:memberPortraitChosed.value ,
             })
         });
         
-        // 
         try{
           const newMemberInfo = await resp.json();
-
-          console.log('後端回應:',newMemberInfo);
-
           if (newMemberInfo.status === "success") {
               alert("會員資訊已更新成功！");
           } else {

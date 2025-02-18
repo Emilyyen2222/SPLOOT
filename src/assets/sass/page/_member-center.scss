@@ -702,6 +702,7 @@ ol {
     
 
     .btn-group{
+      width: 100%;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -732,21 +733,26 @@ ol {
             position: unset;
             .cardwrapper {
               width: 100%;
+              max-width: 80vw;
               transform: unset;
               margin-top: unset;
               &:nth-child(n){
                 position: unset;
               }
               .imageContainer{
-                width: 20rem;
+                max-width: 20rem;
                 transition: .3s ease-in-out;
                 img{
                   width: unset;
+                  max-width: 100%;
                   height: 100%;
                 }
                 &:hover{
                   width: 100%;
                 }
+              }
+              .content{
+                max-width: 90%;
               }
           }
 
@@ -754,6 +760,9 @@ ol {
 
     }
 
+}
+.ptc-btn-group{
+  max-width: 100%;
 }
 }
 
