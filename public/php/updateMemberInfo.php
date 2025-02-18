@@ -18,7 +18,7 @@ $phone = $postData['phone'];
 $address_city = $postData['address_city'];
 $address_district = $postData['address_district'];
 $address_street = $postData['address_street'];
-$portrait = $postData['avatarPortrait'];
+$portrait = $postData['portrait'];
 
 $response = [];
 
