@@ -3,10 +3,12 @@ include 'PdoConnection.php';
 
 header("Content-Type:application/json");
 
+// 解包JSON
 $postData = json_decode(file_get_contents("php://input"), true);
 $response = [];
 
 
+// 查詢
 $user_id = '3';
 $sql_select = "
   select
@@ -25,6 +27,7 @@ $sql_select = "
   from USER
   WHERE user_id = :user_id
 ";
+
 
 $stmt_select = $pdo->prepare($sql_select);
 $stmt_select->bindValue(':user_id', $user_id, PDO::PARAM_INT);
@@ -52,6 +55,7 @@ if ($user){
     'message' => '無使用者'
   ];
 }
+
 
 echo json_encode($response);
 ?>
