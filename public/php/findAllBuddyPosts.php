@@ -40,7 +40,7 @@ if ($posts) {
         case '友善寄宿':
           $post['serviceType'] = 'fostering';
           break;
-        case '毛孩計程車':
+        case '寵物計程車':
           $post['serviceType'] = 'petDrop';
           break;
       }
