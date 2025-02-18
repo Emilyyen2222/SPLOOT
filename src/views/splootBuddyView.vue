@@ -282,6 +282,8 @@
 
 <script setup>
     import {computed, ref, watch, onMounted} from "vue";
+    import { useAuthStores } from '@/stores/AuthBoxStores.js';  
+
 
     import MainHeader from "@/components/MainHeader.vue";
     import DropdownMenu from "@/components/DropdownMenu.vue";
@@ -289,6 +291,10 @@
     import LightBox from "@/components/LightBox.vue";
     import MainFooter from "@/components/MainFooter.vue"
     import InputText from '@/components/InputText.vue';
+
+    //登入狀態
+    const authBoxStore = useAuthStores();
+
 
 //測試用
 
@@ -877,20 +883,26 @@ let newPostLightBox = ref(false);
 
 // 控制燈箱的顯示與隱藏
 function toggleNewPost() {
-    newPostLightBox.value = !newPostLightBox.value;
-// 清空資料
-    postServiceType.value.selectService = '';
-    postTitle.value.inputValue = '';
-    postTitle.value.inputError = false;
-    postContent.value.inputValue = '';
-    postContent.value.inputError = false;
-    hasUploadImg.value = null;
-// 停止捲軸
-  if (newPostLightBox.value) {
-    document.body.classList.add('clicked');
-  } else {
-    document.body.classList.remove('clicked');
-  }
+
+    if(authBoxStore.isLoggedIn){
+        newPostLightBox.value = !newPostLightBox.value;
+    // 清空資料
+        postServiceType.value.selectService = '';
+        postTitle.value.inputValue = '';
+        postTitle.value.inputError = false;
+        postContent.value.inputValue = '';
+        postContent.value.inputError = false;
+        hasUploadImg.value = null;
+    // 停止捲軸
+      if (newPostLightBox.value) {
+        document.body.classList.add('clicked');
+      } else {
+        document.body.classList.remove('clicked');
+      }
+
+    }else{
+        authBoxStore.toggleAuthBox();
+    };
 }
 
 // 上傳圖片

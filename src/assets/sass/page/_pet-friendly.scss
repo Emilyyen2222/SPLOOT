@@ -8,6 +8,7 @@
         .leftMain {
             max-width: 800px;
 
+        
             .title {
                 text-align: center;
                 
@@ -39,7 +40,10 @@
                 @include md(){
                     margin: 2.4rem auto 2.4rem;
                    }  
-
+                
+                @include sm(){
+                    width: 36rem;;
+                }
 
                 // 隱藏單選按鈕
                 .switch-input {

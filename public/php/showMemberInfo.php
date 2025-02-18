@@ -2,6 +2,7 @@
 include 'PdoConnection.php';
 
 header("Content-Type:application/json");
+session_start();
 
 // 解包JSON
 $postData = json_decode(file_get_contents("php://input"), true);
@@ -9,7 +10,7 @@ $response = [];
 
 
 // 查詢
-$user_id = '3';
+$user_id = $_SESSION['userId'];
 $sql_select = "
   select
     email,
