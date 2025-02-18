@@ -773,7 +773,20 @@ const cardsData = ref([]); //渲染的卡片
 //         serviceDays: ["一", "二", "三", "四", "五", "六", "日"],
 //     },
 // ]);
-const cardsRawData = ref([]);
+const cardsRawData = ref([
+    {
+        imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
+        title: "台南市kitten寵物照顧專家",
+        serviceTimeStart: "06:00",
+        serviceTimeEnd: "16:00",
+        city: "台南市",
+        district: "永康區",
+        serviceType: "walkies",
+        petTypes: ["small", "kitten"],
+        stars: 1,
+        serviceDays: ["一", "二", "三", "四", "五", "六", "日"],
+    },
+]);
 
 //評分星星計算
 
@@ -1011,9 +1024,29 @@ async function findAllBuddyPostsPhp(){
         if(postResp.status == 'success'){
             const allPosts = postResp.data;
             for(let post of allPosts){
+                const imgResp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`);
+                let base64Img = '';
+                let imageType = 'image/jpeg';  // Default type to JPEG
+
+                try {
+                    base64Img = await imgResp.text();
+                    
+                    // Here, you might want to determine the file type from the server or URL, for now assuming it's a PNG
+                    if (base64Img.includes('PNG')) {
+                        imageType = 'image/png';
+                    } else if (base64Img.includes('JPEG') || base64Img.includes('JPG')) {
+                        imageType = 'image/jpeg';
+                    }
+                } catch (error) {
+                    console.error(`Error fetching image for postId ${post.postId}:`, error);
+                    base64Img = '';  // Set to empty if the image cannot be fetched
+                }
+
                 cardsRawData.value.push({
-                    // imgSrc: new URL(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`, import.meta.url).href,
-                    imgSrc: `${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`,
+                    imgSrc: `data:${imageType};base64,${base64Img}`,
+                    
+                    // const postImg = new URL(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`, import.meta.url).href;
+                    // imgSrc: `${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`,
                     title: post.title,
                     serviceTimeStart: post.serviceTimeStart,
                     serviceTimeEnd: post.serviceTimeEnd,
