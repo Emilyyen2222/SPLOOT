@@ -130,7 +130,7 @@
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag1.selected, option)}"
                                     @click="tag1.formChoice(tag1.selected, option)"
-                                    v-model="selectedGender">{{ option }}</Btn>
+                                    v-model="tag1.selected.value">{{ option }}</Btn>
                                 </div>
                             </div>
                         </div>
@@ -161,7 +161,8 @@
                                     <div class="year">
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.year.placeHolder"
-                                        :options="menus.year.options">
+                                        :options="menus.year.options"
+                                        v-model="e">
                                         </DropdownMenu>
                                     </div>
                                 </div>
@@ -169,7 +170,8 @@
                                     <div class="month">
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.month.placeHolder"
-                                        :options="menus.month.options">
+                                        :options="menus.month.options"
+                                        v-model="e">
                                         </DropdownMenu>
                                     </div>
                                 </div>
@@ -177,7 +179,8 @@
                                     <div class="date">
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.day.placeHolder"
-                                        :options="menus.day.options">
+                                        :options="menus.day.options"
+                                        v-model="e">
                                         </DropdownMenu> 
                                     </div>
                                 </div>
@@ -263,7 +266,7 @@
                         <div class="field">
                             <label>毛孩簡介*</label>
                                 <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
-                                v-model="inputValue" :hasError="inputError"></InputText>
+                                v-model="petDescription" :hasError="inputError"></InputText>
                         </div>
                     </div>
                 </div>
@@ -556,6 +559,7 @@
 
   // v-model
   const petName = ref('')
+  const petDescription = ref('')
   const selectedGender = ref('')
 
   // dropDown
@@ -596,6 +600,7 @@
         { id: 30, name: '比格犬' },
         { id: 30, name: '米克斯' },
         ],
+        selected: ref([])
     },
     menuCat: {
         placeHolder: '我的貓貓品種是',

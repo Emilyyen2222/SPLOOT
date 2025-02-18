@@ -24,7 +24,8 @@ $sql_select = "
     phone,
     address_city as addressCity,
     address_district as addressDistrict,
-    address_street as addressStreet
+    address_street as addressStreet,
+    portrait
   from USER
   WHERE user_id = :user_id
 ";
@@ -48,7 +49,8 @@ if ($user){
     'phone' => $user['phone'],
     'addressCity' => $user['addressCity'],
     'addressDistrict' => $user['addressDistrict'],
-    'addressStreet' => $user['addressStreet']
+    'addressStreet' => $user['addressStreet'],
+    'portrait' => $user['portrait']
   ];
 }else{
   $response = [
