@@ -763,9 +763,6 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
     // 組合起來，為了傳給後端
     const birthDate= computed(()=>{
-      // if( !menu_birth_y.placeHolder || !menu_birth_m.placeHolder || !menu_birth_d.placeHolder ){
-      //     return null;
-      //   } 
       if ( selectedYear.value && selectedMonth.value && selectedDay.value ){
         console.log(typeof(`${selectedYear.value}-${String(selectedMonth.value).padStart(2,"0")}-${String(selectedDay.value).padStart(2,"0")}`))
         return `${selectedYear.value}-${String(selectedMonth.value).padStart(2,"0")}-${String(selectedDay.value).padStart(2,"0")}`
