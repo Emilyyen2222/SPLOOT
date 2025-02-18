@@ -83,14 +83,14 @@
                     <img :src="matchedOwner.pets[0].imageSrc" alt="Pet Image"style="cursor: pointer;"
                         @click="toggleLightBoxPetInfo">
                     
-                    <div class="dot">
+                    <!-- <div class="dot">
                         <div 
                             v-for="(pet, dotIndex) in matchedOwner.pets" 
                             :key="dotIndex"
                             :class="{ 'dotActive': clickedIndexOverlay[cardIndex] === dotIndex, 'dotInactive': clickedIndexOverlay[cardIndex] !== dotIndex }"
                             @click="clickedIndexOverlay[cardIndex] = dotIndex;">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>
@@ -118,14 +118,14 @@
                         style="cursor: pointer;"
                         @click="toggleLightBoxPetInfo">
                     
-                    <div class="dot">
+                    <!-- <div class="dot">
                         <div 
                             v-for="(pet, dotIndex) in matchedCard" 
                             :key="dotIndex"
                             :class="{ 'dotActive': clickedIndexMatchAll[cardIndex] === dotIndex, 'dotInactive': clickedIndexMatchAll[cardIndex] !== dotIndex }"
                             @click="clickedIndexMatchAll[cardIndex] = dotIndex;">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

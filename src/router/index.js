@@ -135,15 +135,15 @@ const routes = [
       bodyBg: 'natural-1',
     }
   },
-  {
-    path: '/member-center/petcard',
-    component: () => import('@/views/memberPetcard.vue'),
-    meta: {
-      title: '寵物資訊卡 | Sploot',
-      theme: 'red',
-      bodyBg: 'natural-1',
-    }
-  },
+  // {
+  //   path: '/member-center/petcard',
+  //   component: () => import('@/views/memberPetcard.vue'),
+  //   meta: {
+  //     title: '寵物資訊卡 | Sploot',
+  //     theme: 'red',
+  //     bodyBg: 'natural-1',
+  //   }
+  // },
   {
     path: '/member-center/subscription',
     component: () => import('@/views/memberSubscription.vue'),
