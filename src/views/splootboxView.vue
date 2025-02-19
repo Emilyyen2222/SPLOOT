@@ -1,5 +1,5 @@
 <template>
-<MainHeader theme="red" bgc="pink-0"></MainHeader>
+<MainHeader theme="red" bgc=""></MainHeader>
 <div class="page-splootbox">
         <!--- heroSection -->
     <div class="herobox">

@@ -2,25 +2,29 @@
 @each $theme in $themes {
     body.#{$theme}Theme{
         header{
-            position: sticky;
-            top: 0;
+            position: fixed;
+            top: 0.8rem;
+            left:0.8rem;
+            right: 0.8rem;
             z-index: 1000;
-            
-            width: 100%;
+            width: calc(100% - 1.6rem);
             
             nav{
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-            
-                width: 100%;
-                max-width: 1440px;
+                            
                 height: 6.4rem;
-                padding: 1.6rem 4.8rem;
+                padding: 1.6rem;
                 margin: 0 auto;
-            
+
+
                 @include md(){
-                    padding: 1.2rem 1.6rem;
+                    //padding: 1.2rem 1.6rem;
+                    background: rgba(255, 255, 255, 0.5);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+                    border-radius: 100px;
                 }
 
                 .memberLogo{
@@ -32,7 +36,7 @@
                     display: none;
             
                     @include md(){
-                        cursor: pointer;
+                        cursor: $hoverPointer;
                         
                         display: flex;
                         flex-direction: column;
@@ -63,7 +67,7 @@
                 }
             
                 .logo{
-                    img{ width: 6.4rem; }
+                    img{ width: 5.6rem; }
             
                     @include md(){
                         img{ width: 5.4rem; }
@@ -73,6 +77,16 @@
                 .headerList{
                     display: flex;
                     gap: 2.4rem;
+                    padding: 0 1.6rem;
+
+                    border-radius: 2.4rem;
+                    background: rgba(255, 255, 255, 0.5);
+                    backdrop-filter: blur(10px);
+                    -webkit-backdrop-filter: blur(10px);
+    
+                    &:hover{
+                        background-color:map-get($colors, beige);
+                    }
 
                     @include md(){
                         position: absolute;
@@ -86,6 +100,9 @@
 
                         width: 100vw;
                         height: 100vh;
+                        background-color:map-get($colors, beige);
+                        backdrop-filter: unset;
+                        -webkit-backdrop-filter: unset;
 
                         text-align: center;
                         transition: all .6s ease;
@@ -96,7 +113,15 @@
                     }
             
                     a{
-                        @include textStyle(smallText);
+                        @include textStyle(p);
+                        
+                        // .btn.primary.small{
+                        //     @include textStyle(p);
+                        //     background-color: transparent;
+                        //     color: map-get($colors, $theme);
+    
+                        //     span::after{ background-color: map-get($colors, $theme); }
+                        // }
                         display: block;
                         color: map-get($colors, $theme);
                         line-height: 4.8rem;  
@@ -106,26 +131,26 @@
                             color: map-get($themeColors, $theme);
                         }
                         
-                        &::after{
-                            content: "";
-                            bottom: 0;
-                            left: 0;
+                        // &::after{
+                        //     content: "";
+                        //     bottom: 0;
+                        //     left: 0;
                             
-                            display: block;
-                            width: 0;
-                            border: 1px solid map-get($colors, $theme);
+                        //     display: block;
+                        //     width: 0;
+                        //     border: 1px solid map-get($colors, $theme);
             
-                            opacity: 0;
-                            visibility: hidden;
-                            transition: all .5s;
-                        }
-                        &:hover::after{
-                            width: 100%;
-                            opacity: 1;
-                            visibility: visible;
+                        //     opacity: 0;
+                        //     visibility: hidden;
+                        //     transition: all .5s;
+                        // }
+                        // &:hover::after{
+                        //     width: 100%;
+                        //     opacity: 1;
+                        //     visibility: visible;
 
-                            @include md(){ opacity: 0; }
-                        }
+                        //     @include md(){ opacity: 0; }
+                        // }
                     }
                     .memberCenter{
                         display: none;
@@ -145,7 +170,7 @@
             
                 .loginBox{
                     @include md(){
-                        .btn.primary.small{
+                        .btn.primary.default{
                             background-color: transparent;
                             color: map-get($colors, $theme);
     
