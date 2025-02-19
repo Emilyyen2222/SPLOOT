@@ -963,7 +963,7 @@ async function subscribeSplootBoxPhp() {
 
 }
 onBeforeMount(() => {
-    if (isLoggedIn.value && sessionStorage.getItem('question') == 5) {
+    if (authBoxStore.isLoggedIn && sessionStorage.getItem('question') == 5) {
         question.value = 5;
         petName.value.inputMsg = sessionStorage.getItem('petName');
         questionPet.value.selected[0] = sessionStorage.getItem('questionPetSelected');
