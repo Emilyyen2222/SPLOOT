@@ -131,6 +131,7 @@
                                     :class="{'-active': optionSelected(tag1.selected, option)}"
                                     @click="tag1.formChoice(tag1.selected, option)"
                                     v-model="tag1.selected.value">{{ option }}</Btn>
+                                    <p>{{ tag1.selected.value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -142,9 +143,9 @@
                                         <DropdownMenu class="dropDown"
                                         :placeHolder="menus.menuDog.placeHolder"
                                         :options="menus.menuDog.options"
-                                        v-model="menus.menuDog.options">
+                                        v-model="menus.menuDog.menuValue.value">
                                         </DropdownMenu>
-                                        <!-- <p>{{ menus.menuDog.options }}</p> -->
+                                        <p>{{ menus.menuDog.menuValue.value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +163,7 @@
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.year.placeHolder"
                                         :options="menus.year.options"
-                                        v-model="e">
+                                        v-model="selectedYear">
                                         </DropdownMenu>
                                     </div>
                                 </div>
@@ -171,7 +172,7 @@
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.month.placeHolder"
                                         :options="menus.month.options"
-                                        v-model="e">
+                                        v-model="selectedMonth">
                                         </DropdownMenu>
                                     </div>
                                 </div>
@@ -180,7 +181,7 @@
                                         <DropdownMenu class="dropDown city"
                                         :placeHolder="menus.day.placeHolder"
                                         :options="menus.day.options"
-                                        v-model="e">
+                                        v-model="selectedDay">
                                         </DropdownMenu> 
                                     </div>
                                 </div>
@@ -190,6 +191,7 @@
                                         btnType="tag" 
                                         :class="{'-active': optionSelected(tag5.selected, option)}"
                                         @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
+                                        <p>{{ tag5.selected.value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +210,7 @@
                                     :class="{'-active': optionSelected(tag2.selected, option)}"
                                     @click="tag2.formChoice(tag2.selected, option)"
                                     v-model="tag2.selected.value">{{ option }}</Btn>
-                                    <!-- <p>{{ tag2.selected.value }}</p> -->
+                                    <p>{{ tag2.selected.value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -225,6 +227,7 @@
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag3.selected, option)}"
                                     @click="tag3.formChoice(tag3.selected, option)">{{ option }}</Btn>
+                                    <p>{{ tag3.selected.value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -242,6 +245,7 @@
                                         btnType="tag" 
                                         :class="{'-active': optionSelected(tag4.selected, option)}"
                                         @click="tag4.formChoice(tag4.selected, option)">{{ option }}</Btn>
+                                        <p>{{ tag4.selected.value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -254,8 +258,8 @@
                         <div class="field">
                             <label>絕育狀態*</label>
                             <div class="breedOptions">
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered">已絕育
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered">未絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered">已絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered">未絕育
                             </div>
                         </div>
                     </div>
@@ -295,7 +299,7 @@
                                 <label>毛孩姓名*</label>
                                 <div class="petName">
                                     <InputText placeHolder="Splooter" size = "small" text-align="left" errorMsg="Invalid Input" 
-                                    v-model="inputValue" :hasError="inputError"></InputText>
+                                    v-model="petName" :hasError="inputError"></InputText>
                                 </div>
                             </div>
                         </div>
@@ -307,6 +311,7 @@
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag1.selected, option)}"
                                     @click="tag1.formChoice(tag1.selected, option)">{{ option }}</Btn>
+                                    <p>{{ tag1.selected.vlaue }}</p>
                                 </div>
                             </div>
                         </div>
@@ -361,28 +366,15 @@
                                         btnType="tag" 
                                         :class="{'-active': optionSelected(tag5.selected, option)}"
                                         @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
+                                        <p>{{ tag5.selected.value }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- 體型 -->
-                <!-- <div class="petSize">
-                    <div class="sizeFieldWrapper">
-                        <div class="field">
-                            <label>體型</label>
-                            <div class="sizeOptions">
-                                <div class="tags">
-                                    <Btn v-for="option in tag2.options" :key="option"
-                                    btnType="tag" 
-                                    :class="{'-active': optionSelected(tag2.selected, option)}"
-                                    @click="tag2.formChoice(tag2.selected, option)">{{ option }}</Btn>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                <!-- 貓貓沒有體型 -->
+                
                 <!-- 社交 -->
                 <div class="social">
                     <div class="socialfieldWrapper">
@@ -394,6 +386,7 @@
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(tag3.selected, option)}"
                                     @click="tag3.formChoice(tag3.selected, option)">{{ option }}</Btn>
+                                    <p>{{ tag3.selected.value }}</p>
                                 </div>
                             </div>
                         </div>
@@ -411,6 +404,7 @@
                                         btnType="tag" 
                                         :class="{'-active': optionSelected(tag6.selected, option)}"
                                         @click="tag6.formChoice(tag6.selected, option)">{{ option }}</Btn>
+                                        <p>{{ tag6.selected.value }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -423,8 +417,8 @@
                         <div class="field">
                             <label>絕育狀態*</label>
                             <div class="breedOptions">
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered">已絕育
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered">未絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered">已絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered">未絕育
                             </div>
                         </div>
                     </div>
@@ -435,7 +429,7 @@
                         <div class="field">
                             <label>毛孩簡介*</label>
                                 <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
-                                v-model="inputValue" :hasError="inputError"></InputText>
+                                v-model="petDescription" :hasError="inputError"></InputText>
                         </div>
                     </div>
                 </div>
@@ -560,7 +554,6 @@
   // v-model
   const petName = ref('')
   const petDescription = ref('')
-  const selectedGender = ref('')
 
   // dropDown
   const menus = {
@@ -600,7 +593,7 @@
         { id: 30, name: '比格犬' },
         { id: 30, name: '米克斯' },
         ],
-        selected: ref([])
+        menuValue: ref([])
     },
     menuCat: {
         placeHolder: '我的貓貓品種是',
@@ -637,7 +630,7 @@
             { id: 29, name: '柯尼斯捲毛貓' },
             { id: 30, name: '日本短尾貓' },
             ],
-        menuValue: ref('我的貓咪品種是'),
+        menuValue: ref([])
     },
     year: {
         placeHolder: '年份',
@@ -645,6 +638,7 @@
         id: i,
         name: `${2025 - i} 年`,
         })),
+        menuValue: ref([])
     },
     month: {
         placeHolder: '月份',
@@ -652,6 +646,7 @@
         id: i + 1,
         name: `${i + 1} 月`,
         })),
+        menuValue: ref([])
     },
     day: {
         placeHolder: '日期',
@@ -659,8 +654,17 @@
         id: i + 1,
         name: `${i + 1} 日`,
         })),
+        menuValue: ref([])
     },
     };
+    // 組合生日
+    const birthDate= computed(()=>{
+      if ( selectedYear && selectedMonth && selectedDay ){
+        console.log(typeof(`${selectedYear}-${String(selectedMonth).padStart(2,"0")}-${String(selectedDay).padStart(2,"0")}`))
+        return `${selectedYear}-${String(selectedMonth).padStart(2,"0")}-${String(selectedDay).padStart(2,"0")}`
+      }
+      return "未填寫";
+    });
 
   // 會員中心的 寵物資訊卡的 卡片資料
     const memberPetCards = ref([
@@ -885,13 +889,13 @@
             },
             body: JSON.stringify({
                 // pet: pet,
-                // name: memberPetCards.name,
-                // gender: memberPetCards.gender,
+                // name: petName,
+                // gender: tag1.selected.value,
                 // breed: memberPetCards.value.tags[0],
                 // birthDate: '2025-02-02',
-                // size: '中型犬',
-                // neutured: '已絕育',
-                // description: '描述',
+                // size: tag3.selected.value,
+                // neutured: selectedNeutered,
+                // description: petDescription,
                 // petImg: hasUploadImg.value,
                 // petHobby: ['興趣', '興趣'],
                 // petSocial: ['社交', '社交']

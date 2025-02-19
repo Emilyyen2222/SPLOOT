@@ -311,6 +311,7 @@ export const useAuthStores = defineStore('auth',() => {
 
     onBeforeMount(() => {
         checkLoginStatus();
+        console.log(isLoggedIn.value);
     });
 
     return {
