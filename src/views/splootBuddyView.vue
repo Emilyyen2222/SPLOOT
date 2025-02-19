@@ -97,6 +97,7 @@
                             <ul class="stars">
                                 <li v-for="n in 5">
                                     <img :src="isStars(n, card.stars)" alt="star" :class="['star', 'star' + n]">
+                                    <!-- 暫時寫死 -->
                                 </li>
                             </ul>
                             <div class="avgGrade smallText">{{ card.stars }}</div>
@@ -108,6 +109,8 @@
                                 <p class="smallText">每週</p>
                                 <ul class="daysUl">
                                     <li v-for="day in card.serviceDays" class="daysItem xsText">{{ day }}</li>
+                                    <!-- 暫時寫死 -->
+
                                 </ul>                            
                             </div>
                         </div>                
@@ -773,7 +776,106 @@ const cardsData = ref([]); //渲染的卡片
 //         serviceDays: ["一", "二", "三", "四", "五", "六", "日"],
 //     },
 // ]);
+
 const cardsRawData = ref([]);
+
+// 寫死
+const serviceDaysArray = [
+  ["一", "二"],
+  ["一", "二"],
+  ["一", "四", "六", "日"],
+  ["一", "二", "四", "六", "日"],
+  ["一", "二", "三", "四", "五", "六", "日"],
+  ["一"],
+  ["一", "二", "三", "四", "五", "日"],
+  ["二", "三", "六"],
+  ["六", "日"],
+  ["一", "二"],
+  ["一", "二", "六", "日"],
+  ["一", "二", "三", "四", "六", "日"],
+  ["二", "三", "四", "五", "日"],
+  ["日"],
+  ["一", "三", "五", "六", "日"],
+  ["一"],
+  ["二", "五"],
+  ["一", "二", "三", "日"],
+  ["四", "五"],
+  ["一", "二", "三", "四", "五", "六", "日"],
+  ["一", "二", "三", "四", "五", "日"],
+  ["一", "二", "三", "四", "五", "六", "日"],
+  ["六", "日"],
+  ["六", "日"],
+  ["日"],
+  ["六", "日"],
+];
+
+const starsArray = [
+    5,5,5,4,5,4,5,4,3,5,5,5,4,5,3,3
+];
+
+const cityArray = [
+    "台北市", 
+    "新北市", 
+    "基隆市", 
+    "高雄市", 
+    "台中市", 
+    "桃園市", 
+    "新北市", 
+    "高雄市", 
+    "台南市", 
+    "台南市", 
+    "新北市", 
+    "桃園市", 
+    "台北市", 
+    "台中市", 
+    "高雄市", 
+    "高雄市", 
+    "台中市", 
+    "新北市", 
+    "台南市", 
+    "台北市", 
+    "台中市", 
+    "新北市"
+];
+
+const districtArray = [
+    "中正區",
+    "板橋區",
+    "中正區",
+    "鳳山區",
+    "北屯區",
+    "桃園區",
+    "新莊區",
+    "三民區",
+    "南區",
+    "安平區",
+    "新店區",
+    "中壢區",
+    "大安區",
+    "西屯區",
+    "仁武區",
+    "左營區",
+    "東區",
+    "楊梅區",
+    "西區",
+    "淡水區",
+    "永康區",
+    "大同區"
+];
+
+
+
+const arrayAddData = () => {
+    cardsRawData.value.forEach((card, index) => {
+      card.serviceDays = serviceDaysArray[index];
+      card.stars = starsArray[index];
+      card.city = cityArray[index];
+      card.district = districtArray[index];
+
+    });
+
+    console.log(card.stars);
+};
 
 //評分星星計算
 
@@ -1109,5 +1211,6 @@ async function findAllBuddyPostsPhp(){
         console.error('Error parsing JSON:', error);
     }
     searchBuddies();
+    arrayAddData();
 }
 </script>
