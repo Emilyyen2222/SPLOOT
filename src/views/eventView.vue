@@ -443,8 +443,12 @@
     };
 
     const filterScheduleCard = (day) => {
-        const selectdate = day.date;
-        isDateObject(selectdate);
+        if(authBoxStore.isLoggedIn){
+            const selectdate = day.date;
+            isDateObject(selectdate);
+        }else{
+            authBoxStore.toggleAuthBox();
+        };
     };
 
     // 預設篩選今天的活動
@@ -476,38 +480,42 @@
 
     // 控制燈箱的顯示與隱藏
     function toggleAddEvent() {
-        isAddEvent.value = !isAddEvent.value;
-        editMode.value = false; //關閉燈箱切換回新增貼文模式
-        // 停止捲軸
-        if (isAddEvent.value) {
-        document.body.classList.add('clicked');
-        } else {
-        document.body.classList.remove('clicked');
-        }
-
-        if((!editMode.value)){
-            //清空內容選單 以及提示錯誤
-            newEventTitle.value.inputValue='';
-            newEventTitle.value.inputError = false;
-            newEventContent.value.inputValue='';
-            newEventContent.value.inputError = false;
-            peopleNumber.value.inputValue='';
-            peopleNumber.value.inputError = false;
-            activePlace.value.inputValue='';
-            activePlace.value.inputError = false;
-            startTimeD.value.menuValue = '';
-            endTimeD.value.menuValue = '';
-            startTimeY.value.placeHolder = '年';
-            startTimeM.value.placeHolder = '月';
-            startTimeD.value.placeHolder = '日';
-            startTimeH.value.placeHolder = '時';
-            startTime.value.placeHolder = '分';
-            endTimeY.value.placeHolder = '年';
-            endTimeM.value.placeHolder = '月';
-            endTimeD.value.placeHolder = '日';
-            endTimeH.value.placeHolder = '時';
-            endTime.value.placeHolder = '分';
-        }
+        if(authBoxStore.isLoggedIn){
+            isAddEvent.value = !isAddEvent.value;
+            editMode.value = false; //關閉燈箱切換回新增貼文模式
+            // 停止捲軸
+            if (isAddEvent.value) {
+            document.body.classList.add('clicked');
+            } else {
+            document.body.classList.remove('clicked');
+            }
+    
+            if((!editMode.value)){
+                //清空內容選單 以及提示錯誤
+                newEventTitle.value.inputValue='';
+                newEventTitle.value.inputError = false;
+                newEventContent.value.inputValue='';
+                newEventContent.value.inputError = false;
+                peopleNumber.value.inputValue='';
+                peopleNumber.value.inputError = false;
+                activePlace.value.inputValue='';
+                activePlace.value.inputError = false;
+                startTimeD.value.menuValue = '';
+                endTimeD.value.menuValue = '';
+                startTimeY.value.placeHolder = '年';
+                startTimeM.value.placeHolder = '月';
+                startTimeD.value.placeHolder = '日';
+                startTimeH.value.placeHolder = '時';
+                startTime.value.placeHolder = '分';
+                endTimeY.value.placeHolder = '年';
+                endTimeM.value.placeHolder = '月';
+                endTimeD.value.placeHolder = '日';
+                endTimeH.value.placeHolder = '時';
+                endTime.value.placeHolder = '分';
+            }
+        }else{
+            authBoxStore.toggleAuthBox();
+        };
     }
 
     // ------------新增貼文輸入以及下拉式選單-------------
@@ -1001,6 +1009,6 @@
             console.error('Error parsing JSON:', error);
         }
     }
-    deleteEventPhp(8);
+    // deleteEventPhp(8);
 
 </script>

@@ -62,6 +62,12 @@ export const useAuthStores = defineStore('auth',() => {
     const isLightBoxPolicy = ref(false);
     const isLightBoxPrivacy = ref(false);
 
+    //是否有寵物卡
+    const hasPetCard = ref(false);
+
+    //是否填過配對問卷
+    const hasMatchQuestion = ref(false);
+
     function toggleAuthBox() {
         isAuthBox.value = !isAuthBox.value;  // 切換開關
 

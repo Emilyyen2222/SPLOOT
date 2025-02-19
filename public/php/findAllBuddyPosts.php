@@ -14,7 +14,8 @@ $sql_select = "
     service_district AS serviceDistrict,
     service_time_start AS serviceTimeStart,
     service_time_end AS serviceTimeEnd,
-    description
+    description,
+    post_img
   FROM HELPER_POST
   WHERE post_status = 1;
 ";

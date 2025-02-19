@@ -50,7 +50,7 @@ $stmt_insert->bindValue(':service_district', $service_district, PDO::PARAM_STR);
 $stmt_insert->bindValue(':service_time_start', $service_time_start, PDO::PARAM_STR);
 $stmt_insert->bindValue(':service_time_end', $service_time_end, PDO::PARAM_STR);
 $stmt_insert->bindValue(':description', $description, PDO::PARAM_STR);
-$stmt_insert->bindValue(':post_img', base64_decode($post_img), PDO::PARAM_LOB);
+$stmt_insert->bindValue(':post_img', $post_img, PDO::PARAM_STR);
 $stmt_insert->execute();
 
 if($stmt_insert->rowCount() > 0){

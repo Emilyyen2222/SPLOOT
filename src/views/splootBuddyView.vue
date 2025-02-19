@@ -88,7 +88,7 @@
             <li class="buddyCards" v-for="(card,index) in visibleCards" :key="index">
                 <div class="cardBox">
                     <div class="cardsImgBox">                        
-                            <img :src="card.imgSrc" alt="" class="cardsImg">                        
+                            <img :src="`/tid103/g3/buddyUserImg/${card.imgSrc}`" alt="" class="cardsImg">                        
                     </div>
                     <div class="cardText">
                         <h6 class="cardsTitle bold">{{ card.title }}</h6>
@@ -773,20 +773,7 @@ const cardsData = ref([]); //渲染的卡片
 //         serviceDays: ["一", "二", "三", "四", "五", "六", "日"],
 //     },
 // ]);
-const cardsRawData = ref([
-    {
-        imgSrc: new URL("@/assets/img/pet-friendly/democat.jpeg", import.meta.url).href,
-        title: "台南市kitten寵物照顧專家",
-        serviceTimeStart: "06:00",
-        serviceTimeEnd: "16:00",
-        city: "台南市",
-        district: "永康區",
-        serviceType: "walkies",
-        petTypes: ["small", "kitten"],
-        stars: 1,
-        serviceDays: ["一", "二", "三", "四", "五", "六", "日"],
-    },
-]);
+const cardsRawData = ref([]);
 
 //評分星星計算
 
@@ -918,10 +905,46 @@ function toggleNewPost() {
     };
 }
 
+
+
+// createBuddyPostPhp();
+
+
+// findAllBuddyPostsPhp();
+
+async function deleteBuddyPostPhp(postId, updater = 'System'){
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deleteBuddyPost.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            postId: postId,
+            updater: updater
+        }),
+    });
+    
+    try{
+        const postDeleted = await resp.json();
+        if(postDeleted.status == 'success'){
+            console.log(postDeleted);
+        }else if(postDeleted.status == 'error'){
+            console.log(postDeleted.message);
+        }
+    }catch(error){
+        console.error('Error parsing JSON:', error);
+    }
+}
+
+
+
+
 // 上傳圖片
 const fileInput = ref(null);
-const hasUploadImg = ref(null);
-const uploadedImg = ref(null);
+const hasUploadImg = ref(null); // 預覽圖片的 URL
+// const uploadedImg = ref(null);
+const selectedFile = ref(null); // 用來存儲選擇的 File 物件
+const imagePath = ref(null); //儲存上傳完成的檔名
 
 // 按下按鈕呼叫"選擇檔案"
 const callFileInput = () => {
@@ -945,21 +968,19 @@ const uploadFileImage = (event) => {
         return;
     }
 
-    if (file && file.type.startsWith('image/')) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        hasUploadImg.value = e.target.result; // 設定預覽圖片的 base64 URL
-    };
-    reader.readAsDataURL(file);
-  }
+    hasUploadImg.value = URL.createObjectURL(file);
+    selectedFile.value = file; // 儲存圖片檔案
 };
 
 // 提交按鈕
-const submitCard = () => {
+const submitCard =  async () => {
         if(submitCheck.value){
             alert('填寫未完成');
         }else{
-            createBuddyPostPhp();
+            const imagePath =  await uploadImage();
+            console.log("submit:" + imagePath);
+
+            createBuddyPostPhp(imagePath);
             toggleNewPost();
         }
     };
@@ -974,40 +995,77 @@ const submitCheck = computed(() => {
     )
 });
 
-async function createBuddyPostPhp(){
-    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/createBuddyPost.php`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            postImg: hasUploadImg.value,
-            title: postTitle.value.inputValue,
-            acceptDays: ["一", "二"],
-            serviceTimeStart: '09:00',
-            serviceTimeEnd: '18:00',
-            serviceCity: '台北市',
-            serviceDistrict: '大同區',
-            service: postServiceType.value.selectService,
-            acceptPets: ["puppy", "small", "middle", "large", "elder", "kitten", "cat"],
-            stars: 5,
-            description: postContent.value.inputValue,
-        })
-    });
+async function createBuddyPostPhp(imagePath){
 
-    try{
-        const postCreate = await resp.json();
-        if(postCreate.status == 'success'){
-            
-        }else if(postCreate.status == 'error'){
-            console.log(postCreate.message);
-        }
-    } catch(error){
-        console.error('Error parsing JSON:', error);
+const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/createBuddyPost.php`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        postImg: imagePath,
+        title: postTitle.value.inputValue,
+        acceptDays: ["一", "二"],
+        serviceTimeStart: '09:00',
+        serviceTimeEnd: '18:00',
+        serviceCity: '台北市',
+        serviceDistrict: '大同區',
+        service: postServiceType.value.selectService,
+        acceptPets: ["puppy", "small", "middle", "large", "elder", "kitten", "cat"],
+        stars: 5,
+        description: postContent.value.inputValue,
+    })
+});
+
+try{
+    const postCreate = await resp.json();
+    if(postCreate.status == 'success'){
+        
+    }else if(postCreate.status == 'error'){
+        console.log(postCreate.message);
     }
-    findAllBuddyPostsPhp();
+} catch(error){
+    console.error('Error parsing JSON:', error);
 }
-// createBuddyPostPhp();
+findAllBuddyPostsPhp();
+}
+
+async function uploadImage(){
+    if(!selectedFile.value){
+        console.log('請選擇一張圖片')
+        return null;
+    }
+
+    // 選擇的圖片
+    const formData = new FormData();
+    formData.append('file', selectedFile.value);
+    try {
+        const response = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/saveImage.php`, {
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        if (result.success === true) {
+            console.log("uploadImag1" + result);
+            console.log("uploadImag2" + result.imagePath);
+            imagePath.value = result.imagePath; // 成功則回傳圖片存放檔名
+            return imagePath.value;
+        } else {
+            console.error("~~~圖片上傳失敗:", result.message);
+            return null;
+        }
+
+    }catch(error){
+        console.log(selectedFile.value);
+        console.error("圖片顯示錯誤", error);
+        return null;
+    }
+}
 
 async function findAllBuddyPostsPhp(){
     // 清空陣列
@@ -1018,32 +1076,17 @@ async function findAllBuddyPostsPhp(){
             'Content-Type': 'application/json',
         }
     });
-
+    
     try{
         const postResp = await resp.json();
+        console.log('POSTRESP', postResp.data);
         if(postResp.status == 'success'){
             const allPosts = postResp.data;
             for(let post of allPosts){
-                const imgResp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`);
-                let base64Img = '';
-                let imageType = 'image/jpeg';  // Default type to JPEG
-
-                try {
-                    base64Img = await imgResp.text();
-                    
-                    // Here, you might want to determine the file type from the server or URL, for now assuming it's a PNG
-                    if (base64Img.includes('PNG')) {
-                        imageType = 'image/png';
-                    } else if (base64Img.includes('JPEG') || base64Img.includes('JPG')) {
-                        imageType = 'image/jpeg';
-                    }
-                } catch (error) {
-                    console.error(`Error fetching image for postId ${post.postId}:`, error);
-                    base64Img = '';  // Set to empty if the image cannot be fetched
-                }
-
+                console.log('POST',post);
+                console.log('IMG', post.post_img);
                 cardsRawData.value.push({
-                    imgSrc: `data:${imageType};base64,${base64Img}`,
+                    imgSrc: post.post_img,
                     
                     // const postImg = new URL(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`, import.meta.url).href;
                     // imgSrc: `${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findBuddyPostImg.php?postId=${post.postId}`,
@@ -1066,30 +1109,5 @@ async function findAllBuddyPostsPhp(){
         console.error('Error parsing JSON:', error);
     }
     searchBuddies();
-}
-// findAllBuddyPostsPhp();
-
-async function deleteBuddyPostPhp(postId, updater = 'System'){
-    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deleteBuddyPost.php`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            postId: postId,
-            updater: updater
-        }),
-    });
-
-    try{
-        const postDeleted = await resp.json();
-        if(postDeleted.status == 'success'){
-            console.log(postDeleted);
-        }else if(postDeleted.status == 'error'){
-            console.log(postDeleted.message);
-        }
-    }catch(error){
-        console.error('Error parsing JSON:', error);
-    }
 }
 </script>
