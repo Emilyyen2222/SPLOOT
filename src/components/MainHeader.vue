@@ -11,7 +11,7 @@
                     <img :src="themes[props.theme].logoUrl" alt="Logo">
                 </RouterLink>
             </div>
-            <ul class="headerList" :class="[{ '-navFocus': isNavFocus }, `bg-${props.bgc}`]">
+            <ul class="headerList" :class="[{ '-navFocus': isNavFocus}, `bg-${props.bgc}` ]">
                 <li class="headerItem" v-for="(item, index) in [
                     { name: '認識新毛友', link: '/petInfoCard' },
                     { name: '訂閱寵物盒', link: '/sploot-box' },
@@ -20,7 +20,8 @@
                     { name: '友善設施', link: '/sploot-pet-friendly' },
                 ]" :key="index">
 
-                    <RouterLink :to="item.link">{{ item.name }}</RouterLink>
+                    <!-- <RouterLink :to="item.link">{{ item.name }}</RouterLink> -->
+                    <RouterLink :to="item.link"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
                 </li>
                 <li v-if="authBoxStore.isLoggedIn" class="memberCenter">
                     <RouterLink to="/member-center">
@@ -29,9 +30,9 @@
                     </RouterLink>
                 </li>
             </ul>
-            <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox" btnStyle="primary small" @click="authBoxStore.toggleAuthBox">登入</Btn>
+            <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn>
             <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox">
-                <Btn btnStyle="baseline small" @click="logOutPhp">登出</Btn>
+                <Btn btnStyle="default baseline" @click="logOutPhp">登出</Btn>
                 <RouterLink to="/member-center">
                     <img class="memberLogo" :src="memberLogo" alt="memberLogo">
                 </RouterLink>
@@ -52,7 +53,6 @@
     import Btn from './Btn.vue';
 
     const authBoxStore = useAuthStores();
-
     const props = defineProps({
         theme: {
             type: String,
