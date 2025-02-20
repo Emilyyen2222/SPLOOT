@@ -11,7 +11,7 @@
         </div>
         <!-- msg -->
         <div class="msg-welcome">
-        <h5 class="bold">嗨! <span id="msgUsername">{{ userName.name }}</span> 歡迎回來</h5>
+        <h5 class="bold">嗨! <span id="msgUsername">{{ inputs.input_nickname.inputValue }}</span> 歡迎回來</h5>
         </div>
     </div>
     <!-- mc nav -->
@@ -53,15 +53,15 @@
 
 <script setup>
 
-import { ref, computed } from 'vue';
+import { ref, computed, reactive } from 'vue';
 
 // components
 import Btn from '../components/Btn.vue';
 
-  // username
-  const userName = ref(
-    {name: 'Hao'},
-  )
+  // // username
+  // const userName = ref(
+  //   {name: 'Hao'},
+  // )
 
 const props = defineProps({
   avatar: {
@@ -71,7 +71,7 @@ const props = defineProps({
 })
 
 const memberPortrait = computed(()=> {      
-        console.log("帶進switch的值:", props.avatar);
+        // console.log("帶進switch的值:", props.avatar);
         switch (props.avatar){
           case 1 : 
             return new URL(`@/assets/img/member-center/portrait1.svg`,import.meta.url).href;
@@ -106,5 +106,47 @@ const memberPortrait = computed(()=> {
   {avatarId:8,img: new URL("@/assets/img/member-center/portrait8.svg", import.meta.url).href},
 ];
 
+const inputs = reactive({
+    // input1: { placeHolder: '輸入預設文字' , errorMsg : '請輸入正確格式的'},
+    input_firstName: { placeHolder: '輸入姓名',inputValue : ref('') },
+    input_lastName: { placeHolder: '輸入姓名' ,inputValue : ref('')},
+    input_nickname: { placeHolder: '輸入暱稱' ,inputValue : ref('')},
+  });
+
+  // 統一設定每個 inputText 的預設屬性，避免重複
+  Object.keys(inputs).forEach(key => {
+    inputs[key] = {
+      ...inputs[key],
+      size: 'small',
+      textAlign: 'textLeft',
+      errorMsg: '請輸入正確格式',
+      hasError: ref(false)
+    };
+  });
+
+// 撈資料 顯示
+async function showMemberInfoPhp() {
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/showMemberInfo.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        try{
+          const memberInfo = await resp.json();
+
+          inputs.input_firstName.inputValue = memberInfo['firstName'];
+          inputs.input_lastName.inputValue = memberInfo['lastName'];
+          inputs.input_nickname.inputValue = memberInfo['nickname'];
+
+          memberPortrait = memberInfo['portrait'];
+          console.log(memberPortrait)
+        } catch (error){
+          console.error('Error parsing JSON:', error);
+        }
+      }
+
+      showMemberInfoPhp();
 
 </script>
