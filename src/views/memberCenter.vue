@@ -65,7 +65,7 @@
     
                     <div class="bi-inbox">
                       <div class="label">信箱</div>
-                      <div>{{ member.email }}</div>
+                      <div>{{ memberEmail }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">密碼</div>
@@ -243,7 +243,7 @@
                     <div class="card-content">
                       <div class="input-group">                          
                           <label>帳戶</label>
-                          <p>{{ member.email }}</p>                          
+                          <p>{{ memberEmail }}</p>                          
                       </div>
                       <div class="input-group">
                         <div class="pwdEye">
@@ -676,6 +676,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   // 基本資料 性別
   const selectedSex = ref('');
   // 帳戶/號(信箱)
+  const memberEmail = ref('');
   const member = reactive({
     email : 'hao@gmail.com',   // 暫時寫死
     pwd: '12345'
@@ -1005,6 +1006,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
         try{
           const memberInfo = await resp.json();
+          memberEmail.value = memberInfo['email']
 
           inputs.input_firstName.inputValue = memberInfo['firstName'];
           inputs.input_lastName.inputValue = memberInfo['lastName'];

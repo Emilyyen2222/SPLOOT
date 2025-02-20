@@ -4,7 +4,7 @@
   <!-- 主內容 -->
     <main class="whole-bg">
       <!-- top nav -->
-      <memberNav/>
+      <memberNav :avatar="memberPortraitChosed"/>
       <!-- v-show : 審核判斷 -->
         <!-- hc : helper-center -->
       <div class="helperCenter">
@@ -1161,5 +1161,12 @@ const city = {
       };        
     };
 
+// async
+// 要傳的審核步驟:
+// step1.value
+// step2.value
+//     unreviewed.value
+//     underReview.value
+// step3.value
 
 </script>

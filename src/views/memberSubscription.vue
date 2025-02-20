@@ -4,7 +4,7 @@
   <!-- 主內容 -->
   <main class="whole-bg">
     <!-- top nav -->
-    <memberNav/>
+    <memberNav :avatar="memberPortraitChosed"/>
     
     <div class="subRecord">
     
@@ -221,71 +221,71 @@
   import memberNav from '../views/memberNav.vue' ;
   
   // cards
-  // const cards = ref([
-  //   // {
-  //   //   id: 1,
-  //   //   name: '小白',
-  //   //   subscription: '銀卡 (3個月方案)',
-  //   //   subscribeDate: '2025/01/02',
-  //   //   deliveryDate: '每月10日',
-  //   //   delivered: 0,
-  //   //   remaining: 3,
-  //   //   amount: '$1299',
-  //   // },
-  //   // {
-  //   //   id: 2,
-  //   //   name: '小黑',
-  //   //   subscription: '銀卡 (6個月方案)',
-  //   //   subscribeDate: '2025/02/05',
-  //   //   deliveryDate: '每月10日',
-  //   //   delivered: 2,
-  //   //   remaining: 4,
-  //   //   amount: '$2299',
-  //   // },
-  //   // {
-  //   //   id: 3,
-  //   //   name: '小花',
-  //   //   subscription: '銀卡 (1個月方案)',
-  //   //   subscribeDate: '2025/03/10',
-  //   //   deliveryDate: '每月10日',
-  //   //   delivered: 1,
-  //   //   remaining: 0,
-  //   //   amount: '$699',
-  //   // },
-  //   // {
-  //   //   id: 4,
-  //   //   name: '小藍',
-  //   //   subscription: '白金卡 (12個月方案)',
-  //   //   subscribeDate: '2025/04/15',
-  //   //   deliveryDate: '每月10日',
-  //   //   delivered: 5,
-  //   //   remaining: 7,
-  //   //   amount: '$3999',
-  //   // },
-  //   // {
-  //   //   id: 5,
-  //   //   name: '小綠',
-  //   //   subscription: '白金卡 (3個月方案)',
-  //   //   subscribeDate: '2025/04/15',
-  //   //   deliveryDate: '每月10日',
-  //   //   delivered: 5,
-  //   //   remaining: 7,
-  //   //   amount: '$3999',
-  //   // },
-  // ]);
-  const cards = ref([]);
-  const subHistories = ref([]);
+  const cards = ref([
+    // {
+    //   id: 1,
+    //   name: '小白',
+    //   subscription: '銀卡 (3個月方案)',
+    //   subscribeDate: '2025/01/02',
+    //   deliveryDate: '每月10日',
+    //   delivered: 0,
+    //   remaining: 3,
+    //   amount: '$1299',
+    // },
+    // {
+    //   id: 2,
+    //   name: '小黑',
+    //   subscription: '銀卡 (6個月方案)',
+    //   subscribeDate: '2025/02/05',
+    //   deliveryDate: '每月10日',
+    //   delivered: 2,
+    //   remaining: 4,
+    //   amount: '$2299',
+    // },
+    // {
+    //   id: 3,
+    //   name: '小花',
+    //   subscription: '銀卡 (1個月方案)',
+    //   subscribeDate: '2025/03/10',
+    //   deliveryDate: '每月10日',
+    //   delivered: 1,
+    //   remaining: 0,
+    //   amount: '$699',
+    // },
+    // {
+    //   id: 4,
+    //   name: '小藍',
+    //   subscription: '白金卡 (12個月方案)',
+    //   subscribeDate: '2025/04/15',
+    //   deliveryDate: '每月10日',
+    //   delivered: 5,
+    //   remaining: 7,
+    //   amount: '$3999',
+    // },
+    // {
+    //   id: 5,
+    //   name: '小綠',
+    //   subscription: '白金卡 (3個月方案)',
+    //   subscribeDate: '2025/04/15',
+    //   deliveryDate: '每月10日',
+    //   delivered: 5,
+    //   remaining: 7,
+    //   amount: '$3999',
+    // },
+  ]);
+  // const cards = ref([]);
+  // const subHistories = ref([]);
   
    // 計算卡片數量
   const cardCount = computed(() => cards.value.length);
 
   // 歷史紀錄，subHistory
   // const subHistories = ref([
-    // {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
-    // {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    // {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    // {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-    // {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  //   {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
+  //   {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  //   {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  //   {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  //   {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
   // ]);
 
 
