@@ -2,10 +2,9 @@
 header('Content-Type: application/json');
 session_start();
 
-$user_id = $_SESSION['userId'];
 $response = [];
 
-if (isset($user_id)) {
+if (isset($_SESSION['userId'])) {
     $response = [
       'status' => 'loggedIn',
       'message' => '已經登入'

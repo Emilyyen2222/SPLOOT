@@ -2,7 +2,7 @@
 @each $theme in $themes {
     body.#{$theme}Theme{
         header{
-            position: fixed;
+            position: sticky;
             top: 0.8rem;
             left:0.8rem;
             right: 0.8rem;
@@ -77,6 +77,7 @@
                 .headerList{
                     display: flex;
                     gap: 2.4rem;
+                    
                     padding: 0 1.6rem;
 
                     border-radius: 2.4rem;
@@ -90,8 +91,8 @@
 
                     @include md(){
                         position: absolute;
-                        top: -100vh;
-                        left: 0;
+                        top: calc(-100vh - 0.8rem);
+                        left: -0.8rem;
                         z-index: -1;
     
                         display: flex;
@@ -107,7 +108,7 @@
                         text-align: center;
                         transition: all .6s ease;
                         &.-navFocus{
-                            top: 0;
+                            top: -0.8rem;
                             
                         }
                     }
@@ -169,26 +170,54 @@
                 }
             
                 .loginBox{
+                    width: 6.8rem;
                     @include md(){
+                        width: 6.8rem;
                         .btn.primary.default{
+                            padding: 0;
                             background-color: transparent;
                             color: map-get($colors, $theme);
-    
-                            span::after{ background-color: map-get($colors, $theme); }
+                            border: 1px solid map-get($colors, $theme);
+
+                            span{
+                                &::after{background-color: map-get($colors, $theme); }
+                            }
                         }
     
                     }
                 }
                 .logOutBox{
                     display: flex;
-                    gap: 2.4rem;
+                    align-items: center;
+                    gap: 0.8rem;
+                    .defaultBtn{
+                        width: 7.2rem;
+                        height: 4rem;
+                        border-radius: 100px;
+                        background: rgba(255, 255, 255, 0.5);
+                        backdrop-filter: blur(10px);
+                        -webkit-backdrop-filter: blur(10px);
+
+                        &:hover{
+                            background-color: map-get($colors, beige);
+                        }
+                    }
                     .memberLogo{
                         width: 4.8rem;
                         border: 1px solid map-get($colors, natural-0);
                         border-radius: 50%;
                     }
                     @include md(){
-                        width: 3.6rem;
+                        width: 6.8rem;
+                        .defaultBtn{
+                            background-color: transparent;
+                            border: 1px solid map-get($colors, $theme);
+                            backdrop-filter: unset;
+
+                            &:hover{
+                                background-color: transparent;
+                            }
+                        }
                         a{ display: none; }
                     }
                 }

@@ -1,5 +1,5 @@
 <template>
-<MainHeader theme="blue" bgc="blueberry-0"></MainHeader>
+<!-- <MainHeader theme="blue" bgc=""></MainHeader> -->
 <!-- 主內容 -->
  <div class="wrapper">
 <!-- 主要功能 -->

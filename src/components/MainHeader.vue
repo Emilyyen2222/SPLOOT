@@ -2,11 +2,11 @@
 <template>
     <header :class="[`bg-${props.bgc}`, {'loggedIn': authBoxStore.isLoggedIn} ]">
         <nav>
-            <div class="navHamburger" :class="{ '-navFocus': isNavFocus }" @click="toggleNav">
+            <div class="navHamburger navSideBox" :class="{ '-navFocus': isNavFocus }" @click="toggleNav">
                 <div class="line"></div>
                 <div class="line"></div>
             </div>
-            <div class="logo">
+            <div class="logo navSideBox">
                 <RouterLink to="/">
                     <img :src="themes[props.theme].logoUrl" alt="Logo">
                 </RouterLink>
@@ -30,9 +30,9 @@
                     </RouterLink>
                 </li>
             </ul>
-            <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn>
-            <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox">
-                <Btn btnStyle="default baseline" @click="logOutPhp">登出</Btn>
+            <!-- <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn> -->
+            <div v-if="authBoxStore.isLoggedIn == false" class="logOutBox navSideBox">
+                <Btn btnStyle="text default" @click="logOutPhp">登出</Btn>
                 <RouterLink to="/member-center">
                     <img class="memberLogo" :src="memberLogo" alt="memberLogo">
                 </RouterLink>
@@ -72,7 +72,7 @@
     const isNavFocus = ref(false);
     // const isAuthBox = ref(false);
     // const authType = ref('login'); // 初始為登入模式
-    const memberLogoPortrait = ref(8);
+    const memberLogoPortrait = ref(1);
 
 const isMDScreen = computed(() => { return window.innerWidth <= 768; });
 

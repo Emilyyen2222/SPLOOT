@@ -1,6 +1,6 @@
 <!-- Sam -->
 <template>
-    <MainHeader theme="red" bgc="purple-1"></MainHeader>
+    <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
     <h4 style="margin: 20px 0">首頁還沒切元件庫先當首頁</h4>
     <section class="buttons">
         <h4>Buttons (完成)</h4>

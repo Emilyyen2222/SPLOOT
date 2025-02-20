@@ -1,6 +1,6 @@
 
 <template>
-  <MainHeader theme="red" bgc="natural-1"></MainHeader>
+  <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
   <!-- 主內容 -->
     <main class="whole-bg">
       <!-- top nav -->

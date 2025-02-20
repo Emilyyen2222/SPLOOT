@@ -126,7 +126,7 @@
                         <p v-if="authBoxStore.robotCheck.hasError" class="text-red xsText">請勾選我不是機器人</p>
                         <!-- 根據模式改按鈕內容 -->
                         <btn btnStyle="primary small" v-if="authBoxStore.authType === 'signUp'" @click="authBoxStore.signUpPhp">註冊</btn>
-                        <btn btnStyle="primary small" v-if="authBoxStore.authType === 'login'" @click="authBoxStore.loginPhp">登入</btn>
+                        <btn btnStyle="primary small" v-if="authBoxStore.authType === 'login'" @click="authBoxStore.loginPhp(router)">登入</btn>
                         <!-- 分隔線 -->
                         <div class="dividerBox">
                             <div class="divider left"></div>
@@ -192,12 +192,14 @@
 
 <script setup>
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
     import { useAuthStores } from '@/stores/AuthBoxStores.js';  // 導入 Pinia Store
 
     import InputText from '@/components/InputText.vue';
     import Btn from '@/components/Btn.vue';
     import Policy from '../components/Policy.vue'; 
 
+    const router = useRouter();
     const authBoxStore = useAuthStores();
 
     const emit = defineEmits(['update:authType', 'toggle']);

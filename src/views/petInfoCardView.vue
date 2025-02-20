@@ -1,5 +1,5 @@
 <template>
-    <MainHeader theme="red" bgc=""></MainHeader>
+    <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
     
 <!-- 請先建立寵物卡 -->
 <PopUp

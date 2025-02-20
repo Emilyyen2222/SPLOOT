@@ -1,5 +1,5 @@
 <template>
-    <MainHeader theme="red" bgc="pink-1"></MainHeader>
+    <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
 
     <!-- question 1--->
     <div v-if="question == 1" class="box firstBox">

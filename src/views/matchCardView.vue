@@ -1,5 +1,5 @@
 <template>
-    <MainHeader theme="red" bgc="purple-1"></MainHeader>
+    <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
 <!-- 全部內容 -->
 <div class="matchbox">
     <!-- 遮罩以上 -->

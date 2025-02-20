@@ -1,6 +1,6 @@
 <!-- Sam -->
 <template>
-  <!-- <MainHeader :theme="route.meta.theme" :bgc="route.meta.bgc"></MainHeader> -->
+  <MainHeader :theme="routeMeta" bgc=""></MainHeader>
   <RouterView></RouterView>
   <AuthBox />
 </template>
@@ -10,7 +10,8 @@ import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import AuthBox from '@/components/authBox.vue';
 
-// import MainHeader from './MainHeader.vue';
+import MainHeader from '@/components/MainHeader.vue';
 
 const route = useRoute();
+const routeMeta = computed(() => route.meta.theme);
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <MainHeader v-if="isMDScreen" theme="red" bgc="yellow-1"></MainHeader>
-  <MainHeader v-else theme="red" bgc="transparent"></MainHeader>
+  <!-- <MainHeader v-if="isMDScreen" theme="red" bgc=""></MainHeader> -->
+  <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
   <section class="scrollSection landing bg-yellow-1">
     <div class="mainBox">
       <div class="bigText text-red">CONNECT THROUGH SPLOOT</div>
