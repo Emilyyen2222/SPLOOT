@@ -33,7 +33,7 @@
             padding: 2rem 2.4rem 0 calc(100% - 6rem);  //2.4rem(右邊padding) + 3.6rem(自己寬度)
 
             .closeBtn{
-                cursor: pointer;
+                cursor: $hoverPointer;
 
                 width: 4rem;
                 height: 4rem;

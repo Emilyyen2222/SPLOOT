@@ -83,7 +83,7 @@
                 gap: .2rem;
             }
                 .imgUpload{
-                    cursor: pointer;
+                    cursor: $hoverPointer;
                     .imgUploadSection{
                         display: flex;
                         justify-content: center;

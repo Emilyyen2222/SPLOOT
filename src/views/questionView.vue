@@ -252,14 +252,14 @@
                     </div>
                     <div class="boxDivider"></div>
                     <div class="textBox">
-                        <p>月費</p>
-                        <p>{{ "$" + monthlyPrice.toLocaleString() }}</p>
+                        <p>總金額</p>
+                        <p>{{ "$" + totalAmount.toLocaleString() }}</p>
 
                     </div>
                     <div class="boxDivider"></div>
                     <div class="textBox">
                         <p>今日應付金額</p>
-                        <p>{{ "$" + monthlyPrice.toLocaleString() }}</p>
+                        <p>{{ "$" + selectedPrice.toLocaleString() }}</p>
                     </div>
                 </div>
                 <div class="infoBox">
@@ -423,21 +423,21 @@ const monthFee = {
 const planOptions = {
     "銀卡": [
         { label: "單次體驗", times: "x1", price: 799 },
-        { label: "3個月", times: "x3", price: 2097 },
-        { label: "6個月", times: "x6", price: 3774 },
-        { label: "12個月", times: "x12", price: 7128 }
+        { label: "3個月", times: "x3", price: 699 },
+        { label: "6個月", times: "x6", price: 629 },
+        { label: "12個月", times: "x12", price: 594 }
     ],
     "金卡": [
         { label: "單次體驗", times: "x1", price: 999 },
-        { label: "3個月", times: "x3", price: 2697 },
-        { label: "6個月", times: "x6", price: 4854 },
-        { label: "12個月", times: "x12", price: 9168 }
+        { label: "3個月", times: "x3", price: 899 },
+        { label: "6個月", times: "x6", price: 809 },
+        { label: "12個月", times: "x12", price: 764 }
     ],
     "白金卡": [
         { label: "單次體驗", times: "x1", price: 1299 },
-        { label: "3個月", times: "x3", price: 3597 },
-        { label: "6個月", times: "x6", price: 6474 },
-        { label: "12個月", times: "x12", price: 12228 }
+        { label: "3個月", times: "x3", price: 1199 },
+        { label: "6個月", times: "x6", price: 1079 },
+        { label: "12個月", times: "x12", price: 1019 }
     ]
 };
 
@@ -627,9 +627,9 @@ const selectedPrice = computed(() => {
     return selectedPlanObj.price
 });
 
-const monthlyPrice = computed(() => {
+const totalAmount = computed(() => {
     const months = monthFee[planSelected.value] || 1;
-    return selectedPrice.value / months;
+    return selectedPrice.value * months;
 });
 
 const formatCardNumber = () => {

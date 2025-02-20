@@ -177,7 +177,7 @@ body{
             width: 100vw;
         }
         .card {
-            cursor: pointer;
+            cursor: $hoverPointer;
             position: relative;
             display: inline-flex;
             flex-direction: column;
@@ -278,7 +278,7 @@ body{
             flex-wrap: nowrap;
         }
         .card {
-            cursor: pointer;
+            cursor: $hoverPointer;
             position: relative;
             display: flex;
             justify-content: flex-start;
@@ -431,7 +431,7 @@ body{
             height: 1.6rem;
             border: 2px solid map-get($colors, natural-2); 
             border-radius: .4rem; 
-            cursor: pointer;
+            cursor: $hoverPointer;
             &:checked {
                 background-color: map-get($colors, brown); 
                 border-color: map-get($colors, brown); 
@@ -452,7 +452,7 @@ body{
             gap: .8rem;
         }
         .link{
-            cursor: pointer;
+            cursor: $hoverPointer;
             color: map-get($colors, red);
             text-decoration: underline;
         }
