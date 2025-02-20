@@ -126,3 +126,47 @@
     }
   }
 }
+
+.setPopUpContainer{
+  .content{
+    display: flex;
+    gap: 80px;
+
+    margin-bottom: 80px;
+    
+    .leftContent, .rightContent{
+        display: flex;
+        gap: 20px;
+
+        .leftItem{
+          // border: 1px solid;
+
+          width: 120px;
+
+          .item{
+            line-height: 42px;
+          }
+        }
+
+        .rightItem{
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          
+          width: 200px;
+
+          // border: 1px solid;
+
+          .item{
+            line-height: 42px;
+          }
+        }
+    }
+  }
+
+  .popBtnBox{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+}

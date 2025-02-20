@@ -11,7 +11,7 @@
           {name: '訂單管理', link:'/backend/order'},
           {name: '小幫手身份審核', link:'/backend/splootBuddy-verify'},
           {name: '活動管理', link:'/backend/event'},
-          {name: '消息管理', link:'/backend/news'},
+          {name: '回到前台首頁', link:'/'},
         ]" :key="index">
           <RouterLink :to="item.link" :class="{isAcitve: active == item.name}">
             <Btn v-if="active==item.name" btnStyle="primary default">{{ item.name }}</Btn>

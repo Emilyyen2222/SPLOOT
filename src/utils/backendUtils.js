@@ -2,9 +2,18 @@
 import {ref, computed, watch} from 'vue';
 
 //useBackend(匯入的資料名,搜尋用的資料名稱,checkbox用的資料名稱,checkbox篩選條件)
-export function useBackend(backendData, searchUseData, checkBoxTarget,checkBoxCondition){
-    //傳入該頁面的原始資料
-    const rawData = ref([...backendData.value]);
+export function useBackend(
+  backendData = ref(), 
+  searchUseData = null, 
+  checkBoxTarget = null,
+  checkBoxCondition = null){
+    
+  //傳入該頁面的原始資料
+    const rawData = ref([]);
+
+    if(backendData.value){
+      rawData.value = [...backendData.value];
+    }
 
     //過濾後資料(用於搜尋)
     const filterData = ref([...rawData.value]); 
@@ -109,7 +118,9 @@ export function useBackend(backendData, searchUseData, checkBoxTarget,checkBoxCo
   const thisData =ref(null);
 
   const popUpToggle = (index) => {
-    thisData.value = {...backendData.value[index]}
+    if(backendData.value){
+      thisData.value = {...backendData.value[index]}
+    }
 
     isPopUp.value = !isPopUp.value;
     document.body.classList.toggle('clicked');

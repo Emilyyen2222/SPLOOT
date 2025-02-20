@@ -34,7 +34,7 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="data in viewData" :key="data.orderId">
+        <tr v-for="(data, index) in viewData" :key="data.orderId">
           <td>{{ data.orderId }}</td>
           <td>{{ data.memberId }}</td>
           <td>{{ data.boxId }}</td>
@@ -43,7 +43,7 @@
           <td>{{ data.pickupMethod }}</td>
           <td>{{ data.shipmentStatus }}</td>
           <td>{{ data.shippingCarrier }}</td>
-          <td><Btn btnStyle="outline small">查看與編輯</Btn></td>
+          <td><Btn btnStyle="outline small" @click="popUpToggle(index)">查看與編輯</Btn></td>
         </tr>
       </tbody>
     </table>
@@ -66,6 +66,50 @@
     </div>
   </div>
 
+  <PopUp
+  :is-pop-up="isPopUp"
+  >
+  <div class="setPopUpContainer">
+    <div class="content">
+      <div class="leftContent">
+        <div class="leftItem">
+          <p class="item">方案：</p>
+          <p class="item">每月價錢：</p>
+          <p class="item">大型犬內容：</p>
+          <p class="item">中型犬內容：</p>
+          <p class="item">小型犬內容：</p>
+        </div>
+        <div class="rightItem">
+          <p class="item"></p>
+          <p class="item"></p>
+          <p class="item"></p>
+          <p class="item"></p>
+          <p class="item"></p>          
+        </div>
+      </div>
+      <div class="rightContent">
+        <div class="leftItem">
+          <p class="item">訂閱人數：</p>
+          <p class="item">更新者：</p>
+          <p class="item">最後更新：</p>
+          <p class="item">最後更新：</p>
+          <p class="item">最後更新：</p>
+          <p class="item">最後更新：</p>
+        </div>
+        <div class="rightItem">
+          <p class="item">99</p>
+          <p class="item">2025-2-14</p>
+        </div>
+      </div>
+    </div>
+    <div class="popBtnBox">
+      <Btn btnStyle="primary small" @click="popUpToggle">儲存</Btn>
+      <Btn btnStyle="outline small" @click="popUpToggle">關閉</Btn>
+    </div>
+  </div>
+
+  </PopUp>
+
 </template>
 
 <script setup>
@@ -74,6 +118,7 @@
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
+  import PopUp from "@/components/PopUp.vue"
 
   const orders = ref(
     Array.from({length:103},(value,x) => ({
@@ -101,6 +146,9 @@
         isPending, //審核專用
         inputValue,
         dataFilter,
+        isPopUp,
+        thisData,
+        popUpToggle,
     } = useBackend(orders, 'orderId', 'shipmentStatus', '未寄出');
 
 </script>

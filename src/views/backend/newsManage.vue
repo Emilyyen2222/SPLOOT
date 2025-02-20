@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <BackendHeader active="消息管理" bgc="yellow-1" class="bg-yellow-1"></BackendHeader>
 
   <div class="wrapper">
@@ -107,4 +107,4 @@
 <style lang="scss">
 @import '@/assets/sass/style.scss';
 @import '@/assets/sass/page/backend';
-</style>
+</style> -->
