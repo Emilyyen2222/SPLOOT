@@ -448,7 +448,7 @@ ol {
       min-width: unset;
     }
     .theEye{
-      cursor: pointer;
+      cursor: $hoverPointer;
 
       // position: absolute;
       // top: 10px;
@@ -1140,7 +1140,7 @@ ol {
     gap: 2.4rem;
     margin-bottom: 2.4rem;
     .hc-steps{
-      cursor: pointer;
+      cursor: $hoverPointer;
       flex-basis: 19.5rem;
       flex-grow: 1;
       display: flex;

@@ -88,7 +88,7 @@
                            line-height: 3.6rem;
     
                            label {
-                               cursor: pointer;
+                               cursor: $hoverPointer;
                                z-index: 10;
                            }
                        }
@@ -130,7 +130,7 @@
             }
 
             .scheduleBtn{
-                cursor: pointer;
+                cursor: $hoverPointer;
 
                 display: flex;
                 align-items: center;
