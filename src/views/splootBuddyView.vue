@@ -1162,17 +1162,17 @@ async function uploadImage(){
 
         const result = await response.json();
         if (result.success === true) {
-            console.log("uploadImag1" + result);
-            console.log("uploadImag2" + result.imagePath);
+            // console.log("uploadImag1" + result);
+            // console.log("uploadImag2" + result.imagePath);
             imagePath.value = result.imagePath; // 成功則回傳圖片存放檔名
             return imagePath.value;
         } else {
-            console.error("~~~圖片上傳失敗:", result.message);
+            console.error("圖片上傳失敗:", result.message);
             return null;
         }
 
     }catch(error){
-        console.log(selectedFile.value);
+        // console.log(selectedFile.value);
         console.error("圖片顯示錯誤", error);
         return null;
     }
@@ -1194,8 +1194,8 @@ async function findAllBuddyPostsPhp(){
         if(postResp.status == 'success'){
             const allPosts = postResp.data;
             for(let post of allPosts){
-                console.log('POST',post);
-                console.log('IMG', post.post_img);
+                // console.log('POST',post);
+                // console.log('IMG', post.post_img);
                 cardsRawData.value.push({
                     imgSrc: post.post_img,
                     

@@ -56,36 +56,17 @@
         <div class="leftItem">
           <p class="item">方案：</p>
           <p class="item">每月價錢：</p>
-          <p class="item">大型犬內容：</p>
-          <p class="item">中型犬內容：</p>
-          <p class="item">小型犬內容：</p>
+          <p class="item">總金額：</p>
         </div>
         <div class="rightItem">
-          <p class="item">{{ thisData.planName }} - {{ thisData.planCycle }}</p>
+          <p class="item">{{ thisData.planName }} - {{ thisData.planCycle }}個月</p>
           <InputText
           size="small"
           textAlign="textLeft"
           placeHolder=""
           v-model="priceInputValue"
           ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="LargeInputValue"
-          ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="middleInputValue"
-          ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="smallInputValue"
-          ></InputText>
+          <p class="item">{{ thisData.totalPrice() }}</p>
         </div>
       </div>
       <div class="rightContent">
@@ -95,7 +76,7 @@
           <p class="item">最後更新：</p>
         </div>
         <div class="rightItem">
-          <p class="item">99</p>
+          <p class="item">{{ thisData.Subscribers }}</p>
           <InputText
           size="small"
           textAlign="textLeft"
@@ -127,19 +108,22 @@
 
   const plans = ref([
     // 銀卡
-    { planName: "銀卡", planCycle: "3個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
-    { planName: "銀卡", planCycle: "6個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
-    { planName: "銀卡", planCycle: "12個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 1, planPrice: 799, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 3, planPrice: 699, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 6, planPrice: 629, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 12, planPrice: 594, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCcyle}, lastUpdate: "2025-2-28" },
 
     // 金卡
-    { planName: "金卡", planCycle: "3個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
-    { planName: "金卡", planCycle: "6個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
-    { planName: "金卡", planCycle: "12個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 1, planPrice: 999, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 3, planPrice: 899, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 6, planPrice: 809, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 12, planPrice: 764, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCcyle}, lastUpdate: "2025-2-28" },
 
     // 白金卡
-    { planName: "白金卡", planCycle: "3個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
-    { planName: "白金卡", planCycle: "6個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
-    { planName: "白金卡", planCycle: "12個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 1, planPrice: 1299, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 3, planPrice: 1199, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 6, planPrice: 1079, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 12, planPrice: 1019, Subscribers: 100, totalPrice: function(){return this.planPrice * this.planCycle}, lastUpdate: "2025-2-28" },
   ]);
 
   // v-modle
@@ -157,6 +141,10 @@
   });
 
   const updaterInputValue = ref("NightMonkey");
+
+  const priceCalculate = computed((a,b) => {
+    return a * b; 
+  });
 
 
 

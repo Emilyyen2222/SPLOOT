@@ -30,9 +30,11 @@
                     </RouterLink>
                 </li>
             </ul>
-            <!-- <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn> -->
-            <div v-if="authBoxStore.isLoggedIn == false" class="logOutBox navSideBox">
+            <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn>
+            <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox navSideBox">
+                <RouterLink to="/">
                 <Btn btnStyle="text default" @click="logOutPhp">登出</Btn>
+            </RouterLink>
                 <RouterLink to="/member-center">
                     <img class="memberLogo" :src="memberLogo" alt="memberLogo">
                 </RouterLink>
@@ -160,6 +162,8 @@ onBeforeMount(()=>{
         getUserPortraitPhp();
     }
 })
+
+
 // http://localhost/tid103/g3/php/checkLogin.php
 // https://tibamef2e.com/tid103/g3/php/checkLogin.php
 

@@ -12,6 +12,7 @@
       </div>
       <div class="searchBar">
         <InputText
+        @keyup.enter="dataFilter"
         size="small"
         textAlign="textLeft"
         placeHolder="以 ID 查詢"
