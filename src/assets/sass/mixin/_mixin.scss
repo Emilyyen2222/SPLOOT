@@ -80,7 +80,8 @@ p{ @include textStyle(p); }
         padding: .4rem 1.6rem;
     }
 
-    cursor: pointer;
+    // cursor: pointer;
+    cursor: $hoverPointer;
     display: flex;
     align-items: center;
     justify-content: center;

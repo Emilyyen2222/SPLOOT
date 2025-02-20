@@ -1,5 +1,4 @@
  body{
-    background-color: map-get($colors, pink-0);
     position: relative;
 } 
 .page-splootbox{
@@ -14,6 +13,7 @@
     .img {
         position: absolute;
         z-index: -5;
+        top: 3%;
         width: 100%;
         height: 100%;
         object-fit: cover; 

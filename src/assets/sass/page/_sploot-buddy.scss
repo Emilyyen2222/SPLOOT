@@ -61,7 +61,7 @@ body{
                 margin-bottom: 8px;
 
                 .buddyTypes{
-                    cursor: pointer;
+                    cursor: $hoverPointer;
 
                     display: flex;
                     justify-content: center;
@@ -164,7 +164,7 @@ body{
                             gap: 8px;
 
                             input[type="checkbox"] {
-                                cursor: pointer;
+                                cursor: $hoverPointer;
                                 appearance: none; // 隱藏瀏覽器樣式
                                 width: 16px;
                                 height: 16px;
@@ -201,7 +201,7 @@ body{
                         gap: 0.7rem;
     
                         .petTypes{
-                            cursor: pointer;
+                            cursor: $hoverPointer;
 
                             display: flex;
                             justify-content: center;
@@ -264,7 +264,7 @@ body{
                     }
             }
             .scheduleBtn{
-                cursor: pointer;
+                cursor: $hoverPointer;
 
                 display: flex;
                 align-items: center;

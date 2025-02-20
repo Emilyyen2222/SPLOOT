@@ -73,7 +73,7 @@
                     line-height: 3.6rem;
 
                     label {
-                        cursor: pointer;
+                        cursor: $hoverPointer;
                         display: flex;
                         align-items: center;
                         gap: 4px;
@@ -180,7 +180,7 @@
 
 
             .mapBack{
-                cursor: pointer;
+                cursor: $hoverPointer;
                 
                 position: absolute;
                 top: 10px;
