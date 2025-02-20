@@ -778,6 +778,8 @@ const cardsData = ref([]); //渲染的卡片
 
 const cardsRawData = ref([]);
 
+console.log(`aaa${cardsRawData}`);
+
 // 寫死
 const serviceDaysArray = [
   ["一", "二"],
@@ -882,8 +884,6 @@ const arrayAddData = () => {
       card.district = districtArray[index];
 
     });
-
-    console.log(card.stars);
 };
 
 //評分星星計算
