@@ -235,19 +235,7 @@ const routes = [
       theme: 'red',
       bodyBg: 'yellow-1',
     }
-  },
-  {
-    path: '/backend/news',
-    component: () => import('@/views/backend/newsManage.vue'),
-    meta: {
-      title: '消息管理 | Sploot',
-      theme: 'red',
-      bodyBg: 'yellow-1',
-    }
-  },
-  
-  
-  
+  },  
 ];
 
 // 建立 router

@@ -44,12 +44,14 @@
 template{
   box-sizing: border-box;
 }
-header{
+#backendHeader{
   width: 100vw;
+  position: sticky;
 
   nav{
     width: 100%;
     max-width: 1216px;
+
     ul{
       display: flex;
       justify-content: flex-start;
