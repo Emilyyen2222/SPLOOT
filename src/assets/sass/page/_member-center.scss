@@ -654,7 +654,8 @@ ol {
   // 寵物卡片的外層，用grid
   .petcard-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); // 自適應列數，最小 488px
+    grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); // 自適應列數，最小 430px
+    // grid-template-columns: repeat(2, 1fr); 
     grid-gap: 3.2rem;              // 行列間距 
     max-width: 100%;            // 最大寬度限制 
     margin: 0 auto;              // 水平置中    
@@ -665,6 +666,7 @@ ol {
 
     .petcard{
       width: 100%;
+      max-width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -1572,6 +1574,13 @@ ol {
     .group-email,.group-pwd{
       flex-direction: column;
       align-items: end;
+    }
+  }
+}
+@media (max-width:550px) {
+  .petcard {
+    .ptc-btn-group{
+      max-width: 80vw;
     }
   }
 }
