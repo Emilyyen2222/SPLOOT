@@ -1,6 +1,6 @@
 <template>
   <header id="backendHeader">
-    <nav>
+    <nav class="backend">
       <ul>
         <li
         v-for="(item, index) in [
@@ -47,8 +47,9 @@ template{
 #backendHeader{
   width: 100vw;
   position: sticky;
+  top: 0;
 
-  nav{
+  nav.backend{
     width: 100%;
     max-width: 1216px;
 
@@ -58,7 +59,7 @@ template{
       flex-wrap: wrap;
       gap: .4rem;
       
-      padding-top: 2rem;
+      padding: 2rem 0;
       width: 100%;
       li{
         // flex-grow: 1;

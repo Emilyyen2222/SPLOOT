@@ -102,7 +102,7 @@
           <DropdownMenu class="dropdownInput"
             :placeHolder="thisData.shipmentStatus"
             :options="shipmentStatusOption"
-            v-model="thisData.shipmentStatus"
+            v-model="shipmentInputValue"
             @change="">
           </DropdownMenu>
           <InputText
@@ -138,7 +138,7 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+  import {ref, watch} from "vue";
   import {useBackend} from "@/utils/backendUtils"
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
@@ -163,6 +163,7 @@
     }))
   );
 
+  const shipmentInputValue =ref("");
   const realMailinputValue = ref(new Date (2025,1,23).toISOString().split('T')[0]);
   const carrierInputValue =ref("");
   const mailerInputValue =ref("NightMonkey");
@@ -191,6 +192,16 @@
       {name:"已寄出"},
       {name:"未寄出"}
     ]);
+
+    watch(isPopUp, (newValue) => {
+      if(newValue && thisData.value){
+        shipmentInputValue.value = thisData.value.shipmentStatus;
+        carrierInputValue.value = thisData.value.shippingCarrier;
+        mailerInputValue.value = thisData.value.mailer;
+      }
+    });
+
+    // const 
 
 </script>
 
