@@ -231,8 +231,8 @@
         imgSrc: new URL("@/assets/img/buddy-post/demo.png", import.meta.url).href,
         title:"高速散步",
         stars:5,
-        avgGrade:4.5,
-        commentCount:3,
+        avgGrade:4.8,
+        commentCount:8,
         content:"唉，散步陪伴這種事，說實話有點麻煩，不過既然你需要，我會盡量幫忙。需要陪你的毛孩散步嗎？我提供的服務可是高速散步，速度快到連詛咒隧道附近都能快速穿越，保證不會耽誤太久。雖然有點累，還是得做好，畢竟毛孩的安全是最重要的。放心，牠們會平安無事……應該。預計散步的地點在小桃他們家的神社附近，阿，我好想你，小桃。"
     });
 

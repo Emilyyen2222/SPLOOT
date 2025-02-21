@@ -33,7 +33,9 @@
                         <Btn btnStyle="text small" class="rightItem">FACEBOOK</Btn>
                         <Btn btnStyle="text small" class="rightItem"></Btn>
                         <Btn btnStyle="text small" class="rightItem">隱私權政策</Btn>
-                        <Btn btnStyle="text small" class="rightItem">服務條款</Btn>
+                        <RouterLink to="/backend/member">
+                            <Btn btnStyle="text small" class="rightItem">服務條款</Btn>
+                        </RouterLink>
                         <Btn btnStyle="text small" class="rightItem"></Btn>
                     </div>
                  </div>

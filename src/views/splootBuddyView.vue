@@ -100,7 +100,7 @@
                                 </li>
                             </ul>
                             <div class="avgGrade smallText">{{ card.stars }}</div>
-                            <div class="commentCount smallText">({{ testFunction() }})</div>   <!-- 測試用上架後要拿掉 -->
+                            <div class="commentCount smallText">(8)</div> 
                         </div>
                         <div class="serviceDays">
                             <p class="smallText">服務時段</p>
@@ -113,7 +113,8 @@
                                 </ul>                            
                             </div>
                         </div>                
-                        <div class="serviceTime smallText">{{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div>
+                        <div class="serviceTime smallText">10:00-22:00</div>
+                        <!-- <div class="serviceTime smallText">{{ card.serviceTimeStart }}-{{ card.serviceTimeEnd }}</div> -->
                     </div>
                 </div>
                 <Router-link  to="/sploot-buddy/buddy-post">
@@ -793,8 +794,8 @@ const serviceDaysArray = [
   ["六", "日"],
   ["一", "二"],
   ["一", "二", "六", "日"],
-  ["一", "二", "三", "四", "六", "日"],
-  ["二", "三", "四", "五", "日"],
+  ["一", "二", "三", "四", "六", "日"],//
+  ["一", "四", "六", "日"],//demo
   ["日"],
   ["一", "三", "五", "六", "日"],
   ["一"],
@@ -811,7 +812,7 @@ const serviceDaysArray = [
 ];
 
 const starsArray = [
-    5,5,5,4,5,4,5,4,3,5,5,5,4,5,3,34,3,5,5,5,4,5,
+    5,5,5,4,5,4,5,4,3,5,5,5,5,5,3,34,3,5,5,5,4,5,
 ];
 
 const cityArray = [
