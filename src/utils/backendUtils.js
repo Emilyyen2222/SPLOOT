@@ -115,7 +115,7 @@ export function useBackend(
   const isPopUp =ref(false);
 
   // 儲存點選資料變數
-  const thisData =ref(null);
+  const thisData =ref({});
 
   const popUpToggle = (index) => {
     if(backendData.value){

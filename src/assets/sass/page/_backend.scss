@@ -143,6 +143,10 @@
 
           width: 120px;
 
+          &.orderItem{
+            width: 160px;
+          }
+
           .item{
             line-height: 42px;
           }
@@ -154,6 +158,10 @@
           gap: 2px;
           
           width: 200px;
+
+          &.orderItem{
+            gap: 0;
+          }
 
           // border: 1px solid;
 
