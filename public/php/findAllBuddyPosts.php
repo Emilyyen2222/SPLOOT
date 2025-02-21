@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
 include './PdoConnection.php';
 
@@ -51,7 +54,7 @@ if ($posts) {
 
       $sql_select_acceptDays = "
       SELECT accept_day FROM HELPER_ACCEPT_DAY
-      WHERE post_id = :post_id
+      WHERE user_id = :post_id
       AND active_status = 1
       ";
       $stmt_select_acceptDays = $pdo->prepare($sql_select_acceptDays);
@@ -61,7 +64,7 @@ if ($posts) {
 
       $sql_select_acceptPets = "
       SELECT accept_pet FROM HELPER_ACCEPT_PET
-      WHERE post_id = :post_id
+      WHERE user_id = :post_id
       AND active_status = 1
       ";
       $stmt_select_acceptPets = $pdo->prepare($sql_select_acceptPets);

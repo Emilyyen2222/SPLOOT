@@ -6,6 +6,7 @@ session_start();
 $postData = json_decode(file_get_contents("php://input"), true);
 
 $user_id = $_SESSION['userId'];
+// $user_id = null;
 $title = $postData['title'];
 $event_start_date = $postData['eventStartDate'];
 $time_start = $postData['timeStart'];

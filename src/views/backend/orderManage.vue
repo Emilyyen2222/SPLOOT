@@ -12,6 +12,7 @@
       </div>
       <div class="searchBar">
         <InputText
+        @keyup.enter="dataFilter"
         size="small"
         textAlign="textLeft"
         placeHolder="以 ID 查詢"
@@ -72,33 +73,57 @@
   <div class="setPopUpContainer">
     <div class="content">
       <div class="leftContent">
-        <div class="leftItem">
-          <p class="item">方案：</p>
-          <p class="item">每月價錢：</p>
-          <p class="item">大型犬內容：</p>
-          <p class="item">中型犬內容：</p>
-          <p class="item">小型犬內容：</p>
+        <div class="leftItem orderItem">
+          <p class="item">訂單 ID：</p>
+          <p class="item">會員 ID：</p>
+          <p class="item">寵物盒訂閱 ID：</p>
+          <p class="item">訂閱方案：</p>
+          <p class="item">會員取貨方式：</p>
         </div>
-        <div class="rightItem">
-          <p class="item"></p>
-          <p class="item"></p>
-          <p class="item"></p>
-          <p class="item"></p>
-          <p class="item"></p>          
+        <div class="rightItem orderItem">
+          <p class="item">{{ thisData.orderId }}</p>
+          <p class="item">{{ thisData.memberId }}</p>
+          <p class="item">{{ thisData.boxId }}</p>
+          <p class="item">{{ thisData.planName }}</p>
+          <p class="item">{{ thisData.pickupMethod }}</p>          
         </div>
       </div>
       <div class="rightContent">
-        <div class="leftItem">
-          <p class="item">訂閱人數：</p>
-          <p class="item">更新者：</p>
-          <p class="item">最後更新：</p>
-          <p class="item">最後更新：</p>
-          <p class="item">最後更新：</p>
+        <div class="leftItem orderItem">
+          <p class="item">應寄出日：</p>
+          <p class="item">寄出狀態：</p>
+          <p class="item">實際寄出日：</p>
+          <p class="item">寄出物流：</p>
+          <p class="item">寄出者：</p>
           <p class="item">最後更新：</p>
         </div>
         <div class="rightItem">
-          <p class="item">99</p>
-          <p class="item">2025-2-14</p>
+          <p class="item">{{ thisData.mailDeadline }}</p>
+          <DropdownMenu class="dropdownInput"
+            :placeHolder="thisData.shipmentStatus"
+            :options="shipmentStatusOption"
+            v-model="shipmentInputValue"
+            @change="">
+          </DropdownMenu>
+          <InputText
+          size="small"
+          textAlign="textLeft"
+          placeHolder=""
+          v-model="realMailinputValue"
+          ></InputText>
+          <InputText
+          size="small"
+          textAlign="textLeft"
+          placeHolder=""
+          v-model="carrierInputValue"
+          ></InputText>
+          <InputText
+          size="small"
+          textAlign="textLeft"
+          placeHolder=""
+          v-model="mailerInputValue"
+          ></InputText>
+          <p class="item">{{ thisData.lastUpdate }}</p>
         </div>
       </div>
     </div>
@@ -113,12 +138,13 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+  import {ref, watch} from "vue";
   import {useBackend} from "@/utils/backendUtils"
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
   import Btn from "@/components/Btn.vue";
-  import PopUp from "@/components/PopUp.vue"
+  import PopUp from "@/components/PopUp.vue";
+  import DropdownMenu from "@/components/DropdownMenu.vue"
 
   const orders = ref(
     Array.from({length:103},(value,x) => ({
@@ -129,9 +155,19 @@
       shipmentDate: '2025-03-01', 
       pickupMethod: '全家取貨', 
       shipmentStatus: x % 3 === 0 ? '未寄出' : '已寄出',
-      shippingCarrier: x % 2 ===0 || x % 5 === 0 ? '黑貓' : '店到店'
+      shippingCarrier: x % 2 ===0 || x % 5 === 0 ? '黑貓' : '店到店',
+      mailDeadline: "2025-04-05",
+      realMailDate: "",
+      mailer:"NightMonkey",
+      lastUpdate: "2025-2-28"
     }))
   );
+
+  const shipmentInputValue =ref("");
+  const realMailinputValue = ref(new Date (2025,1,23).toISOString().split('T')[0]);
+  const carrierInputValue =ref("");
+  const mailerInputValue =ref("NightMonkey");
+
 
   const {
         filterData,
@@ -150,6 +186,22 @@
         thisData,
         popUpToggle,
     } = useBackend(orders, 'orderId', 'shipmentStatus', '未寄出');
+
+    // 下拉式選單
+    const shipmentStatusOption = ref([
+      {name:"已寄出"},
+      {name:"未寄出"}
+    ]);
+
+    watch(isPopUp, (newValue) => {
+      if(newValue && thisData.value){
+        shipmentInputValue.value = thisData.value.shipmentStatus;
+        carrierInputValue.value = thisData.value.shippingCarrier;
+        mailerInputValue.value = thisData.value.mailer;
+      }
+    });
+
+    // const 
 
 </script>
 

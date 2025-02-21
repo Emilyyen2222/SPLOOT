@@ -11,8 +11,8 @@
         <th>方案</th>
         <th>週期</th>
         <th>每月價錢</th>
+        <th>總金額</th>
         <th>訂閱人數</th>
-        <th>內容</th>
         <th>最後更新</th>
         <th></th>
       </thead>
@@ -21,16 +21,16 @@
           <td>{{ data.planName }}</td>
           <td>{{ data.planCycle }}</td>
           <td>{{ data.planPrice }}</td>
+          <td>{{ data.planPrice * data.planCycle }}</td>
           <td>{{ data.Subscribers }}</td>
-          <td>{{ data.content }}</td>
           <td>{{ data.lastUpdate }}</td>
           <td><Btn btnStyle="outline small" @click="popUpToggle(index)">查看與編輯</Btn></td>
         </tr>
       </tbody>
     </table>
 
-    <!-- <div class="pagesContainer">
-      <div class="pageBtn preBtn">
+    <div class="pagesContainer">
+      <!-- <div class="pageBtn preBtn">
         <Btn btnStyle="small primary" @click="prePage"><</Btn>      
       </div>
       <div class="pageBtn" 
@@ -43,8 +43,8 @@
       </div>
       <div class="pageBtn nextBtn">
         <Btn btnStyle="small primary" @click="nextPage">></Btn>      
-      </div>
-    </div> -->
+      </div> -->
+    </div>
   </div>
 
   <PopUp
@@ -56,35 +56,14 @@
         <div class="leftItem">
           <p class="item">方案：</p>
           <p class="item">每月價錢：</p>
-          <p class="item">大型犬內容：</p>
-          <p class="item">中型犬內容：</p>
-          <p class="item">小型犬內容：</p>
         </div>
         <div class="rightItem">
-          <p class="item">{{ thisData.planName }} - {{ thisData.planCycle }}</p>
+          <p class="item">{{ thisData.planName }} - {{ thisData.planCycle }}個月</p>
           <InputText
           size="small"
           textAlign="textLeft"
           placeHolder=""
           v-model="priceInputValue"
-          ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="LargeInputValue"
-          ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="middleInputValue"
-          ></InputText>
-          <InputText
-          size="small"
-          textAlign="textLeft"
-          placeHolder=""
-          v-model="smallInputValue"
           ></InputText>
         </div>
       </div>
@@ -95,19 +74,19 @@
           <p class="item">最後更新：</p>
         </div>
         <div class="rightItem">
-          <p class="item">99</p>
+          <p class="item">{{ thisData.Subscribers }}</p>
           <InputText
           size="small"
           textAlign="textLeft"
           placeHolder=""
           v-model="updaterInputValue"
           ></InputText>
-          <p class="item">2025-2-14</p>
+          <p class="item">{{ thisData.lastUpdate }}</p>
         </div>
       </div>
     </div>
     <div class="popBtnBox">
-      <Btn btnStyle="primary small" @click="popUpToggle">儲存</Btn>
+      <Btn btnStyle="primary small" @click="updatePrice">儲存</Btn>
       <Btn btnStyle="outline small" @click="popUpToggle">關閉</Btn>
     </div>
   </div>
@@ -117,7 +96,7 @@
 </template>
 
 <script setup>
-  import {computed, ref} from "vue";
+  import {computed, ref, watch} from "vue";
   import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
@@ -127,38 +106,23 @@
 
   const plans = ref([
     // 銀卡
-    { planName: "銀卡", planCycle: "3個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
-    { planName: "銀卡", planCycle: "6個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
-    { planName: "銀卡", planCycle: "12個月", planPrice: 799, Subscribers: 100, content: "玩具 2 個, 零食 2 包", lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 1, planPrice: 799, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 3, planPrice: 699, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 6, planPrice: 629, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "銀卡", planCycle: 12, planPrice: 594, Subscribers: 100, lastUpdate: "2025-2-28" },
 
     // 金卡
-    { planName: "金卡", planCycle: "3個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
-    { planName: "金卡", planCycle: "6個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
-    { planName: "金卡", planCycle: "12個月", planPrice: 999, Subscribers: 100, content: "玩具 2 個, 零食 5 包", lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 1, planPrice: 999, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 3, planPrice: 899, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 6, planPrice: 809, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "金卡", planCycle: 12, planPrice: 764, Subscribers: 100, lastUpdate: "2025-2-28" },
 
     // 白金卡
-    { planName: "白金卡", planCycle: "3個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
-    { planName: "白金卡", planCycle: "6個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
-    { planName: "白金卡", planCycle: "12個月", planPrice: 1299, Subscribers: 100, content: "玩具 5 個, 零食 7 包", lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 1, planPrice: 1299, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 3, planPrice: 1199, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 6, planPrice: 1079, Subscribers: 100, lastUpdate: "2025-2-28" },
+    { planName: "白金卡", planCycle: 12, planPrice: 1019, Subscribers: 100, lastUpdate: "2025-2-28" },
   ]);
-
-  // v-modle
-  const priceInputValue = computed(() => {
-    return thisData.value ? thisData.value.planPrice : "";
-  });
-  const LargeInputValue = computed(() => {
-    return thisData.value ? thisData.value.content : "";
-  });
-  const middleInputValue = computed(() => {
-    return thisData.value ? thisData.value.content : "";
-  });
-  const smallInputValue = computed(() => {
-    return thisData.value ? thisData.value.content : "";
-  });
-
-  const updaterInputValue = ref("NightMonkey");
-
-
 
   const {
         filterData,
@@ -177,6 +141,40 @@
         thisData,
         popUpToggle,
   } = useBackend(plans); 
+
+  const updaterInputValue = ref("NightMonkey");
+
+  const priceInputValue =ref(0);
+
+  watch(isPopUp, (newValue) => {
+    if(newValue && thisData.value){
+      priceInputValue.value = thisData.value.planPrice;
+    }
+  });
+
+  const updatePrice = () => {
+    if(!thisData.value || isNaN(priceInputValue.value)){
+       alert(`${priceInputValue.value}不是數字`) 
+      }else{
+        // 找thisData這筆資料位於原始資料的索引
+        const planIndex = plans.value.findIndex(
+          (plan) => plan.planName === thisData.value.planName && plan.planCycle === thisData.value.planCycle);
+  
+          plans.value[planIndex].planPrice = priceInputValue.value;
+
+          const now = new Date();
+          now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+          plans.value[planIndex].lastUpdate = now.toISOString().split('T')[0];
+
+          popUpToggle();
+      }
+  };
+  
+  
+  
+  
+
+
 
 
 </script>

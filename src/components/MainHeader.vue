@@ -19,10 +19,12 @@
                     { name: '尋找小幫手', link: '/sploot-buddy' },
                     { name: '毛孩日曆', link: '/sploot-event' },
                     { name: '友善設施', link: '/sploot-pet-friendly' },
-                    // { name: '友善設施', link: '/backend/member' },
+                    // { name: '後台', link: '/backend/member' },
                 ]" :key="index">
 
-                    <RouterLink :to="item.link" @click="isNavFocus = false"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
+                    <!-- <RouterLink :to="item.link">{{ item.name }}</RouterLink> -->
+                    <a v-if="item.link == '/petInfoCard' && !authBoxStore.isLoggedIn" @click="authBoxStore.toggleAuthBox"><Btn btnStyle="default text">{{ item.name }}</Btn></a>
+                    <RouterLink v-else :to="item.link" @click="isNavFocus = false"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
                 </li>
                 <li v-if="authBoxStore.isLoggedIn" class="memberCenter">
                     <RouterLink to="/member-center">
@@ -33,7 +35,9 @@
             </ul>
             <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn>
             <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox navSideBox">
+                <RouterLink to="/">
                 <Btn btnStyle="text default" @click="logOutPhp">登出</Btn>
+            </RouterLink>
                 <RouterLink to="/member-center">
                     <img class="memberLogo" :src="memberLogo" alt="memberLogo">
                 </RouterLink>
@@ -161,6 +165,8 @@ onBeforeMount(()=>{
         getUserPortraitPhp();
     }
 })
+
+
 // http://localhost/tid103/g3/php/checkLogin.php
 // https://tibamef2e.com/tid103/g3/php/checkLogin.php
 
@@ -187,4 +193,26 @@ onBeforeMount(()=>{
 // console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
 // console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
 
+ // **認識新毛友判斷**
+        const meetFuriendsClick = () => {
+            if(isLogin.value){
+
+            }else {
+                
+            }
+                if (!hasPetCard.value) {
+                // **如果沒有寵物卡，彈出建立寵物卡的燈箱**
+                CreatePetCard.isPopUp.value = true;
+            } else if (!hasFilledMatchForm.value) {
+                // **如果有寵物卡但還沒填寫配對問卷，則跳轉到問卷**
+                router.push("/match");
+                // <RouterLink to="/match" style="cursor: pointer;">
+                //     <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">前往配對問卷</Btn> 
+                // </RouterLink>
+            } else {
+                // **如果已填寫問卷，則直接跳到配對頁**
+                router.push("/match/matchCard");
+            }
+            
+        };
 </script>

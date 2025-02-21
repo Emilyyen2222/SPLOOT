@@ -12,6 +12,7 @@
       </div>
       <div class="searchBar">
         <InputText
+        @keyup.enter="dataFilter"
         size="small"
         textAlign="textLeft"
         placeHolder="以 ID 查詢"
@@ -39,7 +40,8 @@
             <DropdownMenu class="dropdownInput"
               :placeHolder="data.photoReview"
               :options="photoReview"
-              v-model="reviewStatus">
+              v-model="data.photoReview"
+              @change="updateReview(data)">
             </DropdownMenu>
           </td>
           <td class="forImg">{{ data.creationTime }}</td>
@@ -90,7 +92,7 @@
   );
 
   const {
-        filterData,
+    filterData,
         currentPage,
         perPage,
         totalPages,
@@ -102,6 +104,9 @@
         isPending, //審核專用
         inputValue,
         dataFilter,
+        isPopUp,
+        thisData,
+        popUpToggle,
     } = useBackend(cardVerifications, 'memberId', 'photoReview', '待審核');  
 
     const photoReview =ref([
@@ -109,8 +114,13 @@
       {name:'未通過'},
     ]);
 
-    // 審核雙向綁定
-    const reviewStatus = ref('');
+
+    const updateReview = () => {
+      const cardVerificationIndex = cardVerifications.value.findIndex(
+        cardVerification => cardVerification.memberId == thisData.memberId
+      )
+      cardVerifications.value[cardVerificationIndex].photoReview = reviewStatus.value;
+    };
 
 </script>
 

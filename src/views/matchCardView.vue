@@ -303,7 +303,7 @@
         {
             owner: 'Emily',
             pets: [
-                { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的金毛，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male', events: ['2/10公園晨跑', '2/22湖邊遊玩'] },
+                { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的薩摩耶，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male', events: ['2/10公園晨跑', '2/22湖邊遊玩'] },
                 { label: 'card5', name: 'Bella', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '02', distance: 7, tags: ['貴賓犬', '聰明', '喜歡散步'], description: 'Bella 是一隻聰明的貴賓犬，會很多小技巧，還是個愛散步的小天使！', gender: 'Female', events: ['2/15花園玩耍', '3/1跑步比賽'] },
                 { label: 'card7', name: 'Charlie', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '03', distance: 3, tags: ['拉布拉多', '熱心', '愛啃骨頭'], description: 'Charlie 喜歡和人玩，對每個人都很熱心，最愛啃骨頭。', gender: 'Male', events: ['12/12碧潭野餐', '2/24迎風狗公園聚會'] }
             ],
@@ -424,7 +424,7 @@
             {
                 owner: 'Emily',
                 pets: [
-                    { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['金毛尋回犬', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的金毛，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male' },
+                    { label: 'card4', name: 'Max', imageSrc: new URL('../assets/img/match/Samoyed.avif', import.meta.url).href, number: '01', distance: 5, tags: ['薩摩耶', '溫順', '喜歡游泳'], description: 'Max 是一隻愛水的薩摩耶，喜歡在湖邊玩耍，是個很好的夥伴！', gender: 'Male' },
                     { label: 'card5', name: 'Bella', imageSrc: new URL('../assets/img/match/goldenDog.avif', import.meta.url).href, number: '02', distance: 7, tags: ['貴賓犬', '聰明', '喜歡散步'], description: 'Bella 是一隻聰明的貴賓犬，會很多小技巧，還是個愛散步的小天使！', gender: 'Female' },
                     { label: 'card7', name: 'Charlie', imageSrc: new URL('../assets/img/match/dog5.avif', import.meta.url).href, number: '03', distance: 3, tags: ['拉布拉多', '熱心', '愛啃骨頭'], description: 'Charlie 喜歡和人玩，對每個人都很熱心，最愛啃骨頭。', gender: 'Male' }
                 ],
