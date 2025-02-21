@@ -34,7 +34,7 @@
     
                     <div class="bi-inbox">
                       <div class="label">姓名</div>
-                      <div>{{ inputs.input_firstName.inputValue + inputs.input_lastName.inputValue }}</div>
+                      <div>{{ inputs.input_firstName.inputValue + " " + inputs.input_lastName.inputValue }}</div>
                     </div>
                     <div class="bi-inbox">
                       <div class="label">暱稱</div>
@@ -253,7 +253,7 @@
                         <div class="group-pwd">
                           <div class="inputSetBox">
                             <!-- 眼睛切換顯示與否 -->
-                            <p v-if="isPwdVisible">{{ member.pwd }}</p>
+                            <p v-if="isPwdVisible">{{ memberPwd }}</p>
                             <p v-else>{{ '******' }}</p>
                           </div>
                           <Btn btnStyle="baseline small" @click="togglePopUp_resetPwd">變更密碼</Btn>                          
@@ -419,11 +419,21 @@
     
                 </div>
                 <!-- 3 輸入新密碼 -->
-                <div v-if="step ==3" class="mc-update-verify">
+                <!-- <div v-if="step ==3" class="mc-update-verify"> -->
+                <div class="mc-update-verify">
     
                   <h5 class="bold">重設密碼</h5>              
     
                   <label>
+                    <!-- <InputText 
+                    v-model="inputs.input_oldPwd.inputValue"
+                      :placeHolder="inputs.input_oldPwd.placeHolder"
+                      :size="inputs.input_oldPwd.size"
+                      :textAlign="inputs.input_oldPwd.textAlign"
+                      :errorMsg="inputs.input_oldPwd.errorMsg"
+                      :hasError="inputs.input_oldPwd.hasError"
+                      required>
+                    </InputText> -->
                     <InputText 
                     v-model="inputs.input_newPwd.inputValue"
                       :placeHolder="inputs.input_newPwd.placeHolder"
@@ -444,13 +454,8 @@
                       :hasError="inputs.input_newPwd2.hasError"
                       required>
                     </InputText>
-                  </label>              
-    
-                  <label class="resetPwdAgree">
-                    <input type="checkbox" name="agree" v-model="resetPwdAgree">
-                    <p>我已閱讀並同意使用者政策和我們的隱私權政策。</p>
                   </label>
-    
+                     
                   <Btn btnStyle="primary default" @click="nextStep()">進行重設</Btn>
     
                 </div>
@@ -527,6 +532,7 @@ import openedEye from '@/assets/img/icon/login/openedEye.svg'
 import closedEye from '@/assets/img/icon/login/closedEye.svg' 
 
 // const
+const memberIsLogin = ref(false)
   //input
     // 使用物件來統一管理所有輸入框的狀態
   const inputs = reactive({
@@ -542,6 +548,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
     // 變更密碼 SOP
     input_vEmail: { placeHolder: '輸入信箱' ,inputValue : ref('')},
     input_vCode: { placeHolder: '輸入驗證碼',inputValue : ref('') },
+    input_oldPwd: { placeHolder: '輸入舊密碼',inputValue : ref('') },
     input_newPwd: { placeHolder: '輸入新密碼',inputValue : ref('') },
     input_newPwd2: { placeHolder: '確認新密碼',inputValue : ref('') }
   });
@@ -677,6 +684,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
   const selectedSex = ref('');
   // 帳戶/號(信箱)
   const memberEmail = ref('');
+  const memberPwd = ref('');
   const member = reactive({
     email : 'hao@gmail.com',   // 暫時寫死
     pwd: '12345'
@@ -789,6 +797,11 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
 
 // function
+// const memberIsLogin = computed(()=>{
+//   if(user_id){
+//     redirectHome();
+//   }
+// })
   // 監聽input的內容，驗證
     // 手機
       // 檢查格式  
@@ -910,35 +923,30 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
       });
 
       // 變更密碼的彈窗      
-        const emailInputValue = computed(() => inputs.input_vEmail.inputValue);
-
-          // 驗證 Email 格式
-          const varifyEmail = (email) => {
-          email = email.trim().replace(/\s/g, '');
-          // console.log("驗證 Email:", email);
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return emailPattern.test(email);
-        };
-
-        const nextStep = () => {
-          if (step.value === 1) {
-            if (!inputs.input_vEmail.inputValue) {
-              alert("請輸入電子郵件");
-              console.log("錯誤的輸入值:",inputs.input_vEmail.inputValue)
-              console.log("Email 未輸入");
+          const nextStep = () => {
+          // if (step.value === 1) {
+          //   if (!inputs.input_vEmail.inputValue) {
+          //     alert("請輸入電子郵件");
+          //     console.log("錯誤的輸入值:",inputs.input_vEmail.inputValue)
+          //     console.log("Email 未輸入");
+          //     return;
+          //   }
+          // }else if (step.value === 2) {
+          //   if (!inputs.input_vCode.inputValue) {
+          //     alert("請輸入驗證碼");
+          //     console.log("驗證碼未輸入");
+          //     return;
+          //   }
+          // }
+           if (step.value === 3) {
+            // 檢查舊密碼
+            if( !inputs.input_oldPwd.inputValue || inputs.input_oldPwd.inputValue != memberPwd){
+              alert("請輸入原本的密碼")
               return;
             }
-          }else if (step.value === 2) {
-            if (!inputs.input_vCode.inputValue) {
-              alert("請輸入驗證碼");
-              console.log("驗證碼未輸入");
-              return;
-            }
-          }else if (step.value === 3) {
             // 檢查 新密碼&確認密碼
-            if (!inputs.input_newPwd.inputValue || !inputs.input_newPwd2.inputValue) {
+            if ( !inputs.input_oldPwd.inputValue || !inputs.input_newPwd.inputValue || !inputs.input_newPwd2.inputValue) {
               alert("請輸入密碼");
-              console.log("新密碼未輸入");
               return;
             }else{
               rePwd1.value=true;
@@ -1006,7 +1014,8 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg'
 
         try{
           const memberInfo = await resp.json();
-          memberEmail.value = memberInfo['email']
+          memberEmail.value = memberInfo['email'];
+          memberPwd.value = memberInfo['password'];
 
           inputs.input_firstName.inputValue = memberInfo['firstName'];
           inputs.input_lastName.inputValue = memberInfo['lastName'];

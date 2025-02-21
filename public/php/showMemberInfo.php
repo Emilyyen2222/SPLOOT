@@ -40,6 +40,7 @@ if ($user){
   $response = [
     'status' => 'success',
     'email' => $user['email'],
+    'password' => $user['password'],
     'firstName' => $user['firstName'],
     'lastName' => $user['lastName'],
     'nickname' => $user['nickname'],
