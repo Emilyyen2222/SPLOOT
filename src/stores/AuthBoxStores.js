@@ -6,7 +6,7 @@ import closedEye from '@/assets/img/icon/login/closedEye.svg';
 
 export const useAuthStores = defineStore('auth',() => {
 
-    const isLoggedIn = ref(true);
+    const isLoggedIn = ref(false);
     
     const authType = ref('login');
     const isAuthBox = ref(false);
@@ -61,12 +61,6 @@ export const useAuthStores = defineStore('auth',() => {
 
     const isLightBoxPolicy = ref(false);
     const isLightBoxPrivacy = ref(false);
-
-    //是否有寵物卡
-    const hasPetCard = ref(false);
-
-    //是否填過配對問卷
-    const hasMatchQuestion = ref(false);
 
     function toggleAuthBox() {
         isAuthBox.value = !isAuthBox.value;  // 切換開關
