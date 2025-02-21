@@ -22,7 +22,8 @@
                 ]" :key="index">
 
                     <!-- <RouterLink :to="item.link">{{ item.name }}</RouterLink> -->
-                    <RouterLink :to="item.link"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
+                    <a v-if="item.link == '/petInfoCard' && !authBoxStore.isLoggedIn" @click="authBoxStore.toggleAuthBox"><Btn btnStyle="default text">{{ item.name }}</Btn></a>
+                    <RouterLink v-else :to="item.link" @click="isNavFocus = false"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
                 </li>
                 <li v-if="authBoxStore.isLoggedIn" class="memberCenter">
                     <RouterLink to="/member-center">
@@ -191,4 +192,26 @@ onBeforeMount(()=>{
 // console.log("%c" + "這個東西好好玩", "color: #D14535; font-size: 80px; font-weight: bold;");
 // console.log("%c" + "到此一遊", "color: #00000; font-size: 60px; font-weight: bold;");
 
+ // **認識新毛友判斷**
+        const meetFuriendsClick = () => {
+            if(isLogin.value){
+
+            }else {
+                
+            }
+                if (!hasPetCard.value) {
+                // **如果沒有寵物卡，彈出建立寵物卡的燈箱**
+                CreatePetCard.isPopUp.value = true;
+            } else if (!hasFilledMatchForm.value) {
+                // **如果有寵物卡但還沒填寫配對問卷，則跳轉到問卷**
+                router.push("/match");
+                // <RouterLink to="/match" style="cursor: pointer;">
+                //     <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">前往配對問卷</Btn> 
+                // </RouterLink>
+            } else {
+                // **如果已填寫問卷，則直接跳到配對頁**
+                router.push("/match/matchCard");
+            }
+            
+        };
 </script>

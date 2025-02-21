@@ -2,26 +2,35 @@
     <!-- <MainHeader theme="red" bgc=""></MainHeader> -->
     
 <!-- 請先建立寵物卡 -->
-<PopUp
-    :is-pop-up="CreatePetCard.isPopUp.value"
+<PopUp    
+    :is-pop-up="isLightBoxPet"
     @toggle="meetFuriendsClick">
-    <!-- <P class="bold" style="margin-bottom: 2.4rem;">請先建立寵物卡</P> -->
-    <RouterLink to="/member-center/petcard" style="cursor: pointer;">
-        <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">建立寵物卡</Btn> 
-    </RouterLink>
-    
-    <RouterLink to="/match" style="cursor: pointer;">
-        <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;" class="toMatchQuestion">前往配對問卷</Btn> 
-    </RouterLink>
-
-    <RouterLink to="/match/matchCard" style="cursor: pointer;">
-        <Btn btnType="form" btnStyle="nextQ">開始配對</Btn> 
-    </RouterLink>
+    <div
+    v-if="!hasPetCard"
+     class="hasPetCard">
+        <P class="bold" style="margin-bottom: 2.4rem;">請先建立寵物卡</P>
+        <RouterLink to="/member-center/petcard" style="cursor: pointer;">
+            <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">確認</Btn> 
+        </RouterLink>
+    </div>
+    <div
+    v-if="hasPetCard && !hasMatch"
+    class="hasMatch">
+        <P class="bold" style="margin-bottom: 2.4rem;">請前往配對問卷</P>
+        <RouterLink to="/match" style="cursor: pointer;">
+            <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;" class="toMatchQuestion">確認</Btn> 
+        </RouterLink>
+    </div>
+    <div
+    v-if="hasPetCard && hasMatch"
+     class="hasMatchCard">
+        <P class="bold" style="margin-bottom: 2.4rem;">請前往配對頁面</P>
+        <RouterLink to="/match/matchCard" style="cursor: pointer;">
+            <Btn btnType="form" btnStyle="nextQ">開始配對</Btn> 
+        </RouterLink>
+    </div>
 </PopUp>
 
-<!-- 寵物資訊卡 -->
-<!-- <button @click="toggleLightBoxPetInfo('dog')">狗狗資訊卡</button>
-<button @click="toggleLightBoxPetInfo('cat')">貓貓資訊卡</button> -->
 
 <!-- <LightBox 
     :title="lightTitlePetInfo.title"
@@ -345,33 +354,57 @@
         import MainHeader from "../components/MainHeader.vue";
         import Btn from '../components/Btn.vue';
         import { ref, computed } from 'vue'
-        import LightBox from "@/components/LightBox.vue";
         import PopUp from "@/components/PopUp.vue";
 
         import { useRouter } from "vue-router";
-        const router = useRouter();
+        // const router = useRouter();
+
+
+        const hasPetCard = ref(true);
+        const hasMatch = ref(false);
+        const isLightBoxPet = ref(true);
+
+        // 
+        // const showPopUpType = computed(() => {
+        // if (!hasPetCard.value) return "petCard";
+        // if (!hasMatch.value) return "match";
+        // if (!hasMatchCard.value) return "matchCard";
+        // return null;
+        // });
+
+        // const meetFuriendsClick = () => {
+        // if (showPopUpType.value === "petCard") {
+        //     isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
+        // } else if (showPopUpType.value === "match") {
+        //     isLightBoxMatch.value = !isLightBoxMatch.value;
+        // } else if (showPopUpType.value === "matchCard") {
+        //     isLightBoxMatchCard.value = !isLightBoxMatchCard.value;
+        // }
+        // };
+
 
         // 是否已建立寵物卡
-        const hasPetCard = ref(false); 
+        // const hasPetCard = ref(false); 
         // 是否已填寫過配對問卷
-        const hasFilledMatchForm = ref(false); 
+        // const hasFilledMatchForm = ref(false); 
 
         // **認識新毛友判斷**
-        const meetFuriendsClick = () => {
-        if (!hasPetCard.value) {
-            // **如果沒有寵物卡，彈出建立寵物卡的燈箱**
-            CreatePetCard.isPopUp.value = true;
-        } else if (!hasFilledMatchForm.value) {
-            // **如果有寵物卡但還沒填寫配對問卷，則跳轉到問卷**
-            router.push("/match");
-            // <RouterLink to="/match" style="cursor: pointer;">
-            //     <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">前往配對問卷</Btn> 
-            // </RouterLink>
-        } else {
-            // **如果已填寫問卷，則直接跳到配對頁**
-            router.push("/match/matchCard");
-        }
-        };
+        // const meetFuriendsClick = () => {
+        //         if (!hasPetCard.value) {
+                // **如果沒有寵物卡，彈出建立寵物卡的燈箱**
+            //     CreatePetCard.isPopUp.value = true;
+            // } else if (!hasFilledMatchForm.value) {
+                // **如果有寵物卡但還沒填寫配對問卷，則跳轉到問卷**
+                // router.push("/match");
+                // <RouterLink to="/match" style="cursor: pointer;">
+                //     <Btn btnType="form" btnStyle="nextQ" style="margin-bottom: 1.2rem;">前往配對問卷</Btn> 
+                // </RouterLink>
+            // } else {
+                // **如果已填寫問卷，則直接跳到配對頁**
+        //         router.push("/match/matchCard");
+        //     }
+            
+        // };
 
         // popup 請先建立寵物卡
         const CreatePetCard = { isPopUp : ref (true)  };
