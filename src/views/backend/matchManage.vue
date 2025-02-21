@@ -27,15 +27,15 @@
         <th>配對時間</th>
       </thead>
       <tbody>        
-        <tr v-for="data in viewData" :key="data.matchId">
-          <td>{{ data.matchId }}</td>
-          <td>{{ data.memberId }}</td>
-          <td>{{ data.memberName}}</td>
-          <td>{{ data.matchedMemberID }}</td>
-          <td>{{ data.matchedMemberName }}</td>
-          <td>{{ data.matchSelected }}</td>
-          <td>{{ data.matchStatus }}</td>
-          <td>{{ data.matchTimes }}</td>
+        <tr v-for="(match, index) in viewData" :key="index">
+          <td>{{ match.match_id }}</td>
+          <td>{{ match.user_id }}</td>
+          <td>{{ match.userName }}</td>
+          <td>{{ match.matcher_id }}</td>
+          <td>{{ match.matcherName }}</td>
+          <td>{{ match.match_choice }}</td>
+          <td>{{ match.match_status }}</td>
+          <td>{{ new Date(match.created_date).toISOString().split('T')[0] }}</td>
         </tr>
       </tbody>
     </table>
@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+  import {ref, onBeforeMount} from "vue";
   import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
@@ -80,6 +80,8 @@
     }))
   );
 
+  const matches = ref([]);
+
   const {
         filterData,
         currentPage,
@@ -93,8 +95,30 @@
         isPending, //審核專用
         inputValue,
         dataFilter,
-    } = useBackend(matchs, 'matchId'); 
+    } = useBackend(matches, 'match_id'); 
 
+  async function findAllMatchesPhp() {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/backend/findAllMatches.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    try{
+      const matchInfo = await resp.json();
+        if(matchInfo.status == 'success'){
+          const matchData = matchInfo.data;
+          matches.value = matchData;
+        }
+    } catch (error){
+      console.error('Error parsing JSON:', error);
+    }
+  }
+
+  onBeforeMount(() => {
+    findAllMatchesPhp();
+  })
 </script>
 
 <style lang="scss">

@@ -27,7 +27,7 @@
         <th></th>
       </thead>
       <tbody>        
-        <tr v-for="(data, index) in viewData" :key="data.memberId">
+        <!-- <tr v-for="(data, index) in viewData" :key="data.memberId">
           <td>{{ data.memberId }}</td>
           <td>{{ data.memberName }}</td>
           <td>{{ data.email }}</td>
@@ -35,6 +35,16 @@
           <td>{{ data.splootBoxSub }}</td>
           <td>{{ data.helperPost }}</td>
           <td>{{ data.accountStatus }}</td>
+          <td><Btn btnStyle="outline small" @click="popUpToggle(index)">查看與編輯</Btn></td>
+        </tr> -->
+        <tr v-for="(user, index) in viewData" :key="user.user_id">
+          <td>{{ user.user_id }}</td>
+          <td>{{ user.last_name + user.first_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.pets.length }}</td>
+          <td>{{ user.subs.length }}</td>
+          <td>{{ user.buddy.posts.length }}</td>
+          <td>{{ user.account_status == 1 ? '正常' : '已停用' }}</td>
           <td><Btn btnStyle="outline small" @click="popUpToggle(index)">查看與編輯</Btn></td>
         </tr>
       </tbody>
@@ -85,15 +95,15 @@
           <p class="item">LINE：</p>
         </div>
         <div class="rightItem">
-          <p class="item">{{ thisData.memberId }}</p>
-          <p class="item">海綿寶寶方褲褲</p>
-          <p class="item">{{ thisData.memberName }}</p>
-          <p class="item">男生</p>
+          <p class="item">{{ thisData.user_id }}</p>
+          <p class="item">{{ thisData.last_name + thisData.first_name }}</p>
+          <p class="item">{{ thisData.nickname }}</p>
+          <p class="item">{{ thisData.gender }}</p>
+          <p class="item">{{ thisData.birthDate }}</p>
           <p class="item">{{ thisData.email }}</p>
-          <p class="item">1896-07-14</p>
-          <p class="item">0900000000</p>
-          <p class="item">比奇堡貝殼街 124 號</p>
-          <p class="item">squarepants</p>
+          <p class="item">{{ thisData.phone }}</p>
+          <p class="item">{{ thisData.address_city + thisData.address_district + thisData.address_street}}</p>
+          <p class="item">{{ thisData.line_id}}</p>
         </div>
       </div>
       <div class="rightContent">
@@ -102,31 +112,35 @@
           <p class="item">寵物數量：</p>
           <p class="item">寵物訂閱盒數量：</p>
           <p class="item">小幫手貼文數量：</p>
+          <p class="item">更新者：</p>
+          <p class="item">最後更新時間：</p>
           <p class="item">帳號創建時間：</p>
         </div>
         <div class="rightItem">
           <p class="item">
             <DropdownMenu class="dropdownInput"
-              :placeHolder="thisData.accountStatus"
+              :placeHolder="thisData.account_status == 1 ? '正常' : '已停用'"
               :options="accountType"
               v-model="accountEditData">
             </DropdownMenu>
           </p>
-          <p class="item">{{ thisData.petNumber }}</p>
-          <p class="item">{{ thisData.splootBoxSub }}</p>
-          <p class="item">{{ thisData.helperPost }}</p>
-          <p class="item">1897-01-01</p>
+          <p class="item">{{ thisData.pets.length }}</p>
+          <p class="item">{{ thisData.subs.length }}</p>
+          <p class="item">{{ thisData.buddy.posts.length }}</p>
+          <p class="item">{{ thisData.updater }}</p>
+          <p class="item">{{ new Date(thisData.last_updated_date).toISOString().split('T')[0] }}</p>
+          <p class="item">{{ new Date(thisData.created_date).toISOString().split('T')[0]}}</p>
         </div>
       </div>
     </div>
     <!-- 寵物資訊 -->
      <div class="petDetail content" v-if="selectedNav === '寵物資訊'">
       <div class="top">
-        <p>寵物數量：{{ thisData.petNumber }}</p>
+        <p>寵物數量：{{ thisData.pets.length }}</p>
       </div>
       <div class="bottom">
         <ul class="petDetailCards">
-          <li class="petDetailCard" v-for ="(card, index) in 4" :key="index">
+          <li class="petDetailCard" v-for ="(pet, index) in thisData.pets" :key="index">
             <div class="petCounts">
               <p class="count">{{ index+1 }}</p>
             </div>
@@ -134,18 +148,18 @@
               <div class="leftItem">
                 <p class="item">寵物ID：</p>
                 <p class="item">名稱：</p>
-                <p class="item"><br></p>
                 <p class="item">性別：</p>
-                <p class="item">年齡：</p>
+                <p class="item">品種：</p>
+                <p class="item">生日：</p>
                 <p class="item">毛孩介紹：</p>
               </div>
               <div class="rightItem">
-                <p class="item">00{{ index+1 }}</p>
-                <p class="item">歐西里斯</p>
-                <p class="item"><br></p>
-                <p class="item">女生</p>
-                <p class="item">6</p>
-                <p class="item">全名為歐西里斯的天空龍的挪威森林貓，他很黏人吧?</p>
+                <p class="item">{{ pet.pet_id }}</p>
+                <p class="item">{{ pet.name}}</p>
+                <p class="item">{{ pet.gender }}</p>
+                <p class="item">{{ pet.breed }}</p>
+                <p class="item">{{ pet.birth_date }}</p>
+                <p class="item">{{ pet.description}}</p>
               </div>
             </div>
             <div class="rightContent">
@@ -156,10 +170,10 @@
                 <p class="item">創建時間：</p>
               </div>
               <div class="rightItem">
-                <p class="item">親貓親人,小孩友善</p>
-                <p class="item">已結紮</p>
-                <p class="item">喜歡發呆,喜歡玩球</p>
-                <p class="item">2024-09-09</p>
+                <p class="item">{{ pet.petSocial }}</p>
+                <p class="item">{{ pet.neutured}}</p>
+                <p class="item">{{ pet.petHobby}}</p>
+                <p class="item">{{ new Date(pet.created_date).toISOString().split('T')[0] }}</p>
               </div>
             </div>
           </li>
@@ -169,11 +183,11 @@
     <!-- 寵物盒訂閱資訊 -->
      <div class="splootBoxDetail content" v-if="selectedNav === '寵物盒訂閱資訊'">
       <div class="top">
-        <p>寵物盒訂閱數量：{{ thisData.splootBoxSub }}</p>
+        <p>寵物盒訂閱數量：{{ thisData.subs.length }}</p>
       </div>
       <div class="bottom">
         <ul class="splootBoxDetailCards">
-          <li class="splootBoxDetailCard" v-for ="(card, index) in 3" :key="index">
+          <li class="splootBoxDetailCard" v-for ="(sub, index) in thisData.subs" :key="index">
             <div class="petCounts">
               <p class="count">{{ index+1 }}</p>
             </div>
@@ -182,17 +196,11 @@
                 <p class="item">訂閱ID：</p>
                 <p class="item">方案：</p>
                 <p class="item">寄送地址：</p>
-                <p class="item"><br></p>
-                <p class="item">取貨方式：</p>
-                <p class="item">卡片內容：</p>
-                <p class="item"><br></p>
               </div>
               <div class="rightItem">
-                <p class="item">00{{ index+1 }}</p>
-                <p class="item">白金卡（十二個月）</p>
-                <p class="item">台北市中山區南京東路三段219號4樓</p>
-                <p class="item">宅配到家</p>
-                <p class="item">小孩愛吃，已購買</p>
+                <p class="item">{{ sub.sub_id}}</p>
+                <p class="item">{{ `白金卡（十二個月`}}</p>
+                <p class="item">{{ sub.deliver_city + sub.deliver_district + sub.deliver_street}}</p>
               </div>
             </div>
             <div class="rightContent">
@@ -201,7 +209,7 @@
                 <p class="item">結束日期：</p>
               </div>
               <div class="rightItem">
-                <p class="item">2024-12-12</p>
+                <p class="item">{{ new Date(sub.created_date).toISOString().split('T')[0]}}</p>
                 <p class="item">2025-12-05</p>
               </div>
             </div>
@@ -213,13 +221,13 @@
      <div class="buddyDetail content" v-if="selectedNav === '小幫手資訊'">
       <div class="top">
         <p>小幫手認證：待審核</p>
-        <p>小幫手貼文數：{{ thisData.helperPost }}</p>
-        <p>小幫手評分：5.0</p>
-        <p>小幫手評論數：99</p>
+        <p>小幫手貼文數：{{ thisData.buddy.posts.length }}</p>
+        <p>小幫手評分：{{ thisData.buddy.helperCommentRating }}</p>
+        <p>小幫手評論數：{{ thisData.buddy.helperCommentCount }}</p>
       </div>
       <div class="bottom">
         <ul class="splootBoxDetailCards">
-          <li class="splootBoxDetailCard" v-for ="(card, index) in 4" :key="index">
+          <li class="splootBoxDetailCard" v-for ="(post, index) in thisData.buddy.posts" :key="index">
             <div class="petCounts">
               <p class="count">{{ index+1 }}</p>
             </div>
@@ -231,12 +239,10 @@
                 <p class="item">服務時間：</p>
               </div>
               <div class="rightItem">
-                <p class="item">00{{ index+1 }}</p>
-                <p class="item">{{ 
-                index == 0 ? '散步陪伴' : index == 1 ? '到府照顧' : index == 2 ? '友善寄宿' : index == 3 ? '毛孩計程車' : '！錯誤！' 
-                }}</p>
-                <p class="item">台北市,中山區</p>
-                <p class="item">一,二,日</p>
+                <p class="item">{{ post.post_id }}</p>
+                <p class="item">{{ post.service}}</p>
+                <p class="item">{{ `${post.service_city} ${post.service_district}`}}</p>
+                <p class="item">{{ thisData.buddy.helperAcceptDays }}</p>
               </div>
             </div>
             <div class="rightContent">
@@ -247,9 +253,9 @@
                 <p class="item"><br></p>
               </div>
               <div class="rightItem">
-                <p class="item">小型犬, 幼犬, 成貓</p>
-                <p class="item">2025-02-18</p>
-                <p class="item">唉，真沒勁……不過，我會盡量照顧好你的毛孩，我擅長高速散步、高速接送，都交給我。就算覺得好累，還是得做好這些事，反正我能應付。別擔心，牠們會安全的，應該。</p>
+                <p class="item">{{ thisData.buddy.helperAcceptPets }}</p>
+                <p class="item">{{ new Date(post.last_updated_date).toISOString().split('T')[0]}}</p>
+                <p class="item">{{ post.description }}</p>
               </div>
             </div>
           </li>
@@ -268,7 +274,7 @@
 </template>
 
 <script setup>
-  import {ref} from "vue";
+  import {ref, onBeforeMount} from "vue";
   import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
@@ -278,7 +284,7 @@
 
   const members = ref(
     Array.from({length:103},(value,x) => ({
-      memberId: `${x+1}`.padStart(4,'0'), 
+      memberId: `${x+1}`.padStart(3,'0'), 
       memberName: `海綿寶寶${x+1}`,
       email:`tibame${x+1}@tibame.com`, 
       petNumber: 4, 
@@ -287,6 +293,33 @@
       accountStatus: '正常'
     }))
   );
+
+  const members1 = ref([]);
+
+  // const members = ref([
+  //   {
+  //     memberId: '3'.padStart(3,'0'),
+  //     email: 'email',
+  //     memberName: '海綿寶寶',
+  //     nickname: '',
+  //     gender: '',
+  //     birthDate: '',
+  //     lineId: '',
+  //     phone,
+  //     addressCity,
+  //     addressDistrict,
+  //     addressStreet,
+  //     portrait,
+  //     accountStatus: '正常',
+  //     admin,
+  //     updater,
+  //     lastUpdatedDate,
+  //     createdDate,
+  //     pets: [],
+
+      
+  //   }
+  // ]);
 
   const {
         filterData,
@@ -304,7 +337,7 @@
         isPopUp,
         thisData,
         popUpToggle,
-  } = useBackend(members, 'memberId');  
+  } = useBackend(members1, 'user_id');  
 
   //專用函式
   
@@ -332,6 +365,40 @@
     {name:'正常'},
     {name:'已停用'},
   ]);
+
+  async function findAllUsersPhp() {
+    const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/backend/findAllUsers.php`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    try{
+      const memberInfo = await resp.json();
+      if(memberInfo.status == 'success'){
+        const userData = memberInfo.data;
+        
+        for(let user of userData){
+          let birth = new Date(user.birth_date);
+          let birthYear = birth.getFullYear();
+          let birthMonth = birth.getMonth() + 1;
+          let birthDate = birth.getDate();
+
+          user.birthDate = `${birthYear}-${birthMonth}-${birthDate}`
+        }
+        members1.value = userData;
+      }else if(memberInfo.status == 'error'){
+        console.log(memberInfo.message);
+      }
+    } catch (error){
+      console.error('Error parsing JSON:', error);
+    }
+  }
+
+  onBeforeMount(() => {
+    findAllUsersPhp();
+  })
 
 
     
