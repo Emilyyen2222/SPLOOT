@@ -58,7 +58,7 @@ $stmt_insert->bindValue(':birth_date', $birth_date, PDO::PARAM_STR);
 $stmt_insert->bindValue(':size', $size, PDO::PARAM_STR);
 $stmt_insert->bindValue(':neutured', $neutured, PDO::PARAM_STR);
 $stmt_insert->bindValue(':description', $description, PDO::PARAM_STR);
-$stmt_insert->bindValue(':pet_img', base64_decode($pet_img), PDO::PARAM_LOB);
+$stmt_insert->bindValue(':pet_img', $pet_img, PDO::PARAM_STR);
 $stmt_insert->execute();
 
 $pet_id = $pdo->lastInsertId();
