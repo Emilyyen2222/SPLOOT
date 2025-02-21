@@ -1,6 +1,6 @@
 <!-- Sam -->
 <template>
-  <MainHeader :theme="routeMeta" bgc=""></MainHeader>
+  <MainHeader v-if="!routePath.includes('backend')" :theme="routeMeta" bgc=""></MainHeader>
   <RouterView></RouterView>
   <AuthBox />
 </template>
@@ -14,4 +14,5 @@ import MainHeader from '@/components/MainHeader.vue';
 
 const route = useRoute();
 const routeMeta = computed(() => route.meta.theme);
+const routePath = computed(() => route.path);
 </script>

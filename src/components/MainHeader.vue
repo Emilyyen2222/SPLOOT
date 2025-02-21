@@ -12,16 +12,17 @@
                 </RouterLink>
             </div>
             <ul class="headerList" :class="[{ '-navFocus': isNavFocus}, `bg-${props.bgc}` ]">
-                <li class="headerItem" v-for="(item, index) in [
+                <li class="headerItem"
+                v-for="(item, index) in [
                     { name: '認識新毛友', link: '/petInfoCard' },
                     { name: '訂閱寵物盒', link: '/sploot-box' },
                     { name: '尋找小幫手', link: '/sploot-buddy' },
                     { name: '毛孩日曆', link: '/sploot-event' },
                     { name: '友善設施', link: '/sploot-pet-friendly' },
+                    // { name: '友善設施', link: '/backend/member' },
                 ]" :key="index">
 
-                    <!-- <RouterLink :to="item.link">{{ item.name }}</RouterLink> -->
-                    <RouterLink :to="item.link"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
+                    <RouterLink :to="item.link" @click="isNavFocus = false"><Btn btnStyle="default text">{{ item.name }}</Btn></RouterLink>
                 </li>
                 <li v-if="authBoxStore.isLoggedIn" class="memberCenter">
                     <RouterLink to="/member-center">
@@ -30,8 +31,8 @@
                     </RouterLink>
                 </li>
             </ul>
-            <!-- <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn> -->
-            <div v-if="authBoxStore.isLoggedIn == false" class="logOutBox navSideBox">
+            <Btn v-if="authBoxStore.isLoggedIn == false" class="loginBox navSideBox" btnStyle="primary default" @click="authBoxStore.toggleAuthBox">登入</Btn>
+            <div v-if="authBoxStore.isLoggedIn == true" class="logOutBox navSideBox">
                 <Btn btnStyle="text default" @click="logOutPhp">登出</Btn>
                 <RouterLink to="/member-center">
                     <img class="memberLogo" :src="memberLogo" alt="memberLogo">
