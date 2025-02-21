@@ -2,7 +2,7 @@
 @each $theme in $themes {
     body.#{$theme}Theme{
         header{
-            position: fixed;
+            position: sticky;
             top: 0.8rem;
             left:0.8rem;
             right: 0.8rem;
