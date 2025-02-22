@@ -363,6 +363,9 @@
     import DropdownMenu from "@/components/DropdownMenu.vue";
     import PopUp from "@/components/PopUp.vue"
 
+    //官方大頭貼
+    import officialImg from '@/assets/img/header-red.svg';
+
     //登入狀態
     const authBoxStore = useAuthStores();
 
@@ -825,11 +828,9 @@
             const eventResp = await resp.json();
             if(eventResp['status'] == 'success'){
                 const events = eventResp['data'];
-
                 for(let event of events){
                     const startDate = new Date(event['eventStartDate']);
                     const endDate = new Date(event['eventEndDate']);
-
                     // 判斷是否已額滿
                     let status = event['attendStatus'];
                     if (event['currentParticipants'] >= event['capacity']) {
@@ -858,9 +859,9 @@
                             type: event['eventType'],
                             status: event['attendStatus'],
                             organizer: {
-                                avatar: authBoxStore.memberPortrait(event['userPortrait']),
-                                name: event['nameShown'],
-                                line: event['lindId']
+                                avatar: event['eventType'] == 'official' ? officialImg : authBoxStore.memberPortrait(event['userPortrait']),
+                                name: event['eventType'] == 'official' ? 'Sploot 官方' : event['userNameShown'],
+                                line: event['eventType'] == 'official' ? '@SplootOfficial' : event['userLineId']
                             }
                         }
                     );
