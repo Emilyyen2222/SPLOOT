@@ -16,7 +16,8 @@ $sql_select = "
     birth_date as birthDate,
     size,
     neutured,
-    description
+    description,
+    pet_img
   FROM PET
   WHERE pet_status = 1
   AND user_id = :user_id;

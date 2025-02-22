@@ -232,46 +232,6 @@
     //   remaining: 3,
     //   amount: '$1299',
     // },
-    // {
-    //   id: 2,
-    //   name: '小黑',
-    //   subscription: '銀卡 (6個月方案)',
-    //   subscribeDate: '2025/02/05',
-    //   deliveryDate: '每月10日',
-    //   delivered: 2,
-    //   remaining: 4,
-    //   amount: '$2299',
-    // },
-    // {
-    //   id: 3,
-    //   name: '小花',
-    //   subscription: '銀卡 (1個月方案)',
-    //   subscribeDate: '2025/03/10',
-    //   deliveryDate: '每月10日',
-    //   delivered: 1,
-    //   remaining: 0,
-    //   amount: '$699',
-    // },
-    // {
-    //   id: 4,
-    //   name: '小藍',
-    //   subscription: '白金卡 (12個月方案)',
-    //   subscribeDate: '2025/04/15',
-    //   deliveryDate: '每月10日',
-    //   delivered: 5,
-    //   remaining: 7,
-    //   amount: '$3999',
-    // },
-    // {
-    //   id: 5,
-    //   name: '小綠',
-    //   subscription: '白金卡 (3個月方案)',
-    //   subscribeDate: '2025/04/15',
-    //   deliveryDate: '每月10日',
-    //   delivered: 5,
-    //   remaining: 7,
-    //   amount: '$3999',
-    // },
   ]);
   // const cards = ref([]);
   // const subHistories = ref([]);
@@ -281,11 +241,7 @@
 
   // 歷史紀錄，subHistory
   // const subHistories = ref([
-  //   {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },
-  //   {shId:2, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-  //   {shId:3, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-  //   {shId:4, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
-  //   {shId:5, petName : '大黑', plan: "金卡(十二個月)", date:'2018/01/15', total:'1200' },
+  //   {shId:1, petName : '小白', plan: "銀卡(三個月)", date:'2024/01/15', total:'300' },   
   // ]);
 
 
@@ -317,17 +273,15 @@
   });
   const planSelected = ref("");
   const planName = {
-      // s:"Sliver",
       "銀卡": "Silver",
-      // "金卡": "Gold",
-      // "白金卡": "Platinum"
+      "金卡": "Gold",
+      "白金卡": "Platinum"
   };
   const periodName = {
-      three: "三個月",
-      // "單次體驗": "單次體驗",
-      // "3個月": "三個月",
-      // "6個月": "六個月",
-      // "12個月": "十二個月"
+      "單次體驗": "單次體驗",
+      "3個月": "三個月",
+      "6個月": "六個月",
+      "12個月": "十二個月"
   };
   const monthFee = {
       "單次體驗": 1,

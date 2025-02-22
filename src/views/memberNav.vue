@@ -140,8 +140,8 @@ async function showMemberInfoPhp() {
           inputs.input_lastName.inputValue = memberInfo['lastName'];
           inputs.input_nickname.inputValue = memberInfo['nickname'];
 
-          memberPortrait = memberInfo['portrait'];
-          console.log(memberPortrait)
+          // memberPortrait = memberInfo['portrait'];
+          // console.log(memberPortrait)
         } catch (error){
           console.error('Error parsing JSON:', error);
         }
