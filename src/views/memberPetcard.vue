@@ -71,8 +71,8 @@
         </div>
             <!-- 案扭區 -->
               <div class="ptc-btn-group">
-                <Btn v-if="card.pet == 'dog'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit')">編輯</Btn>
-                <Btn v-else-if="card.pet == 'cat'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit')">編輯</Btn>
+                <Btn v-if="card.pet == 'dog'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
+                <Btn v-else-if="card.pet == 'cat'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
                 <div class="btn-group">
                   <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard()">刪除卡片</Btn>
                 </div>
@@ -191,7 +191,6 @@
                                         btnType="tag" 
                                         :class="{'-active': optionSelected(tag5.selected, option)}"
                                         @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
-                                        <!-- <p>{{ tag5.selected }}</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -768,9 +767,6 @@
   const petName = ref('')
   const petDescription = ref('')
   const selectedNeutered = ref('')
-  const createPetName = ref('')
-  const createPetDescription = ref('')
-  const createSelectedNeutered = ref('')
 
   // dropDown
   const menus = {
@@ -1032,9 +1028,31 @@
     // 狗狗貓貓資訊卡切換
     const selectedPetType = ref('');
     const selectedGoal = ref('');
+
     // 狗狗資訊卡
     // 控制燈箱的顯示與隱藏
-    function toggleLightBoxPetInfo(petType,goal) {
+    function toggleLightBoxPetInfo(petType,goal, petIndex = -1) {
+      petName.value = '';
+      genderTags.value.selected = [];
+      menus.menuDog.menuValue = [];
+      menus.menuCat.menuValue = [];
+
+      if(petIndex != -1 && goal == 'edit'){
+        let currentPet = memberPetCards.value[petIndex];
+        selectedPetType.value = currentPet.pet;
+        petName.value = currentPet.name;
+        genderTags.value.selected.push(currentPet.gender);
+        tag5.value.selected.push(currentPet.tags);
+        menus.menuDog.menuValue.push(currentPet.breed);
+        menus.menuCat.menuValue.push(currentPet.breed);
+        dogSizeTags.value.selected.push(currentPet.size);
+        catSizeTags.value.selected.push(currentPet.size);
+        // birthDate
+        selectedNeutered.value = currentPet.neutured;
+        petDescription.value = currentPet.description;
+        hasUploadImg.value = currentPet.petHobby;
+        
+      }
         isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
         if (petType) {
             selectedPetType.value = petType; 
