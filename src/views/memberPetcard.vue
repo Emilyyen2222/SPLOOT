@@ -71,8 +71,9 @@
         </div>
             <!-- 案扭區 -->
               <div class="ptc-btn-group">
-                <Btn v-if="card.pet == 'dog'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
-                <Btn v-else-if="card.pet == 'cat'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
+                <!-- <Btn v-if="card.pet == 'dog'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
+                <Btn v-else-if="card.pet == 'cat'" btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn> -->
+                <Btn btnStyle="primary default" @click="toggleLightBoxPetInfo(card.pet,'edit', index)">編輯</Btn>
                 <div class="btn-group">
                   <Btn btnStyle="baseline small" @click="togglePopUp_deleteCard()">刪除卡片</Btn>
                 </div>
@@ -94,199 +95,6 @@
         :title="lightTitlePetInfo.title"
         :is-light-box="isLightBoxPetInfo" 
         @toggle="toggleLightBoxPetInfo(selectedPetType,'edit')">
-        <!-- 狗才用 -->
-        <div class="infoContainer">
-        <!-- 資訊卡內文 -->
-            <div class="infoWrap">
-                <!-- 毛孩姓名，性別，品種 -->
-                <div class="wPhotoSec">
-                    <div class="imgUpload" @click="callFileInput">
-                        <div class="imgUploadSection">
-                            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
-                            <!-- 如果有圖片的話才顯現 -->
-                            <div class="uploadImgBox" v-if="hasUploadImg">
-                                <img src="../assets/img/match/dog5.avif" alt="uploadImg" ref="uploadedImg">
-                            </div>
-                        </div>
-                        <div class="imgUploadBtn">
-                            <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
-                            <!-- <Btn btnStyle="primary small" >上傳圖檔</Btn> -->
-                        </div>
-                    </div>
-                    <div class="infoSection">
-                        <div class="fieldWrapper">
-                            <div class="field">
-                                <label>毛孩姓名*</label>
-                                <div class="petName">
-                                    <InputText placeHolder="Splooter" size = "small" text-align="left" errorMsg="Invalid Input" 
-                                    v-model="petName" :hasError="inputError"></InputText>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fieldWrapper">
-                            <div class="field">
-                                <label>性別*</label>
-                                <div class="tags">
-                                    <Btn v-for="option in genderTags.options" :key="option"
-                                    btnType="tag" 
-                                    :class="{'-active': optionSelected(genderTags.selected, option)}"
-                                    @click="genderTags.formChoice(genderTags.selected, option)">{{ option }}</Btn>
-                                    <!-- <p>{{ genderTags.selected }}</p> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fieldWrapper">
-                            <div class="field">
-                                <label>品種*</label>
-                                <div class="breedOpt">
-                                    <div class="dropdownMenu">
-                                        <DropdownMenu class="dropDown"
-                                        :placeHolder="menus.menuDog.placeHolder"
-                                        :options="menus.menuDog.options"
-                                        v-model="menus.menuDog.menuValue">
-                                        </DropdownMenu>
-                                        <!-- <p>{{ menus.menuDog.menuValue.value }}</p> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 生日 -->
-                <div class="birthdaySection">
-                    <div class="birthFieldWrapper">
-                        <div class="field">
-                            <label>生日</label>
-                            <div class="birthBox">
-                                <div class="dropdownMenu">
-                                    <div class="year">
-                                        <DropdownMenu class="dropDown city"
-                                        :placeHolder="menus.year.placeHolder"
-                                        :options="menus.year.options"
-                                        v-model="menus.year.menuValue.value">
-                                        </DropdownMenu>
-                                    </div>
-                                </div>
-                                <div class="dropdownMenu">
-                                    <div class="month">
-                                        <DropdownMenu class="dropDown city"
-                                        :placeHolder="menus.month.placeHolder"
-                                        :options="menus.month.options"
-                                        v-model="menus.month.menuValue.value">
-                                        </DropdownMenu>
-                                    </div>
-                                </div>
-                                <div class="dropdownMenu">
-                                    <div class="date">
-                                        <DropdownMenu class="dropDown city"
-                                        :placeHolder="menus.day.placeHolder"
-                                        :options="menus.day.options"
-                                        v-model="menus.day.menuValue.value">
-                                        </DropdownMenu> 
-                                    </div>
-                                </div>
-                                <div class="tags">
-                                    <div class="unknown">
-                                        <Btn v-for="option in tag5.options" :key="option"
-                                        btnType="tag" 
-                                        :class="{'-active': optionSelected(tag5.selected, option)}"
-                                        @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 體型 -->
-                <div class="petSize">
-                    <div class="sizeFieldWrapper">
-                        <div class="field">
-                            <label>體型</label>
-                            <div class="sizeOptions">
-                                <div class="tags">
-                                    <Btn v-for="option in dogSizeTags.options" :key="option"
-                                    btnType="tag" 
-                                    :class="{'-active': optionSelected(dogSizeTags.selected, option)}"
-                                    @click="dogSizeTags.formChoice(dogSizeTags.selected, option)">{{ option }}</Btn>
-                                    <!-- <p>{{ petSizeTags.selected }}</p> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 社交 -->
-                <div class="social">
-                    <div class="socialfieldWrapper">
-                        <div class="field">
-                            <label>社交性</label>
-                            <div class="sizeOptions">
-                                <div class="tags">
-                                    <Btn v-for="option in petSocialTags.options" :key="option"
-                                    btnType="tag" 
-                                    :class="{'-active': optionSelected(petSocialTags.selected, option)}"
-                                    @click="petSocialTags.formChoice(petSocialTags.selected, option)">{{ option }}</Btn>
-                                    <!-- <p>{{ petSocialTags.selected }}</p> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 興趣愛好 -->
-                <div class="interest">
-                    <div class="fieldWrapper">
-                        <div class="field ">
-                            <label>興趣愛好</label>
-                            <div class="fieldInterest">
-                                <div class="sizeOptions">
-                                    <div class="tags">
-                                        <Btn v-for="option in dogHobbyTags.options" :key="option"
-                                        btnType="tag" 
-                                        :class="{'-active': optionSelected(dogHobbyTags.selected, option)}"
-                                        @click="dogHobbyTags.formChoice(dogHobbyTags.selected, option)">{{ option }}</Btn>
-                                        <!-- <p>{{ dogHobbyTags.selected }}</p> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 絕育狀態 -->
-                <div class="neuter">
-                    <div class="neuterFieldWrapper">
-                        <div class="field">
-                            <label>絕育狀態*</label>
-                            <div class="breedOptions">
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered" value="neutered">已絕育
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered" value="unneutered">未絕育
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 毛孩簡介文字區 -->
-                <div class="infoInput">
-                    <div class="fieldWrapper">
-                        <div class="field">
-                            <label>毛孩簡介*</label>
-                                <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
-                                v-model="petDescription" :hasError="inputError"></InputText>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="saveBtnBox">            
-                      
-            <Btn btnType="form" btnStyle="nextQ" @click="toggleAndSaveCard()">儲存</Btn>                             
-            
-            <Btn class="borderBottom" btnType="form" btnStyle="lastQ" @click="toggleLightBoxPetInfo()">取消編輯</Btn>
-        </div> 
-      </LightBox>
-
-      <!-- LightBox，新增卡片-->
-      <LightBox 
-        :title="lightTitlePetInfo.title"
-        :is-light-box="isLightBoxPetInfo" 
-        @toggle="toggleLightBoxPetInfo(selectedPetType,'create')">
         <!-- 狗才用 -->
         <div v-if="selectedPetType === 'dog'" class="infoContainer">
         <!-- 資訊卡內文 -->
@@ -380,11 +188,11 @@
                                 </div>
                                 <div class="tags">
                                     <div class="unknown">
-                                        <Btn v-for="option in tag5.options" :key="option"
+                                        <Btn v-for="option in tagUnknownBirth.options" :key="option"
                                         btnType="tag" 
-                                        :class="{'-active': optionSelected(tag5.selected, option)}"
-                                        @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
-                                        <!-- <p>{{ tag5.selected }}</p> -->
+                                        :class="{'-active': optionSelected(tagUnknownBirth.selected, option)}"
+                                        @click="tagUnknownBirth.formChoice(tagUnknownBirth.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ tagUnknownBirth.selected }}</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -559,11 +367,11 @@
                                 </div>
                                 <div class="tags">
                                     <div class="unknown">
-                                        <Btn v-for="option in tag5.options" :key="option"
+                                        <Btn v-for="option in tagUnknownBirth.options" :key="option"
                                         btnType="tag" 
-                                        :class="{'-active': optionSelected(tag5.selected, option)}"
-                                        @click="tag5.formChoice(tag5.selected, option)">{{ option }}</Btn>
-                                        <!-- <p>{{ tag5.selected }}</p> -->
+                                        :class="{'-active': optionSelected(tagUnknownBirth.selected, option)}"
+                                        @click="tagUnknownBirth.formChoice(tagUnknownBirth.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ tagUnknownBirth.selected }}</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -598,7 +406,6 @@
                                     btnType="tag" 
                                     :class="{'-active': optionSelected(petSocialTags.selected, option)}"
                                     @click="petSocialTags.formChoice(petSocialTags.selected, option)">{{ option }}</Btn>
-                                    <!-- <p>{{ petSocialTags.selected }}</p> -->
                                 </div>
                             </div>
                         </div>
@@ -629,8 +436,380 @@
                         <div class="field">
                             <label>絕育狀態*</label>
                             <div class="breedOptions">
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered">已絕育
-                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered">未絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered" value="neutered">已絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered" value="unneutered">未絕育
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 毛孩簡介文字區 -->
+                <div class="infoInput">
+                    <div class="fieldWrapper">
+                        <div class="field">
+                            <label>毛孩簡介*</label>
+                                <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
+                                v-model="petDescription" :hasError="inputError"></InputText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="saveBtnBox">            
+                      
+            <Btn btnType="form" btnStyle="nextQ" @click="toggleAndSaveCard()">儲存</Btn>                             
+            
+            <Btn class="borderBottom" btnType="form" btnStyle="lastQ" @click="toggleLightBoxPetInfo()">取消編輯</Btn>
+        </div> 
+      </LightBox>
+
+      <!-- LightBox，新增卡片-->
+      <LightBox 
+        :title="lightTitlePetInfo.title"
+        :is-light-box="isLightBoxPetInfo" 
+        @toggle="toggleLightBoxPetInfo(selectedPetType,'create')">
+        <!-- 狗才用 -->
+        <div v-if="selectedPetType === 'dog'" class="infoContainer">
+        <!-- 資訊卡內文 -->
+            <div class="infoWrap">
+                <!-- 毛孩姓名，性別，品種 -->
+                <div class="wPhotoSec">
+                    <div class="imgUpload" @click="callFileInput">
+                        <div class="imgUploadSection">
+                            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+                            <!-- 如果有圖片的話才顯現 -->
+                            <div class="uploadImgBox" v-if="hasUploadImg">
+                                <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
+                            </div>
+                        </div>
+                        <div class="imgUploadBtn">
+                            <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
+                            <!-- <Btn btnStyle="primary small" >上傳圖檔</Btn> -->
+                        </div>
+                    </div>
+                    <div class="infoSection">
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>毛孩姓名*</label>
+                                <div class="petName">
+                                    <InputText placeHolder="Splooter" size = "small" text-align="left" errorMsg="Invalid Input" 
+                                    v-model="petName" :hasError="inputError"></InputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>性別*</label>
+                                <div class="tags">
+                                    <Btn v-for="option in genderTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(genderTags.selected, option)}"
+                                    @click="genderTags.formChoice(genderTags.selected, option)">{{ option }}</Btn>
+                                    <!-- <p>{{ genderTags.selected }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>品種*</label>
+                                <div class="breedOpt">
+                                    <div class="dropdownMenu">
+                                        <DropdownMenu class="dropDown"
+                                        :placeHolder="menus.menuDog.placeHolder"
+                                        :options="menus.menuDog.options"
+                                        v-model="menus.menuDog.menuValue">
+                                        </DropdownMenu>
+                                        <!-- <p>{{ menus.menuDog.menuValue.value }}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 生日 -->
+                <div class="birthdaySection">
+                    <div class="birthFieldWrapper">
+                        <div class="field">
+                            <label>生日</label>
+                            <div class="birthBox">
+                                <div class="dropdownMenu">
+                                    <div class="year">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.year.placeHolder"
+                                        :options="menus.year.options"
+                                        v-model="menus.year.menuValue.value">
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
+                                <div class="dropdownMenu">
+                                    <div class="month">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.month.placeHolder"
+                                        :options="menus.month.options"
+                                        v-model="menus.month.menuValue.value">
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
+                                <div class="dropdownMenu">
+                                    <div class="date">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.day.placeHolder"
+                                        :options="menus.day.options"
+                                        v-model="menus.day.menuValue.value">
+                                        </DropdownMenu> 
+                                    </div>
+                                </div>
+                                <div class="tags">
+                                    <div class="unknown">
+                                        <Btn v-for="option in tagUnknownBirth.options" :key="option"
+                                        btnType="tag" 
+                                        :class="{'-active': optionSelected(tagUnknownBirth.selected, option)}"
+                                        @click="tagUnknownBirth.formChoice(tagUnknownBirth.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ tagUnknownBirth.selected }}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 體型 -->
+                <div class="petSize">
+                    <div class="sizeFieldWrapper">
+                        <div class="field">
+                            <label>體型</label>
+                            <div class="sizeOptions">
+                                <div class="tags">
+                                    <Btn v-for="option in dogSizeTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(dogSizeTags.selected, option)}"
+                                    @click="dogSizeTags.formChoice(dogSizeTags.selected, option)">{{ option }}</Btn>
+                                    <!-- <p>{{ petSizeTags.selected }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社交 -->
+                <div class="social">
+                    <div class="socialfieldWrapper">
+                        <div class="field">
+                            <label>社交性</label>
+                            <div class="sizeOptions">
+                                <div class="tags">
+                                    <Btn v-for="option in petSocialTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(petSocialTags.selected, option)}"
+                                    @click="petSocialTags.formChoice(petSocialTags.selected, option)">{{ option }}</Btn>
+                                    <!-- <p>{{ petSocialTags.selected }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 興趣愛好 -->
+                <div class="interest">
+                    <div class="fieldWrapper">
+                        <div class="field ">
+                            <label>興趣愛好</label>
+                            <div class="fieldInterest">
+                                <div class="sizeOptions">
+                                    <div class="tags">
+                                        <Btn v-for="option in dogHobbyTags.options" :key="option"
+                                        btnType="tag" 
+                                        :class="{'-active': optionSelected(dogHobbyTags.selected, option)}"
+                                        @click="dogHobbyTags.formChoice(dogHobbyTags.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ dogHobbyTags.selected }}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 絕育狀態 -->
+                <div class="neuter">
+                    <div class="neuterFieldWrapper">
+                        <div class="field">
+                            <label>絕育狀態*</label>
+                            <div class="breedOptions">
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered" value="neutered">已絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered" value="unneutered">未絕育
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 毛孩簡介文字區 -->
+                <div class="infoInput">
+                    <div class="fieldWrapper">
+                        <div class="field">
+                            <label>毛孩簡介*</label>
+                                <InputText class="textBox" inputType="textarea" textAlign="left" size="small" placeHolder="請於80字內" errorMsg="Invalid Input" 
+                                v-model="petDescription" :hasError="inputError"></InputText>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 貓用 -->
+        <div v-if="selectedPetType === 'cat'" class="infoContainer">
+        <!-- 資訊卡內文 -->
+            <div class="infoWrap">
+                <!-- 毛孩姓名，性別，品種 -->
+                <div class="wPhotoSec">
+                    <div class="imgUpload" @click="callFileInput">
+                        <div class="imgUploadSection">
+                            <p class="smallText imgUploadText" v-if="!hasUploadImg">上傳主圖片*<br>建議1100x300px</p>
+                            <div class="uploadImgBox" v-if="hasUploadImg">  <!-- 如果有圖片的話才顯現 -->
+                                <img :src="hasUploadImg" alt="uploadImg" ref="uploadedImg">
+                            </div>
+                        </div>
+                        <div class="imgUploadBtn">
+                            <input type="file" hidden ref="fileInput" accept="image/*" @change="uploadFileImage">
+                            <!-- <Btn btnStyle="primary small" >上傳圖檔</Btn> -->
+                        </div>
+                    </div>
+                    <div class="infoSection">
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>毛孩姓名*</label>
+                                <div class="petName">
+                                    <InputText placeHolder="Splooter" size = "small" text-align="left" errorMsg="Invalid Input" 
+                                    v-model="petName" :hasError="inputError"></InputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>性別*</label>
+                                <div class="tags">
+                                    <Btn v-for="option in genderTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(genderTags.selected, option)}"
+                                    @click="genderTags.formChoice(genderTags.selected, option)">{{ option }}</Btn>
+                                    <!-- <p>{{ genderTags.selected }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fieldWrapper">
+                            <div class="field">
+                                <label>品種*</label>
+                                <div class="breedOpt">
+                                    <div class="dropdownMenu">
+                                        <DropdownMenu class="dropDown"
+                                        :placeHolder="menus.menuCat.placeHolder"
+                                        :options="menus.menuCat.options"
+                                        v-model="menus.menuCat.menuValue">
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 生日 -->
+                <div class="birthdaySection">
+                    <div class="birthFieldWrapper">
+                        <div class="field">
+                            <label>生日</label>
+                            <div class="birthBox">
+                                <div class="dropdownMenu">
+                                    <div class="year">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.year.placeHolder"
+                                        :options="menus.year.options"
+                                        v-model="menus.year.menuValue.value">
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
+                                <div class="dropdownMenu">
+                                    <div class="month">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.month.placeHolder"
+                                        :options="menus.month.options"
+                                        v-model="menus.month.menuValue.value">
+                                        </DropdownMenu>
+                                    </div>
+                                </div>
+                                <div class="dropdownMenu">
+                                    <div class="date">
+                                        <DropdownMenu class="dropDown city"
+                                        :placeHolder="menus.day.placeHolder"
+                                        :options="menus.day.options"
+                                        v-model="menus.day.menuValue.value">
+                                        </DropdownMenu> 
+                                    </div>
+                                </div>
+                                <div class="tags">
+                                    <div class="unknown">
+                                        <Btn v-for="option in tagUnknownBirth.options" :key="option"
+                                        btnType="tag" 
+                                        :class="{'-active': optionSelected(tagUnknownBirth.selected, option)}"
+                                        @click="tagUnknownBirth.formChoice(tagUnknownBirth.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ tagUnknownBirth.selected }}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 體型 -->
+                <div class="petSize">
+                    <div class="sizeFieldWrapper">
+                        <div class="field">
+                            <label>體型</label>
+                            <div class="sizeOptions">
+                                <div class="tags">
+                                    <Btn v-for="option in catSizeTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(catSizeTags.selected, option)}"
+                                    @click="catSizeTags.formChoice(catSizeTags.selected, option)">{{ option }}</Btn>
+                                    <!-- <p>{{ petSizeTags.selected }}</p> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 社交 -->
+                <div class="social">
+                    <div class="socialfieldWrapper">
+                        <div class="field">
+                            <label>社交性</label>
+                            <div class="sizeOptions">
+                                <div class="tags">
+                                    <Btn v-for="option in petSocialTags.options" :key="option"
+                                    btnType="tag" 
+                                    :class="{'-active': optionSelected(petSocialTags.selected, option)}"
+                                    @click="petSocialTags.formChoice(petSocialTags.selected, option)">{{ option }}</Btn>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 興趣愛好 -->
+                <div class="interest">
+                    <div class="fieldWrapper">
+                        <div class="field ">
+                            <label>興趣愛好</label>
+                            <div class="fieldInterest">
+                                <div class="sizeOptions">
+                                    <div class="tags">
+                                        <Btn v-for="option in catHobbyTags.options" :key="option"
+                                        btnType="tag" 
+                                        :class="{'-active': optionSelected(catHobbyTags.selected, option)}"
+                                        @click="catHobbyTags.formChoice(catHobbyTags.selected, option)">{{ option }}</Btn>
+                                        <!-- <p>{{ petHobbyTags.selected }}</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 絕育狀態 -->
+                <div class="neuter">
+                    <div class="neuterFieldWrapper">
+                        <div class="field">
+                            <label>絕育狀態*</label>
+                            <div class="breedOptions">
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="neutered" v-model="selectedNeutered" value="neutered">已絕育
+                                <input type="radio" name="neuterStatus" class="nRadioBtn" id="notNeutered" v-model="selectedNeutered" value="unneutered">未絕育
                             </div>
                         </div>
                     </div>
@@ -747,7 +926,7 @@
   
   <script setup>
   
-  import { ref,computed, onBeforeMount } from 'vue';
+  import { ref,computed, onBeforeMount, watch } from 'vue';
   // components
   import MainHeader from '@/components/MainHeader.vue';
   import Btn from '@/components/Btn.vue';
@@ -872,39 +1051,36 @@
     };
     // 組合生日
     const birthDate= computed(()=>{      
-      if (!menus || !menus.year || !menus.month || !menus.day) {
-        console.warn("menus 或其屬性未初始化，返回 '未填寫'");
+      
+      const year = menus.year.menuValue?.value ? menus.year.menuValue.value.replace(" 年", ""):"";  
+      const month = menus.month.menuValue?.value ? menus.month.menuValue.value.replace(" 月", "") : ""; 
+      const day = menus.day.menuValue?.value ? menus.day.menuValue.value.replace(" 日", "") : ""; 
+      if (!year || !month || !day) {
+        birthDate.value = "未填寫";
         return "未填寫"; 
     }
-
-        const year = menus.year.menuValue?.value ? menus.year.menuValue.value.replace(" 年", ""):"";  
-        const month = menus.month.menuValue?.value ? menus.month.menuValue.value.replace(" 月", "") : ""; 
-        const day = menus.day.menuValue?.value ? menus.day.menuValue.value.replace(" 日", "") : ""; 
         if(year && month && day){
           return `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`
         };
 
-        return "未填寫";
+        return "0000-00-00 00:00:00";
     });
+    // 解析從後端傳回的格式
+    // watch(birthDate,(newValue,oldValue)=>{
+    //   const dateSplit = newValue.split(" ")[0];
+    //   const[year,month,day]= dateSplit.split("-");
+
+    //   // 放回去
+    //   menus.year.menuValue.value = year;
+    //   menus.month.menuValue.value = month;
+    //   menus.day.menuValue.value = day;
+    // });
     
   // 會員中心的 寵物資訊卡的 卡片資料
     const memberPetCards = ref([]);
-    // const memberPetCards = ref([
-    //     { label: '1', name: 'Rocky', imageSrc: new URL('../assets/img/match/dog6.avif', import.meta.url).href, number: '01', distance: 8, tags: ['杜賓犬', '忠誠', '喜歡奔跑'], description: 'Rocky 是一隻忠誠的杜賓犬，愛與主人一起奔跑，是個很有活力的夥伴。', gender: 'Male' },
-    //     { label: '2', name: 'Luna', imageSrc: new URL('../assets/img/match/dog1.avif', import.meta.url).href, number: '01', distance: 10, tags: ['哈士奇', '調皮', '喜歡雪地'], description: 'Luna 喜歡在雪地裡玩耍，性格調皮，總是喜歡捉弄其他狗狗。', gender: 'Female' },
-    //     { label: '3', name: 'Milo', imageSrc: new URL('../assets/img/match/dog7.avif', import.meta.url).href, number: '02', distance: 5, tags: ['西施犬', '親和', '愛玩具'], description: 'Milo 是隻非常友善的小西施，對每個人都很親切，愛玩各種玩具。', gender: 'Male' }
-    // ])
     // 計算資訊卡的卡片數量
     const petCardCount = computed(() => memberPetCards.value.length);
-    // by Emily
-    
-
-    //格式化數字
-    // const dottedNumber = computed(() => {
-    //     return (clickedIndex.value + 1).toString().padStart(2, '0'); //index+1並轉換為兩位數字, 前面加上0
-    // });
-
-      
+     
   // 調整喜好
    // 哪種朋友
   const tag_friend = ref({
@@ -989,7 +1165,7 @@
     options: ['喜歡散步', '喜歡玩球', '喜歡玩飛盤', '熱愛玩水', '喜歡跳舞', '熱衷學習指令'],
     selected: [],
     });
-    const tag5 = ref({
+    const tagUnknownBirth = ref({
     formChoice: multipleChoice,
     options: ['未知'],
     selected: [],
@@ -1025,80 +1201,119 @@
         title: ''
     });
     let isLightBoxPetInfo = ref(false);
-    // 狗狗貓貓資訊卡切換
+    // 狗狗/貓貓，edit/create 資訊卡切換
     const selectedPetType = ref('');
     const selectedGoal = ref('');
+    const selectedPetId = ref();
 
     // 狗狗資訊卡
     // 控制燈箱的顯示與隱藏
     function toggleLightBoxPetInfo(petType,goal, petIndex = -1) {
+        // petIndex 對應memberPetCards陣列的索引，用來指定會選取哪一張卡，petIndex= -1 進入"新增"模式；petIndex>=0 進入"編輯"模式
+        // goal 用來決定UI的模式 : 新增/編輯
+      // 預設打開的時候清空欄位
       petName.value = '';
       genderTags.value.selected = [];
+      birthDate.value = '';
+      tagUnknownBirth.value.selected = [];
       menus.menuDog.menuValue = [];
       menus.menuCat.menuValue = [];
-
+      dogSizeTags.value.selected = [];
+      dogHobbyTags.value.selected = [];
+      catSizeTags.value.selected = [];
+      catHobbyTags.value.selected = [];
+      petDescription.value = [];
+      hasUploadImg.value = [];
+      // 當 goal == 'edit' 也就是編輯模式下，填入從資料庫撈到的對應值
       if(petIndex != -1 && goal == 'edit'){
+        // 帶進-1 避免選到存在的資訊卡
         let currentPet = memberPetCards.value[petIndex];
+        console.log(currentPet.birthDate)
+        selectedPetId.value = currentPet.petId; 
         selectedPetType.value = currentPet.pet;
         petName.value = currentPet.name;
         genderTags.value.selected.push(currentPet.gender);
-        tag5.value.selected.push(currentPet.tags);
-        menus.menuDog.menuValue.push(currentPet.breed);
-        menus.menuCat.menuValue.push(currentPet.breed);
-        dogSizeTags.value.selected.push(currentPet.size);
-        catSizeTags.value.selected.push(currentPet.size);
-        // birthDate
+        birthDate.value = currentPet.birthDate
+        watch(birthDate,(newValue,oldValue)=>{
+          if (newValue && newValue !== "未填寫" && newValue !== "0000-00-00 00:00:00"){
+            const dateSplit = newValue.split(" ")[0];
+            const[year,month,day]= dateSplit.split("-");
+
+            console.log(year,month,day)
+            // 放回去
+            menus.year.menuValue.value = year;
+            menus.month.menuValue.value = month;
+            menus.day.menuValue.value = day;
+            console.log(menus.year.menuValue.value)
+            console.log(menus.month.menuValue.value)
+            console.log(menus.day.menuValue.value)
+          }          
+        });
+        // ?? tags?
+        tagUnknownBirth.value.selected.push(currentPet.tags);
+        if(petType == 'dog'){
+          menus.menuDog.menuValue.push(currentPet.breed);
+          dogSizeTags.value.selected.push(currentPet.size);
+          dogHobbyTags.value.selected.push(currentPet.petHobby);
+        }else if(petType == 'cat'){
+          menus.menuCat.menuValue.push(currentPet.breed);
+          catSizeTags.value.selected.push(currentPet.size);
+          catHobbyTags.value.selected.push(currentPet.petHobby);
+        }
         selectedNeutered.value = currentPet.neutured;
         petDescription.value = currentPet.description;
-        hasUploadImg.value = currentPet.petHobby;
-        
+        // hasUploadImg.value = currentPet.petImg;        
       }
-        isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
-        if (petType) {
-            selectedPetType.value = petType; 
-            console.log(petType)
-        }
-        if(goal){
-          selectedGoal.value = goal;
-        }
-        // 根據goal 決定打開 "新增" 還是 "編輯"
-        if (goal == 'create' && petType == 'dog') {
-            lightTitlePetInfo.value.title = '新增狗狗資訊卡';
-            return lightTitlePetInfo.value.title;
-        } else if (goal == 'edit' && petType == 'dog') {
-            lightTitlePetInfo.value.title = '編輯狗狗資訊卡';
-            return lightTitlePetInfo.value.title;
-        }else if (goal == 'create' && petType == 'cat') {
-            lightTitlePetInfo.value.title = '新增貓貓資訊卡';
-            return lightTitlePetInfo.value.title;
-        } else if (goal == 'edit' && petType == 'cat') {
-            lightTitlePetInfo.value.title = '編輯貓貓資訊卡';
-            return lightTitlePetInfo.value.title;
-        }
-        // 根據狀態新增或移除 clicked 類別
-        if (isLightBoxPetInfo.value) {
-            document.body.classList.add('clicked');
-        } else {
-            document.body.classList.remove('clicked');
-        }
+      isLightBoxPetInfo.value = !isLightBoxPetInfo.value;
+      if (petType) {
+        selectedPetType.value = petType;
+      }
+      if(goal){
+        selectedGoal.value = goal;
+      }
+      // 根據goal 決定打開 "新增" 還是 "編輯"
+      if (selectedPetType.value == 'dog' && goal == 'create') {
+          lightTitlePetInfo.value.title = '新增狗狗資訊卡';
+          return lightTitlePetInfo.value.title;
+      } else if (selectedPetType.value == 'dog' && goal == 'edit') {
+          lightTitlePetInfo.value.title = '編輯狗狗資訊卡';
+          return lightTitlePetInfo.value.title;
+      }else if (selectedPetType.value == 'cat' && goal == 'create' ) {
+          lightTitlePetInfo.value.title = '新增貓貓資訊卡';
+          return lightTitlePetInfo.value.title;
+      } else if (selectedPetType.value == 'cat'  && goal == 'edit') {
+          lightTitlePetInfo.value.title = '編輯貓貓資訊卡';
+          return lightTitlePetInfo.value.title;
+      }
+      // 根據狀態新增或移除 clicked 類別
+      if (isLightBoxPetInfo.value) {
+          document.body.classList.add('clicked');
+      } else {
+          document.body.classList.remove('clicked');
+      }
     }
     // 編輯>儲存
     function toggleAndSaveCard(){
+      if(birthDate.value == "未填寫"){
+        alert('請填寫生日');
+        return;
+        // 嘗試驗證birthDate欄位
+      }
       if(selectedGoal.value === 'create'){
         if(selectedPetType.value === 'dog'){
-          createPetCardPhp('dog');
+          createPetCardPhp(selectedPetType.value = 'dog');
           alert('新增成功!');
           
         }else if (selectedPetType.value === 'cat'){
-          createPetCardPhp('cat');
+          createPetCardPhp(selectedPetType.value = 'cat');
           alert('新增成功!');
         }
       }else if(selectedGoal.value === 'edit'){
         if(selectedPetType.value === 'dog'){
-          updatePetCardPhp('dog');
+          updatePetCardPhp('dog',selectedPetId.value);
           alert('更改成功!');
         }else if (selectedPetType.value === 'cat'){
-          updatePetCardPhp('cat');
+          updatePetCardPhp('cat',selectedPetId.value);
           alert('更改成功!');
         }
       }
@@ -1149,20 +1364,6 @@ let sizeTags;
         hobbyTags = catHobbyTags;
         sizeTags = catSizeTags;
       }
-        console.log("送出前的`v-model`們:",{
-            pet: selectedPetType.value,
-            name: petName.value,
-            gender: genderTags.value.selected[0],
-            breed: breedMenu.menuValue,
-            birthDate: birthDate.value,
-            size: sizeTags.value.selected[0],
-            neutured: selectedNeutered.value,
-            description: petDescription.value,
-            petImg: hasUploadImg.value,
-            petHobby: hobbyTags.value.selected,
-            petSocial: petSocialTags.value.selected
-        });
-
         const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/createPetCard.php`, {
             method: 'POST',
             headers: {
@@ -1177,7 +1378,7 @@ let sizeTags;
               size: sizeTags.value.selected[0],
               neutured: selectedNeutered.value,
               description: petDescription.value,
-              petImg: hasUploadImg.value,
+              petImg: hasUploadImg.value || "",
               petHobby: hobbyTags.value.selected,
               petSocial: petSocialTags.value.selected
             })
@@ -1194,57 +1395,65 @@ let sizeTags;
             console.error('Error parsing JSON:', error);
         }
     };
+    // 似乎沒有成功值型這支php
+    async function updatePetCardPhp(pet,petId, updater = 'System'){
+        if(pet == 'dog'){
+          breedMenu = menus.menuDog;
+          hobbyTags = dogHobbyTags; 
+          sizeTags = dogSizeTags;     
+        }else if(pet == 'cat'){
+          breedMenu = menus.menuCat;
+          hobbyTags = catHobbyTags;
+          sizeTags = catSizeTags;
+        }
+        console.log("送出更新前的`v-model`們:",{
+            petId : petId,
+            pet: selectedPetType.value,
+            name: petName.value,
+            gender: genderTags.value.selected[0],
+            breed: breedMenu.menuValue,
+            birthDate: birthDate.value,
+            size: sizeTags.value.selected[0],
+            neutured: selectedNeutered.value,
+            description: petDescription.value,
+            petImg: hasUploadImg.value || "",
+            petHobby: hobbyTags.value.selected,
+            petSocial: petSocialTags.value.selected
+        });
+        
+        const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updatePetCard.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                petId :petId,
+                pet: selectedPetType.value,
+                name: petName.value,
+                gender: genderTags.value.selected[0],
+                breed: breedMenu.menuValue,
+                birthDate: birthDate.value,
+                size: sizeTags.value.selected[0],
+                neutured: selectedNeutered.value,
+                description: petDescription.value,
+                petImg: hasUploadImg.value || "",
+                petHobby: hobbyTags.value.selected,
+                petSocial: petSocialTags.value.selected,
+                updater: updater
+            })            
+        });
 
-    // async function updatePetCardPhp(petId, updater = 'System'){
-    //     const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/updatePetCard.php`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             // petId.value: petId,
-    //             // pet: selectedPetType.value,
-    //             // name: petName,
-    //             // gender: genderTags.value.selected,
-    //             // breed: breedMenu.value.tags,
-    //             // birthDate: birthDate.value,
-    //             // size: sizeTags.value.selected,
-    //             // neutured: selectedNeutered,
-    //             // description: petDescription,
-    //             // petImg: hasUploadImg.value,
-    //             // petHobby: petHobbyTags.value.selected,
-    //             // petSocial: tag_social.value.selected,
-    //             // updater: updater
-    //         })
-    //         // body: JSON.stringify({
-    //         //     petId: petId,
-    //         //     pet: '狗狗',
-    //         //     name: 'CoCo',
-    //         //     gender: '男',
-    //         //     breed: '柴犬',
-    //         //     birthDate: '2025-02-02',
-    //         //     size: '中型犬',
-    //         //     neutured: '已絕育',
-    //         //     description: '描述',
-    //         //     petImg: hasUploadImg.value,
-    //         //     petHobby: ['興趣', '興趣'],
-    //         //     petSocial: ['社交', '社交'],
-    //         //     updater: updater
-    //         // })
-    //     });
-
-    //     try{
-    //         const petCardResp = await resp.json();
-    //         if(petCardResp.status == 'success'){
+        try{
+            const petCardResp = await resp.json();
+            if(petCardResp.status == 'success'){
                 
-    //         }else if(petCardResp.status == 'error'){
-    //             console.log(petCardResp.message);
-    //         }
-    //     }catch(error){
-    //         console.error('Error parsing JSON:', error);
-    //     }
-    // };
-    // updatePetCardPhp(3);
+            }else if(petCardResp.status == 'error'){
+                console.log(petCardResp.message);
+            }
+        }catch(error){
+            console.error('Error parsing JSON:', error);
+        }
+    };
 
     async function findAllPetCardsPhp(){
         const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/findAllPetCards.php`, {
@@ -1259,32 +1468,8 @@ let sizeTags;
             if(petCardResp.status == 'success'){
                 const petCards = petCardResp['data'];
                 for(let pet of petCards){
-                  // if(pet['pet'] == 'dog'){
-                    //   breedMenu = menus.menuDog;
-                    //   hobbyTags = dogHobbyTags; 
-                    //   sizeTags = dogSizeTags;
-                    // }else if(pet['pet'] == 'cat'){
-                      //   breedMenu = menus.menuCat;
-                      //   hobbyTags = catHobbyTags; 
-                      //   sizeTags = catSizeTags;
-                      // }
                     pet['cardTags'] = pet['petHobby'];
                     pet['cardTags'].unshift(pet['breed']);
-                    // memberPetCards.value.push(pet);
-
-
-                    // petId.value = pet['petId'];
-                    // console.log(petId);
-                    // selectedPetType.value = pet['pet'];
-                    // petName.value = pet['name'];
-                    // genderTags.value.selected = pet['gender'];
-                    // breedMenu.menuValue = pet['breed'];
-                    // birthDate.value = pet['birthDate'];                    
-                    // selectedNeutered.value = pet['neutured'];
-                    // petDescription.value = pet['description'];
-                    // tag_social.value.selected = pet['petSocial']
-
-                    
                     // 圖片從缺
                 }
                 memberPetCards.value = petCards;
@@ -1295,7 +1480,7 @@ let sizeTags;
         }catch(error){
             console.error('Error parsing JSON:', error);
         }
-    }
+    };
 
     // async function deletePetCardPhp(petId, updater = 'System'){
     //     const resp = await fetch(`${import.meta.env.VITE_API_DOMAIN}/tid103/g3/php/deletePetCard.php`, {
