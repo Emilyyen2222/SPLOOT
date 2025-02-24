@@ -86,7 +86,7 @@
       </div>
     </div>
     <div class="popBtnBox">
-      <Btn btnStyle="primary small" @click="updatePrice">儲存</Btn>
+      <Btn btnStyle="primary small" @click="updateBoxData">儲存</Btn>
       <Btn btnStyle="outline small" @click="popUpToggle">關閉</Btn>
     </div>
   </div>
@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-  import {computed, ref, watch} from "vue";
+  import {ref, watch} from "vue";
   import {useBackend} from "@/utils/backendUtils";
   import BackendHeader from "./backendHeader.vue";
   import InputText from "@/components/InputText.vue";
@@ -152,13 +152,14 @@
     }
   });
 
-  const updatePrice = () => {
+  const updateBoxData = () => {
     if(!thisData.value || isNaN(priceInputValue.value)){
        alert(`${priceInputValue.value}不是數字`) 
       }else{
         // 找thisData這筆資料位於原始資料的索引
         const planIndex = plans.value.findIndex(
-          (plan) => plan.planName === thisData.value.planName && plan.planCycle === thisData.value.planCycle);
+          (plan) => plan.planName === thisData.value.planName && plan.planCycle === thisData.value.planCycle
+        );
   
           plans.value[planIndex].planPrice = priceInputValue.value;
 
@@ -169,6 +170,8 @@
           popUpToggle();
       }
   };
+
+ 
   
   
   

@@ -40,7 +40,7 @@
           <td>{{ data.memberId }}</td>
           <td>{{ data.boxId }}</td>
           <td>{{ data.planName }}</td>
-          <td>{{ data.shipmentDate }}</td>
+          <td>{{ data.mailDeadline }}</td>
           <td>{{ data.pickupMethod }}</td>
           <td>{{ data.shipmentStatus }}</td>
           <td>{{ data.shippingCarrier }}</td>
@@ -128,7 +128,7 @@
       </div>
     </div>
     <div class="popBtnBox">
-      <Btn btnStyle="primary small" @click="popUpToggle">儲存</Btn>
+      <Btn btnStyle="primary small" @click="updateOrderData">儲存</Btn>
       <Btn btnStyle="outline small" @click="popUpToggle">關閉</Btn>
     </div>
   </div>
@@ -152,22 +152,20 @@
       memberId: `${x+1}`.padStart(4,'0'), 
       boxId:`${x+1}`.padStart(4,'0'), 
       planName: '銀卡(十二個月)', 
-      shipmentDate: '2025-03-01', 
+      mailDeadline: "2025-03-05",
       pickupMethod: '全家取貨', 
       shipmentStatus: x % 3 === 0 ? '未寄出' : '已寄出',
       shippingCarrier: x % 2 ===0 || x % 5 === 0 ? '黑貓' : '店到店',
-      mailDeadline: "2025-04-05",
-      realMailDate: "",
+      realMailDate: "2025-02-22",
       mailer:"NightMonkey",
       lastUpdate: "2025-2-28"
     }))
   );
 
   const shipmentInputValue =ref("");
-  const realMailinputValue = ref(new Date (2025,1,23).toISOString().split('T')[0]);
+  const realMailinputValue = ref("");
   const carrierInputValue =ref("");
-  const mailerInputValue =ref("NightMonkey");
-
+  const mailerInputValue =ref("");
 
   const {
         filterData,
@@ -196,12 +194,48 @@
     watch(isPopUp, (newValue) => {
       if(newValue && thisData.value){
         shipmentInputValue.value = thisData.value.shipmentStatus;
+        realMailinputValue.value = thisData.value.realMailDate;
         carrierInputValue.value = thisData.value.shippingCarrier;
         mailerInputValue.value = thisData.value.mailer;
       }
     });
 
-    // const 
+    const updateOrderData = () => {
+      if(!thisData.value || !shipmentInputValue.value || !realMailinputValue.value || !carrierInputValue.value || !mailerInputValue.value){
+        alert("資料不完全");
+      }else{
+        if(dateCheck(realMailinputValue.value)){
+          const orderIndex = orders.value.findIndex(
+          (order) => order.orderId === thisData.value.orderId
+        );
+
+        orders.value[orderIndex].shipmentStatus = shipmentInputValue.value
+        orders.value[orderIndex].realMailDate = realMailinputValue.value;
+        orders.value[orderIndex].shippingCarrier = carrierInputValue.value;
+        orders.value[orderIndex].mailer = mailerInputValue.value;
+
+        popUpToggle();
+        }else{
+          alert("實際出貨日請輸入'YYYY-MM-DD'格式'或正確日期")
+        };        
+      }
+    };
+  // 輸入日期檢查
+  const dateCheck = (checkedDate) => {
+      const regex = /^\d{4}-\d{2}-\d{2}$/;
+      //檢查正規表達式是否匹配
+      if(!regex.test(checkedDate)){return false};
+
+      // 檢查日期是否存在
+      const date = new Date(checkedDate);
+      const [year, month, day] = checkedDate.split('-').map(Number);
+
+      return date.getFullYear() === year &&
+      date.getMonth()+1 === month &&
+      date.getDate() === day;
+
+    };
+
 
 </script>
 
