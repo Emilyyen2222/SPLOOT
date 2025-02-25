@@ -24,7 +24,7 @@
 
     <table>
       <thead>
-        <th>會員 ID</th>
+        <th>寵物 ID</th>
         <th>品種</th>
         <th>年齡</th>
         <th>照片審核</th>
